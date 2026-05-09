@@ -1,0 +1,47 @@
+.cursor-none {
+  cursor: none;
+}
+
+.cursor-auto {
+  cursor: auto;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+.cursor-help {
+  cursor: help;
+}
+
+.cursor-progress {
+  cursor: progress;
+}
+
+.cursor-wait {
+  cursor: wait;
+}
+
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
+}
+
+.cursor-text {
+  cursor: text;
+}
+
+.cursor-copy {
+  cursor: copy;
+}
+
+.cursor-alias {
+  cursor: alias;
+}

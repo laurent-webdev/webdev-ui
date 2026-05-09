@@ -1,0 +1,144 @@
+@use "../abstracts/breakpoints" as bp;
+$breakpoints: bp.$breakpoints;
+
+$percentages: (
+    0: 0,
+    10: 10%,
+    20: 20%,
+    25: 25%,
+    30: 30%,
+    33: 33.333%,
+    40: 40%,
+    50: 50%,
+    60: 60%,
+    66: 66.666%,
+    70: 70%,
+    75: 75%,
+    80: 80%,
+    90: 90%,
+    100: 100%,
+    auto: auto
+);
+
+$viewport-heights: (
+    0: 0,
+    10: 10vh,
+    20: 20vh,
+    25: 25vh,
+    30: 30vh,
+    40: 40vh,
+    50: 50vh,
+    60: 60vh,
+    70: 70vh,
+    75: 75vh,
+    80: 80vh,
+    90: 90vh,
+    100: 100vh
+);
+
+$viewport-widths: (
+    0: 0,
+    10: 10vw,
+    20: 20vw,
+    25: 25vw,
+    30: 30vw,
+    40: 40vw,
+    50: 50vw,
+    60: 60vw,
+    70: 70vw,
+    80: 80vw,
+    90: 90vw,
+    100: 100vw
+);
+
+// ─────────────────────────────────────────
+// FIT CLASSES (base)
+// ─────────────────────────────────────────
+.fit-width        { width: fit-content; }
+.fit-height       { height: fit-content; }
+.fit-size         { width: fit-content; height: fit-content; }
+.fit-max-width    { width: max-content; }
+.fit-max-height   { height: max-content; }
+.fit-max-size     { width: max-content; height: max-content; }
+.fit-min-width    { width: min-content; }
+.fit-min-height   { height: min-content; }
+.fit-min-size     { width: min-content; height: min-content; }
+
+// ─────────────────────────────────────────
+// PERCENTAGE — w / h
+// ─────────────────────────────────────────
+@each $key, $value in $percentages {
+    .w-#{$key}  { width: $value; }
+    .h-#{$key}  { height: $value; }
+
+    @if $key != auto {
+        .min-w-#{$key} { min-width: $value; }
+        .max-w-#{$key} { max-width: $value; }
+        .min-h-#{$key} { min-height: $value; }
+        .max-h-#{$key} { max-height: $value; }
+    }
+}
+
+// ─────────────────────────────────────────
+// VIEWPORT WIDTH — vw
+// ─────────────────────────────────────────
+@each $key, $value in $viewport-widths {
+    .w-#{$key}vw      { width: $value; }
+    .min-w-#{$key}vw  { min-width: $value; }
+    .max-w-#{$key}vw  { max-width: $value; }
+}
+
+// ─────────────────────────────────────────
+// VIEWPORT HEIGHT — vh
+// ─────────────────────────────────────────
+@each $key, $value in $viewport-heights {
+    .h-#{$key}vh      { height: $value; }
+    .min-h-#{$key}vh  { min-height: $value; }
+    .max-h-#{$key}vh  { max-height: $value; }
+}
+
+// ─────────────────────────────────────────
+// RESPONSIVE (breakpoints)
+// ─────────────────────────────────────────
+@each $bp, $size in $breakpoints {
+    @media (min-width: #{$size}) {
+
+        // fit
+        .fit-width-#{$bp}      { width: fit-content; }
+        .fit-height-#{$bp}     { height: fit-content; }
+        .fit-size-#{$bp}       { width: fit-content; height: fit-content; }
+        .fit-max-width-#{$bp}  { width: max-content; }
+        .fit-max-height-#{$bp} { height: max-content; }
+        .fit-max-size-#{$bp}   { width: max-content; height: max-content; }
+        .fit-min-width-#{$bp}  { width: min-content; }
+        .fit-min-height-#{$bp} { height: min-content; }
+        .fit-min-size-#{$bp}   { width: min-content; height: min-content; }
+
+        // percentage
+        @each $key, $value in $percentages {
+            .w-#{$key}-#{$bp}  { width: $value; }
+            .h-#{$key}-#{$bp}  { height: $value; }
+
+            @if $key != auto {
+                .min-w-#{$key}-#{$bp} { min-width: $value; }
+                .max-w-#{$key}-#{$bp} { max-width: $value; }
+                .min-h-#{$key}-#{$bp} { min-height: $value; }
+                .max-h-#{$key}-#{$bp} { max-height: $value; }
+            }
+        }
+
+        // viewport width
+        @each $key, $value in $viewport-widths {
+            .w-#{$key}vw-#{$bp}     { width: $value; }
+            .min-w-#{$key}vw-#{$bp} { min-width: $value; }
+            .max-w-#{$key}vw-#{$bp} { max-width: $value; }
+        }
+
+        // viewport height
+        @each $key, $value in $viewport-heights {
+            .h-#{$key}vh-#{$bp}     { height: $value; }
+            .min-h-#{$key}vh-#{$bp} { min-height: $value; }
+            .max-h-#{$key}vh-#{$bp} { max-height: $value; }
+        }
+    }
+}

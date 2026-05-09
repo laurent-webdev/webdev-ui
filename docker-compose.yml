@@ -1,0 +1,6 @@
+services:
+  builder:
+    build: .
+    volumes:
+      - ./src:/app/src
+      - ./dist:/app/dist

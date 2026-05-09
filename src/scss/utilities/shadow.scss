@@ -1,0 +1,20 @@
+.shadow-hover{
+    transition: box-shadow 0.2s ease;
+}
+
+
+.shadow{
+    box-shadow: var(--box-shadow);
+}
+
+.shadow-hover{
+    box-shadow: var(--box-shadow-hover-before);
+    &:hover{
+        box-shadow: var(--box-shadow-hover-after);
+    }
+}
+
+.shadow-none {
+    box-shadow: none;
+}
+

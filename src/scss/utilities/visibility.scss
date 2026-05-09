@@ -1,0 +1,38 @@
+@use "../abstracts/breakpoints" as bp;
+$breakpoints: bp.$breakpoints;
+
+.visible   { visibility: visible; }
+.hidden { visibility: hidden; }
+
+.opacity-0   { opacity: 0; }
+.opacity-1  { opacity: .1; }
+.opacity-2  { opacity: .2; }
+.opacity-3  { opacity: .3; }
+.opacity-4  { opacity: .4; }
+.opacity-5  { opacity: .5; }
+.opacity-6  { opacity: .6; }
+.opacity-7  { opacity: .7; }
+.opacity-8  { opacity: .8; }
+.opacity-9  { opacity: .9; }
+.opacity-10 { opacity: 1; }
+
+@each $bp, $size in $breakpoints {
+    @media (min-width: #{$size}) {
+
+        .visible-#{$bp} { visibility: visible; }
+        .hidden-#{$bp}  { visibility: hidden; }
+
+        .opacity-0-#{$bp}  { opacity: 0; }
+        .opacity-1-#{$bp}  { opacity: .1; }
+        .opacity-2-#{$bp}  { opacity: .2; }
+        .opacity-3-#{$bp}  { opacity: .3; }
+        .opacity-4-#{$bp}  { opacity: .4; }
+        .opacity-5-#{$bp}  { opacity: .5; }
+        .opacity-6-#{$bp}  { opacity: .6; }
+        .opacity-7-#{$bp}  { opacity: .7; }
+        .opacity-8-#{$bp}  { opacity: .8; }
+        .opacity-9-#{$bp}  { opacity: .9; }
+        .opacity-10-#{$bp} { opacity: 1; }
+
+    }
+}

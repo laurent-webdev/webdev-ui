@@ -1,0 +1,53 @@
+@use "../abstracts/colors" as colors;
+
+$colors: colors.$colors;
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--card-group-gap);
+}
+
+.card-container > .card {
+    flex: 1 1 var(--card-min-width);
+    width: 100%;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--card-border-radius);
+    border-color: var(--card-border-color);
+    border-style: var(--card-border-style);
+    border-width: var(--card-border-width);
+    background-color: var(--card-background-color);
+}
+
+.card-header {
+    border-top-left-radius: calc(var(--card-border-radius) - var(--card-border-width));
+    border-top-right-radius: calc(var(--card-border-radius) - var(--card-border-width));
+    padding-inline: var(--card-header-padding-x);
+    padding-block: var(--card-header-padding-y);
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding-inline: var(--card-body-padding-x);
+    padding-block: var(--card-body-padding-y);
+}
+
+.card-footer {
+    border-bottom-left-radius: calc(var(--card-border-radius) - var(--card-border-width));
+    border-bottom-right-radius: calc(var(--card-border-radius) - var(--card-border-width));
+    padding-inline: var(--card-footer-padding-x);
+    padding-block: var(--card-footer-padding-y);
+}
+
+
+@each $name, $value in $colors {
+    .card-#{$name} {
+        background-color: #{$value};
+        border-color: #{$value};
+        color: var(--content-on-#{$name});
+    }
+}

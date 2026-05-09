@@ -1,0 +1,67 @@
+@use "../abstracts/breakpoints" as bp;
+$breakpoints: bp.$breakpoints;
+
+.font-primary {font-family: var(--font-family-primary), sans-serif;}
+.font-secondary {font-family: var(--font-family-secondary), sans-serif;}
+.font-tertiary {font-family: var(--font-family-tertiary), sans-serif;}
+
+.fw-100 { font-weight: 100; }
+.fw-200 { font-weight: 200; }
+.fw-300 { font-weight: 300; }
+.fw-400 { font-weight: 400; }
+.fw-500 { font-weight: 500; }
+.fw-600 { font-weight: 600; }
+.fw-700 { font-weight: 700; }
+.fw-800 { font-weight: 800; }
+.fw-900 { font-weight: 900; }
+.fw-inherit { font-weight: inherit; }
+.fw-initial { font-weight: initial; }
+
+.fs-h1   { font-size: var(--font-size-h1); }
+.fs-h2   { font-size: var(--font-size-h2); }
+.fs-h3   { font-size: var(--font-size-h3); }
+.fs-h4   { font-size: var(--font-size-h4); }
+.fs-h5   { font-size: var(--font-size-h5); }
+.fs-h6   { font-size: var(--font-size-h6); }
+
+.fs-1   { font-size: var(--font-size-xs); }
+.fs-2  { font-size: var(--font-size-sm); }
+.fs-3 { font-size: var(--font-size-md); }
+.fs-4  { font-size: var(--font-size-lg); }
+.fs-5 { font-size: var(--font-size-xl); }
+.fs-6{ font-size: var(--font-size-xxl); }
+.fs-inherit { font-size: inherit; }
+.fs-initial { font-size: initial; }
+
+@each $bp, $size in $breakpoints {
+  @media (min-width: #{$size}) {
+
+    .fw-100-#{$bp} { font-weight: 100; }
+    .fw-200-#{$bp} { font-weight: 200; }
+    .fw-300-#{$bp} { font-weight: 300; }
+    .fw-400-#{$bp} { font-weight: 400; }
+    .fw-500-#{$bp} { font-weight: 500; }
+    .fw-600-#{$bp} { font-weight: 600; }
+    .fw-700-#{$bp} { font-weight: 700; }
+    .fw-800-#{$bp} { font-weight: 800; }
+    .fw-900-#{$bp} { font-weight: 900; }
+    .fw-inherit-#{$bp} { font-weight: inherit; }
+    .fw-initial-#{$bp} { font-weight: initial; }
+
+    .fs-h1-#{$bp} { font-size: var(--font-size-h1); }
+    .fs-h2-#{$bp} { font-size: var(--font-size-h2); }
+    .fs-h3-#{$bp} { font-size: var(--font-size-h3); }
+    .fs-h4-#{$bp} { font-size: var(--font-size-h4); }
+    .fs-h5-#{$bp} { font-size: var(--font-size-h5); }
+    .fs-h6-#{$bp} { font-size: var(--font-size-h6); }
+
+    .fs-1-#{$bp}   { font-size: var(--font-size-xs); }
+    .fs-2-#{$bp}  { font-size: var(--font-size-sm); }
+    .fs-3-#{$bp}{ font-size: var(--font-size-md); }
+    .fs-4-#{$bp}  { font-size: var(--font-size-lg); }
+    .fs-5-#{$bp}{ font-size: var(--font-size-xl); }
+    .fs-6-#{$bp}{ font-size: var(--font-size-xxl); }
+    .fs-inherit-#{$bp} { font-size: inherit; }
+    .fs-initial-#{$bp} { font-size: initial; }
+  }
+}

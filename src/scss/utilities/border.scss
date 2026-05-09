@@ -1,0 +1,54 @@
+@use "../abstracts/colors" as colors;
+$colors: colors.$colors;
+
+.border-top    { border-top: var(--border-width) var(--border-style) var(--border-color); }
+.border-bottom { border-bottom: var(--border-width) var(--border-style) var(--border-color); }
+.border-left   { border-left: var(--border-width) var(--border-style) var(--border-color); }
+.border-right  { border-right: var(--border-width) var(--border-style) var(--border-color); }
+.border-y      { border-top: var(--border-width) var(--border-style) var(--border-color); border-bottom: var(--border-width) var(--border-style) var(--border-color); }
+.border-x      { border-left: var(--border-width) var(--border-style) var(--border-color); border-right: var(--border-width) var(--border-style) var(--border-color); }
+.border    { border: var(--border-width) var(--border-style) var(--border-color); }
+
+.border-solid  { border-style: solid; }
+.border-dashed { border-style: dashed; }
+.border-dotted { border-style: dotted; }
+.border-double { border-style: double; }
+.border-none   { border-style: none; }
+
+.border-0 { border-width: 0;}
+.border-1 { border-width: 1px; }
+.border-2 { border-width: 2px; }
+.border-3 { border-width: 3px; }
+.border-4 { border-width: 4px; }
+.border-5 { border-width: 5px; }
+
+.rounded-0       { border-radius: 0; }
+.rounded         { border-radius: var(--border-radius); }
+.rounded-pill    { border-radius: var(--border-radius-pill); }
+.rounded-circle  { border-radius: var(--border-radius-circle); }
+
+.no-border { border: none !important;}
+.no-border-top    { border-top: none !important; }
+.no-border-bottom { border-bottom: none !important; }
+.no-border-left   { border-left: none !important; }
+.no-border-right  { border-right: none !important; }
+.no-border-x      { border-left: none !important; border-right: none !important; }
+.no-border-y      { border-top: none !important; border-bottom: none !important; }
+
+.no-radius { border-radius: 0 !important;}
+.no-radius-top    { border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; }
+.no-radius-bottom { border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important; }
+.no-radius-left   { border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important; }
+.no-radius-right  { border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important; }
+
+.border-transparent {
+    border-color: var(--color-transparent);
+}
+
+@each $name, $value in $colors {
+    .border-#{$name} {
+        border-color: #{$value};
+    }
+}
+
+

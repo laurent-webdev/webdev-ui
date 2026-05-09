@@ -1,0 +1,13 @@
+@use "../abstracts/colors" as colors;
+$colors: colors.$colors;
+
+
+@each $name, $value in $colors {
+    .bg-#{$name} {
+        background-color: #{$value};
+    }
+}
+
+.bg-transparent {
+    background-color: var(--color-transparent);
+}

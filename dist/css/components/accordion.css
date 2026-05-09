@@ -1,0 +1,77 @@
+.accordion {
+  --accordion-border: var(--accordion-border-width) var(--accordion-border-style) var(--accordion-border-color);
+  border: var(--accordion-border);
+  border-radius: var(--accordion-border-radius);
+  background-color: var(--accordion-background-color);
+}
+
+.accordion-btn {
+  padding-inline: var(--accordion-button-padding-x);
+  padding-block: var(--accordion-button-padding-y);
+  border-top-radius: var();
+  background-color: var(--accordion-button-background-color);
+  border-block: var(--accordion-border);
+  color: var(--accordion-button-color);
+  border-inline: none;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  line-height: normal;
+}
+.accordion-btn:not(.is-open) {
+  border-bottom: none;
+}
+
+.accordion-item:first-child .accordion-btn {
+  border-top: none;
+  border-top-left-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+  border-top-right-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+}
+
+.accordion-item:last-child .accordion-btn {
+  border-bottom-left-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+  border-bottom-right-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+}
+.accordion-item:last-child .accordion-btn.is-open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.accordion-item:last-child:has(.is-open) .accordion-body {
+  border-bottom-left-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+  border-bottom-right-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+}
+
+.accordion-btn-sm {
+  padding-inline: var(--accordion-button-padding-x-sm);
+  padding-block: var(--accordion-button-padding-y-sm);
+}
+
+.accordion-btn-md {
+  padding-inline: var(--accordion-button-padding-x-md);
+  padding-block: var(--accordion-button-padding-y-md);
+}
+
+.accordion-btn-lg {
+  padding-inline: var(--accordion-button-padding-x-lg);
+  padding-block: var(--accordion-button-padding-y-lg);
+}
+
+.accordion-panel:not(.is-open) {
+  display: none;
+}
+
+.accordion-body {
+  padding-inline: var(--accordion-body-padding-x);
+  padding-block: var(--accordion-body-padding-y);
+}
+
+.accordion-indicator::after {
+  content: var(--accordion-indicator-content);
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.accordion-btn.is-open:not(.is-closing) .accordion-indicator::after {
+  transform: rotate(135deg);
+}

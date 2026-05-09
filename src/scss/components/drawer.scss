@@ -1,0 +1,123 @@
+@use "../abstracts/breakpoints" as bp;
+$breakpoints: bp.$breakpoints;
+
+@mixin drawer-base {
+    position: fixed;
+    z-index: 1000;
+    background-color: var(--drawer-background-color);
+    padding-inline: var(--drawer-padding-x);
+    padding-block: var(--drawer-padding-y);
+    transition: transform var(--drawer-transition-duration, 0.3s) ease;
+    will-change: transform;
+}
+
+@mixin drawer-left {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: min(var(--drawer-width), 100%);
+    border-right: var(--drawer-border-width) var(--drawer-border-style) var(--drawer-border-color);
+    border-top-right-radius: var(--drawer-border-radius);
+    border-bottom-right-radius: var(--drawer-border-radius);
+}
+
+@mixin drawer-right {
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: min(var(--drawer-width), 100%);
+    border-left: var(--drawer-border-width) var(--drawer-border-style) var(--drawer-border-color);
+    border-top-left-radius: var(--drawer-border-radius);
+    border-bottom-left-radius: var(--drawer-border-radius);
+}
+
+@mixin drawer-top {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: min(var(--drawer-height), 100%);
+    border-bottom: var(--drawer-border-width) var(--drawer-border-style) var(--drawer-border-color);
+    border-bottom-left-radius: var(--drawer-border-radius);
+    border-bottom-right-radius: var(--drawer-border-radius);
+}
+
+@mixin drawer-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: min(var(--drawer-height), 100%);
+    border-top: var(--drawer-border-width) var(--drawer-border-style) var(--drawer-border-color);
+    border-top-left-radius: var(--drawer-border-radius);
+    border-top-right-radius: var(--drawer-border-radius);
+}
+
+.drawer {
+    @include drawer-base;
+
+    &.drawer-left {
+        @include drawer-left;
+        transform: translateX(-100%);
+    }
+    &.drawer-right {
+        @include drawer-right;
+        transform: translateX(100%);
+    }
+    &.drawer-top {
+        @include drawer-top;
+        transform: translateY(-100%);
+    }
+    &.drawer-bottom {
+        @include drawer-bottom;
+        transform: translateY(100%);
+    }
+    &.is-open {
+        transform: translate(0);
+    }
+    &.is-closing {
+        pointer-events: none;
+    }
+}
+
+.drawer-fixed {
+    @include drawer-base;
+
+    &.drawer-left   { @include drawer-left; }
+    &.drawer-right  { @include drawer-right; }
+    &.drawer-top    { @include drawer-top; }
+    &.drawer-bottom { @include drawer-bottom; }
+}
+
+.drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background-color: var(--drawer-backdrop-color);
+    animation: fade-in var(--drawer-transition-duration) ease forwards;
+
+    &.is-closing {
+        animation: fade-out var(--drawer-transition-duration) ease forwards;
+    }
+}
+
+body {
+    &:has(.drawer-fixed.drawer-left)   { margin-left: var(--drawer-width); }
+    &:has(.drawer-fixed.drawer-right)  { margin-right: var(--drawer-width); }
+    &:has(.drawer-fixed.drawer-top)    { margin-top: var(--drawer-height); }
+    &:has(.drawer-fixed.drawer-bottom) { margin-bottom: var(--drawer-height); }
+}
+
+@each $name, $bp in $breakpoints {
+    @media (min-width: #{$bp}) {
+        .drawer-fixed-#{$name} {
+            transform: none !important;
+            pointer-events: auto;
+        }
+        body {
+            transition: margin var(--drawer-transition-duration) ease;
+            &:has(.drawer-fixed-#{$name}.drawer-left)   { margin-left: var(--drawer-width); }
+            &:has(.drawer-fixed-#{$name}.drawer-right)  { margin-right: var(--drawer-width); }
+            &:has(.drawer-fixed-#{$name}.drawer-top)    { margin-top: var(--drawer-height); }
+            &:has(.drawer-fixed-#{$name}.drawer-bottom) { margin-bottom: var(--drawer-height); }
+        }
+    }
+}

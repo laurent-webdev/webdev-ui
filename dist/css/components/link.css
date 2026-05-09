@@ -1,0 +1,874 @@
+.link {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--text-color);
+  text-decoration-color: var(--text-color);
+}
+.link:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-defaut);
+  text-decoration-color: var(--hover-defaut);
+}
+.link:not(:disabled):active, .link:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-defaut);
+  text-decoration-color: var(--active-defaut);
+}
+.link:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--text-color);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--text-color) 50%, transparent);
+}
+.link:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-primary {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-primary);
+  text-decoration-color: var(--color-primary);
+}
+.link-primary:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-primary);
+  text-decoration-color: var(--hover-primary);
+}
+.link-primary:not(:disabled):active, .link-primary:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-primary);
+  text-decoration-color: var(--active-primary);
+}
+.link-primary:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-primary) 50%, transparent);
+}
+.link-primary:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-secondary {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-secondary);
+  text-decoration-color: var(--color-secondary);
+}
+.link-secondary:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-secondary);
+  text-decoration-color: var(--hover-secondary);
+}
+.link-secondary:not(:disabled):active, .link-secondary:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-secondary);
+  text-decoration-color: var(--active-secondary);
+}
+.link-secondary:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-secondary) 50%, transparent);
+}
+.link-secondary:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-tertiary {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-tertiary);
+  text-decoration-color: var(--color-tertiary);
+}
+.link-tertiary:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-tertiary);
+  text-decoration-color: var(--hover-tertiary);
+}
+.link-tertiary:not(:disabled):active, .link-tertiary:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-tertiary);
+  text-decoration-color: var(--active-tertiary);
+}
+.link-tertiary:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-tertiary);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-tertiary) 50%, transparent);
+}
+.link-tertiary:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-success {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-success);
+  text-decoration-color: var(--color-success);
+}
+.link-success:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-success);
+  text-decoration-color: var(--hover-success);
+}
+.link-success:not(:disabled):active, .link-success:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-success);
+  text-decoration-color: var(--active-success);
+}
+.link-success:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-success);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-success) 50%, transparent);
+}
+.link-success:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-info {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-info);
+  text-decoration-color: var(--color-info);
+}
+.link-info:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-info);
+  text-decoration-color: var(--hover-info);
+}
+.link-info:not(:disabled):active, .link-info:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-info);
+  text-decoration-color: var(--active-info);
+}
+.link-info:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-info);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-info) 50%, transparent);
+}
+.link-info:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-warning {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-warning);
+  text-decoration-color: var(--color-warning);
+}
+.link-warning:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-warning);
+  text-decoration-color: var(--hover-warning);
+}
+.link-warning:not(:disabled):active, .link-warning:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-warning);
+  text-decoration-color: var(--active-warning);
+}
+.link-warning:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-warning);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-warning) 50%, transparent);
+}
+.link-warning:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-danger {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-danger);
+  text-decoration-color: var(--color-danger);
+}
+.link-danger:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-danger);
+  text-decoration-color: var(--hover-danger);
+}
+.link-danger:not(:disabled):active, .link-danger:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-danger);
+  text-decoration-color: var(--active-danger);
+}
+.link-danger:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-danger) 50%, transparent);
+}
+.link-danger:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-neutral {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-neutral);
+  text-decoration-color: var(--color-neutral);
+}
+.link-neutral:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-neutral);
+  text-decoration-color: var(--hover-neutral);
+}
+.link-neutral:not(:disabled):active, .link-neutral:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-neutral);
+  text-decoration-color: var(--active-neutral);
+}
+.link-neutral:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-neutral);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-neutral) 50%, transparent);
+}
+.link-neutral:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-light {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-light);
+  text-decoration-color: var(--color-light);
+}
+.link-light:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-light);
+  text-decoration-color: var(--hover-light);
+}
+.link-light:not(:disabled):active, .link-light:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-light);
+  text-decoration-color: var(--active-light);
+}
+.link-light:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-light);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-light) 50%, transparent);
+}
+.link-light:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-dark {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-dark);
+  text-decoration-color: var(--color-dark);
+}
+.link-dark:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-dark);
+  text-decoration-color: var(--hover-dark);
+}
+.link-dark:not(:disabled):active, .link-dark:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-dark);
+  text-decoration-color: var(--active-dark);
+}
+.link-dark:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-dark);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-dark) 50%, transparent);
+}
+.link-dark:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-white {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-white);
+  text-decoration-color: var(--color-white);
+}
+.link-white:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-white);
+  text-decoration-color: var(--hover-white);
+}
+.link-white:not(:disabled):active, .link-white:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-white);
+  text-decoration-color: var(--active-white);
+}
+.link-white:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-white);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-white) 50%, transparent);
+}
+.link-white:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-black {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-black);
+  text-decoration-color: var(--color-black);
+}
+.link-black:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-black);
+  text-decoration-color: var(--hover-black);
+}
+.link-black:not(:disabled):active, .link-black:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-black);
+  text-decoration-color: var(--active-black);
+}
+.link-black:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-black);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-black) 50%, transparent);
+}
+.link-black:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-primary-ghost {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-primary-ghost);
+  text-decoration-color: var(--color-primary-ghost);
+}
+.link-primary-ghost:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-primary-ghost);
+  text-decoration-color: var(--hover-primary-ghost);
+}
+.link-primary-ghost:not(:disabled):active, .link-primary-ghost:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-primary-ghost);
+  text-decoration-color: var(--active-primary-ghost);
+}
+.link-primary-ghost:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-primary-ghost);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-primary-ghost) 50%, transparent);
+}
+.link-primary-ghost:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-secondary-ghost {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-secondary-ghost);
+  text-decoration-color: var(--color-secondary-ghost);
+}
+.link-secondary-ghost:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-secondary-ghost);
+  text-decoration-color: var(--hover-secondary-ghost);
+}
+.link-secondary-ghost:not(:disabled):active, .link-secondary-ghost:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-secondary-ghost);
+  text-decoration-color: var(--active-secondary-ghost);
+}
+.link-secondary-ghost:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-secondary-ghost);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-secondary-ghost) 50%, transparent);
+}
+.link-secondary-ghost:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-tertiary-ghost {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-tertiary-ghost);
+  text-decoration-color: var(--color-tertiary-ghost);
+}
+.link-tertiary-ghost:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-tertiary-ghost);
+  text-decoration-color: var(--hover-tertiary-ghost);
+}
+.link-tertiary-ghost:not(:disabled):active, .link-tertiary-ghost:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-tertiary-ghost);
+  text-decoration-color: var(--active-tertiary-ghost);
+}
+.link-tertiary-ghost:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-tertiary-ghost);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-tertiary-ghost) 50%, transparent);
+}
+.link-tertiary-ghost:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-success-ghost {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-success-ghost);
+  text-decoration-color: var(--color-success-ghost);
+}
+.link-success-ghost:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-success-ghost);
+  text-decoration-color: var(--hover-success-ghost);
+}
+.link-success-ghost:not(:disabled):active, .link-success-ghost:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-success-ghost);
+  text-decoration-color: var(--active-success-ghost);
+}
+.link-success-ghost:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-success-ghost);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-success-ghost) 50%, transparent);
+}
+.link-success-ghost:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-info-ghost {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-info-ghost);
+  text-decoration-color: var(--color-info-ghost);
+}
+.link-info-ghost:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-info-ghost);
+  text-decoration-color: var(--hover-info-ghost);
+}
+.link-info-ghost:not(:disabled):active, .link-info-ghost:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-info-ghost);
+  text-decoration-color: var(--active-info-ghost);
+}
+.link-info-ghost:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-info-ghost);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-info-ghost) 50%, transparent);
+}
+.link-info-ghost:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-warning-ghost {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-warning-ghost);
+  text-decoration-color: var(--color-warning-ghost);
+}
+.link-warning-ghost:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-warning-ghost);
+  text-decoration-color: var(--hover-warning-ghost);
+}
+.link-warning-ghost:not(:disabled):active, .link-warning-ghost:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-warning-ghost);
+  text-decoration-color: var(--active-warning-ghost);
+}
+.link-warning-ghost:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-warning-ghost);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-warning-ghost) 50%, transparent);
+}
+.link-warning-ghost:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-danger-ghost {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-danger-ghost);
+  text-decoration-color: var(--color-danger-ghost);
+}
+.link-danger-ghost:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-danger-ghost);
+  text-decoration-color: var(--hover-danger-ghost);
+}
+.link-danger-ghost:not(:disabled):active, .link-danger-ghost:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-danger-ghost);
+  text-decoration-color: var(--active-danger-ghost);
+}
+.link-danger-ghost:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-danger-ghost);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-danger-ghost) 50%, transparent);
+}
+.link-danger-ghost:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-neutral-ghost {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-neutral-ghost);
+  text-decoration-color: var(--color-neutral-ghost);
+}
+.link-neutral-ghost:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-neutral-ghost);
+  text-decoration-color: var(--hover-neutral-ghost);
+}
+.link-neutral-ghost:not(:disabled):active, .link-neutral-ghost:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-neutral-ghost);
+  text-decoration-color: var(--active-neutral-ghost);
+}
+.link-neutral-ghost:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-neutral-ghost);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-neutral-ghost) 50%, transparent);
+}
+.link-neutral-ghost:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-light-ghost {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-light-ghost);
+  text-decoration-color: var(--color-light-ghost);
+}
+.link-light-ghost:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-light-ghost);
+  text-decoration-color: var(--hover-light-ghost);
+}
+.link-light-ghost:not(:disabled):active, .link-light-ghost:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-light-ghost);
+  text-decoration-color: var(--active-light-ghost);
+}
+.link-light-ghost:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-light-ghost);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-light-ghost) 50%, transparent);
+}
+.link-light-ghost:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-dark-ghost {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-dark-ghost);
+  text-decoration-color: var(--color-dark-ghost);
+}
+.link-dark-ghost:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-dark-ghost);
+  text-decoration-color: var(--hover-dark-ghost);
+}
+.link-dark-ghost:not(:disabled):active, .link-dark-ghost:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-dark-ghost);
+  text-decoration-color: var(--active-dark-ghost);
+}
+.link-dark-ghost:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-dark-ghost);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-dark-ghost) 50%, transparent);
+}
+.link-dark-ghost:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-white-ghost {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-white-ghost);
+  text-decoration-color: var(--color-white-ghost);
+}
+.link-white-ghost:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-white-ghost);
+  text-decoration-color: var(--hover-white-ghost);
+}
+.link-white-ghost:not(:disabled):active, .link-white-ghost:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-white-ghost);
+  text-decoration-color: var(--active-white-ghost);
+}
+.link-white-ghost:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-white-ghost);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-white-ghost) 50%, transparent);
+}
+.link-white-ghost:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}
+
+.link-black-ghost {
+  padding-block: var(--link-padding-y);
+  padding-inline: var(--link-padding-x);
+  border-radius: var(--link-border-radius);
+  border-style: var(--link-border-style);
+  border-width: var(--link-border-width);
+  border-color: var(--color-transparent);
+  background-color: var(--color-transparent);
+  text-decoration: underline;
+  color: var(--color-black-ghost);
+  text-decoration-color: var(--color-black-ghost);
+}
+.link-black-ghost:not(:disabled):hover {
+  background-color: var(--color-transparent);
+  color: var(--hover-black-ghost);
+  text-decoration-color: var(--hover-black-ghost);
+}
+.link-black-ghost:not(:disabled):active, .link-black-ghost:not(:disabled).active {
+  background-color: var(--color-transparent);
+  color: var(--active-black-ghost);
+  text-decoration-color: var(--active-black-ghost);
+}
+.link-black-ghost:not(:disabled):focus-visible {
+  outline: none;
+  border-color: var(--color-black-ghost);
+  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-black-ghost) 50%, transparent);
+}
+.link-black-ghost:disabled {
+  background-color: var(--color-transparent);
+  border-color: var(--color-transparent);
+  text-decoration-color: var(--link-disabled-color);
+  color: var(--link-disabled-color);
+  opacity: 0.5;
+}

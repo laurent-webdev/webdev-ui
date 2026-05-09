@@ -1,0 +1,55 @@
+@use "../abstracts/colors" as colors;
+$colors: colors.$colors;
+
+.alert-container {
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: var(--alert-gap);
+    padding-inline: var(--alert-container-padding-x);
+    padding-block: var(--alert-container-padding-y);
+}
+
+.alert {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--alert-border-radius);
+    border-width: var(--alert-border-width);
+    border-style: var(--alert-border-style);
+    border-color: var(--alert-border-color);
+    background-color: var(--alert-background-color);
+
+    &.is-closing{
+        pointer-events: none;
+    }
+}
+
+.alert-header {
+    border-top-left-radius: calc(var(--alert-border-radius) - var(--alert-border-width));
+    border-top-right-radius: calc(var(--alert-border-radius) - var(--alert-border-width));
+    padding-inline: var(--alert-header-padding-x);
+    padding-block: var(--alert-header-padding-y);
+}
+
+.alert-body {
+    flex: 1 1 auto;
+    padding-inline: var(--alert-body-padding-x);
+    padding-block: var(--alert-body-padding-y);
+}
+
+.alert-footer {
+    border-bottom-left-radius: calc(var(--alert-border-radius) - var(--alert-border-width));
+    border-bottom-right-radius: calc(var(--alert-border-radius) - var(--alert-border-width));
+    padding-inline: var(--alert-footer-padding-x);
+    padding-block: var(--alert-footer-padding-y);
+}
+
+
+@each $name, $value in $colors {
+    .alert-#{$name} {
+        border-color: #{$value};
+        background-color: #{$value};
+        color: var(--content-on-#{$name});
+    }
+}

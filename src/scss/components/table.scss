@@ -1,0 +1,373 @@
+@use "../abstracts/colors" as colors;
+
+$colors: colors.$colors;
+
+table.table {
+    border-width: var(--table-border-width);
+    border-style: var(--table-border-style);
+    border-color: var(--table-border-color);
+    border-collapse: collapse;
+    width: 100%;
+
+    thead {
+        tr {
+            th, td {
+                border-top: var(--table-border-width) var(--table-border-style) var(--table-border-color);
+                padding-block: var(--table-padding-y);
+                padding-inline: var(--table-padding-x);
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            th, td {
+                border-top: var(--table-border-width) var(--table-border-style) var(--table-border-color);
+                padding-block: var(--table-padding-y);
+                padding-inline: var(--table-padding-x);
+            }
+        }
+    }
+
+    tfoot {
+        tr {
+            th, td {
+                border-top: var(--table-border-width) var(--table-border-style) var(--table-border-color);
+                padding-block: var(--table-padding-y);
+                padding-inline: var(--table-padding-x);
+            }
+        }
+    }
+
+    &.table-borderless {
+        border: none;
+
+        thead,
+        tbody,
+        tfoot {
+            tr {
+                th, td {
+                    border: none;
+                }
+            }
+        }
+    }
+
+    &.table-bordered {
+        thead,
+        tbody,
+        tfoot {
+            tr {
+                th, td {
+                    border: var(--table-border-width) var(--table-border-style) var(--table-border-color);
+                }
+            }
+        }
+    }
+}
+
+table.table-sm {
+    thead,
+    tbody,
+    tfoot {
+        tr {
+            th, td {
+                padding-block: var(--table-padding-y-sm);
+                padding-inline: var(--table-padding-x-sm);
+            }
+        }
+    }
+}
+
+table.table-md {
+    thead,
+    tbody,
+    tfoot {
+        tr {
+            th, td {
+                padding-block: var(--table-padding-y-md);
+                padding-inline: var(--table-padding-x-md);
+            }
+        }
+    }
+}
+
+table.table-lg {
+    thead,
+    tbody,
+    tfoot {
+        tr {
+            th, td {
+                padding-block: var(--table-padding-y-lg);
+                padding-inline: var(--table-padding-x-lg);
+            }
+        }
+    }
+}
+
+.table-group-divider > tr:first-child {
+    border-top: var(--table-border-divider-width) var(--table-border-divider-style) var(--table-border-divider-color);
+}
+
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+@layer table-l01, table-l02, table-l03, table-l04, table-l05, table-l06, table-l07, table-l08, table-l09, table-l10, table-l11, table-l12;
+
+@layer table-l01 {
+    .table-striped {
+        tbody tr:nth-child(even) {
+            box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
+        }
+    }
+
+    .table-striped-odd {
+        tbody tr:nth-child(odd) {
+            box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
+        }
+    }
+
+    .table-striped-column {
+        tbody {
+            tr th:nth-child(even),
+            tr td:nth-child(even) {
+                box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
+            }
+        }
+    }
+
+    .table-striped-column-odd {
+        tbody {
+            tr th:nth-child(odd),
+            tr td:nth-child(odd) {
+                box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
+            }
+        }
+    }
+}
+
+@layer table-l02 {
+    table.table-hover {
+        tbody {
+            tr:hover {
+                box-shadow: inset 0 0 0 9999px var(--table-hover-background-color);
+            }
+
+            tr:active,
+            tr.active {
+                box-shadow: inset 0 0 0 9999px var(--table-active-background-color);
+            }
+        }
+    }
+}
+
+@layer table-l03 {
+    thead.table-hover,
+    tbody.table-hover,
+    tfoot.table-hover {
+        tr:hover {
+            box-shadow: inset 0 0 0 9999px var(--table-hover-background-color);
+        }
+
+        tr:active,
+        tr.active {
+            box-shadow: inset 0 0 0 9999px var(--table-active-background-color);
+        }
+    }
+}
+
+@layer table-l04 {
+    tr.table-hover:hover {
+        box-shadow: inset 0 0 0 9999px var(--table-hover-background-color);
+    }
+
+    tr.table-hover:active,
+    tr.table-hover.active {
+        box-shadow: inset 0 0 0 9999px var(--table-active-background-color);
+    }
+}
+
+
+@layer table-l05 {
+    th.table-hover:hover,
+    td.table-hover:hover {
+        box-shadow: inset 0 0 0 9999px var(--table-hover-background-color);
+    }
+
+    th.table-hover:active,
+    td.table-hover:active,
+    th.table-hover.active,
+    td.table-hover.active {
+        box-shadow: inset 0 0 0 9999px var(--table-active-background-color);
+    }
+}
+
+//// Bloc 1 - table elle-même
+@layer table-l06 {
+    @each $name, $value in $colors {
+        table.table-#{$name} {
+            background-color: $value;
+            color: var(--content-on-#{$name});
+
+            &.table-hover {
+                tbody tr:hover {
+                    box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
+                }
+
+                tbody tr:active,
+                tbody tr.active {
+                    box-shadow: inset 0 0 0 9999px var(--active-#{$name});
+                }
+            }
+        }
+    }
+}
+
+// Bloc 2 - thead/tbody/tfoot parent hover
+@layer table-l07 {
+    @each $name, $value in $colors {
+        .table-hover {
+            tbody.table-#{$name} {
+                background-color: $value;
+                color: var(--content-on-#{$name});
+
+                tr:hover {
+                    box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
+                }
+
+                tr:active,
+                tr.active {
+                    box-shadow: inset 0 0 0 9999px var(--active-#{$name});
+                }
+            }
+        }
+    }
+}
+
+// Bloc 3 - thead/tbody/tfoot himself hover
+@layer table-l08 {
+    @each $name, $value in $colors {
+        thead.table-#{$name},
+        tbody.table-#{$name},
+        tfoot.table-#{$name} {
+            background-color: $value;
+            color: var(--content-on-#{$name});
+
+            &.table-hover tr:hover {
+                box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
+            }
+
+            &.table-hover tr:active,
+            &.table-hover tr.active {
+                box-shadow: inset 0 0 0 9999px var(--active-#{$name});
+            }
+        }
+    }
+}
+
+// Bloc 4 - tr parent hover
+@mixin tr-parent-hover($name, $value) {
+    tr.table-#{$name} {
+        background-color: $value;
+        color: var(--content-on-#{$name});
+
+        &:hover {
+            box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
+        }
+
+        &:active,
+        &.active {
+            box-shadow: inset 0 0 0 9999px var(--active-#{$name});
+        }
+    }
+}
+
+@layer table-l09 {
+    @each $name, $value in $colors {
+        table.table-hover {
+            tbody {
+                @include tr-parent-hover($name, $value);
+            }
+        }
+        thead.table-hover,
+        tbody.table-hover,
+        tfoot.table-hover {
+            @include tr-parent-hover($name, $value);
+        }
+    }
+}
+
+// Bloc 5 - tr himself hover
+@layer table-l10 {
+    @each $name, $value in $colors {
+        tr.table-#{$name} {
+            background-color: $value;
+            color: var(--content-on-#{$name});
+
+            &.table-hover:hover {
+                box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
+            }
+
+            &.table-hover:active,
+            &.table-hover.active {
+                box-shadow: inset 0 0 0 9999px var(--active-#{$name});
+            }
+        }
+    }
+}
+
+// Bloc 6 - th/td parent hover (table-level only, excludes thead/tfoot)
+@mixin cell-parent-color($name, $value) {
+    th.table-#{$name},
+    td.table-#{$name} {
+        background-color: $value;
+        color: var(--content-on-#{$name});
+
+        &:hover {
+            box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
+        }
+
+        &:active,
+        &.active {
+            box-shadow: inset 0 0 0 9999px var(--active-#{$name});
+        }
+    }
+}
+
+@layer table-l11 {
+    @each $name, $value in $colors {
+        table.table-hover {
+            tbody {
+                @include cell-parent-color($name, $value);
+            }
+        }
+        thead.table-hover,
+        tbody.table-hover,
+        tfoot.table-hover,
+        tr.table-hover {
+            @include cell-parent-color($name, $value);
+        }
+    }
+}
+
+// Bloc 7 - th/td himself hover
+@layer table-l12 {
+    @each $name, $value in $colors {
+        th.table-#{$name},
+        td.table-#{$name} {
+            background-color: $value;
+            color: var(--content-on-#{$name});
+
+            &.table-hover:hover {
+                box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
+            }
+
+            &.table-hover:active,
+            &.table-hover.active {
+                box-shadow: inset 0 0 0 9999px var(--active-#{$name});
+            }
+        }
+    }
+}

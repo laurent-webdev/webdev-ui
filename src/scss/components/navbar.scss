@@ -1,0 +1,120 @@
+@use "../abstracts/breakpoints" as bp;
+
+$breakpoints: bp.$breakpoints;
+
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: var(--navbar-padding-x);
+    padding-block: var(--navbar-padding-y);
+    border-radius: var(--navbar-border-radius);
+    border-width: var(--navbar-border-width);
+    border-style: var(--navbar-border-style);
+    border-color: var(--navbar-border-color);
+}
+
+.navbar-toggle {
+    display: none;
+}
+
+.navbar-body {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    &.navbar-left,
+    &.navbar-start {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    &.navbar-center {
+        justify-content: center;
+        align-items: center;
+    }
+
+    &.navbar-right,
+    &.navbar-end {
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+}
+
+
+
+.navbar-collapse {
+    display: flex;
+    padding-block: var(--navbar-collapse-padding-y);
+    padding-inline: var(--navbar-collapse-padding-x);
+    gap: var(--navbar-collapse-gap);
+
+    &.list {
+        > .list-item {
+            align-self: center;
+            border-radius: var(--list-border-radius);
+            .list-link {
+                align-self: center;
+            }
+        }
+    }
+}
+
+@mixin navbar-responsive {
+    flex-wrap: wrap;
+    .navbar-body {
+        flex-direction: column;
+
+        &.navbar-left-bp,
+        &.navbar-start-bp {
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        &.navbar-center-bp {
+            justify-content: center;
+            align-items: center;
+        }
+
+        &.navbar-right-bp,
+        &.navbar-end-bp {
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
+    }
+
+    .navbar-body:not(.is-open) {
+        display: none;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-collapse {
+        padding-block: var(--navbar-collapse-padding-y);
+        padding-inline: var(--navbar-collapse-padding-x);
+        flex-direction: column;
+    }
+}
+
+
+.navbar {
+    @media (max-width: 768px) {
+        @include navbar-responsive;
+    }
+}
+
+
+@each $name, $bp in $breakpoints {
+    .navbar-#{$name} {
+        @media (max-width: $bp) {
+            @include navbar-responsive;
+        }
+    }
+}
+
+
+
+
+

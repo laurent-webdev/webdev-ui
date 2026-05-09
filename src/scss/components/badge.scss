@@ -1,0 +1,42 @@
+@use "../abstracts/colors" as colors;
+$colors: colors.$colors;
+
+.badge {
+    border-radius: var(--badge-border-radius);
+    border-width: var(--badge-border-width);
+    border-style: var(--badge-border-style);
+    border-color: var(--badge-border-color);
+    background-color: var(--badge-background-color);
+    padding-inline: var(--badge-padding-x);
+    padding-block: var(--badge-padding-y);
+    font-size: var(--badge-font-size);
+
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    line-height: normal;
+}
+.badge-sm{
+    padding-inline: var(--badge-padding-x-sm);
+    padding-block: var(--badge-padding-y-sm);
+}
+
+.badge-md {
+    padding-inline: var(--badge-padding-x-md);
+    padding-block: var(--badge-padding-y-md);
+}
+
+.badge-lg {
+    padding-inline: var(--badge-padding-x-lg);
+    padding-block: var(--badge-padding-y-lg);
+}
+
+@each $name, $value in $colors {
+    .badge-#{$name} {
+        border-color: var(--color-transparent);
+        background-color: #{$value};
+        color: var(--content-on-#{$name});
+    }
+}
+
+

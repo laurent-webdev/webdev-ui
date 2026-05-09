@@ -1,0 +1,21 @@
+@use "../abstracts/colors" as colors;
+$colors: colors.$colors;
+
+.outline {
+    background-color: transparent;
+    color: var(--text-color);
+    border-color: var(--text-color);
+    border-style: var(--border-style-outline);
+    border-width: var(--border-width-outline);
+}
+
+
+@each $name, $value in $colors {
+    .outline-#{$name} {
+        background-color: transparent;
+        color: #{$value};
+        border-color: #{$value};
+        border-style: var(--border-style-outline);
+        border-width: var(--border-width-outline);
+    }
+}

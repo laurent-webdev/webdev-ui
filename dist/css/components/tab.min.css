@@ -1,0 +1,1 @@
+[data-ui=tab-panel]{display:none}[data-ui=tab-panel].is-open{display:block}.tab-panel{border-color:var(--tab-panel-border-color);border-style:var(--tab-panel-border-style);border-width:var(--tab-panel-border-width);border-radius:var(--tab-panel-border-radius);padding-block:var(--tab-panel-padding-y);padding-inline:var(--tab-panel-padding-x)}

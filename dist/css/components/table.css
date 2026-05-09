@@ -1,0 +1,3607 @@
+table.table {
+  border-width: var(--table-border-width);
+  border-style: var(--table-border-style);
+  border-color: var(--table-border-color);
+  border-collapse: collapse;
+  width: 100%;
+}
+table.table thead tr th, table.table thead tr td {
+  border-top: var(--table-border-width) var(--table-border-style) var(--table-border-color);
+  padding-block: var(--table-padding-y);
+  padding-inline: var(--table-padding-x);
+}
+table.table tbody tr th, table.table tbody tr td {
+  border-top: var(--table-border-width) var(--table-border-style) var(--table-border-color);
+  padding-block: var(--table-padding-y);
+  padding-inline: var(--table-padding-x);
+}
+table.table tfoot tr th, table.table tfoot tr td {
+  border-top: var(--table-border-width) var(--table-border-style) var(--table-border-color);
+  padding-block: var(--table-padding-y);
+  padding-inline: var(--table-padding-x);
+}
+table.table.table-borderless {
+  border: none;
+}
+table.table.table-borderless thead tr th, table.table.table-borderless thead tr td,
+table.table.table-borderless tbody tr th,
+table.table.table-borderless tbody tr td,
+table.table.table-borderless tfoot tr th,
+table.table.table-borderless tfoot tr td {
+  border: none;
+}
+table.table.table-bordered thead tr th, table.table.table-bordered thead tr td,
+table.table.table-bordered tbody tr th,
+table.table.table-bordered tbody tr td,
+table.table.table-bordered tfoot tr th,
+table.table.table-bordered tfoot tr td {
+  border: var(--table-border-width) var(--table-border-style) var(--table-border-color);
+}
+
+table.table-sm thead tr th, table.table-sm thead tr td,
+table.table-sm tbody tr th,
+table.table-sm tbody tr td,
+table.table-sm tfoot tr th,
+table.table-sm tfoot tr td {
+  padding-block: var(--table-padding-y-sm);
+  padding-inline: var(--table-padding-x-sm);
+}
+
+table.table-md thead tr th, table.table-md thead tr td,
+table.table-md tbody tr th,
+table.table-md tbody tr td,
+table.table-md tfoot tr th,
+table.table-md tfoot tr td {
+  padding-block: var(--table-padding-y-md);
+  padding-inline: var(--table-padding-x-md);
+}
+
+table.table-lg thead tr th, table.table-lg thead tr td,
+table.table-lg tbody tr th,
+table.table-lg tbody tr td,
+table.table-lg tfoot tr th,
+table.table-lg tfoot tr td {
+  padding-block: var(--table-padding-y-lg);
+  padding-inline: var(--table-padding-x-lg);
+}
+
+.table-group-divider > tr:first-child {
+  border-top: var(--table-border-divider-width) var(--table-border-divider-style) var(--table-border-divider-color);
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+@layer table-l01, table-l02, table-l03, table-l04, table-l05, table-l06, table-l07, table-l08, table-l09, table-l10, table-l11, table-l12;
+@layer table-l01 {
+  .table-striped tbody tr:nth-child(even) {
+    box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
+  }
+  .table-striped-odd tbody tr:nth-child(odd) {
+    box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
+  }
+  .table-striped-column tbody tr th:nth-child(even),
+  .table-striped-column tbody tr td:nth-child(even) {
+    box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
+  }
+  .table-striped-column-odd tbody tr th:nth-child(odd),
+  .table-striped-column-odd tbody tr td:nth-child(odd) {
+    box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
+  }
+}
+@layer table-l02 {
+  table.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--table-hover-background-color);
+  }
+  table.table-hover tbody tr:active,
+  table.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--table-active-background-color);
+  }
+}
+@layer table-l03 {
+  thead.table-hover tr:hover,
+  tbody.table-hover tr:hover,
+  tfoot.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--table-hover-background-color);
+  }
+  thead.table-hover tr:active,
+  thead.table-hover tr.active,
+  tbody.table-hover tr:active,
+  tbody.table-hover tr.active,
+  tfoot.table-hover tr:active,
+  tfoot.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--table-active-background-color);
+  }
+}
+@layer table-l04 {
+  tr.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--table-hover-background-color);
+  }
+  tr.table-hover:active,
+  tr.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--table-active-background-color);
+  }
+}
+@layer table-l05 {
+  th.table-hover:hover,
+  td.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--table-hover-background-color);
+  }
+  th.table-hover:active,
+  td.table-hover:active,
+  th.table-hover.active,
+  td.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--table-active-background-color);
+  }
+}
+@layer table-l06 {
+  table.table-primary {
+    background-color: var(--color-primary);
+    color: var(--content-on-primary);
+  }
+  table.table-primary.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary);
+  }
+  table.table-primary.table-hover tbody tr:active,
+  table.table-primary.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary);
+  }
+  table.table-secondary {
+    background-color: var(--color-secondary);
+    color: var(--content-on-secondary);
+  }
+  table.table-secondary.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary);
+  }
+  table.table-secondary.table-hover tbody tr:active,
+  table.table-secondary.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary);
+  }
+  table.table-tertiary {
+    background-color: var(--color-tertiary);
+    color: var(--content-on-tertiary);
+  }
+  table.table-tertiary.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary);
+  }
+  table.table-tertiary.table-hover tbody tr:active,
+  table.table-tertiary.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary);
+  }
+  table.table-success {
+    background-color: var(--color-success);
+    color: var(--content-on-success);
+  }
+  table.table-success.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success);
+  }
+  table.table-success.table-hover tbody tr:active,
+  table.table-success.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success);
+  }
+  table.table-info {
+    background-color: var(--color-info);
+    color: var(--content-on-info);
+  }
+  table.table-info.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info);
+  }
+  table.table-info.table-hover tbody tr:active,
+  table.table-info.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info);
+  }
+  table.table-warning {
+    background-color: var(--color-warning);
+    color: var(--content-on-warning);
+  }
+  table.table-warning.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning);
+  }
+  table.table-warning.table-hover tbody tr:active,
+  table.table-warning.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning);
+  }
+  table.table-danger {
+    background-color: var(--color-danger);
+    color: var(--content-on-danger);
+  }
+  table.table-danger.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger);
+  }
+  table.table-danger.table-hover tbody tr:active,
+  table.table-danger.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger);
+  }
+  table.table-neutral {
+    background-color: var(--color-neutral);
+    color: var(--content-on-neutral);
+  }
+  table.table-neutral.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral);
+  }
+  table.table-neutral.table-hover tbody tr:active,
+  table.table-neutral.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral);
+  }
+  table.table-light {
+    background-color: var(--color-light);
+    color: var(--content-on-light);
+  }
+  table.table-light.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light);
+  }
+  table.table-light.table-hover tbody tr:active,
+  table.table-light.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light);
+  }
+  table.table-dark {
+    background-color: var(--color-dark);
+    color: var(--content-on-dark);
+  }
+  table.table-dark.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark);
+  }
+  table.table-dark.table-hover tbody tr:active,
+  table.table-dark.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark);
+  }
+  table.table-white {
+    background-color: var(--color-white);
+    color: var(--content-on-white);
+  }
+  table.table-white.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white);
+  }
+  table.table-white.table-hover tbody tr:active,
+  table.table-white.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white);
+  }
+  table.table-black {
+    background-color: var(--color-black);
+    color: var(--content-on-black);
+  }
+  table.table-black.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black);
+  }
+  table.table-black.table-hover tbody tr:active,
+  table.table-black.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black);
+  }
+  table.table-primary-ghost {
+    background-color: var(--color-primary-ghost);
+    color: var(--content-on-primary-ghost);
+  }
+  table.table-primary-ghost.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary-ghost);
+  }
+  table.table-primary-ghost.table-hover tbody tr:active,
+  table.table-primary-ghost.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary-ghost);
+  }
+  table.table-secondary-ghost {
+    background-color: var(--color-secondary-ghost);
+    color: var(--content-on-secondary-ghost);
+  }
+  table.table-secondary-ghost.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary-ghost);
+  }
+  table.table-secondary-ghost.table-hover tbody tr:active,
+  table.table-secondary-ghost.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary-ghost);
+  }
+  table.table-tertiary-ghost {
+    background-color: var(--color-tertiary-ghost);
+    color: var(--content-on-tertiary-ghost);
+  }
+  table.table-tertiary-ghost.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary-ghost);
+  }
+  table.table-tertiary-ghost.table-hover tbody tr:active,
+  table.table-tertiary-ghost.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary-ghost);
+  }
+  table.table-success-ghost {
+    background-color: var(--color-success-ghost);
+    color: var(--content-on-success-ghost);
+  }
+  table.table-success-ghost.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success-ghost);
+  }
+  table.table-success-ghost.table-hover tbody tr:active,
+  table.table-success-ghost.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success-ghost);
+  }
+  table.table-info-ghost {
+    background-color: var(--color-info-ghost);
+    color: var(--content-on-info-ghost);
+  }
+  table.table-info-ghost.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info-ghost);
+  }
+  table.table-info-ghost.table-hover tbody tr:active,
+  table.table-info-ghost.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info-ghost);
+  }
+  table.table-warning-ghost {
+    background-color: var(--color-warning-ghost);
+    color: var(--content-on-warning-ghost);
+  }
+  table.table-warning-ghost.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning-ghost);
+  }
+  table.table-warning-ghost.table-hover tbody tr:active,
+  table.table-warning-ghost.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning-ghost);
+  }
+  table.table-danger-ghost {
+    background-color: var(--color-danger-ghost);
+    color: var(--content-on-danger-ghost);
+  }
+  table.table-danger-ghost.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger-ghost);
+  }
+  table.table-danger-ghost.table-hover tbody tr:active,
+  table.table-danger-ghost.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger-ghost);
+  }
+  table.table-neutral-ghost {
+    background-color: var(--color-neutral-ghost);
+    color: var(--content-on-neutral-ghost);
+  }
+  table.table-neutral-ghost.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral-ghost);
+  }
+  table.table-neutral-ghost.table-hover tbody tr:active,
+  table.table-neutral-ghost.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral-ghost);
+  }
+  table.table-light-ghost {
+    background-color: var(--color-light-ghost);
+    color: var(--content-on-light-ghost);
+  }
+  table.table-light-ghost.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light-ghost);
+  }
+  table.table-light-ghost.table-hover tbody tr:active,
+  table.table-light-ghost.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light-ghost);
+  }
+  table.table-dark-ghost {
+    background-color: var(--color-dark-ghost);
+    color: var(--content-on-dark-ghost);
+  }
+  table.table-dark-ghost.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark-ghost);
+  }
+  table.table-dark-ghost.table-hover tbody tr:active,
+  table.table-dark-ghost.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark-ghost);
+  }
+  table.table-white-ghost {
+    background-color: var(--color-white-ghost);
+    color: var(--content-on-white-ghost);
+  }
+  table.table-white-ghost.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white-ghost);
+  }
+  table.table-white-ghost.table-hover tbody tr:active,
+  table.table-white-ghost.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white-ghost);
+  }
+  table.table-black-ghost {
+    background-color: var(--color-black-ghost);
+    color: var(--content-on-black-ghost);
+  }
+  table.table-black-ghost.table-hover tbody tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black-ghost);
+  }
+  table.table-black-ghost.table-hover tbody tr:active,
+  table.table-black-ghost.table-hover tbody tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black-ghost);
+  }
+}
+@layer table-l07 {
+  .table-hover tbody.table-primary {
+    background-color: var(--color-primary);
+    color: var(--content-on-primary);
+  }
+  .table-hover tbody.table-primary tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary);
+  }
+  .table-hover tbody.table-primary tr:active,
+  .table-hover tbody.table-primary tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary);
+  }
+  .table-hover tbody.table-secondary {
+    background-color: var(--color-secondary);
+    color: var(--content-on-secondary);
+  }
+  .table-hover tbody.table-secondary tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary);
+  }
+  .table-hover tbody.table-secondary tr:active,
+  .table-hover tbody.table-secondary tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary);
+  }
+  .table-hover tbody.table-tertiary {
+    background-color: var(--color-tertiary);
+    color: var(--content-on-tertiary);
+  }
+  .table-hover tbody.table-tertiary tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary);
+  }
+  .table-hover tbody.table-tertiary tr:active,
+  .table-hover tbody.table-tertiary tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary);
+  }
+  .table-hover tbody.table-success {
+    background-color: var(--color-success);
+    color: var(--content-on-success);
+  }
+  .table-hover tbody.table-success tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success);
+  }
+  .table-hover tbody.table-success tr:active,
+  .table-hover tbody.table-success tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success);
+  }
+  .table-hover tbody.table-info {
+    background-color: var(--color-info);
+    color: var(--content-on-info);
+  }
+  .table-hover tbody.table-info tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info);
+  }
+  .table-hover tbody.table-info tr:active,
+  .table-hover tbody.table-info tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info);
+  }
+  .table-hover tbody.table-warning {
+    background-color: var(--color-warning);
+    color: var(--content-on-warning);
+  }
+  .table-hover tbody.table-warning tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning);
+  }
+  .table-hover tbody.table-warning tr:active,
+  .table-hover tbody.table-warning tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning);
+  }
+  .table-hover tbody.table-danger {
+    background-color: var(--color-danger);
+    color: var(--content-on-danger);
+  }
+  .table-hover tbody.table-danger tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger);
+  }
+  .table-hover tbody.table-danger tr:active,
+  .table-hover tbody.table-danger tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger);
+  }
+  .table-hover tbody.table-neutral {
+    background-color: var(--color-neutral);
+    color: var(--content-on-neutral);
+  }
+  .table-hover tbody.table-neutral tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral);
+  }
+  .table-hover tbody.table-neutral tr:active,
+  .table-hover tbody.table-neutral tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral);
+  }
+  .table-hover tbody.table-light {
+    background-color: var(--color-light);
+    color: var(--content-on-light);
+  }
+  .table-hover tbody.table-light tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light);
+  }
+  .table-hover tbody.table-light tr:active,
+  .table-hover tbody.table-light tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light);
+  }
+  .table-hover tbody.table-dark {
+    background-color: var(--color-dark);
+    color: var(--content-on-dark);
+  }
+  .table-hover tbody.table-dark tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark);
+  }
+  .table-hover tbody.table-dark tr:active,
+  .table-hover tbody.table-dark tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark);
+  }
+  .table-hover tbody.table-white {
+    background-color: var(--color-white);
+    color: var(--content-on-white);
+  }
+  .table-hover tbody.table-white tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white);
+  }
+  .table-hover tbody.table-white tr:active,
+  .table-hover tbody.table-white tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white);
+  }
+  .table-hover tbody.table-black {
+    background-color: var(--color-black);
+    color: var(--content-on-black);
+  }
+  .table-hover tbody.table-black tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black);
+  }
+  .table-hover tbody.table-black tr:active,
+  .table-hover tbody.table-black tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black);
+  }
+  .table-hover tbody.table-primary-ghost {
+    background-color: var(--color-primary-ghost);
+    color: var(--content-on-primary-ghost);
+  }
+  .table-hover tbody.table-primary-ghost tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary-ghost);
+  }
+  .table-hover tbody.table-primary-ghost tr:active,
+  .table-hover tbody.table-primary-ghost tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary-ghost);
+  }
+  .table-hover tbody.table-secondary-ghost {
+    background-color: var(--color-secondary-ghost);
+    color: var(--content-on-secondary-ghost);
+  }
+  .table-hover tbody.table-secondary-ghost tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary-ghost);
+  }
+  .table-hover tbody.table-secondary-ghost tr:active,
+  .table-hover tbody.table-secondary-ghost tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary-ghost);
+  }
+  .table-hover tbody.table-tertiary-ghost {
+    background-color: var(--color-tertiary-ghost);
+    color: var(--content-on-tertiary-ghost);
+  }
+  .table-hover tbody.table-tertiary-ghost tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary-ghost);
+  }
+  .table-hover tbody.table-tertiary-ghost tr:active,
+  .table-hover tbody.table-tertiary-ghost tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary-ghost);
+  }
+  .table-hover tbody.table-success-ghost {
+    background-color: var(--color-success-ghost);
+    color: var(--content-on-success-ghost);
+  }
+  .table-hover tbody.table-success-ghost tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success-ghost);
+  }
+  .table-hover tbody.table-success-ghost tr:active,
+  .table-hover tbody.table-success-ghost tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success-ghost);
+  }
+  .table-hover tbody.table-info-ghost {
+    background-color: var(--color-info-ghost);
+    color: var(--content-on-info-ghost);
+  }
+  .table-hover tbody.table-info-ghost tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info-ghost);
+  }
+  .table-hover tbody.table-info-ghost tr:active,
+  .table-hover tbody.table-info-ghost tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info-ghost);
+  }
+  .table-hover tbody.table-warning-ghost {
+    background-color: var(--color-warning-ghost);
+    color: var(--content-on-warning-ghost);
+  }
+  .table-hover tbody.table-warning-ghost tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning-ghost);
+  }
+  .table-hover tbody.table-warning-ghost tr:active,
+  .table-hover tbody.table-warning-ghost tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning-ghost);
+  }
+  .table-hover tbody.table-danger-ghost {
+    background-color: var(--color-danger-ghost);
+    color: var(--content-on-danger-ghost);
+  }
+  .table-hover tbody.table-danger-ghost tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger-ghost);
+  }
+  .table-hover tbody.table-danger-ghost tr:active,
+  .table-hover tbody.table-danger-ghost tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger-ghost);
+  }
+  .table-hover tbody.table-neutral-ghost {
+    background-color: var(--color-neutral-ghost);
+    color: var(--content-on-neutral-ghost);
+  }
+  .table-hover tbody.table-neutral-ghost tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral-ghost);
+  }
+  .table-hover tbody.table-neutral-ghost tr:active,
+  .table-hover tbody.table-neutral-ghost tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral-ghost);
+  }
+  .table-hover tbody.table-light-ghost {
+    background-color: var(--color-light-ghost);
+    color: var(--content-on-light-ghost);
+  }
+  .table-hover tbody.table-light-ghost tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light-ghost);
+  }
+  .table-hover tbody.table-light-ghost tr:active,
+  .table-hover tbody.table-light-ghost tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light-ghost);
+  }
+  .table-hover tbody.table-dark-ghost {
+    background-color: var(--color-dark-ghost);
+    color: var(--content-on-dark-ghost);
+  }
+  .table-hover tbody.table-dark-ghost tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark-ghost);
+  }
+  .table-hover tbody.table-dark-ghost tr:active,
+  .table-hover tbody.table-dark-ghost tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark-ghost);
+  }
+  .table-hover tbody.table-white-ghost {
+    background-color: var(--color-white-ghost);
+    color: var(--content-on-white-ghost);
+  }
+  .table-hover tbody.table-white-ghost tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white-ghost);
+  }
+  .table-hover tbody.table-white-ghost tr:active,
+  .table-hover tbody.table-white-ghost tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white-ghost);
+  }
+  .table-hover tbody.table-black-ghost {
+    background-color: var(--color-black-ghost);
+    color: var(--content-on-black-ghost);
+  }
+  .table-hover tbody.table-black-ghost tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black-ghost);
+  }
+  .table-hover tbody.table-black-ghost tr:active,
+  .table-hover tbody.table-black-ghost tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black-ghost);
+  }
+}
+@layer table-l08 {
+  thead.table-primary,
+  tbody.table-primary,
+  tfoot.table-primary {
+    background-color: var(--color-primary);
+    color: var(--content-on-primary);
+  }
+  thead.table-primary.table-hover tr:hover,
+  tbody.table-primary.table-hover tr:hover,
+  tfoot.table-primary.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary);
+  }
+  thead.table-primary.table-hover tr:active, thead.table-primary.table-hover tr.active,
+  tbody.table-primary.table-hover tr:active,
+  tbody.table-primary.table-hover tr.active,
+  tfoot.table-primary.table-hover tr:active,
+  tfoot.table-primary.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary);
+  }
+  thead.table-secondary,
+  tbody.table-secondary,
+  tfoot.table-secondary {
+    background-color: var(--color-secondary);
+    color: var(--content-on-secondary);
+  }
+  thead.table-secondary.table-hover tr:hover,
+  tbody.table-secondary.table-hover tr:hover,
+  tfoot.table-secondary.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary);
+  }
+  thead.table-secondary.table-hover tr:active, thead.table-secondary.table-hover tr.active,
+  tbody.table-secondary.table-hover tr:active,
+  tbody.table-secondary.table-hover tr.active,
+  tfoot.table-secondary.table-hover tr:active,
+  tfoot.table-secondary.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary);
+  }
+  thead.table-tertiary,
+  tbody.table-tertiary,
+  tfoot.table-tertiary {
+    background-color: var(--color-tertiary);
+    color: var(--content-on-tertiary);
+  }
+  thead.table-tertiary.table-hover tr:hover,
+  tbody.table-tertiary.table-hover tr:hover,
+  tfoot.table-tertiary.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary);
+  }
+  thead.table-tertiary.table-hover tr:active, thead.table-tertiary.table-hover tr.active,
+  tbody.table-tertiary.table-hover tr:active,
+  tbody.table-tertiary.table-hover tr.active,
+  tfoot.table-tertiary.table-hover tr:active,
+  tfoot.table-tertiary.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary);
+  }
+  thead.table-success,
+  tbody.table-success,
+  tfoot.table-success {
+    background-color: var(--color-success);
+    color: var(--content-on-success);
+  }
+  thead.table-success.table-hover tr:hover,
+  tbody.table-success.table-hover tr:hover,
+  tfoot.table-success.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success);
+  }
+  thead.table-success.table-hover tr:active, thead.table-success.table-hover tr.active,
+  tbody.table-success.table-hover tr:active,
+  tbody.table-success.table-hover tr.active,
+  tfoot.table-success.table-hover tr:active,
+  tfoot.table-success.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success);
+  }
+  thead.table-info,
+  tbody.table-info,
+  tfoot.table-info {
+    background-color: var(--color-info);
+    color: var(--content-on-info);
+  }
+  thead.table-info.table-hover tr:hover,
+  tbody.table-info.table-hover tr:hover,
+  tfoot.table-info.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info);
+  }
+  thead.table-info.table-hover tr:active, thead.table-info.table-hover tr.active,
+  tbody.table-info.table-hover tr:active,
+  tbody.table-info.table-hover tr.active,
+  tfoot.table-info.table-hover tr:active,
+  tfoot.table-info.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info);
+  }
+  thead.table-warning,
+  tbody.table-warning,
+  tfoot.table-warning {
+    background-color: var(--color-warning);
+    color: var(--content-on-warning);
+  }
+  thead.table-warning.table-hover tr:hover,
+  tbody.table-warning.table-hover tr:hover,
+  tfoot.table-warning.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning);
+  }
+  thead.table-warning.table-hover tr:active, thead.table-warning.table-hover tr.active,
+  tbody.table-warning.table-hover tr:active,
+  tbody.table-warning.table-hover tr.active,
+  tfoot.table-warning.table-hover tr:active,
+  tfoot.table-warning.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning);
+  }
+  thead.table-danger,
+  tbody.table-danger,
+  tfoot.table-danger {
+    background-color: var(--color-danger);
+    color: var(--content-on-danger);
+  }
+  thead.table-danger.table-hover tr:hover,
+  tbody.table-danger.table-hover tr:hover,
+  tfoot.table-danger.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger);
+  }
+  thead.table-danger.table-hover tr:active, thead.table-danger.table-hover tr.active,
+  tbody.table-danger.table-hover tr:active,
+  tbody.table-danger.table-hover tr.active,
+  tfoot.table-danger.table-hover tr:active,
+  tfoot.table-danger.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger);
+  }
+  thead.table-neutral,
+  tbody.table-neutral,
+  tfoot.table-neutral {
+    background-color: var(--color-neutral);
+    color: var(--content-on-neutral);
+  }
+  thead.table-neutral.table-hover tr:hover,
+  tbody.table-neutral.table-hover tr:hover,
+  tfoot.table-neutral.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral);
+  }
+  thead.table-neutral.table-hover tr:active, thead.table-neutral.table-hover tr.active,
+  tbody.table-neutral.table-hover tr:active,
+  tbody.table-neutral.table-hover tr.active,
+  tfoot.table-neutral.table-hover tr:active,
+  tfoot.table-neutral.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral);
+  }
+  thead.table-light,
+  tbody.table-light,
+  tfoot.table-light {
+    background-color: var(--color-light);
+    color: var(--content-on-light);
+  }
+  thead.table-light.table-hover tr:hover,
+  tbody.table-light.table-hover tr:hover,
+  tfoot.table-light.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light);
+  }
+  thead.table-light.table-hover tr:active, thead.table-light.table-hover tr.active,
+  tbody.table-light.table-hover tr:active,
+  tbody.table-light.table-hover tr.active,
+  tfoot.table-light.table-hover tr:active,
+  tfoot.table-light.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light);
+  }
+  thead.table-dark,
+  tbody.table-dark,
+  tfoot.table-dark {
+    background-color: var(--color-dark);
+    color: var(--content-on-dark);
+  }
+  thead.table-dark.table-hover tr:hover,
+  tbody.table-dark.table-hover tr:hover,
+  tfoot.table-dark.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark);
+  }
+  thead.table-dark.table-hover tr:active, thead.table-dark.table-hover tr.active,
+  tbody.table-dark.table-hover tr:active,
+  tbody.table-dark.table-hover tr.active,
+  tfoot.table-dark.table-hover tr:active,
+  tfoot.table-dark.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark);
+  }
+  thead.table-white,
+  tbody.table-white,
+  tfoot.table-white {
+    background-color: var(--color-white);
+    color: var(--content-on-white);
+  }
+  thead.table-white.table-hover tr:hover,
+  tbody.table-white.table-hover tr:hover,
+  tfoot.table-white.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white);
+  }
+  thead.table-white.table-hover tr:active, thead.table-white.table-hover tr.active,
+  tbody.table-white.table-hover tr:active,
+  tbody.table-white.table-hover tr.active,
+  tfoot.table-white.table-hover tr:active,
+  tfoot.table-white.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white);
+  }
+  thead.table-black,
+  tbody.table-black,
+  tfoot.table-black {
+    background-color: var(--color-black);
+    color: var(--content-on-black);
+  }
+  thead.table-black.table-hover tr:hover,
+  tbody.table-black.table-hover tr:hover,
+  tfoot.table-black.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black);
+  }
+  thead.table-black.table-hover tr:active, thead.table-black.table-hover tr.active,
+  tbody.table-black.table-hover tr:active,
+  tbody.table-black.table-hover tr.active,
+  tfoot.table-black.table-hover tr:active,
+  tfoot.table-black.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black);
+  }
+  thead.table-primary-ghost,
+  tbody.table-primary-ghost,
+  tfoot.table-primary-ghost {
+    background-color: var(--color-primary-ghost);
+    color: var(--content-on-primary-ghost);
+  }
+  thead.table-primary-ghost.table-hover tr:hover,
+  tbody.table-primary-ghost.table-hover tr:hover,
+  tfoot.table-primary-ghost.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary-ghost);
+  }
+  thead.table-primary-ghost.table-hover tr:active, thead.table-primary-ghost.table-hover tr.active,
+  tbody.table-primary-ghost.table-hover tr:active,
+  tbody.table-primary-ghost.table-hover tr.active,
+  tfoot.table-primary-ghost.table-hover tr:active,
+  tfoot.table-primary-ghost.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary-ghost);
+  }
+  thead.table-secondary-ghost,
+  tbody.table-secondary-ghost,
+  tfoot.table-secondary-ghost {
+    background-color: var(--color-secondary-ghost);
+    color: var(--content-on-secondary-ghost);
+  }
+  thead.table-secondary-ghost.table-hover tr:hover,
+  tbody.table-secondary-ghost.table-hover tr:hover,
+  tfoot.table-secondary-ghost.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary-ghost);
+  }
+  thead.table-secondary-ghost.table-hover tr:active, thead.table-secondary-ghost.table-hover tr.active,
+  tbody.table-secondary-ghost.table-hover tr:active,
+  tbody.table-secondary-ghost.table-hover tr.active,
+  tfoot.table-secondary-ghost.table-hover tr:active,
+  tfoot.table-secondary-ghost.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary-ghost);
+  }
+  thead.table-tertiary-ghost,
+  tbody.table-tertiary-ghost,
+  tfoot.table-tertiary-ghost {
+    background-color: var(--color-tertiary-ghost);
+    color: var(--content-on-tertiary-ghost);
+  }
+  thead.table-tertiary-ghost.table-hover tr:hover,
+  tbody.table-tertiary-ghost.table-hover tr:hover,
+  tfoot.table-tertiary-ghost.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary-ghost);
+  }
+  thead.table-tertiary-ghost.table-hover tr:active, thead.table-tertiary-ghost.table-hover tr.active,
+  tbody.table-tertiary-ghost.table-hover tr:active,
+  tbody.table-tertiary-ghost.table-hover tr.active,
+  tfoot.table-tertiary-ghost.table-hover tr:active,
+  tfoot.table-tertiary-ghost.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary-ghost);
+  }
+  thead.table-success-ghost,
+  tbody.table-success-ghost,
+  tfoot.table-success-ghost {
+    background-color: var(--color-success-ghost);
+    color: var(--content-on-success-ghost);
+  }
+  thead.table-success-ghost.table-hover tr:hover,
+  tbody.table-success-ghost.table-hover tr:hover,
+  tfoot.table-success-ghost.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success-ghost);
+  }
+  thead.table-success-ghost.table-hover tr:active, thead.table-success-ghost.table-hover tr.active,
+  tbody.table-success-ghost.table-hover tr:active,
+  tbody.table-success-ghost.table-hover tr.active,
+  tfoot.table-success-ghost.table-hover tr:active,
+  tfoot.table-success-ghost.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success-ghost);
+  }
+  thead.table-info-ghost,
+  tbody.table-info-ghost,
+  tfoot.table-info-ghost {
+    background-color: var(--color-info-ghost);
+    color: var(--content-on-info-ghost);
+  }
+  thead.table-info-ghost.table-hover tr:hover,
+  tbody.table-info-ghost.table-hover tr:hover,
+  tfoot.table-info-ghost.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info-ghost);
+  }
+  thead.table-info-ghost.table-hover tr:active, thead.table-info-ghost.table-hover tr.active,
+  tbody.table-info-ghost.table-hover tr:active,
+  tbody.table-info-ghost.table-hover tr.active,
+  tfoot.table-info-ghost.table-hover tr:active,
+  tfoot.table-info-ghost.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info-ghost);
+  }
+  thead.table-warning-ghost,
+  tbody.table-warning-ghost,
+  tfoot.table-warning-ghost {
+    background-color: var(--color-warning-ghost);
+    color: var(--content-on-warning-ghost);
+  }
+  thead.table-warning-ghost.table-hover tr:hover,
+  tbody.table-warning-ghost.table-hover tr:hover,
+  tfoot.table-warning-ghost.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning-ghost);
+  }
+  thead.table-warning-ghost.table-hover tr:active, thead.table-warning-ghost.table-hover tr.active,
+  tbody.table-warning-ghost.table-hover tr:active,
+  tbody.table-warning-ghost.table-hover tr.active,
+  tfoot.table-warning-ghost.table-hover tr:active,
+  tfoot.table-warning-ghost.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning-ghost);
+  }
+  thead.table-danger-ghost,
+  tbody.table-danger-ghost,
+  tfoot.table-danger-ghost {
+    background-color: var(--color-danger-ghost);
+    color: var(--content-on-danger-ghost);
+  }
+  thead.table-danger-ghost.table-hover tr:hover,
+  tbody.table-danger-ghost.table-hover tr:hover,
+  tfoot.table-danger-ghost.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger-ghost);
+  }
+  thead.table-danger-ghost.table-hover tr:active, thead.table-danger-ghost.table-hover tr.active,
+  tbody.table-danger-ghost.table-hover tr:active,
+  tbody.table-danger-ghost.table-hover tr.active,
+  tfoot.table-danger-ghost.table-hover tr:active,
+  tfoot.table-danger-ghost.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger-ghost);
+  }
+  thead.table-neutral-ghost,
+  tbody.table-neutral-ghost,
+  tfoot.table-neutral-ghost {
+    background-color: var(--color-neutral-ghost);
+    color: var(--content-on-neutral-ghost);
+  }
+  thead.table-neutral-ghost.table-hover tr:hover,
+  tbody.table-neutral-ghost.table-hover tr:hover,
+  tfoot.table-neutral-ghost.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral-ghost);
+  }
+  thead.table-neutral-ghost.table-hover tr:active, thead.table-neutral-ghost.table-hover tr.active,
+  tbody.table-neutral-ghost.table-hover tr:active,
+  tbody.table-neutral-ghost.table-hover tr.active,
+  tfoot.table-neutral-ghost.table-hover tr:active,
+  tfoot.table-neutral-ghost.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral-ghost);
+  }
+  thead.table-light-ghost,
+  tbody.table-light-ghost,
+  tfoot.table-light-ghost {
+    background-color: var(--color-light-ghost);
+    color: var(--content-on-light-ghost);
+  }
+  thead.table-light-ghost.table-hover tr:hover,
+  tbody.table-light-ghost.table-hover tr:hover,
+  tfoot.table-light-ghost.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light-ghost);
+  }
+  thead.table-light-ghost.table-hover tr:active, thead.table-light-ghost.table-hover tr.active,
+  tbody.table-light-ghost.table-hover tr:active,
+  tbody.table-light-ghost.table-hover tr.active,
+  tfoot.table-light-ghost.table-hover tr:active,
+  tfoot.table-light-ghost.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light-ghost);
+  }
+  thead.table-dark-ghost,
+  tbody.table-dark-ghost,
+  tfoot.table-dark-ghost {
+    background-color: var(--color-dark-ghost);
+    color: var(--content-on-dark-ghost);
+  }
+  thead.table-dark-ghost.table-hover tr:hover,
+  tbody.table-dark-ghost.table-hover tr:hover,
+  tfoot.table-dark-ghost.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark-ghost);
+  }
+  thead.table-dark-ghost.table-hover tr:active, thead.table-dark-ghost.table-hover tr.active,
+  tbody.table-dark-ghost.table-hover tr:active,
+  tbody.table-dark-ghost.table-hover tr.active,
+  tfoot.table-dark-ghost.table-hover tr:active,
+  tfoot.table-dark-ghost.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark-ghost);
+  }
+  thead.table-white-ghost,
+  tbody.table-white-ghost,
+  tfoot.table-white-ghost {
+    background-color: var(--color-white-ghost);
+    color: var(--content-on-white-ghost);
+  }
+  thead.table-white-ghost.table-hover tr:hover,
+  tbody.table-white-ghost.table-hover tr:hover,
+  tfoot.table-white-ghost.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white-ghost);
+  }
+  thead.table-white-ghost.table-hover tr:active, thead.table-white-ghost.table-hover tr.active,
+  tbody.table-white-ghost.table-hover tr:active,
+  tbody.table-white-ghost.table-hover tr.active,
+  tfoot.table-white-ghost.table-hover tr:active,
+  tfoot.table-white-ghost.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white-ghost);
+  }
+  thead.table-black-ghost,
+  tbody.table-black-ghost,
+  tfoot.table-black-ghost {
+    background-color: var(--color-black-ghost);
+    color: var(--content-on-black-ghost);
+  }
+  thead.table-black-ghost.table-hover tr:hover,
+  tbody.table-black-ghost.table-hover tr:hover,
+  tfoot.table-black-ghost.table-hover tr:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black-ghost);
+  }
+  thead.table-black-ghost.table-hover tr:active, thead.table-black-ghost.table-hover tr.active,
+  tbody.table-black-ghost.table-hover tr:active,
+  tbody.table-black-ghost.table-hover tr.active,
+  tfoot.table-black-ghost.table-hover tr:active,
+  tfoot.table-black-ghost.table-hover tr.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black-ghost);
+  }
+}
+@layer table-l09 {
+  table.table-hover tbody tr.table-primary {
+    background-color: var(--color-primary);
+    color: var(--content-on-primary);
+  }
+  table.table-hover tbody tr.table-primary:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary);
+  }
+  table.table-hover tbody tr.table-primary:active, table.table-hover tbody tr.table-primary.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary);
+  }
+  thead.table-hover tr.table-primary,
+  tbody.table-hover tr.table-primary,
+  tfoot.table-hover tr.table-primary {
+    background-color: var(--color-primary);
+    color: var(--content-on-primary);
+  }
+  thead.table-hover tr.table-primary:hover,
+  tbody.table-hover tr.table-primary:hover,
+  tfoot.table-hover tr.table-primary:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary);
+  }
+  thead.table-hover tr.table-primary:active, thead.table-hover tr.table-primary.active,
+  tbody.table-hover tr.table-primary:active,
+  tbody.table-hover tr.table-primary.active,
+  tfoot.table-hover tr.table-primary:active,
+  tfoot.table-hover tr.table-primary.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary);
+  }
+  table.table-hover tbody tr.table-secondary {
+    background-color: var(--color-secondary);
+    color: var(--content-on-secondary);
+  }
+  table.table-hover tbody tr.table-secondary:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary);
+  }
+  table.table-hover tbody tr.table-secondary:active, table.table-hover tbody tr.table-secondary.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary);
+  }
+  thead.table-hover tr.table-secondary,
+  tbody.table-hover tr.table-secondary,
+  tfoot.table-hover tr.table-secondary {
+    background-color: var(--color-secondary);
+    color: var(--content-on-secondary);
+  }
+  thead.table-hover tr.table-secondary:hover,
+  tbody.table-hover tr.table-secondary:hover,
+  tfoot.table-hover tr.table-secondary:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary);
+  }
+  thead.table-hover tr.table-secondary:active, thead.table-hover tr.table-secondary.active,
+  tbody.table-hover tr.table-secondary:active,
+  tbody.table-hover tr.table-secondary.active,
+  tfoot.table-hover tr.table-secondary:active,
+  tfoot.table-hover tr.table-secondary.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary);
+  }
+  table.table-hover tbody tr.table-tertiary {
+    background-color: var(--color-tertiary);
+    color: var(--content-on-tertiary);
+  }
+  table.table-hover tbody tr.table-tertiary:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary);
+  }
+  table.table-hover tbody tr.table-tertiary:active, table.table-hover tbody tr.table-tertiary.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary);
+  }
+  thead.table-hover tr.table-tertiary,
+  tbody.table-hover tr.table-tertiary,
+  tfoot.table-hover tr.table-tertiary {
+    background-color: var(--color-tertiary);
+    color: var(--content-on-tertiary);
+  }
+  thead.table-hover tr.table-tertiary:hover,
+  tbody.table-hover tr.table-tertiary:hover,
+  tfoot.table-hover tr.table-tertiary:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary);
+  }
+  thead.table-hover tr.table-tertiary:active, thead.table-hover tr.table-tertiary.active,
+  tbody.table-hover tr.table-tertiary:active,
+  tbody.table-hover tr.table-tertiary.active,
+  tfoot.table-hover tr.table-tertiary:active,
+  tfoot.table-hover tr.table-tertiary.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary);
+  }
+  table.table-hover tbody tr.table-success {
+    background-color: var(--color-success);
+    color: var(--content-on-success);
+  }
+  table.table-hover tbody tr.table-success:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success);
+  }
+  table.table-hover tbody tr.table-success:active, table.table-hover tbody tr.table-success.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success);
+  }
+  thead.table-hover tr.table-success,
+  tbody.table-hover tr.table-success,
+  tfoot.table-hover tr.table-success {
+    background-color: var(--color-success);
+    color: var(--content-on-success);
+  }
+  thead.table-hover tr.table-success:hover,
+  tbody.table-hover tr.table-success:hover,
+  tfoot.table-hover tr.table-success:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success);
+  }
+  thead.table-hover tr.table-success:active, thead.table-hover tr.table-success.active,
+  tbody.table-hover tr.table-success:active,
+  tbody.table-hover tr.table-success.active,
+  tfoot.table-hover tr.table-success:active,
+  tfoot.table-hover tr.table-success.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success);
+  }
+  table.table-hover tbody tr.table-info {
+    background-color: var(--color-info);
+    color: var(--content-on-info);
+  }
+  table.table-hover tbody tr.table-info:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info);
+  }
+  table.table-hover tbody tr.table-info:active, table.table-hover tbody tr.table-info.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info);
+  }
+  thead.table-hover tr.table-info,
+  tbody.table-hover tr.table-info,
+  tfoot.table-hover tr.table-info {
+    background-color: var(--color-info);
+    color: var(--content-on-info);
+  }
+  thead.table-hover tr.table-info:hover,
+  tbody.table-hover tr.table-info:hover,
+  tfoot.table-hover tr.table-info:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info);
+  }
+  thead.table-hover tr.table-info:active, thead.table-hover tr.table-info.active,
+  tbody.table-hover tr.table-info:active,
+  tbody.table-hover tr.table-info.active,
+  tfoot.table-hover tr.table-info:active,
+  tfoot.table-hover tr.table-info.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info);
+  }
+  table.table-hover tbody tr.table-warning {
+    background-color: var(--color-warning);
+    color: var(--content-on-warning);
+  }
+  table.table-hover tbody tr.table-warning:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning);
+  }
+  table.table-hover tbody tr.table-warning:active, table.table-hover tbody tr.table-warning.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning);
+  }
+  thead.table-hover tr.table-warning,
+  tbody.table-hover tr.table-warning,
+  tfoot.table-hover tr.table-warning {
+    background-color: var(--color-warning);
+    color: var(--content-on-warning);
+  }
+  thead.table-hover tr.table-warning:hover,
+  tbody.table-hover tr.table-warning:hover,
+  tfoot.table-hover tr.table-warning:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning);
+  }
+  thead.table-hover tr.table-warning:active, thead.table-hover tr.table-warning.active,
+  tbody.table-hover tr.table-warning:active,
+  tbody.table-hover tr.table-warning.active,
+  tfoot.table-hover tr.table-warning:active,
+  tfoot.table-hover tr.table-warning.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning);
+  }
+  table.table-hover tbody tr.table-danger {
+    background-color: var(--color-danger);
+    color: var(--content-on-danger);
+  }
+  table.table-hover tbody tr.table-danger:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger);
+  }
+  table.table-hover tbody tr.table-danger:active, table.table-hover tbody tr.table-danger.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger);
+  }
+  thead.table-hover tr.table-danger,
+  tbody.table-hover tr.table-danger,
+  tfoot.table-hover tr.table-danger {
+    background-color: var(--color-danger);
+    color: var(--content-on-danger);
+  }
+  thead.table-hover tr.table-danger:hover,
+  tbody.table-hover tr.table-danger:hover,
+  tfoot.table-hover tr.table-danger:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger);
+  }
+  thead.table-hover tr.table-danger:active, thead.table-hover tr.table-danger.active,
+  tbody.table-hover tr.table-danger:active,
+  tbody.table-hover tr.table-danger.active,
+  tfoot.table-hover tr.table-danger:active,
+  tfoot.table-hover tr.table-danger.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger);
+  }
+  table.table-hover tbody tr.table-neutral {
+    background-color: var(--color-neutral);
+    color: var(--content-on-neutral);
+  }
+  table.table-hover tbody tr.table-neutral:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral);
+  }
+  table.table-hover tbody tr.table-neutral:active, table.table-hover tbody tr.table-neutral.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral);
+  }
+  thead.table-hover tr.table-neutral,
+  tbody.table-hover tr.table-neutral,
+  tfoot.table-hover tr.table-neutral {
+    background-color: var(--color-neutral);
+    color: var(--content-on-neutral);
+  }
+  thead.table-hover tr.table-neutral:hover,
+  tbody.table-hover tr.table-neutral:hover,
+  tfoot.table-hover tr.table-neutral:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral);
+  }
+  thead.table-hover tr.table-neutral:active, thead.table-hover tr.table-neutral.active,
+  tbody.table-hover tr.table-neutral:active,
+  tbody.table-hover tr.table-neutral.active,
+  tfoot.table-hover tr.table-neutral:active,
+  tfoot.table-hover tr.table-neutral.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral);
+  }
+  table.table-hover tbody tr.table-light {
+    background-color: var(--color-light);
+    color: var(--content-on-light);
+  }
+  table.table-hover tbody tr.table-light:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light);
+  }
+  table.table-hover tbody tr.table-light:active, table.table-hover tbody tr.table-light.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light);
+  }
+  thead.table-hover tr.table-light,
+  tbody.table-hover tr.table-light,
+  tfoot.table-hover tr.table-light {
+    background-color: var(--color-light);
+    color: var(--content-on-light);
+  }
+  thead.table-hover tr.table-light:hover,
+  tbody.table-hover tr.table-light:hover,
+  tfoot.table-hover tr.table-light:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light);
+  }
+  thead.table-hover tr.table-light:active, thead.table-hover tr.table-light.active,
+  tbody.table-hover tr.table-light:active,
+  tbody.table-hover tr.table-light.active,
+  tfoot.table-hover tr.table-light:active,
+  tfoot.table-hover tr.table-light.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light);
+  }
+  table.table-hover tbody tr.table-dark {
+    background-color: var(--color-dark);
+    color: var(--content-on-dark);
+  }
+  table.table-hover tbody tr.table-dark:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark);
+  }
+  table.table-hover tbody tr.table-dark:active, table.table-hover tbody tr.table-dark.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark);
+  }
+  thead.table-hover tr.table-dark,
+  tbody.table-hover tr.table-dark,
+  tfoot.table-hover tr.table-dark {
+    background-color: var(--color-dark);
+    color: var(--content-on-dark);
+  }
+  thead.table-hover tr.table-dark:hover,
+  tbody.table-hover tr.table-dark:hover,
+  tfoot.table-hover tr.table-dark:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark);
+  }
+  thead.table-hover tr.table-dark:active, thead.table-hover tr.table-dark.active,
+  tbody.table-hover tr.table-dark:active,
+  tbody.table-hover tr.table-dark.active,
+  tfoot.table-hover tr.table-dark:active,
+  tfoot.table-hover tr.table-dark.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark);
+  }
+  table.table-hover tbody tr.table-white {
+    background-color: var(--color-white);
+    color: var(--content-on-white);
+  }
+  table.table-hover tbody tr.table-white:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white);
+  }
+  table.table-hover tbody tr.table-white:active, table.table-hover tbody tr.table-white.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white);
+  }
+  thead.table-hover tr.table-white,
+  tbody.table-hover tr.table-white,
+  tfoot.table-hover tr.table-white {
+    background-color: var(--color-white);
+    color: var(--content-on-white);
+  }
+  thead.table-hover tr.table-white:hover,
+  tbody.table-hover tr.table-white:hover,
+  tfoot.table-hover tr.table-white:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white);
+  }
+  thead.table-hover tr.table-white:active, thead.table-hover tr.table-white.active,
+  tbody.table-hover tr.table-white:active,
+  tbody.table-hover tr.table-white.active,
+  tfoot.table-hover tr.table-white:active,
+  tfoot.table-hover tr.table-white.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white);
+  }
+  table.table-hover tbody tr.table-black {
+    background-color: var(--color-black);
+    color: var(--content-on-black);
+  }
+  table.table-hover tbody tr.table-black:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black);
+  }
+  table.table-hover tbody tr.table-black:active, table.table-hover tbody tr.table-black.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black);
+  }
+  thead.table-hover tr.table-black,
+  tbody.table-hover tr.table-black,
+  tfoot.table-hover tr.table-black {
+    background-color: var(--color-black);
+    color: var(--content-on-black);
+  }
+  thead.table-hover tr.table-black:hover,
+  tbody.table-hover tr.table-black:hover,
+  tfoot.table-hover tr.table-black:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black);
+  }
+  thead.table-hover tr.table-black:active, thead.table-hover tr.table-black.active,
+  tbody.table-hover tr.table-black:active,
+  tbody.table-hover tr.table-black.active,
+  tfoot.table-hover tr.table-black:active,
+  tfoot.table-hover tr.table-black.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black);
+  }
+  table.table-hover tbody tr.table-primary-ghost {
+    background-color: var(--color-primary-ghost);
+    color: var(--content-on-primary-ghost);
+  }
+  table.table-hover tbody tr.table-primary-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary-ghost);
+  }
+  table.table-hover tbody tr.table-primary-ghost:active, table.table-hover tbody tr.table-primary-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary-ghost);
+  }
+  thead.table-hover tr.table-primary-ghost,
+  tbody.table-hover tr.table-primary-ghost,
+  tfoot.table-hover tr.table-primary-ghost {
+    background-color: var(--color-primary-ghost);
+    color: var(--content-on-primary-ghost);
+  }
+  thead.table-hover tr.table-primary-ghost:hover,
+  tbody.table-hover tr.table-primary-ghost:hover,
+  tfoot.table-hover tr.table-primary-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary-ghost);
+  }
+  thead.table-hover tr.table-primary-ghost:active, thead.table-hover tr.table-primary-ghost.active,
+  tbody.table-hover tr.table-primary-ghost:active,
+  tbody.table-hover tr.table-primary-ghost.active,
+  tfoot.table-hover tr.table-primary-ghost:active,
+  tfoot.table-hover tr.table-primary-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary-ghost);
+  }
+  table.table-hover tbody tr.table-secondary-ghost {
+    background-color: var(--color-secondary-ghost);
+    color: var(--content-on-secondary-ghost);
+  }
+  table.table-hover tbody tr.table-secondary-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary-ghost);
+  }
+  table.table-hover tbody tr.table-secondary-ghost:active, table.table-hover tbody tr.table-secondary-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary-ghost);
+  }
+  thead.table-hover tr.table-secondary-ghost,
+  tbody.table-hover tr.table-secondary-ghost,
+  tfoot.table-hover tr.table-secondary-ghost {
+    background-color: var(--color-secondary-ghost);
+    color: var(--content-on-secondary-ghost);
+  }
+  thead.table-hover tr.table-secondary-ghost:hover,
+  tbody.table-hover tr.table-secondary-ghost:hover,
+  tfoot.table-hover tr.table-secondary-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary-ghost);
+  }
+  thead.table-hover tr.table-secondary-ghost:active, thead.table-hover tr.table-secondary-ghost.active,
+  tbody.table-hover tr.table-secondary-ghost:active,
+  tbody.table-hover tr.table-secondary-ghost.active,
+  tfoot.table-hover tr.table-secondary-ghost:active,
+  tfoot.table-hover tr.table-secondary-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary-ghost);
+  }
+  table.table-hover tbody tr.table-tertiary-ghost {
+    background-color: var(--color-tertiary-ghost);
+    color: var(--content-on-tertiary-ghost);
+  }
+  table.table-hover tbody tr.table-tertiary-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary-ghost);
+  }
+  table.table-hover tbody tr.table-tertiary-ghost:active, table.table-hover tbody tr.table-tertiary-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary-ghost);
+  }
+  thead.table-hover tr.table-tertiary-ghost,
+  tbody.table-hover tr.table-tertiary-ghost,
+  tfoot.table-hover tr.table-tertiary-ghost {
+    background-color: var(--color-tertiary-ghost);
+    color: var(--content-on-tertiary-ghost);
+  }
+  thead.table-hover tr.table-tertiary-ghost:hover,
+  tbody.table-hover tr.table-tertiary-ghost:hover,
+  tfoot.table-hover tr.table-tertiary-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary-ghost);
+  }
+  thead.table-hover tr.table-tertiary-ghost:active, thead.table-hover tr.table-tertiary-ghost.active,
+  tbody.table-hover tr.table-tertiary-ghost:active,
+  tbody.table-hover tr.table-tertiary-ghost.active,
+  tfoot.table-hover tr.table-tertiary-ghost:active,
+  tfoot.table-hover tr.table-tertiary-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary-ghost);
+  }
+  table.table-hover tbody tr.table-success-ghost {
+    background-color: var(--color-success-ghost);
+    color: var(--content-on-success-ghost);
+  }
+  table.table-hover tbody tr.table-success-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success-ghost);
+  }
+  table.table-hover tbody tr.table-success-ghost:active, table.table-hover tbody tr.table-success-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success-ghost);
+  }
+  thead.table-hover tr.table-success-ghost,
+  tbody.table-hover tr.table-success-ghost,
+  tfoot.table-hover tr.table-success-ghost {
+    background-color: var(--color-success-ghost);
+    color: var(--content-on-success-ghost);
+  }
+  thead.table-hover tr.table-success-ghost:hover,
+  tbody.table-hover tr.table-success-ghost:hover,
+  tfoot.table-hover tr.table-success-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success-ghost);
+  }
+  thead.table-hover tr.table-success-ghost:active, thead.table-hover tr.table-success-ghost.active,
+  tbody.table-hover tr.table-success-ghost:active,
+  tbody.table-hover tr.table-success-ghost.active,
+  tfoot.table-hover tr.table-success-ghost:active,
+  tfoot.table-hover tr.table-success-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success-ghost);
+  }
+  table.table-hover tbody tr.table-info-ghost {
+    background-color: var(--color-info-ghost);
+    color: var(--content-on-info-ghost);
+  }
+  table.table-hover tbody tr.table-info-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info-ghost);
+  }
+  table.table-hover tbody tr.table-info-ghost:active, table.table-hover tbody tr.table-info-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info-ghost);
+  }
+  thead.table-hover tr.table-info-ghost,
+  tbody.table-hover tr.table-info-ghost,
+  tfoot.table-hover tr.table-info-ghost {
+    background-color: var(--color-info-ghost);
+    color: var(--content-on-info-ghost);
+  }
+  thead.table-hover tr.table-info-ghost:hover,
+  tbody.table-hover tr.table-info-ghost:hover,
+  tfoot.table-hover tr.table-info-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info-ghost);
+  }
+  thead.table-hover tr.table-info-ghost:active, thead.table-hover tr.table-info-ghost.active,
+  tbody.table-hover tr.table-info-ghost:active,
+  tbody.table-hover tr.table-info-ghost.active,
+  tfoot.table-hover tr.table-info-ghost:active,
+  tfoot.table-hover tr.table-info-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info-ghost);
+  }
+  table.table-hover tbody tr.table-warning-ghost {
+    background-color: var(--color-warning-ghost);
+    color: var(--content-on-warning-ghost);
+  }
+  table.table-hover tbody tr.table-warning-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning-ghost);
+  }
+  table.table-hover tbody tr.table-warning-ghost:active, table.table-hover tbody tr.table-warning-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning-ghost);
+  }
+  thead.table-hover tr.table-warning-ghost,
+  tbody.table-hover tr.table-warning-ghost,
+  tfoot.table-hover tr.table-warning-ghost {
+    background-color: var(--color-warning-ghost);
+    color: var(--content-on-warning-ghost);
+  }
+  thead.table-hover tr.table-warning-ghost:hover,
+  tbody.table-hover tr.table-warning-ghost:hover,
+  tfoot.table-hover tr.table-warning-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning-ghost);
+  }
+  thead.table-hover tr.table-warning-ghost:active, thead.table-hover tr.table-warning-ghost.active,
+  tbody.table-hover tr.table-warning-ghost:active,
+  tbody.table-hover tr.table-warning-ghost.active,
+  tfoot.table-hover tr.table-warning-ghost:active,
+  tfoot.table-hover tr.table-warning-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning-ghost);
+  }
+  table.table-hover tbody tr.table-danger-ghost {
+    background-color: var(--color-danger-ghost);
+    color: var(--content-on-danger-ghost);
+  }
+  table.table-hover tbody tr.table-danger-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger-ghost);
+  }
+  table.table-hover tbody tr.table-danger-ghost:active, table.table-hover tbody tr.table-danger-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger-ghost);
+  }
+  thead.table-hover tr.table-danger-ghost,
+  tbody.table-hover tr.table-danger-ghost,
+  tfoot.table-hover tr.table-danger-ghost {
+    background-color: var(--color-danger-ghost);
+    color: var(--content-on-danger-ghost);
+  }
+  thead.table-hover tr.table-danger-ghost:hover,
+  tbody.table-hover tr.table-danger-ghost:hover,
+  tfoot.table-hover tr.table-danger-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger-ghost);
+  }
+  thead.table-hover tr.table-danger-ghost:active, thead.table-hover tr.table-danger-ghost.active,
+  tbody.table-hover tr.table-danger-ghost:active,
+  tbody.table-hover tr.table-danger-ghost.active,
+  tfoot.table-hover tr.table-danger-ghost:active,
+  tfoot.table-hover tr.table-danger-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger-ghost);
+  }
+  table.table-hover tbody tr.table-neutral-ghost {
+    background-color: var(--color-neutral-ghost);
+    color: var(--content-on-neutral-ghost);
+  }
+  table.table-hover tbody tr.table-neutral-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral-ghost);
+  }
+  table.table-hover tbody tr.table-neutral-ghost:active, table.table-hover tbody tr.table-neutral-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral-ghost);
+  }
+  thead.table-hover tr.table-neutral-ghost,
+  tbody.table-hover tr.table-neutral-ghost,
+  tfoot.table-hover tr.table-neutral-ghost {
+    background-color: var(--color-neutral-ghost);
+    color: var(--content-on-neutral-ghost);
+  }
+  thead.table-hover tr.table-neutral-ghost:hover,
+  tbody.table-hover tr.table-neutral-ghost:hover,
+  tfoot.table-hover tr.table-neutral-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral-ghost);
+  }
+  thead.table-hover tr.table-neutral-ghost:active, thead.table-hover tr.table-neutral-ghost.active,
+  tbody.table-hover tr.table-neutral-ghost:active,
+  tbody.table-hover tr.table-neutral-ghost.active,
+  tfoot.table-hover tr.table-neutral-ghost:active,
+  tfoot.table-hover tr.table-neutral-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral-ghost);
+  }
+  table.table-hover tbody tr.table-light-ghost {
+    background-color: var(--color-light-ghost);
+    color: var(--content-on-light-ghost);
+  }
+  table.table-hover tbody tr.table-light-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light-ghost);
+  }
+  table.table-hover tbody tr.table-light-ghost:active, table.table-hover tbody tr.table-light-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light-ghost);
+  }
+  thead.table-hover tr.table-light-ghost,
+  tbody.table-hover tr.table-light-ghost,
+  tfoot.table-hover tr.table-light-ghost {
+    background-color: var(--color-light-ghost);
+    color: var(--content-on-light-ghost);
+  }
+  thead.table-hover tr.table-light-ghost:hover,
+  tbody.table-hover tr.table-light-ghost:hover,
+  tfoot.table-hover tr.table-light-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light-ghost);
+  }
+  thead.table-hover tr.table-light-ghost:active, thead.table-hover tr.table-light-ghost.active,
+  tbody.table-hover tr.table-light-ghost:active,
+  tbody.table-hover tr.table-light-ghost.active,
+  tfoot.table-hover tr.table-light-ghost:active,
+  tfoot.table-hover tr.table-light-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light-ghost);
+  }
+  table.table-hover tbody tr.table-dark-ghost {
+    background-color: var(--color-dark-ghost);
+    color: var(--content-on-dark-ghost);
+  }
+  table.table-hover tbody tr.table-dark-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark-ghost);
+  }
+  table.table-hover tbody tr.table-dark-ghost:active, table.table-hover tbody tr.table-dark-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark-ghost);
+  }
+  thead.table-hover tr.table-dark-ghost,
+  tbody.table-hover tr.table-dark-ghost,
+  tfoot.table-hover tr.table-dark-ghost {
+    background-color: var(--color-dark-ghost);
+    color: var(--content-on-dark-ghost);
+  }
+  thead.table-hover tr.table-dark-ghost:hover,
+  tbody.table-hover tr.table-dark-ghost:hover,
+  tfoot.table-hover tr.table-dark-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark-ghost);
+  }
+  thead.table-hover tr.table-dark-ghost:active, thead.table-hover tr.table-dark-ghost.active,
+  tbody.table-hover tr.table-dark-ghost:active,
+  tbody.table-hover tr.table-dark-ghost.active,
+  tfoot.table-hover tr.table-dark-ghost:active,
+  tfoot.table-hover tr.table-dark-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark-ghost);
+  }
+  table.table-hover tbody tr.table-white-ghost {
+    background-color: var(--color-white-ghost);
+    color: var(--content-on-white-ghost);
+  }
+  table.table-hover tbody tr.table-white-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white-ghost);
+  }
+  table.table-hover tbody tr.table-white-ghost:active, table.table-hover tbody tr.table-white-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white-ghost);
+  }
+  thead.table-hover tr.table-white-ghost,
+  tbody.table-hover tr.table-white-ghost,
+  tfoot.table-hover tr.table-white-ghost {
+    background-color: var(--color-white-ghost);
+    color: var(--content-on-white-ghost);
+  }
+  thead.table-hover tr.table-white-ghost:hover,
+  tbody.table-hover tr.table-white-ghost:hover,
+  tfoot.table-hover tr.table-white-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white-ghost);
+  }
+  thead.table-hover tr.table-white-ghost:active, thead.table-hover tr.table-white-ghost.active,
+  tbody.table-hover tr.table-white-ghost:active,
+  tbody.table-hover tr.table-white-ghost.active,
+  tfoot.table-hover tr.table-white-ghost:active,
+  tfoot.table-hover tr.table-white-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white-ghost);
+  }
+  table.table-hover tbody tr.table-black-ghost {
+    background-color: var(--color-black-ghost);
+    color: var(--content-on-black-ghost);
+  }
+  table.table-hover tbody tr.table-black-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black-ghost);
+  }
+  table.table-hover tbody tr.table-black-ghost:active, table.table-hover tbody tr.table-black-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black-ghost);
+  }
+  thead.table-hover tr.table-black-ghost,
+  tbody.table-hover tr.table-black-ghost,
+  tfoot.table-hover tr.table-black-ghost {
+    background-color: var(--color-black-ghost);
+    color: var(--content-on-black-ghost);
+  }
+  thead.table-hover tr.table-black-ghost:hover,
+  tbody.table-hover tr.table-black-ghost:hover,
+  tfoot.table-hover tr.table-black-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black-ghost);
+  }
+  thead.table-hover tr.table-black-ghost:active, thead.table-hover tr.table-black-ghost.active,
+  tbody.table-hover tr.table-black-ghost:active,
+  tbody.table-hover tr.table-black-ghost.active,
+  tfoot.table-hover tr.table-black-ghost:active,
+  tfoot.table-hover tr.table-black-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black-ghost);
+  }
+}
+@layer table-l10 {
+  tr.table-primary {
+    background-color: var(--color-primary);
+    color: var(--content-on-primary);
+  }
+  tr.table-primary.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary);
+  }
+  tr.table-primary.table-hover:active, tr.table-primary.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary);
+  }
+  tr.table-secondary {
+    background-color: var(--color-secondary);
+    color: var(--content-on-secondary);
+  }
+  tr.table-secondary.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary);
+  }
+  tr.table-secondary.table-hover:active, tr.table-secondary.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary);
+  }
+  tr.table-tertiary {
+    background-color: var(--color-tertiary);
+    color: var(--content-on-tertiary);
+  }
+  tr.table-tertiary.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary);
+  }
+  tr.table-tertiary.table-hover:active, tr.table-tertiary.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary);
+  }
+  tr.table-success {
+    background-color: var(--color-success);
+    color: var(--content-on-success);
+  }
+  tr.table-success.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success);
+  }
+  tr.table-success.table-hover:active, tr.table-success.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success);
+  }
+  tr.table-info {
+    background-color: var(--color-info);
+    color: var(--content-on-info);
+  }
+  tr.table-info.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info);
+  }
+  tr.table-info.table-hover:active, tr.table-info.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info);
+  }
+  tr.table-warning {
+    background-color: var(--color-warning);
+    color: var(--content-on-warning);
+  }
+  tr.table-warning.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning);
+  }
+  tr.table-warning.table-hover:active, tr.table-warning.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning);
+  }
+  tr.table-danger {
+    background-color: var(--color-danger);
+    color: var(--content-on-danger);
+  }
+  tr.table-danger.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger);
+  }
+  tr.table-danger.table-hover:active, tr.table-danger.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger);
+  }
+  tr.table-neutral {
+    background-color: var(--color-neutral);
+    color: var(--content-on-neutral);
+  }
+  tr.table-neutral.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral);
+  }
+  tr.table-neutral.table-hover:active, tr.table-neutral.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral);
+  }
+  tr.table-light {
+    background-color: var(--color-light);
+    color: var(--content-on-light);
+  }
+  tr.table-light.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light);
+  }
+  tr.table-light.table-hover:active, tr.table-light.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light);
+  }
+  tr.table-dark {
+    background-color: var(--color-dark);
+    color: var(--content-on-dark);
+  }
+  tr.table-dark.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark);
+  }
+  tr.table-dark.table-hover:active, tr.table-dark.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark);
+  }
+  tr.table-white {
+    background-color: var(--color-white);
+    color: var(--content-on-white);
+  }
+  tr.table-white.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white);
+  }
+  tr.table-white.table-hover:active, tr.table-white.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white);
+  }
+  tr.table-black {
+    background-color: var(--color-black);
+    color: var(--content-on-black);
+  }
+  tr.table-black.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black);
+  }
+  tr.table-black.table-hover:active, tr.table-black.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black);
+  }
+  tr.table-primary-ghost {
+    background-color: var(--color-primary-ghost);
+    color: var(--content-on-primary-ghost);
+  }
+  tr.table-primary-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary-ghost);
+  }
+  tr.table-primary-ghost.table-hover:active, tr.table-primary-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary-ghost);
+  }
+  tr.table-secondary-ghost {
+    background-color: var(--color-secondary-ghost);
+    color: var(--content-on-secondary-ghost);
+  }
+  tr.table-secondary-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary-ghost);
+  }
+  tr.table-secondary-ghost.table-hover:active, tr.table-secondary-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary-ghost);
+  }
+  tr.table-tertiary-ghost {
+    background-color: var(--color-tertiary-ghost);
+    color: var(--content-on-tertiary-ghost);
+  }
+  tr.table-tertiary-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary-ghost);
+  }
+  tr.table-tertiary-ghost.table-hover:active, tr.table-tertiary-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary-ghost);
+  }
+  tr.table-success-ghost {
+    background-color: var(--color-success-ghost);
+    color: var(--content-on-success-ghost);
+  }
+  tr.table-success-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success-ghost);
+  }
+  tr.table-success-ghost.table-hover:active, tr.table-success-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success-ghost);
+  }
+  tr.table-info-ghost {
+    background-color: var(--color-info-ghost);
+    color: var(--content-on-info-ghost);
+  }
+  tr.table-info-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info-ghost);
+  }
+  tr.table-info-ghost.table-hover:active, tr.table-info-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info-ghost);
+  }
+  tr.table-warning-ghost {
+    background-color: var(--color-warning-ghost);
+    color: var(--content-on-warning-ghost);
+  }
+  tr.table-warning-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning-ghost);
+  }
+  tr.table-warning-ghost.table-hover:active, tr.table-warning-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning-ghost);
+  }
+  tr.table-danger-ghost {
+    background-color: var(--color-danger-ghost);
+    color: var(--content-on-danger-ghost);
+  }
+  tr.table-danger-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger-ghost);
+  }
+  tr.table-danger-ghost.table-hover:active, tr.table-danger-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger-ghost);
+  }
+  tr.table-neutral-ghost {
+    background-color: var(--color-neutral-ghost);
+    color: var(--content-on-neutral-ghost);
+  }
+  tr.table-neutral-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral-ghost);
+  }
+  tr.table-neutral-ghost.table-hover:active, tr.table-neutral-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral-ghost);
+  }
+  tr.table-light-ghost {
+    background-color: var(--color-light-ghost);
+    color: var(--content-on-light-ghost);
+  }
+  tr.table-light-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light-ghost);
+  }
+  tr.table-light-ghost.table-hover:active, tr.table-light-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light-ghost);
+  }
+  tr.table-dark-ghost {
+    background-color: var(--color-dark-ghost);
+    color: var(--content-on-dark-ghost);
+  }
+  tr.table-dark-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark-ghost);
+  }
+  tr.table-dark-ghost.table-hover:active, tr.table-dark-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark-ghost);
+  }
+  tr.table-white-ghost {
+    background-color: var(--color-white-ghost);
+    color: var(--content-on-white-ghost);
+  }
+  tr.table-white-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white-ghost);
+  }
+  tr.table-white-ghost.table-hover:active, tr.table-white-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white-ghost);
+  }
+  tr.table-black-ghost {
+    background-color: var(--color-black-ghost);
+    color: var(--content-on-black-ghost);
+  }
+  tr.table-black-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black-ghost);
+  }
+  tr.table-black-ghost.table-hover:active, tr.table-black-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black-ghost);
+  }
+}
+@layer table-l11 {
+  table.table-hover tbody th.table-primary,
+  table.table-hover tbody td.table-primary {
+    background-color: var(--color-primary);
+    color: var(--content-on-primary);
+  }
+  table.table-hover tbody th.table-primary:hover,
+  table.table-hover tbody td.table-primary:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary);
+  }
+  table.table-hover tbody th.table-primary:active, table.table-hover tbody th.table-primary.active,
+  table.table-hover tbody td.table-primary:active,
+  table.table-hover tbody td.table-primary.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary);
+  }
+  thead.table-hover th.table-primary,
+  thead.table-hover td.table-primary,
+  tbody.table-hover th.table-primary,
+  tbody.table-hover td.table-primary,
+  tfoot.table-hover th.table-primary,
+  tfoot.table-hover td.table-primary,
+  tr.table-hover th.table-primary,
+  tr.table-hover td.table-primary {
+    background-color: var(--color-primary);
+    color: var(--content-on-primary);
+  }
+  thead.table-hover th.table-primary:hover,
+  thead.table-hover td.table-primary:hover,
+  tbody.table-hover th.table-primary:hover,
+  tbody.table-hover td.table-primary:hover,
+  tfoot.table-hover th.table-primary:hover,
+  tfoot.table-hover td.table-primary:hover,
+  tr.table-hover th.table-primary:hover,
+  tr.table-hover td.table-primary:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary);
+  }
+  thead.table-hover th.table-primary:active, thead.table-hover th.table-primary.active,
+  thead.table-hover td.table-primary:active,
+  thead.table-hover td.table-primary.active,
+  tbody.table-hover th.table-primary:active,
+  tbody.table-hover th.table-primary.active,
+  tbody.table-hover td.table-primary:active,
+  tbody.table-hover td.table-primary.active,
+  tfoot.table-hover th.table-primary:active,
+  tfoot.table-hover th.table-primary.active,
+  tfoot.table-hover td.table-primary:active,
+  tfoot.table-hover td.table-primary.active,
+  tr.table-hover th.table-primary:active,
+  tr.table-hover th.table-primary.active,
+  tr.table-hover td.table-primary:active,
+  tr.table-hover td.table-primary.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary);
+  }
+  table.table-hover tbody th.table-secondary,
+  table.table-hover tbody td.table-secondary {
+    background-color: var(--color-secondary);
+    color: var(--content-on-secondary);
+  }
+  table.table-hover tbody th.table-secondary:hover,
+  table.table-hover tbody td.table-secondary:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary);
+  }
+  table.table-hover tbody th.table-secondary:active, table.table-hover tbody th.table-secondary.active,
+  table.table-hover tbody td.table-secondary:active,
+  table.table-hover tbody td.table-secondary.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary);
+  }
+  thead.table-hover th.table-secondary,
+  thead.table-hover td.table-secondary,
+  tbody.table-hover th.table-secondary,
+  tbody.table-hover td.table-secondary,
+  tfoot.table-hover th.table-secondary,
+  tfoot.table-hover td.table-secondary,
+  tr.table-hover th.table-secondary,
+  tr.table-hover td.table-secondary {
+    background-color: var(--color-secondary);
+    color: var(--content-on-secondary);
+  }
+  thead.table-hover th.table-secondary:hover,
+  thead.table-hover td.table-secondary:hover,
+  tbody.table-hover th.table-secondary:hover,
+  tbody.table-hover td.table-secondary:hover,
+  tfoot.table-hover th.table-secondary:hover,
+  tfoot.table-hover td.table-secondary:hover,
+  tr.table-hover th.table-secondary:hover,
+  tr.table-hover td.table-secondary:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary);
+  }
+  thead.table-hover th.table-secondary:active, thead.table-hover th.table-secondary.active,
+  thead.table-hover td.table-secondary:active,
+  thead.table-hover td.table-secondary.active,
+  tbody.table-hover th.table-secondary:active,
+  tbody.table-hover th.table-secondary.active,
+  tbody.table-hover td.table-secondary:active,
+  tbody.table-hover td.table-secondary.active,
+  tfoot.table-hover th.table-secondary:active,
+  tfoot.table-hover th.table-secondary.active,
+  tfoot.table-hover td.table-secondary:active,
+  tfoot.table-hover td.table-secondary.active,
+  tr.table-hover th.table-secondary:active,
+  tr.table-hover th.table-secondary.active,
+  tr.table-hover td.table-secondary:active,
+  tr.table-hover td.table-secondary.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary);
+  }
+  table.table-hover tbody th.table-tertiary,
+  table.table-hover tbody td.table-tertiary {
+    background-color: var(--color-tertiary);
+    color: var(--content-on-tertiary);
+  }
+  table.table-hover tbody th.table-tertiary:hover,
+  table.table-hover tbody td.table-tertiary:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary);
+  }
+  table.table-hover tbody th.table-tertiary:active, table.table-hover tbody th.table-tertiary.active,
+  table.table-hover tbody td.table-tertiary:active,
+  table.table-hover tbody td.table-tertiary.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary);
+  }
+  thead.table-hover th.table-tertiary,
+  thead.table-hover td.table-tertiary,
+  tbody.table-hover th.table-tertiary,
+  tbody.table-hover td.table-tertiary,
+  tfoot.table-hover th.table-tertiary,
+  tfoot.table-hover td.table-tertiary,
+  tr.table-hover th.table-tertiary,
+  tr.table-hover td.table-tertiary {
+    background-color: var(--color-tertiary);
+    color: var(--content-on-tertiary);
+  }
+  thead.table-hover th.table-tertiary:hover,
+  thead.table-hover td.table-tertiary:hover,
+  tbody.table-hover th.table-tertiary:hover,
+  tbody.table-hover td.table-tertiary:hover,
+  tfoot.table-hover th.table-tertiary:hover,
+  tfoot.table-hover td.table-tertiary:hover,
+  tr.table-hover th.table-tertiary:hover,
+  tr.table-hover td.table-tertiary:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary);
+  }
+  thead.table-hover th.table-tertiary:active, thead.table-hover th.table-tertiary.active,
+  thead.table-hover td.table-tertiary:active,
+  thead.table-hover td.table-tertiary.active,
+  tbody.table-hover th.table-tertiary:active,
+  tbody.table-hover th.table-tertiary.active,
+  tbody.table-hover td.table-tertiary:active,
+  tbody.table-hover td.table-tertiary.active,
+  tfoot.table-hover th.table-tertiary:active,
+  tfoot.table-hover th.table-tertiary.active,
+  tfoot.table-hover td.table-tertiary:active,
+  tfoot.table-hover td.table-tertiary.active,
+  tr.table-hover th.table-tertiary:active,
+  tr.table-hover th.table-tertiary.active,
+  tr.table-hover td.table-tertiary:active,
+  tr.table-hover td.table-tertiary.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary);
+  }
+  table.table-hover tbody th.table-success,
+  table.table-hover tbody td.table-success {
+    background-color: var(--color-success);
+    color: var(--content-on-success);
+  }
+  table.table-hover tbody th.table-success:hover,
+  table.table-hover tbody td.table-success:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success);
+  }
+  table.table-hover tbody th.table-success:active, table.table-hover tbody th.table-success.active,
+  table.table-hover tbody td.table-success:active,
+  table.table-hover tbody td.table-success.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success);
+  }
+  thead.table-hover th.table-success,
+  thead.table-hover td.table-success,
+  tbody.table-hover th.table-success,
+  tbody.table-hover td.table-success,
+  tfoot.table-hover th.table-success,
+  tfoot.table-hover td.table-success,
+  tr.table-hover th.table-success,
+  tr.table-hover td.table-success {
+    background-color: var(--color-success);
+    color: var(--content-on-success);
+  }
+  thead.table-hover th.table-success:hover,
+  thead.table-hover td.table-success:hover,
+  tbody.table-hover th.table-success:hover,
+  tbody.table-hover td.table-success:hover,
+  tfoot.table-hover th.table-success:hover,
+  tfoot.table-hover td.table-success:hover,
+  tr.table-hover th.table-success:hover,
+  tr.table-hover td.table-success:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success);
+  }
+  thead.table-hover th.table-success:active, thead.table-hover th.table-success.active,
+  thead.table-hover td.table-success:active,
+  thead.table-hover td.table-success.active,
+  tbody.table-hover th.table-success:active,
+  tbody.table-hover th.table-success.active,
+  tbody.table-hover td.table-success:active,
+  tbody.table-hover td.table-success.active,
+  tfoot.table-hover th.table-success:active,
+  tfoot.table-hover th.table-success.active,
+  tfoot.table-hover td.table-success:active,
+  tfoot.table-hover td.table-success.active,
+  tr.table-hover th.table-success:active,
+  tr.table-hover th.table-success.active,
+  tr.table-hover td.table-success:active,
+  tr.table-hover td.table-success.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success);
+  }
+  table.table-hover tbody th.table-info,
+  table.table-hover tbody td.table-info {
+    background-color: var(--color-info);
+    color: var(--content-on-info);
+  }
+  table.table-hover tbody th.table-info:hover,
+  table.table-hover tbody td.table-info:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info);
+  }
+  table.table-hover tbody th.table-info:active, table.table-hover tbody th.table-info.active,
+  table.table-hover tbody td.table-info:active,
+  table.table-hover tbody td.table-info.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info);
+  }
+  thead.table-hover th.table-info,
+  thead.table-hover td.table-info,
+  tbody.table-hover th.table-info,
+  tbody.table-hover td.table-info,
+  tfoot.table-hover th.table-info,
+  tfoot.table-hover td.table-info,
+  tr.table-hover th.table-info,
+  tr.table-hover td.table-info {
+    background-color: var(--color-info);
+    color: var(--content-on-info);
+  }
+  thead.table-hover th.table-info:hover,
+  thead.table-hover td.table-info:hover,
+  tbody.table-hover th.table-info:hover,
+  tbody.table-hover td.table-info:hover,
+  tfoot.table-hover th.table-info:hover,
+  tfoot.table-hover td.table-info:hover,
+  tr.table-hover th.table-info:hover,
+  tr.table-hover td.table-info:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info);
+  }
+  thead.table-hover th.table-info:active, thead.table-hover th.table-info.active,
+  thead.table-hover td.table-info:active,
+  thead.table-hover td.table-info.active,
+  tbody.table-hover th.table-info:active,
+  tbody.table-hover th.table-info.active,
+  tbody.table-hover td.table-info:active,
+  tbody.table-hover td.table-info.active,
+  tfoot.table-hover th.table-info:active,
+  tfoot.table-hover th.table-info.active,
+  tfoot.table-hover td.table-info:active,
+  tfoot.table-hover td.table-info.active,
+  tr.table-hover th.table-info:active,
+  tr.table-hover th.table-info.active,
+  tr.table-hover td.table-info:active,
+  tr.table-hover td.table-info.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info);
+  }
+  table.table-hover tbody th.table-warning,
+  table.table-hover tbody td.table-warning {
+    background-color: var(--color-warning);
+    color: var(--content-on-warning);
+  }
+  table.table-hover tbody th.table-warning:hover,
+  table.table-hover tbody td.table-warning:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning);
+  }
+  table.table-hover tbody th.table-warning:active, table.table-hover tbody th.table-warning.active,
+  table.table-hover tbody td.table-warning:active,
+  table.table-hover tbody td.table-warning.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning);
+  }
+  thead.table-hover th.table-warning,
+  thead.table-hover td.table-warning,
+  tbody.table-hover th.table-warning,
+  tbody.table-hover td.table-warning,
+  tfoot.table-hover th.table-warning,
+  tfoot.table-hover td.table-warning,
+  tr.table-hover th.table-warning,
+  tr.table-hover td.table-warning {
+    background-color: var(--color-warning);
+    color: var(--content-on-warning);
+  }
+  thead.table-hover th.table-warning:hover,
+  thead.table-hover td.table-warning:hover,
+  tbody.table-hover th.table-warning:hover,
+  tbody.table-hover td.table-warning:hover,
+  tfoot.table-hover th.table-warning:hover,
+  tfoot.table-hover td.table-warning:hover,
+  tr.table-hover th.table-warning:hover,
+  tr.table-hover td.table-warning:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning);
+  }
+  thead.table-hover th.table-warning:active, thead.table-hover th.table-warning.active,
+  thead.table-hover td.table-warning:active,
+  thead.table-hover td.table-warning.active,
+  tbody.table-hover th.table-warning:active,
+  tbody.table-hover th.table-warning.active,
+  tbody.table-hover td.table-warning:active,
+  tbody.table-hover td.table-warning.active,
+  tfoot.table-hover th.table-warning:active,
+  tfoot.table-hover th.table-warning.active,
+  tfoot.table-hover td.table-warning:active,
+  tfoot.table-hover td.table-warning.active,
+  tr.table-hover th.table-warning:active,
+  tr.table-hover th.table-warning.active,
+  tr.table-hover td.table-warning:active,
+  tr.table-hover td.table-warning.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning);
+  }
+  table.table-hover tbody th.table-danger,
+  table.table-hover tbody td.table-danger {
+    background-color: var(--color-danger);
+    color: var(--content-on-danger);
+  }
+  table.table-hover tbody th.table-danger:hover,
+  table.table-hover tbody td.table-danger:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger);
+  }
+  table.table-hover tbody th.table-danger:active, table.table-hover tbody th.table-danger.active,
+  table.table-hover tbody td.table-danger:active,
+  table.table-hover tbody td.table-danger.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger);
+  }
+  thead.table-hover th.table-danger,
+  thead.table-hover td.table-danger,
+  tbody.table-hover th.table-danger,
+  tbody.table-hover td.table-danger,
+  tfoot.table-hover th.table-danger,
+  tfoot.table-hover td.table-danger,
+  tr.table-hover th.table-danger,
+  tr.table-hover td.table-danger {
+    background-color: var(--color-danger);
+    color: var(--content-on-danger);
+  }
+  thead.table-hover th.table-danger:hover,
+  thead.table-hover td.table-danger:hover,
+  tbody.table-hover th.table-danger:hover,
+  tbody.table-hover td.table-danger:hover,
+  tfoot.table-hover th.table-danger:hover,
+  tfoot.table-hover td.table-danger:hover,
+  tr.table-hover th.table-danger:hover,
+  tr.table-hover td.table-danger:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger);
+  }
+  thead.table-hover th.table-danger:active, thead.table-hover th.table-danger.active,
+  thead.table-hover td.table-danger:active,
+  thead.table-hover td.table-danger.active,
+  tbody.table-hover th.table-danger:active,
+  tbody.table-hover th.table-danger.active,
+  tbody.table-hover td.table-danger:active,
+  tbody.table-hover td.table-danger.active,
+  tfoot.table-hover th.table-danger:active,
+  tfoot.table-hover th.table-danger.active,
+  tfoot.table-hover td.table-danger:active,
+  tfoot.table-hover td.table-danger.active,
+  tr.table-hover th.table-danger:active,
+  tr.table-hover th.table-danger.active,
+  tr.table-hover td.table-danger:active,
+  tr.table-hover td.table-danger.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger);
+  }
+  table.table-hover tbody th.table-neutral,
+  table.table-hover tbody td.table-neutral {
+    background-color: var(--color-neutral);
+    color: var(--content-on-neutral);
+  }
+  table.table-hover tbody th.table-neutral:hover,
+  table.table-hover tbody td.table-neutral:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral);
+  }
+  table.table-hover tbody th.table-neutral:active, table.table-hover tbody th.table-neutral.active,
+  table.table-hover tbody td.table-neutral:active,
+  table.table-hover tbody td.table-neutral.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral);
+  }
+  thead.table-hover th.table-neutral,
+  thead.table-hover td.table-neutral,
+  tbody.table-hover th.table-neutral,
+  tbody.table-hover td.table-neutral,
+  tfoot.table-hover th.table-neutral,
+  tfoot.table-hover td.table-neutral,
+  tr.table-hover th.table-neutral,
+  tr.table-hover td.table-neutral {
+    background-color: var(--color-neutral);
+    color: var(--content-on-neutral);
+  }
+  thead.table-hover th.table-neutral:hover,
+  thead.table-hover td.table-neutral:hover,
+  tbody.table-hover th.table-neutral:hover,
+  tbody.table-hover td.table-neutral:hover,
+  tfoot.table-hover th.table-neutral:hover,
+  tfoot.table-hover td.table-neutral:hover,
+  tr.table-hover th.table-neutral:hover,
+  tr.table-hover td.table-neutral:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral);
+  }
+  thead.table-hover th.table-neutral:active, thead.table-hover th.table-neutral.active,
+  thead.table-hover td.table-neutral:active,
+  thead.table-hover td.table-neutral.active,
+  tbody.table-hover th.table-neutral:active,
+  tbody.table-hover th.table-neutral.active,
+  tbody.table-hover td.table-neutral:active,
+  tbody.table-hover td.table-neutral.active,
+  tfoot.table-hover th.table-neutral:active,
+  tfoot.table-hover th.table-neutral.active,
+  tfoot.table-hover td.table-neutral:active,
+  tfoot.table-hover td.table-neutral.active,
+  tr.table-hover th.table-neutral:active,
+  tr.table-hover th.table-neutral.active,
+  tr.table-hover td.table-neutral:active,
+  tr.table-hover td.table-neutral.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral);
+  }
+  table.table-hover tbody th.table-light,
+  table.table-hover tbody td.table-light {
+    background-color: var(--color-light);
+    color: var(--content-on-light);
+  }
+  table.table-hover tbody th.table-light:hover,
+  table.table-hover tbody td.table-light:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light);
+  }
+  table.table-hover tbody th.table-light:active, table.table-hover tbody th.table-light.active,
+  table.table-hover tbody td.table-light:active,
+  table.table-hover tbody td.table-light.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light);
+  }
+  thead.table-hover th.table-light,
+  thead.table-hover td.table-light,
+  tbody.table-hover th.table-light,
+  tbody.table-hover td.table-light,
+  tfoot.table-hover th.table-light,
+  tfoot.table-hover td.table-light,
+  tr.table-hover th.table-light,
+  tr.table-hover td.table-light {
+    background-color: var(--color-light);
+    color: var(--content-on-light);
+  }
+  thead.table-hover th.table-light:hover,
+  thead.table-hover td.table-light:hover,
+  tbody.table-hover th.table-light:hover,
+  tbody.table-hover td.table-light:hover,
+  tfoot.table-hover th.table-light:hover,
+  tfoot.table-hover td.table-light:hover,
+  tr.table-hover th.table-light:hover,
+  tr.table-hover td.table-light:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light);
+  }
+  thead.table-hover th.table-light:active, thead.table-hover th.table-light.active,
+  thead.table-hover td.table-light:active,
+  thead.table-hover td.table-light.active,
+  tbody.table-hover th.table-light:active,
+  tbody.table-hover th.table-light.active,
+  tbody.table-hover td.table-light:active,
+  tbody.table-hover td.table-light.active,
+  tfoot.table-hover th.table-light:active,
+  tfoot.table-hover th.table-light.active,
+  tfoot.table-hover td.table-light:active,
+  tfoot.table-hover td.table-light.active,
+  tr.table-hover th.table-light:active,
+  tr.table-hover th.table-light.active,
+  tr.table-hover td.table-light:active,
+  tr.table-hover td.table-light.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light);
+  }
+  table.table-hover tbody th.table-dark,
+  table.table-hover tbody td.table-dark {
+    background-color: var(--color-dark);
+    color: var(--content-on-dark);
+  }
+  table.table-hover tbody th.table-dark:hover,
+  table.table-hover tbody td.table-dark:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark);
+  }
+  table.table-hover tbody th.table-dark:active, table.table-hover tbody th.table-dark.active,
+  table.table-hover tbody td.table-dark:active,
+  table.table-hover tbody td.table-dark.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark);
+  }
+  thead.table-hover th.table-dark,
+  thead.table-hover td.table-dark,
+  tbody.table-hover th.table-dark,
+  tbody.table-hover td.table-dark,
+  tfoot.table-hover th.table-dark,
+  tfoot.table-hover td.table-dark,
+  tr.table-hover th.table-dark,
+  tr.table-hover td.table-dark {
+    background-color: var(--color-dark);
+    color: var(--content-on-dark);
+  }
+  thead.table-hover th.table-dark:hover,
+  thead.table-hover td.table-dark:hover,
+  tbody.table-hover th.table-dark:hover,
+  tbody.table-hover td.table-dark:hover,
+  tfoot.table-hover th.table-dark:hover,
+  tfoot.table-hover td.table-dark:hover,
+  tr.table-hover th.table-dark:hover,
+  tr.table-hover td.table-dark:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark);
+  }
+  thead.table-hover th.table-dark:active, thead.table-hover th.table-dark.active,
+  thead.table-hover td.table-dark:active,
+  thead.table-hover td.table-dark.active,
+  tbody.table-hover th.table-dark:active,
+  tbody.table-hover th.table-dark.active,
+  tbody.table-hover td.table-dark:active,
+  tbody.table-hover td.table-dark.active,
+  tfoot.table-hover th.table-dark:active,
+  tfoot.table-hover th.table-dark.active,
+  tfoot.table-hover td.table-dark:active,
+  tfoot.table-hover td.table-dark.active,
+  tr.table-hover th.table-dark:active,
+  tr.table-hover th.table-dark.active,
+  tr.table-hover td.table-dark:active,
+  tr.table-hover td.table-dark.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark);
+  }
+  table.table-hover tbody th.table-white,
+  table.table-hover tbody td.table-white {
+    background-color: var(--color-white);
+    color: var(--content-on-white);
+  }
+  table.table-hover tbody th.table-white:hover,
+  table.table-hover tbody td.table-white:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white);
+  }
+  table.table-hover tbody th.table-white:active, table.table-hover tbody th.table-white.active,
+  table.table-hover tbody td.table-white:active,
+  table.table-hover tbody td.table-white.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white);
+  }
+  thead.table-hover th.table-white,
+  thead.table-hover td.table-white,
+  tbody.table-hover th.table-white,
+  tbody.table-hover td.table-white,
+  tfoot.table-hover th.table-white,
+  tfoot.table-hover td.table-white,
+  tr.table-hover th.table-white,
+  tr.table-hover td.table-white {
+    background-color: var(--color-white);
+    color: var(--content-on-white);
+  }
+  thead.table-hover th.table-white:hover,
+  thead.table-hover td.table-white:hover,
+  tbody.table-hover th.table-white:hover,
+  tbody.table-hover td.table-white:hover,
+  tfoot.table-hover th.table-white:hover,
+  tfoot.table-hover td.table-white:hover,
+  tr.table-hover th.table-white:hover,
+  tr.table-hover td.table-white:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white);
+  }
+  thead.table-hover th.table-white:active, thead.table-hover th.table-white.active,
+  thead.table-hover td.table-white:active,
+  thead.table-hover td.table-white.active,
+  tbody.table-hover th.table-white:active,
+  tbody.table-hover th.table-white.active,
+  tbody.table-hover td.table-white:active,
+  tbody.table-hover td.table-white.active,
+  tfoot.table-hover th.table-white:active,
+  tfoot.table-hover th.table-white.active,
+  tfoot.table-hover td.table-white:active,
+  tfoot.table-hover td.table-white.active,
+  tr.table-hover th.table-white:active,
+  tr.table-hover th.table-white.active,
+  tr.table-hover td.table-white:active,
+  tr.table-hover td.table-white.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white);
+  }
+  table.table-hover tbody th.table-black,
+  table.table-hover tbody td.table-black {
+    background-color: var(--color-black);
+    color: var(--content-on-black);
+  }
+  table.table-hover tbody th.table-black:hover,
+  table.table-hover tbody td.table-black:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black);
+  }
+  table.table-hover tbody th.table-black:active, table.table-hover tbody th.table-black.active,
+  table.table-hover tbody td.table-black:active,
+  table.table-hover tbody td.table-black.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black);
+  }
+  thead.table-hover th.table-black,
+  thead.table-hover td.table-black,
+  tbody.table-hover th.table-black,
+  tbody.table-hover td.table-black,
+  tfoot.table-hover th.table-black,
+  tfoot.table-hover td.table-black,
+  tr.table-hover th.table-black,
+  tr.table-hover td.table-black {
+    background-color: var(--color-black);
+    color: var(--content-on-black);
+  }
+  thead.table-hover th.table-black:hover,
+  thead.table-hover td.table-black:hover,
+  tbody.table-hover th.table-black:hover,
+  tbody.table-hover td.table-black:hover,
+  tfoot.table-hover th.table-black:hover,
+  tfoot.table-hover td.table-black:hover,
+  tr.table-hover th.table-black:hover,
+  tr.table-hover td.table-black:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black);
+  }
+  thead.table-hover th.table-black:active, thead.table-hover th.table-black.active,
+  thead.table-hover td.table-black:active,
+  thead.table-hover td.table-black.active,
+  tbody.table-hover th.table-black:active,
+  tbody.table-hover th.table-black.active,
+  tbody.table-hover td.table-black:active,
+  tbody.table-hover td.table-black.active,
+  tfoot.table-hover th.table-black:active,
+  tfoot.table-hover th.table-black.active,
+  tfoot.table-hover td.table-black:active,
+  tfoot.table-hover td.table-black.active,
+  tr.table-hover th.table-black:active,
+  tr.table-hover th.table-black.active,
+  tr.table-hover td.table-black:active,
+  tr.table-hover td.table-black.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black);
+  }
+  table.table-hover tbody th.table-primary-ghost,
+  table.table-hover tbody td.table-primary-ghost {
+    background-color: var(--color-primary-ghost);
+    color: var(--content-on-primary-ghost);
+  }
+  table.table-hover tbody th.table-primary-ghost:hover,
+  table.table-hover tbody td.table-primary-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary-ghost);
+  }
+  table.table-hover tbody th.table-primary-ghost:active, table.table-hover tbody th.table-primary-ghost.active,
+  table.table-hover tbody td.table-primary-ghost:active,
+  table.table-hover tbody td.table-primary-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary-ghost);
+  }
+  thead.table-hover th.table-primary-ghost,
+  thead.table-hover td.table-primary-ghost,
+  tbody.table-hover th.table-primary-ghost,
+  tbody.table-hover td.table-primary-ghost,
+  tfoot.table-hover th.table-primary-ghost,
+  tfoot.table-hover td.table-primary-ghost,
+  tr.table-hover th.table-primary-ghost,
+  tr.table-hover td.table-primary-ghost {
+    background-color: var(--color-primary-ghost);
+    color: var(--content-on-primary-ghost);
+  }
+  thead.table-hover th.table-primary-ghost:hover,
+  thead.table-hover td.table-primary-ghost:hover,
+  tbody.table-hover th.table-primary-ghost:hover,
+  tbody.table-hover td.table-primary-ghost:hover,
+  tfoot.table-hover th.table-primary-ghost:hover,
+  tfoot.table-hover td.table-primary-ghost:hover,
+  tr.table-hover th.table-primary-ghost:hover,
+  tr.table-hover td.table-primary-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary-ghost);
+  }
+  thead.table-hover th.table-primary-ghost:active, thead.table-hover th.table-primary-ghost.active,
+  thead.table-hover td.table-primary-ghost:active,
+  thead.table-hover td.table-primary-ghost.active,
+  tbody.table-hover th.table-primary-ghost:active,
+  tbody.table-hover th.table-primary-ghost.active,
+  tbody.table-hover td.table-primary-ghost:active,
+  tbody.table-hover td.table-primary-ghost.active,
+  tfoot.table-hover th.table-primary-ghost:active,
+  tfoot.table-hover th.table-primary-ghost.active,
+  tfoot.table-hover td.table-primary-ghost:active,
+  tfoot.table-hover td.table-primary-ghost.active,
+  tr.table-hover th.table-primary-ghost:active,
+  tr.table-hover th.table-primary-ghost.active,
+  tr.table-hover td.table-primary-ghost:active,
+  tr.table-hover td.table-primary-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary-ghost);
+  }
+  table.table-hover tbody th.table-secondary-ghost,
+  table.table-hover tbody td.table-secondary-ghost {
+    background-color: var(--color-secondary-ghost);
+    color: var(--content-on-secondary-ghost);
+  }
+  table.table-hover tbody th.table-secondary-ghost:hover,
+  table.table-hover tbody td.table-secondary-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary-ghost);
+  }
+  table.table-hover tbody th.table-secondary-ghost:active, table.table-hover tbody th.table-secondary-ghost.active,
+  table.table-hover tbody td.table-secondary-ghost:active,
+  table.table-hover tbody td.table-secondary-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary-ghost);
+  }
+  thead.table-hover th.table-secondary-ghost,
+  thead.table-hover td.table-secondary-ghost,
+  tbody.table-hover th.table-secondary-ghost,
+  tbody.table-hover td.table-secondary-ghost,
+  tfoot.table-hover th.table-secondary-ghost,
+  tfoot.table-hover td.table-secondary-ghost,
+  tr.table-hover th.table-secondary-ghost,
+  tr.table-hover td.table-secondary-ghost {
+    background-color: var(--color-secondary-ghost);
+    color: var(--content-on-secondary-ghost);
+  }
+  thead.table-hover th.table-secondary-ghost:hover,
+  thead.table-hover td.table-secondary-ghost:hover,
+  tbody.table-hover th.table-secondary-ghost:hover,
+  tbody.table-hover td.table-secondary-ghost:hover,
+  tfoot.table-hover th.table-secondary-ghost:hover,
+  tfoot.table-hover td.table-secondary-ghost:hover,
+  tr.table-hover th.table-secondary-ghost:hover,
+  tr.table-hover td.table-secondary-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary-ghost);
+  }
+  thead.table-hover th.table-secondary-ghost:active, thead.table-hover th.table-secondary-ghost.active,
+  thead.table-hover td.table-secondary-ghost:active,
+  thead.table-hover td.table-secondary-ghost.active,
+  tbody.table-hover th.table-secondary-ghost:active,
+  tbody.table-hover th.table-secondary-ghost.active,
+  tbody.table-hover td.table-secondary-ghost:active,
+  tbody.table-hover td.table-secondary-ghost.active,
+  tfoot.table-hover th.table-secondary-ghost:active,
+  tfoot.table-hover th.table-secondary-ghost.active,
+  tfoot.table-hover td.table-secondary-ghost:active,
+  tfoot.table-hover td.table-secondary-ghost.active,
+  tr.table-hover th.table-secondary-ghost:active,
+  tr.table-hover th.table-secondary-ghost.active,
+  tr.table-hover td.table-secondary-ghost:active,
+  tr.table-hover td.table-secondary-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary-ghost);
+  }
+  table.table-hover tbody th.table-tertiary-ghost,
+  table.table-hover tbody td.table-tertiary-ghost {
+    background-color: var(--color-tertiary-ghost);
+    color: var(--content-on-tertiary-ghost);
+  }
+  table.table-hover tbody th.table-tertiary-ghost:hover,
+  table.table-hover tbody td.table-tertiary-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary-ghost);
+  }
+  table.table-hover tbody th.table-tertiary-ghost:active, table.table-hover tbody th.table-tertiary-ghost.active,
+  table.table-hover tbody td.table-tertiary-ghost:active,
+  table.table-hover tbody td.table-tertiary-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary-ghost);
+  }
+  thead.table-hover th.table-tertiary-ghost,
+  thead.table-hover td.table-tertiary-ghost,
+  tbody.table-hover th.table-tertiary-ghost,
+  tbody.table-hover td.table-tertiary-ghost,
+  tfoot.table-hover th.table-tertiary-ghost,
+  tfoot.table-hover td.table-tertiary-ghost,
+  tr.table-hover th.table-tertiary-ghost,
+  tr.table-hover td.table-tertiary-ghost {
+    background-color: var(--color-tertiary-ghost);
+    color: var(--content-on-tertiary-ghost);
+  }
+  thead.table-hover th.table-tertiary-ghost:hover,
+  thead.table-hover td.table-tertiary-ghost:hover,
+  tbody.table-hover th.table-tertiary-ghost:hover,
+  tbody.table-hover td.table-tertiary-ghost:hover,
+  tfoot.table-hover th.table-tertiary-ghost:hover,
+  tfoot.table-hover td.table-tertiary-ghost:hover,
+  tr.table-hover th.table-tertiary-ghost:hover,
+  tr.table-hover td.table-tertiary-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary-ghost);
+  }
+  thead.table-hover th.table-tertiary-ghost:active, thead.table-hover th.table-tertiary-ghost.active,
+  thead.table-hover td.table-tertiary-ghost:active,
+  thead.table-hover td.table-tertiary-ghost.active,
+  tbody.table-hover th.table-tertiary-ghost:active,
+  tbody.table-hover th.table-tertiary-ghost.active,
+  tbody.table-hover td.table-tertiary-ghost:active,
+  tbody.table-hover td.table-tertiary-ghost.active,
+  tfoot.table-hover th.table-tertiary-ghost:active,
+  tfoot.table-hover th.table-tertiary-ghost.active,
+  tfoot.table-hover td.table-tertiary-ghost:active,
+  tfoot.table-hover td.table-tertiary-ghost.active,
+  tr.table-hover th.table-tertiary-ghost:active,
+  tr.table-hover th.table-tertiary-ghost.active,
+  tr.table-hover td.table-tertiary-ghost:active,
+  tr.table-hover td.table-tertiary-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary-ghost);
+  }
+  table.table-hover tbody th.table-success-ghost,
+  table.table-hover tbody td.table-success-ghost {
+    background-color: var(--color-success-ghost);
+    color: var(--content-on-success-ghost);
+  }
+  table.table-hover tbody th.table-success-ghost:hover,
+  table.table-hover tbody td.table-success-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success-ghost);
+  }
+  table.table-hover tbody th.table-success-ghost:active, table.table-hover tbody th.table-success-ghost.active,
+  table.table-hover tbody td.table-success-ghost:active,
+  table.table-hover tbody td.table-success-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success-ghost);
+  }
+  thead.table-hover th.table-success-ghost,
+  thead.table-hover td.table-success-ghost,
+  tbody.table-hover th.table-success-ghost,
+  tbody.table-hover td.table-success-ghost,
+  tfoot.table-hover th.table-success-ghost,
+  tfoot.table-hover td.table-success-ghost,
+  tr.table-hover th.table-success-ghost,
+  tr.table-hover td.table-success-ghost {
+    background-color: var(--color-success-ghost);
+    color: var(--content-on-success-ghost);
+  }
+  thead.table-hover th.table-success-ghost:hover,
+  thead.table-hover td.table-success-ghost:hover,
+  tbody.table-hover th.table-success-ghost:hover,
+  tbody.table-hover td.table-success-ghost:hover,
+  tfoot.table-hover th.table-success-ghost:hover,
+  tfoot.table-hover td.table-success-ghost:hover,
+  tr.table-hover th.table-success-ghost:hover,
+  tr.table-hover td.table-success-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success-ghost);
+  }
+  thead.table-hover th.table-success-ghost:active, thead.table-hover th.table-success-ghost.active,
+  thead.table-hover td.table-success-ghost:active,
+  thead.table-hover td.table-success-ghost.active,
+  tbody.table-hover th.table-success-ghost:active,
+  tbody.table-hover th.table-success-ghost.active,
+  tbody.table-hover td.table-success-ghost:active,
+  tbody.table-hover td.table-success-ghost.active,
+  tfoot.table-hover th.table-success-ghost:active,
+  tfoot.table-hover th.table-success-ghost.active,
+  tfoot.table-hover td.table-success-ghost:active,
+  tfoot.table-hover td.table-success-ghost.active,
+  tr.table-hover th.table-success-ghost:active,
+  tr.table-hover th.table-success-ghost.active,
+  tr.table-hover td.table-success-ghost:active,
+  tr.table-hover td.table-success-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success-ghost);
+  }
+  table.table-hover tbody th.table-info-ghost,
+  table.table-hover tbody td.table-info-ghost {
+    background-color: var(--color-info-ghost);
+    color: var(--content-on-info-ghost);
+  }
+  table.table-hover tbody th.table-info-ghost:hover,
+  table.table-hover tbody td.table-info-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info-ghost);
+  }
+  table.table-hover tbody th.table-info-ghost:active, table.table-hover tbody th.table-info-ghost.active,
+  table.table-hover tbody td.table-info-ghost:active,
+  table.table-hover tbody td.table-info-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info-ghost);
+  }
+  thead.table-hover th.table-info-ghost,
+  thead.table-hover td.table-info-ghost,
+  tbody.table-hover th.table-info-ghost,
+  tbody.table-hover td.table-info-ghost,
+  tfoot.table-hover th.table-info-ghost,
+  tfoot.table-hover td.table-info-ghost,
+  tr.table-hover th.table-info-ghost,
+  tr.table-hover td.table-info-ghost {
+    background-color: var(--color-info-ghost);
+    color: var(--content-on-info-ghost);
+  }
+  thead.table-hover th.table-info-ghost:hover,
+  thead.table-hover td.table-info-ghost:hover,
+  tbody.table-hover th.table-info-ghost:hover,
+  tbody.table-hover td.table-info-ghost:hover,
+  tfoot.table-hover th.table-info-ghost:hover,
+  tfoot.table-hover td.table-info-ghost:hover,
+  tr.table-hover th.table-info-ghost:hover,
+  tr.table-hover td.table-info-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info-ghost);
+  }
+  thead.table-hover th.table-info-ghost:active, thead.table-hover th.table-info-ghost.active,
+  thead.table-hover td.table-info-ghost:active,
+  thead.table-hover td.table-info-ghost.active,
+  tbody.table-hover th.table-info-ghost:active,
+  tbody.table-hover th.table-info-ghost.active,
+  tbody.table-hover td.table-info-ghost:active,
+  tbody.table-hover td.table-info-ghost.active,
+  tfoot.table-hover th.table-info-ghost:active,
+  tfoot.table-hover th.table-info-ghost.active,
+  tfoot.table-hover td.table-info-ghost:active,
+  tfoot.table-hover td.table-info-ghost.active,
+  tr.table-hover th.table-info-ghost:active,
+  tr.table-hover th.table-info-ghost.active,
+  tr.table-hover td.table-info-ghost:active,
+  tr.table-hover td.table-info-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info-ghost);
+  }
+  table.table-hover tbody th.table-warning-ghost,
+  table.table-hover tbody td.table-warning-ghost {
+    background-color: var(--color-warning-ghost);
+    color: var(--content-on-warning-ghost);
+  }
+  table.table-hover tbody th.table-warning-ghost:hover,
+  table.table-hover tbody td.table-warning-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning-ghost);
+  }
+  table.table-hover tbody th.table-warning-ghost:active, table.table-hover tbody th.table-warning-ghost.active,
+  table.table-hover tbody td.table-warning-ghost:active,
+  table.table-hover tbody td.table-warning-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning-ghost);
+  }
+  thead.table-hover th.table-warning-ghost,
+  thead.table-hover td.table-warning-ghost,
+  tbody.table-hover th.table-warning-ghost,
+  tbody.table-hover td.table-warning-ghost,
+  tfoot.table-hover th.table-warning-ghost,
+  tfoot.table-hover td.table-warning-ghost,
+  tr.table-hover th.table-warning-ghost,
+  tr.table-hover td.table-warning-ghost {
+    background-color: var(--color-warning-ghost);
+    color: var(--content-on-warning-ghost);
+  }
+  thead.table-hover th.table-warning-ghost:hover,
+  thead.table-hover td.table-warning-ghost:hover,
+  tbody.table-hover th.table-warning-ghost:hover,
+  tbody.table-hover td.table-warning-ghost:hover,
+  tfoot.table-hover th.table-warning-ghost:hover,
+  tfoot.table-hover td.table-warning-ghost:hover,
+  tr.table-hover th.table-warning-ghost:hover,
+  tr.table-hover td.table-warning-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning-ghost);
+  }
+  thead.table-hover th.table-warning-ghost:active, thead.table-hover th.table-warning-ghost.active,
+  thead.table-hover td.table-warning-ghost:active,
+  thead.table-hover td.table-warning-ghost.active,
+  tbody.table-hover th.table-warning-ghost:active,
+  tbody.table-hover th.table-warning-ghost.active,
+  tbody.table-hover td.table-warning-ghost:active,
+  tbody.table-hover td.table-warning-ghost.active,
+  tfoot.table-hover th.table-warning-ghost:active,
+  tfoot.table-hover th.table-warning-ghost.active,
+  tfoot.table-hover td.table-warning-ghost:active,
+  tfoot.table-hover td.table-warning-ghost.active,
+  tr.table-hover th.table-warning-ghost:active,
+  tr.table-hover th.table-warning-ghost.active,
+  tr.table-hover td.table-warning-ghost:active,
+  tr.table-hover td.table-warning-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning-ghost);
+  }
+  table.table-hover tbody th.table-danger-ghost,
+  table.table-hover tbody td.table-danger-ghost {
+    background-color: var(--color-danger-ghost);
+    color: var(--content-on-danger-ghost);
+  }
+  table.table-hover tbody th.table-danger-ghost:hover,
+  table.table-hover tbody td.table-danger-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger-ghost);
+  }
+  table.table-hover tbody th.table-danger-ghost:active, table.table-hover tbody th.table-danger-ghost.active,
+  table.table-hover tbody td.table-danger-ghost:active,
+  table.table-hover tbody td.table-danger-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger-ghost);
+  }
+  thead.table-hover th.table-danger-ghost,
+  thead.table-hover td.table-danger-ghost,
+  tbody.table-hover th.table-danger-ghost,
+  tbody.table-hover td.table-danger-ghost,
+  tfoot.table-hover th.table-danger-ghost,
+  tfoot.table-hover td.table-danger-ghost,
+  tr.table-hover th.table-danger-ghost,
+  tr.table-hover td.table-danger-ghost {
+    background-color: var(--color-danger-ghost);
+    color: var(--content-on-danger-ghost);
+  }
+  thead.table-hover th.table-danger-ghost:hover,
+  thead.table-hover td.table-danger-ghost:hover,
+  tbody.table-hover th.table-danger-ghost:hover,
+  tbody.table-hover td.table-danger-ghost:hover,
+  tfoot.table-hover th.table-danger-ghost:hover,
+  tfoot.table-hover td.table-danger-ghost:hover,
+  tr.table-hover th.table-danger-ghost:hover,
+  tr.table-hover td.table-danger-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger-ghost);
+  }
+  thead.table-hover th.table-danger-ghost:active, thead.table-hover th.table-danger-ghost.active,
+  thead.table-hover td.table-danger-ghost:active,
+  thead.table-hover td.table-danger-ghost.active,
+  tbody.table-hover th.table-danger-ghost:active,
+  tbody.table-hover th.table-danger-ghost.active,
+  tbody.table-hover td.table-danger-ghost:active,
+  tbody.table-hover td.table-danger-ghost.active,
+  tfoot.table-hover th.table-danger-ghost:active,
+  tfoot.table-hover th.table-danger-ghost.active,
+  tfoot.table-hover td.table-danger-ghost:active,
+  tfoot.table-hover td.table-danger-ghost.active,
+  tr.table-hover th.table-danger-ghost:active,
+  tr.table-hover th.table-danger-ghost.active,
+  tr.table-hover td.table-danger-ghost:active,
+  tr.table-hover td.table-danger-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger-ghost);
+  }
+  table.table-hover tbody th.table-neutral-ghost,
+  table.table-hover tbody td.table-neutral-ghost {
+    background-color: var(--color-neutral-ghost);
+    color: var(--content-on-neutral-ghost);
+  }
+  table.table-hover tbody th.table-neutral-ghost:hover,
+  table.table-hover tbody td.table-neutral-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral-ghost);
+  }
+  table.table-hover tbody th.table-neutral-ghost:active, table.table-hover tbody th.table-neutral-ghost.active,
+  table.table-hover tbody td.table-neutral-ghost:active,
+  table.table-hover tbody td.table-neutral-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral-ghost);
+  }
+  thead.table-hover th.table-neutral-ghost,
+  thead.table-hover td.table-neutral-ghost,
+  tbody.table-hover th.table-neutral-ghost,
+  tbody.table-hover td.table-neutral-ghost,
+  tfoot.table-hover th.table-neutral-ghost,
+  tfoot.table-hover td.table-neutral-ghost,
+  tr.table-hover th.table-neutral-ghost,
+  tr.table-hover td.table-neutral-ghost {
+    background-color: var(--color-neutral-ghost);
+    color: var(--content-on-neutral-ghost);
+  }
+  thead.table-hover th.table-neutral-ghost:hover,
+  thead.table-hover td.table-neutral-ghost:hover,
+  tbody.table-hover th.table-neutral-ghost:hover,
+  tbody.table-hover td.table-neutral-ghost:hover,
+  tfoot.table-hover th.table-neutral-ghost:hover,
+  tfoot.table-hover td.table-neutral-ghost:hover,
+  tr.table-hover th.table-neutral-ghost:hover,
+  tr.table-hover td.table-neutral-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral-ghost);
+  }
+  thead.table-hover th.table-neutral-ghost:active, thead.table-hover th.table-neutral-ghost.active,
+  thead.table-hover td.table-neutral-ghost:active,
+  thead.table-hover td.table-neutral-ghost.active,
+  tbody.table-hover th.table-neutral-ghost:active,
+  tbody.table-hover th.table-neutral-ghost.active,
+  tbody.table-hover td.table-neutral-ghost:active,
+  tbody.table-hover td.table-neutral-ghost.active,
+  tfoot.table-hover th.table-neutral-ghost:active,
+  tfoot.table-hover th.table-neutral-ghost.active,
+  tfoot.table-hover td.table-neutral-ghost:active,
+  tfoot.table-hover td.table-neutral-ghost.active,
+  tr.table-hover th.table-neutral-ghost:active,
+  tr.table-hover th.table-neutral-ghost.active,
+  tr.table-hover td.table-neutral-ghost:active,
+  tr.table-hover td.table-neutral-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral-ghost);
+  }
+  table.table-hover tbody th.table-light-ghost,
+  table.table-hover tbody td.table-light-ghost {
+    background-color: var(--color-light-ghost);
+    color: var(--content-on-light-ghost);
+  }
+  table.table-hover tbody th.table-light-ghost:hover,
+  table.table-hover tbody td.table-light-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light-ghost);
+  }
+  table.table-hover tbody th.table-light-ghost:active, table.table-hover tbody th.table-light-ghost.active,
+  table.table-hover tbody td.table-light-ghost:active,
+  table.table-hover tbody td.table-light-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light-ghost);
+  }
+  thead.table-hover th.table-light-ghost,
+  thead.table-hover td.table-light-ghost,
+  tbody.table-hover th.table-light-ghost,
+  tbody.table-hover td.table-light-ghost,
+  tfoot.table-hover th.table-light-ghost,
+  tfoot.table-hover td.table-light-ghost,
+  tr.table-hover th.table-light-ghost,
+  tr.table-hover td.table-light-ghost {
+    background-color: var(--color-light-ghost);
+    color: var(--content-on-light-ghost);
+  }
+  thead.table-hover th.table-light-ghost:hover,
+  thead.table-hover td.table-light-ghost:hover,
+  tbody.table-hover th.table-light-ghost:hover,
+  tbody.table-hover td.table-light-ghost:hover,
+  tfoot.table-hover th.table-light-ghost:hover,
+  tfoot.table-hover td.table-light-ghost:hover,
+  tr.table-hover th.table-light-ghost:hover,
+  tr.table-hover td.table-light-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light-ghost);
+  }
+  thead.table-hover th.table-light-ghost:active, thead.table-hover th.table-light-ghost.active,
+  thead.table-hover td.table-light-ghost:active,
+  thead.table-hover td.table-light-ghost.active,
+  tbody.table-hover th.table-light-ghost:active,
+  tbody.table-hover th.table-light-ghost.active,
+  tbody.table-hover td.table-light-ghost:active,
+  tbody.table-hover td.table-light-ghost.active,
+  tfoot.table-hover th.table-light-ghost:active,
+  tfoot.table-hover th.table-light-ghost.active,
+  tfoot.table-hover td.table-light-ghost:active,
+  tfoot.table-hover td.table-light-ghost.active,
+  tr.table-hover th.table-light-ghost:active,
+  tr.table-hover th.table-light-ghost.active,
+  tr.table-hover td.table-light-ghost:active,
+  tr.table-hover td.table-light-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light-ghost);
+  }
+  table.table-hover tbody th.table-dark-ghost,
+  table.table-hover tbody td.table-dark-ghost {
+    background-color: var(--color-dark-ghost);
+    color: var(--content-on-dark-ghost);
+  }
+  table.table-hover tbody th.table-dark-ghost:hover,
+  table.table-hover tbody td.table-dark-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark-ghost);
+  }
+  table.table-hover tbody th.table-dark-ghost:active, table.table-hover tbody th.table-dark-ghost.active,
+  table.table-hover tbody td.table-dark-ghost:active,
+  table.table-hover tbody td.table-dark-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark-ghost);
+  }
+  thead.table-hover th.table-dark-ghost,
+  thead.table-hover td.table-dark-ghost,
+  tbody.table-hover th.table-dark-ghost,
+  tbody.table-hover td.table-dark-ghost,
+  tfoot.table-hover th.table-dark-ghost,
+  tfoot.table-hover td.table-dark-ghost,
+  tr.table-hover th.table-dark-ghost,
+  tr.table-hover td.table-dark-ghost {
+    background-color: var(--color-dark-ghost);
+    color: var(--content-on-dark-ghost);
+  }
+  thead.table-hover th.table-dark-ghost:hover,
+  thead.table-hover td.table-dark-ghost:hover,
+  tbody.table-hover th.table-dark-ghost:hover,
+  tbody.table-hover td.table-dark-ghost:hover,
+  tfoot.table-hover th.table-dark-ghost:hover,
+  tfoot.table-hover td.table-dark-ghost:hover,
+  tr.table-hover th.table-dark-ghost:hover,
+  tr.table-hover td.table-dark-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark-ghost);
+  }
+  thead.table-hover th.table-dark-ghost:active, thead.table-hover th.table-dark-ghost.active,
+  thead.table-hover td.table-dark-ghost:active,
+  thead.table-hover td.table-dark-ghost.active,
+  tbody.table-hover th.table-dark-ghost:active,
+  tbody.table-hover th.table-dark-ghost.active,
+  tbody.table-hover td.table-dark-ghost:active,
+  tbody.table-hover td.table-dark-ghost.active,
+  tfoot.table-hover th.table-dark-ghost:active,
+  tfoot.table-hover th.table-dark-ghost.active,
+  tfoot.table-hover td.table-dark-ghost:active,
+  tfoot.table-hover td.table-dark-ghost.active,
+  tr.table-hover th.table-dark-ghost:active,
+  tr.table-hover th.table-dark-ghost.active,
+  tr.table-hover td.table-dark-ghost:active,
+  tr.table-hover td.table-dark-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark-ghost);
+  }
+  table.table-hover tbody th.table-white-ghost,
+  table.table-hover tbody td.table-white-ghost {
+    background-color: var(--color-white-ghost);
+    color: var(--content-on-white-ghost);
+  }
+  table.table-hover tbody th.table-white-ghost:hover,
+  table.table-hover tbody td.table-white-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white-ghost);
+  }
+  table.table-hover tbody th.table-white-ghost:active, table.table-hover tbody th.table-white-ghost.active,
+  table.table-hover tbody td.table-white-ghost:active,
+  table.table-hover tbody td.table-white-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white-ghost);
+  }
+  thead.table-hover th.table-white-ghost,
+  thead.table-hover td.table-white-ghost,
+  tbody.table-hover th.table-white-ghost,
+  tbody.table-hover td.table-white-ghost,
+  tfoot.table-hover th.table-white-ghost,
+  tfoot.table-hover td.table-white-ghost,
+  tr.table-hover th.table-white-ghost,
+  tr.table-hover td.table-white-ghost {
+    background-color: var(--color-white-ghost);
+    color: var(--content-on-white-ghost);
+  }
+  thead.table-hover th.table-white-ghost:hover,
+  thead.table-hover td.table-white-ghost:hover,
+  tbody.table-hover th.table-white-ghost:hover,
+  tbody.table-hover td.table-white-ghost:hover,
+  tfoot.table-hover th.table-white-ghost:hover,
+  tfoot.table-hover td.table-white-ghost:hover,
+  tr.table-hover th.table-white-ghost:hover,
+  tr.table-hover td.table-white-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white-ghost);
+  }
+  thead.table-hover th.table-white-ghost:active, thead.table-hover th.table-white-ghost.active,
+  thead.table-hover td.table-white-ghost:active,
+  thead.table-hover td.table-white-ghost.active,
+  tbody.table-hover th.table-white-ghost:active,
+  tbody.table-hover th.table-white-ghost.active,
+  tbody.table-hover td.table-white-ghost:active,
+  tbody.table-hover td.table-white-ghost.active,
+  tfoot.table-hover th.table-white-ghost:active,
+  tfoot.table-hover th.table-white-ghost.active,
+  tfoot.table-hover td.table-white-ghost:active,
+  tfoot.table-hover td.table-white-ghost.active,
+  tr.table-hover th.table-white-ghost:active,
+  tr.table-hover th.table-white-ghost.active,
+  tr.table-hover td.table-white-ghost:active,
+  tr.table-hover td.table-white-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white-ghost);
+  }
+  table.table-hover tbody th.table-black-ghost,
+  table.table-hover tbody td.table-black-ghost {
+    background-color: var(--color-black-ghost);
+    color: var(--content-on-black-ghost);
+  }
+  table.table-hover tbody th.table-black-ghost:hover,
+  table.table-hover tbody td.table-black-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black-ghost);
+  }
+  table.table-hover tbody th.table-black-ghost:active, table.table-hover tbody th.table-black-ghost.active,
+  table.table-hover tbody td.table-black-ghost:active,
+  table.table-hover tbody td.table-black-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black-ghost);
+  }
+  thead.table-hover th.table-black-ghost,
+  thead.table-hover td.table-black-ghost,
+  tbody.table-hover th.table-black-ghost,
+  tbody.table-hover td.table-black-ghost,
+  tfoot.table-hover th.table-black-ghost,
+  tfoot.table-hover td.table-black-ghost,
+  tr.table-hover th.table-black-ghost,
+  tr.table-hover td.table-black-ghost {
+    background-color: var(--color-black-ghost);
+    color: var(--content-on-black-ghost);
+  }
+  thead.table-hover th.table-black-ghost:hover,
+  thead.table-hover td.table-black-ghost:hover,
+  tbody.table-hover th.table-black-ghost:hover,
+  tbody.table-hover td.table-black-ghost:hover,
+  tfoot.table-hover th.table-black-ghost:hover,
+  tfoot.table-hover td.table-black-ghost:hover,
+  tr.table-hover th.table-black-ghost:hover,
+  tr.table-hover td.table-black-ghost:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black-ghost);
+  }
+  thead.table-hover th.table-black-ghost:active, thead.table-hover th.table-black-ghost.active,
+  thead.table-hover td.table-black-ghost:active,
+  thead.table-hover td.table-black-ghost.active,
+  tbody.table-hover th.table-black-ghost:active,
+  tbody.table-hover th.table-black-ghost.active,
+  tbody.table-hover td.table-black-ghost:active,
+  tbody.table-hover td.table-black-ghost.active,
+  tfoot.table-hover th.table-black-ghost:active,
+  tfoot.table-hover th.table-black-ghost.active,
+  tfoot.table-hover td.table-black-ghost:active,
+  tfoot.table-hover td.table-black-ghost.active,
+  tr.table-hover th.table-black-ghost:active,
+  tr.table-hover th.table-black-ghost.active,
+  tr.table-hover td.table-black-ghost:active,
+  tr.table-hover td.table-black-ghost.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black-ghost);
+  }
+}
+@layer table-l12 {
+  th.table-primary,
+  td.table-primary {
+    background-color: var(--color-primary);
+    color: var(--content-on-primary);
+  }
+  th.table-primary.table-hover:hover,
+  td.table-primary.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary);
+  }
+  th.table-primary.table-hover:active, th.table-primary.table-hover.active,
+  td.table-primary.table-hover:active,
+  td.table-primary.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary);
+  }
+  th.table-secondary,
+  td.table-secondary {
+    background-color: var(--color-secondary);
+    color: var(--content-on-secondary);
+  }
+  th.table-secondary.table-hover:hover,
+  td.table-secondary.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary);
+  }
+  th.table-secondary.table-hover:active, th.table-secondary.table-hover.active,
+  td.table-secondary.table-hover:active,
+  td.table-secondary.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary);
+  }
+  th.table-tertiary,
+  td.table-tertiary {
+    background-color: var(--color-tertiary);
+    color: var(--content-on-tertiary);
+  }
+  th.table-tertiary.table-hover:hover,
+  td.table-tertiary.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary);
+  }
+  th.table-tertiary.table-hover:active, th.table-tertiary.table-hover.active,
+  td.table-tertiary.table-hover:active,
+  td.table-tertiary.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary);
+  }
+  th.table-success,
+  td.table-success {
+    background-color: var(--color-success);
+    color: var(--content-on-success);
+  }
+  th.table-success.table-hover:hover,
+  td.table-success.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success);
+  }
+  th.table-success.table-hover:active, th.table-success.table-hover.active,
+  td.table-success.table-hover:active,
+  td.table-success.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success);
+  }
+  th.table-info,
+  td.table-info {
+    background-color: var(--color-info);
+    color: var(--content-on-info);
+  }
+  th.table-info.table-hover:hover,
+  td.table-info.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info);
+  }
+  th.table-info.table-hover:active, th.table-info.table-hover.active,
+  td.table-info.table-hover:active,
+  td.table-info.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info);
+  }
+  th.table-warning,
+  td.table-warning {
+    background-color: var(--color-warning);
+    color: var(--content-on-warning);
+  }
+  th.table-warning.table-hover:hover,
+  td.table-warning.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning);
+  }
+  th.table-warning.table-hover:active, th.table-warning.table-hover.active,
+  td.table-warning.table-hover:active,
+  td.table-warning.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning);
+  }
+  th.table-danger,
+  td.table-danger {
+    background-color: var(--color-danger);
+    color: var(--content-on-danger);
+  }
+  th.table-danger.table-hover:hover,
+  td.table-danger.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger);
+  }
+  th.table-danger.table-hover:active, th.table-danger.table-hover.active,
+  td.table-danger.table-hover:active,
+  td.table-danger.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger);
+  }
+  th.table-neutral,
+  td.table-neutral {
+    background-color: var(--color-neutral);
+    color: var(--content-on-neutral);
+  }
+  th.table-neutral.table-hover:hover,
+  td.table-neutral.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral);
+  }
+  th.table-neutral.table-hover:active, th.table-neutral.table-hover.active,
+  td.table-neutral.table-hover:active,
+  td.table-neutral.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral);
+  }
+  th.table-light,
+  td.table-light {
+    background-color: var(--color-light);
+    color: var(--content-on-light);
+  }
+  th.table-light.table-hover:hover,
+  td.table-light.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light);
+  }
+  th.table-light.table-hover:active, th.table-light.table-hover.active,
+  td.table-light.table-hover:active,
+  td.table-light.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light);
+  }
+  th.table-dark,
+  td.table-dark {
+    background-color: var(--color-dark);
+    color: var(--content-on-dark);
+  }
+  th.table-dark.table-hover:hover,
+  td.table-dark.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark);
+  }
+  th.table-dark.table-hover:active, th.table-dark.table-hover.active,
+  td.table-dark.table-hover:active,
+  td.table-dark.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark);
+  }
+  th.table-white,
+  td.table-white {
+    background-color: var(--color-white);
+    color: var(--content-on-white);
+  }
+  th.table-white.table-hover:hover,
+  td.table-white.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white);
+  }
+  th.table-white.table-hover:active, th.table-white.table-hover.active,
+  td.table-white.table-hover:active,
+  td.table-white.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white);
+  }
+  th.table-black,
+  td.table-black {
+    background-color: var(--color-black);
+    color: var(--content-on-black);
+  }
+  th.table-black.table-hover:hover,
+  td.table-black.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black);
+  }
+  th.table-black.table-hover:active, th.table-black.table-hover.active,
+  td.table-black.table-hover:active,
+  td.table-black.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black);
+  }
+  th.table-primary-ghost,
+  td.table-primary-ghost {
+    background-color: var(--color-primary-ghost);
+    color: var(--content-on-primary-ghost);
+  }
+  th.table-primary-ghost.table-hover:hover,
+  td.table-primary-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-primary-ghost);
+  }
+  th.table-primary-ghost.table-hover:active, th.table-primary-ghost.table-hover.active,
+  td.table-primary-ghost.table-hover:active,
+  td.table-primary-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-primary-ghost);
+  }
+  th.table-secondary-ghost,
+  td.table-secondary-ghost {
+    background-color: var(--color-secondary-ghost);
+    color: var(--content-on-secondary-ghost);
+  }
+  th.table-secondary-ghost.table-hover:hover,
+  td.table-secondary-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-secondary-ghost);
+  }
+  th.table-secondary-ghost.table-hover:active, th.table-secondary-ghost.table-hover.active,
+  td.table-secondary-ghost.table-hover:active,
+  td.table-secondary-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-secondary-ghost);
+  }
+  th.table-tertiary-ghost,
+  td.table-tertiary-ghost {
+    background-color: var(--color-tertiary-ghost);
+    color: var(--content-on-tertiary-ghost);
+  }
+  th.table-tertiary-ghost.table-hover:hover,
+  td.table-tertiary-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-tertiary-ghost);
+  }
+  th.table-tertiary-ghost.table-hover:active, th.table-tertiary-ghost.table-hover.active,
+  td.table-tertiary-ghost.table-hover:active,
+  td.table-tertiary-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-tertiary-ghost);
+  }
+  th.table-success-ghost,
+  td.table-success-ghost {
+    background-color: var(--color-success-ghost);
+    color: var(--content-on-success-ghost);
+  }
+  th.table-success-ghost.table-hover:hover,
+  td.table-success-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-success-ghost);
+  }
+  th.table-success-ghost.table-hover:active, th.table-success-ghost.table-hover.active,
+  td.table-success-ghost.table-hover:active,
+  td.table-success-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-success-ghost);
+  }
+  th.table-info-ghost,
+  td.table-info-ghost {
+    background-color: var(--color-info-ghost);
+    color: var(--content-on-info-ghost);
+  }
+  th.table-info-ghost.table-hover:hover,
+  td.table-info-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-info-ghost);
+  }
+  th.table-info-ghost.table-hover:active, th.table-info-ghost.table-hover.active,
+  td.table-info-ghost.table-hover:active,
+  td.table-info-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-info-ghost);
+  }
+  th.table-warning-ghost,
+  td.table-warning-ghost {
+    background-color: var(--color-warning-ghost);
+    color: var(--content-on-warning-ghost);
+  }
+  th.table-warning-ghost.table-hover:hover,
+  td.table-warning-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-warning-ghost);
+  }
+  th.table-warning-ghost.table-hover:active, th.table-warning-ghost.table-hover.active,
+  td.table-warning-ghost.table-hover:active,
+  td.table-warning-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-warning-ghost);
+  }
+  th.table-danger-ghost,
+  td.table-danger-ghost {
+    background-color: var(--color-danger-ghost);
+    color: var(--content-on-danger-ghost);
+  }
+  th.table-danger-ghost.table-hover:hover,
+  td.table-danger-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-danger-ghost);
+  }
+  th.table-danger-ghost.table-hover:active, th.table-danger-ghost.table-hover.active,
+  td.table-danger-ghost.table-hover:active,
+  td.table-danger-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-danger-ghost);
+  }
+  th.table-neutral-ghost,
+  td.table-neutral-ghost {
+    background-color: var(--color-neutral-ghost);
+    color: var(--content-on-neutral-ghost);
+  }
+  th.table-neutral-ghost.table-hover:hover,
+  td.table-neutral-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-neutral-ghost);
+  }
+  th.table-neutral-ghost.table-hover:active, th.table-neutral-ghost.table-hover.active,
+  td.table-neutral-ghost.table-hover:active,
+  td.table-neutral-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-neutral-ghost);
+  }
+  th.table-light-ghost,
+  td.table-light-ghost {
+    background-color: var(--color-light-ghost);
+    color: var(--content-on-light-ghost);
+  }
+  th.table-light-ghost.table-hover:hover,
+  td.table-light-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-light-ghost);
+  }
+  th.table-light-ghost.table-hover:active, th.table-light-ghost.table-hover.active,
+  td.table-light-ghost.table-hover:active,
+  td.table-light-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-light-ghost);
+  }
+  th.table-dark-ghost,
+  td.table-dark-ghost {
+    background-color: var(--color-dark-ghost);
+    color: var(--content-on-dark-ghost);
+  }
+  th.table-dark-ghost.table-hover:hover,
+  td.table-dark-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-dark-ghost);
+  }
+  th.table-dark-ghost.table-hover:active, th.table-dark-ghost.table-hover.active,
+  td.table-dark-ghost.table-hover:active,
+  td.table-dark-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-dark-ghost);
+  }
+  th.table-white-ghost,
+  td.table-white-ghost {
+    background-color: var(--color-white-ghost);
+    color: var(--content-on-white-ghost);
+  }
+  th.table-white-ghost.table-hover:hover,
+  td.table-white-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-white-ghost);
+  }
+  th.table-white-ghost.table-hover:active, th.table-white-ghost.table-hover.active,
+  td.table-white-ghost.table-hover:active,
+  td.table-white-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-white-ghost);
+  }
+  th.table-black-ghost,
+  td.table-black-ghost {
+    background-color: var(--color-black-ghost);
+    color: var(--content-on-black-ghost);
+  }
+  th.table-black-ghost.table-hover:hover,
+  td.table-black-ghost.table-hover:hover {
+    box-shadow: inset 0 0 0 9999px var(--hover-black-ghost);
+  }
+  th.table-black-ghost.table-hover:active, th.table-black-ghost.table-hover.active,
+  td.table-black-ghost.table-hover:active,
+  td.table-black-ghost.table-hover.active {
+    box-shadow: inset 0 0 0 9999px var(--active-black-ghost);
+  }
+}

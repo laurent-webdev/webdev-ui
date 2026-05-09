@@ -1,0 +1,83 @@
+@use "../abstracts/breakpoints" as bp;
+$breakpoints: bp.$breakpoints;
+
+$spacings: (
+    0: 0,
+    1: 0.5rem,
+    2: 1rem,
+    3: 1.5rem,
+    4: 2rem,
+    5: 2.5rem,
+    6: 3rem,
+    7: 4rem,
+    8: 5rem,
+    9: 6rem,
+    auto: auto
+);
+
+@mixin generate-spacing-base($property, $prefix, $allow-auto: true) {
+    @each $key, $value in $spacings {
+        @if $allow-auto or $key != auto {
+            .#{$prefix}-#{$key} { #{$property}: $value; }
+            .#{$prefix}t-#{$key} { #{$property}-top: $value; }
+            .#{$prefix}b-#{$key} { #{$property}-bottom: $value; }
+            .#{$prefix}l-#{$key} { #{$property}-left: $value; }
+            .#{$prefix}r-#{$key} { #{$property}-right: $value; }
+            .#{$prefix}s-#{$key} { #{$property}-inline-start: $value; }
+            .#{$prefix}e-#{$key} { #{$property}-inline-end: $value; }
+            .#{$prefix}x-#{$key} { #{$property}-inline: $value; }
+            .#{$prefix}y-#{$key} { #{$property}-block: $value; }
+        }
+    }
+}
+
+
+
+@mixin generate-spacing-responsive($property, $prefix, $allow-auto: true) {
+    @each $bp, $size in $breakpoints {
+        @media (min-width: #{$size}) {
+            @each $key, $value in $spacings {
+                @if $allow-auto or $key != auto {
+                    .#{$prefix}-#{$key}-#{$bp} { #{$property}: $value; }
+                    .#{$prefix}t-#{$key}-#{$bp} { #{$property}-top: $value; }
+                    .#{$prefix}b-#{$key}-#{$bp} { #{$property}-bottom: $value; }
+                    .#{$prefix}l-#{$key}-#{$bp} { #{$property}-left: $value; }
+                    .#{$prefix}r-#{$key}-#{$bp} { #{$property}-right: $value; }
+                    .#{$prefix}s-#{$key}-#{$bp} { #{$property}-inline-start: $value; }
+                    .#{$prefix}e-#{$key}-#{$bp} { #{$property}-inline-end: $value; }
+                    .#{$prefix}x-#{$key}-#{$bp} { #{$property}-inline: $value; }
+                    .#{$prefix}y-#{$key}-#{$bp} { #{$property}-block: $value; }
+                }
+            }
+        }
+    }
+}
+
+
+@mixin generate-gap-base {
+    @each $key, $value in $spacings {
+        @if $key != auto {
+            .gap-#{$key} { gap: $value; }
+        }
+    }
+}
+
+@mixin generate-gap-responsive {
+    @each $bp, $size in $breakpoints {
+        @media (min-width: #{$size}) {
+            @each $key, $value in $spacings {
+                @if $key != auto {
+                    .gap-#{$key}-#{$bp} { gap: $value; }
+                }
+            }
+        }
+    }
+}
+
+@include generate-spacing-base(margin, m, true);
+@include generate-spacing-base(padding, p, false);
+@include generate-gap-base();
+
+@include generate-spacing-responsive(margin, m, true);
+@include generate-spacing-responsive(padding, p, false);
+@include generate-gap-responsive();

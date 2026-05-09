@@ -1,0 +1,255 @@
+@use "../abstracts/colors" as colors;
+
+$colors: colors.$colors;
+
+.list {
+    list-style: none;
+    overflow: clip;
+    border-radius: var(--list-border-radius);
+    border-style: var(--list-border-style);
+    border-color: var(--list-border-color);
+    border-width: var(--list-border-width);
+}
+
+@mixin list-item-padding($x, $y) {
+    .list-item {
+        padding-inline: $x;
+        padding-block: $y;
+
+        &:has(> .list-link) {
+            padding: 0;
+        }
+
+        > .list-link {
+            padding-inline: $x;
+            padding-block: $y;
+        }
+    }
+}
+
+.list {
+    @include list-item-padding(var(--list-item-padding-x), var(--list-item-padding-y));
+}
+
+.list-sm {
+    @include list-item-padding(var(--list-item-padding-x-sm), var(--list-item-padding-y-sm));
+}
+
+.list-md {
+    @include list-item-padding(var(--list-item-padding-x-md), var(--list-item-padding-y-md));
+}
+
+.list-lg {
+    @include list-item-padding(var(--list-item-padding-x-lg), var(--list-item-padding-y-lg));
+}
+
+.list:not(.list-bordered) {
+    .list-item,
+    .list-link {
+        border-radius: var(--list-border-radius);
+    }
+}
+
+.list-bordered {
+    .list-item {
+        border-bottom-width: var(--list-border-width);
+        border-bottom-style: var(--list-border-style);
+        border-bottom-color: var(--list-border-color);
+    }
+
+    .list-item:last-child {
+        border-bottom-width: 0;
+    }
+}
+
+.list-borderless {
+    border: none;
+
+    .list-item {
+        border: none;
+    }
+}
+
+
+.list-inline {
+    display: inline-flex;
+    list-style: none;
+    gap: var(--list-inline-gap);
+    border-radius: var(--list-border-radius);
+    border-style: var(--list-border-style);
+    border-color: var(--list-border-color);
+    border-width: var(--list-border-width);
+
+    .list-item {
+        align-self: center;
+        border-radius: var(--list-border-radius);
+
+        .list-link {
+            align-self: center;
+        }
+    }
+}
+
+
+.list-divider {
+    padding-block: var(--list-divider-padding-y);
+    padding-inline: var(--list-divider-padding-x);
+    border-bottom-width: var(--list-border-width);
+    border-bottom-style: var(--list-border-style);
+    border-bottom-color: var(--list-border-color);
+    color: var(--list-divider-color);
+    pointer-events: none;
+    user-select: none;
+}
+
+
+
+.list-unstyled {
+    list-style: none;
+}
+
+
+.list-item {
+    &.active:not(.no-action) {
+        background-color: var(--list-item-active-background-color);
+        box-shadow: inset var(--list-item-border-width-inside-hover) var(--list-item-shadow-inset-reduce) var(--list-item-active-background-color);
+    }
+}
+
+
+.list-link {
+    display: block;
+    width: 100%;
+
+    &:focus-visible {
+        outline: none;
+        border-color: var(--text-color);
+        box-shadow: inset 0 0 0.5rem 0.25rem color-mix(in srgb, var(--text-color) 50%, transparent);
+    }
+}
+
+
+.list-hover {
+    .list-item:not(.no-action) {
+
+        &:hover {
+            background-color: var(--list-item-hover-background-color);
+            box-shadow: inset var(--list-item-border-width-inside-hover) var(--list-item-shadow-inset-reduce) var(--list-item-hover-background-color);
+        }
+
+        &:active,
+        &.active{
+            background-color: var(--list-item-active-background-color);
+            box-shadow: inset var(--list-item-border-width-inside-hover) var(--list-item-shadow-inset-reduce) var(--list-item-active-background-color);
+        }
+    }
+}
+
+.list-item-hover {
+
+    &:hover {
+        background-color: var(--list-item-hover-background-color);
+        box-shadow: inset var(--list-item-border-width-inside-hover) var(--list-item-shadow-inset-reduce) var(--list-item-hover-background-color);
+    }
+
+    &:active {
+        background-color: var(--list-item-active-background-color);
+        box-shadow: inset var(--list-item-border-width-inside-hover) var(--list-item-shadow-inset-reduce) var(--list-item-active-background-color);
+    }
+}
+
+
+@each $name, $value in $colors {
+    .list-#{$name} {
+        border-color: color-mix(in srgb, #{$value} 50%, transparent);
+        color: #{$value};
+
+        .list-item {
+            border-color: color-mix(in srgb, #{$value} 50%, transparent);
+
+            &.active {
+                background-color: color-mix(in srgb, #{$value} 30%, transparent);
+                box-shadow: inset var(--list-item-border-width-inside-hover) var(--list-item-shadow-inset-reduce) #{$value};
+            }
+        }
+
+        .list-link:focus-visible {
+            outline: none;
+            border-color: #{$value};
+            box-shadow: inset 0 0 0.5rem 0.25rem color-mix(in srgb, #{$value} 50%, transparent);
+        }
+    }
+}
+
+@each $name, $value in $colors {
+    .list-item-#{$name} {
+        color: #{$value};
+
+        .list-link:focus-visible {
+            outline: none;
+            border-color: #{$value};
+            box-shadow: inset 0 0 0.5rem 0.25rem color-mix(in srgb, #{$value} 50%, transparent);
+        }
+    }
+}
+
+@each $name, $value in $colors {
+    .list-hover.list-#{$name} {
+        .list-item:not(.no-action) {
+            &:hover {
+                background-color: color-mix(in srgb, #{$value} 15%, transparent);
+                box-shadow: inset var(--list-item-border-width-inside-hover) var(--list-item-shadow-inset-reduce) #{$value};
+            }
+
+            &:active,
+            &.active {
+                background-color: color-mix(in srgb, #{$value} 30%, transparent);
+                box-shadow: inset var(--list-item-border-width-inside-hover) var(--list-item-shadow-inset-reduce) #{$value};
+            }
+        }
+    }
+}
+
+@each $name, $value in $colors {
+    .list-hover.list {
+        .list-item-#{$name}:not(.no-action) {
+            &:hover {
+                background-color: color-mix(in srgb, #{$value} 15%, transparent);
+                box-shadow: inset var(--list-item-border-width-inside-hover) var(--list-item-shadow-inset-reduce) #{$value};
+            }
+
+            &:active,
+            &.active {
+                background-color: color-mix(in srgb, #{$value} 30%, transparent);
+                box-shadow: inset var(--list-item-border-width-inside-hover) var(--list-item-shadow-inset-reduce) #{$value};
+            }
+        }
+    }
+}
+
+@each $name, $value in $colors {
+    .list-item-hover.list-item-#{$name}:not(.no-action) {
+        &:hover {
+            background-color: color-mix(in srgb, #{$value} 15%, transparent);
+            box-shadow: inset var(--list-item-border-width-inside-hover) var(--list-item-shadow-inset-reduce) #{$value};
+        }
+
+        &:active,
+        &.active {
+            background-color: color-mix(in srgb, #{$value} 30%, transparent);
+            box-shadow: inset var(--list-item-border-width-inside-hover) var(--list-item-shadow-inset-reduce) #{$value};
+        }
+    }
+}
+
+@each $name, $value in $colors {
+    .list-item-#{$name}:not(.no-action) {
+        &.active {
+            background-color: color-mix(in srgb, #{$value} 30%, transparent);
+            box-shadow: inset var(--list-item-border-width-inside-hover) var(--list-item-shadow-inset-reduce) #{$value};
+        }
+    }
+}
+
+
+

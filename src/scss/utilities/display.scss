@@ -1,0 +1,22 @@
+@use "../abstracts/breakpoints" as bp;
+$breakpoints: bp.$breakpoints;
+
+.d-none { display: none; }
+.d-inline { display: inline; }
+.d-inline-block { display: inline-block; }
+.d-block { display: block; }
+.d-grid { display: grid; }
+.d-flex { display: flex; }
+.d-inline-flex { display: inline-flex; }
+
+@each $key, $value in $breakpoints {
+  @media (min-width: #{$value}) {
+    .d-none-#{$key} { display: none; }
+    .d-inline-#{$key} { display: inline; }
+    .d-inline-block-#{$key} { display: inline-block; }
+    .d-block-#{$key} { display: block; }
+    .d-grid-#{$key} { display: grid; }
+    .d-flex-#{$key} { display: flex; }
+    .d-inline-flex-#{$key} { display: inline-flex; }
+  }
+}

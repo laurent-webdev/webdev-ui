@@ -1,0 +1,112 @@
+@use "../abstracts/colors" as colors;
+$colors: colors.$colors;
+
+body:has(dialog[open]) {
+    overflow: hidden;
+}
+
+.dialog {
+    flex-direction: column;
+    position: fixed;
+    z-index: 1200;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--dialog-width);
+    max-height: var(--dialog-max-height);
+    border-color: var(--dialog-border-color);
+    border-style: var(--dialog-border-style);
+    border-width: var(--dialog-border-width);
+    border-radius: var(--dialog-border-radius);
+    background: var(--dialog-background-color);
+    transition: opacity .2s ease, transform .2s ease;
+
+
+
+    &:not([open]) {
+        display: none;
+    }
+
+    &[open] {
+        display: flex;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.75);
+    }
+
+    &.is-open {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    &.is-closing {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.75);
+        pointer-events: none;
+    }
+}
+
+.dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    background: var(--dialog-backdrop-background);
+    opacity: 0;
+    transition: opacity .2s ease;
+    pointer-events: none;
+
+    &.is-open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &.is-closing {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+
+
+.dialog-sm {
+    width: var(--dialog-width-sm);
+    max-height: var(--dialog-max-height-sm);
+}
+
+.dialog-md {
+    width: var(--dialog-width-md);
+    max-height: var(--dialog-max-height-md);
+}
+
+.dialog-lg {
+    width: var(--dialog-width-lg);
+    max-height: var(--dialog-max-height-lg);
+}
+
+.dialog-header {
+    border-top-left-radius: calc(var(--dialog-border-radius) - var(--dialog-border-width));
+    border-top-right-radius: calc(var(--dialog-border-radius) - var(--dialog-border-width));
+    padding-inline: var(--dialog-header-padding-x);
+    padding-block: var(--dialog-header-padding-y);
+}
+
+.dialog-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding-inline: var(--dialog-body-padding-x);
+    padding-block: var(--dialog-body-padding-y);
+}
+
+.dialog-footer {
+    border-bottom-left-radius: calc(var(--dialog-border-radius) - var(--dialog-border-width));
+    border-bottom-right-radius: calc(var(--dialog-border-radius) - var(--dialog-border-width));
+    padding-inline: var(--dialog-footer-padding-x);
+    padding-block: var(--dialog-footer-padding-y);
+}
+
+@each $name, $value in $colors {
+    .dialog-#{$name} {
+        background-color: #{$value};
+        border-color: #{$value};
+        color: var(--content-on-#{$name});
+    }
+}

@@ -1,0 +1,59 @@
+@use "sass:math";
+@use "../abstracts/breakpoints" as bp;
+
+$breakpoints: bp.$breakpoints;
+$columns: 12;
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row > * {
+    width: 100%;
+    padding-inline: var(--col-padding-x);
+    padding-block: var(--col-padding-y);
+}
+
+.col {
+    flex: 1 1 0;
+    max-width: 100%;
+}
+
+.col-auto {
+    flex: 0 0 auto;
+    width: auto;
+}
+
+
+@for $i from 1 through $columns {
+    $width: math.div(100% * $i, $columns);
+    .col-#{$i} {
+        flex: 0 0 $width;
+        max-width: $width;
+    }
+}
+
+@each $bp, $size in $breakpoints {
+    @media (min-width: #{$size}) {
+        @for $i from 1 through $columns {
+            $width: math.div(100% * $i, $columns);
+            .col-#{$i}-#{$bp} {
+                flex: 0 0 $width;
+                max-width: $width;
+            }
+        }
+    }
+}
+
+@mixin generate-cols-breakpoint($bp) {
+    @for $i from 1 through 12 {
+        $width: math.div(100% * $i, 12);
+
+        .col-#{$i}-#{$bp} {
+            flex: 0 0 #{$width};
+            max-width: #{$width};
+        }
+    }
+}

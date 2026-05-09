@@ -1,0 +1,57 @@
+.collapse-item {
+  border-color: var(--collapse-border-color);
+  border-style: var(--collapse-border-style);
+  border-width: var(--collapse-border-width);
+  border-radius: var(--collapse-border-radius);
+  background-color: var(--collapse-background-color);
+}
+
+.collapse-btn {
+  align-items: center;
+  width: 100%;
+  display: inline-flex;
+  border: none;
+  line-height: normal;
+  border-bottom: var(--collapse-border-width) var(--collapse-border-style) var(--collapse-border-color);
+  padding-inline: var(--collapse-button-padding-x);
+  padding-block: var(--collapse-button-padding-y);
+  background-color: var(--collapse-button-background-color);
+  color: var(--collapse-button-color);
+}
+.collapse-btn:not(.is-open) {
+  border-bottom: none;
+}
+
+.collapse-btn-sm {
+  padding-inline: var(--collapse-button-padding-x-sm);
+  padding-block: var(--collapse-button-padding-y-sm);
+}
+
+.collapse-btn-md {
+  padding-inline: var(--collapse-button-padding-x-md);
+  padding-block: var(--collapse-button-padding-y-md);
+}
+
+.collapse-btn-lg {
+  padding-inline: var(--collapse-button-padding-x-lg);
+  padding-block: var(--collapse-button-padding-y-lg);
+}
+
+.collapse-panel:not(.is-open) {
+  display: none;
+}
+
+.collapse-body {
+  padding-inline: var(--collapse-body-padding-x);
+  padding-block: var(--collapse-body-padding-y);
+}
+
+.collapse-indicator::after {
+  content: var(--collapse-indicator-content);
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.collapse-btn.is-open:not(.is-closing) .collapse-indicator::after {
+  transform: rotate(135deg);
+}

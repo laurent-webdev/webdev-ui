@@ -1,0 +1,23 @@
+@use "../abstracts/breakpoints" as bp;
+$breakpoints: bp.$breakpoints;
+
+.overflow-hidden  { overflow: hidden; }
+.overflow-visible { overflow: visible; }
+.overflow-auto    { overflow: auto; }
+.overflow-y-auto    { overflow-y: auto; }
+.overflow-x-auto    { overflow-x: auto; }
+.overflow-y-hidden    { overflow-y: hidden; }
+.overflow-x-hidden    { overflow-x: hidden; }
+
+
+@each $bp, $size in $breakpoints {
+    @media (min-width: #{$size}) {
+        .overflow-hidden-#{$bp}  { overflow: hidden; }
+        .overflow-visible-#{$bp} { overflow: visible; }
+        .overflow-auto-#{$bp}    { overflow: auto; }
+        .overflow-y-auto-#{$bp}    { overflow-y: auto; }
+        .overflow-x-auto-#{$bp}    { overflow-x: auto; }
+        .overflow-y-hidden-#{$bp}    { overflow-y: hidden; }
+        .overflow-x-hidden-#{$bp}    { overflow-x: hidden; }
+    }
+}
