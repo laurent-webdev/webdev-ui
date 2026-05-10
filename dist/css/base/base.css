@@ -15,6 +15,14 @@ body {
   min-height: 100%;
   overflow-x: hidden;
 }
+body::selection {
+  background: var(--selection-bg-color);
+  color: var(--selection-text-color);
+}
+body::-moz-selection {
+  background: var(--selection-bg-color);
+  color: var(--selection-text-color);
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-secondary), sans-serif;
@@ -84,10 +92,4 @@ hr {
 
 :disabled {
   cursor: not-allowed;
-}
-
-body::selection,
-body::-moz-selection {
-  background-color: var(--selection-bg-color);
-  color: var(--selection-text-color);
 }

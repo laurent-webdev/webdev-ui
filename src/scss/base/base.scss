@@ -15,6 +15,15 @@ body {
     letter-spacing: var(--letter-spacing);
     min-height: 100%;
     overflow-x: hidden;
+
+    &::selection{
+        background: var(--selection-bg-color);
+        color: var(--selection-text-color);
+    }
+    &::-moz-selection{
+        background: var(--selection-bg-color);
+        color: var(--selection-text-color);
+    }
 }
 
 
@@ -89,12 +98,6 @@ hr {
 
 :disabled {
     cursor: not-allowed;
-}
-
-body::selection,
-body::-moz-selection {
-    background-color: var(--selection-bg-color);
-    color: var(--selection-text-color);
 }
 
 
