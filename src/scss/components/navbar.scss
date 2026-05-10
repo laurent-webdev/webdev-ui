@@ -23,19 +23,19 @@ $breakpoints: bp.$breakpoints;
     display: flex;
     width: 100%;
     text-align: center;
-    &.navbar-left,
-    &.navbar-start {
+    &.navbar-body-left,
+    &.navbar-body-start {
         justify-content: flex-start;
         align-items: flex-start;
     }
 
-    &.navbar-center {
+    &.navbar-body-center {
         justify-content: center;
         align-items: center;
     }
 
-    &.navbar-right,
-    &.navbar-end {
+    &.navbar-body-right,
+    &.navbar-body-end {
         justify-content: flex-end;
         align-items: flex-end;
     }
@@ -65,19 +65,19 @@ $breakpoints: bp.$breakpoints;
     .navbar-body {
         flex-direction: column;
 
-        &.navbar-left-bp,
-        &.navbar-start-bp {
+        &.navbar-body-left-bp,
+        &.navbar-body-start-bp {
             justify-content: flex-start;
             align-items: flex-start;
         }
 
-        &.navbar-center-bp {
+        &.navbar-body-center-bp {
             justify-content: center;
             align-items: center;
         }
 
-        &.navbar-right-bp,
-        &.navbar-end-bp {
+        &.navbar-body-right-bp,
+        &.navbar-body-end-bp {
             justify-content: flex-end;
             align-items: flex-end;
         }
