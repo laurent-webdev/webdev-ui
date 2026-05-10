@@ -86,8 +86,8 @@ hr {
   cursor: not-allowed;
 }
 
-::selection,
-::-moz-selection {
+body::selection,
+body::-moz-selection {
   background-color: var(--selection-bg-color);
   color: var(--selection-text-color);
 }
