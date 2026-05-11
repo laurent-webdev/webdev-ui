@@ -8,6 +8,7 @@
   border-width: var(--navbar-border-width);
   border-style: var(--navbar-border-style);
   border-color: var(--navbar-border-color);
+  background-color: var(--navbar-background-color);
 }
 
 .navbar-toggle {

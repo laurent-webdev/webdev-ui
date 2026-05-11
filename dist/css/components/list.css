@@ -5,6 +5,7 @@
   border-style: var(--list-border-style);
   border-color: var(--list-border-color);
   border-width: var(--list-border-width);
+  background-color: var(--list-background-color);
 }
 
 .list .list-item {

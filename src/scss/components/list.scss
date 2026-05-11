@@ -9,6 +9,7 @@ $colors: colors.$colors;
     border-style: var(--list-border-style);
     border-color: var(--list-border-color);
     border-width: var(--list-border-width);
+    background-color: var(--list-background-color);
 }
 
 @mixin list-item-padding($x, $y) {

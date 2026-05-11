@@ -290,6 +290,7 @@
   --list-border-style: var(--border-style);
   --list-border-radius: var(--border-radius);
   --list-border-color: var(--border-color);
+  --list-background-color: var(--color-transparent);
   --list-item-padding-x: 1.5rem;
   --list-item-padding-y: .75rem;
   --list-item-padding-x-sm: 1rem;
@@ -308,10 +309,11 @@
   --navbar-gap: 2rem;
   --navbar-padding-x: 1.5rem;
   --navbar-padding-y: 1rem;
-  --navbar-border-width: var(--border-width);
   --navbar-border-radius: 0;
+  --navbar-border-width: var(--border-width);
   --navbar-border-style: var(--border-style);
   --navbar-border-color: var(--border-color);
+  --navbar-background-color: var(--color-transparent);
   --navbar-collapse-gap: 2rem;
   --navbar-collapse-padding-y: 1rem;
   --navbar-collapse-padding-x: 0;
@@ -326,7 +328,7 @@
   --drawer-compact-width: var(--drawer-width);
   --drawer-compact-width-reduce: 6.5rem;
   --drawer-compact-gap: 2rem;
-  --drawer-background-color: var(--background-color);
+  --drawer-background-color: var(--color-theme);
   --drawer-transition-duration: 200ms;
   --tab-panel-padding-y: 1rem;
   --tab-panel-padding-x: 1rem;
@@ -334,11 +336,12 @@
   --tab-panel-border-style: var(--border-style);
   --tab-panel-border-color: var(--border-color);
   --tab-panel-border-radius: var(--border-radius);
+  --tab-panel-background-color: var(--color-transparent);
   --container-padding-x: 1.5rem;
-  --container-padding-y: 1rem;
+  --container-padding-y: 1.5rem;
   --container-max-width: 1280px;
   --img-border-radius: var(--border-radius);
-  --img-thumbnail-background-color: var(--background-color);
+  --img-thumbnail-background-color: var(--color-theme);
   --img-thumbnail-padding: .25rem;
   --img-thumbnail-border-width: var(--border-width);
   --img-thumbnail-border-color: var(--border-color);
@@ -347,8 +350,9 @@
   --table-border-style: var(--border-style);
   --table-border-width: var(--border-width);
   --table-border-color: var(--border-color);
-  --table-border-divider-width: 2px;
+  --table-background-color: var(--color-transparent);
   --table-border-divider-style: var(--border-style);
+  --table-border-divider-width: 2px;
   --table-padding-y: .75rem;
   --table-padding-x: .75rem;
   --table-padding-y-sm: .5rem;

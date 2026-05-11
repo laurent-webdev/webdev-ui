@@ -15,7 +15,7 @@ body:has(dialog[open]) {
   border-style: var(--dialog-border-style);
   border-width: var(--dialog-border-width);
   border-radius: var(--dialog-border-radius);
-  background: var(--dialog-background-color);
+  background-color: var(--dialog-background-color);
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 .dialog:not([open]) {
