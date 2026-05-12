@@ -97,3 +97,7 @@
 .bg-transparent {
   background-color: var(--color-transparent);
 }
+
+.bg-theme {
+  background-color: var(--color-theme);
+}

@@ -3,7 +3,7 @@ $breakpoints: bp.$breakpoints;
 
 @mixin drawer-base {
     position: fixed;
-    z-index: 1000;
+    z-index: 1100;
     background-color: var(--drawer-background-color);
     padding-inline: var(--drawer-padding-x);
     padding-block: var(--drawer-padding-y);
@@ -51,6 +51,10 @@ $breakpoints: bp.$breakpoints;
     border-top-right-radius: var(--drawer-border-radius);
 }
 
+body:has(.drawer.is-open) {
+    overflow: hidden;
+}
+
 .drawer {
     @include drawer-base;
 
@@ -90,7 +94,7 @@ $breakpoints: bp.$breakpoints;
 .drawer-backdrop {
     position: fixed;
     inset: 0;
-    z-index: 999;
+    z-index: 1090;
     background-color: var(--drawer-backdrop-color);
     animation: fade-in var(--drawer-transition-duration) ease forwards;
 

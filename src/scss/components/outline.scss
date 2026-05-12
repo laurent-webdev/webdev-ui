@@ -2,20 +2,20 @@
 $colors: colors.$colors;
 
 .outline {
-    background-color: transparent;
-    color: var(--text-color);
-    border-color: var(--text-color);
-    border-style: var(--border-style-outline);
-    border-width: var(--border-width-outline);
+    background-color: var(--outline-background-color);
+    color: var(--outline-color);
+    border-color: var(--outline-border-color);
+    border-style: var(--outline-border-style);
+    border-width: var(--outline-border-width);
 }
 
 
 @each $name, $value in $colors {
     .outline-#{$name} {
-        background-color: transparent;
+        background-color: var(--outline-background-color);
         color: #{$value};
         border-color: #{$value};
-        border-style: var(--border-style-outline);
-        border-width: var(--border-width-outline);
+        border-style: var(--outline-border-style);
+        border-width: var(--outline-border-width);
     }
 }

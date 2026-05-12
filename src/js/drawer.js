@@ -121,15 +121,19 @@ export default class Drawer {
 
         Drawer._animating.set(drawer, true);
 
+        const zDrawer = parseInt(getComputedStyle(drawer).getPropertyValue('--z-drawer')) || 1100;
+        drawer.style.zIndex = zDrawer + 10;
+
         if (!Drawer.isFixed(drawer)) {
             const backdrop = document.createElement('div');
             backdrop.className = 'drawer-backdrop';
             backdrop.dataset.for = drawer.id;
             document.body.appendChild(backdrop);
+            const zBackdrop = parseInt(getComputedStyle(backdrop).getPropertyValue('--z-backdrop')) || 1090;
+            backdrop.style.zIndex = zBackdrop + 10;
         }
 
         drawer.classList.add('is-open');
-
         Drawer.updateTriggers(drawer, true);
 
         const computed = window.getComputedStyle(drawer);
@@ -180,7 +184,6 @@ export default class Drawer {
 
         drawer.classList.add('is-closing');
         drawer.classList.remove('is-open');
-
         Drawer.updateTriggers(drawer, false);
 
         const backdrop = document.querySelector(`.drawer-backdrop[data-for="${drawer.id}"]`);
@@ -194,6 +197,7 @@ export default class Drawer {
 
         const cleanup = () => {
             drawer.classList.remove('is-closing');
+            drawer.style.zIndex = '';
             Drawer._animating.delete(drawer);
             backdrop?.remove();
 

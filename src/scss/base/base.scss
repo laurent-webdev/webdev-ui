@@ -17,11 +17,12 @@ body {
     overflow-x: hidden;
 
     &::selection{
-        background: var(--selection-bg-color);
+        background-color: var(--selection-bg-color);
         color: var(--selection-text-color);
     }
-    &::-moz-selection{
-        background: var(--selection-bg-color);
+
+    &::-moz-selection {
+        background-color: var(--selection-bg-color);
         color: var(--selection-text-color);
     }
 }

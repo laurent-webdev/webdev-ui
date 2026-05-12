@@ -94,11 +94,15 @@ class Drawer {
     }));
     if (!canOpen) return;
     Drawer._animating.set(drawer, true);
+    const zDrawer = parseInt(getComputedStyle(drawer).getPropertyValue("--z-drawer")) || 1100;
+    drawer.style.zIndex = zDrawer + 10;
     if (!Drawer.isFixed(drawer)) {
       const backdrop = document.createElement("div");
       backdrop.className = "drawer-backdrop";
       backdrop.dataset.for = drawer.id;
       document.body.appendChild(backdrop);
+      const zBackdrop = parseInt(getComputedStyle(backdrop).getPropertyValue("--z-backdrop")) || 1090;
+      backdrop.style.zIndex = zBackdrop + 10;
     }
     drawer.classList.add("is-open");
     Drawer.updateTriggers(drawer, true);
@@ -150,6 +154,7 @@ class Drawer {
     );
     const cleanup = () => {
       drawer.classList.remove("is-closing");
+      drawer.style.zIndex = "";
       Drawer._animating.delete(drawer);
       backdrop?.remove();
       drawer.dispatchEvent(new CustomEvent("drawer:afterClose", {

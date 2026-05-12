@@ -111,8 +111,6 @@ $breakpoints: bp.$breakpoints;
     --border-radius: 0.5rem;
     --border-width: 1px;
     --border-style: solid;
-    --border-width-outline: 1px;
-    --border-style-outline: solid;
     --border-radius-pill: 10rem;
     --border-radius-circle: 50%;
 
@@ -186,7 +184,7 @@ $breakpoints: bp.$breakpoints;
     --accordion-border-style: var(--border-style);
     --accordion-border-radius: var(--border-radius);
     --accordion-border-color: var(--border-color);
-    --accordion-background-color: var(--color-transparent);
+    --accordion-background-color: var(--color-theme);
     --accordion-button-color: var(--text-color);
     --accordion-body-padding-x: 1rem;
     --accordion-body-padding-y: 1rem;
@@ -222,7 +220,7 @@ $breakpoints: bp.$breakpoints;
     --badge-border-style: var(--border-style);
     --badge-border-width: var(--border-width);
     --badge-border-color: var(--border-color);
-    --badge-background-color: var(--color-transparent);
+    --badge-background-color: var(--color-theme);
     --badge-font-size: var(--font-size-xs);
     --badge-padding-x: .5rem;
     --badge-padding-y: .2rem;
@@ -272,7 +270,7 @@ $breakpoints: bp.$breakpoints;
     --collapse-border-style: var(--border-style);
     --collapse-border-radius: var(--border-radius);
     --collapse-border-color: var(--border-color);
-    --collapse-background-color: var(--color-transparent);
+    --collapse-background-color: var(--color-theme);
     --collapse-button-color: var(--text-color);
     --collapse-body-padding-x: 1rem;
     --collapse-body-padding-y: 1rem;
@@ -339,11 +337,17 @@ $breakpoints: bp.$breakpoints;
     --input-switch-height-sm: 1.5rem;
     --input-switch-height-md: 2rem;
     --input-switch-height-lg: 2.5rem;
+    --select-option-background-color: var(--color-theme);
+
 
 
     --link-border-radius: var(--border-radius);
     --link-border-style: var(--border-style);
     --link-border-width: var(--border-width);
+    --link-boder-color: var(--color-transparent);
+    --link-background-color: var(--color-transparent);
+    --link-color: var(--text-color);
+    --link-text-decoration-color: var(--text-color);
     --link-padding-x: .25rem;
     --link-padding-y: .25rem;
 
@@ -352,7 +356,7 @@ $breakpoints: bp.$breakpoints;
     --list-border-style: var(--border-style);
     --list-border-radius: var(--border-radius);
     --list-border-color: var(--border-color);
-    --list-background-color: var(--color-transparent);
+    --list-background-color: var(--color-theme);
     --list-item-padding-x: 1.5rem;
     --list-item-padding-y: .75rem;
     --list-item-padding-x-sm: 1rem;
@@ -377,10 +381,17 @@ $breakpoints: bp.$breakpoints;
     --navbar-border-width: var(--border-width);
     --navbar-border-style: var(--border-style);
     --navbar-border-color: var(--border-color);
-    --navbar-background-color: var(--color-transparent);
+    --navbar-background-color: var(--color-theme);
     --navbar-collapse-gap: 2rem;
     --navbar-collapse-padding-y: 1rem;
     --navbar-collapse-padding-x: 0;
+
+
+    --outline-border-width: 1px;
+    --outline-border-style: solid;
+    --outline-background-color: var(--color-transparent);
+    --outline-color: var(--text-color);
+    --outline-border-color: var(--text-color);
 
 
     --drawer-width: 30rem;
@@ -424,7 +435,7 @@ $breakpoints: bp.$breakpoints;
     --table-border-style: var(--border-style);
     --table-border-width: var(--border-width);
     --table-border-color: var(--border-color);
-    --table-background-color: var(--color-transparent);
+    --table-background-color: var(--color-theme);
     --table-border-divider-style: var(--border-style);
     --table-border-divider-width: 2px;
     --table-padding-y: .75rem;

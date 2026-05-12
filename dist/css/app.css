@@ -23,11 +23,11 @@ body {
   overflow-x: hidden;
 }
 body::selection {
-  background: var(--selection-bg-color);
+  background-color: var(--selection-bg-color);
   color: var(--selection-text-color);
 }
 body::-moz-selection {
-  background: var(--selection-bg-color);
+  background-color: var(--selection-bg-color);
   color: var(--selection-text-color);
 }
 
@@ -191,8 +191,6 @@ hr {
   --border-radius: 0.5rem;
   --border-width: 1px;
   --border-style: solid;
-  --border-width-outline: 1px;
-  --border-style-outline: solid;
   --border-radius-pill: 10rem;
   --border-radius-circle: 50%;
   --hr-border-width: var(--border-width);
@@ -246,7 +244,7 @@ hr {
   --accordion-border-style: var(--border-style);
   --accordion-border-radius: var(--border-radius);
   --accordion-border-color: var(--border-color);
-  --accordion-background-color: var(--color-transparent);
+  --accordion-background-color: var(--color-theme);
   --accordion-button-color: var(--text-color);
   --accordion-body-padding-x: 1rem;
   --accordion-body-padding-y: 1rem;
@@ -278,7 +276,7 @@ hr {
   --badge-border-style: var(--border-style);
   --badge-border-width: var(--border-width);
   --badge-border-color: var(--border-color);
-  --badge-background-color: var(--color-transparent);
+  --badge-background-color: var(--color-theme);
   --badge-font-size: var(--font-size-xs);
   --badge-padding-x: .5rem;
   --badge-padding-y: .2rem;
@@ -322,7 +320,7 @@ hr {
   --collapse-border-style: var(--border-style);
   --collapse-border-radius: var(--border-radius);
   --collapse-border-color: var(--border-color);
-  --collapse-background-color: var(--color-transparent);
+  --collapse-background-color: var(--color-theme);
   --collapse-button-color: var(--text-color);
   --collapse-body-padding-x: 1rem;
   --collapse-body-padding-y: 1rem;
@@ -383,16 +381,21 @@ hr {
   --input-switch-height-sm: 1.5rem;
   --input-switch-height-md: 2rem;
   --input-switch-height-lg: 2.5rem;
+  --select-option-background-color: var(--color-theme);
   --link-border-radius: var(--border-radius);
   --link-border-style: var(--border-style);
   --link-border-width: var(--border-width);
+  --link-boder-color: var(--color-transparent);
+  --link-background-color: var(--color-transparent);
+  --link-color: var(--text-color);
+  --link-text-decoration-color: var(--text-color);
   --link-padding-x: .25rem;
   --link-padding-y: .25rem;
   --list-border-width: var(--border-width);
   --list-border-style: var(--border-style);
   --list-border-radius: var(--border-radius);
   --list-border-color: var(--border-color);
-  --list-background-color: var(--color-transparent);
+  --list-background-color: var(--color-theme);
   --list-item-padding-x: 1.5rem;
   --list-item-padding-y: .75rem;
   --list-item-padding-x-sm: 1rem;
@@ -415,10 +418,15 @@ hr {
   --navbar-border-width: var(--border-width);
   --navbar-border-style: var(--border-style);
   --navbar-border-color: var(--border-color);
-  --navbar-background-color: var(--color-transparent);
+  --navbar-background-color: var(--color-theme);
   --navbar-collapse-gap: 2rem;
   --navbar-collapse-padding-y: 1rem;
   --navbar-collapse-padding-x: 0;
+  --outline-border-width: 1px;
+  --outline-border-style: solid;
+  --outline-background-color: var(--color-transparent);
+  --outline-color: var(--text-color);
+  --outline-border-color: var(--text-color);
   --drawer-width: 30rem;
   --drawer-height: 30rem;
   --drawer-padding-x: 1rem;
@@ -452,7 +460,7 @@ hr {
   --table-border-style: var(--border-style);
   --table-border-width: var(--border-width);
   --table-border-color: var(--border-color);
-  --table-background-color: var(--color-transparent);
+  --table-background-color: var(--color-theme);
   --table-border-divider-style: var(--border-style);
   --table-border-divider-width: 2px;
   --table-padding-y: .75rem;
@@ -2361,7 +2369,7 @@ hr {
 }
 
 .alert-container {
-  z-index: 1000;
+  z-index: 1300;
   display: flex;
   flex-direction: column;
   gap: var(--alert-gap);
@@ -4538,9 +4546,13 @@ body:has(dialog[open]) {
   color: var(--content-on-black-ghost);
 }
 
+body:has(.drawer.is-open) {
+  overflow: hidden;
+}
+
 .drawer {
   position: fixed;
-  z-index: 1000;
+  z-index: 1100;
   background-color: var(--drawer-background-color);
   padding-inline: var(--drawer-padding-x);
   padding-block: var(--drawer-padding-y);
@@ -4596,7 +4608,7 @@ body:has(dialog[open]) {
 
 .drawer-fixed {
   position: fixed;
-  z-index: 1000;
+  z-index: 1100;
   background-color: var(--drawer-background-color);
   padding-inline: var(--drawer-padding-x);
   padding-block: var(--drawer-padding-y);
@@ -4643,7 +4655,7 @@ body:has(dialog[open]) {
 .drawer-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 999;
+  z-index: 1090;
   background-color: var(--drawer-backdrop-color);
   animation: fade-in var(--drawer-transition-duration) ease forwards;
 }
@@ -4839,7 +4851,7 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-style: var(--dropdown-body-border-style);
   border-width: var(--dropdown-body-border-width);
   white-space: nowrap;
-  z-index: 1010;
+  z-index: 1000;
   position: absolute;
   opacity: 0;
   pointer-events: none;
@@ -5212,30 +5224,30 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
-  color: var(--text-color);
-  text-decoration-color: var(--text-color);
+  color: var(--link-color);
+  text-decoration-color: var(--link-text-decoration-color);
 }
 .link:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-defaut);
   text-decoration-color: var(--hover-defaut);
 }
 .link:not(:disabled):active, .link:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-defaut);
   text-decoration-color: var(--active-defaut);
 }
 .link:not(:disabled):focus-visible {
   outline: none;
-  border-color: var(--text-color);
+  border-color: var(--link-boder-color);
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--text-color) 50%, transparent);
 }
 .link:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5247,19 +5259,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-primary);
   text-decoration-color: var(--color-primary);
 }
 .link-primary:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-primary);
   text-decoration-color: var(--hover-primary);
 }
 .link-primary:not(:disabled):active, .link-primary:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-primary);
   text-decoration-color: var(--active-primary);
 }
@@ -5269,8 +5281,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-primary) 50%, transparent);
 }
 .link-primary:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5282,19 +5294,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-secondary);
   text-decoration-color: var(--color-secondary);
 }
 .link-secondary:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-secondary);
   text-decoration-color: var(--hover-secondary);
 }
 .link-secondary:not(:disabled):active, .link-secondary:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-secondary);
   text-decoration-color: var(--active-secondary);
 }
@@ -5304,8 +5316,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-secondary) 50%, transparent);
 }
 .link-secondary:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5317,19 +5329,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-tertiary);
   text-decoration-color: var(--color-tertiary);
 }
 .link-tertiary:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-tertiary);
   text-decoration-color: var(--hover-tertiary);
 }
 .link-tertiary:not(:disabled):active, .link-tertiary:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-tertiary);
   text-decoration-color: var(--active-tertiary);
 }
@@ -5339,8 +5351,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-tertiary) 50%, transparent);
 }
 .link-tertiary:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5352,19 +5364,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-success);
   text-decoration-color: var(--color-success);
 }
 .link-success:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-success);
   text-decoration-color: var(--hover-success);
 }
 .link-success:not(:disabled):active, .link-success:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-success);
   text-decoration-color: var(--active-success);
 }
@@ -5374,8 +5386,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-success) 50%, transparent);
 }
 .link-success:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5387,19 +5399,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-info);
   text-decoration-color: var(--color-info);
 }
 .link-info:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-info);
   text-decoration-color: var(--hover-info);
 }
 .link-info:not(:disabled):active, .link-info:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-info);
   text-decoration-color: var(--active-info);
 }
@@ -5409,8 +5421,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-info) 50%, transparent);
 }
 .link-info:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5422,19 +5434,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-warning);
   text-decoration-color: var(--color-warning);
 }
 .link-warning:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-warning);
   text-decoration-color: var(--hover-warning);
 }
 .link-warning:not(:disabled):active, .link-warning:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-warning);
   text-decoration-color: var(--active-warning);
 }
@@ -5444,8 +5456,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-warning) 50%, transparent);
 }
 .link-warning:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5457,19 +5469,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-danger);
   text-decoration-color: var(--color-danger);
 }
 .link-danger:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-danger);
   text-decoration-color: var(--hover-danger);
 }
 .link-danger:not(:disabled):active, .link-danger:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-danger);
   text-decoration-color: var(--active-danger);
 }
@@ -5479,8 +5491,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-danger) 50%, transparent);
 }
 .link-danger:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5492,19 +5504,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-neutral);
   text-decoration-color: var(--color-neutral);
 }
 .link-neutral:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-neutral);
   text-decoration-color: var(--hover-neutral);
 }
 .link-neutral:not(:disabled):active, .link-neutral:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-neutral);
   text-decoration-color: var(--active-neutral);
 }
@@ -5514,8 +5526,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-neutral) 50%, transparent);
 }
 .link-neutral:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5527,19 +5539,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-light);
   text-decoration-color: var(--color-light);
 }
 .link-light:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-light);
   text-decoration-color: var(--hover-light);
 }
 .link-light:not(:disabled):active, .link-light:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-light);
   text-decoration-color: var(--active-light);
 }
@@ -5549,8 +5561,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-light) 50%, transparent);
 }
 .link-light:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5562,19 +5574,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-dark);
   text-decoration-color: var(--color-dark);
 }
 .link-dark:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-dark);
   text-decoration-color: var(--hover-dark);
 }
 .link-dark:not(:disabled):active, .link-dark:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-dark);
   text-decoration-color: var(--active-dark);
 }
@@ -5584,8 +5596,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-dark) 50%, transparent);
 }
 .link-dark:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5597,19 +5609,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-white);
   text-decoration-color: var(--color-white);
 }
 .link-white:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-white);
   text-decoration-color: var(--hover-white);
 }
 .link-white:not(:disabled):active, .link-white:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-white);
   text-decoration-color: var(--active-white);
 }
@@ -5619,8 +5631,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-white) 50%, transparent);
 }
 .link-white:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5632,19 +5644,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-black);
   text-decoration-color: var(--color-black);
 }
 .link-black:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-black);
   text-decoration-color: var(--hover-black);
 }
 .link-black:not(:disabled):active, .link-black:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-black);
   text-decoration-color: var(--active-black);
 }
@@ -5654,8 +5666,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-black) 50%, transparent);
 }
 .link-black:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5667,19 +5679,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-primary-ghost);
   text-decoration-color: var(--color-primary-ghost);
 }
 .link-primary-ghost:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-primary-ghost);
   text-decoration-color: var(--hover-primary-ghost);
 }
 .link-primary-ghost:not(:disabled):active, .link-primary-ghost:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-primary-ghost);
   text-decoration-color: var(--active-primary-ghost);
 }
@@ -5689,8 +5701,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-primary-ghost) 50%, transparent);
 }
 .link-primary-ghost:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5702,19 +5714,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-secondary-ghost);
   text-decoration-color: var(--color-secondary-ghost);
 }
 .link-secondary-ghost:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-secondary-ghost);
   text-decoration-color: var(--hover-secondary-ghost);
 }
 .link-secondary-ghost:not(:disabled):active, .link-secondary-ghost:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-secondary-ghost);
   text-decoration-color: var(--active-secondary-ghost);
 }
@@ -5724,8 +5736,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-secondary-ghost) 50%, transparent);
 }
 .link-secondary-ghost:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5737,19 +5749,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-tertiary-ghost);
   text-decoration-color: var(--color-tertiary-ghost);
 }
 .link-tertiary-ghost:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-tertiary-ghost);
   text-decoration-color: var(--hover-tertiary-ghost);
 }
 .link-tertiary-ghost:not(:disabled):active, .link-tertiary-ghost:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-tertiary-ghost);
   text-decoration-color: var(--active-tertiary-ghost);
 }
@@ -5759,8 +5771,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-tertiary-ghost) 50%, transparent);
 }
 .link-tertiary-ghost:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5772,19 +5784,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-success-ghost);
   text-decoration-color: var(--color-success-ghost);
 }
 .link-success-ghost:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-success-ghost);
   text-decoration-color: var(--hover-success-ghost);
 }
 .link-success-ghost:not(:disabled):active, .link-success-ghost:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-success-ghost);
   text-decoration-color: var(--active-success-ghost);
 }
@@ -5794,8 +5806,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-success-ghost) 50%, transparent);
 }
 .link-success-ghost:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5807,19 +5819,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-info-ghost);
   text-decoration-color: var(--color-info-ghost);
 }
 .link-info-ghost:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-info-ghost);
   text-decoration-color: var(--hover-info-ghost);
 }
 .link-info-ghost:not(:disabled):active, .link-info-ghost:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-info-ghost);
   text-decoration-color: var(--active-info-ghost);
 }
@@ -5829,8 +5841,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-info-ghost) 50%, transparent);
 }
 .link-info-ghost:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5842,19 +5854,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-warning-ghost);
   text-decoration-color: var(--color-warning-ghost);
 }
 .link-warning-ghost:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-warning-ghost);
   text-decoration-color: var(--hover-warning-ghost);
 }
 .link-warning-ghost:not(:disabled):active, .link-warning-ghost:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-warning-ghost);
   text-decoration-color: var(--active-warning-ghost);
 }
@@ -5864,8 +5876,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-warning-ghost) 50%, transparent);
 }
 .link-warning-ghost:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5877,19 +5889,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-danger-ghost);
   text-decoration-color: var(--color-danger-ghost);
 }
 .link-danger-ghost:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-danger-ghost);
   text-decoration-color: var(--hover-danger-ghost);
 }
 .link-danger-ghost:not(:disabled):active, .link-danger-ghost:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-danger-ghost);
   text-decoration-color: var(--active-danger-ghost);
 }
@@ -5899,8 +5911,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-danger-ghost) 50%, transparent);
 }
 .link-danger-ghost:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5912,19 +5924,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-neutral-ghost);
   text-decoration-color: var(--color-neutral-ghost);
 }
 .link-neutral-ghost:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-neutral-ghost);
   text-decoration-color: var(--hover-neutral-ghost);
 }
 .link-neutral-ghost:not(:disabled):active, .link-neutral-ghost:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-neutral-ghost);
   text-decoration-color: var(--active-neutral-ghost);
 }
@@ -5934,8 +5946,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-neutral-ghost) 50%, transparent);
 }
 .link-neutral-ghost:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5947,19 +5959,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-light-ghost);
   text-decoration-color: var(--color-light-ghost);
 }
 .link-light-ghost:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-light-ghost);
   text-decoration-color: var(--hover-light-ghost);
 }
 .link-light-ghost:not(:disabled):active, .link-light-ghost:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-light-ghost);
   text-decoration-color: var(--active-light-ghost);
 }
@@ -5969,8 +5981,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-light-ghost) 50%, transparent);
 }
 .link-light-ghost:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -5982,19 +5994,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-dark-ghost);
   text-decoration-color: var(--color-dark-ghost);
 }
 .link-dark-ghost:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-dark-ghost);
   text-decoration-color: var(--hover-dark-ghost);
 }
 .link-dark-ghost:not(:disabled):active, .link-dark-ghost:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-dark-ghost);
   text-decoration-color: var(--active-dark-ghost);
 }
@@ -6004,8 +6016,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-dark-ghost) 50%, transparent);
 }
 .link-dark-ghost:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -6017,19 +6029,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-white-ghost);
   text-decoration-color: var(--color-white-ghost);
 }
 .link-white-ghost:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-white-ghost);
   text-decoration-color: var(--hover-white-ghost);
 }
 .link-white-ghost:not(:disabled):active, .link-white-ghost:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-white-ghost);
   text-decoration-color: var(--active-white-ghost);
 }
@@ -6039,8 +6051,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-white-ghost) 50%, transparent);
 }
 .link-white-ghost:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -6052,19 +6064,19 @@ body:has(.drawer-fixed.drawer-bottom) {
   border-radius: var(--link-border-radius);
   border-style: var(--link-border-style);
   border-width: var(--link-border-width);
-  border-color: var(--color-transparent);
-  background-color: var(--color-transparent);
+  border-color: var(--link-boder-color);
+  background-color: var(--link-background-color);
   text-decoration: underline;
   color: var(--color-black-ghost);
   text-decoration-color: var(--color-black-ghost);
 }
 .link-black-ghost:not(:disabled):hover {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--hover-black-ghost);
   text-decoration-color: var(--hover-black-ghost);
 }
 .link-black-ghost:not(:disabled):active, .link-black-ghost:not(:disabled).active {
-  background-color: var(--color-transparent);
+  background-color: var(--link-background-color);
   color: var(--active-black-ghost);
   text-decoration-color: var(--active-black-ghost);
 }
@@ -6074,8 +6086,8 @@ body:has(.drawer-fixed.drawer-bottom) {
   box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-black-ghost) 50%, transparent);
 }
 .link-black-ghost:disabled {
-  background-color: var(--color-transparent);
-  border-color: var(--color-transparent);
+  background-color: var(--link-background-color);
+  border-color: var(--link-boder-color);
   text-decoration-color: var(--link-disabled-color);
   color: var(--link-disabled-color);
   opacity: 0.5;
@@ -7891,203 +7903,203 @@ body:has(.drawer-fixed.drawer-bottom) {
 }
 
 .outline {
-  background-color: transparent;
-  color: var(--text-color);
-  border-color: var(--text-color);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  background-color: var(--outline-background-color);
+  color: var(--outline-color);
+  border-color: var(--outline-border-color);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-primary {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-primary);
   border-color: var(--color-primary);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-secondary {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-secondary);
   border-color: var(--color-secondary);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-tertiary {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-tertiary);
   border-color: var(--color-tertiary);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-success {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-success);
   border-color: var(--color-success);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-info {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-info);
   border-color: var(--color-info);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-warning {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-warning);
   border-color: var(--color-warning);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-danger {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-danger);
   border-color: var(--color-danger);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-neutral {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-neutral);
   border-color: var(--color-neutral);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-light {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-light);
   border-color: var(--color-light);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-dark {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-dark);
   border-color: var(--color-dark);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-white {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-white);
   border-color: var(--color-white);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-black {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-black);
   border-color: var(--color-black);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-primary-ghost {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-primary-ghost);
   border-color: var(--color-primary-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-secondary-ghost {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-secondary-ghost);
   border-color: var(--color-secondary-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-tertiary-ghost {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-tertiary-ghost);
   border-color: var(--color-tertiary-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-success-ghost {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-success-ghost);
   border-color: var(--color-success-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-info-ghost {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-info-ghost);
   border-color: var(--color-info-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-warning-ghost {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-warning-ghost);
   border-color: var(--color-warning-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-danger-ghost {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-danger-ghost);
   border-color: var(--color-danger-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-neutral-ghost {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-neutral-ghost);
   border-color: var(--color-neutral-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-light-ghost {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-light-ghost);
   border-color: var(--color-light-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-dark-ghost {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-dark-ghost);
   border-color: var(--color-dark-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-white-ghost {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-white-ghost);
   border-color: var(--color-white-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 .outline-black-ghost {
-  background-color: transparent;
+  background-color: var(--outline-background-color);
   color: var(--color-black-ghost);
   border-color: var(--color-black-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--outline-border-style);
+  border-width: var(--outline-border-width);
 }
 
 [data-ui=tab-panel] {
@@ -11986,6 +11998,10 @@ table.table-lg tfoot tr td {
 
 .bg-transparent {
   background-color: var(--color-transparent);
+}
+
+.bg-theme {
+  background-color: var(--color-theme);
 }
 
 .border-top {
