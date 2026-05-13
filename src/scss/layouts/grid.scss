@@ -1,56 +1,33 @@
-@use "sass:math";
 @use "../abstracts/breakpoints" as bp;
-
 $breakpoints: bp.$breakpoints;
 $total-columns: 12;
 
-
-
-@mixin generate-grid-columns($suffix: null) {
-    @for $i from 1 through $total-columns {
-
-        $width: math.div(100% * $i, $total-columns);
-        $gap-compensation: math.div($total-columns - $i, $total-columns);
-
-        @if $suffix != null {
-            .g-col-#{$i}-#{$suffix} {
-                flex: 0 0 calc(#{$width} - (var(--grid-gap) * #{$gap-compensation}));
-                max-width: calc(#{$width} - (var(--grid-gap) * #{$gap-compensation}));
-            }
-        } @else {
-            .g-col-#{$i} {
-                flex: 0 0 calc(#{$width} - (var(--grid-gap) * #{$gap-compensation}));
-                max-width: calc(#{$width} - (var(--grid-gap) * #{$gap-compensation}));
-            }
-        }
-    }
-}
-
-
 .grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(#{$total-columns}, 1fr);
     gap: var(--grid-gap);
 }
 
-
-.grid > * {
-    padding-inline: var(--grid-padding-x);
-    padding-block: var(--grid-padding-y);
-    min-width: 0;
-}
-
-
 .g-col {
-    flex: 1 0 0;
+    grid-column: span 1;
 }
 
+.g-col-auto {
+    grid-column: auto;
+}
 
-@include generate-grid-columns();
-
+@for $i from 1 through $total-columns {
+    .g-col-#{$i} {
+        grid-column: span #{$i};
+    }
+}
 
 @each $bp, $size in $breakpoints {
     @media (min-width: #{$size}) {
-        @include generate-grid-columns($bp);
+        @for $i from 1 through $total-columns {
+            .g-col-#{$i}-#{$bp} {
+                grid-column: span #{$i};
+            }
+        }
     }
 }

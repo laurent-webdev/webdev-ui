@@ -133,11 +133,8 @@
   --line-height-lg: 1.6;
   --line-height-xl: 1.75;
   --line-height-xxl: 2;
-  --col-padding-x: 1rem;
-  --col-padding-y: 1rem;
-  --grid-padding-x: 1rem;
-  --grid-padding-y: 1rem;
-  --grid-gap: .5rem;
+  --col-gutter: 1.5rem;
+  --grid-gap: 1.5rem;
   --accordion-border-width: var(--border-width);
   --accordion-border-style: var(--border-style);
   --accordion-border-radius: var(--border-radius);
@@ -190,6 +187,8 @@
   --button-border-color: var(--border-color);
   --button-background-color: var(--color-transparent);
   --button-outline-background-color: var(--color-transparent);
+  --button-outline-border-style: solid;
+  --button-outline-border-width: 1px;
   --button-color: var(--text-color);
   --button-padding-x: 1.5rem;
   --button-padding-y: .75rem;

@@ -1,6 +1,5 @@
 @use "sass:math";
 @use "../abstracts/breakpoints" as bp;
-
 $breakpoints: bp.$breakpoints;
 $columns: 12;
 
@@ -8,28 +7,33 @@ $columns: 12;
 .row {
     display: flex;
     flex-wrap: wrap;
+    align-items: stretch;
+    margin-inline: calc(var(--col-gutter) * -0.5);
 }
 
-.row > * {
+@mixin col-base {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    padding-inline: var(--col-padding-x);
-    padding-block: var(--col-padding-y);
+    padding-inline: calc(var(--col-gutter) * 0.5);
 }
 
 .col {
+    @include col-base;
     flex: 1 1 0;
     max-width: 100%;
 }
 
 .col-auto {
+    @include col-base;
     flex: 0 0 auto;
     width: auto;
 }
 
-
 @for $i from 1 through $columns {
     $width: math.div(100% * $i, $columns);
     .col-#{$i} {
+        @include col-base;
         flex: 0 0 $width;
         max-width: $width;
     }
@@ -40,20 +44,10 @@ $columns: 12;
         @for $i from 1 through $columns {
             $width: math.div(100% * $i, $columns);
             .col-#{$i}-#{$bp} {
+                @include col-base;
                 flex: 0 0 $width;
                 max-width: $width;
             }
-        }
-    }
-}
-
-@mixin generate-cols-breakpoint($bp) {
-    @for $i from 1 through 12 {
-        $width: math.div(100% * $i, 12);
-
-        .col-#{$i}-#{$bp} {
-            flex: 0 0 #{$width};
-            max-width: #{$width};
         }
     }
 }

@@ -702,8 +702,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-primary);
   border-color: var(--color-primary);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-primary:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -731,8 +731,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-secondary);
   border-color: var(--color-secondary);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-secondary:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -760,8 +760,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-tertiary);
   border-color: var(--color-tertiary);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-tertiary:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -789,8 +789,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-success);
   border-color: var(--color-success);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-success:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -818,8 +818,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-info);
   border-color: var(--color-info);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-info:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -847,8 +847,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-warning);
   border-color: var(--color-warning);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-warning:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -876,8 +876,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-danger);
   border-color: var(--color-danger);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-danger:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -905,8 +905,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-neutral);
   border-color: var(--color-neutral);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-neutral:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -934,8 +934,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-light);
   border-color: var(--color-light);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-light:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -963,8 +963,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-dark);
   border-color: var(--color-dark);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-dark:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -992,8 +992,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-white);
   border-color: var(--color-white);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-white:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -1021,8 +1021,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-black);
   border-color: var(--color-black);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-black:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -1050,8 +1050,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-primary-ghost);
   border-color: var(--color-primary-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-primary-ghost:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -1079,8 +1079,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-secondary-ghost);
   border-color: var(--color-secondary-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-secondary-ghost:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -1108,8 +1108,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-tertiary-ghost);
   border-color: var(--color-tertiary-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-tertiary-ghost:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -1137,8 +1137,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-success-ghost);
   border-color: var(--color-success-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-success-ghost:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -1166,8 +1166,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-info-ghost);
   border-color: var(--color-info-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-info-ghost:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -1195,8 +1195,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-warning-ghost);
   border-color: var(--color-warning-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-warning-ghost:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -1224,8 +1224,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-danger-ghost);
   border-color: var(--color-danger-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-danger-ghost:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -1253,8 +1253,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-neutral-ghost);
   border-color: var(--color-neutral-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-neutral-ghost:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -1282,8 +1282,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-light-ghost);
   border-color: var(--color-light-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-light-ghost:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -1311,8 +1311,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-dark-ghost);
   border-color: var(--color-dark-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-dark-ghost:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -1340,8 +1340,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-white-ghost);
   border-color: var(--color-white-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-white-ghost:not(:disabled):hover {
   border-color: var(--color-transparent);
@@ -1369,8 +1369,8 @@
   background-color: var(--button-outline-background-color);
   color: var(--color-black-ghost);
   border-color: var(--color-black-ghost);
-  border-style: var(--border-style-outline);
-  border-width: var(--border-width-outline);
+  border-style: var(--button-outline-border-style);
+  border-width: var(--button-outline-border-width);
 }
 .btn-outline-black-ghost:not(:disabled):hover {
   border-color: var(--color-transparent);

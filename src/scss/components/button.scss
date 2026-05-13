@@ -155,8 +155,8 @@ $colors: colors.$colors;
         background-color: var(--button-outline-background-color);
         color: #{$value};
         border-color: #{$value};
-        border-style: var(--border-style-outline);
-        border-width: var(--border-width-outline);
+        border-style: var(--button-outline-border-style);
+        border-width: var(--button-outline-border-width);
 
         &:not(:disabled):hover {
             border-color: var(--color-transparent);
