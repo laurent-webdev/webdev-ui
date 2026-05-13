@@ -14,12 +14,12 @@ $columns: 12;
 @mixin col-base {
     display: flex;
     flex-direction: column;
-    width: 100%;
     padding-inline: calc(var(--col-gutter) * 0.5);
 }
 
 .col {
     @include col-base;
+    width: 100%;
     flex: 1 1 0;
     max-width: 100%;
 }
@@ -34,6 +34,7 @@ $columns: 12;
     $width: math.div(100% * $i, $columns);
     .col-#{$i} {
         @include col-base;
+        width: 100%;
         flex: 0 0 $width;
         max-width: $width;
     }
@@ -45,6 +46,7 @@ $columns: 12;
             $width: math.div(100% * $i, $columns);
             .col-#{$i}-#{$bp} {
                 @include col-base;
+                width: 100%;
                 flex: 0 0 $width;
                 max-width: $width;
             }
