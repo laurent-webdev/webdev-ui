@@ -87,6 +87,7 @@ export default class Drawer {
     }
 
     static toggle(drawer, button) {
+        if (Drawer.isFixed(drawer)) return;
         Drawer.isOpen(drawer)
             ? Drawer.close(drawer, button)
             : Drawer.open(drawer, button);
@@ -121,7 +122,8 @@ export default class Drawer {
 
         Drawer._animating.set(drawer, true);
 
-        const zDrawer = parseInt(getComputedStyle(drawer).getPropertyValue('--z-drawer')) || 1100;
+
+        const zDrawer = parseInt(getComputedStyle(drawer).getPropertyValue('--drawer-z-index')) || 1100;
         drawer.style.zIndex = zDrawer + 10;
 
         if (!Drawer.isFixed(drawer)) {
@@ -129,8 +131,8 @@ export default class Drawer {
             backdrop.className = 'drawer-backdrop';
             backdrop.dataset.for = drawer.id;
             document.body.appendChild(backdrop);
-            const zBackdrop = parseInt(getComputedStyle(backdrop).getPropertyValue('--z-backdrop')) || 1090;
-            backdrop.style.zIndex = zBackdrop + 10;
+            const zBackdrop = parseInt(getComputedStyle(backdrop).getPropertyValue('--drawer-z-index')) || 1100;
+            backdrop.style.zIndex = zBackdrop + 5;
         }
 
         drawer.classList.add('is-open');

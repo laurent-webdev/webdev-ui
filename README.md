@@ -2,8 +2,9 @@
 
 Lightweight CSS/JS framework — modular, CDN-ready, no dependencies.
 
-- 📦 **GitHub** : [github.com/laurent-webdev/webdev-ui](https://github.com/laurent-webdev/webdev-ui)
-- 🚀 **CDN** : [jsDelivr](https://www.jsdelivr.com/package/gh/laurent-webdev/webdev-ui)
+- 🐙 **GitHub** : [github.com/laurent-webdev/webdev-ui](https://github.com/laurent-webdev/webdev-ui)
+- 📦 **CDN** : [jsDelivr](https://www.jsdelivr.com/package/gh/laurent-webdev/webdev-ui)
+- 📖 **Docs** : [webdev-ui.laurentlassallette.com](https://webdev-ui.laurentlassallette.com)
 
 ---
 

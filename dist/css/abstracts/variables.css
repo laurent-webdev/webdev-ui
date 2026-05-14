@@ -156,6 +156,11 @@
   --alert-container-padding-x: 0.5rem;
   --alert-container-padding-y: 0;
   --alert-gap: 1rem;
+  --alert-z-index: 1200;
+  --alert-container-top: 0;
+  --alert-container-left: 0;
+  --alert-container-right: 0;
+  --alert-container-bottom: auto;
   --alert-border-width: var(--border-width);
   --alert-border-style: var(--border-style);
   --alert-border-radius: var(--border-radius);
@@ -243,6 +248,7 @@
   --dialog-border-width: var(--border-width);
   --dialog-border-radius: var(--border-radius);
   --dialog-border-color: var(--border-color);
+  --dialog-z-index: 1100;
   --dialog-header-padding-x: 1rem;
   --dialog-header-padding-y: 1rem;
   --dialog-body-padding-x: 1rem;
@@ -255,6 +261,7 @@
   --dropdown-body-border-width: var(--border-width);
   --dropdown-body-border-color: var(--border-color);
   --dropdown-body-background-color: var(--color-theme);
+  --dropdown-body-z-index: 1300;
   --form-control-gap: 1rem;
   --input-background-color: var(--color-theme);
   --input-border-style: var(--border-style);
@@ -336,6 +343,7 @@
   --drawer-compact-width-reduce: 6.5rem;
   --drawer-compact-gap: 2rem;
   --drawer-background-color: var(--color-theme);
+  --drawer-z-index: 1000;
   --drawer-transition-duration: 200ms;
   --tab-panel-padding-y: 1rem;
   --tab-panel-padding-x: 1rem;

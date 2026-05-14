@@ -8,7 +8,7 @@ body:has(dialog[open]) {
 .dialog {
     flex-direction: column;
     position: fixed;
-    z-index: 1200;
+    z-index: var(--dialog-z-index);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

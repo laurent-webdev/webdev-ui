@@ -2,18 +2,27 @@
 $colors: colors.$colors;
 
 .alert-container {
-    z-index: 1300;
     display: flex;
+    position: fixed;
     flex-direction: column;
+    pointer-events: none;
+
     gap: var(--alert-gap);
+    z-index: var(--alert-z-index);
     padding-inline: var(--alert-container-padding-x);
     padding-block: var(--alert-container-padding-y);
+
+    top: var(--alert-container-top);
+    bottom: var(--alert-container-bottom);
+    left: var(--alert-container-left);
+    right: var(--alert-container-right);
 }
 
 .alert {
     width: 100%;
     display: flex;
     flex-direction: column;
+    pointer-events: auto;
     border-radius: var(--alert-border-radius);
     border-width: var(--alert-border-width);
     border-style: var(--alert-border-style);

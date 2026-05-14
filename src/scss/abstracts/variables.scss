@@ -1,4 +1,5 @@
 @use "../abstracts/breakpoints" as bp;
+
 $breakpoints: bp.$breakpoints;
 
 :root {
@@ -6,7 +7,6 @@ $breakpoints: bp.$breakpoints;
     @each $name, $bp in $breakpoints {
         --breakpoint-#{$name}: #{$bp};
     }
-
 
     --gray-100: #f5f5f5;
     --gray-200: #e5e5e5;
@@ -200,6 +200,11 @@ $breakpoints: bp.$breakpoints;
     --alert-container-padding-x: 0.5rem;
     --alert-container-padding-y: 0;
     --alert-gap: 1rem;
+    --alert-z-index: 1200;
+    --alert-container-top: 0;
+    --alert-container-left: 0;
+    --alert-container-right: 0;
+    --alert-container-bottom: auto;
     --alert-border-width: var(--border-width);
     --alert-border-style: var(--border-style);
     --alert-border-radius: var(--border-radius);
@@ -297,6 +302,7 @@ $breakpoints: bp.$breakpoints;
     --dialog-border-width: var(--border-width);
     --dialog-border-radius: var(--border-radius);
     --dialog-border-color: var(--border-color);
+    --dialog-z-index: 1100;
     --dialog-header-padding-x: 1rem;
     --dialog-header-padding-y: 1rem;
     --dialog-body-padding-x: 1rem;
@@ -311,6 +317,7 @@ $breakpoints: bp.$breakpoints;
     --dropdown-body-border-width: var(--border-width);
     --dropdown-body-border-color: var(--border-color);
     --dropdown-body-background-color: var(--color-theme);
+    --dropdown-body-z-index: 1300;
 
 
     --form-control-gap: 1rem;
@@ -337,7 +344,6 @@ $breakpoints: bp.$breakpoints;
     --input-switch-height-md: 2rem;
     --input-switch-height-lg: 2.5rem;
     --select-option-background-color: var(--color-theme);
-
 
 
     --link-border-radius: var(--border-radius);
@@ -405,6 +411,7 @@ $breakpoints: bp.$breakpoints;
     --drawer-compact-width-reduce: 6.5rem;
     --drawer-compact-gap: 2rem;
     --drawer-background-color: var(--color-theme);
+    --drawer-z-index: 1000;
     --drawer-transition-duration: 200ms;
 
 

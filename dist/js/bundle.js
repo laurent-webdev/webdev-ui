@@ -515,6 +515,7 @@ var Drawer = class _Drawer {
     _Drawer.toggle(drawer, button);
   }
   static toggle(drawer, button) {
+    if (_Drawer.isFixed(drawer)) return;
     _Drawer.isOpen(drawer) ? _Drawer.close(drawer, button) : _Drawer.open(drawer, button);
   }
   static isOpen(drawer) {
@@ -541,15 +542,15 @@ var Drawer = class _Drawer {
     }));
     if (!canOpen) return;
     _Drawer._animating.set(drawer, true);
-    const zDrawer = parseInt(getComputedStyle(drawer).getPropertyValue("--z-drawer")) || 1100;
+    const zDrawer = parseInt(getComputedStyle(drawer).getPropertyValue("--drawer-z-index")) || 1100;
     drawer.style.zIndex = zDrawer + 10;
     if (!_Drawer.isFixed(drawer)) {
       const backdrop = document.createElement("div");
       backdrop.className = "drawer-backdrop";
       backdrop.dataset.for = drawer.id;
       document.body.appendChild(backdrop);
-      const zBackdrop = parseInt(getComputedStyle(backdrop).getPropertyValue("--z-backdrop")) || 1090;
-      backdrop.style.zIndex = zBackdrop + 10;
+      const zBackdrop = parseInt(getComputedStyle(backdrop).getPropertyValue("--drawer-z-index")) || 1100;
+      backdrop.style.zIndex = zBackdrop + 5;
     }
     drawer.classList.add("is-open");
     _Drawer.updateTriggers(drawer, true);
@@ -855,6 +856,338 @@ var Dropdown = class _Dropdown {
   }
 };
 
+// src/js/dropdown-float.js
+var DropdownFloat = class _DropdownFloat {
+  static _animating = /* @__PURE__ */ new WeakMap();
+  static _reposition = /* @__PURE__ */ new WeakMap();
+  static _anchor = /* @__PURE__ */ new WeakMap();
+  static _rafPending = /* @__PURE__ */ new WeakMap();
+  static _openDropdowns = /* @__PURE__ */ new Set();
+  // { dropdown, button }
+  static _observer = null;
+  constructor() {
+    if (_DropdownFloat.initialized) return;
+    _DropdownFloat.initialized = true;
+    _DropdownFloat.init();
+    _DropdownFloat.observe();
+    document.addEventListener("click", _DropdownFloat.onClick);
+  }
+  static init() {
+    document.querySelectorAll('[data-ui="dropdown-float"]').forEach(_DropdownFloat.initButton);
+  }
+  static initButton(button) {
+    if (button.closest('[data-ui="code"]')) return;
+    const selector = button.getAttribute("data-target");
+    if (!selector) return;
+    const dropdown = document.getElementById(selector.replace(/^#/, ""));
+    if (!dropdown) return;
+    const isOpen = _DropdownFloat.isOpen(dropdown);
+    button.setAttribute("aria-controls", dropdown.id);
+    button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    if (isOpen) {
+      _DropdownFloat.attachReposition(dropdown, button);
+    }
+  }
+  static observe() {
+    if (!document.body) {
+      document.addEventListener("DOMContentLoaded", _DropdownFloat.observe, { once: true });
+      return;
+    }
+    _DropdownFloat._observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+          if (!(node instanceof HTMLElement)) continue;
+          if (node.matches('[data-ui="dropdown-float"]')) {
+            _DropdownFloat.initButton(node);
+            continue;
+          }
+          node.querySelectorAll?.('[data-ui="dropdown-float"]').forEach(_DropdownFloat.initButton);
+        }
+      }
+    });
+    _DropdownFloat._observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  }
+  static onClick(event) {
+    const button = event.target.closest('[data-ui="dropdown-float"]');
+    if (button) {
+      const selector = button.getAttribute("data-target");
+      if (!selector) return;
+      const dropdown = document.getElementById(selector.replace(/^#/, ""));
+      if (!dropdown) return;
+      _DropdownFloat.closeAllDropdowns(button);
+      _DropdownFloat.toggleDropdown(dropdown, button);
+      return;
+    }
+    if (event.target.closest(".dropdown-body")) return;
+    _DropdownFloat.closeAllDropdowns();
+  }
+  static toggleDropdown(dropdown, button) {
+    _DropdownFloat.isOpen(dropdown) ? _DropdownFloat.closeDropdown(dropdown, button) : _DropdownFloat.openDropdown(dropdown, button);
+  }
+  static isOpen(dropdown) {
+    return dropdown.classList.contains("is-open");
+  }
+  static openDropdown(dropdown, button) {
+    if (_DropdownFloat.isOpen(dropdown)) return;
+    if (_DropdownFloat._animating.has(dropdown)) return;
+    const canOpen = dropdown.dispatchEvent(new CustomEvent("dropdown:beforeOpen", {
+      bubbles: true,
+      cancelable: true,
+      detail: { dropdown, button }
+    }));
+    if (!canOpen) return;
+    const wrapper = button.closest(".dropdown");
+    if (wrapper) {
+      dropdown.dataset.drop = wrapper.dataset.drop ?? "bottom";
+      dropdown.dataset.dropAlign = wrapper.dataset.dropAlign ?? "start";
+      dropdown.dataset.dropOrigin = dropdown.dataset.drop;
+      dropdown.dataset.dropAlignOrigin = dropdown.dataset.dropAlign;
+    }
+    if (!_DropdownFloat._anchor.has(dropdown)) {
+      _DropdownFloat._anchor.set(dropdown, {
+        parent: dropdown.parentNode,
+        next: dropdown.nextSibling
+      });
+    }
+    document.body.appendChild(dropdown);
+    dropdown.classList.remove("is-closing");
+    dropdown.classList.add("is-open");
+    button.setAttribute("aria-expanded", "true");
+    _DropdownFloat._animating.set(dropdown, true);
+    requestAnimationFrame(() => {
+      _DropdownFloat.attachReposition(dropdown, button);
+      requestAnimationFrame(() => {
+        _DropdownFloat._animating.delete(dropdown);
+        dropdown.dispatchEvent(new CustomEvent("dropdown:afterOpen", {
+          bubbles: true,
+          detail: { dropdown, button }
+        }));
+      });
+    });
+  }
+  static closeDropdown(dropdown, button) {
+    if (!_DropdownFloat.isOpen(dropdown)) return;
+    if (_DropdownFloat._animating.has(dropdown)) return;
+    const canClose = dropdown.dispatchEvent(new CustomEvent("dropdown:beforeClose", {
+      bubbles: true,
+      cancelable: true,
+      detail: { dropdown, button }
+    }));
+    if (!canClose) return;
+    button.setAttribute("aria-expanded", "false");
+    const reposition = _DropdownFloat._reposition.get(dropdown);
+    if (reposition) {
+      window.removeEventListener("scroll", reposition);
+      window.removeEventListener("resize", reposition);
+      _DropdownFloat._reposition.delete(dropdown);
+    }
+    _DropdownFloat._openDropdowns.forEach((entry) => {
+      if (entry.dropdown === dropdown) _DropdownFloat._openDropdowns.delete(entry);
+    });
+    dropdown.classList.add("is-closing");
+    _DropdownFloat._animating.set(dropdown, true);
+    const cleanup = () => {
+      dropdown.classList.remove("is-open", "is-closing");
+      _DropdownFloat._animating.delete(dropdown);
+      delete dropdown.dataset.drop;
+      delete dropdown.dataset.dropAlign;
+      delete dropdown.dataset.dropOrigin;
+      delete dropdown.dataset.dropAlignOrigin;
+      const anchor = _DropdownFloat._anchor.get(dropdown);
+      if (anchor) {
+        anchor.parent.insertBefore(dropdown, anchor.next);
+        _DropdownFloat._anchor.delete(dropdown);
+      }
+      dropdown.dispatchEvent(new CustomEvent("dropdown:afterClose", {
+        bubbles: true,
+        detail: { dropdown, button }
+      }));
+    };
+    const duration = Math.max(
+      0,
+      ...window.getComputedStyle(dropdown).transitionDuration.split(",").map((d) => parseFloat(d) * 1e3)
+    );
+    if (!duration) {
+      cleanup();
+      return;
+    }
+    const safetyTimer = setTimeout(cleanup, duration + 100);
+    dropdown.addEventListener("transitionend", (event) => {
+      if (event.target !== dropdown) return;
+      clearTimeout(safetyTimer);
+      cleanup();
+    }, { once: true });
+  }
+  // [FIX] Logique simplifiée et alignée sur Dropdown (référence)
+  static closeAllDropdowns(exception = null) {
+    [..._DropdownFloat._openDropdowns].forEach(({ dropdown, button }) => {
+      if (button === exception) return;
+      _DropdownFloat.closeDropdown(dropdown, button);
+    });
+  }
+  static attachReposition(dropdown, button) {
+    _DropdownFloat.position(dropdown, button);
+    const reposition = _DropdownFloat.createReposition(dropdown, button);
+    _DropdownFloat._reposition.set(dropdown, reposition);
+    window.addEventListener("scroll", reposition, { passive: true });
+    window.addEventListener("resize", reposition, { passive: true });
+    _DropdownFloat._openDropdowns.add({ dropdown, button });
+  }
+  static createReposition(dropdown, button) {
+    let debounceTimer = null;
+    return () => {
+      if (!_DropdownFloat._rafPending.get(dropdown)) {
+        _DropdownFloat._rafPending.set(dropdown, true);
+        requestAnimationFrame(() => {
+          _DropdownFloat.position(dropdown, button);
+          _DropdownFloat._rafPending.delete(dropdown);
+        });
+      }
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        _DropdownFloat.position(dropdown, button);
+      }, 100);
+    };
+  }
+  static position(dropdown, button) {
+    const rect = button.getBoundingClientRect();
+    const dropdownWidth = dropdown.offsetWidth;
+    const dropdownHeight = dropdown.offsetHeight;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const spaceAbove = rect.top;
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const dropOrigin = dropdown.dataset.dropOrigin ?? "bottom";
+    const dropAlignOrigin = dropdown.dataset.dropAlignOrigin ?? "start";
+    const setTop = () => {
+      top = rect.top - dropdownHeight;
+      dropdown.dataset.drop = "top";
+    };
+    const setBottom = () => {
+      top = rect.bottom;
+      dropdown.dataset.drop = "bottom";
+    };
+    let top;
+    if (dropOrigin === "top") {
+      if (spaceAbove >= dropdownHeight) {
+        setTop();
+      } else if (spaceBelow >= dropdownHeight) {
+        setBottom();
+      }
+    } else {
+      if (spaceBelow >= dropdownHeight) {
+        setBottom();
+      } else if (spaceAbove >= dropdownHeight) {
+        setTop();
+      }
+    }
+    const startFits = window.innerWidth - rect.left >= dropdownWidth;
+    const endFits = rect.right >= dropdownWidth;
+    const centerFits = rect.left + rect.width / 2 - dropdownWidth / 2 >= 0 && rect.left + rect.width / 2 + dropdownWidth / 2 <= window.innerWidth;
+    const endOutsideFits = rect.right + dropdownWidth <= window.innerWidth;
+    const startOutsideFits = rect.left - dropdownWidth >= 0;
+    const setLeft = () => {
+      left = rect.left;
+      dropdown.dataset.dropAlign = "start";
+    };
+    const setCenter = () => {
+      left = rect.left + rect.width / 2 - dropdownWidth / 2;
+      dropdown.dataset.dropAlign = "center";
+    };
+    const setRight = () => {
+      left = rect.right - dropdownWidth;
+      dropdown.dataset.dropAlign = "end";
+    };
+    const setRightOutside = () => {
+      left = rect.right;
+      top = rect.top;
+      dropdown.dataset.dropAlign = "end-outside";
+    };
+    const setLeftOutside = () => {
+      left = rect.left - dropdownWidth;
+      top = rect.top;
+      dropdown.dataset.dropAlign = "start-outside";
+    };
+    let left;
+    if (dropAlignOrigin === "start") {
+      if (startFits) {
+        setLeft();
+      } else if (centerFits) {
+        setCenter();
+      } else if (endFits) {
+        setRight();
+      }
+    } else if (dropAlignOrigin === "end") {
+      if (endFits) {
+        setRight();
+      } else if (centerFits) {
+        setCenter();
+      } else if (startFits) {
+        setLeft();
+      }
+    } else if (dropAlignOrigin === "center") {
+      if (centerFits) {
+        setCenter();
+      } else if (startFits) {
+        setLeft();
+      } else if (endFits) {
+        setRight();
+      }
+    } else if (dropAlignOrigin === "end-outside") {
+      if (endOutsideFits) {
+        setRightOutside();
+      } else if (startOutsideFits) {
+        setLeftOutside();
+      } else if (endFits) {
+        setRight();
+      } else if (centerFits) {
+        setCenter();
+      } else if (startFits) {
+        setLeft();
+      }
+    } else if (dropAlignOrigin === "start-outside") {
+      if (startOutsideFits) {
+        setLeftOutside();
+      } else if (endOutsideFits) {
+        setRightOutside();
+      } else if (startFits) {
+        setLeft();
+      } else if (centerFits) {
+        setCenter();
+      } else if (endFits) {
+        setRight();
+      }
+    }
+    if (top !== void 0) dropdown.style.top = Math.round(top) + scrollY + "px";
+    if (left !== void 0) dropdown.style.left = Math.round(left) + scrollX + "px";
+  }
+  // [FIX] destroy complet : nettoyage listeners scroll/resize, _anchor, _rafPending
+  static destroy() {
+    [..._DropdownFloat._openDropdowns].forEach(({ dropdown }) => {
+      const reposition = _DropdownFloat._reposition.get(dropdown);
+      if (reposition) {
+        window.removeEventListener("scroll", reposition);
+        window.removeEventListener("resize", reposition);
+        _DropdownFloat._reposition.delete(dropdown);
+      }
+      const anchor = _DropdownFloat._anchor.get(dropdown);
+      if (anchor) {
+        anchor.parent.insertBefore(dropdown, anchor.next);
+        _DropdownFloat._anchor.delete(dropdown);
+      }
+    });
+    _DropdownFloat._rafPending = /* @__PURE__ */ new WeakMap();
+    document.removeEventListener("click", _DropdownFloat.onClick);
+    _DropdownFloat._observer?.disconnect();
+    _DropdownFloat._observer = null;
+    _DropdownFloat.initialized = false;
+    _DropdownFloat._openDropdowns.clear();
+  }
+};
+
 // src/js/form-validate.js
 var FormValidate = class _FormValidate {
   constructor() {
@@ -1042,6 +1375,7 @@ document.addEventListener("DOMContentLoaded", () => {
   new Dialog();
   new Drawer();
   new Dropdown();
+  new DropdownFloat();
   new FormValidate();
   new Tab();
 });

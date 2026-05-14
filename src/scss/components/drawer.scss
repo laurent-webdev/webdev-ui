@@ -1,9 +1,10 @@
 @use "../abstracts/breakpoints" as bp;
 $breakpoints: bp.$breakpoints;
 
+
 @mixin drawer-base {
     position: fixed;
-    z-index: 1100;
+    z-index: var(--drawer-z-index);
     background-color: var(--drawer-background-color);
     padding-inline: var(--drawer-padding-x);
     padding-block: var(--drawer-padding-y);
@@ -94,7 +95,7 @@ body:has(.drawer.is-open) {
 .drawer-backdrop {
     position: fixed;
     inset: 0;
-    z-index: 1090;
+    z-index: var(--drawer-z-index);
     background-color: var(--drawer-backdrop-color);
     animation: fade-in var(--drawer-transition-duration) ease forwards;
 

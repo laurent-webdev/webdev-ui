@@ -56,8 +56,8 @@
     border-color: var(--dropdown-body-border-color);
     border-style: var(--dropdown-body-border-style);
     border-width: var(--dropdown-body-border-width);
+    z-index: var(--dropdown-body-z-index);
     white-space: nowrap;
-    z-index: 1000;
     position: absolute;
     opacity: 0;
     pointer-events: none;
