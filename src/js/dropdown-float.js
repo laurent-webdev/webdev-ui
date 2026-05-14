@@ -181,6 +181,9 @@ export default class DropdownFloat {
             delete dropdown.dataset.dropOrigin;
             delete dropdown.dataset.dropAlignOrigin;
 
+            dropdown.style.top = '';
+            dropdown.style.left = '';
+
             // Remettre le dropdown à sa place d'origine
             const anchor = DropdownFloat._anchor.get(dropdown);
             if (anchor) {

@@ -996,6 +996,8 @@ var DropdownFloat = class _DropdownFloat {
       delete dropdown.dataset.dropAlign;
       delete dropdown.dataset.dropOrigin;
       delete dropdown.dataset.dropAlignOrigin;
+      dropdown.style.top = "";
+      dropdown.style.left = "";
       const anchor = _DropdownFloat._anchor.get(dropdown);
       if (anchor) {
         anchor.parent.insertBefore(dropdown, anchor.next);
