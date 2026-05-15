@@ -7,16 +7,15 @@
 }
 
 .col {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
   flex: 1 1 0;
   max-width: 100%;
 }
 
 .col-auto {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
@@ -25,615 +24,615 @@
 }
 
 .col-1 {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
   flex: 0 0 8.3333333333%;
   max-width: 8.3333333333%;
 }
 
 .col-2 {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
   flex: 0 0 16.6666666667%;
   max-width: 16.6666666667%;
 }
 
 .col-3 {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
   flex: 0 0 25%;
   max-width: 25%;
 }
 
 .col-4 {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
   flex: 0 0 33.3333333333%;
   max-width: 33.3333333333%;
 }
 
 .col-5 {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
   flex: 0 0 41.6666666667%;
   max-width: 41.6666666667%;
 }
 
 .col-6 {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
   flex: 0 0 50%;
   max-width: 50%;
 }
 
 .col-7 {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
   flex: 0 0 58.3333333333%;
   max-width: 58.3333333333%;
 }
 
 .col-8 {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
   flex: 0 0 66.6666666667%;
   max-width: 66.6666666667%;
 }
 
 .col-9 {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
   flex: 0 0 75%;
   max-width: 75%;
 }
 
 .col-10 {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
   flex: 0 0 83.3333333333%;
   max-width: 83.3333333333%;
 }
 
 .col-11 {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
   flex: 0 0 91.6666666667%;
   max-width: 91.6666666667%;
 }
 
 .col-12 {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
   flex: 0 0 100%;
   max-width: 100%;
 }
 
 .col-1-xs {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-2-xs {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-3-xs {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-4-xs {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-5-xs {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-6-xs {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-7-xs {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-8-xs {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-9-xs {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-10-xs {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-11-xs {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-12-xs {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-1-sm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-2-sm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-3-sm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-4-sm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-5-sm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-6-sm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-7-sm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-8-sm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-9-sm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-10-sm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-11-sm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-12-sm {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-1-md {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-2-md {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-3-md {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-4-md {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-5-md {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-6-md {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-7-md {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-8-md {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-9-md {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-10-md {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-11-md {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-12-md {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-1-lg {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-2-lg {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-3-lg {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-4-lg {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-5-lg {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-6-lg {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-7-lg {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-8-lg {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-9-lg {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-10-lg {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-11-lg {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-12-lg {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-1-xl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-2-xl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-3-xl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-4-xl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-5-xl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-6-xl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-7-xl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-8-xl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-9-xl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-10-xl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-11-xl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-12-xl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-1-xxl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-2-xxl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-3-xxl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-4-xxl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-5-xxl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-6-xxl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-7-xxl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-8-xxl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-9-xxl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-10-xxl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-11-xxl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 .col-12-xxl {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding-inline: calc(var(--col-gutter) * 0.5);
+  width: 100%;
 }
 
 @media (min-width: 480px) {
