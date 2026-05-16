@@ -66,7 +66,7 @@
 .btn:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--button-border-color);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--button-border-color) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--button-border-color) 50%, transparent);
 }
 .btn:disabled {
   background-color: var(--button-disabled-background-color);
@@ -91,7 +91,7 @@
 .btn-primary:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-primary) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-primary) 50%, transparent);
 }
 .btn-primary:disabled {
   background-color: var(--button-disabled-background-color);
@@ -116,7 +116,7 @@
 .btn-secondary:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-secondary);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-secondary) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-secondary) 50%, transparent);
 }
 .btn-secondary:disabled {
   background-color: var(--button-disabled-background-color);
@@ -141,7 +141,7 @@
 .btn-tertiary:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-tertiary);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-tertiary) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-tertiary) 50%, transparent);
 }
 .btn-tertiary:disabled {
   background-color: var(--button-disabled-background-color);
@@ -166,7 +166,7 @@
 .btn-success:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-success);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-success) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-success) 50%, transparent);
 }
 .btn-success:disabled {
   background-color: var(--button-disabled-background-color);
@@ -191,7 +191,7 @@
 .btn-info:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-info);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-info) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-info) 50%, transparent);
 }
 .btn-info:disabled {
   background-color: var(--button-disabled-background-color);
@@ -216,7 +216,7 @@
 .btn-warning:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-warning);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-warning) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-warning) 50%, transparent);
 }
 .btn-warning:disabled {
   background-color: var(--button-disabled-background-color);
@@ -241,7 +241,7 @@
 .btn-danger:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-danger);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-danger) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-danger) 50%, transparent);
 }
 .btn-danger:disabled {
   background-color: var(--button-disabled-background-color);
@@ -266,7 +266,7 @@
 .btn-neutral:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-neutral);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-neutral) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-neutral) 50%, transparent);
 }
 .btn-neutral:disabled {
   background-color: var(--button-disabled-background-color);
@@ -291,7 +291,7 @@
 .btn-light:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-light);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-light) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-light) 50%, transparent);
 }
 .btn-light:disabled {
   background-color: var(--button-disabled-background-color);
@@ -316,7 +316,7 @@
 .btn-dark:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-dark);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-dark) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-dark) 50%, transparent);
 }
 .btn-dark:disabled {
   background-color: var(--button-disabled-background-color);
@@ -341,7 +341,7 @@
 .btn-white:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-white);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-white) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-white) 50%, transparent);
 }
 .btn-white:disabled {
   background-color: var(--button-disabled-background-color);
@@ -366,7 +366,7 @@
 .btn-black:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-black);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-black) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-black) 50%, transparent);
 }
 .btn-black:disabled {
   background-color: var(--button-disabled-background-color);
@@ -391,7 +391,7 @@
 .btn-primary-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-primary-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-primary-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-primary-ghost) 50%, transparent);
 }
 .btn-primary-ghost:disabled {
   background-color: var(--button-disabled-background-color);
@@ -416,7 +416,7 @@
 .btn-secondary-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-secondary-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-secondary-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-secondary-ghost) 50%, transparent);
 }
 .btn-secondary-ghost:disabled {
   background-color: var(--button-disabled-background-color);
@@ -441,7 +441,7 @@
 .btn-tertiary-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-tertiary-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-tertiary-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-tertiary-ghost) 50%, transparent);
 }
 .btn-tertiary-ghost:disabled {
   background-color: var(--button-disabled-background-color);
@@ -466,7 +466,7 @@
 .btn-success-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-success-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-success-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-success-ghost) 50%, transparent);
 }
 .btn-success-ghost:disabled {
   background-color: var(--button-disabled-background-color);
@@ -491,7 +491,7 @@
 .btn-info-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-info-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-info-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-info-ghost) 50%, transparent);
 }
 .btn-info-ghost:disabled {
   background-color: var(--button-disabled-background-color);
@@ -516,7 +516,7 @@
 .btn-warning-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-warning-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-warning-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-warning-ghost) 50%, transparent);
 }
 .btn-warning-ghost:disabled {
   background-color: var(--button-disabled-background-color);
@@ -541,7 +541,7 @@
 .btn-danger-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-danger-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-danger-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-danger-ghost) 50%, transparent);
 }
 .btn-danger-ghost:disabled {
   background-color: var(--button-disabled-background-color);
@@ -566,7 +566,7 @@
 .btn-neutral-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-neutral-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-neutral-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-neutral-ghost) 50%, transparent);
 }
 .btn-neutral-ghost:disabled {
   background-color: var(--button-disabled-background-color);
@@ -591,7 +591,7 @@
 .btn-light-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-light-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-light-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-light-ghost) 50%, transparent);
 }
 .btn-light-ghost:disabled {
   background-color: var(--button-disabled-background-color);
@@ -616,7 +616,7 @@
 .btn-dark-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-dark-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-dark-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-dark-ghost) 50%, transparent);
 }
 .btn-dark-ghost:disabled {
   background-color: var(--button-disabled-background-color);
@@ -641,7 +641,7 @@
 .btn-white-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-white-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-white-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-white-ghost) 50%, transparent);
 }
 .btn-white-ghost:disabled {
   background-color: var(--button-disabled-background-color);
@@ -666,7 +666,7 @@
 .btn-black-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-black-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-black-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-black-ghost) 50%, transparent);
 }
 .btn-black-ghost:disabled {
   background-color: var(--button-disabled-background-color);
@@ -689,7 +689,7 @@
 .btn-outline:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--button-border-color);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--button-border-color) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--button-border-color) 50%, transparent);
 }
 .btn-outline:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -718,7 +718,7 @@
 .btn-outline-primary:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-primary) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-primary) 50%, transparent);
 }
 .btn-outline-primary:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -747,7 +747,7 @@
 .btn-outline-secondary:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-secondary);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-secondary) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-secondary) 50%, transparent);
 }
 .btn-outline-secondary:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -776,7 +776,7 @@
 .btn-outline-tertiary:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-tertiary);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-tertiary) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-tertiary) 50%, transparent);
 }
 .btn-outline-tertiary:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -805,7 +805,7 @@
 .btn-outline-success:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-success);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-success) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-success) 50%, transparent);
 }
 .btn-outline-success:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -834,7 +834,7 @@
 .btn-outline-info:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-info);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-info) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-info) 50%, transparent);
 }
 .btn-outline-info:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -863,7 +863,7 @@
 .btn-outline-warning:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-warning);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-warning) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-warning) 50%, transparent);
 }
 .btn-outline-warning:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -892,7 +892,7 @@
 .btn-outline-danger:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-danger);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-danger) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-danger) 50%, transparent);
 }
 .btn-outline-danger:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -921,7 +921,7 @@
 .btn-outline-neutral:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-neutral);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-neutral) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-neutral) 50%, transparent);
 }
 .btn-outline-neutral:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -950,7 +950,7 @@
 .btn-outline-light:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-light);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-light) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-light) 50%, transparent);
 }
 .btn-outline-light:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -979,7 +979,7 @@
 .btn-outline-dark:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-dark);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-dark) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-dark) 50%, transparent);
 }
 .btn-outline-dark:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1008,7 +1008,7 @@
 .btn-outline-white:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-white);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-white) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-white) 50%, transparent);
 }
 .btn-outline-white:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1037,7 +1037,7 @@
 .btn-outline-black:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-black);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-black) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-black) 50%, transparent);
 }
 .btn-outline-black:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1066,7 +1066,7 @@
 .btn-outline-primary-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-primary-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-primary-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-primary-ghost) 50%, transparent);
 }
 .btn-outline-primary-ghost:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1095,7 +1095,7 @@
 .btn-outline-secondary-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-secondary-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-secondary-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-secondary-ghost) 50%, transparent);
 }
 .btn-outline-secondary-ghost:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1124,7 +1124,7 @@
 .btn-outline-tertiary-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-tertiary-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-tertiary-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-tertiary-ghost) 50%, transparent);
 }
 .btn-outline-tertiary-ghost:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1153,7 +1153,7 @@
 .btn-outline-success-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-success-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-success-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-success-ghost) 50%, transparent);
 }
 .btn-outline-success-ghost:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1182,7 +1182,7 @@
 .btn-outline-info-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-info-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-info-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-info-ghost) 50%, transparent);
 }
 .btn-outline-info-ghost:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1211,7 +1211,7 @@
 .btn-outline-warning-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-warning-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-warning-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-warning-ghost) 50%, transparent);
 }
 .btn-outline-warning-ghost:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1240,7 +1240,7 @@
 .btn-outline-danger-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-danger-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-danger-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-danger-ghost) 50%, transparent);
 }
 .btn-outline-danger-ghost:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1269,7 +1269,7 @@
 .btn-outline-neutral-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-neutral-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-neutral-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-neutral-ghost) 50%, transparent);
 }
 .btn-outline-neutral-ghost:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1298,7 +1298,7 @@
 .btn-outline-light-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-light-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-light-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-light-ghost) 50%, transparent);
 }
 .btn-outline-light-ghost:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1327,7 +1327,7 @@
 .btn-outline-dark-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-dark-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-dark-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-dark-ghost) 50%, transparent);
 }
 .btn-outline-dark-ghost:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1356,7 +1356,7 @@
 .btn-outline-white-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-white-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-white-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-white-ghost) 50%, transparent);
 }
 .btn-outline-white-ghost:disabled {
   background-color: var(--button-outline-disabled-background-color);
@@ -1385,7 +1385,7 @@
 .btn-outline-black-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-black-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-black-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-black-ghost) 50%, transparent);
 }
 .btn-outline-black-ghost:disabled {
   background-color: var(--button-outline-disabled-background-color);

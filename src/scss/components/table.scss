@@ -106,7 +106,9 @@ table.table-lg {
     }
 }
 
-.table-group-divider > tr:first-child {
+
+.table-group-divider > tr:first-child > td,
+.table-group-divider > tr:first-child > th {
     border-top: var(--table-border-divider-width) var(--table-border-divider-style) var(--table-border-divider-color);
 }
 
@@ -115,260 +117,226 @@ table.table-lg {
     overflow-x: auto;
 }
 
-@layer table-l01, table-l02, table-l03, table-l04, table-l05, table-l06, table-l07, table-l08, table-l09, table-l10, table-l11, table-l12;
 
+@layer table-l01, table-l02, table-l03, table-l04;
+
+// ─── Striped ────────────────────────────────────────────────────────────────
+// box-shadow inset sur td/th : compatible Safari + se superpose aux background-color sémantiques
 @layer table-l01 {
-    .table-striped {
-        tbody tr:nth-child(even) {
-            box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
-        }
+
+    .table-striped tbody tr:nth-child(even) td,
+    .table-striped tbody tr:nth-child(even) th {
+        box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
     }
 
-    .table-striped-odd {
-        tbody tr:nth-child(odd) {
-            box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
-        }
+    .table-striped-odd tbody tr:nth-child(odd) td,
+    .table-striped-odd tbody tr:nth-child(odd) th {
+        box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
     }
 
-    .table-striped-column {
-        tbody {
-            tr th:nth-child(even),
-            tr td:nth-child(even) {
-                box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
-            }
-        }
+    .table-striped-column tbody tr td:nth-child(even),
+    .table-striped-column tbody tr th:nth-child(even) {
+        box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
     }
 
-    .table-striped-column-odd {
-        tbody {
-            tr th:nth-child(odd),
-            tr td:nth-child(odd) {
-                box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
-            }
-        }
+    .table-striped-column-odd tbody tr td:nth-child(odd),
+    .table-striped-column-odd tbody tr th:nth-child(odd) {
+        box-shadow: inset 0 0 0 9999px var(--table-striped-background-color);
     }
 }
 
+// ─── Hover générique ─────────────────────────────────────────────────────────
 @layer table-l02 {
-    table.table-hover {
-        tbody {
-            tr:hover {
-                box-shadow: inset 0 0 0 9999px var(--table-hover-background-color);
-            }
 
-            tr:active,
-            tr.active {
-                box-shadow: inset 0 0 0 9999px var(--table-active-background-color);
-            }
-        }
-    }
-}
-
-@layer table-l03 {
-    thead.table-hover,
-    tbody.table-hover,
-    tfoot.table-hover {
-        tr:hover {
-            box-shadow: inset 0 0 0 9999px var(--table-hover-background-color);
-        }
-
-        tr:active,
-        tr.active {
-            box-shadow: inset 0 0 0 9999px var(--table-active-background-color);
-        }
-    }
-}
-
-@layer table-l04 {
-    tr.table-hover:hover {
-        box-shadow: inset 0 0 0 9999px var(--table-hover-background-color);
+    // table.table-hover
+    table.table-hover tbody tr:hover td,
+    table.table-hover tbody tr:hover th {
+        background-color: var(--table-hover-background-color);
     }
 
-    tr.table-hover:active,
-    tr.table-hover.active {
-        box-shadow: inset 0 0 0 9999px var(--table-active-background-color);
-    }
-}
-
-
-@layer table-l05 {
-    th.table-hover:hover,
-    td.table-hover:hover {
-        box-shadow: inset 0 0 0 9999px var(--table-hover-background-color);
+    table.table-hover tbody tr:active td,
+    table.table-hover tbody tr:active th,
+    table.table-hover tbody tr.active td,
+    table.table-hover tbody tr.active th {
+        background-color: var(--table-active-background-color);
     }
 
-    th.table-hover:active,
+    // thead/tbody/tfoot.table-hover
+    thead.table-hover tr:hover td,
+    thead.table-hover tr:hover th,
+    tbody.table-hover tr:hover td,
+    tbody.table-hover tr:hover th,
+    tfoot.table-hover tr:hover td,
+    tfoot.table-hover tr:hover th {
+        background-color: var(--table-hover-background-color);
+    }
+
+    thead.table-hover tr:active td,
+    thead.table-hover tr:active th,
+    thead.table-hover tr.active td,
+    thead.table-hover tr.active th,
+    tbody.table-hover tr:active td,
+    tbody.table-hover tr:active th,
+    tbody.table-hover tr.active td,
+    tbody.table-hover tr.active th,
+    tfoot.table-hover tr:active td,
+    tfoot.table-hover tr:active th,
+    tfoot.table-hover tr.active td,
+    tfoot.table-hover tr.active th {
+        background-color: var(--table-active-background-color);
+    }
+
+    // tr.table-hover
+    tr.table-hover:hover td,
+    tr.table-hover:hover th {
+        background-color: var(--table-hover-background-color);
+    }
+
+    tr.table-hover:active td,
+    tr.table-hover:active th,
+    tr.table-hover.active td,
+    tr.table-hover.active th {
+        background-color: var(--table-active-background-color);
+    }
+
+    // td/th.table-hover
+    td.table-hover:hover,
+    th.table-hover:hover {
+        background-color: var(--table-hover-background-color);
+    }
+
     td.table-hover:active,
-    th.table-hover.active,
-    td.table-hover.active {
-        box-shadow: inset 0 0 0 9999px var(--table-active-background-color);
+    th.table-hover:active,
+    td.table-hover.active,
+    th.table-hover.active {
+        background-color: var(--table-active-background-color);
     }
 }
 
-//// Bloc 1 - table elle-même
-@layer table-l06 {
+// ─── Couleurs sémantiques ─────────────────────────────────────────────────────
+@layer table-l03 {
     @each $name, $value in $colors {
-        table.table-#{$name} {
-            background-color: $value;
+
+        // table
+        table.table-#{$name} td,
+        table.table-#{$name} th {
+            background-color: #{$value};
             color: var(--content-on-#{$name});
-
-            &.table-hover {
-                tbody tr:hover {
-                    box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
-                }
-
-                tbody tr:active,
-                tbody tr.active {
-                    box-shadow: inset 0 0 0 9999px var(--active-#{$name});
-                }
-            }
         }
-    }
-}
 
-// Bloc 2 - thead/tbody/tfoot parent hover
-@layer table-l07 {
-    @each $name, $value in $colors {
-        .table-hover {
-            tbody.table-#{$name} {
-                background-color: $value;
-                color: var(--content-on-#{$name});
-
-                tr:hover {
-                    box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
-                }
-
-                tr:active,
-                tr.active {
-                    box-shadow: inset 0 0 0 9999px var(--active-#{$name});
-                }
-            }
-        }
-    }
-}
-
-// Bloc 3 - thead/tbody/tfoot himself hover
-@layer table-l08 {
-    @each $name, $value in $colors {
-        thead.table-#{$name},
-        tbody.table-#{$name},
-        tfoot.table-#{$name} {
-            background-color: $value;
+        // thead/tbody/tfoot
+        thead.table-#{$name} td,
+        thead.table-#{$name} th,
+        tbody.table-#{$name} td,
+        tbody.table-#{$name} th,
+        tfoot.table-#{$name} td,
+        tfoot.table-#{$name} th {
+            background-color: #{$value};
             color: var(--content-on-#{$name});
-
-            &.table-hover tr:hover {
-                box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
-            }
-
-            &.table-hover tr:active,
-            &.table-hover tr.active {
-                box-shadow: inset 0 0 0 9999px var(--active-#{$name});
-            }
-        }
-    }
-}
-
-// Bloc 4 - tr parent hover
-@mixin tr-parent-hover($name, $value) {
-    tr.table-#{$name} {
-        background-color: $value;
-        color: var(--content-on-#{$name});
-
-        &:hover {
-            box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
         }
 
-        &:active,
-        &.active {
-            box-shadow: inset 0 0 0 9999px var(--active-#{$name});
-        }
-    }
-}
-
-@layer table-l09 {
-    @each $name, $value in $colors {
-        table.table-hover {
-            tbody {
-                @include tr-parent-hover($name, $value);
-            }
-        }
-        thead.table-hover,
-        tbody.table-hover,
-        tfoot.table-hover {
-            @include tr-parent-hover($name, $value);
-        }
-    }
-}
-
-// Bloc 5 - tr himself hover
-@layer table-l10 {
-    @each $name, $value in $colors {
-        tr.table-#{$name} {
-            background-color: $value;
+        // tr
+        tr.table-#{$name} td,
+        tr.table-#{$name} th {
+            background-color: #{$value};
             color: var(--content-on-#{$name});
-
-            &.table-hover:hover {
-                box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
-            }
-
-            &.table-hover:active,
-            &.table-hover.active {
-                box-shadow: inset 0 0 0 9999px var(--active-#{$name});
-            }
-        }
-    }
-}
-
-// Bloc 6 - th/td parent hover (table-level only, excludes thead/tfoot)
-@mixin cell-parent-color($name, $value) {
-    th.table-#{$name},
-    td.table-#{$name} {
-        background-color: $value;
-        color: var(--content-on-#{$name});
-
-        &:hover {
-            box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
         }
 
-        &:active,
-        &.active {
-            box-shadow: inset 0 0 0 9999px var(--active-#{$name});
-        }
-    }
-}
-
-@layer table-l11 {
-    @each $name, $value in $colors {
-        table.table-hover {
-            tbody {
-                @include cell-parent-color($name, $value);
-            }
-        }
-        thead.table-hover,
-        tbody.table-hover,
-        tfoot.table-hover,
-        tr.table-hover {
-            @include cell-parent-color($name, $value);
-        }
-    }
-}
-
-// Bloc 7 - th/td himself hover
-@layer table-l12 {
-    @each $name, $value in $colors {
-        th.table-#{$name},
-        td.table-#{$name} {
-            background-color: $value;
+        // td/th
+        td.table-#{$name},
+        th.table-#{$name} {
+            background-color: #{$value};
             color: var(--content-on-#{$name});
+        }
+    }
+}
 
-            &.table-hover:hover {
-                box-shadow: inset 0 0 0 9999px var(--hover-#{$name});
-            }
+// ─── Hover sur couleurs sémantiques ──────────────────────────────────────────
+@layer table-l04 {
+    @each $name, $value in $colors {
 
-            &.table-hover:active,
-            &.table-hover.active {
-                box-shadow: inset 0 0 0 9999px var(--active-#{$name});
-            }
+        // table.table-name + table-hover
+        table.table-#{$name}.table-hover tbody tr:hover td,
+        table.table-#{$name}.table-hover tbody tr:hover th {
+            background-color: var(--hover-#{$name});
+        }
+
+        table.table-#{$name}.table-hover tbody tr:active td,
+        table.table-#{$name}.table-hover tbody tr:active th,
+        table.table-#{$name}.table-hover tbody tr.active td,
+        table.table-#{$name}.table-hover tbody tr.active th {
+            background-color: var(--active-#{$name});
+        }
+
+        // tbody.table-name dans table-hover
+        table.table-hover tbody.table-#{$name} tr:hover td,
+        table.table-hover tbody.table-#{$name} tr:hover th {
+            background-color: var(--hover-#{$name});
+        }
+
+        table.table-hover tbody.table-#{$name} tr:active td,
+        table.table-hover tbody.table-#{$name} tr:active th,
+        table.table-hover tbody.table-#{$name} tr.active td,
+        table.table-hover tbody.table-#{$name} tr.active th {
+            background-color: var(--active-#{$name});
+        }
+
+        // tbody.table-name.table-hover
+        tbody.table-#{$name}.table-hover tr:hover td,
+        tbody.table-#{$name}.table-hover tr:hover th {
+            background-color: var(--hover-#{$name});
+        }
+
+        tbody.table-#{$name}.table-hover tr:active td,
+        tbody.table-#{$name}.table-hover tr:active th,
+        tbody.table-#{$name}.table-hover tr.active td,
+        tbody.table-#{$name}.table-hover tr.active th {
+            background-color: var(--active-#{$name});
+        }
+
+        // tr.table-name dans table-hover
+        table.table-hover tbody tr.table-#{$name}:hover td,
+        table.table-hover tbody tr.table-#{$name}:hover th,
+        tbody.table-hover tr.table-#{$name}:hover td,
+        tbody.table-hover tr.table-#{$name}:hover th {
+            background-color: var(--hover-#{$name});
+        }
+
+        table.table-hover tbody tr.table-#{$name}:active td,
+        table.table-hover tbody tr.table-#{$name}:active th,
+        table.table-hover tbody tr.table-#{$name}.active td,
+        table.table-hover tbody tr.table-#{$name}.active th,
+        tbody.table-hover tr.table-#{$name}:active td,
+        tbody.table-hover tr.table-#{$name}:active th,
+        tbody.table-hover tr.table-#{$name}.active td,
+        tbody.table-hover tr.table-#{$name}.active th {
+            background-color: var(--active-#{$name});
+        }
+
+        // tr.table-name.table-hover
+        tr.table-#{$name}.table-hover:hover td,
+        tr.table-#{$name}.table-hover:hover th {
+            background-color: var(--hover-#{$name});
+        }
+
+        tr.table-#{$name}.table-hover:active td,
+        tr.table-#{$name}.table-hover:active th,
+        tr.table-#{$name}.table-hover.active td,
+        tr.table-#{$name}.table-hover.active th {
+            background-color: var(--active-#{$name});
+        }
+
+        // td/th.table-name.table-hover
+        td.table-#{$name}.table-hover:hover,
+        th.table-#{$name}.table-hover:hover {
+            background-color: var(--hover-#{$name});
+        }
+
+        td.table-#{$name}.table-hover:active,
+        th.table-#{$name}.table-hover:active,
+        td.table-#{$name}.table-hover.active,
+        th.table-#{$name}.table-hover.active {
+            background-color: var(--active-#{$name});
         }
     }
 }

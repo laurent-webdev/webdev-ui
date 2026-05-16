@@ -23,7 +23,7 @@
 .link:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--link-boder-color);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--text-color) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--text-color) 50%, transparent);
 }
 .link:disabled {
   background-color: var(--link-background-color);
@@ -58,7 +58,7 @@
 .link-primary:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-primary) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-primary) 50%, transparent);
 }
 .link-primary:disabled {
   background-color: var(--link-background-color);
@@ -93,7 +93,7 @@
 .link-secondary:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-secondary);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-secondary) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-secondary) 50%, transparent);
 }
 .link-secondary:disabled {
   background-color: var(--link-background-color);
@@ -128,7 +128,7 @@
 .link-tertiary:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-tertiary);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-tertiary) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-tertiary) 50%, transparent);
 }
 .link-tertiary:disabled {
   background-color: var(--link-background-color);
@@ -163,7 +163,7 @@
 .link-success:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-success);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-success) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-success) 50%, transparent);
 }
 .link-success:disabled {
   background-color: var(--link-background-color);
@@ -198,7 +198,7 @@
 .link-info:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-info);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-info) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-info) 50%, transparent);
 }
 .link-info:disabled {
   background-color: var(--link-background-color);
@@ -233,7 +233,7 @@
 .link-warning:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-warning);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-warning) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-warning) 50%, transparent);
 }
 .link-warning:disabled {
   background-color: var(--link-background-color);
@@ -268,7 +268,7 @@
 .link-danger:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-danger);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-danger) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-danger) 50%, transparent);
 }
 .link-danger:disabled {
   background-color: var(--link-background-color);
@@ -303,7 +303,7 @@
 .link-neutral:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-neutral);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-neutral) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-neutral) 50%, transparent);
 }
 .link-neutral:disabled {
   background-color: var(--link-background-color);
@@ -338,7 +338,7 @@
 .link-light:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-light);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-light) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-light) 50%, transparent);
 }
 .link-light:disabled {
   background-color: var(--link-background-color);
@@ -373,7 +373,7 @@
 .link-dark:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-dark);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-dark) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-dark) 50%, transparent);
 }
 .link-dark:disabled {
   background-color: var(--link-background-color);
@@ -408,7 +408,7 @@
 .link-white:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-white);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-white) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-white) 50%, transparent);
 }
 .link-white:disabled {
   background-color: var(--link-background-color);
@@ -443,7 +443,7 @@
 .link-black:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-black);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-black) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-black) 50%, transparent);
 }
 .link-black:disabled {
   background-color: var(--link-background-color);
@@ -478,7 +478,7 @@
 .link-primary-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-primary-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-primary-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-primary-ghost) 50%, transparent);
 }
 .link-primary-ghost:disabled {
   background-color: var(--link-background-color);
@@ -513,7 +513,7 @@
 .link-secondary-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-secondary-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-secondary-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-secondary-ghost) 50%, transparent);
 }
 .link-secondary-ghost:disabled {
   background-color: var(--link-background-color);
@@ -548,7 +548,7 @@
 .link-tertiary-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-tertiary-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-tertiary-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-tertiary-ghost) 50%, transparent);
 }
 .link-tertiary-ghost:disabled {
   background-color: var(--link-background-color);
@@ -583,7 +583,7 @@
 .link-success-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-success-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-success-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-success-ghost) 50%, transparent);
 }
 .link-success-ghost:disabled {
   background-color: var(--link-background-color);
@@ -618,7 +618,7 @@
 .link-info-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-info-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-info-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-info-ghost) 50%, transparent);
 }
 .link-info-ghost:disabled {
   background-color: var(--link-background-color);
@@ -653,7 +653,7 @@
 .link-warning-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-warning-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-warning-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-warning-ghost) 50%, transparent);
 }
 .link-warning-ghost:disabled {
   background-color: var(--link-background-color);
@@ -688,7 +688,7 @@
 .link-danger-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-danger-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-danger-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-danger-ghost) 50%, transparent);
 }
 .link-danger-ghost:disabled {
   background-color: var(--link-background-color);
@@ -723,7 +723,7 @@
 .link-neutral-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-neutral-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-neutral-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-neutral-ghost) 50%, transparent);
 }
 .link-neutral-ghost:disabled {
   background-color: var(--link-background-color);
@@ -758,7 +758,7 @@
 .link-light-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-light-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-light-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-light-ghost) 50%, transparent);
 }
 .link-light-ghost:disabled {
   background-color: var(--link-background-color);
@@ -793,7 +793,7 @@
 .link-dark-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-dark-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-dark-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-dark-ghost) 50%, transparent);
 }
 .link-dark-ghost:disabled {
   background-color: var(--link-background-color);
@@ -828,7 +828,7 @@
 .link-white-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-white-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-white-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-white-ghost) 50%, transparent);
 }
 .link-white-ghost:disabled {
   background-color: var(--link-background-color);
@@ -863,7 +863,7 @@
 .link-black-ghost:not(:disabled):focus-visible {
   outline: none;
   border-color: var(--color-black-ghost);
-  box-shadow: 0 0 0.5rem 0.25rem color-mix(in srgb, var(--color-black-ghost) 50%, transparent);
+  box-shadow: 0 0 0.375rem 0.125rem color-mix(in srgb, var(--color-black-ghost) 50%, transparent);
 }
 .link-black-ghost:disabled {
   background-color: var(--link-background-color);

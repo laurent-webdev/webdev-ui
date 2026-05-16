@@ -76,7 +76,7 @@ $colors: colors.$colors;
     &:not(:disabled):focus-visible {
         outline: none;
         border-color: var(--button-border-color);
-        box-shadow:  0 0 0.5rem 0.25rem color-mix(in srgb, var(--button-border-color) 50%, transparent);
+        box-shadow:  0 0 0.375rem 0.125rem color-mix(in srgb, var(--button-border-color) 50%, transparent);
     }
 
     &:disabled{
@@ -107,7 +107,7 @@ $colors: colors.$colors;
         &:not(:disabled):focus-visible {
             outline: none;
             border-color: #{$value};
-            box-shadow:  0 0 0.5rem 0.25rem color-mix(in srgb, #{$value} 50%, transparent);
+            box-shadow:  0 0 0.375rem 0.125rem color-mix(in srgb, #{$value} 50%, transparent);
         }
 
         &:disabled{
@@ -139,7 +139,7 @@ $colors: colors.$colors;
     &:not(:disabled):focus-visible {
         outline: none;
         border-color: var(--button-border-color);
-        box-shadow:  0 0 0.5rem 0.25rem color-mix(in srgb, var(--button-border-color) 50%, transparent);
+        box-shadow:  0 0 0.375rem 0.125rem color-mix(in srgb, var(--button-border-color) 50%, transparent);
     }
 
     &:disabled{
@@ -174,7 +174,7 @@ $colors: colors.$colors;
         &:not(:disabled):focus-visible {
             outline: none;
             border-color: #{$value};
-            box-shadow:  0 0 0.5rem 0.25rem color-mix(in srgb, #{$value} 50%, transparent);
+            box-shadow:  0 0 0.375rem 0.125rem color-mix(in srgb, #{$value} 50%, transparent);
         }
 
         &:disabled{

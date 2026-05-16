@@ -111,6 +111,7 @@
         }
     }
 
+
     input[type="file"] {
         width: 100%;
         background-color: var(--input-background-color);
@@ -126,6 +127,8 @@
         }
 
         &::file-selector-button {
+            border-top-left-radius:  calc(var(--input-border-radius) - var(--input-border-width));
+            border-bottom-left-radius: calc(var(--input-border-radius) - var(--input-border-width));
             background-color: var(--input-accent-color);
             color: var(--input-content-on-accent-color);
             padding-inline: var(--input-padding-x);
@@ -167,7 +170,7 @@
         background-image: var(--input-icon-select-arrow-svg);
         background-repeat: no-repeat;
         background-position: right var(--input-padding-x) center;
-        background-size: 1.5rem;
+        background-size: .9rem;
 
         &:focus {
             outline: none;

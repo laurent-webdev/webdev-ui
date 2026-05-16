@@ -125,6 +125,8 @@
   box-shadow: var(--input-box-shadow-focus);
 }
 .form-control input[type=file]::file-selector-button {
+  border-top-left-radius: calc(var(--input-border-radius) - var(--input-border-width));
+  border-bottom-left-radius: calc(var(--input-border-radius) - var(--input-border-width));
   background-color: var(--input-accent-color);
   color: var(--input-content-on-accent-color);
   padding-inline: var(--input-padding-x);
@@ -161,7 +163,7 @@
   background-image: var(--input-icon-select-arrow-svg);
   background-repeat: no-repeat;
   background-position: right var(--input-padding-x) center;
-  background-size: 1.5rem;
+  background-size: 0.9rem;
 }
 .form-control select:focus {
   outline: none;
