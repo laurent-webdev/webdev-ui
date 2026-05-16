@@ -66,6 +66,8 @@ $colors: colors.$colors;
 .text-muted {color: var(--gray-500);}
 .text-color-default {color: var(--text-color);}
 .text-transparent {color: var(--color-transparent)}
+.text-color-light {color: var(--text-color-light);}
+.text-color-dark {color: var(--text-color-dark);}
 
 
 @each $name, $value in $colors {
