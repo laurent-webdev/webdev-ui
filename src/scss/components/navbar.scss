@@ -46,9 +46,9 @@ $breakpoints: bp.$breakpoints;
 
 .navbar-collapse {
     display: flex;
-    padding-block: var(--navbar-collapse-padding-y);
-    padding-inline: var(--navbar-collapse-padding-x);
-    gap: var(--navbar-collapse-gap);
+    padding-block: var(--navbar-collapse-inline-padding-y);
+    padding-inline: var(--navbar-collapse-inline-padding-x);
+    gap: var(--navbar-collapse-inline-gap);
 
     &.list {
         > .list-item {
@@ -93,8 +93,9 @@ $breakpoints: bp.$breakpoints;
     }
 
     .navbar-collapse {
-        padding-block: var(--navbar-collapse-padding-y);
-        padding-inline: var(--navbar-collapse-padding-x);
+        padding-block: var(--navbar-collapse-column-padding-y);
+        padding-inline: var(--navbar-collapse-column-padding-x);
+        gap: var(--navbar-collapse-column-gap);
         flex-direction: column;
     }
 }
