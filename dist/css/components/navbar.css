@@ -35,9 +35,9 @@
 
 .navbar-collapse {
   display: flex;
-  padding-block: var(--navbar-collapse-padding-y);
-  padding-inline: var(--navbar-collapse-padding-x);
-  gap: var(--navbar-collapse-gap);
+  padding-block: var(--navbar-collapse-inline-padding-y);
+  padding-inline: var(--navbar-collapse-inline-padding-x);
+  gap: var(--navbar-collapse-inline-gap);
 }
 .navbar-collapse.list > .list-item {
   align-self: center;
@@ -73,8 +73,9 @@
     display: block;
   }
   .navbar .navbar-collapse {
-    padding-block: var(--navbar-collapse-padding-y);
-    padding-inline: var(--navbar-collapse-padding-x);
+    padding-block: var(--navbar-collapse-column-padding-y);
+    padding-inline: var(--navbar-collapse-column-padding-x);
+    gap: var(--navbar-collapse-column-gap);
     flex-direction: column;
   }
 }
@@ -105,8 +106,9 @@
     display: block;
   }
   .navbar-xs .navbar-collapse {
-    padding-block: var(--navbar-collapse-padding-y);
-    padding-inline: var(--navbar-collapse-padding-x);
+    padding-block: var(--navbar-collapse-column-padding-y);
+    padding-inline: var(--navbar-collapse-column-padding-x);
+    gap: var(--navbar-collapse-column-gap);
     flex-direction: column;
   }
 }
@@ -137,8 +139,9 @@
     display: block;
   }
   .navbar-sm .navbar-collapse {
-    padding-block: var(--navbar-collapse-padding-y);
-    padding-inline: var(--navbar-collapse-padding-x);
+    padding-block: var(--navbar-collapse-column-padding-y);
+    padding-inline: var(--navbar-collapse-column-padding-x);
+    gap: var(--navbar-collapse-column-gap);
     flex-direction: column;
   }
 }
@@ -169,8 +172,9 @@
     display: block;
   }
   .navbar-md .navbar-collapse {
-    padding-block: var(--navbar-collapse-padding-y);
-    padding-inline: var(--navbar-collapse-padding-x);
+    padding-block: var(--navbar-collapse-column-padding-y);
+    padding-inline: var(--navbar-collapse-column-padding-x);
+    gap: var(--navbar-collapse-column-gap);
     flex-direction: column;
   }
 }
@@ -201,8 +205,9 @@
     display: block;
   }
   .navbar-lg .navbar-collapse {
-    padding-block: var(--navbar-collapse-padding-y);
-    padding-inline: var(--navbar-collapse-padding-x);
+    padding-block: var(--navbar-collapse-column-padding-y);
+    padding-inline: var(--navbar-collapse-column-padding-x);
+    gap: var(--navbar-collapse-column-gap);
     flex-direction: column;
   }
 }
@@ -233,8 +238,9 @@
     display: block;
   }
   .navbar-xl .navbar-collapse {
-    padding-block: var(--navbar-collapse-padding-y);
-    padding-inline: var(--navbar-collapse-padding-x);
+    padding-block: var(--navbar-collapse-column-padding-y);
+    padding-inline: var(--navbar-collapse-column-padding-x);
+    gap: var(--navbar-collapse-column-gap);
     flex-direction: column;
   }
 }
@@ -265,8 +271,9 @@
     display: block;
   }
   .navbar-xxl .navbar-collapse {
-    padding-block: var(--navbar-collapse-padding-y);
-    padding-inline: var(--navbar-collapse-padding-x);
+    padding-block: var(--navbar-collapse-column-padding-y);
+    padding-inline: var(--navbar-collapse-column-padding-x);
+    gap: var(--navbar-collapse-column-gap);
     flex-direction: column;
   }
 }
