@@ -1,0 +1,22 @@
+# IDE
+.idea/
+.vscode/
+
+# Node
+node_modules/
+
+# Variables Docker propres à chaque machine (UID, ports)
+/.env.local
+
+# Réglages Claude Code personnels
+.claude/settings.local.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# doc/.gitignore complète ce fichier pour Symfony (vendor/, var/…)

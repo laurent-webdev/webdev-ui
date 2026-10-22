@@ -1,0 +1,16 @@
+framework:
+    asset_mapper:
+        # The paths to make available to the asset mapper.
+        paths:
+            assets/: ''
+            # Le build de la librairie, tel qu'il est publié sur le CDN : dist/css/app.css → asset('webdev-ui/css/app.css').
+            # Ce sont les fichiers publiés qui sont testés : relancer le build (dossier parent) pour voir un changement
+            ../dist/: webdev-ui
+        missing_import_mode: strict
+        excluded_patterns:
+            - '**/assets/styles/**/_*.scss'
+
+when@prod:
+    framework:
+        asset_mapper:
+            missing_import_mode: warn

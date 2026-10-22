@@ -1,0 +1,17 @@
+{
+  "name": "webdev-ui",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "sass src/scss/app.scss dist/css/app.css --no-source-map && sass src/scss/app.scss dist/css/app.min.css --no-source-map --style=compressed",
+    "watch": "sass src/scss/app.scss dist/css/app.css --no-source-map --watch",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^6.0.0",
+    "sass": "^1.79.0",
+    "gulp-rename": "^2.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.6.0"
+  }
+}

@@ -1,0 +1,20 @@
+:root {
+  /* Rayons */
+  --radius: 0.375rem;
+
+  /* États (survol, clic…) : part de couleur mélangée au fond, léger ou fort */
+  --state-mix-soft: 20%;
+  --state-mix-strong: 30%;
+
+  /* Contour de focus (:focus-visible) */
+  --focus-outline-width: 2px;
+  --focus-outline-offset: 1px;
+
+  /* Tailles de texte (valeurs de Bootstrap 6) */
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.125rem;
+
+  /* Transitions */
+  --transition-duration: 0.15s;
+
+}

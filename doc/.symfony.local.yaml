@@ -1,0 +1,16 @@
+# Serveur local de la doc, dans le conteneur dev-env (voir le README du dossier parent) :
+#   symfony serve --allow-all-ip
+# --allow-all-ip reste dans la commande : la Symfony CLI ne le lit pas dans ce fichier.
+# Sans lui, le serveur n'écoute que dans le conteneur et la doc n'est pas accessible depuis la machine
+http:
+    port: 8000
+    no_tls: true
+
+# Lancés et arrêtés avec le serveur
+workers:
+    # Recompile le CSS propre à la doc (assets/styles/) à chaque modification
+    sass:
+        cmd: ['symfony', 'console', 'sass:build', '--watch']
+    # Reconstruit ../dist (la lib, à la racine du dépôt) à chaque modification de ../src : la doc le lit directement
+    webdev-ui:
+        cmd: ['npm', '--prefix', '..', 'run', 'watch']

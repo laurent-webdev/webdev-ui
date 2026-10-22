@@ -1,0 +1,60 @@
+twig:
+    file_name_pattern: '*.twig'
+    globals:
+        # Pages de la doc, dans l'ordre de lecture. Cette liste unique sert au menu latéral, au titre des onglets,
+        # au fil d'Ariane, aux liens « page précédente / suivante », au sitemap.xml et au llms.txt.
+        # Ajouter une page : ajouter [route, libellé, template] dans la bonne section.
+        # Le llms.txt reprend le {% block description %} du template.
+        doc_sections:
+            - id: custom
+              label: Personnalisation
+              links:
+                  - [app_breakpoints, Breakpoints, custom/breakpoints.html.twig]
+                  - [app_variables, Variables, custom/variables.html.twig]
+            - id: component
+              label: Composants
+              links:
+                  - [app_accordion, Accordion, components/accordion.html.twig]
+                  - [app_alert, Alert, components/alert.html.twig]
+                  - [app_badge, Badge, components/badge.html.twig]
+                  - [app_button, Button, components/button.html.twig]
+                  - [app_card, Card, components/card.html.twig]
+                  - [app_collapse, Collapse, components/collapse.html.twig]
+                  - [app_dialog, Dialog, components/dialog.html.twig]
+                  - [app_drawer, Drawer, components/drawer.html.twig]
+                  - [app_dropdown, Dropdown, components/dropdown.html.twig]
+                  - [app_form, Form, components/form.html.twig]
+                  - [app_link, Link, components/link.html.twig]
+                  - [app_list, List, components/list.html.twig]
+                  - [app_navbar, Navbar, components/navbar.html.twig]
+                  - [app_outline, Outline, components/outline.html.twig]
+                  - [app_tab, Tab, components/tab.html.twig]
+                  - [app_table, Table, components/table.html.twig]
+            - id: layout
+              label: Mise en page
+              links:
+                  - [app_columns, Columns, layouts/columns.html.twig]
+                  - [app_container, Container, layouts/container.html.twig]
+                  - [app_flex, Flexbox, layouts/flex.html.twig]
+            - id: utility
+              label: Utilitaires
+              links:
+                  - [app_animation, Animation, utilities/animation.html.twig]
+                  - [app_background, Background, utilities/background.html.twig]
+                  - [app_border, Border, utilities/border.html.twig]
+                  - [app_color, Color, utilities/color.html.twig]
+                  - [app_cursor, Cursor, utilities/cursor.html.twig]
+                  - [app_display, Display, utilities/display.html.twig]
+                  - [app_font, Font, utilities/font.html.twig]
+                  - [app_image, Image, utilities/image.html.twig]
+                  - [app_overflow, Overflow, utilities/overflow.html.twig]
+                  - [app_position, Position, utilities/position.html.twig]
+                  - [app_shadow, Shadow, utilities/shadow.html.twig]
+                  - [app_sizing, Sizing, utilities/sizing.html.twig]
+                  - [app_spacing, Spacing, utilities/spacing.html.twig]
+                  - [app_text, Text, utilities/text.html.twig]
+                  - [app_visibility, Visibility, utilities/visibility.html.twig]
+
+when@test:
+    twig:
+        strict_variables: true

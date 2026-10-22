@@ -1,0 +1,15 @@
+services:
+  app:
+    container_name: ${COMPOSE_PROJECT_NAME}
+    image: ${COMPOSE_PROJECT_NAME}:latest
+    build:
+      context: .
+      args:
+        UID: ${UID:-1000}
+    restart: unless-stopped
+    volumes:
+      - .:/app
+    ports:
+      - "${APP_PORT:-8888}:8000"
+      - "${NEXT_PORT:-3000}:3000"
+      - "${VITE_PORT:-5173}:5173"

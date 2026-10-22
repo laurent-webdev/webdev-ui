@@ -1,0 +1,15 @@
+{
+    // Sert à la vérification des types (npm run typecheck) et à l'éditeur.
+    // La compilation vers dist/js est faite par esbuild (gulpfile.js), qui ignore les types.
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
+        "isolatedModules": true,
+        "noEmit": true,
+        // Vérification complète : chaque paramètre a un type, null est vérifié…
+        "strict": true
+    },
+    "include": ["src/ts"]
+}

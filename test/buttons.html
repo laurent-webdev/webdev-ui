@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test des boutons</title>
+    <link rel="stylesheet" href="../dist/css/app.css">
+    <style>
+        body { padding: 2rem; font-family: system-ui, sans-serif; background: var(--color-background); }
+        h2 { margin-block: 2rem 0.75rem; font-size: 1.125rem; }
+        .row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+        .row + .row { margin-block-start: 0.5rem; }
+    </style>
+</head>
+<body>
+    <h1>Test des boutons</h1>
+
+    <h2>Solid</h2>
+    <div class="row">
+        <button class="btn-solid theme-primary" type="button">Primary</button>
+        <button class="btn-solid theme-secondary" type="button">Secondary</button>
+        <button class="btn-solid theme-accent" type="button">Accent</button>
+        <button class="btn-solid theme-success" type="button">Success</button>
+        <button class="btn-solid theme-danger" type="button">Danger</button>
+        <button class="btn-solid theme-warning" type="button">Warning</button>
+        <button class="btn-solid theme-info" type="button">Info</button>
+        <button class="btn-solid theme-neutral" type="button">Neutral</button>
+        <button class="btn-solid theme-inverse" type="button">Inverse</button>
+    </div>
+
+    <h2>Outline</h2>
+    <div class="row">
+        <button class="btn-outline theme-primary" type="button">Primary</button>
+        <button class="btn-outline theme-secondary" type="button">Secondary</button>
+        <button class="btn-outline theme-accent" type="button">Accent</button>
+        <button class="btn-outline theme-success" type="button">Success</button>
+        <button class="btn-outline theme-danger" type="button">Danger</button>
+        <button class="btn-outline theme-warning" type="button">Warning</button>
+        <button class="btn-outline theme-info" type="button">Info</button>
+        <button class="btn-outline theme-neutral" type="button">Neutral</button>
+        <button class="btn-outline theme-inverse" type="button">Inverse</button>
+    </div>
+
+    <h2>Subtle</h2>
+    <div class="row">
+        <button class="btn-subtle theme-primary" type="button">Primary</button>
+        <button class="btn-subtle theme-secondary" type="button">Secondary</button>
+        <button class="btn-subtle theme-accent" type="button">Accent</button>
+        <button class="btn-subtle theme-success" type="button">Success</button>
+        <button class="btn-subtle theme-danger" type="button">Danger</button>
+        <button class="btn-subtle theme-warning" type="button">Warning</button>
+        <button class="btn-subtle theme-info" type="button">Info</button>
+        <button class="btn-subtle theme-neutral" type="button">Neutral</button>
+        <button class="btn-subtle theme-inverse" type="button">Inverse</button>
+    </div>
+
+    <h2>Text</h2>
+    <div class="row">
+        <button class="btn-text theme-primary" type="button">Primary</button>
+        <button class="btn-text theme-secondary" type="button">Secondary</button>
+        <button class="btn-text theme-accent" type="button">Accent</button>
+        <button class="btn-text theme-success" type="button">Success</button>
+        <button class="btn-text theme-danger" type="button">Danger</button>
+        <button class="btn-text theme-warning" type="button">Warning</button>
+        <button class="btn-text theme-info" type="button">Info</button>
+        <button class="btn-text theme-neutral" type="button">Neutral</button>
+        <button class="btn-text theme-inverse" type="button">Inverse</button>
+    </div>
+
+    <h2>Tailles</h2>
+    <div class="row theme-primary">
+        <button class="btn-solid btn-sm" type="button">Solid sm</button>
+        <button class="btn-solid" type="button">Solid</button>
+        <button class="btn-solid btn-lg" type="button">Solid lg</button>
+    </div>
+    <div class="row theme-primary">
+        <button class="btn-outline btn-sm" type="button">Outline sm</button>
+        <button class="btn-outline" type="button">Outline</button>
+        <button class="btn-outline btn-lg" type="button">Outline lg</button>
+    </div>
+    <div class="row theme-primary">
+        <button class="btn-subtle btn-sm" type="button">Subtle sm</button>
+        <button class="btn-subtle" type="button">Subtle</button>
+        <button class="btn-subtle btn-lg" type="button">Subtle lg</button>
+    </div>
+    <div class="row theme-primary">
+        <button class="btn-text btn-sm" type="button">Text sm</button>
+        <button class="btn-text" type="button">Text</button>
+        <button class="btn-text btn-lg" type="button">Text lg</button>
+    </div>
+</body>
+</html>

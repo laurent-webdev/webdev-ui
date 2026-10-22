@@ -1,0 +1,76 @@
+# ============================================================
+# Apache, pour un hébergement de production dont la racine web est public/.
+# En local, la doc tourne sous Nginx (docker/nginx/default.conf) : ce fichier y est ignoré.
+# Base : .htaccess de Symfony (https://symfony.com/doc/current/setup/web_server_configuration.html)
+# ============================================================
+
+DirectoryIndex index.php
+
+# Pas de liste des fichiers d'un dossier sans index
+Options -Indexes
+
+# Négociation de contenu désactivée : /index ne doit pas servir index.php
+<IfModule mod_negotiation.c>
+    Options -MultiViews
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # HTTPS obligatoire, en 301 (une seule adresse par page pour les moteurs de recherche).
+    # X-Forwarded-Proto : le HTTPS est parfois terminé avant Apache (proxy, CDN)
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # À ADAPTER : une seule version du domaine. Décommenter pour rediriger www.exemple.fr vers exemple.fr,
+    # seulement si exemple.fr (sans www) répond bien sur ce serveur
+    # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    # RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+    # Chemin de base de l'application (si elle est servie dans un sous-dossier)
+    RewriteCond %{REQUEST_URI}::$0 ^(/.+)/(.*)::\2$
+    RewriteRule .* - [E=BASE:%1]
+
+    # En-tête Authorization transmis à PHP
+    RewriteCond %{HTTP:Authorization} .+
+    RewriteRule ^ - [E=HTTP_AUTHORIZATION:%0]
+
+    # /index.php/page → /page : pas deux URL pour la même page
+    RewriteCond %{ENV:REDIRECT_STATUS} =""
+    RewriteRule ^index\.php(?:/(.*)|$) %{ENV:BASE}/$1 [R=301,L]
+
+    # Fichier réel (favicon, assets compilés…) : servi tel quel. Tout le reste : Symfony
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ %{ENV:BASE}/index.php [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+        # Sans mod_rewrite : l'accueil passe quand même par Symfony
+        RedirectMatch 307 ^/$ /index.php/
+    </IfModule>
+</IfModule>
+
+# Compression du texte (audit Lighthouse « Enable text compression » : pages plus rapides, meilleur classement)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/javascript text/markdown
+    AddOutputFilterByType DEFLATE application/javascript application/json application/ld+json application/xml image/svg+xml
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Fichiers de public/assets/ (asset-map:compile) : leur nom contient une empreinte et change à chaque modification,
+    # ils peuvent rester en cache un an sans être revalidés
+    <If "%{REQUEST_URI} =~ m#^/assets/#">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </If>
+
+    # Sécurité (audits Lighthouse « Bonnes pratiques »)
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # À ADAPTER : à activer une fois le HTTPS vérifié sur tout le domaine.
+    # Le navigateur refuse ensuite le HTTP pendant un an
+    # Header always set Strict-Transport-Security "max-age=31536000"
+</IfModule>

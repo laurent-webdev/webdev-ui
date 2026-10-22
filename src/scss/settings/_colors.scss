@@ -1,0 +1,38 @@
+@use '../tools/mixins';
+
+// Les couleurs qui ont des dérivées (texte, state, subtle, emphasis)
+$colors: primary, secondary, accent, success, danger, warning, info, neutral, inverse;
+
+:root { color-scheme: light dark; }
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+
+:root {
+  --color-background: light-dark(#ffffff, oklch(0.17 0.008 228));
+
+  --color-primary: light-dark(oklch(0.592 0.112 228), oklch(0.592 0.112 228));
+  --color-secondary: light-dark(oklch(0.64 0.15 355), oklch(0.64 0.15 355));
+  --color-accent: light-dark(oklch(0.68 0.104 290), oklch(0.68 0.104 290));
+  --color-success: light-dark(oklch(0.78 0.16 167), oklch(0.78 0.16 167));
+  --color-danger: light-dark(oklch(0.71 0.185 25), oklch(0.71 0.185 25));
+  --color-warning: light-dark(oklch(0.88 0.135 86), oklch(0.88 0.135 86));
+  --color-info: light-dark(oklch(0.72 0.165 262), oklch(0.72 0.165 262));
+  --color-neutral: light-dark(oklch(0.93 0.008 228), oklch(0.33 0.012 228));
+  --color-inverse: light-dark(oklch(0.32 0.015 228), oklch(0.86 0.008 228));
+
+  /* Luminance WCAG comparée à 0.179 : blanc en dessous, noir au-dessus (≥ 4,58:1) */
+  --contrast-channel: clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1);
+
+  /* Fond léger : luminosité imposée (+ 12 % de celle de la couleur), saturation réduite */
+  --subtle-light: 0.85;
+  --subtle-dark: 0.22;
+  --subtle-chroma: 0.3;
+
+  /* Mélangée au fond subtle au survol : fonce en clair, éclaircit en sombre */
+  --color-state-on-subtle: light-dark(#000000, #ffffff);
+
+  @include mixins.text-on-colors($colors);
+  @include mixins.state-on-colors($colors);
+  @include mixins.subtle-colors($colors);
+  @include mixins.emphasis-colors($colors);
+}

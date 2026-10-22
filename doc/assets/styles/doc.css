@@ -1,0 +1,7 @@
+/* Mise en page de la doc uniquement : ne fait pas partie du framework */
+body {
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+  background: var(--color-background);
+}
+
