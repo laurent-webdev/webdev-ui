@@ -160,6 +160,42 @@
 }
 
 :root {
+  /* Familles : polices du système, rien à télécharger */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+  /* Tailles : fixes jusqu'à md, fluides ensuite */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+  --font-size-xl: clamp(1.5rem, 1.1rem + 0.75vw, 1.75rem);
+  --font-size-2xl: clamp(1.75rem, 1.3rem + 1vw, 2rem);
+  --font-size-3xl: clamp(2rem, 1.5rem + 1.875vw, 2.5rem);
+  --font-size-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3rem);
+  --font-size-5xl: clamp(3rem, 2rem + 5vw, 4rem);
+  --font-size-6xl: clamp(3.75rem, 2.5rem + 6.25vw, 5rem);
+  /* Graisses */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  /* Interlignage : un par taille, plus serré quand le texte grossit */
+  --line-height-xs: 1.25;
+  --line-height-sm: 1.5;
+  --line-height-md: 1.5;
+  --line-height-lg: 1.5;
+  --line-height-xl: 1.43;
+  --line-height-2xl: 1.33;
+  --line-height-3xl: 1.2;
+  --line-height-4xl: 1.1;
+  --line-height-5xl: 1.1;
+  --line-height-6xl: 1;
+  /* Titres */
+  --heading-font-weight: var(--font-weight-medium);
+}
+
+:root {
   /* Rayons */
   --radius: 0.375rem;
   /* États (survol, clic…) : part de couleur mélangée au fond, léger ou fort */
@@ -168,26 +204,65 @@
   /* Contour de focus (:focus-visible) */
   --focus-outline-width: 2px;
   --focus-outline-offset: 1px;
-  /* Tailles de texte (valeurs de Bootstrap 6) */
-  --font-size-sm: 0.875rem;
-  --font-size-lg: 1.125rem;
   /* Transitions */
   --transition-duration: 0.15s;
 }
 
+@layer base {
+  body {
+    font-family: var(--font-family), sans-serif;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-md);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--heading-font-weight);
+  }
+  h1 {
+    font-size: var(--font-size-3xl);
+    line-height: var(--line-height-3xl);
+  }
+  h2 {
+    font-size: var(--font-size-2xl);
+    line-height: var(--line-height-2xl);
+  }
+  h3 {
+    font-size: var(--font-size-xl);
+    line-height: var(--line-height-xl);
+  }
+  h4 {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-lg);
+  }
+  h5 {
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+  }
+  h6 {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-sm);
+  }
+  code, kbd, samp, pre {
+    font-family: var(--font-family-monospace), monospace;
+    font-size: 1em;
+  }
+}
 @layer components {
   :root {
-    --btn-padding-block: 0.5rem;
+    --btn-padding-block: 0.375rem;
     --btn-padding-inline: 1rem;
     --btn-border-radius: var(--radius);
     --btn-border-width: 1px;
     --btn-transition-duration: var(--transition-duration);
     --btn-focus-outline-width: var(--focus-outline-width);
     --btn-focus-outline-offset: var(--focus-outline-offset);
+    --btn-xs-padding-block: 0.125rem;
+    --btn-xs-padding-inline: 0.5rem;
+    --btn-xs-font-size: var(--font-size-xs);
     --btn-sm-padding-block: 0.25rem;
     --btn-sm-padding-inline: 0.75rem;
     --btn-sm-font-size: var(--font-size-sm);
-    --btn-lg-padding-block: 0.75rem;
+    --btn-lg-padding-block: 0.5rem;
     --btn-lg-padding-inline: 1.25rem;
     --btn-lg-font-size: var(--font-size-lg);
     --btn-solid-hover-mix: var(--state-mix-soft);
@@ -335,6 +410,11 @@
       background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--btn-text-active-mix));
     }
   }
+  .btn-xs {
+    padding-block: var(--btn-xs-padding-block);
+    padding-inline: var(--btn-xs-padding-inline);
+    font-size: var(--btn-xs-font-size);
+  }
   .btn-sm {
     padding-block: var(--btn-sm-padding-block);
     padding-inline: var(--btn-sm-padding-inline);
@@ -344,5 +424,71 @@
     padding-block: var(--btn-lg-padding-block);
     padding-inline: var(--btn-lg-padding-inline);
     font-size: var(--btn-lg-font-size);
+  }
+}
+@layer utilities {
+  .fs-xs {
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-xs);
+  }
+  .fs-sm {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-sm);
+  }
+  .fs-md {
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+  }
+  .fs-lg {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-lg);
+  }
+  .fs-xl {
+    font-size: var(--font-size-xl);
+    line-height: var(--line-height-xl);
+  }
+  .fs-2xl {
+    font-size: var(--font-size-2xl);
+    line-height: var(--line-height-2xl);
+  }
+  .fs-3xl {
+    font-size: var(--font-size-3xl);
+    line-height: var(--line-height-3xl);
+  }
+  .fs-4xl {
+    font-size: var(--font-size-4xl);
+    line-height: var(--line-height-4xl);
+  }
+  .fs-5xl {
+    font-size: var(--font-size-5xl);
+    line-height: var(--line-height-5xl);
+  }
+  .fs-6xl {
+    font-size: var(--font-size-6xl);
+    line-height: var(--line-height-6xl);
+  }
+  .fw-light {
+    font-weight: var(--font-weight-light);
+  }
+  .fw-normal {
+    font-weight: var(--font-weight-normal);
+  }
+  .fw-medium {
+    font-weight: var(--font-weight-medium);
+  }
+  .fw-semibold {
+    font-weight: var(--font-weight-semibold);
+  }
+  .fw-bold {
+    font-weight: var(--font-weight-bold);
+  }
+  .fst-italic {
+    font-style: italic;
+  }
+  .fst-normal {
+    font-style: normal;
+  }
+  .font-monospace {
+    font-family: var(--font-family-monospace), monospace;
   }
 }

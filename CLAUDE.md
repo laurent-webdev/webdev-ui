@@ -69,19 +69,22 @@ Inspiré de Bootstrap et Tailwind. Pas de préfixe sur les classes.
 | Breakpoint | `breakpoint:classe` | `md:d-flex`, `lg:button-lg` |
 | État | attribut natif ou ARIA | `disabled`, `aria-expanded`, `open` (pas de classe `is-*`) |
 
-- **Tailles et breakpoints** : `xs`, `sm`, `md`, `lg`, `xl`.
-- **Abréviations autorisées** : uniquement les très connues — `d` (display), `m` / `p` (margin / padding) et leurs côtés `mt`, `mx`…, `w` / `h` (width / height). Toute nouvelle abréviation doit être ajoutée ici.
+- **Tailles et breakpoints** : `xs`, `sm`, `md`, `lg`, `xl`. Une taille est un suffixe (`.btn-sm`, `.btn-lg`), un breakpoint est un préfixe (`md:d-flex`) : jamais `sm:` pour dire « petit » (décision de Laurent, 2026-10-22).
+- **Abréviations autorisées** : uniquement les très connues — `d` (display), `m` / `p` (margin / padding) et leurs côtés `mt`, `mx`…, `w` / `h` (width / height), `fs` / `fw` / `fst` (font-size / font-weight / font-style, comme Bootstrap 6). Toute nouvelle abréviation doit être ajoutée ici.
 - Tout en minuscules, mots séparés par `-`.
 - En SCSS, le `:` des breakpoints s'échappe : `.md\:d-flex`. Les classes responsive sont générées par un mixin, jamais écrites à la main.
 
 ## Variables CSS
 
 - **Aucun préfixe** sur les variables ni sur les classes.
+- **Nommage cohérent partout** (validé par Laurent, 2026-10-22 : simple, basique, modifiable ensuite) :
+    - échelle globale = `--<propriété>-<valeur>` : `--font-size-lg`, `--font-weight-bold`, `--space-3` ;
+    - réglage d'un élément ou composant = `--<élément>-<propriété>` : `--heading-font-weight`, `--btn-padding-block`, `--focus-outline-width`.
 - **Globales** (dans `:root`) : `--color-primary`, `--space-2`, `--radius`, `--font`…
     - couleurs dans `settings/_colors.scss` ; espacements dans `settings/_spacing.scss` ; le reste (`--radius`…) dans `settings/_variables.scss`.
     - **Espacements** : `--space-0` à `--space-12`, l'échelle de Bootstrap 6 (même numéro, même valeur : 0, 0.25, 0.375, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 3rem). Toutes les valeurs sont des multiples de `--space` (0.25rem) : le changer redimensionne toute l'échelle. Sert aux utilitaires (margin, padding, gap). `auto` est géré par les utilitaires.
     - **Espace entre les sections** : pas dans cette échelle. Une variable fluide unique (`--section-padding-block: clamp(…)`) sur une classe `.section` de `layout/`, à créer avec le `container`.
-    - **Padding des composants : vraies valeurs** (`--btn-padding-block: 0.5rem`), pas `--space-*` (choix de Laurent, 2026-10-22) : changer l'échelle des espacements ne doit pas redimensionner les composants. Les autres réglages (rayon, transition, couleurs…) pointent vers une globale.
+    - **Padding des composants : vraies valeurs** (`--btn-padding-block: 0.375rem`), pas `--space-*` (choix de Laurent, 2026-10-22) : changer l'échelle des espacements ne doit pas redimensionner les composants. Les autres réglages (rayon, transition, couleurs…) pointent vers une globale.
 - **Toutes les couleurs ont une valeur claire et une sombre** (`light-dark()`), en oklch, dans `settings/_colors.scss`. Couleurs de marque et d'état : en sombre, même teinte, chroma réduite (~15-20 %), et luminosité ramenée dans une même bande (l 0.68 à 0.84) pour l'équilibre : les couleurs moyennes (primary, accent) sont éclaircies, les claires (success, warning) un peu assombries. Le mode clair est validé par Laurent : les réglages d'équilibre se font sur le sombre. `neutral` : gris clair en clair, gris foncé en sombre. `inverse` : presque noir en clair, presque blanc en sombre. `primary`, `success`, `warning` : couleurs de Laurent (`#118ab2`, `#06d6a0`, `#ffd166`) converties en oklch. `secondary` (essai en cours) : rose tiré de `#ef476f`, arrangé pour la marque : teinte 355 (bleu 228 → violet 290 → rose 355, ~60° d'écart ; plus rose que `#ef476f` (11) pour s'éloigner de danger, 25), chroma ramenée à 0.15 (comme primary et accent, `#ef476f` est à 0.20). `accent` : violet (teinte 290), pour aller avec primary et secondary ; en clair, la couleur de son ancien survol (`0.60 0.13` + 20 % de blanc = `0.68 0.104`), choix de Laurent. Les gris et le fond sombre sont légèrement teintés (teinte 228, celle de primary).
 - Chaque couleur `--color-<nom>` a ses dérivées, dans chaque thème, à créer aussi pour toute nouvelle couleur :
     - `--color-text-on-<nom>` : noir ou blanc, le plus contrasté (luminance WCAG comparée à 0.179, ≥ 4,58:1), via `--contrast-channel` dans `color(from … srgb-linear …)` ;
@@ -97,35 +100,8 @@ Inspiré de Bootstrap et Tailwind. Pas de préfixe sur les classes.
     - Les variantes (`.btn-solid`, `.btn-subtle`…) disent **comment** utiliser le thème.
 - **Composant** : ses réglages (forme, tailles) sont des variables `--<composant>-*` dans un `:root` en tête de son fichier ; sa couleur vient de ses `--<composant>-theme-*`. Pas de classe de base : chaque variante (`.btn-solid`, `.btn-subtle`…) s'utilise seule.
 
-```css
-:root {
-  --btn-padding-block: 0.5rem;
-  --btn-padding-inline: 1rem;
-  --btn-border-radius: var(--radius);
-  --btn-border-width: 1px;
-}
-.btn-solid, .btn-subtle, .btn-outline, .btn-text {
-  padding-block: var(--btn-padding-block);
-  padding-inline: var(--btn-padding-inline);
-  border-radius: var(--btn-border-radius);
-  border: var(--btn-border-width) solid transparent; /* même taille pour toutes les variantes */
-}
-.btn-solid {
-  background-color: var(--btn-theme-bg);
-  color: var(--btn-theme-text);
-}
-.btn-subtle {
-  background-color: var(--theme-bg-subtle);
-  color: var(--theme-contrast-subtle);
-}
-.btn-outline {
-  border-color: var(--theme-bg);
-  color: var(--theme-contrast-subtle);
-}
-.btn-text {
-  color: var(--theme-contrast-subtle);
-}
-```
+Modèle de référence : `src/scss/components/_button.scss` (pas de copie du code ici : elle devient fausse dès que le code change, et l'IDE la signale en erreur au commit).
+
 ```html
 <button class="btn-subtle theme-danger" type="button">Supprimer</button>
 ```
@@ -140,8 +116,13 @@ Inspiré de Bootstrap et Tailwind. Pas de préfixe sur les classes.
     - États écrits avec le nesting Sass (`&:hover`, `&:active`) dans la variante.
     - Transition des couleurs (fond, bordure, texte) : `--btn-transition-duration`, qui pointe vers la globale `--transition-duration` (0.15s, comme Bootstrap). Coupée par le bloc `prefers-reduced-motion` du reset.
 - **Focus des boutons** (demande de Laurent, 2026-10-22) : `:focus-visible` dans la forme commune, `outline` simple de la couleur du thème en emphasis (`--btn-theme-text-emphasis`, pas la couleur pleine : neutral, success et warning sont trop clairs sur fond blanc, < 3:1). Variables : `--btn-focus-outline-width` / `-offset` → globales `--focus-outline-width` 2px / `--focus-outline-offset` 1px (`_variables.scss`). Halo façon archive essayé puis écarté (2026-10-22) : trop orienté design, le framework reste sobre.
-- **Tailles des boutons** (2026-10-22) : `.btn-sm` / `.btn-lg`, combinables avec toutes les variantes (`class="btn-outline btn-lg"`), écrites après les variantes pour les surcharger. Padding et taille de texte : `--btn-sm-padding-block` 0.25rem / `-inline` 0.75rem / `-font-size` (`--font-size-sm` 0.875rem), `--btn-lg-*` 0.75rem / 1.25rem / `--font-size-lg` 1.125rem. `--font-size-sm` / `-lg` ajoutées dans `_variables.scss` en attendant la typo de `base/`. Pas de taille responsive (`md:btn-lg`) : réservé à la mise en page.
+- **Tailles des boutons** (2026-10-22) : `.btn-xs` / `.btn-sm` / `.btn-lg`, combinables avec toutes les variantes (`class="btn-outline btn-lg"`), écrites après les variantes pour les surcharger. Padding (block / inline) et taille de texte : xs 0.125 / 0.5rem / `--font-size-xs`, sm 0.25 / 0.75rem / `--font-size-sm`, normal 0.375 / 1rem, lg 0.5 / 1.25rem / `--font-size-lg` (réglés par Laurent). Hauteurs (interligne 1.5 + bordures) : 24, 31, 38, 45 à 48px, un pas régulier de ~7px, comme Bootstrap 5 ; xs = 24px, la cible tactile minimale (WCAG 2.5.8) : ne pas descendre en dessous. Pas de taille responsive (`md:btn-lg`) : réservé à la mise en page.
 - L'utilisateur personnalise en surchargeant une variable (globale ou `--theme-*`), globalement ou sur un seul élément.
+- **Typographie** (2026-10-22), valeurs de Bootstrap 6, noms de Laurent :
+    - `settings/_typography.scss` : `--font-family` (polices du système), `--font-family-monospace`, `--font-size-xs` à `-6xl` (fixes jusqu'à md, `clamp()` à partir de lg), `--font-weight-light` 300 à `-bold` 700 (pas de `lighter` / `bolder` : rarement utiles), `--line-height-xs` à `-6xl` (1.25, 1.5, 1.5, 1.5, 1.43, 1.33, 1.2, 1.1, 1.1, 1), `--heading-font-weight` (medium). **L'interligne suit la taille, pas la balise** (validé par Laurent, 2026-10-22) : un `<h5>` et un `<p>` de même taille ont le même interligne ; `.fs-*` règle aussi l'interligne ;
+    - `base/_typography.scss` : body (famille, taille md, graisse normale, interlignage md), titres h1 = 3xl … h6 = sm avec l'interligne de leur taille, `code, kbd, samp, pre` en monospace à 1em. `font-family` suivie d'une famille générique (`var(--font-family), sans-serif`, `var(--font-family-monospace), monospace`), exigée par l'inspection « Insert generic font name » de l'IDE ;
+    - `utilities/_font.scss` : `.fs-*`, `.fw-*`, `.fst-italic` / `-normal`, `.font-monospace`, générés par `@each`. Pas de variante responsive (comme Bootstrap 6), pas de `.lh-*` pour l'instant ;
+    - testé dans `doc/templates/main/index.html.twig`.
 
 ## Thèmes clair et sombre
 
@@ -242,7 +223,7 @@ src/ts/
     - breakpoints : Bootstrap a lg 1024 et 2xl 1536.
 
 
-- Page de test des boutons : `test/buttons.html`.
+- **Page de test** : tout exemple à tester va dans `doc/templates/main/index.html.twig` (demande de Laurent, 2026-10-22), pas dans `test/`.
 - Nom du projet (plus tard).
 - Navigateurs supportés (conditionne `:has()`, `popover`, nesting natif, `command`/`commandfor`, anchor positioning).
 - Build CSS : fait par la CLI `sass` (scripts `build` et `watch` de `package.json`). `gulpfile.js` et les paquets gulp, gulp-sass, gulp-rename et esbuild ne servent plus, à supprimer. Build JS à ajouter avec `tsc` quand le premier composant aura du JS.

@@ -1,0 +1,23 @@
+@layer utilities {
+
+    // Taille : .fs-xs … .fs-6xl, avec l'interligne de la taille
+    @each $size in xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl {
+        .fs-#{$size} {
+            font-size: var(--font-size-#{$size});
+            line-height: var(--line-height-#{$size});
+        }
+    }
+
+    // Graisse : .fw-light … .fw-bold
+    @each $weight in light, normal, medium, semibold, bold {
+        .fw-#{$weight} { font-weight: var(--font-weight-#{$weight}); }
+    }
+
+    // Style
+    .fst-italic { font-style: italic; }
+    .fst-normal { font-style: normal; }
+
+    // Famille
+    .font-monospace { font-family: var(--font-family-monospace), monospace; }
+
+}
