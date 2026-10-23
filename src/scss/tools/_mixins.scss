@@ -1,3 +1,10 @@
+// Une classe par cran de l'échelle d'espacements : .mt-0 … .mt-12
+@mixin space-classes($class, $property) {
+  @for $size from 0 through 12 {
+    .#{$class}-#{$size} { #{$property}: var(--space-#{$size}); }
+  }
+}
+
 // Couleurs dérivées : une variable par couleur de la liste, calculée à partir de --color-<nom>
 
 // Texte noir ou blanc, le plus lisible : luminance WCAG comparée à 0.179, blanc en dessous, noir au-dessus (≥ 4,58:1)

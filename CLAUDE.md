@@ -69,10 +69,10 @@ Inspiré de Bootstrap et Tailwind. Pas de préfixe sur les classes.
 | Breakpoint | `breakpoint:classe` | `md:d-flex`, `lg:button-lg` |
 | État | attribut natif ou ARIA | `disabled`, `aria-expanded`, `open` (pas de classe `is-*`) |
 
-- **Tailles et breakpoints** : `xs`, `sm`, `md`, `lg`, `xl`. Une taille est un suffixe (`.btn-sm`, `.btn-lg`), un breakpoint est un préfixe (`md:d-flex`) : jamais `sm:` pour dire « petit » (décision de Laurent, 2026-10-22).
+- **Tailles et breakpoints** : tailles `xs`, `sm`, `md`, `lg`, `xl` ; breakpoints `sm`, `md`, `lg`, `xl`, `2xl` (pas de `xs` : une classe sans préfixe vaut déjà pour les téléphones). Une taille est un suffixe (`.btn-sm`, `.btn-lg`), un breakpoint est un préfixe (`md:d-flex`) : jamais `sm:` pour dire « petit » (décision de Laurent, 2026-10-22).
 - **Abréviations autorisées** : uniquement les très connues — `d` (display), `m` / `p` (margin / padding) et leurs côtés `mt`, `mx`…, `w` / `h` (width / height), `fs` / `fw` / `fst` (font-size / font-weight / font-style, comme Bootstrap 6). Toute nouvelle abréviation doit être ajoutée ici.
 - Tout en minuscules, mots séparés par `-`.
-- En SCSS, le `:` des breakpoints s'échappe : `.md\:d-flex`. Les classes responsive sont générées par un mixin, jamais écrites à la main.
+- En SCSS, le `:` des breakpoints s'échappe : `.md\:d-flex`. Les classes responsive sont générées par un mixin à paramètre `$breakpoint`, jamais écrites à la main.
 
 ## Variables CSS
 
@@ -82,7 +82,8 @@ Inspiré de Bootstrap et Tailwind. Pas de préfixe sur les classes.
     - réglage d'un élément ou composant = `--<élément>-<propriété>` : `--heading-font-weight`, `--btn-padding-block`, `--focus-outline-width`.
 - **Globales** (dans `:root`) : `--color-primary`, `--space-2`, `--radius`, `--font`…
     - couleurs dans `settings/_colors.scss` ; espacements dans `settings/_spacing.scss` ; le reste (`--radius`…) dans `settings/_variables.scss`.
-    - **Espacements** : `--space-0` à `--space-12`, l'échelle de Bootstrap 6 (même numéro, même valeur : 0, 0.25, 0.375, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 3rem). Toutes les valeurs sont des multiples de `--space` (0.25rem) : le changer redimensionne toute l'échelle. Sert aux utilitaires (margin, padding, gap). `auto` est géré par les utilitaires.
+    - **Espacements** : `--space-0` à `--space-12`, règle droite `--space-n = n × --space` (0.25rem), de 0 à 3rem (2026-10-23 : on s'inspire de Bootstrap sans copier son échelle irrégulière). Le changer redimensionne toute l'échelle. Sert aux utilitaires (margin, padding, plus tard gap). `auto` est géré par les utilitaires.
+    - **Utilitaires d'espacement** (`utilities/_spacing.scss`, 2026-10-23) : `m`, `mx`, `my`, `mt`, `mb`, `ms`, `me` (+ `-auto`) et les mêmes en `p`, de 0 à 12, en propriétés logiques (`mt` = `margin-block-start`, `ms` = `margin-inline-start`). Écrits dans cet ordre (tous les côtés, puis un axe, puis un côté) pour que le plus précis gagne : `class="m-4 mt-0"`. Variantes `sm:` `md:` `lg:` `xl:` `2xl:`. Écriture choisie par Laurent le 2026-10-23, un entre-deux après deux essais (mixin `responsive` avec `@content` + `using` : syntaxe trop dure à lire ; une boucle `@for` par propriété écrite dans le fichier : trop long) : un mixin `spacing-classes($breakpoint: '')` dans le fichier, qui appelle `mixins.space-classes('#{$breakpoint}mt', margin-block-start)` une ligne par classe, puis appelé sans préfixe et dans chacune des 5 `@media` (comme `layouts/flex.scss` de l'archive). Chaque futur fichier responsive (display, flex, gap…) suit la même forme et recopie ses 5 `@media`. Poids mesuré avec les 5 breakpoints : le CSS passe de ≈ 18,5 à ≈ 68 Ko minifié, de ≈ 3,1 à ≈ 8,1 Ko compressé (189 classes + 945 responsive).
     - **Espace entre les sections** : pas dans cette échelle. Une variable fluide unique (`--section-padding-block: clamp(…)`) sur une classe `.section` de `layout/`, à créer avec le `container`.
     - **Padding des composants : vraies valeurs** (`--btn-padding-block: 0.375rem`), pas `--space-*` (choix de Laurent, 2026-10-22) : changer l'échelle des espacements ne doit pas redimensionner les composants.
     - **Variables simples, accessibles aux débutants** (Laurent, 2026-10-23) : une variable n'existe que si un site voudra la changer. Une formule ou une valeur réglée pour le contraste va en dur dans le mixin, pas dans `:root`. Fichiers propres, sans bruit ni variable pseudo-utile.
@@ -164,7 +165,7 @@ src/scss/
 │   └── _variables.scss   autres variables CSS globales dans :root (rayons…)
 ├── tools/
 │   ├── _index.scss       @forward des outils
-│   └── _mixins.scss      mixin responsive, boucles des utilitaires, pas de sortie CSS
+│   └── _mixins.scss      boucle des espacements, couleurs dérivées, pas de sortie CSS
 ├── _reset.scss           remise à zéro, aucun style visuel (un seul fichier : pas de dossier)
 ├── base/                 styles des éléments natifs (texte, liens, focus-visible…)
 ├── layout/               container, columns
@@ -211,7 +212,7 @@ src/ts/
 ## Façon de travailler
 
 - Changements petits et lisibles, proches du style du code existant. Pas de gros refactoring d'un coup.
-- **Coder comme Laurent** : code direct et lisible, sans indirections (pas de variables « recette » ni de `--x-current`). Les réglages d'un composant sont des variables `--<composant>-*` dans un `:root` en tête de fichier, lues directement par les propriétés. Plusieurs classes qui partagent des styles sont regroupées dans un même sélecteur (`.btn, .btn-solid, .btn-subtle { … }`).
+- **Coder comme Laurent** : code direct et lisible, sans indirections (pas de variables « recette » ni de `--x-current`). Les réglages d'un composant sont des variables `--<composant>-*` dans un `:root` en tête de fichier, lues directement par les propriétés. Plusieurs classes qui partagent des styles sont regroupées dans un même sélecteur (`.btn, .btn-solid, .btn-subtle { … }`). **Plus long et détaillé plutôt qu'abstrait** (Laurent, 2026-10-23 : « je préfère quand c'est un peu plus long donc plus détaillé avec moins d'abstraction ») : pas de `@content` avec `using`.
 - **Style de Laurent** : voir son ancien code dans `/home/laurent/dev/webdev-ui_archive/src/scss/` (`components/button.scss`, `abstracts/variables.scss`). Indentation 4 espaces ; variables préfixées par le composant ; une boucle `@each` par composant ; états imbriqués (`&:hover`). Laurent développe pour comprendre et refactore ensuite : avancer pas à pas, le refactoring viendra plus tard.
 - **Commentaires concis** : une ligne courte, qui dit le pourquoi. Pas de paragraphe ni d'exemple d'usage dans le code : les explications vont dans la documentation.
 - **Tenir ce fichier à jour** à chaque nouvelle décision ou information.
@@ -223,12 +224,11 @@ src/ts/
 
 - **Alignement sur Bootstrap 6** : points où ce fichier dit autre chose que Bootstrap 6, à trancher :
     - nommage : ce fichier veut des noms complets (`text-align-center`, `.button`), Bootstrap garde les abréviations (`text-center`, `.btn`, `fw-bold`). Le code utilise déjà `.btn` et `.theme-*` ;
-    - tokens de couleur : Bootstrap a `-bg-subtle`, `-fg`, `-fg-emphasis`, `-contrast`, `-border`… ; le code a `-subtle`, `-emphasis`, `on-` ;
-    - breakpoints : Bootstrap a lg 1024 et 2xl 1536.
+    - tokens de couleur : Bootstrap a `-bg-subtle`, `-fg`, `-fg-emphasis`, `-contrast`, `-border`… ; le code a `-subtle`, `-emphasis`, `on-`.
 
 
 - **Page de test** : tout exemple à tester va dans `doc/templates/main/index.html.twig` (demande de Laurent, 2026-10-22), pas dans `test/`.
-- **Breakpoints** : à faire avec les premiers utilitaires de mise en page (`d-*`, `m-*`, `p-*`, `w-*`), pas avant, et pas sur les boutons. L'archive avait 6 breakpoints en map Sass (xs 480 à xxl 1536px), des suffixes (`-md`), `min-width` et `max-width` mélangés, et la boucle `@media` recopiée dans chaque fichier. Proposition pour la v2 (pas encore validée) : mobile-first seulement, syntaxe `(width >= …)`, valeurs en rem (suivent la taille de texte choisie par l'utilisateur), 4 breakpoints sm 32rem / md 48rem / lg 64rem / xl 80rem (+16rem à chaque cran), un seul mixin dans `tools/` ; container queries pour les composants qui dépendent de leur place (navbar, card).
+- **Breakpoints** (2026-10-23, choisis avec Laurent d'après les écrans réels, StatCounter septembre 2026) : `settings/_breakpoints.scss`, `$screen-sm` 36rem (576px : petites tablettes, petits téléphones couchés), `-md` 48rem (768px : tablettes debout, la plupart des téléphones couchés : 670 à 930px ; tourner le téléphone change donc la mise en page, comme dans tous les frameworks), `-lg` 64rem (1024px : tablettes couchées, petits portables), `-xl` 80rem (1280px : portables), `-2xl` 96rem (1536px : grands portables, écrans de bureau). Règle : un breakpoint au début de chaque famille d'appareils, jamais au milieu. Téléphones debout : 360 à 430px CSS (414 n° 1, puis 360, 384, 390, 393), sans préfixe ; tablettes 600 à 834 ; portables 1280 à 1536 ; bureau 1920 (n° 1, 28 %). Ce sont les valeurs de Bootstrap 6 (sm 576 colle mieux aux données que les 640 de Tailwind : les tablettes de 600px passent du bon côté). Pas de `xs` : aucun appareil courant entre 430 et 576px (essayé à 480px puis retiré). Tester dès 320px (WCAG 1.4.10, aussi 1280px zoomé à 400 %). En rem : la mise en page suit la taille de texte choisie par l'utilisateur. Noms `$screen-*` parce qu'une variable Sass ne peut pas commencer par un chiffre (`$2xl`) ; la classe `2xl:` s'écrit `.\32 xl\:` dans le CSS. Pas de map Sass : chaque fichier d'utilitaires responsive écrit ses 5 media queries `(width >= …)`, mobile-first, et y appelle son mixin avec le préfixe (`@include spacing-classes('md\\:')`). Pas sur les boutons. Container queries à prévoir pour les composants qui dépendent de leur place (navbar, card).
 - Nom du projet (plus tard).
 - Navigateurs supportés (conditionne `:has()`, `popover`, nesting natif, `command`/`commandfor`, anchor positioning).
 - Build CSS : CLI `sass` (scripts `build` et `watch` de `package.json`) et `gulpfile.js`. **Laurent a besoin de `gulpfile.js` pour compiler (2026-10-23) : on le garde, ne pas proposer de le supprimer.** Build JS à ajouter avec `tsc` quand le premier composant aura du JS.

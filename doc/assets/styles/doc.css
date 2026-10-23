@@ -4,3 +4,13 @@ body {
   /*font-family: system-ui, sans-serif;*/
 }
 
+/* Boîte de démo : le fond montre le padding, le cadre montre la marge */
+.demo-frame {
+  display: flow-root; /* garde la marge du bloc intérieur dans le cadre */
+  outline: 1px dashed var(--color-emphasis-neutral);
+}
+
+.demo-box {
+  background-color: var(--color-subtle-primary);
+}
+

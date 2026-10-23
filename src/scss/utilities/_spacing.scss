@@ -1,0 +1,46 @@
+@use '../settings/breakpoints';
+@use '../tools/mixins';
+
+// Toutes les classes d'espacement ; $breakpoint est mis devant le nom de la classe (.md\:m-3), vide sans breakpoint
+// Ordre : tous les côtés, puis un axe, puis un seul côté ; écrit en dernier, le plus précis gagne (class="m-4 mt-2")
+// Propriétés logiques : block-start = haut, block-end = bas, inline-start = gauche, inline-end = droite (en français)
+@mixin spacing-classes($breakpoint: '') {
+
+    // Margin, avec auto pour centrer ou pousser
+    @include mixins.space-classes('#{$breakpoint}m', margin);
+    .#{$breakpoint}m-auto { margin: auto; }
+    @include mixins.space-classes('#{$breakpoint}mx', margin-inline);
+    .#{$breakpoint}mx-auto { margin-inline: auto; }
+    @include mixins.space-classes('#{$breakpoint}my', margin-block);
+    .#{$breakpoint}my-auto { margin-block: auto; }
+    @include mixins.space-classes('#{$breakpoint}mt', margin-block-start);
+    .#{$breakpoint}mt-auto { margin-block-start: auto; }
+    @include mixins.space-classes('#{$breakpoint}mb', margin-block-end);
+    .#{$breakpoint}mb-auto { margin-block-end: auto; }
+    @include mixins.space-classes('#{$breakpoint}ms', margin-inline-start);
+    .#{$breakpoint}ms-auto { margin-inline-start: auto; }
+    @include mixins.space-classes('#{$breakpoint}me', margin-inline-end);
+    .#{$breakpoint}me-auto { margin-inline-end: auto; }
+
+    // Padding
+    @include mixins.space-classes('#{$breakpoint}p', padding);
+    @include mixins.space-classes('#{$breakpoint}px', padding-inline);
+    @include mixins.space-classes('#{$breakpoint}py', padding-block);
+    @include mixins.space-classes('#{$breakpoint}pt', padding-block-start);
+    @include mixins.space-classes('#{$breakpoint}pb', padding-block-end);
+    @include mixins.space-classes('#{$breakpoint}ps', padding-inline-start);
+    @include mixins.space-classes('#{$breakpoint}pe', padding-inline-end);
+}
+
+@layer utilities {
+
+    // Sans breakpoint, puis une fois par breakpoint, du plus petit au plus grand
+    @include spacing-classes;
+    @media (width >= breakpoints.$screen-sm) { @include spacing-classes('sm\\:'); }
+    @media (width >= breakpoints.$screen-md) { @include spacing-classes('md\\:'); }
+    @media (width >= breakpoints.$screen-lg) { @include spacing-classes('lg\\:'); }
+    @media (width >= breakpoints.$screen-xl) { @include spacing-classes('xl\\:'); }
+    // Une classe CSS ne peut pas commencer par un chiffre : le 2 de 2xl s'écrit échappé (\32 + espace)
+    @media (width >= breakpoints.$screen-2xl) { @include spacing-classes('\\32 xl\\:'); }
+
+}
