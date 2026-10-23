@@ -198,7 +198,7 @@
   --focus-outline-width: 2px;
   --focus-outline-offset: 1px;
   /* Élément désactivé (disabled) */
-  --disabled-opacity: 0.65;
+  --disabled-opacity: 0.50;
   /* Transitions */
   --transition-duration: 0.15s;
 }
@@ -317,7 +317,7 @@
     --btn-theme-background-subtle: var(--color-subtle-inverse);
     --btn-theme-text-emphasis: var(--color-emphasis-inverse);
   }
-  .btn-solid, .btn-outline, .btn-subtle, .btn-text {
+  .btn-solid, .btn-outline, .btn-subtle, .btn-text, .btn-link {
     padding-block: var(--btn-padding-block);
     padding-inline: var(--btn-padding-inline);
     border: var(--btn-border-width) solid transparent;
@@ -325,11 +325,11 @@
     transition-property: background-color, border-color, color;
     transition-duration: var(--transition-duration);
   }
-  .btn-solid:focus-visible, .btn-outline:focus-visible, .btn-subtle:focus-visible, .btn-text:focus-visible {
+  .btn-solid:focus-visible, .btn-outline:focus-visible, .btn-subtle:focus-visible, .btn-text:focus-visible, .btn-link:focus-visible {
     outline: var(--focus-outline-width) solid var(--btn-theme-text-emphasis);
     outline-offset: var(--focus-outline-offset);
   }
-  .btn-solid:disabled, .btn-outline:disabled, .btn-subtle:disabled, .btn-text:disabled {
+  .btn-solid:disabled, .btn-outline:disabled, .btn-subtle:disabled, .btn-text:disabled, .btn-link:disabled {
     opacity: var(--disabled-opacity);
     pointer-events: none;
   }
@@ -375,6 +375,17 @@
   }
   .btn-text:active {
     background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-soft));
+  }
+  .btn-link {
+    background-color: transparent;
+    color: var(--btn-theme-text-emphasis);
+    text-decoration: underline;
+  }
+  .btn-link:hover {
+    color: color-mix(in srgb, var(--btn-theme-text-emphasis), CanvasText calc(var(--state-mix-soft) * 2));
+  }
+  .btn-link:active {
+    color: color-mix(in srgb, var(--btn-theme-text-emphasis), CanvasText calc(var(--state-mix-strong) * 2));
   }
   .btn-xs {
     --btn-padding-block: 0.125rem;

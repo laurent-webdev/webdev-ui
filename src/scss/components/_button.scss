@@ -27,7 +27,7 @@
     }
 
     // Forme commune : la bordure existe toujours, toutes les variantes ont la même taille
-    .btn-solid, .btn-outline, .btn-subtle, .btn-text {
+    .btn-solid, .btn-outline, .btn-subtle, .btn-text, .btn-link {
         padding-block: var(--btn-padding-block);
         padding-inline: var(--btn-padding-inline);
         border: var(--btn-border-width) solid transparent;
@@ -102,6 +102,21 @@
         }
         &:active {
             background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-soft));
+        }
+    }
+
+    // Link : souligné comme un lien, sa couleur se rapproche du texte au survol et au clic (le contraste augmente)
+    // Mélange doublé : un texte est fin, il en faut deux fois plus qu'un fond pour que ça se voie
+    .btn-link {
+        background-color: transparent;
+        color: var(--btn-theme-text-emphasis);
+        text-decoration: underline;
+
+        &:hover {
+            color: color-mix(in srgb, var(--btn-theme-text-emphasis), CanvasText calc(var(--state-mix-soft) * 2));
+        }
+        &:active {
+            color: color-mix(in srgb, var(--btn-theme-text-emphasis), CanvasText calc(var(--state-mix-strong) * 2));
         }
     }
 
