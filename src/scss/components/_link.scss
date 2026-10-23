@@ -1,0 +1,15 @@
+@layer components {
+
+    :root {
+        // Thème par défaut, sans classe .theme-*
+        --link-theme-text-emphasis: var(--color-emphasis-neutral);
+    }
+
+    // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses liens
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .theme-#{$color} {
+            --link-theme-text-emphasis: var(--color-emphasis-#{$color});
+        }
+    }
+
+}

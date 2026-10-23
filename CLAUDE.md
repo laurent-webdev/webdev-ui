@@ -1,6 +1,6 @@
 # Nouveau framework CSS/JS (nom à définir)
 
-Nouveau projet, repart de zéro en s'inspirant de webdev-ui. webdev-ui reste un projet séparé : on ne touche pas à son code, et aucune compatibilité avec lui n'est recherchée.
+La v2 de webdev-ui : une refonte totale, en mieux, plus native, avec une meilleure architecture (précisé par Laurent, 2026-10-23). L'ancienne version est dans `/home/laurent/dev/webdev-ui_archive` : lecture seule, on ne touche jamais à son code, et aucune compatibilité avec elle n'est recherchée.
 
 ## Objectif
 
@@ -43,7 +43,7 @@ Ce que fait Bootstrap 6 (relevé dans `dist/css/bootstrap.css`, octobre 2026) :
 - **Rien d'inutile.** Ne pas reprendre de webdev-ui les fonctionnalités complexes ou rarement utiles.
 - **Seulement ce qui sert au quotidien.** Pas de classe « au cas où » (ex. pas de `border-top-left-radius-*`). Un besoin rare se règle en CSS dans le site ou en surchargeant une variable. Une classe est ajoutée le jour où elle devient vraiment utile.
 - **Facile à étendre.** Les mixins et boucles SCSS permettent d'ajouter une valeur ou une classe en une ligne, sans toucher au reste.
-- **Point de départ : les classes de webdev-ui**, triées une par une (garder, simplifier ou supprimer).
+- **Point de départ : les classes de l'archive**, triées une par une (garder, simplifier ou supprimer), puis réécrites en mieux, jamais copiées.
 - **Variantes responsive (`md:`…) seulement pour la mise en page** : display, flex, grid, espacements, largeur, alignement du texte. Pas pour les couleurs, l'opacité, les bordures, les ombres, etc.
 
 ## Exigence qualité
@@ -228,6 +228,7 @@ src/ts/
 
 
 - **Page de test** : tout exemple à tester va dans `doc/templates/main/index.html.twig` (demande de Laurent, 2026-10-22), pas dans `test/`.
+- **Breakpoints** : à faire avec les premiers utilitaires de mise en page (`d-*`, `m-*`, `p-*`, `w-*`), pas avant, et pas sur les boutons. L'archive avait 6 breakpoints en map Sass (xs 480 à xxl 1536px), des suffixes (`-md`), `min-width` et `max-width` mélangés, et la boucle `@media` recopiée dans chaque fichier. Proposition pour la v2 (pas encore validée) : mobile-first seulement, syntaxe `(width >= …)`, valeurs en rem (suivent la taille de texte choisie par l'utilisateur), 4 breakpoints sm 32rem / md 48rem / lg 64rem / xl 80rem (+16rem à chaque cran), un seul mixin dans `tools/` ; container queries pour les composants qui dépendent de leur place (navbar, card).
 - Nom du projet (plus tard).
 - Navigateurs supportés (conditionne `:has()`, `popover`, nesting natif, `command`/`commandfor`, anchor positioning).
 - Build CSS : fait par la CLI `sass` (scripts `build` et `watch` de `package.json`). `gulpfile.js` et les paquets gulp, gulp-sass, gulp-rename et esbuild ne servent plus, à supprimer. Build JS à ajouter avec `tsc` quand le premier composant aura du JS.
@@ -237,10 +238,10 @@ src/ts/
     - `interpolate-size` seulement sous `prefers-reduced-motion: no-preference` ;
     - bloc `prefers-reduced-motion: reduce` global en `!important` dans le reset : gagne sur tout, site compris (choix strict assumé) ;
     - `-webkit-font-smoothing` retiré.
-- **base/ à créer** : ce qui est sorti du reset y va, avec des variables : `line-height` du body (`--line-height`), taille et graisse des titres, couleur des liens, `hr`, `accent-color`.
+- **base/** : ce qui est sorti du reset. Fait : typographie (`_typography.scss`). **En essai, à valider par Laurent** (2026-10-23) : `_colors.scss` = fond du `body` (`--color-background`, retiré de `doc.css`) et liens (`a`, couleur `--link-theme-text-emphasis`, neutral par défaut comme les boutons ; survol et clic comme `btn-link`, mélange `CanvasText` doublé ; soulignement natif gardé). **Couleur des liens = `.theme-*`, la même règle que les boutons** (Laurent, 2026-10-23 : « c'est important de respecter les mêmes règles partout » ; comme Bootstrap 6, qui a supprimé `.link-primary`) : `components/_link.scss` a la même forme que `_button.scss` (`:root` avec le thème par défaut, boucle `@each` des `.theme-*`). `<a class="theme-primary" href>` suffit : pas de classe `.link`, l'élément `<a>` est déjà stylé (HTML minimal). Le style de `a` reste dans `base/` : dans ce layer, les classes `.btn-*` posées sur un `<a>` gagnent toujours (dans `components/`, `a:hover` passerait devant la couleur de `.btn-solid`). Reste : `hr`, `accent-color`, `:focus-visible` commun.
 - Composants de l'archive écartés pour l'instant :
     - `collapse` (fusionné dans `accordion`, c'est un `<details>`) ;
-    - `link` (va dans base) ;
+    - `link` : refait (style dans `base/_colors.scss`, thèmes dans `components/_link.scss`) ;
     - `outline` (rôle à préciser) ;
     - utilitaires `animation`, `keyframes`, `cursor`, `image`.
 - JS : seul `tab.ts` est prévu. `dialog`, `drawer` et `dropdown` pourraient se passer de JS (`<dialog>` + `command`, `popover`), selon les navigateurs supportés.

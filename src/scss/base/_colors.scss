@@ -1,0 +1,21 @@
+@layer base {
+
+    // Fond de page : suit le thème clair ou sombre
+    body {
+        background-color: var(--color-background);
+    }
+
+    // Liens : soulignés (natif), leur couleur se rapproche du texte au survol et au clic, comme btn-link
+    // Couleur du thème dans components/_link.scss ; dans base, les classes .btn-* gagnent toujours
+    a {
+        color: var(--link-theme-text-emphasis);
+
+        &:hover {
+            color: color-mix(in srgb, var(--link-theme-text-emphasis), CanvasText calc(var(--state-mix-soft) * 2));
+        }
+        &:active {
+            color: color-mix(in srgb, var(--link-theme-text-emphasis), CanvasText calc(var(--state-mix-strong) * 2));
+        }
+    }
+
+}
