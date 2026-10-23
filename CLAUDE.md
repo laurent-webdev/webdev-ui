@@ -231,7 +231,7 @@ src/ts/
 - **Breakpoints** : à faire avec les premiers utilitaires de mise en page (`d-*`, `m-*`, `p-*`, `w-*`), pas avant, et pas sur les boutons. L'archive avait 6 breakpoints en map Sass (xs 480 à xxl 1536px), des suffixes (`-md`), `min-width` et `max-width` mélangés, et la boucle `@media` recopiée dans chaque fichier. Proposition pour la v2 (pas encore validée) : mobile-first seulement, syntaxe `(width >= …)`, valeurs en rem (suivent la taille de texte choisie par l'utilisateur), 4 breakpoints sm 32rem / md 48rem / lg 64rem / xl 80rem (+16rem à chaque cran), un seul mixin dans `tools/` ; container queries pour les composants qui dépendent de leur place (navbar, card).
 - Nom du projet (plus tard).
 - Navigateurs supportés (conditionne `:has()`, `popover`, nesting natif, `command`/`commandfor`, anchor positioning).
-- Build CSS : fait par la CLI `sass` (scripts `build` et `watch` de `package.json`). `gulpfile.js` et les paquets gulp, gulp-sass, gulp-rename et esbuild ne servent plus, à supprimer. Build JS à ajouter avec `tsc` quand le premier composant aura du JS.
+- Build CSS : CLI `sass` (scripts `build` et `watch` de `package.json`) et `gulpfile.js`. **Laurent a besoin de `gulpfile.js` pour compiler (2026-10-23) : on le garde, ne pas proposer de le supprimer.** Build JS à ajouter avec `tsc` quand le premier composant aura du JS.
 - Reset (`_reset.scss`) : revu et corrigé (comparé à Josh Comeau, Andy Bell, modern-normalize, reboot de Bootstrap 6). Décisions :
     - `margin: 0` seul sur `*` (pas de `padding: 0` : il casse le padding natif des champs, cellules, listes) ;
     - pas de `ul[role="list"]` (warning W3C) : liste sans puces = future classe `.list-unstyled` ;
