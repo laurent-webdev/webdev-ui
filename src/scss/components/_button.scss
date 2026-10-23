@@ -37,8 +37,14 @@
 
         // Couleur du thème en emphasis : visible sur le fond de page, même pour neutral ou warning
         &:focus-visible {
-            outline: var(--focus-outline-width) solid var(--btn-theme-background-solid);
+            outline: var(--focus-outline-width) solid var(--btn-theme-text-emphasis);
             outline-offset: var(--focus-outline-offset);
+        }
+
+        // Désactivé : estompé, plus de survol ni de clic
+        &:disabled {
+            opacity: var(--disabled-opacity);
+            pointer-events: none;
         }
     }
 

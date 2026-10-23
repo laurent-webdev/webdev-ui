@@ -197,6 +197,8 @@
   /* Contour de focus (:focus-visible) */
   --focus-outline-width: 2px;
   --focus-outline-offset: 1px;
+  /* Élément désactivé (disabled) */
+  --disabled-opacity: 0.65;
   /* Transitions */
   --transition-duration: 0.15s;
 }
@@ -324,8 +326,12 @@
     transition-duration: var(--transition-duration);
   }
   .btn-solid:focus-visible, .btn-outline:focus-visible, .btn-subtle:focus-visible, .btn-text:focus-visible {
-    outline: var(--focus-outline-width) solid var(--btn-theme-background-solid);
+    outline: var(--focus-outline-width) solid var(--btn-theme-text-emphasis);
     outline-offset: var(--focus-outline-offset);
+  }
+  .btn-solid:disabled, .btn-outline:disabled, .btn-subtle:disabled, .btn-text:disabled {
+    opacity: var(--disabled-opacity);
+    pointer-events: none;
   }
   .btn-solid {
     background-color: var(--btn-theme-background-solid);
