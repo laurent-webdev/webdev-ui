@@ -318,6 +318,9 @@
     --btn-theme-text-emphasis: var(--color-emphasis-inverse);
   }
   .btn-solid, .btn-outline, .btn-subtle, .btn-text, .btn-link {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
     padding-block: var(--btn-padding-block);
     padding-inline: var(--btn-padding-inline);
     border: var(--btn-border-width) solid transparent;

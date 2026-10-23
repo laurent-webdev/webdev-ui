@@ -28,6 +28,10 @@
 
     // Forme commune : la bordure existe toujours, toutes les variantes ont la même taille
     .btn-solid, .btn-outline, .btn-subtle, .btn-text, .btn-link {
+        // Sur un <a> aussi : une boîte comme <button>, centrée, sans soulignement (btn-link le remet)
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
         padding-block: var(--btn-padding-block);
         padding-inline: var(--btn-padding-inline);
         border: var(--btn-border-width) solid transparent;
