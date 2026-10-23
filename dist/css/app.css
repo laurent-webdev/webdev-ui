@@ -95,23 +95,15 @@
   --color-info: light-dark(oklch(0.72 0.165 262), oklch(0.72 0.165 262));
   --color-neutral: light-dark(oklch(0.93 0.008 228), oklch(0.33 0.012 228));
   --color-inverse: light-dark(oklch(0.32 0.015 228), oklch(0.86 0.008 228));
-  /* Luminance WCAG comparée à 0.179 : blanc en dessous, noir au-dessus (≥ 4,58:1) */
-  --contrast-channel: clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1);
-  /* Fond léger : luminosité imposée (+ 12 % de celle de la couleur), saturation réduite */
-  --subtle-light: 0.85;
-  --subtle-dark: 0.22;
-  --subtle-chroma: 0.3;
-  /* Mélangée au fond subtle au survol : fonce en clair, éclaircit en sombre */
-  --color-state-on-subtle: light-dark(#000000, #ffffff);
-  --color-text-on-primary: color(from var(--color-primary) srgb-linear var(--contrast-channel) var(--contrast-channel) var(--contrast-channel));
-  --color-text-on-secondary: color(from var(--color-secondary) srgb-linear var(--contrast-channel) var(--contrast-channel) var(--contrast-channel));
-  --color-text-on-accent: color(from var(--color-accent) srgb-linear var(--contrast-channel) var(--contrast-channel) var(--contrast-channel));
-  --color-text-on-success: color(from var(--color-success) srgb-linear var(--contrast-channel) var(--contrast-channel) var(--contrast-channel));
-  --color-text-on-danger: color(from var(--color-danger) srgb-linear var(--contrast-channel) var(--contrast-channel) var(--contrast-channel));
-  --color-text-on-warning: color(from var(--color-warning) srgb-linear var(--contrast-channel) var(--contrast-channel) var(--contrast-channel));
-  --color-text-on-info: color(from var(--color-info) srgb-linear var(--contrast-channel) var(--contrast-channel) var(--contrast-channel));
-  --color-text-on-neutral: color(from var(--color-neutral) srgb-linear var(--contrast-channel) var(--contrast-channel) var(--contrast-channel));
-  --color-text-on-inverse: color(from var(--color-inverse) srgb-linear var(--contrast-channel) var(--contrast-channel) var(--contrast-channel));
+  --color-text-on-primary: color(from var(--color-primary) srgb-linear clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1));
+  --color-text-on-secondary: color(from var(--color-secondary) srgb-linear clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1));
+  --color-text-on-accent: color(from var(--color-accent) srgb-linear clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1));
+  --color-text-on-success: color(from var(--color-success) srgb-linear clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1));
+  --color-text-on-danger: color(from var(--color-danger) srgb-linear clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1));
+  --color-text-on-warning: color(from var(--color-warning) srgb-linear clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1));
+  --color-text-on-info: color(from var(--color-info) srgb-linear clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1));
+  --color-text-on-neutral: color(from var(--color-neutral) srgb-linear clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1));
+  --color-text-on-inverse: color(from var(--color-inverse) srgb-linear clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1) clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1));
   --color-state-on-primary: color(from var(--color-text-on-primary) srgb calc(1 - r) calc(1 - g) calc(1 - b));
   --color-state-on-secondary: color(from var(--color-text-on-secondary) srgb calc(1 - r) calc(1 - g) calc(1 - b));
   --color-state-on-accent: color(from var(--color-text-on-accent) srgb calc(1 - r) calc(1 - g) calc(1 - b));
@@ -121,15 +113,15 @@
   --color-state-on-info: color(from var(--color-text-on-info) srgb calc(1 - r) calc(1 - g) calc(1 - b));
   --color-state-on-neutral: color(from var(--color-text-on-neutral) srgb calc(1 - r) calc(1 - g) calc(1 - b));
   --color-state-on-inverse: color(from var(--color-text-on-inverse) srgb calc(1 - r) calc(1 - g) calc(1 - b));
-  --color-subtle-primary: light-dark(oklch(from var(--color-primary) calc(l * 0.12 + var(--subtle-light)) calc(c * var(--subtle-chroma)) h), oklch(from var(--color-primary) calc(l * 0.12 + var(--subtle-dark)) calc(c * var(--subtle-chroma)) h));
-  --color-subtle-secondary: light-dark(oklch(from var(--color-secondary) calc(l * 0.12 + var(--subtle-light)) calc(c * var(--subtle-chroma)) h), oklch(from var(--color-secondary) calc(l * 0.12 + var(--subtle-dark)) calc(c * var(--subtle-chroma)) h));
-  --color-subtle-accent: light-dark(oklch(from var(--color-accent) calc(l * 0.12 + var(--subtle-light)) calc(c * var(--subtle-chroma)) h), oklch(from var(--color-accent) calc(l * 0.12 + var(--subtle-dark)) calc(c * var(--subtle-chroma)) h));
-  --color-subtle-success: light-dark(oklch(from var(--color-success) calc(l * 0.12 + var(--subtle-light)) calc(c * var(--subtle-chroma)) h), oklch(from var(--color-success) calc(l * 0.12 + var(--subtle-dark)) calc(c * var(--subtle-chroma)) h));
-  --color-subtle-danger: light-dark(oklch(from var(--color-danger) calc(l * 0.12 + var(--subtle-light)) calc(c * var(--subtle-chroma)) h), oklch(from var(--color-danger) calc(l * 0.12 + var(--subtle-dark)) calc(c * var(--subtle-chroma)) h));
-  --color-subtle-warning: light-dark(oklch(from var(--color-warning) calc(l * 0.12 + var(--subtle-light)) calc(c * var(--subtle-chroma)) h), oklch(from var(--color-warning) calc(l * 0.12 + var(--subtle-dark)) calc(c * var(--subtle-chroma)) h));
-  --color-subtle-info: light-dark(oklch(from var(--color-info) calc(l * 0.12 + var(--subtle-light)) calc(c * var(--subtle-chroma)) h), oklch(from var(--color-info) calc(l * 0.12 + var(--subtle-dark)) calc(c * var(--subtle-chroma)) h));
-  --color-subtle-neutral: light-dark(oklch(from var(--color-neutral) calc(l * 0.12 + var(--subtle-light)) calc(c * var(--subtle-chroma)) h), oklch(from var(--color-neutral) calc(l * 0.12 + var(--subtle-dark)) calc(c * var(--subtle-chroma)) h));
-  --color-subtle-inverse: light-dark(oklch(from var(--color-inverse) calc(l * 0.12 + var(--subtle-light)) calc(c * var(--subtle-chroma)) h), oklch(from var(--color-inverse) calc(l * 0.12 + var(--subtle-dark)) calc(c * var(--subtle-chroma)) h));
+  --color-subtle-primary: light-dark(oklch(from var(--color-primary) calc(l * 0.12 + 0.85) calc(c * 0.3) h), oklch(from var(--color-primary) calc(l * 0.12 + 0.22) calc(c * 0.3) h));
+  --color-subtle-secondary: light-dark(oklch(from var(--color-secondary) calc(l * 0.12 + 0.85) calc(c * 0.3) h), oklch(from var(--color-secondary) calc(l * 0.12 + 0.22) calc(c * 0.3) h));
+  --color-subtle-accent: light-dark(oklch(from var(--color-accent) calc(l * 0.12 + 0.85) calc(c * 0.3) h), oklch(from var(--color-accent) calc(l * 0.12 + 0.22) calc(c * 0.3) h));
+  --color-subtle-success: light-dark(oklch(from var(--color-success) calc(l * 0.12 + 0.85) calc(c * 0.3) h), oklch(from var(--color-success) calc(l * 0.12 + 0.22) calc(c * 0.3) h));
+  --color-subtle-danger: light-dark(oklch(from var(--color-danger) calc(l * 0.12 + 0.85) calc(c * 0.3) h), oklch(from var(--color-danger) calc(l * 0.12 + 0.22) calc(c * 0.3) h));
+  --color-subtle-warning: light-dark(oklch(from var(--color-warning) calc(l * 0.12 + 0.85) calc(c * 0.3) h), oklch(from var(--color-warning) calc(l * 0.12 + 0.22) calc(c * 0.3) h));
+  --color-subtle-info: light-dark(oklch(from var(--color-info) calc(l * 0.12 + 0.85) calc(c * 0.3) h), oklch(from var(--color-info) calc(l * 0.12 + 0.22) calc(c * 0.3) h));
+  --color-subtle-neutral: light-dark(oklch(from var(--color-neutral) calc(l * 0.12 + 0.85) calc(c * 0.3) h), oklch(from var(--color-neutral) calc(l * 0.12 + 0.22) calc(c * 0.3) h));
+  --color-subtle-inverse: light-dark(oklch(from var(--color-inverse) calc(l * 0.12 + 0.85) calc(c * 0.3) h), oklch(from var(--color-inverse) calc(l * 0.12 + 0.22) calc(c * 0.3) h));
   --color-emphasis-primary: light-dark(oklch(from var(--color-primary) 0.45 c h), oklch(from var(--color-primary) 0.80 c h));
   --color-emphasis-secondary: light-dark(oklch(from var(--color-secondary) 0.45 c h), oklch(from var(--color-secondary) 0.80 c h));
   --color-emphasis-accent: light-dark(oklch(from var(--color-accent) 0.45 c h), oklch(from var(--color-accent) 0.80 c h));
@@ -163,34 +155,35 @@
   /* Familles : polices du système, rien à télécharger */
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, "Cascadia Mono", Consolas, "Liberation Mono", monospace;
-  /* Tailles : fixes jusqu'à md, fluides ensuite */
+  /* Texte (xs à lg) : fixe, 2px d'écart */
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-md: 1rem;
-  --font-size-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
-  --font-size-xl: clamp(1.5rem, 1.1rem + 0.75vw, 1.75rem);
-  --font-size-2xl: clamp(1.75rem, 1.3rem + 1vw, 2rem);
-  --font-size-3xl: clamp(2rem, 1.5rem + 1.875vw, 2.5rem);
-  --font-size-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3rem);
-  --font-size-5xl: clamp(3rem, 2rem + 5vw, 4rem);
-  --font-size-6xl: clamp(3.75rem, 2.5rem + 6.25vw, 5rem);
+  --font-size-lg: 1.125rem;
+  /* Titres (xl à 6xl) : grandissent de 400 à 1200px d'écran ; grand écran : double tous les 3 crans ; mobile : écart avec md divisé par 2 */
+  --font-size-xl: clamp(1.25rem, 1.125rem + 0.5vw, 1.5rem);
+  --font-size-2xl: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  --font-size-3xl: clamp(1.75rem, 1.375rem + 1.5vw, 2.5rem);
+  --font-size-4xl: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --font-size-5xl: clamp(2.5rem, 1.75rem + 3vw, 4rem);
+  --font-size-6xl: clamp(3rem, 2rem + 4vw, 5rem);
   /* Graisses */
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  /* Interlignage : un par taille, plus serré quand le texte grossit */
-  --line-height-xs: 1.25;
+  /* Interlignage : 1.5 pour le texte (xs à lg), puis -0.1 par taille, 1.2 minimum (les accents ne touchent pas la ligne voisine) */
+  --line-height-xs: 1.5;
   --line-height-sm: 1.5;
   --line-height-md: 1.5;
   --line-height-lg: 1.5;
-  --line-height-xl: 1.43;
-  --line-height-2xl: 1.33;
+  --line-height-xl: 1.4;
+  --line-height-2xl: 1.3;
   --line-height-3xl: 1.2;
-  --line-height-4xl: 1.1;
-  --line-height-5xl: 1.1;
-  --line-height-6xl: 1;
+  --line-height-4xl: 1.2;
+  --line-height-5xl: 1.2;
+  --line-height-6xl: 1.2;
   /* Titres */
   --heading-font-weight: var(--font-weight-medium);
 }
@@ -253,26 +246,6 @@
     --btn-padding-inline: 1rem;
     --btn-border-radius: var(--radius);
     --btn-border-width: 1px;
-    --btn-transition-duration: var(--transition-duration);
-    --btn-focus-outline-width: var(--focus-outline-width);
-    --btn-focus-outline-offset: var(--focus-outline-offset);
-    --btn-xs-padding-block: 0.125rem;
-    --btn-xs-padding-inline: 0.5rem;
-    --btn-xs-font-size: var(--font-size-xs);
-    --btn-sm-padding-block: 0.25rem;
-    --btn-sm-padding-inline: 0.75rem;
-    --btn-sm-font-size: var(--font-size-sm);
-    --btn-lg-padding-block: 0.5rem;
-    --btn-lg-padding-inline: 1.25rem;
-    --btn-lg-font-size: var(--font-size-lg);
-    --btn-solid-hover-mix: var(--state-mix-soft);
-    --btn-solid-active-mix: var(--state-mix-strong);
-    --btn-outline-hover-mix: 0%;
-    --btn-outline-active-mix: var(--state-mix-soft);
-    --btn-subtle-hover-mix: var(--state-mix-soft);
-    --btn-subtle-active-mix: var(--state-mix-strong);
-    --btn-text-hover-mix: 0%;
-    --btn-text-active-mix: var(--state-mix-soft);
     --btn-theme-background-solid: var(--color-neutral);
     --btn-theme-text-solid: var(--color-text-on-neutral);
     --btn-theme-state-solid: var(--color-state-on-neutral);
@@ -347,23 +320,22 @@
     padding-inline: var(--btn-padding-inline);
     border: var(--btn-border-width) solid transparent;
     border-radius: var(--btn-border-radius);
-    transition: background-color var(--btn-transition-duration), border-color var(--btn-transition-duration), color var(--btn-transition-duration);
+    transition-property: background-color, border-color, color;
+    transition-duration: var(--transition-duration);
   }
   .btn-solid:focus-visible, .btn-outline:focus-visible, .btn-subtle:focus-visible, .btn-text:focus-visible {
-    outline: var(--btn-focus-outline-width) solid var(--btn-theme-background-solid);
-    outline-offset: var(--btn-focus-outline-offset);
+    outline: var(--focus-outline-width) solid var(--btn-theme-background-solid);
+    outline-offset: var(--focus-outline-offset);
   }
   .btn-solid {
     background-color: var(--btn-theme-background-solid);
     color: var(--btn-theme-text-solid);
   }
-  @supports (color: color-mix(in srgb, red, blue)) {
-    .btn-solid:hover {
-      background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--btn-solid-hover-mix));
-    }
-    .btn-solid:active {
-      background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--btn-solid-active-mix));
-    }
+  .btn-solid:hover {
+    background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--state-mix-soft));
+  }
+  .btn-solid:active {
+    background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--state-mix-strong));
   }
   .btn-outline {
     border-color: var(--btn-theme-background-solid);
@@ -375,55 +347,43 @@
     background-color: var(--btn-theme-background-solid);
     color: var(--btn-theme-text-solid);
   }
-  @supports (color: color-mix(in srgb, red, blue)) {
-    .btn-outline:hover {
-      background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--btn-outline-hover-mix));
-    }
-    .btn-outline:active {
-      background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--btn-outline-active-mix));
-    }
+  .btn-outline:active {
+    background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--state-mix-soft));
   }
   .btn-subtle {
     background-color: var(--btn-theme-background-subtle);
     color: var(--btn-theme-text-emphasis);
   }
-  @supports (color: color-mix(in srgb, red, blue)) {
-    .btn-subtle:hover {
-      background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--btn-subtle-hover-mix));
-    }
-    .btn-subtle:active {
-      background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--btn-subtle-active-mix));
-    }
+  .btn-subtle:hover {
+    background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-soft));
+  }
+  .btn-subtle:active {
+    background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-strong));
   }
   .btn-text {
     background-color: transparent;
     color: var(--btn-theme-text-emphasis);
   }
-  .btn-text:hover, .btn-text:active {
+  .btn-text:hover {
     background-color: var(--btn-theme-background-subtle);
   }
-  @supports (color: color-mix(in srgb, red, blue)) {
-    .btn-text:hover {
-      background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--btn-text-hover-mix));
-    }
-    .btn-text:active {
-      background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--btn-text-active-mix));
-    }
+  .btn-text:active {
+    background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-soft));
   }
   .btn-xs {
-    padding-block: var(--btn-xs-padding-block);
-    padding-inline: var(--btn-xs-padding-inline);
-    font-size: var(--btn-xs-font-size);
+    --btn-padding-block: 0.125rem;
+    --btn-padding-inline: 0.5rem;
+    font-size: var(--font-size-xs);
   }
   .btn-sm {
-    padding-block: var(--btn-sm-padding-block);
-    padding-inline: var(--btn-sm-padding-inline);
-    font-size: var(--btn-sm-font-size);
+    --btn-padding-block: 0.25rem;
+    --btn-padding-inline: 0.75rem;
+    font-size: var(--font-size-sm);
   }
   .btn-lg {
-    padding-block: var(--btn-lg-padding-block);
-    padding-inline: var(--btn-lg-padding-inline);
-    font-size: var(--btn-lg-font-size);
+    --btn-padding-block: 0.5rem;
+    --btn-padding-inline: 1.25rem;
+    font-size: var(--font-size-lg);
   }
 }
 @layer utilities {

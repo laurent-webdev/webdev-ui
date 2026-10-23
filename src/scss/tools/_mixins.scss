@@ -1,9 +1,11 @@
 // Couleurs dérivées : une variable par couleur de la liste, calculée à partir de --color-<nom>
 
-// Texte noir ou blanc, le plus lisible sur la couleur (utilise --contrast-channel)
+// Texte noir ou blanc, le plus lisible : luminance WCAG comparée à 0.179, blanc en dessous, noir au-dessus (≥ 4,58:1)
 @mixin text-on-colors($colors) {
+  $channel: "clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1)";
+
   @each $color in $colors {
-    --color-text-on-#{$color}: color(from var(--color-#{$color}) srgb-linear var(--contrast-channel) var(--contrast-channel) var(--contrast-channel));
+    --color-text-on-#{$color}: color(from var(--color-#{$color}) srgb-linear #{$channel} #{$channel} #{$channel});
   }
 }
 
@@ -14,10 +16,10 @@
   }
 }
 
-// Fond léger : luminosité imposée (+ 12 % de celle de la couleur), saturation réduite (utilise --subtle-*)
+// Fond léger : luminosité 0.85 en clair, 0.22 en sombre (+ 12 % de celle de la couleur), saturation à 30 %
 @mixin subtle-colors($colors) {
   @each $color in $colors {
-    --color-subtle-#{$color}: light-dark(oklch(from var(--color-#{$color}) calc(l * 0.12 + var(--subtle-light)) calc(c * var(--subtle-chroma)) h), oklch(from var(--color-#{$color}) calc(l * 0.12 + var(--subtle-dark)) calc(c * var(--subtle-chroma)) h));
+    --color-subtle-#{$color}: light-dark(oklch(from var(--color-#{$color}) calc(l * 0.12 + 0.85) calc(c * 0.3) h), oklch(from var(--color-#{$color}) calc(l * 0.12 + 0.22) calc(c * 0.3) h));
   }
 }
 

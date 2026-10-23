@@ -6,35 +6,6 @@
         --btn-padding-inline: 1rem;
         --btn-border-radius: var(--radius);
         --btn-border-width: 1px;
-        --btn-transition-duration: var(--transition-duration);
-        --btn-focus-outline-width: var(--focus-outline-width);
-        --btn-focus-outline-offset: var(--focus-outline-offset);
-
-        // Tailles
-        --btn-xs-padding-block: 0.125rem;
-        --btn-xs-padding-inline: 0.5rem;
-        --btn-xs-font-size: var(--font-size-xs);
-
-        --btn-sm-padding-block: 0.25rem;
-        --btn-sm-padding-inline: 0.75rem;
-        --btn-sm-font-size: var(--font-size-sm);
-
-        --btn-lg-padding-block: 0.5rem;
-        --btn-lg-padding-inline: 1.25rem;
-        --btn-lg-font-size: var(--font-size-lg);
-
-        // Survol et clic : part de couleur mélangée au fond (0 % = pas de mélange)
-        --btn-solid-hover-mix: var(--state-mix-soft);
-        --btn-solid-active-mix: var(--state-mix-strong);
-
-        --btn-outline-hover-mix: 0%;
-        --btn-outline-active-mix: var(--state-mix-soft);
-
-        --btn-subtle-hover-mix: var(--state-mix-soft);
-        --btn-subtle-active-mix: var(--state-mix-strong);
-
-        --btn-text-hover-mix: 0%;
-        --btn-text-active-mix: var(--state-mix-soft);
 
         // Thème par défaut, sans classe .theme-*
         --btn-theme-background-solid: var(--color-neutral);
@@ -61,32 +32,26 @@
         padding-inline: var(--btn-padding-inline);
         border: var(--btn-border-width) solid transparent;
         border-radius: var(--btn-border-radius);
-        transition:
-            background-color var(--btn-transition-duration),
-            border-color var(--btn-transition-duration),
-            color var(--btn-transition-duration);
+        transition-property: background-color, border-color, color;
+        transition-duration: var(--transition-duration);
 
         // Couleur du thème en emphasis : visible sur le fond de page, même pour neutral ou warning
         &:focus-visible {
-            outline: var(--btn-focus-outline-width) solid var(--btn-theme-background-solid);
-            outline-offset: var(--btn-focus-outline-offset);
+            outline: var(--focus-outline-width) solid var(--btn-theme-background-solid);
+            outline-offset: var(--focus-outline-offset);
         }
     }
-
-    // Les @supports : sans color-mix(), le navigateur garde le fond de repli
 
     // Solid : fond plein, mélangé à l'opposé du texte
     .btn-solid {
         background-color: var(--btn-theme-background-solid);
         color: var(--btn-theme-text-solid);
 
-        @supports (color: color-mix(in srgb, red, blue)) {
-            &:hover {
-                background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--btn-solid-hover-mix));
-            }
-            &:active {
-                background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--btn-solid-active-mix));
-            }
+        &:hover {
+            background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--state-mix-soft));
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--state-mix-strong));
         }
     }
 
@@ -103,14 +68,8 @@
             background-color: var(--btn-theme-background-solid);
             color: var(--btn-theme-text-solid);
         }
-
-        @supports (color: color-mix(in srgb, red, blue)) {
-            &:hover {
-                background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--btn-outline-hover-mix));
-            }
-            &:active {
-                background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--btn-outline-active-mix));
-            }
+        &:active {
+            background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--state-mix-soft));
         }
     }
 
@@ -119,13 +78,11 @@
         background-color: var(--btn-theme-background-subtle);
         color: var(--btn-theme-text-emphasis);
 
-        @supports (color: color-mix(in srgb, red, blue)) {
-            &:hover {
-                background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--btn-subtle-hover-mix));
-            }
-            &:active {
-                background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--btn-subtle-active-mix));
-            }
+        &:hover {
+            background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-soft));
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-strong));
         }
     }
 
@@ -134,38 +91,31 @@
         background-color: transparent;
         color: var(--btn-theme-text-emphasis);
 
-        &:hover,
-        &:active {
+        &:hover {
             background-color: var(--btn-theme-background-subtle);
         }
-
-        @supports (color: color-mix(in srgb, red, blue)) {
-            &:hover {
-                background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--btn-text-hover-mix));
-            }
-            &:active {
-                background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--btn-text-active-mix));
-            }
+        &:active {
+            background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-soft));
         }
     }
 
-    // Tailles : après les variantes pour les surcharger, avec n'importe laquelle
+    // Tailles : changent le padding du bouton, avec n'importe quelle variante
     .btn-xs {
-        padding-block: var(--btn-xs-padding-block);
-        padding-inline: var(--btn-xs-padding-inline);
-        font-size: var(--btn-xs-font-size);
+        --btn-padding-block: 0.125rem;
+        --btn-padding-inline: 0.5rem;
+        font-size: var(--font-size-xs);
     }
 
     .btn-sm {
-        padding-block: var(--btn-sm-padding-block);
-        padding-inline: var(--btn-sm-padding-inline);
-        font-size: var(--btn-sm-font-size);
+        --btn-padding-block: 0.25rem;
+        --btn-padding-inline: 0.75rem;
+        font-size: var(--font-size-sm);
     }
 
     .btn-lg {
-        padding-block: var(--btn-lg-padding-block);
-        padding-inline: var(--btn-lg-padding-inline);
-        font-size: var(--btn-lg-font-size);
+        --btn-padding-block: 0.5rem;
+        --btn-padding-inline: 1.25rem;
+        font-size: var(--font-size-lg);
     }
 
 }

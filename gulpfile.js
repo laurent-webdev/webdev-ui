@@ -58,7 +58,7 @@ function buildJSBundle() {
         bundle: true,
         format: 'esm',
     });
-}
+}Boutons : états, focus, tailles ; ajout de la typographie
 
 function buildJSBundleMin() {
     return esbuild.build({

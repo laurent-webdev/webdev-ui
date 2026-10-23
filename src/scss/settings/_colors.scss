@@ -20,17 +20,6 @@ $colors: primary, secondary, accent, success, danger, warning, info, neutral, in
   --color-neutral: light-dark(oklch(0.93 0.008 228), oklch(0.33 0.012 228));
   --color-inverse: light-dark(oklch(0.32 0.015 228), oklch(0.86 0.008 228));
 
-  /* Luminance WCAG comparée à 0.179 : blanc en dessous, noir au-dessus (≥ 4,58:1) */
-  --contrast-channel: clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1);
-
-  /* Fond léger : luminosité imposée (+ 12 % de celle de la couleur), saturation réduite */
-  --subtle-light: 0.85;
-  --subtle-dark: 0.22;
-  --subtle-chroma: 0.3;
-
-  /* Mélangée au fond subtle au survol : fonce en clair, éclaircit en sombre */
-  --color-state-on-subtle: light-dark(#000000, #ffffff);
-
   @include mixins.text-on-colors($colors);
   @include mixins.state-on-colors($colors);
   @include mixins.subtle-colors($colors);
