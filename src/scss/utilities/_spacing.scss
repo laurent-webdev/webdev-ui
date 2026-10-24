@@ -36,6 +36,7 @@
 
     // Sans breakpoint, puis une fois par breakpoint, du plus petit au plus grand
     @include spacing-classes;
+    @media (width >= breakpoints.$screen-xs) { @include spacing-classes('xs\\:'); }
     @media (width >= breakpoints.$screen-sm) { @include spacing-classes('sm\\:'); }
     @media (width >= breakpoints.$screen-md) { @include spacing-classes('md\\:'); }
     @media (width >= breakpoints.$screen-lg) { @include spacing-classes('lg\\:'); }

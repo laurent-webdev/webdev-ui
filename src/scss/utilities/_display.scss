@@ -1,0 +1,29 @@
+@use '../settings/breakpoints';
+
+// Toutes les classes d'affichage ; $breakpoint est mis devant le nom de la classe (.md\:d-flex), vide sans breakpoint
+// Ce sont des mots-clés de display, pas des réglages : pas de variable CSS
+@mixin display-classes($breakpoint: '') {
+    // Masqué pour tout le monde, lecteurs d'écran compris
+    .#{$breakpoint}d-none { display: none; }
+    .#{$breakpoint}d-inline { display: inline; }
+    .#{$breakpoint}d-inline-block { display: inline-block; }
+    .#{$breakpoint}d-block { display: block; }
+    .#{$breakpoint}d-flex { display: flex; }
+    .#{$breakpoint}d-inline-flex { display: inline-flex; }
+    // Sans colonnes, à la différence de .grid ; réaffiche aussi une .grid masquée (class="grid d-none md:d-grid")
+    .#{$breakpoint}d-grid { display: grid; }
+}
+
+@layer utilities {
+
+    // Sans breakpoint, puis une fois par breakpoint, du plus petit au plus grand
+    @include display-classes;
+    @media (width >= breakpoints.$screen-xs) { @include display-classes('xs\\:'); }
+    @media (width >= breakpoints.$screen-sm) { @include display-classes('sm\\:'); }
+    @media (width >= breakpoints.$screen-md) { @include display-classes('md\\:'); }
+    @media (width >= breakpoints.$screen-lg) { @include display-classes('lg\\:'); }
+    @media (width >= breakpoints.$screen-xl) { @include display-classes('xl\\:'); }
+    // Une classe CSS ne peut pas commencer par un chiffre : le 2 de 2xl s'écrit échappé (\32 + espace)
+    @media (width >= breakpoints.$screen-2xl) { @include display-classes('\\32 xl\\:'); }
+
+}

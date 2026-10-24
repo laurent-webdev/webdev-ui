@@ -1,0 +1,28 @@
+@use '../settings/breakpoints';
+
+@layer layout {
+
+    :root {
+        // Largeur du plus grand breakpoint (2xl, 96rem), marges comprises
+        --container-max-width: #{breakpoints.$screen-2xl};
+        // Marge sur les côtés, pour que le contenu ne touche pas le bord de l'écran
+        --container-padding-inline: 1rem;
+    }
+
+    // Centré, pleine largeur jusqu'à --container-max-width
+    .container, .container-xs, .container-sm, .container-md, .container-lg, .container-xl, .container-2xl {
+        width: 100%;
+        max-width: var(--container-max-width);
+        margin-inline: auto;
+        padding-inline: var(--container-padding-inline);
+    }
+
+    // Tailles : le container s'arrête à la largeur du breakpoint du même nom
+    .container-xs { --container-max-width: #{breakpoints.$screen-xs}; }
+    .container-sm { --container-max-width: #{breakpoints.$screen-sm}; }
+    .container-md { --container-max-width: #{breakpoints.$screen-md}; }
+    .container-lg { --container-max-width: #{breakpoints.$screen-lg}; }
+    .container-xl { --container-max-width: #{breakpoints.$screen-xl}; }
+    .container-2xl { --container-max-width: #{breakpoints.$screen-2xl}; }
+
+}

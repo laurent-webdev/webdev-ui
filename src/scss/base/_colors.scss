@@ -16,6 +16,13 @@
         &:active {
             color: color-mix(in srgb, var(--link-theme-text-emphasis), CanvasText calc(var(--state-mix-strong) * 2));
         }
+
+        // Contour de la couleur du lien, comme les boutons
+        &:focus-visible {
+            outline: var(--focus-outline-width) solid var(--link-theme-text-emphasis);
+            outline-offset: var(--focus-outline-offset);
+            border-radius: var(--radius);
+        }
     }
 
 }

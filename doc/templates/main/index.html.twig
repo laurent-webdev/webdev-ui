@@ -174,6 +174,172 @@
         <div class="demo-frame mt-4"><div class="demo-box m-4 mt-0 p-2">m-4 mt-0 p-2 : le côté précis gagne</div></div>
         <div class="demo-frame mt-4"><div class="demo-box p-2 md:p-6 lg:p-12">p-2 md:p-6 lg:p-12 : grandit avec l'écran</div></div>
         <div class="demo-frame mt-4"><div class="demo-box p-1 sm:p-2 md:p-4 lg:p-6 xl:p-8 2xl:p-12">p-1 sm:p-2 md:p-4 lg:p-6 xl:p-8 2xl:p-12 : un cran par breakpoint</div></div>
+        <div class="demo-frame mt-4"><div class="demo-box p-1 xs:p-4">p-1 xs:p-4 : plus serré sous 360px</div></div>
+    </section>
+
+    <section>
+        <h2>Container</h2>
+        <div class="container demo-frame mt-4">
+            <div class="demo-box p-2">container : centré, 96rem au plus, 1rem de marge sur les côtés (le cadre montre ses bords)</div>
+        </div>
+        <div class="container-2xl demo-frame mt-4"><div class="demo-box p-2">container-2xl : 96rem au plus, comme container</div></div>
+        <div class="container-xl demo-frame mt-4"><div class="demo-box p-2">container-xl : 80rem au plus</div></div>
+        <div class="container-lg demo-frame mt-4"><div class="demo-box p-2">container-lg : 64rem au plus</div></div>
+        <div class="container-md demo-frame mt-4"><div class="demo-box p-2">container-md : 48rem au plus</div></div>
+        <div class="container-sm demo-frame mt-4"><div class="demo-box p-2">container-sm : 36rem au plus</div></div>
+        <div class="container-xs demo-frame mt-4"><div class="demo-box p-2">container-xs : 22.5rem au plus</div></div>
+        <div class="container demo-frame mt-4">
+            <div class="grid">
+                <div class="demo-box p-2 md:col-6">container + grid : md:col-6</div>
+                <div class="demo-box p-2 md:col-6">md:col-6</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Grille</h2>
+        <div class="grid mt-4">
+            <div class="demo-box p-2">sans classe : pleine largeur</div>
+        </div>
+        <div class="grid mt-4">
+            <div class="demo-box p-2 col-6">col-6</div>
+            <div class="demo-box p-2 col-6">col-6</div>
+        </div>
+        <div class="grid mt-4">
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-8">col-8</div>
+        </div>
+        <div class="grid mt-4">
+            <div class="demo-box p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</div>
+            <div class="demo-box p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</div>
+            <div class="demo-box p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</div>
+            <div class="demo-box p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</div>
+        </div>
+        <div class="grid mt-4">
+            <p class="demo-box p-2 col-3">col-3 avec un mot très long : Anticonstitutionnellementanticonstitutionnellement</p>
+            <div class="demo-box p-2 col-9">col-9</div>
+        </div>
+        <div class="grid mt-4">
+            <div class="demo-box p-2 md:col-6">
+                <p>md:col-6 avec une grille dedans</p>
+                <div class="grid mt-2">
+                    <div class="demo-frame p-2 col-6">col-6</div>
+                    <div class="demo-frame p-2 col-6">col-6</div>
+                </div>
+            </div>
+            <div class="demo-box p-2 md:col-6">md:col-6</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Display</h2>
+        <p class="demo-box p-2 mt-4 d-none md:d-block">d-none md:d-block : visible à partir de md (768px)</p>
+        <p class="demo-box p-2 mt-4 md:d-none">md:d-none : masqué à partir de md (768px)</p>
+        <p class="mt-4">d-inline-block : <span class="demo-box p-2 d-inline-block">prend un padding vertical</span> dans le texte</p>
+        <p class="mt-4">d-inline-flex gap-2 : <span class="demo-box p-1 d-inline-flex gap-2"><span>un</span><span>deux</span></span> dans le texte</p>
+        <p class="mt-4">d-grid gap-2 : boutons empilés, pleine largeur</p>
+        <div class="d-grid gap-2">
+            <button class="btn-solid theme-primary" type="button">Valider</button>
+            <button class="btn-outline" type="button">Annuler</button>
+        </div>
+        <p class="mt-4">grid d-none lg:d-grid : grille visible à partir de lg (1024px)</p>
+        <div class="grid d-none lg:d-grid">
+            <div class="demo-box p-2 col-6">col-6</div>
+            <div class="demo-box p-2 col-6">col-6</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Flex</h2>
+        <p class="mt-4">d-flex flex-direction-column md:flex-direction-row gap-2 : en colonne, en ligne dès md</p>
+        <div class="d-flex flex-direction-column md:flex-direction-row gap-2">
+            <div class="demo-box p-2">un</div>
+            <div class="demo-box p-2">deux</div>
+            <div class="demo-box p-2">trois</div>
+        </div>
+        <p class="mt-4">justify-content-start / center / end / space-between</p>
+        <div class="demo-frame d-flex justify-content-start gap-2 mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div></div>
+        <div class="demo-frame d-flex justify-content-center gap-2 mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div></div>
+        <div class="demo-frame d-flex justify-content-end gap-2 mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div></div>
+        <div class="demo-frame d-flex justify-content-space-between gap-2 mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div></div>
+        <p class="mt-4">justify-content-space-between / space-around / space-evenly : la différence se voit aux bords</p>
+        <div class="demo-frame d-flex justify-content-space-between mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div><div class="demo-box p-2">trois</div></div>
+        <div class="demo-frame d-flex justify-content-space-around mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div><div class="demo-box p-2">trois</div></div>
+        <div class="demo-frame d-flex justify-content-space-evenly mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div><div class="demo-box p-2">trois</div></div>
+        <p class="mt-4">align-items-start / center / end / baseline / stretch (le premier bloc est plus haut)</p>
+        <div class="demo-frame d-flex align-items-start gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">start</div></div>
+        <div class="demo-frame d-flex align-items-center gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">center</div></div>
+        <div class="demo-frame d-flex align-items-end gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">end</div></div>
+        <div class="demo-frame d-flex align-items-baseline gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">baseline</div></div>
+        <div class="demo-frame d-flex align-items-stretch gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">stretch</div></div>
+        <p class="mt-4">align-self : un enfant s'aligne autrement que les autres (parent en align-items-start)</p>
+        <div class="demo-frame d-flex align-items-start gap-2 mt-2">
+            <div class="demo-box p-6">haut</div>
+            <div class="demo-box p-2">start</div>
+            <div class="demo-box p-2 align-self-center">align-self-center</div>
+            <div class="demo-box p-2 align-self-end">align-self-end</div>
+        </div>
+        <p class="mt-4">d-flex flex-direction-column : le bouton s'étire ; align-self-start le garde à sa taille</p>
+        <div class="demo-frame d-flex flex-direction-column gap-2 p-2 mt-2">
+            <button class="btn-outline" type="button">étiré</button>
+            <button class="btn-outline align-self-start" type="button">align-self-start</button>
+        </div>
+        <p class="mt-4">flex-wrap-wrap : passe à la ligne quand la place manque</p>
+        <div class="demo-frame d-flex flex-wrap-wrap gap-2 mt-2">
+            <span class="demo-box p-2">étiquette</span><span class="demo-box p-2">étiquette longue</span><span class="demo-box p-2">étiquette</span><span class="demo-box p-2">encore une étiquette</span><span class="demo-box p-2">étiquette</span><span class="demo-box p-2">étiquette</span>
+        </div>
+        <p class="mt-4">flex-grow-1 : le champ prend la place libre ; flex-shrink-0 : le bouton garde sa taille</p>
+        <form class="d-flex flex-wrap-wrap align-items-center gap-2 mt-2">
+            <label for="demo-search">Recherche</label>
+            <input class="flex-grow-1" id="demo-search" type="search" name="q">
+            <button class="btn-solid theme-primary flex-shrink-0" type="submit">Rechercher</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Gap</h2>
+        <p>grid sans classe gap : 1rem (--grid-gap)</p>
+        <div class="grid">
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+        </div>
+        <p class="mt-4">gap-0</p>
+        <div class="grid gap-0">
+            <div class="demo-box demo-frame p-2 col-4">col-4</div>
+            <div class="demo-box demo-frame p-2 col-4">col-4</div>
+            <div class="demo-box demo-frame p-2 col-4">col-4</div>
+            <div class="demo-box demo-frame p-2 col-4">col-4</div>
+            <div class="demo-box demo-frame p-2 col-4">col-4</div>
+            <div class="demo-box demo-frame p-2 col-4">col-4</div>
+        </div>
+        <p class="mt-4">gap-2 row-gap-8 : le plus précis gagne</p>
+        <div class="grid gap-2 row-gap-8">
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+        </div>
+        <p class="mt-4">d-flex gap-4 : gap marche aussi en flex</p>
+        <div class="d-flex gap-4">
+            <div class="demo-box p-2">un</div>
+            <div class="demo-box p-2">deux</div>
+            <div class="demo-box p-2">trois</div>
+        </div>
+        <p class="mt-4">gap-2 md:gap-8 : grandit avec l'écran</p>
+        <div class="grid gap-2 md:gap-8">
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+            <div class="demo-box p-2 col-4">col-4</div>
+        </div>
     </section>
 
 {% endblock %}

@@ -1,0 +1,39 @@
+@use '../settings/breakpoints';
+
+// Une classe par nombre de colonnes ; $breakpoint est mis devant le nom de la classe (.md\:col-6), vide sans breakpoint
+@mixin column-classes($breakpoint: '') {
+    @for $i from 1 through 12 {
+        .#{$breakpoint}col-#{$i} { grid-column: span $i; }
+    }
+}
+
+@layer layout {
+
+    :root {
+        // Espace entre les colonnes et entre les lignes
+        --grid-gap: 1rem;
+    }
+
+    // 12 colonnes égales ; minmax(0, …) : un contenu long ne fait pas déborder sa colonne
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: var(--grid-gap);
+    }
+
+    // Pleine largeur par défaut : sur téléphone, les colonnes s'empilent
+    .grid > * {
+        grid-column: span 12;
+    }
+
+    // Sans breakpoint, puis une fois par breakpoint, du plus petit au plus grand
+    @include column-classes;
+    @media (width >= breakpoints.$screen-xs) { @include column-classes('xs\\:'); }
+    @media (width >= breakpoints.$screen-sm) { @include column-classes('sm\\:'); }
+    @media (width >= breakpoints.$screen-md) { @include column-classes('md\\:'); }
+    @media (width >= breakpoints.$screen-lg) { @include column-classes('lg\\:'); }
+    @media (width >= breakpoints.$screen-xl) { @include column-classes('xl\\:'); }
+    // Une classe CSS ne peut pas commencer par un chiffre : le 2 de 2xl s'écrit échappé (\32 + espace)
+    @media (width >= breakpoints.$screen-2xl) { @include column-classes('\\32 xl\\:'); }
+
+}

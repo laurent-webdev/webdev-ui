@@ -1,0 +1,26 @@
+@use '../settings/breakpoints';
+@use '../tools/mixins';
+
+// Toutes les classes d'espace entre les enfants (grid, flex) ; $breakpoint est mis devant le nom de la classe (.md\:gap-3), vide sans breakpoint
+// Ordre : les deux directions, puis une seule ; écrit en dernier, le plus précis gagne (class="gap-4 row-gap-8")
+@mixin gap-classes($breakpoint: '') {
+    @include mixins.space-classes('#{$breakpoint}gap', gap);
+    // Entre les lignes (vertical)
+    @include mixins.space-classes('#{$breakpoint}row-gap', row-gap);
+    // Entre les colonnes (horizontal)
+    @include mixins.space-classes('#{$breakpoint}column-gap', column-gap);
+}
+
+@layer utilities {
+
+    // Sans breakpoint, puis une fois par breakpoint, du plus petit au plus grand
+    @include gap-classes;
+    @media (width >= breakpoints.$screen-xs) { @include gap-classes('xs\\:'); }
+    @media (width >= breakpoints.$screen-sm) { @include gap-classes('sm\\:'); }
+    @media (width >= breakpoints.$screen-md) { @include gap-classes('md\\:'); }
+    @media (width >= breakpoints.$screen-lg) { @include gap-classes('lg\\:'); }
+    @media (width >= breakpoints.$screen-xl) { @include gap-classes('xl\\:'); }
+    // Une classe CSS ne peut pas commencer par un chiffre : le 2 de 2xl s'écrit échappé (\32 + espace)
+    @media (width >= breakpoints.$screen-2xl) { @include gap-classes('\\32 xl\\:'); }
+
+}
