@@ -1,0 +1,36 @@
+@use '../settings/breakpoints';
+
+// Toutes les classes de largeur et de hauteur ; $breakpoint est mis devant le nom de la classe (.md\:w-50), vide sans breakpoint
+// Pourcentages du parent : ce sont des valeurs de mise en page, pas des réglages, pas de variable CSS
+@mixin sizing-classes($breakpoint: '') {
+    .#{$breakpoint}w-25 { width: 25%; }
+    .#{$breakpoint}w-33 { width: calc(100% / 3); }
+    .#{$breakpoint}w-50 { width: 50%; }
+    .#{$breakpoint}w-66 { width: calc(100% * 2 / 3); }
+    .#{$breakpoint}w-75 { width: 75%; }
+    .#{$breakpoint}w-100 { width: 100%; }
+    .#{$breakpoint}w-auto { width: auto; }
+    // Largeur du contenu, sans dépasser le parent
+    .#{$breakpoint}w-fit-content { width: fit-content; }
+    // Un enfant flex ou grid peut rétrécir sous la largeur de son contenu : un mot long ne fait plus déborder
+    .#{$breakpoint}min-w-0 { min-width: 0; }
+
+    // Hauteurs : seulement les courantes ; une hauteur en % ne marche que si le parent a une hauteur
+    .#{$breakpoint}h-100 { height: 100%; }
+    // Au moins la hauteur de l'écran ; svh : rien n'est caché sous les barres du navigateur sur téléphone
+    .#{$breakpoint}min-h-100svh { min-height: 100svh; }
+}
+
+@layer utilities {
+
+    // Sans breakpoint, puis une fois par breakpoint, du plus petit au plus grand
+    @include sizing-classes;
+    @media (width >= breakpoints.$screen-xs) { @include sizing-classes('xs\\:'); }
+    @media (width >= breakpoints.$screen-sm) { @include sizing-classes('sm\\:'); }
+    @media (width >= breakpoints.$screen-md) { @include sizing-classes('md\\:'); }
+    @media (width >= breakpoints.$screen-lg) { @include sizing-classes('lg\\:'); }
+    @media (width >= breakpoints.$screen-xl) { @include sizing-classes('xl\\:'); }
+    // Une classe CSS ne peut pas commencer par un chiffre : le 2 de 2xl s'écrit échappé (\32 + espace)
+    @media (width >= breakpoints.$screen-2xl) { @include sizing-classes('\\32 xl\\:'); }
+
+}

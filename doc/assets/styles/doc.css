@@ -13,3 +13,8 @@ body {
   background-color: var(--color-subtle-primary);
 }
 
+/* Parent avec une hauteur, pour les démos h-* */
+.demo-height {
+  height: 8rem;
+}
+
