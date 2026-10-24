@@ -211,10 +211,10 @@
     color: var(--link-theme-text-emphasis);
   }
   a:hover {
-    color: color-mix(in srgb, var(--link-theme-text-emphasis), CanvasText calc(var(--state-mix-soft) * 2));
+    text-decoration-thickness: max(2px, 0.125rem, 0.08em);
   }
   a:active {
-    color: color-mix(in srgb, var(--link-theme-text-emphasis), CanvasText calc(var(--state-mix-strong) * 2));
+    text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
   }
   a:focus-visible {
     outline: var(--focus-outline-width) solid var(--link-theme-text-emphasis);
@@ -711,10 +711,10 @@
     text-decoration: underline;
   }
   .btn-link:hover {
-    color: color-mix(in srgb, var(--btn-theme-text-emphasis), CanvasText calc(var(--state-mix-soft) * 2));
+    text-decoration-thickness: max(2px, 0.125rem, 0.08em);
   }
   .btn-link:active {
-    color: color-mix(in srgb, var(--btn-theme-text-emphasis), CanvasText calc(var(--state-mix-strong) * 2));
+    text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
   }
   .btn-xs {
     --btn-padding-block: 0.125rem;
@@ -767,6 +767,155 @@
   }
   .theme-inverse {
     --link-theme-text-emphasis: var(--color-emphasis-inverse);
+  }
+}
+@layer utilities {
+  .bg-primary {
+    --link-theme-text-emphasis: var(--color-text-on-primary);
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+  }
+  .bg-subtle-primary {
+    --link-theme-text-emphasis: var(--color-emphasis-primary);
+    background-color: var(--color-subtle-primary);
+    color: var(--color-emphasis-primary);
+  }
+  .bg-secondary {
+    --link-theme-text-emphasis: var(--color-text-on-secondary);
+    background-color: var(--color-secondary);
+    color: var(--color-text-on-secondary);
+  }
+  .bg-subtle-secondary {
+    --link-theme-text-emphasis: var(--color-emphasis-secondary);
+    background-color: var(--color-subtle-secondary);
+    color: var(--color-emphasis-secondary);
+  }
+  .bg-accent {
+    --link-theme-text-emphasis: var(--color-text-on-accent);
+    background-color: var(--color-accent);
+    color: var(--color-text-on-accent);
+  }
+  .bg-subtle-accent {
+    --link-theme-text-emphasis: var(--color-emphasis-accent);
+    background-color: var(--color-subtle-accent);
+    color: var(--color-emphasis-accent);
+  }
+  .bg-success {
+    --link-theme-text-emphasis: var(--color-text-on-success);
+    background-color: var(--color-success);
+    color: var(--color-text-on-success);
+  }
+  .bg-subtle-success {
+    --link-theme-text-emphasis: var(--color-emphasis-success);
+    background-color: var(--color-subtle-success);
+    color: var(--color-emphasis-success);
+  }
+  .bg-danger {
+    --link-theme-text-emphasis: var(--color-text-on-danger);
+    background-color: var(--color-danger);
+    color: var(--color-text-on-danger);
+  }
+  .bg-subtle-danger {
+    --link-theme-text-emphasis: var(--color-emphasis-danger);
+    background-color: var(--color-subtle-danger);
+    color: var(--color-emphasis-danger);
+  }
+  .bg-warning {
+    --link-theme-text-emphasis: var(--color-text-on-warning);
+    background-color: var(--color-warning);
+    color: var(--color-text-on-warning);
+  }
+  .bg-subtle-warning {
+    --link-theme-text-emphasis: var(--color-emphasis-warning);
+    background-color: var(--color-subtle-warning);
+    color: var(--color-emphasis-warning);
+  }
+  .bg-info {
+    --link-theme-text-emphasis: var(--color-text-on-info);
+    background-color: var(--color-info);
+    color: var(--color-text-on-info);
+  }
+  .bg-subtle-info {
+    --link-theme-text-emphasis: var(--color-emphasis-info);
+    background-color: var(--color-subtle-info);
+    color: var(--color-emphasis-info);
+  }
+  .bg-neutral {
+    --link-theme-text-emphasis: var(--color-text-on-neutral);
+    background-color: var(--color-neutral);
+    color: var(--color-text-on-neutral);
+  }
+  .bg-subtle-neutral {
+    --link-theme-text-emphasis: var(--color-emphasis-neutral);
+    background-color: var(--color-subtle-neutral);
+    color: var(--color-emphasis-neutral);
+  }
+  .bg-inverse {
+    --link-theme-text-emphasis: var(--color-text-on-inverse);
+    background-color: var(--color-inverse);
+    color: var(--color-text-on-inverse);
+  }
+  .bg-subtle-inverse {
+    --link-theme-text-emphasis: var(--color-emphasis-inverse);
+    background-color: var(--color-subtle-inverse);
+    color: var(--color-emphasis-inverse);
+  }
+  .color-primary {
+    color: var(--color-primary);
+  }
+  .color-emphasis-primary {
+    color: var(--color-emphasis-primary);
+  }
+  .color-secondary {
+    color: var(--color-secondary);
+  }
+  .color-emphasis-secondary {
+    color: var(--color-emphasis-secondary);
+  }
+  .color-accent {
+    color: var(--color-accent);
+  }
+  .color-emphasis-accent {
+    color: var(--color-emphasis-accent);
+  }
+  .color-success {
+    color: var(--color-success);
+  }
+  .color-emphasis-success {
+    color: var(--color-emphasis-success);
+  }
+  .color-danger {
+    color: var(--color-danger);
+  }
+  .color-emphasis-danger {
+    color: var(--color-emphasis-danger);
+  }
+  .color-warning {
+    color: var(--color-warning);
+  }
+  .color-emphasis-warning {
+    color: var(--color-emphasis-warning);
+  }
+  .color-info {
+    color: var(--color-info);
+  }
+  .color-emphasis-info {
+    color: var(--color-emphasis-info);
+  }
+  .color-neutral {
+    color: var(--color-neutral);
+  }
+  .color-emphasis-neutral {
+    color: var(--color-emphasis-neutral);
+  }
+  .color-inverse {
+    color: var(--color-inverse);
+  }
+  .color-emphasis-inverse {
+    color: var(--color-emphasis-inverse);
+  }
+  .color-inherit {
+    color: inherit;
   }
 }
 @layer utilities {

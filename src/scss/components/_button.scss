@@ -109,18 +109,17 @@
         }
     }
 
-    // Link : souligné comme un lien, sa couleur se rapproche du texte au survol et au clic (le contraste augmente)
-    // Mélange doublé : un texte est fin, il en faut deux fois plus qu'un fond pour que ça se voie
+    // Link : souligné comme un lien ; au survol et au clic, le soulignement s'épaissit, comme les liens
     .btn-link {
         background-color: transparent;
         color: var(--btn-theme-text-emphasis);
         text-decoration: underline;
 
         &:hover {
-            color: color-mix(in srgb, var(--btn-theme-text-emphasis), CanvasText calc(var(--state-mix-soft) * 2));
+            text-decoration-thickness: max(2px, 0.125rem, 0.08em);
         }
         &:active {
-            color: color-mix(in srgb, var(--btn-theme-text-emphasis), CanvasText calc(var(--state-mix-strong) * 2));
+            text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
         }
     }
 
