@@ -903,7 +903,7 @@
         <h3 class="mt-4">Exemple : un badge sur le coin d'un bouton</h3>
         <button class="btn-outline position-relative mt-4" type="button">
             Messages
-            <span class="bg-danger color-text-on-danger border-radius-pill px-2 fs-xs position-absolute top-0 start-100 translate-middle">3<span class="visually-hidden"> non lus</span></span>
+            <span class="badge-solid theme-danger border-radius-pill position-absolute top-0 start-100 translate-middle">3<span class="visually-hidden"> non lus</span></span>
         </button>
 
         <h3 class="mt-4">Exemple : un en-tête collé en haut</h3>
@@ -1274,6 +1274,90 @@
             <li>En clair, le cadre d'alert-subtle se voit à peine sur le fond de la page : le fond léger suffit à la délimiter.</li>
             <li>Dans alert-solid, un .theme-* sur un lien ne change rien : les liens prennent toujours la couleur du texte.</li>
             <li>Pas de tailles : changer les variables dans le site.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Badges</h2>
+        {% for variant in ['solid', 'subtle', 'outline'] %}
+            <h3 class="mt-4">badge-{{ variant }}</h3>
+            <p class="d-flex flex-wrap-wrap gap-2 mt-2">
+                {% for color in colors %}
+                    <span class="badge-{{ variant }} theme-{{ color }}">{{ color }}</span>
+                {% endfor %}
+            </p>
+        {% endfor %}
+
+        <h3 class="mt-4">La taille suit le texte autour</h3>
+        {% for size in ['3xl', 'xl', 'md', 'sm'] %}
+            <p class="fs-{{ size }} mt-2">Texte fs-{{ size }} <span class="badge-solid theme-primary">Nouveau</span></p>
+        {% endfor %}
+        <p class="mt-2">0.75em du texte autour, jamais moins que --font-size-xs (12px).</p>
+
+        <h3 class="mt-4">Exemple : dans un bouton</h3>
+        <p class="d-flex flex-wrap-wrap gap-2 mt-2">
+            <button class="btn-solid theme-primary" type="button">Messages <span class="badge-solid theme-inverse">4<span class="visually-hidden"> non lus</span></span></button>
+            <button class="btn-outline" type="button">Notifications <span class="badge-solid theme-danger">12<span class="visually-hidden"> nouvelles</span></span></button>
+        </p>
+        <p class="mt-2">Sans le texte visually-hidden, le lecteur d'écran lit « Messages 4 » : le nombre seul ne dit pas ce qu'il compte.</p>
+
+        <h3 class="mt-4">Exemple : en pastille</h3>
+        <p class="d-flex flex-wrap-wrap gap-2 mt-2">
+            <span class="badge-solid theme-success border-radius-pill">En ligne</span>
+            <span class="badge-subtle theme-warning border-radius-pill">En attente</span>
+            <span class="badge-outline theme-danger border-radius-pill">Hors ligne</span>
+        </p>
+        <p class="mt-2">L'utilitaire border-radius-pill passe devant le rayon du badge.</p>
+
+        <h3 class="mt-4">HTML</h3>
+        <pre class="mt-2"><code>&lt;span class="badge-subtle theme-success"&gt;Payée&lt;/span&gt;</code></pre>
+        <p>Comme les boutons : une variante (badge-solid, badge-subtle, badge-outline) qui s'utilise seule, et une couleur .theme-*, neutral sans classe.</p>
+
+        <h3 class="mt-4">Variables</h3>
+        <table class="mt-2">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--badge-padding-block</th><td>0.25em</td><td>haut et bas</td></tr>
+                <tr><th scope="row">--badge-padding-inline</th><td>0.5em</td><td>côtés</td></tr>
+                <tr><th scope="row">--badge-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
+                <tr><th scope="row">--badge-border-width</th><td>--border-width</td><td>cadre</td></tr>
+            </tbody>
+        </table>
+        <p class="mt-2">Les couleurs viennent de .theme-* : le cadre a la couleur du thème (badge-subtle : celle du fond léger), la variante dit le fond et le texte. Le padding est en em : il suit la taille du badge.</p>
+
+        <h3 class="mt-4">Exemple : changer les valeurs</h3>
+        <pre class="mt-2"><code>:root { --badge-border-radius: 50rem; }
+.badge-statut { --badge-padding-inline: 0.75em; }</code></pre>
+        <p>La première ligne met tous les badges en pastille, la deuxième change seulement ceux qui ont la classe badge-statut du site.</p>
+
+        <h3 class="mt-4">Accessibilité</h3>
+        <ul>
+            <li>Le texte du badge dit ce qu'il veut dire : la couleur ne suffit pas (WCAG 1.4.1).</li>
+            <li>Un nombre seul (4, 12) a besoin de son contexte pour les lecteurs d'écran : un texte visually-hidden (« non lus »).</li>
+            <li>Le texte est lisible dans toutes les variantes et toutes les couleurs (au moins 4,5:1, comme les boutons), sur le fond de la page et sur les fonds légers.</li>
+        </ul>
+
+        <h3 class="mt-4">Contre-exemples</h3>
+        <pre class="mt-2"><code>&lt;a class="badge-subtle theme-primary" href="/tag/css"&gt;CSS&lt;/a&gt;</code></pre>
+        <p>Un badge ne se clique pas : il n'a pas de survol ni de clic visibles. Une étiquette cliquable est un bouton : &lt;a class="btn-subtle btn-xs theme-primary" href="/tag/css"&gt;.</p>
+        <pre class="mt-2"><code>&lt;span class="badge-solid theme-success"&gt;&lt;/span&gt; Laurent</code></pre>
+        <p>Une pastille vide : seule la couleur dit « en ligne » (WCAG 1.4.1). Écrire le texte dans le badge.</p>
+        <pre class="mt-2"><code>&lt;button class="btn-solid theme-primary"&gt;Messages &lt;span class="badge-outline"&gt;4&lt;/span&gt;&lt;/button&gt;</code></pre>
+        <p>badge-subtle et badge-outline sont faits pour le fond de la page et les fonds légers : sur un fond plein (btn-solid, alert-solid, bg-*), seul badge-solid.</p>
+        <pre class="mt-2"><code>&lt;span class="badge-subtle"&gt;Livraison offerte dès 50 € d'achat en France métropolitaine&lt;/span&gt;</code></pre>
+        <p>Le texte d'un badge ne passe pas à la ligne : un long texte dépasse de l'écran sur téléphone (WCAG 1.4.10). Quelques mots seulement.</p>
+
+        <h3 class="mt-4">Limites</h3>
+        <ul>
+            <li>Pas de classes de taille : le badge suit le texte autour (dans un titre, il est plus grand). Pour un badge plus grand ou plus petit : les variables, ou le texte du parent.</li>
+            <li>En clair, le cadre de badge-subtle se voit à peine : le fond léger délimite le badge.</li>
+            <li>Un badge vide reste affiché (une petite boîte vide) : le JS du site le cache (hidden) quand le compteur est à 0.</li>
         </ul>
     </section>
 

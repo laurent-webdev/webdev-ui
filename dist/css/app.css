@@ -877,6 +877,96 @@
 }
 @layer components {
   :root {
+    --badge-padding-block: 0.25em;
+    --badge-padding-inline: 0.5em;
+    --badge-border-radius: var(--border-radius-md);
+    --badge-border-width: var(--border-width);
+    --badge-theme-background-solid: var(--color-neutral);
+    --badge-theme-text-solid: var(--color-text-on-neutral);
+    --badge-theme-background-subtle: var(--color-subtle-neutral);
+    --badge-theme-text-emphasis: var(--color-emphasis-neutral);
+  }
+  .theme-primary {
+    --badge-theme-background-solid: var(--color-primary);
+    --badge-theme-text-solid: var(--color-text-on-primary);
+    --badge-theme-background-subtle: var(--color-subtle-primary);
+    --badge-theme-text-emphasis: var(--color-emphasis-primary);
+  }
+  .theme-secondary {
+    --badge-theme-background-solid: var(--color-secondary);
+    --badge-theme-text-solid: var(--color-text-on-secondary);
+    --badge-theme-background-subtle: var(--color-subtle-secondary);
+    --badge-theme-text-emphasis: var(--color-emphasis-secondary);
+  }
+  .theme-accent {
+    --badge-theme-background-solid: var(--color-accent);
+    --badge-theme-text-solid: var(--color-text-on-accent);
+    --badge-theme-background-subtle: var(--color-subtle-accent);
+    --badge-theme-text-emphasis: var(--color-emphasis-accent);
+  }
+  .theme-success {
+    --badge-theme-background-solid: var(--color-success);
+    --badge-theme-text-solid: var(--color-text-on-success);
+    --badge-theme-background-subtle: var(--color-subtle-success);
+    --badge-theme-text-emphasis: var(--color-emphasis-success);
+  }
+  .theme-danger {
+    --badge-theme-background-solid: var(--color-danger);
+    --badge-theme-text-solid: var(--color-text-on-danger);
+    --badge-theme-background-subtle: var(--color-subtle-danger);
+    --badge-theme-text-emphasis: var(--color-emphasis-danger);
+  }
+  .theme-warning {
+    --badge-theme-background-solid: var(--color-warning);
+    --badge-theme-text-solid: var(--color-text-on-warning);
+    --badge-theme-background-subtle: var(--color-subtle-warning);
+    --badge-theme-text-emphasis: var(--color-emphasis-warning);
+  }
+  .theme-info {
+    --badge-theme-background-solid: var(--color-info);
+    --badge-theme-text-solid: var(--color-text-on-info);
+    --badge-theme-background-subtle: var(--color-subtle-info);
+    --badge-theme-text-emphasis: var(--color-emphasis-info);
+  }
+  .theme-neutral {
+    --badge-theme-background-solid: var(--color-neutral);
+    --badge-theme-text-solid: var(--color-text-on-neutral);
+    --badge-theme-background-subtle: var(--color-subtle-neutral);
+    --badge-theme-text-emphasis: var(--color-emphasis-neutral);
+  }
+  .theme-inverse {
+    --badge-theme-background-solid: var(--color-inverse);
+    --badge-theme-text-solid: var(--color-text-on-inverse);
+    --badge-theme-background-subtle: var(--color-subtle-inverse);
+    --badge-theme-text-emphasis: var(--color-emphasis-inverse);
+  }
+  .badge-solid, .badge-subtle, .badge-outline {
+    display: inline-block;
+    padding-block: var(--badge-padding-block);
+    padding-inline: var(--badge-padding-inline);
+    font-size: max(var(--font-size-xs), 0.75em);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    text-wrap: nowrap;
+    border: var(--badge-border-width) solid var(--badge-theme-background-solid);
+    border-radius: var(--badge-border-radius);
+  }
+  .badge-solid {
+    background-color: var(--badge-theme-background-solid);
+    color: var(--badge-theme-text-solid);
+  }
+  .badge-subtle {
+    border-color: var(--badge-theme-background-subtle);
+    background-color: var(--badge-theme-background-subtle);
+    color: var(--badge-theme-text-emphasis);
+  }
+  .badge-outline {
+    background-color: transparent;
+    color: var(--badge-theme-text-emphasis);
+  }
+}
+@layer components {
+  :root {
     --btn-padding-block: 0.375rem;
     --btn-padding-inline: 1rem;
     --btn-border-radius: var(--border-radius-md);

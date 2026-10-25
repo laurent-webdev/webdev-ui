@@ -1,0 +1,60 @@
+@layer components {
+
+    :root {
+        // Forme : en em, le badge grandit avec le texte autour (titre, bouton)
+        --badge-padding-block: 0.25em;
+        --badge-padding-inline: 0.5em;
+        --badge-border-radius: var(--border-radius-md);
+        --badge-border-width: var(--border-width);
+
+        // Thème par défaut, sans classe .theme-*
+        --badge-theme-background-solid: var(--color-neutral);
+        --badge-theme-text-solid: var(--color-text-on-neutral);
+        --badge-theme-background-subtle: var(--color-subtle-neutral);
+        --badge-theme-text-emphasis: var(--color-emphasis-neutral);
+    }
+
+    // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses badges
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .theme-#{$color} {
+            --badge-theme-background-solid: var(--color-#{$color});
+            --badge-theme-text-solid: var(--color-text-on-#{$color});
+            --badge-theme-background-subtle: var(--color-subtle-#{$color});
+            --badge-theme-text-emphasis: var(--color-emphasis-#{$color});
+        }
+    }
+
+    // Forme commune : une étiquette dans la ligne de texte, sur la ligne de base du texte autour
+    .badge-solid, .badge-subtle, .badge-outline {
+        display: inline-block;
+        padding-block: var(--badge-padding-block);
+        padding-inline: var(--badge-padding-inline);
+        // Plus petit que le texte autour, jamais sous --font-size-xs
+        font-size: max(var(--font-size-xs), 0.75em);
+        font-weight: var(--font-weight-semibold);
+        line-height: 1;
+        text-wrap: nowrap;
+        border: var(--badge-border-width) solid var(--badge-theme-background-solid);
+        border-radius: var(--badge-border-radius);
+    }
+
+    // Solid : fond plein
+    .badge-solid {
+        background-color: var(--badge-theme-background-solid);
+        color: var(--badge-theme-text-solid);
+    }
+
+    // Subtle : fond léger, cadre de la même couleur
+    .badge-subtle {
+        border-color: var(--badge-theme-background-subtle);
+        background-color: var(--badge-theme-background-subtle);
+        color: var(--badge-theme-text-emphasis);
+    }
+
+    // Outline : cadre de la couleur du thème, sur le fond de la page
+    .badge-outline {
+        background-color: transparent;
+        color: var(--badge-theme-text-emphasis);
+    }
+
+}
