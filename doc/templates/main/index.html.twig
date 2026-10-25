@@ -130,6 +130,40 @@
     </section>
 
     <section>
+        <h2>Interligne</h2>
+        <p>Chaque fs-* pose déjà l'interligne de sa taille : 1.5 pour le texte (xs à lg), puis de moins en moins pour les titres, 1.2 au plus serré. line-height-* change l'interligne seul, en gardant la taille.</p>
+        <ul>
+            <li>line-height-xs … line-height-6xl : l'interligne de la taille du même nom (--line-height-*) ;</li>
+            <li>line-height-1 : une seule ligne, la boîte colle au texte.</li>
+        </ul>
+        <p class="demo-box p-2 mt-2 fs-2xl">fs-2xl : un grand texte d'introduction, sur plusieurs lignes, avec l'interligne de sa taille (1.3), plus serré que celui du texte.</p>
+        <p class="demo-box p-2 mt-2 fs-2xl line-height-md">fs-2xl line-height-md : la même taille, avec l'interligne du texte (1.5), plus aéré pour un paragraphe à lire.</p>
+        <p class="d-flex flex-wrap-wrap gap-2 mt-2">
+            <span class="demo-box p-2 fs-5xl">42</span>
+            <span class="demo-box p-2 fs-5xl line-height-1">42</span>
+        </p>
+        <p class="mt-2">Le même nombre en fs-5xl, puis avec line-height-1 : la boîte n'a plus d'espace au-dessus et en dessous du chiffre.</p>
+
+        <h3 class="mt-4">Exemple : un chiffre clé</h3>
+        <pre class="mt-2"><code>&lt;p&gt;&lt;span class="d-block fs-5xl fw-bold line-height-1"&gt;98 %&lt;/span&gt; de clients satisfaits&lt;/p&gt;</code></pre>
+
+        <h3 class="mt-4">Exemple : changer les valeurs</h3>
+        <pre class="mt-2"><code>:root { --line-height-md: 1.6; }</code></pre>
+        <p>Le texte de taille md, fs-md et line-height-md passent à 1.6 ensemble.</p>
+
+        <h3 class="mt-4">Contre-exemples</h3>
+        <pre class="mt-2"><code>&lt;p class="line-height-1"&gt;Un paragraphe de plusieurs lignes…&lt;/p&gt;</code></pre>
+        <p>Sur plusieurs lignes, les lignes se touchent : une majuscule accentuée (É) touche le « g » ou le « p » de la ligne du dessus. line-height-1 est fait pour une seule ligne.</p>
+
+        <h3 class="mt-4">Limites</h3>
+        <ul>
+            <li>Plusieurs classes ont la même valeur (xs à lg : 1.5 ; 3xl à 6xl : 1.2) : chacune suit sa variable, elles restent différentes si un site change l'échelle.</li>
+            <li>Pas de variante responsive (comme fs-*).</li>
+            <li>Un utilisateur qui agrandit l'interligne avec une extension (WCAG 1.4.12) passe devant ces classes : le contenu ne doit pas être coupé (pas de hauteur fixe sur un bloc de texte).</li>
+        </ul>
+    </section>
+
+    <section>
         <h2>Graisses</h2>
         <p class="fw-light">.fw-light</p>
         <p class="fw-normal">.fw-normal</p>
@@ -1844,7 +1878,7 @@
             {% endfor %}
         </div>
 
-        <dialog class="drawer-start" id="drawer-start" aria-labelledby="drawer-start-title" closedby="any">
+        <dialog class="drawer-start" id="drawer-start" data-drawer aria-labelledby="drawer-start-title" closedby="any">
             <div class="drawer-header">
                 <h2 class="fs-lg" id="drawer-start-title">Menu</h2>
                 <button class="btn-close-subtle" type="button" commandfor="drawer-start" command="close" aria-label="Fermer"></button>
@@ -1861,7 +1895,7 @@
         </dialog>
 
         {% for side in ['end', 'top', 'bottom'] %}
-            <dialog class="drawer-{{ side }}" id="drawer-{{ side }}" aria-labelledby="drawer-{{ side }}-title" closedby="any">
+            <dialog class="drawer-{{ side }}" id="drawer-{{ side }}" data-drawer aria-labelledby="drawer-{{ side }}-title" closedby="any">
                 <div class="drawer-header">
                     <h2 class="fs-lg" id="drawer-{{ side }}-title">drawer-{{ side }}</h2>
                     <button class="btn-close-subtle" type="button" commandfor="drawer-{{ side }}" command="close" aria-label="Fermer"></button>
@@ -1875,7 +1909,7 @@
         <h3 class="mt-4">HTML</h3>
         <pre class="mt-2"><code>&lt;button class="btn-outline" type="button" commandfor="menu" command="show-modal" aria-label="Menu"&gt;…&lt;/button&gt;
 
-&lt;dialog class="drawer-start" id="menu" aria-labelledby="menu-title" closedby="any"&gt;
+&lt;dialog class="drawer-start" id="menu" data-drawer aria-labelledby="menu-title" closedby="any"&gt;
     &lt;div class="drawer-header"&gt;
         &lt;h2 id="menu-title"&gt;Menu&lt;/h2&gt;
         &lt;button class="btn-close-subtle" type="button" commandfor="menu" command="close" aria-label="Fermer"&gt;&lt;/button&gt;
@@ -1888,6 +1922,7 @@
             <li>Comme le dialogue : command="show-modal" l'ouvre, command="close" le ferme, closedby dit comment il se ferme ; sans JavaScript.</li>
             <li>drawer-start et drawer-end : toute la hauteur, --drawer-width de large ; drawer-top et drawer-bottom : toute la largeur, --drawer-height de haut. Toujours à --drawer-inset (1rem) des bords de l'écran, avec un cadre et des coins arrondis.</li>
             <li>Le fond derrière, le flou et la page bloquée sont ceux du dialogue (--backdrop-background-color, --backdrop-filter).</li>
+            <li>data-drawer : le JS du framework le fait glisser vers son bord avant de le fermer. Sans data-drawer ou sans le JS, il marche aussi, mais se ferme d'un coup.</li>
         </ul>
 
         <h3 class="mt-4">Variables</h3>
@@ -1917,13 +1952,28 @@
 :root { --drawer-inset: 0; --drawer-border-radius: 0; }</code></pre>
         <p>La première ligne change tous les drawers (la largeur à gauche et à droite, la hauteur en haut et en bas), la deuxième seulement celui qui a la classe drawer-panier du site ; la dernière les colle au bord de l'écran, sans arrondi.</p>
 
+        <h3 class="mt-4">JavaScript</h3>
+        <pre class="mt-2"><code>&lt;script type="module" src="…/js/drawer.js"&gt;&lt;/script&gt;</code></pre>
+        <p>drawer.js seul, ou bundle.js (tous les composants). Il n'y a rien à démarrer : il s'occupe de tous les &lt;dialog data-drawer&gt; de la page, aussi ceux ajoutés plus tard.</p>
+        <ul>
+            <li>Il retient la fermeture du navigateur, pose l'attribut data-closing (le CSS fait glisser le panneau et éclaircit la page), puis appelle close() à la fin du glissement.</li>
+            <li>Fermer depuis le JS du site : drawer.requestClose() glisse ; drawer.close() ferme d'un coup.</li>
+        </ul>
+        <p class="mt-2">Événements, tous ceux du navigateur, écoutés sur le &lt;dialog&gt; :</p>
+        <ul>
+            <li>command : un bouton commandfor l'ouvre ou le ferme (event.source = le bouton) ;</li>
+            <li>cancel : Échap, clic à côté, command="request-close" ou requestClose() ;</li>
+            <li>close : le panneau est fermé, après le glissement (returnValue = le value du bouton de fermeture).</li>
+        </ul>
+        <pre class="mt-2"><code>document.getElementById('menu').addEventListener('close', () => { … });</code></pre>
+
         <h3 class="mt-4">Accessibilité</h3>
         <ul>
             <li>Un &lt;dialog&gt; modal : le reste de la page est inactif, Échap ferme, le focus va dans le panneau puis revient sur le bouton d'ouverture (MDN). C'est un dialogue modal pour les lecteurs d'écran (ARIA Authoring Practices).</li>
             <li>aria-labelledby vers le titre ; un menu va dans un &lt;nav aria-label="…"&gt; à l'intérieur.</li>
             <li>Un bouton d'ouverture avec seulement une icône (☰) a un aria-label (« Menu »).</li>
             <li>La croix visible, même avec closedby="any" : tout le monde n'a pas de clavier ni ne pense à cliquer à côté.</li>
-            <li>prefers-reduced-motion : le panneau apparaît sans glisser.</li>
+            <li>prefers-reduced-motion : le panneau apparaît et disparaît sans glisser.</li>
         </ul>
 
         <h3 class="mt-4">Contre-exemples</h3>
@@ -1934,7 +1984,8 @@
 
         <h3 class="mt-4">Limites</h3>
         <ul>
-            <li>Pas d'animation à la fermeture pour l'instant : le panneau disparaît d'un coup (le JS la fera glisser avant de fermer).</li>
+            <li>La fermeture ne glisse qu'avec le JS du framework et data-drawer. Un &lt;form method="dialog"&gt; et close() ferment toujours d'un coup.</li>
+            <li>Le site ne peut pas garder le panneau ouvert avec event.preventDefault() sur cancel : le JS du framework l'a déjà annulé pour le faire glisser. Pour un panneau qui ne se ferme qu'avec ses boutons : closedby="none".</li>
             <li>Pas encore de couleurs (.theme-*, solid, subtle, outline) ni de tailles : le fond est celui de la page, la largeur et la hauteur se changent avec --drawer-width et --drawer-height.</li>
             <li>Un contenu long fait défiler tout le panneau, en-tête compris.</li>
             <li>En haut et en bas, la hauteur est fixe : un contenu court laisse de la place vide en dessous.</li>

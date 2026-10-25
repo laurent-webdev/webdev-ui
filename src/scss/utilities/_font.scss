@@ -8,6 +8,13 @@
         }
     }
 
+    // Interligne : .line-height-xs … .line-height-6xl, celui de la taille du même nom
+    // Après .fs-* : class="fs-2xl line-height-md" garde la taille et prend l'interligne du texte
+    @each $size in xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl {
+        .line-height-#{$size} { line-height: var(--line-height-#{$size}); }
+    }
+
+
     // Graisse : .fw-light … .fw-bold
     @each $weight in light, normal, medium, semibold, bold {
         .fw-#{$weight} { font-weight: var(--font-weight-#{$weight}); }

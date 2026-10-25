@@ -16,6 +16,8 @@
         {% endblock %}
 
         {% block javascripts %}
+            {# Le JS du framework, comme le CSS : dist/js/bundle.js #}
+            <script type="module" src="{{ asset('webdev-ui/js/bundle.js') }}"></script>
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
