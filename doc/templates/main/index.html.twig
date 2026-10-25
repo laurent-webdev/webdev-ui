@@ -1834,4 +1834,114 @@
         </ul>
     </section>
 
+    <section>
+        <h2>Drawer</h2>
+        <p>Un panneau qui glisse depuis un bord de l'écran, par-dessus la page : un &lt;dialog&gt; natif ouvert en modal, comme les dialogues. La classe dit le bord (drawer-start, drawer-end, drawer-top, drawer-bottom) et s'utilise seule.</p>
+
+        <div class="d-flex flex-wrap-wrap gap-2 mt-2">
+            {% for side in ['start', 'end', 'top', 'bottom'] %}
+                <button class="btn-outline" type="button" commandfor="drawer-{{ side }}" command="show-modal">drawer-{{ side }}</button>
+            {% endfor %}
+        </div>
+
+        <dialog class="drawer-start" id="drawer-start" aria-labelledby="drawer-start-title" closedby="any">
+            <div class="drawer-header">
+                <h2 class="fs-lg" id="drawer-start-title">Menu</h2>
+                <button class="btn-close-subtle" type="button" commandfor="drawer-start" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="drawer-body">
+                <nav aria-label="Menu principal">
+                    <ul>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Produits</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </dialog>
+
+        {% for side in ['end', 'top', 'bottom'] %}
+            <dialog class="drawer-{{ side }}" id="drawer-{{ side }}" aria-labelledby="drawer-{{ side }}-title" closedby="any">
+                <div class="drawer-header">
+                    <h2 class="fs-lg" id="drawer-{{ side }}-title">drawer-{{ side }}</h2>
+                    <button class="btn-close-subtle" type="button" commandfor="drawer-{{ side }}" command="close" aria-label="Fermer"></button>
+                </div>
+                <div class="drawer-body">
+                    <p>{% if side == 'end' %}Toute la hauteur, 20rem de large, à 1rem des bords ; sur un téléphone, une bande de la page reste visible à gauche.{% else %}Toute la largeur, 20rem de haut, à 1rem des bords ; un contenu plus long défile dans le panneau.{% endif %} Se ferme avec Échap, la croix ou un clic à côté (closedby="any").</p>
+                </div>
+            </dialog>
+        {% endfor %}
+
+        <h3 class="mt-4">HTML</h3>
+        <pre class="mt-2"><code>&lt;button class="btn-outline" type="button" commandfor="menu" command="show-modal" aria-label="Menu"&gt;…&lt;/button&gt;
+
+&lt;dialog class="drawer-start" id="menu" aria-labelledby="menu-title" closedby="any"&gt;
+    &lt;div class="drawer-header"&gt;
+        &lt;h2 id="menu-title"&gt;Menu&lt;/h2&gt;
+        &lt;button class="btn-close-subtle" type="button" commandfor="menu" command="close" aria-label="Fermer"&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="drawer-body"&gt;
+        &lt;nav aria-label="Menu principal"&gt;…&lt;/nav&gt;
+    &lt;/div&gt;
+&lt;/dialog&gt;</code></pre>
+        <ul>
+            <li>Comme le dialogue : command="show-modal" l'ouvre, command="close" le ferme, closedby dit comment il se ferme ; sans JavaScript.</li>
+            <li>drawer-start et drawer-end : toute la hauteur, --drawer-width de large ; drawer-top et drawer-bottom : toute la largeur, --drawer-height de haut. Toujours à --drawer-inset (1rem) des bords de l'écran, avec un cadre et des coins arrondis.</li>
+            <li>Le fond derrière, le flou et la page bloquée sont ceux du dialogue (--backdrop-background-color, --backdrop-filter).</li>
+        </ul>
+
+        <h3 class="mt-4">Variables</h3>
+        <table class="mt-2">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--drawer-width</th><td>20rem (320px)</td><td>largeur de drawer-start et drawer-end</td></tr>
+                <tr><th scope="row">--drawer-height</th><td>20rem (320px)</td><td>hauteur de drawer-top et drawer-bottom</td></tr>
+                <tr><th scope="row">--drawer-padding-block</th><td>1rem</td><td>haut et bas de l'en-tête et du corps</td></tr>
+                <tr><th scope="row">--drawer-padding-inline</th><td>1rem</td><td>côtés de l'en-tête et du corps</td></tr>
+                <tr><th scope="row">--drawer-inset</th><td>1rem</td><td>écart avec les bords de l'écran (0 : collé au bord)</td></tr>
+                <tr><th scope="row">--drawer-border-radius</th><td>--border-radius-md</td><td>coins du panneau</td></tr>
+                <tr><th scope="row">--drawer-border-width</th><td>--border-width</td><td>cadre (couleur --border-color)</td></tr>
+                <tr><th scope="row">--drawer-transition-duration</th><td>0.2s</td><td>glissement à l'ouverture et apparition du fond</td></tr>
+            </tbody>
+        </table>
+
+        <h3 class="mt-4">Exemple : changer les valeurs</h3>
+        <pre class="mt-2"><code>:root { --drawer-width: 24rem; --drawer-height: 15rem; }
+.drawer-panier { --drawer-width: 30rem; }
+:root { --drawer-inset: 0; --drawer-border-radius: 0; }</code></pre>
+        <p>La première ligne change tous les drawers (la largeur à gauche et à droite, la hauteur en haut et en bas), la deuxième seulement celui qui a la classe drawer-panier du site ; la dernière les colle au bord de l'écran, sans arrondi.</p>
+
+        <h3 class="mt-4">Accessibilité</h3>
+        <ul>
+            <li>Un &lt;dialog&gt; modal : le reste de la page est inactif, Échap ferme, le focus va dans le panneau puis revient sur le bouton d'ouverture (MDN). C'est un dialogue modal pour les lecteurs d'écran (ARIA Authoring Practices).</li>
+            <li>aria-labelledby vers le titre ; un menu va dans un &lt;nav aria-label="…"&gt; à l'intérieur.</li>
+            <li>Un bouton d'ouverture avec seulement une icône (☰) a un aria-label (« Menu »).</li>
+            <li>La croix visible, même avec closedby="any" : tout le monde n'a pas de clavier ni ne pense à cliquer à côté.</li>
+            <li>prefers-reduced-motion : le panneau apparaît sans glisser.</li>
+        </ul>
+
+        <h3 class="mt-4">Contre-exemples</h3>
+        <pre class="mt-2"><code>&lt;aside class="drawer-start" hidden&gt;…&lt;/aside&gt;</code></pre>
+        <p>Sur un &lt;aside&gt; ou un &lt;div&gt;, rien ne marche : il faudrait refaire en JS le focus, Échap, le fond et la page inactive, que &lt;dialog&gt; fait déjà.</p>
+        <pre class="mt-2"><code>&lt;dialog class="drawer-start" open&gt;…&lt;/dialog&gt;</code></pre>
+        <p>L'attribut open écrit dans le HTML affiche un panneau non modal : pas de fond, Échap ne ferme pas, le focus reste dans la page.</p>
+
+        <h3 class="mt-4">Limites</h3>
+        <ul>
+            <li>Pas d'animation à la fermeture pour l'instant : le panneau disparaît d'un coup (le JS la fera glisser avant de fermer).</li>
+            <li>Pas encore de couleurs (.theme-*, solid, subtle, outline) ni de tailles : le fond est celui de la page, la largeur et la hauteur se changent avec --drawer-width et --drawer-height.</li>
+            <li>Un contenu long fait défiler tout le panneau, en-tête compris.</li>
+            <li>En haut et en bas, la hauteur est fixe : un contenu court laisse de la place vide en dessous.</li>
+            <li>Pas de panneau toujours affiché sur grand écran (une colonne de menu à partir de md) : c'est de la mise en page, à voir avec la navbar.</li>
+            <li>Écriture de droite à gauche : drawer-start se met bien à droite, mais glisse depuis la gauche (le déplacement translate ne suit pas le sens d'écriture).</li>
+            <li>command, commandfor et closedby ont les mêmes limites que pour le dialogue (navigateurs récents ; closedby pas encore dans Safari).</li>
+        </ul>
+    </section>
+
 {% endblock %}

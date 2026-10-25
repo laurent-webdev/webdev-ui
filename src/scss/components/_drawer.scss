@@ -1,0 +1,92 @@
+@layer components {
+
+    :root {
+        // Forme : le même padding pour l'en-tête et le corps
+        --drawer-padding-block: 1rem;
+        --drawer-padding-inline: 1rem;
+        --drawer-border-radius: var(--border-radius-md);
+        --drawer-border-width: var(--border-width);
+        // Écart avec les bords de l'écran : 1rem, comme le dialogue et le container
+        --drawer-inset: .75rem;
+        // Largeur à gauche et à droite, hauteur en haut et en bas : 20rem (320px)
+        --drawer-width: 20rem;
+        --drawer-height: 20rem;
+        --drawer-transition-duration: 0.2s;
+    }
+
+    // Forme commune : un <dialog> posé contre un bord de l'écran, avec un écart (natif : centré, à la taille du contenu)
+    .drawer-start, .drawer-end, .drawer-top, .drawer-bottom {
+        margin: 0;
+        padding: 0;
+        border: var(--drawer-border-width) solid var(--border-color);
+        border-radius: var(--drawer-border-radius);
+        background-color: var(--color-background);
+        box-shadow: var(--box-shadow-xl);
+        transition-property: translate;
+        transition-duration: var(--drawer-transition-duration);
+
+        // Derrière : la page assombrie et floutée, comme le dialogue
+        &::backdrop {
+            background-color: var(--backdrop-background-color);
+            backdrop-filter: var(--backdrop-filter);
+            transition-property: background-color, backdrop-filter;
+            transition-duration: var(--drawer-transition-duration);
+        }
+    }
+
+    // À gauche et à droite : toute la hauteur moins les écarts (height: auto, les insets la donnent)
+    // Une bande de la page reste visible : on voit que le panneau est par-dessus, on peut cliquer à côté
+    .drawer-start, .drawer-end {
+        width: var(--drawer-width);
+        max-width: calc(100% - 3rem);
+        height: auto;
+        max-height: none;
+        inset-block: var(--drawer-inset);
+    }
+
+    // En haut et en bas : toute la largeur moins les écarts, une hauteur fixe (un contenu plus long défile)
+    .drawer-top, .drawer-bottom {
+        width: auto;
+        max-width: none;
+        height: var(--drawer-height);
+        max-height: calc(100% - 3rem);
+        inset-inline: var(--drawer-inset);
+    }
+
+    // Le côté
+    .drawer-start { inset-inline: var(--drawer-inset) auto; }
+    .drawer-end { inset-inline: auto var(--drawer-inset); }
+    .drawer-top { inset-block: var(--drawer-inset) auto; }
+    .drawer-bottom { inset-block: auto var(--drawer-inset); }
+
+    // À l'ouverture : glisse depuis son bord (hors de l'écran : sa taille plus l'écart), la page s'assombrit et se floute
+    @starting-style {
+        .drawer-start[open] { translate: calc(-100% - var(--drawer-inset)) 0; }
+        .drawer-end[open] { translate: calc(100% + var(--drawer-inset)) 0; }
+        .drawer-top[open] { translate: 0 calc(-100% - var(--drawer-inset)); }
+        .drawer-bottom[open] { translate: 0 calc(100% + var(--drawer-inset)); }
+
+        .drawer-start[open]::backdrop, .drawer-end[open]::backdrop, .drawer-top[open]::backdrop, .drawer-bottom[open]::backdrop {
+            background-color: transparent;
+            backdrop-filter: none;
+        }
+    }
+
+    // Les zones
+    .drawer-header, .drawer-body {
+        padding-block: var(--drawer-padding-block);
+        padding-inline: var(--drawer-padding-inline);
+    }
+
+    // En-tête : le titre et la croix sur une ligne ; la croix à gauche ou à droite, selon sa place dans le HTML
+    .drawer-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        > :is(.btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child {
+            margin-inline-start: auto;
+        }
+    }
+
+}
