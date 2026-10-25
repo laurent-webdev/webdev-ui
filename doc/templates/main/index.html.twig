@@ -855,4 +855,39 @@
         </ul>
     </section>
 
+    <section>
+        <h2>Vertical-align</h2>
+        <p class="mt-4">Un carré de 24px dans une ligne de texte</p>
+        {% for align in ['baseline', 'top', 'middle', 'bottom', 'text-top', 'text-bottom'] %}
+            <p class="mt-2">Texte xg <svg class="color-emphasis-primary vertical-align-{{ align }}" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="currentColor"/></svg> vertical-align-{{ align }}</p>
+        {% endfor %}
+
+        <h3 class="mt-4">Exemple : les cellules d'un tableau</h3>
+        <table class="mt-2">
+            <tbody>
+                <tr>
+                    <th class="border p-2" scope="row">Trois<br>lignes<br>de texte</th>
+                    <td class="border p-2 vertical-align-top">vertical-align-top</td>
+                    <td class="border p-2">sans classe (middle)</td>
+                    <td class="border p-2 vertical-align-bottom">vertical-align-bottom</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="mt-2">Une cellule est centrée par défaut : vertical-align-top aligne le haut des cellules quand les textes n'ont pas la même longueur.</p>
+
+        <h3 class="mt-4">Contre-exemples</h3>
+        <pre class="mt-2"><code>&lt;div class="d-flex"&gt;
+    &lt;img class="vertical-align-middle" src="…" alt="…"&gt;
+&lt;/div&gt;</code></pre>
+        <p>Sans effet sur un enfant flex ou grid : align-items-center sur le parent, ou align-self-center sur l'enfant.</p>
+        <pre class="mt-2"><code>&lt;div class="vertical-align-middle"&gt;…&lt;/div&gt;</code></pre>
+        <p>Sans effet sur un bloc : vertical-align ne centre pas un bloc dans son parent. Pour ça : d-flex align-items-center sur le parent.</p>
+
+        <h3 class="mt-4">Limites</h3>
+        <ul>
+            <li>middle aligne sur le milieu des minuscules, pas sur le milieu exact de la ligne : une icône peut paraître un peu haute ou basse selon la police.</li>
+            <li>Pas de sub ni de super : utiliser les balises &lt;sub&gt; et &lt;sup&gt;.</li>
+        </ul>
+    </section>
+
 {% endblock %}

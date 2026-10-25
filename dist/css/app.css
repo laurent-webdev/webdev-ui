@@ -7339,6 +7339,26 @@
   }
 }
 @layer utilities {
+  .vertical-align-baseline {
+    vertical-align: baseline;
+  }
+  .vertical-align-top {
+    vertical-align: top;
+  }
+  .vertical-align-middle {
+    vertical-align: middle;
+  }
+  .vertical-align-bottom {
+    vertical-align: bottom;
+  }
+  .vertical-align-text-top {
+    vertical-align: text-top;
+  }
+  .vertical-align-text-bottom {
+    vertical-align: text-bottom;
+  }
+}
+@layer utilities {
   .visibility-hidden {
     visibility: hidden;
   }

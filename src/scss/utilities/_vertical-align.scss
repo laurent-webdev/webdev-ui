@@ -1,0 +1,13 @@
+@layer utilities {
+
+    // Alignement vertical d'un élément inline ou inline-block dans sa ligne, ou du contenu d'une cellule de tableau
+    // Sans effet sur un bloc ou un enfant flex / grid : align-items-* ou align-self-*
+    .vertical-align-baseline { vertical-align: baseline; }
+    .vertical-align-top { vertical-align: top; }
+    // Milieu des minuscules du texte, pas le milieu exact de la ligne
+    .vertical-align-middle { vertical-align: middle; }
+    .vertical-align-bottom { vertical-align: bottom; }
+    .vertical-align-text-top { vertical-align: text-top; }
+    .vertical-align-text-bottom { vertical-align: text-bottom; }
+
+}
