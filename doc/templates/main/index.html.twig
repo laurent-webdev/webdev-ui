@@ -701,14 +701,16 @@
                 <div class="demo-box animation-{{ animation }} p-2 col-6 md:col-4">animation-{{ animation }}</div>
             {% endfor %}
         </div>
-        <p class="d-flex align-items-center gap-2 mt-4" role="status">
+        <p class="d-flex align-items-center gap-2 mt-4" role="status" aria-live="polite">
             <svg class="animation-spin" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             animation-spin : Chargement…
         </p>
 
         <h3 class="mt-4">Exemple : un message qui apparaît</h3>
-        <pre class="mt-2"><code>&lt;p class="animation-slide-in-top" id="message" role="status" hidden&gt;Enregistré&lt;/p&gt;</code></pre>
-        <p>Le JS du site retire hidden (message.hidden = false) : le message glisse en place.</p>
+        <pre class="mt-2"><code>&lt;div role="status" aria-live="polite"&gt;
+    &lt;p class="animation-slide-in-top" id="message" hidden&gt;Enregistré&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        <p>Le JS du site retire hidden (message.hidden = false) : le message glisse en place. La zone role="status" reste affichée et le message est dedans : une zone cachée puis affichée avec son message n'est en général pas lue (MDN).</p>
 
         <h3 class="mt-4">Exemple : changer une durée</h3>
         <pre class="mt-2"><code>:root { --animation-fade-in-duration: 0.6s; }
@@ -733,7 +735,7 @@
 
     <section>
         <h2>Spinner</h2>
-        <p class="mt-4" role="status"><span class="spinner"></span> spinner : couleur du texte</p>
+        <p class="mt-4" role="status" aria-live="polite"><span class="spinner"></span> spinner : couleur du texte</p>
 
         <p class="mt-4">color-emphasis-* : les couleurs</p>
         <div class="grid gap-2 mt-2">
@@ -754,8 +756,8 @@
         <p class="mt-2">Le spinner prend la couleur du texte du bouton, sur toutes les variantes.</p>
 
         <h3 class="mt-4">Exemple : sans texte visible</h3>
-        <p class="mt-2" role="status"><span class="spinner color-emphasis-primary"></span><span class="visually-hidden">Chargement…</span></p>
-        <pre class="mt-2"><code>&lt;p role="status"&gt;&lt;span class="spinner"&gt;&lt;/span&gt;&lt;span class="visually-hidden"&gt;Chargement…&lt;/span&gt;&lt;/p&gt;</code></pre>
+        <p class="mt-2" role="status" aria-live="polite"><span class="spinner color-emphasis-primary"></span><span class="visually-hidden">Chargement…</span></p>
+        <pre class="mt-2"><code>&lt;p role="status" aria-live="polite"&gt;&lt;span class="spinner"&gt;&lt;/span&gt;&lt;span class="visually-hidden"&gt;Chargement…&lt;/span&gt;&lt;/p&gt;</code></pre>
         <p>visually-hidden : le texte est caché à l'écran, mais lu par les lecteurs d'écran (d-none et hidden le cachent à tout le monde).</p>
 
         <h3 class="mt-4">Exemple : changer la taille ou l'épaisseur</h3>
@@ -764,7 +766,7 @@
 
         <h3 class="mt-4">Contre-exemples</h3>
         <pre class="mt-2"><code>&lt;span class="spinner"&gt;&lt;/span&gt;</code></pre>
-        <p>Seul, il n'est pas annoncé par les lecteurs d'écran, et il est figé si l'utilisateur réduit les animations. Toujours un texte (visible ou visually-hidden) dans un role="status".</p>
+        <p>Seul, il n'est pas annoncé par les lecteurs d'écran, et il est figé si l'utilisateur réduit les animations. Toujours un texte (visible ou visually-hidden) dans un role="status" aria-live="polite".</p>
         <pre class="mt-2"><code>&lt;span class="spinner color-success"&gt;&lt;/span&gt;</code></pre>
         <p>color-* est la couleur brute : 1,87:1 sur fond blanc, à peine visible. Utiliser color-emphasis-success.</p>
         <pre class="mt-2"><code>&lt;span class="spinner theme-primary"&gt;&lt;/span&gt;</code></pre>
@@ -1160,6 +1162,118 @@
             <li>Fermer le dernier panneau arrondit tout de suite le bas de son titre, pendant que le contenu se replie encore : les coins sont un instant visibles.</li>
             <li>Pas de variante sans bordure, pas de style pour le titre ouvert : changer les variables dans le site.</li>
             <li>Pas de taille responsive (md:accordion-lg) : réservé à la mise en page.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Alertes</h2>
+        {% for variant in ['solid', 'subtle', 'outline'] %}
+            <h3 class="mt-4">alert-{{ variant }}</h3>
+            <div class="grid gap-3 mt-2">
+                {% for color in colors %}
+                    <div class="alert-{{ variant }} theme-{{ color }} md:col-6 lg:col-4">
+                        <p>theme-{{ color }}, avec <a href="#">un lien</a></p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <h3 class="mt-4">HTML</h3>
+        <pre class="mt-2"><code>&lt;div class="alert-subtle theme-warning"&gt;
+    &lt;p&gt;Attention : la maintenance aura lieu dimanche.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        <p>Comme les boutons : une variante (alert-solid, alert-subtle, alert-outline) qui s'utilise seule, et une couleur .theme-*, neutral sans classe. Le contenu s'empile : titre, paragraphes, liste, boutons.</p>
+
+        <h3 class="mt-4">Exemple : un titre et une liste de liens</h3>
+        <div class="alert-subtle theme-danger mt-2">
+            <h4 class="fs-md">Erreur : le formulaire contient 2 erreurs</h4>
+            <ul class="mt-2">
+                <li><a href="#">Le champ e-mail est vide</a></li>
+                <li><a href="#">Le mot de passe est trop court</a></li>
+            </ul>
+        </div>
+
+        <h3 class="mt-4">Exemple : avec une icône</h3>
+        <div class="alert-outline theme-info d-flex gap-3 mt-2">
+            <svg class="flex-shrink-0" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7v.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <p>Information : la maintenance aura lieu dimanche de 2 h à 4 h.</p>
+        </div>
+        <p class="mt-2">Les utilitaires d-flex gap-3 sur l'alerte placent l'icône à côté du texte ; l'icône est décorative (aria-hidden), le texte dit « Information ».</p>
+
+        <h3 class="mt-4">Exemple : un bouton dans une alerte solid</h3>
+        <div class="alert-solid theme-primary mt-2">
+            <p>Une nouvelle version est disponible. <a href="#">Voir les nouveautés</a></p>
+            <button class="btn-solid theme-inverse mt-3" type="button">Mettre à jour</button>
+        </div>
+        <p class="mt-2">Dans alert-solid, les liens prennent la couleur du texte ; seul btn-solid est prévu sur un fond plein.</p>
+
+        <h3 class="mt-4">Exemple : un message affiché par le JS</h3>
+        <button class="btn-outline mt-2" type="button" aria-expanded="false" aria-controls="demo-alert-status" data-demo-toggle>Afficher / masquer le message</button>
+        <div class="mt-2" role="status" aria-live="polite">
+            <div class="alert-subtle theme-success" id="demo-alert-status" hidden>
+                <p>Succès : vos modifications sont enregistrées.</p>
+            </div>
+        </div>
+        <pre class="mt-2"><code>&lt;div role="status" aria-live="polite"&gt;
+    &lt;div class="alert-subtle theme-success" hidden&gt;
+        &lt;p&gt;Succès : vos modifications sont enregistrées.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <p>La zone role="status" est dans la page dès le chargement ; le JS du site retire hidden : le lecteur d'écran lit le message après ce qu'il est en train de lire.</p>
+
+        <h3 class="mt-4">Variables</h3>
+        <table class="mt-2">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--alert-padding-block</th><td>1rem</td><td>haut et bas</td></tr>
+                <tr><th scope="row">--alert-padding-inline</th><td>1rem</td><td>côtés</td></tr>
+                <tr><th scope="row">--alert-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
+                <tr><th scope="row">--alert-border-width</th><td>--border-width</td><td>cadre</td></tr>
+            </tbody>
+        </table>
+        <p class="mt-2">Les couleurs viennent de .theme-* : le cadre a la couleur du thème (alert-subtle : celle du fond léger), la variante dit le fond et le texte.</p>
+
+        <h3 class="mt-4">Exemple : changer les valeurs</h3>
+        <pre class="mt-2"><code>:root { --alert-padding-block: 0.75rem; }
+.alert-compact { --alert-padding-block: 0.5rem; --alert-padding-inline: 0.75rem; }</code></pre>
+        <p>La première ligne change toutes les alertes, la deuxième seulement celles qui ont la classe alert-compact du site.</p>
+
+        <h3 class="mt-4">Accessibilité</h3>
+        <ul>
+            <li>Un message déjà dans la page au chargement (information permanente, erreurs après l'envoi d'un formulaire rechargé) : pas de role. MDN : role="alert" est fait pour un contenu affiché par le JS, pas pour celui du chargement.</li>
+            <li>Un message affiché par le JS après une action : dans une zone présente dès le chargement, vide ou cachée, où le JS met le message. role="status" aria-live="polite" pour une information ou un succès (lu après la lecture en cours ; MDN conseille d'ajouter aria-live="polite" pour les anciens lecteurs d'écran) ; role="alert" pour une erreur urgente (interrompt la lecture ; sans aria-live, VoiceOver sur iOS le lirait deux fois).</li>
+            <li>role="alert" avec parcimonie (MDN) : plusieurs alertes à la fois, ou inutiles, gênent.</li>
+            <li>La couleur ne suffit pas (WCAG 1.4.1) : le texte dit le type de message (« Erreur : », « Succès : »). Une icône seule, cachée aux lecteurs d'écran, ne compte pas.</li>
+            <li>Le texte est lisible dans toutes les variantes et toutes les couleurs (au moins 4,5:1, comme les boutons).</li>
+        </ul>
+
+        <h3 class="mt-4">Contre-exemples</h3>
+        <pre class="mt-2"><code>&lt;div class="alert-subtle theme-warning" role="alert"&gt;
+    &lt;p&gt;Attention : la maintenance aura lieu dimanche.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        <p>Présente au chargement de la page : role="alert" n'est pas fait pour ça (MDN). Sans role, c'est un bloc de texte comme un autre.</p>
+        <pre class="mt-2"><code>&lt;div class="alert-subtle theme-success"&gt;&lt;p&gt;Paiement&lt;/p&gt;&lt;/div&gt;
+&lt;div class="alert-subtle theme-danger"&gt;&lt;p&gt;Paiement&lt;/p&gt;&lt;/div&gt;</code></pre>
+        <p>Seule la couleur dit si le paiement est accepté ou refusé (WCAG 1.4.1) : l'écrire, « Paiement accepté », « Paiement refusé ».</p>
+        <pre class="mt-2"><code>zone.append(alerte); // une alerte déjà remplie, avec role="status"</code></pre>
+        <p>Ajouter d'un coup une zone role="status" et son message : en général rien n'est lu (MDN). La zone doit exister avant, vide.</p>
+        <pre class="mt-2"><code>&lt;div class="alert-solid theme-primary"&gt;
+    &lt;a class="btn-outline" href="…"&gt;Voir&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+        <p>btn-outline, btn-text et btn-link sont faits pour le fond de la page et les fonds légers : sur un fond plein, seul btn-solid.</p>
+
+        <h3 class="mt-4">Limites</h3>
+        <ul>
+            <li>Pas de bouton de fermeture ni de disparition automatique : il faut du JS. Ce sera le rôle des notifications, plus tard.</li>
+            <li>En clair, le cadre d'alert-subtle se voit à peine sur le fond de la page : le fond léger suffit à la délimiter.</li>
+            <li>Dans alert-solid, un .theme-* sur un lien ne change rien : les liens prennent toujours la couleur du texte.</li>
+            <li>Pas de tailles : changer les variables dans le site.</li>
         </ul>
     </section>
 

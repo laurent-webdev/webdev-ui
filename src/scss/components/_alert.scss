@@ -1,0 +1,59 @@
+@layer components {
+
+    :root {
+        // Forme
+        --alert-padding-block: 1rem;
+        --alert-padding-inline: 1rem;
+        --alert-border-radius: var(--border-radius-md);
+        --alert-border-width: var(--border-width);
+
+        // Thème par défaut, sans classe .theme-*
+        --alert-theme-background-solid: var(--color-neutral);
+        --alert-theme-text-solid: var(--color-text-on-neutral);
+        --alert-theme-background-subtle: var(--color-subtle-neutral);
+        --alert-theme-text-emphasis: var(--color-emphasis-neutral);
+    }
+
+    // Une classe par couleur : hérité, un .theme-* sur un parent colore toutes ses alertes
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .theme-#{$color} {
+            --alert-theme-background-solid: var(--color-#{$color});
+            --alert-theme-text-solid: var(--color-text-on-#{$color});
+            --alert-theme-background-subtle: var(--color-subtle-#{$color});
+            --alert-theme-text-emphasis: var(--color-emphasis-#{$color});
+        }
+    }
+
+    // Forme commune : un bloc de message, le contenu s'empile (titre, paragraphes, liste…)
+    .alert-solid, .alert-subtle, .alert-outline {
+        padding-block: var(--alert-padding-block);
+        padding-inline: var(--alert-padding-inline);
+        border: var(--alert-border-width) solid var(--alert-theme-background-solid);
+        border-radius: var(--alert-border-radius);
+    }
+
+    // Solid : fond plein ; les liens prennent la couleur du texte (l'emphasis serait illisible sur le fond plein)
+    // :where() : les .btn-* posés sur un <a> gardent leurs couleurs
+    .alert-solid {
+        background-color: var(--alert-theme-background-solid);
+        color: var(--alert-theme-text-solid);
+
+        :where(a) {
+            color: inherit;
+        }
+    }
+
+    // Subtle : fond léger, cadre de la même couleur
+    .alert-subtle {
+        border-color: var(--alert-theme-background-subtle);
+        background-color: var(--alert-theme-background-subtle);
+        color: var(--alert-theme-text-emphasis);
+    }
+
+    // Outline : cadre de la couleur du thème, sur le fond de la page
+    .alert-outline {
+        background-color: transparent;
+        color: var(--alert-theme-text-emphasis);
+    }
+
+}
