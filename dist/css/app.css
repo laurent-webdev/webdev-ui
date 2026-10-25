@@ -43,7 +43,11 @@
     color: inherit;
     letter-spacing: inherit;
   }
-  button:not(:disabled) {
+  button:not(:disabled),
+  [type=button]:not(:disabled),
+  [type=reset]:not(:disabled),
+  [type=submit]:not(:disabled),
+  summary {
     cursor: pointer;
   }
   textarea {
@@ -776,6 +780,125 @@
   }
 }
 @layer utilities {
+  .aspect-ratio-auto {
+    aspect-ratio: auto;
+  }
+  .aspect-ratio-1x1 {
+    aspect-ratio: 1/1;
+  }
+  .aspect-ratio-4x3 {
+    aspect-ratio: 4/3;
+  }
+  .aspect-ratio-16x9 {
+    aspect-ratio: 16/9;
+  }
+  .aspect-ratio-21x9 {
+    aspect-ratio: 21/9;
+  }
+  @media (width >= 22.5rem) {
+    .xs\:aspect-ratio-auto {
+      aspect-ratio: auto;
+    }
+    .xs\:aspect-ratio-1x1 {
+      aspect-ratio: 1/1;
+    }
+    .xs\:aspect-ratio-4x3 {
+      aspect-ratio: 4/3;
+    }
+    .xs\:aspect-ratio-16x9 {
+      aspect-ratio: 16/9;
+    }
+    .xs\:aspect-ratio-21x9 {
+      aspect-ratio: 21/9;
+    }
+  }
+  @media (width >= 36rem) {
+    .sm\:aspect-ratio-auto {
+      aspect-ratio: auto;
+    }
+    .sm\:aspect-ratio-1x1 {
+      aspect-ratio: 1/1;
+    }
+    .sm\:aspect-ratio-4x3 {
+      aspect-ratio: 4/3;
+    }
+    .sm\:aspect-ratio-16x9 {
+      aspect-ratio: 16/9;
+    }
+    .sm\:aspect-ratio-21x9 {
+      aspect-ratio: 21/9;
+    }
+  }
+  @media (width >= 48rem) {
+    .md\:aspect-ratio-auto {
+      aspect-ratio: auto;
+    }
+    .md\:aspect-ratio-1x1 {
+      aspect-ratio: 1/1;
+    }
+    .md\:aspect-ratio-4x3 {
+      aspect-ratio: 4/3;
+    }
+    .md\:aspect-ratio-16x9 {
+      aspect-ratio: 16/9;
+    }
+    .md\:aspect-ratio-21x9 {
+      aspect-ratio: 21/9;
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:aspect-ratio-auto {
+      aspect-ratio: auto;
+    }
+    .lg\:aspect-ratio-1x1 {
+      aspect-ratio: 1/1;
+    }
+    .lg\:aspect-ratio-4x3 {
+      aspect-ratio: 4/3;
+    }
+    .lg\:aspect-ratio-16x9 {
+      aspect-ratio: 16/9;
+    }
+    .lg\:aspect-ratio-21x9 {
+      aspect-ratio: 21/9;
+    }
+  }
+  @media (width >= 80rem) {
+    .xl\:aspect-ratio-auto {
+      aspect-ratio: auto;
+    }
+    .xl\:aspect-ratio-1x1 {
+      aspect-ratio: 1/1;
+    }
+    .xl\:aspect-ratio-4x3 {
+      aspect-ratio: 4/3;
+    }
+    .xl\:aspect-ratio-16x9 {
+      aspect-ratio: 16/9;
+    }
+    .xl\:aspect-ratio-21x9 {
+      aspect-ratio: 21/9;
+    }
+  }
+  @media (width >= 96rem) {
+    .\32 xl\:aspect-ratio-auto {
+      aspect-ratio: auto;
+    }
+    .\32 xl\:aspect-ratio-1x1 {
+      aspect-ratio: 1/1;
+    }
+    .\32 xl\:aspect-ratio-4x3 {
+      aspect-ratio: 4/3;
+    }
+    .\32 xl\:aspect-ratio-16x9 {
+      aspect-ratio: 16/9;
+    }
+    .\32 xl\:aspect-ratio-21x9 {
+      aspect-ratio: 21/9;
+    }
+  }
+}
+@layer utilities {
   .border {
     border: var(--border-width) solid var(--border-color);
   }
@@ -990,6 +1113,44 @@
   }
   .color-inherit {
     color: inherit;
+  }
+}
+@layer utilities {
+  .cursor-none {
+    cursor: none;
+  }
+  .cursor-auto {
+    cursor: auto;
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .cursor-not-allowed {
+    cursor: not-allowed;
+  }
+  .cursor-help {
+    cursor: help;
+  }
+  .cursor-progress {
+    cursor: progress;
+  }
+  .cursor-wait {
+    cursor: wait;
+  }
+  .cursor-grab {
+    cursor: grab;
+  }
+  .cursor-grabbing {
+    cursor: grabbing;
+  }
+  .cursor-text {
+    cursor: text;
+  }
+  .cursor-copy {
+    cursor: copy;
+  }
+  .cursor-alias {
+    cursor: alias;
   }
 }
 @layer utilities {
@@ -2589,6 +2750,23 @@
     .\32 xl\:column-gap-12 {
       column-gap: var(--space-12);
     }
+  }
+}
+@layer utilities {
+  .object-fit-contain {
+    object-fit: contain;
+  }
+  .object-fit-cover {
+    object-fit: cover;
+  }
+  .object-fit-fill {
+    object-fit: fill;
+  }
+  .object-fit-none {
+    object-fit: none;
+  }
+  .object-fit-scale-down {
+    object-fit: scale-down;
   }
 }
 @layer utilities {

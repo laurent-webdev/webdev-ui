@@ -72,7 +72,12 @@
     letter-spacing: inherit;
   }
 
-  button:not(:disabled) {
+  // La main sur ce qui se clique nativement (les liens l'ont déjà)
+  button:not(:disabled),
+  [type="button"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  summary {
     cursor: pointer;
   }
 

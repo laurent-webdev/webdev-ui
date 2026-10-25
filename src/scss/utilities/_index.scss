@@ -1,9 +1,12 @@
 // Un @use par fichier, par ordre alphabétique.
+@use 'aspect-ratio';
 @use 'border';
 @use 'colors';
+@use 'cursor';
 @use 'display';
 @use 'flex';
 @use 'font';
 @use 'gap';
+@use 'object-fit';
 @use 'sizing';
 @use 'spacing';

@@ -1,0 +1,15 @@
+@layer utilities {
+
+    // Comment une image ou une vidéo remplit sa boîte : la boîte doit avoir une largeur et une hauteur
+    // Entière, avec des bandes vides
+    .object-fit-contain { object-fit: contain; }
+    // Remplit la boîte, les bords sont recadrés
+    .object-fit-cover { object-fit: cover; }
+    // Étirée à la taille de la boîte, déformée
+    .object-fit-fill { object-fit: fill; }
+    // Taille d'origine, centrée, recadrée
+    .object-fit-none { object-fit: none; }
+    // Comme contain, sans jamais agrandir
+    .object-fit-scale-down { object-fit: scale-down; }
+
+}

@@ -516,4 +516,96 @@
         </ul>
     </section>
 
+    <section>
+        <h2>Curseurs</h2>
+        <p class="mt-4">Survoler chaque case pour voir son curseur</p>
+        <div class="d-flex flex-wrap-wrap gap-2 mt-2">
+            {% for cursor in ['none', 'auto', 'pointer', 'not-allowed', 'help', 'progress', 'wait', 'grab', 'grabbing', 'text', 'copy', 'alias'] %}
+                <div class="demo-box cursor-{{ cursor }} p-2">cursor-{{ cursor }}</div>
+            {% endfor %}
+        </div>
+
+        <h3 class="mt-4">Exemple : une case à cocher et son texte</h3>
+        <p class="mt-2"><label class="cursor-pointer"><input type="checkbox" name="demo-cursor"> Recevoir les nouveautés</label></p>
+
+        <h3 class="mt-4">Contre-exemples</h3>
+        <pre class="mt-2"><code>&lt;div class="cursor-pointer" onclick="…"&gt;Valider&lt;/div&gt;</code></pre>
+        <p>Un faux bouton : pas de focus au clavier, pas annoncé comme bouton par les lecteurs d'écran (WCAG 2.1.1 et 4.1.2). Utiliser &lt;button&gt;, qui a déjà la main.</p>
+        <pre class="mt-2"><code>&lt;button class="btn-solid cursor-not-allowed" type="button" disabled&gt;…&lt;/button&gt;</code></pre>
+        <p>Sans effet : un bouton désactivé ne reçoit plus la souris (pointer-events: none), il garde la flèche.</p>
+
+        <h3 class="mt-4">Limites</h3>
+        <ul>
+            <li>Sans effet sur un écran tactile : il n'y a pas de pointeur.</li>
+            <li>cursor-none masque le pointeur : seulement quand autre chose le remplace (jeu, vidéo en plein écran).</li>
+            <li>cursor-grab, cursor-grabbing, cursor-wait et cursor-progress suivent une action : le JS du site pose et retire la classe (glisser-déposer, chargement).</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Object-fit</h2>
+        <p class="mt-4">La même image (2 fois plus large que haute) dans des boîtes de 8rem de haut : img w-100 h-100 object-fit-*</p>
+        <div class="grid gap-2 mt-2">
+            {% for fit in ['contain', 'cover', 'fill', 'none', 'scale-down'] %}
+                <figure class="col-6 md:col-4">
+                    <div class="demo-box demo-height">
+                        <img class="w-100 h-100 object-fit-{{ fit }}" src="{{ asset('images/demo-landscape.svg') }}" width="400" height="200" alt="">
+                    </div>
+                    <figcaption>object-fit-{{ fit }}</figcaption>
+                </figure>
+            {% endfor %}
+        </div>
+
+        <h3 class="mt-4">Exemple : un avatar rond, avec une image qui n'est pas carrée</h3>
+        <img class="aspect-ratio-1x1 object-fit-cover border-radius-circle mt-2" src="{{ asset('images/demo-landscape.svg') }}" width="96" height="96" alt="">
+        <p class="mt-2">width="96" donne la taille, aspect-ratio-1x1 le carré, object-fit-cover recadre l'image, border-radius-circle l'arrondit.</p>
+
+        <h3 class="mt-4">Contre-exemples</h3>
+        <pre class="mt-2"><code>&lt;img class="object-fit-cover" src="…" width="400" height="200" alt="…"&gt;</code></pre>
+        <p>Sans effet : l'image garde ses proportions (hauteur auto), elle n'a pas de boîte à remplir. Lui donner une largeur et une hauteur : w-100 h-100 dans un parent qui a une hauteur, ou w-100 aspect-ratio-*.</p>
+        <pre class="mt-2"><code>&lt;img class="w-100 h-100 object-fit-cover" src="logo.svg" alt="…"&gt;</code></pre>
+        <p>cover recadre les bords : sur un logo, un schéma ou une image avec du texte, une partie disparaît. Utiliser object-fit-contain.</p>
+
+        <h3 class="mt-4">Limites</h3>
+        <ul>
+            <li>Seulement sur une image ou une vidéo (img, video) ; pour une image de fond, c'est background-size, dans le site.</li>
+            <li>Le recadrage est centré : pas d'utilitaire object-position pour l'instant (le régler dans le site).</li>
+            <li>Pas de variante responsive (md:object-fit-*).</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Aspect-ratio</h2>
+        <p class="mt-4">aspect-ratio-* : la hauteur suit la largeur</p>
+        <div class="grid gap-2 mt-2">
+            {% for ratio in ['1x1', '4x3', '16x9', '21x9'] %}
+                <div class="demo-box aspect-ratio-{{ ratio }} p-2 col-6 md:col-3">aspect-ratio-{{ ratio }}</div>
+            {% endfor %}
+        </div>
+
+        <h3 class="mt-4">Exemple : une vignette en 16/9</h3>
+        <div class="grid mt-2">
+            <img class="w-100 aspect-ratio-16x9 object-fit-cover col-12 md:col-6" src="{{ asset('images/demo-landscape.svg') }}" width="400" height="200" alt="">
+        </div>
+
+        <h3 class="mt-4">Exemple : un bandeau, plus haut sur téléphone</h3>
+        <img class="w-100 aspect-ratio-4x3 md:aspect-ratio-21x9 object-fit-cover mt-2" src="{{ asset('images/demo-landscape.svg') }}" width="400" height="200" alt="">
+        <p class="mt-2">aspect-ratio-4x3 md:aspect-ratio-21x9 : 4/3 sur téléphone, 21/9 à partir de md.</p>
+
+        <h3 class="mt-4">Exemple : une vidéo intégrée</h3>
+        <pre class="mt-2"><code>&lt;iframe class="w-100 aspect-ratio-16x9" src="https://www.youtube-nocookie.com/embed/…" title="Titre de la vidéo"&gt;&lt;/iframe&gt;</code></pre>
+
+        <h3 class="mt-4">Contre-exemples</h3>
+        <pre class="mt-2"><code>&lt;img class="w-100 aspect-ratio-16x9" src="…" width="400" height="200" alt="…"&gt;</code></pre>
+        <p>Une image dont les proportions ne sont pas celles de la boîte est déformée (object-fit: fill par défaut). Ajouter object-fit-cover.</p>
+        <pre class="mt-2"><code>&lt;div class="aspect-ratio-1x1 w-100 h-100"&gt;…&lt;/div&gt;</code></pre>
+        <p>Ignoré : la largeur et la hauteur sont déjà fixées toutes les deux. aspect-ratio calcule la dimension qui reste en auto.</p>
+
+        <h3 class="mt-4">Limites</h3>
+        <ul>
+            <li>Un bloc avec du texte grandit si le contenu dépasse : le ratio est un minimum, le texte ne déborde jamais (zoom 200 %, texte long).</li>
+            <li>Seulement les proportions courantes : une autre (3 / 2, 9 / 16) s'écrit dans le site, aspect-ratio: 3 / 2.</li>
+        </ul>
+    </section>
+
 {% endblock %}
