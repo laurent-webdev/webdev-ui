@@ -779,6 +779,12 @@
   .border {
     border: var(--border-width) solid var(--border-color);
   }
+  .border-x {
+    border-inline: var(--border-width) solid var(--border-color);
+  }
+  .border-y {
+    border-block: var(--border-width) solid var(--border-color);
+  }
   .border-top {
     border-block-start: var(--border-width) solid var(--border-color);
   }

@@ -2,11 +2,15 @@
 
     // Bordure pleine, avec l'épaisseur et la couleur globales
     .border { border: var(--border-width) solid var(--border-color); }
+    // Deux côtés opposés, comme mx et my : x = début et fin, y = haut et bas
+    .border-x { border-inline: var(--border-width) solid var(--border-color); }
+    .border-y { border-block: var(--border-width) solid var(--border-color); }
     // Un seul côté, en propriétés logiques : start et end suivent le sens d'écriture, comme ms et me
     .border-top { border-block-start: var(--border-width) solid var(--border-color); }
     .border-bottom { border-block-end: var(--border-width) solid var(--border-color); }
     .border-start { border-inline-start: var(--border-width) solid var(--border-color); }
     .border-end { border-inline-end: var(--border-width) solid var(--border-color); }
+
     // Retire la bordure, aussi celle d'un composant
     .border-0 { border: 0; }
 
