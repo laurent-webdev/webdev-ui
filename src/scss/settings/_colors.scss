@@ -13,6 +13,8 @@ $colors: primary, secondary, accent, success, danger, warning, info, neutral, in
   --border-color: var(--color-neutral);
   // Ombres : noir transparent, plus opaque en sombre (le fond est déjà presque noir)
   --box-shadow-color: light-dark(oklch(0 0 0 / 0.1), oklch(0 0 0 / 0.5));
+  // Derrière un dialogue modal : la page assombrie, plus en sombre
+  --backdrop-background-color: light-dark(oklch(0 0 0 / 0.5), oklch(0 0 0 / 0.65));
 
   --color-primary: light-dark(oklch(0.592 0.112 228), oklch(0.592 0.112 228));
   --color-secondary: light-dark(oklch(0.64 0.15 355), oklch(0.64 0.15 355));

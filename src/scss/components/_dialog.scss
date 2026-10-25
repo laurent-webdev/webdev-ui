@@ -1,0 +1,149 @@
+@use '../settings/breakpoints';
+
+@layer components {
+
+    :root {
+        // Forme : le même padding pour l'en-tête, le corps et le pied
+        --dialog-padding-block: 1rem;
+        --dialog-padding-inline: 1rem;
+        --dialog-border-radius: var(--border-radius-md);
+        --dialog-border-width: var(--border-width);
+        // Largeur du breakpoint sm (36rem), la taille par défaut
+        --dialog-width: #{breakpoints.$screen-md};
+        --dialog-transition-duration: 0.2s;
+
+        // Thème par défaut, sans classe .theme-*
+        --dialog-theme-background-solid: var(--color-neutral);
+        --dialog-theme-text-solid: var(--color-text-on-neutral);
+        --dialog-theme-background-subtle: var(--color-subtle-neutral);
+    }
+
+    // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses dialogues
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .theme-#{$color} {
+            --dialog-theme-background-solid: var(--color-#{$color});
+            --dialog-theme-text-solid: var(--color-text-on-#{$color});
+            --dialog-theme-background-subtle: var(--color-subtle-#{$color});
+        }
+    }
+
+    // Un dialogue modal ouvert : la page derrière ne défile plus
+    :root:has(dialog:modal) {
+        overflow: hidden;
+    }
+
+    // Forme commune : en-tête, corps et pied empilés, au-dessus de la page
+    // Le cadre et les traits ont la couleur du thème ; la variante dit le fond et le texte
+    .dialog-solid, .dialog-subtle, .dialog-outline {
+        width: var(--dialog-width);
+        // 1rem d'écart avec les bords de l'écran, comme le container
+        max-width: calc(100% - 2rem);
+        max-height: calc(100% - 2rem);
+        // Le padding est dans les zones (natif : 1em sur le dialogue)
+        padding: 0;
+        border: var(--dialog-border-width) solid var(--dialog-theme-background-solid);
+        border-radius: var(--dialog-border-radius);
+        box-shadow: var(--box-shadow-xl);
+        transition-property: opacity, scale;
+        transition-duration: var(--dialog-transition-duration);
+
+        // Derrière : la page assombrie et floutée
+        &::backdrop {
+            background-color: var(--backdrop-background-color);
+            backdrop-filter: var(--backdrop-filter);
+            transition-property: background-color, backdrop-filter;
+            transition-duration: var(--dialog-transition-duration);
+        }
+
+        // Le premier et le dernier élément suivent les coins du cadre (rayon - bordure) : en-tête ou pied colorés
+        > :first-child {
+            border-start-start-radius: calc(var(--dialog-border-radius) - var(--dialog-border-width));
+            border-start-end-radius: calc(var(--dialog-border-radius) - var(--dialog-border-width));
+        }
+        > :last-child {
+            border-end-start-radius: calc(var(--dialog-border-radius) - var(--dialog-border-width));
+            border-end-end-radius: calc(var(--dialog-border-radius) - var(--dialog-border-width));
+        }
+
+        // Un trait sous l'en-tête et au-dessus du pied
+        > .dialog-header {
+            border-block-end: var(--dialog-border-width) solid var(--dialog-theme-background-solid);
+        }
+        > .dialog-footer {
+            border-block-start: var(--dialog-border-width) solid var(--dialog-theme-background-solid);
+        }
+    }
+
+    // À l'ouverture : arrive transparent et un peu plus petit, la page s'assombrit et se floute
+    @starting-style {
+        .dialog-solid[open], .dialog-subtle[open], .dialog-outline[open] {
+            opacity: 0;
+            scale: 0.95;
+        }
+
+        .dialog-solid[open]::backdrop, .dialog-subtle[open]::backdrop, .dialog-outline[open]::backdrop {
+            background-color: transparent;
+            backdrop-filter: none;
+        }
+    }
+
+    // Les zones
+    .dialog-header, .dialog-body, .dialog-footer {
+        padding-block: var(--dialog-padding-block);
+        padding-inline: var(--dialog-padding-inline);
+    }
+
+    // En-tête : le titre et la croix sur une ligne ; la croix à gauche ou à droite, selon sa place dans le HTML
+    .dialog-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        > :is(.btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child {
+            margin-inline-start: auto;
+        }
+    }
+
+    // Pied : les boutons à droite, le principal en dernier
+    .dialog-footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: end;
+        gap: 0.5rem;
+    }
+
+    // Solid : fond plein ; les liens prennent la couleur du texte (l'emphasis serait illisible sur le fond plein)
+    // :where() : les .btn-* posés sur un <a> gardent leurs couleurs
+    .dialog-solid {
+        background-color: var(--dialog-theme-background-solid);
+        color: var(--dialog-theme-text-solid);
+
+        :where(a) {
+            color: inherit;
+        }
+    }
+
+    // Subtle : fond léger, cadre et traits de la même couleur ; le texte reste celui de la page
+    .dialog-subtle {
+        border-color: var(--dialog-theme-background-subtle);
+        background-color: var(--dialog-theme-background-subtle);
+
+        > .dialog-header,
+        > .dialog-footer {
+            border-color: var(--dialog-theme-background-subtle);
+        }
+    }
+
+    // Outline : cadre de la couleur du thème, sur le fond de la page (natif : Canvas, pas notre fond sombre)
+    .dialog-outline {
+        background-color: var(--color-background);
+    }
+
+    // Tailles : le dialogue a la largeur du breakpoint du même nom
+    .dialog-xs { --dialog-width: #{breakpoints.$screen-xs}; }
+    .dialog-sm { --dialog-width: #{breakpoints.$screen-sm}; }
+    .dialog-md { --dialog-width: #{breakpoints.$screen-md}; }
+    .dialog-lg { --dialog-width: #{breakpoints.$screen-lg}; }
+    .dialog-xl { --dialog-width: #{breakpoints.$screen-xl}; }
+
+}

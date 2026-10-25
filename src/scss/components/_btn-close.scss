@@ -1,0 +1,114 @@
+@layer components {
+
+    :root {
+        // Forme : un carré de 24px (la taille xs), bordure comprise, la cible tactile minimale
+        --btn-close-size: 1.5rem;
+        --btn-close-border-radius: var(--border-radius-md);
+        --btn-close-border-width: var(--border-width);
+
+        // Thème par défaut, sans classe .theme-*
+        --btn-close-theme-background-solid: var(--color-neutral);
+        --btn-close-theme-text-solid: var(--color-text-on-neutral);
+        --btn-close-theme-state-solid: var(--color-state-on-neutral);
+        --btn-close-theme-background-subtle: var(--color-subtle-neutral);
+        --btn-close-theme-text-emphasis: var(--color-emphasis-neutral);
+    }
+
+    // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses boutons de fermeture
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .theme-#{$color} {
+            --btn-close-theme-background-solid: var(--color-#{$color});
+            --btn-close-theme-text-solid: var(--color-text-on-#{$color});
+            --btn-close-theme-state-solid: var(--color-state-on-#{$color});
+            --btn-close-theme-background-subtle: var(--color-subtle-#{$color});
+            --btn-close-theme-text-emphasis: var(--color-emphasis-#{$color});
+        }
+    }
+
+    // Forme commune : un carré, la bordure existe toujours, toutes les variantes ont la même taille
+    .btn-close-solid, .btn-close-subtle, .btn-close-outline {
+        width: var(--btn-close-size);
+        aspect-ratio: 1;
+        padding: 0;
+        border: var(--btn-close-border-width) solid transparent;
+        border-radius: var(--btn-close-border-radius);
+        transition-property: background-color, border-color, color;
+        transition-duration: var(--transition-duration);
+
+        // La croix : un masque SVG sur ::before, de la couleur du texte de la variante
+        &::before {
+            content: "";
+            display: block;
+            aspect-ratio: 1;
+            background-color: currentColor;
+            mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M5 5l6 6m0-6l-6 6' stroke='black' stroke-width='1.5' stroke-linecap='round'/></svg>");
+            mask-size: contain;
+            mask-repeat: no-repeat;
+        }
+
+        // Couleur du thème en emphasis, comme les boutons
+        &:focus-visible {
+            outline: var(--focus-outline-width) solid var(--btn-close-theme-text-emphasis);
+            outline-offset: var(--focus-outline-offset);
+        }
+
+        // Contraste élevé (Windows) : le fond forcé effacerait la croix, elle prend la couleur du texte des boutons
+        @media (forced-colors: active) {
+            &::before {
+                forced-color-adjust: none;
+                background-color: ButtonText;
+            }
+        }
+    }
+
+    // Solid : fond plein, mélangé à l'opposé du texte
+    .btn-close-solid {
+        background-color: var(--btn-close-theme-background-solid);
+        color: var(--btn-close-theme-text-solid);
+
+        &:hover {
+            background-color: color-mix(in srgb, var(--btn-close-theme-background-solid), var(--btn-close-theme-state-solid) var(--state-mix-soft));
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--btn-close-theme-background-solid), var(--btn-close-theme-state-solid) var(--state-mix-strong));
+        }
+    }
+
+    // Subtle : fond léger, renforcé par la couleur du thème au survol et au clic
+    .btn-close-subtle {
+        background-color: var(--btn-close-theme-background-subtle);
+        color: var(--btn-close-theme-text-emphasis);
+
+        &:hover {
+            background-color: color-mix(in srgb, var(--btn-close-theme-background-subtle), var(--btn-close-theme-background-solid) var(--state-mix-soft));
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--btn-close-theme-background-subtle), var(--btn-close-theme-background-solid) var(--state-mix-strong));
+        }
+    }
+
+    // Outline : bordure seule, devient solid au survol et au clic
+    .btn-close-outline {
+        border-color: var(--btn-close-theme-background-solid);
+        background-color: transparent;
+        color: var(--btn-close-theme-text-emphasis);
+
+        // Bordure transparente : le fond passe dessous, elle a toujours sa couleur
+        &:hover,
+        &:active {
+            border-color: transparent;
+            background-color: var(--btn-close-theme-background-solid);
+            color: var(--btn-close-theme-text-solid);
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--btn-close-theme-background-solid), var(--btn-close-theme-state-solid) var(--state-mix-soft));
+        }
+    }
+
+    // Tailles : la hauteur du bouton de la même taille (24, 31, 38, 45px), pour les aligner côte à côte
+    .btn-close-xs { --btn-close-size: 1.5rem; }
+    .btn-close-sm { --btn-close-size: 1.9375rem; }
+    .btn-close-md { --btn-close-size: 2.375rem; }
+    .btn-close-lg { --btn-close-size: 2.8125rem; }
+
+}

@@ -23,6 +23,7 @@
   html {
     -webkit-text-size-adjust: 100%; // iOS : pas d'agrandissement auto en paysage
     text-size-adjust: 100%;         // 100% et non none : n'empêche pas le zoom texte
+    scrollbar-gutter: stable;       // place de la barre gardée : la page ne bouge pas quand elle disparaît (dialogue modal)
   }
 
   // Animer vers height: auto seulement si l'utilisateur accepte les animations
