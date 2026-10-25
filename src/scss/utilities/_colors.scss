@@ -1,20 +1,16 @@
 @layer utilities {
 
     // Une classe par couleur : la couleur est dans le nom, sans .theme-* (réservé aux composants)
-    // Fonds écrits avant les textes : un color-* remplace le texte posé par un bg-* (class="bg-primary color-warning")
+    // Les fonds ne posent que le fond : le texte se choisit avec color-* (class="bg-primary color-text-on-primary")
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
-        // Fond plein, avec le texte noir ou blanc le plus lisible ; les liens prennent la couleur du texte
+        // Fond plein
         .bg-#{$color} {
-            --link-theme-text-emphasis: var(--color-text-on-#{$color});
             background-color: var(--color-#{$color});
-            color: var(--color-text-on-#{$color});
         }
 
-        // Fond léger, avec le texte emphasis de la même couleur (comme btn-subtle) ; les liens aussi
+        // Fond léger : le texte normal y reste lisible
         .bg-subtle-#{$color} {
-            --link-theme-text-emphasis: var(--color-emphasis-#{$color});
             background-color: var(--color-subtle-#{$color});
-            color: var(--color-emphasis-#{$color});
         }
     }
 
@@ -28,9 +24,14 @@
         .color-emphasis-#{$color} {
             color: var(--color-emphasis-#{$color});
         }
+
+        // Texte noir ou blanc, lisible sur le fond plein de la même couleur (bg-*)
+        .color-text-on-#{$color} {
+            color: var(--color-text-on-#{$color});
+        }
     }
 
-    // Couleur du parent : retour au texte normal dans un fond (class="bg-subtle-neutral color-inherit")
+    // Couleur du parent : un lien prend la couleur du texte autour (<a class="color-inherit">)
     .color-inherit {
         color: inherit;
     }

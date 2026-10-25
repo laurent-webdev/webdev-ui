@@ -234,16 +234,22 @@
     <section>
         <h2>Couleurs</h2>
         {% set colors = ['primary', 'secondary', 'accent', 'success', 'danger', 'warning', 'info', 'neutral', 'inverse'] %}
-        <p class="mt-4">bg-* : fond plein, texte noir ou blanc automatique</p>
+        <p class="mt-4">bg-* color-text-on-* : fond plein, texte noir ou blanc lisible</p>
         <div class="grid gap-2 mt-2">
             {% for color in colors %}
-                <div class="bg-{{ color }} p-2 col-6 md:col-4">bg-{{ color }}</div>
+                <div class="bg-{{ color }} color-text-on-{{ color }} p-2 col-6 md:col-4">bg-{{ color }} color-text-on-{{ color }}</div>
             {% endfor %}
         </div>
-        <p class="mt-4">bg-subtle-* : fond léger, texte emphasis automatique</p>
+        <p class="mt-4">bg-subtle-* : fond léger, le texte reste normal</p>
         <div class="grid gap-2 mt-2">
             {% for color in colors %}
                 <div class="bg-subtle-{{ color }} p-2 col-6 md:col-4">bg-subtle-{{ color }}</div>
+            {% endfor %}
+        </div>
+        <p class="mt-4">bg-subtle-* color-emphasis-* : fond léger, texte coloré</p>
+        <div class="grid gap-2 mt-2">
+            {% for color in colors %}
+                <div class="bg-subtle-{{ color }} color-emphasis-{{ color }} p-2 col-6 md:col-4">bg-subtle-{{ color }} color-emphasis-{{ color }}</div>
             {% endfor %}
         </div>
         <p class="mt-4">color-emphasis-* : texte coloré lisible</p>
@@ -261,46 +267,47 @@
                 </p>
             {% endfor %}
         </div>
-        <p class="mt-4">à sa sauce : bg-subtle-neutral color-emphasis-* remplace le texte posé par le fond</p>
+        <p class="mt-4">bg-subtle-neutral color-emphasis-* : fond gris léger, texte coloré</p>
         <div class="grid gap-2 mt-2">
             {% for color in colors %}
                 <div class="bg-subtle-neutral color-emphasis-{{ color }} p-2 col-6 md:col-4">bg-subtle-neutral color-emphasis-{{ color }}</div>
             {% endfor %}
         </div>
-        <p class="mt-4">color-inherit : retour au texte normal</p>
-        <div class="bg-subtle-success color-inherit p-2 mt-2">bg-subtle-success color-inherit : fond vert léger, texte normal</div>
     </section>
 
     <section>
         <h2>Liens et boutons dans un fond</h2>
 
         <h3 class="mt-4">Exemples</h3>
-        <div class="bg-primary p-4 mt-2">
-            <p>bg-primary : le texte et les <a href="#">liens</a> passent en noir ou blanc. Au survol, le soulignement s'épaissit.</p>
+        <div class="bg-primary color-text-on-primary p-4 mt-2">
+            <p>bg-primary color-text-on-primary : texte noir ou blanc ; avec color-inherit, les <a class="color-inherit" href="#">liens</a> prennent sa couleur. Au survol, le soulignement s'épaissit.</p>
             <button class="btn-solid mt-2" type="button">btn-solid : son propre fond, toujours lisible</button>
         </div>
         <div class="bg-subtle-success p-4 mt-2">
-            <p>bg-subtle-success : le texte et les <a href="#">liens</a> passent en vert lisible.</p>
+            <p>bg-subtle-success : texte et <a href="#">liens</a> normaux, lisibles sans autre classe.</p>
             <button class="btn-outline theme-success mt-2" type="button">btn-outline theme-success</button>
         </div>
-        <div class="bg-subtle-neutral color-inherit p-4 mt-2">
-            <p>bg-subtle-neutral color-inherit : texte normal, <a href="#">lien</a> normal.</p>
+        <div class="bg-subtle-success color-emphasis-success p-4 mt-2">
+            <p>bg-subtle-success color-emphasis-success : texte vert ; avec color-inherit, le <a class="color-inherit" href="#">lien</a> aussi.</p>
         </div>
 
         <h3 class="mt-4">Contre-exemples (non affichés : ils seraient illisibles)</h3>
-        <pre class="mt-2"><code>&lt;section class="bg-primary"&gt;
+        <pre class="mt-2"><code>&lt;section class="bg-warning"&gt;…&lt;/section&gt;</code></pre>
+        <p>Un fond plein sans color-text-on-* garde le texte de la page : en sombre, blanc sur jaune, 1,44:1. Toujours écrire la paire bg-warning color-text-on-warning.</p>
+        <pre class="mt-2"><code>&lt;section class="bg-primary color-text-on-primary"&gt;
+    &lt;a href="…"&gt;…&lt;/a&gt;
+&lt;/section&gt;</code></pre>
+        <p>Un fond ne change pas la couleur des liens : gris sur bleu, 1,87:1. Ajouter color-inherit sur le lien.</p>
+        <pre class="mt-2"><code>&lt;section class="bg-primary color-text-on-primary"&gt;
     &lt;button class="btn-outline" type="button"&gt;…&lt;/button&gt;
 &lt;/section&gt;</code></pre>
         <p>btn-outline, btn-text et btn-link sont faits pour le fond de page : texte gris sur fond bleu. Sur un fond plein, utiliser btn-solid.</p>
-        <pre class="mt-2"><code>&lt;section class="bg-primary"&gt;
-    &lt;a class="theme-danger" href="…"&gt;…&lt;/a&gt;
-&lt;/section&gt;</code></pre>
-        <p>Un .theme-* sur un lien remplace la couleur donnée par le fond : rouge foncé sur bleu.</p>
         <pre class="mt-2"><code>&lt;p class="color-success"&gt;Enregistré&lt;/p&gt;</code></pre>
         <p>color-* est la couleur brute, pour une icône : en texte, 1,87:1 sur fond blanc. Pour du texte, color-emphasis-success.</p>
 
         <h3 class="mt-4">Limites</h3>
         <ul>
+            <li>Les fonds (bg-*, bg-subtle-*) ne posent que le fond : sur un fond plein, le texte demande color-text-on-* et chaque lien color-inherit.</li>
             <li>Sur un fond plein (bg-*), seul btn-solid est prévu.</li>
             <li>Sur un fond plein, le contour de focus des boutons garde la couleur du thème : il peut manquer de contraste (WCAG 1.4.11 demande 3:1).</li>
             <li>Dans un fond, la couleur des liens ne change pas au survol : c'est le soulignement qui s'épaissit.</li>
@@ -458,6 +465,52 @@
             <li>h-100 ne fait rien si le parent n'a pas de hauteur : la hauteur en % devient auto.</li>
             <li>Autres hauteurs (bandeau à la moitié de l'écran…) : en CSS dans le site, en svh comme min-h-100svh.</li>
             <li>min-h-100svh prend la hauteur de l'écran barres du navigateur affichées : quand elles se cachent sur téléphone, il reste un peu de place en bas.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Bordures</h2>
+        <div class="d-flex flex-wrap-wrap gap-4 mt-4">
+            <div class="border p-4">border</div>
+            <div class="border-top p-4">border-top</div>
+            <div class="border-bottom p-4">border-bottom</div>
+            <div class="border-start p-4">border-start</div>
+            <div class="border-end p-4">border-end</div>
+        </div>
+        <fieldset class="border-0 mt-4">
+            <legend>fieldset border-0 : sans le cadre natif</legend>
+            <label><input type="checkbox" name="demo-border"> Option</label>
+        </fieldset>
+        <p class="mt-4">border border-color-* : couleur brute</p>
+        <div class="grid gap-2 mt-2">
+            {% for color in colors %}
+                <div class="border border-color-{{ color }} p-2 col-6 md:col-4">border-color-{{ color }}</div>
+            {% endfor %}
+        </div>
+        <p class="mt-4">border-radius-* : xs 2px, sm 4px, md 6px (composants), lg 8px, xl 10px, pill, circle</p>
+        <div class="d-flex flex-wrap-wrap align-items-center gap-4 mt-2">
+            {% for radius in ['0', 'xs', 'sm', 'md', 'lg', 'xl', 'pill'] %}
+                <div class="demo-box border-radius-{{ radius }} p-4">border-radius-{{ radius }}</div>
+            {% endfor %}
+            <div class="demo-box demo-square border-radius-circle d-flex align-items-center justify-content-center">circle</div>
+        </div>
+
+        <h3 class="mt-4">Exemple : un encadré</h3>
+        <div class="border border-radius-lg p-4 mt-2">border border-radius-lg p-4</div>
+
+        <h3 class="mt-4">Contre-exemples</h3>
+        <pre class="mt-2"><code>&lt;div class="border-color-primary"&gt;…&lt;/div&gt;</code></pre>
+        <p>Sans border (ou un côté), il n'y a pas de bordure à colorer : rien ne change.</p>
+        <pre class="mt-2"><code>&lt;div class="border-radius-circle p-4"&gt;Texte&lt;/div&gt;</code></pre>
+        <p>circle sur un élément qui n'est pas carré : une ellipse. Pour des bouts ronds, border-radius-pill.</p>
+        <pre class="mt-2"><code>&lt;input class="border" type="text" name="nom"&gt;</code></pre>
+        <p>Le gris des bordures est décoratif : trop clair pour être la seule chose qui montre un champ (WCAG 1.4.11 demande 3:1).</p>
+
+        <h3 class="mt-4">Limites</h3>
+        <ul>
+            <li>Bordure par défaut : 1,23:1 sur le fond de page en clair, 1,57:1 en sombre ; faite pour séparer, pas pour montrer un composant.</li>
+            <li>border-color-* sur le fond de page : en clair, seules primary, secondary et inverse dépassent 3:1 ; en sombre, toutes sauf neutral.</li>
+            <li>Pas d'épaisseur ni d'arrondi par coin en classe : surcharger --border-width, ou écrire le CSS dans le site.</li>
         </ul>
     </section>
 

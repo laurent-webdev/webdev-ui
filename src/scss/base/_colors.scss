@@ -5,7 +5,7 @@
         background-color: var(--color-background);
     }
 
-    // Liens : soulignés (natif) ; couleur du thème dans components/_link.scss, ou du fond (bg-*) dans utilities/_colors.scss
+    // Liens : soulignés (natif) ; couleur du thème dans components/_link.scss
     // Dans base, les classes .btn-* gagnent toujours
     a {
         color: var(--link-theme-text-emphasis);
@@ -19,11 +19,11 @@
             text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
         }
 
-        // Contour de la couleur du lien, comme les boutons
+        // Contour de la couleur du lien, comme les boutons ; currentColor suit aussi color-inherit
         &:focus-visible {
-            outline: var(--focus-outline-width) solid var(--link-theme-text-emphasis);
+            outline: var(--focus-outline-width) solid currentColor;
             outline-offset: var(--focus-outline-offset);
-            border-radius: var(--radius);
+            border-radius: var(--border-radius-md);
         }
     }
 

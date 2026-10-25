@@ -13,6 +13,12 @@ body {
   background-color: var(--color-subtle-primary);
 }
 
+/* Élément carré, pour la démo border-radius-circle */
+.demo-square {
+  width: 6rem;
+  aspect-ratio: 1;
+}
+
 /* Parent avec une hauteur, pour les démos h-* */
 .demo-height {
   height: 8rem;

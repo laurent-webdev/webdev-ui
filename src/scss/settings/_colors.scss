@@ -9,6 +9,8 @@ $colors: primary, secondary, accent, success, danger, warning, info, neutral, in
 
 :root {
   --color-background: light-dark(#ffffff, oklch(0.17 0.008 228));
+  // Bordures : gris neutre, décoratif
+  --border-color: var(--color-neutral);
 
   --color-primary: light-dark(oklch(0.592 0.112 228), oklch(0.592 0.112 228));
   --color-secondary: light-dark(oklch(0.64 0.15 355), oklch(0.64 0.15 355));

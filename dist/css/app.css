@@ -86,6 +86,7 @@
 
 :root {
   --color-background: light-dark(#ffffff, oklch(0.17 0.008 228));
+  --border-color: var(--color-neutral);
   --color-primary: light-dark(oklch(0.592 0.112 228), oklch(0.592 0.112 228));
   --color-secondary: light-dark(oklch(0.64 0.15 355), oklch(0.64 0.15 355));
   --color-accent: light-dark(oklch(0.68 0.104 290), oklch(0.68 0.104 290));
@@ -189,8 +190,13 @@
 }
 
 :root {
-  /* Rayons */
-  --radius: 0.375rem;
+  /* Bordures : épaisseur, et rayons de 2px en 2px (md pour les composants) */
+  --border-width: 1px;
+  --border-radius-xs: 0.125rem;
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.375rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 0.625rem;
   /* États (survol, clic…) : part de couleur mélangée au fond, léger ou fort */
   --state-mix-soft: 20%;
   --state-mix-strong: 30%;
@@ -217,9 +223,9 @@
     text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
   }
   a:focus-visible {
-    outline: var(--focus-outline-width) solid var(--link-theme-text-emphasis);
+    outline: var(--focus-outline-width) solid currentColor;
     outline-offset: var(--focus-outline-offset);
-    border-radius: var(--radius);
+    border-radius: var(--border-radius-md);
   }
 }
 @layer base {
@@ -572,8 +578,8 @@
   :root {
     --btn-padding-block: 0.375rem;
     --btn-padding-inline: 1rem;
-    --btn-border-radius: var(--radius);
-    --btn-border-width: 1px;
+    --btn-border-radius: var(--border-radius-md);
+    --btn-border-width: var(--border-width);
     --btn-theme-background-solid: var(--color-neutral);
     --btn-theme-text-solid: var(--color-text-on-neutral);
     --btn-theme-state-solid: var(--color-state-on-neutral);
@@ -770,95 +776,130 @@
   }
 }
 @layer utilities {
+  .border {
+    border: var(--border-width) solid var(--border-color);
+  }
+  .border-top {
+    border-block-start: var(--border-width) solid var(--border-color);
+  }
+  .border-bottom {
+    border-block-end: var(--border-width) solid var(--border-color);
+  }
+  .border-start {
+    border-inline-start: var(--border-width) solid var(--border-color);
+  }
+  .border-end {
+    border-inline-end: var(--border-width) solid var(--border-color);
+  }
+  .border-0 {
+    border: 0;
+  }
+  .border-color-primary {
+    border-color: var(--color-primary);
+  }
+  .border-color-secondary {
+    border-color: var(--color-secondary);
+  }
+  .border-color-accent {
+    border-color: var(--color-accent);
+  }
+  .border-color-success {
+    border-color: var(--color-success);
+  }
+  .border-color-danger {
+    border-color: var(--color-danger);
+  }
+  .border-color-warning {
+    border-color: var(--color-warning);
+  }
+  .border-color-info {
+    border-color: var(--color-info);
+  }
+  .border-color-neutral {
+    border-color: var(--color-neutral);
+  }
+  .border-color-inverse {
+    border-color: var(--color-inverse);
+  }
+  .border-radius-0 {
+    border-radius: 0;
+  }
+  .border-radius-xs {
+    border-radius: var(--border-radius-xs);
+  }
+  .border-radius-sm {
+    border-radius: var(--border-radius-sm);
+  }
+  .border-radius-md {
+    border-radius: var(--border-radius-md);
+  }
+  .border-radius-lg {
+    border-radius: var(--border-radius-lg);
+  }
+  .border-radius-xl {
+    border-radius: var(--border-radius-xl);
+  }
+  .border-radius-pill {
+    border-radius: 50rem;
+  }
+  .border-radius-circle {
+    border-radius: 50%;
+  }
+}
+@layer utilities {
   .bg-primary {
-    --link-theme-text-emphasis: var(--color-text-on-primary);
     background-color: var(--color-primary);
-    color: var(--color-text-on-primary);
   }
   .bg-subtle-primary {
-    --link-theme-text-emphasis: var(--color-emphasis-primary);
     background-color: var(--color-subtle-primary);
-    color: var(--color-emphasis-primary);
   }
   .bg-secondary {
-    --link-theme-text-emphasis: var(--color-text-on-secondary);
     background-color: var(--color-secondary);
-    color: var(--color-text-on-secondary);
   }
   .bg-subtle-secondary {
-    --link-theme-text-emphasis: var(--color-emphasis-secondary);
     background-color: var(--color-subtle-secondary);
-    color: var(--color-emphasis-secondary);
   }
   .bg-accent {
-    --link-theme-text-emphasis: var(--color-text-on-accent);
     background-color: var(--color-accent);
-    color: var(--color-text-on-accent);
   }
   .bg-subtle-accent {
-    --link-theme-text-emphasis: var(--color-emphasis-accent);
     background-color: var(--color-subtle-accent);
-    color: var(--color-emphasis-accent);
   }
   .bg-success {
-    --link-theme-text-emphasis: var(--color-text-on-success);
     background-color: var(--color-success);
-    color: var(--color-text-on-success);
   }
   .bg-subtle-success {
-    --link-theme-text-emphasis: var(--color-emphasis-success);
     background-color: var(--color-subtle-success);
-    color: var(--color-emphasis-success);
   }
   .bg-danger {
-    --link-theme-text-emphasis: var(--color-text-on-danger);
     background-color: var(--color-danger);
-    color: var(--color-text-on-danger);
   }
   .bg-subtle-danger {
-    --link-theme-text-emphasis: var(--color-emphasis-danger);
     background-color: var(--color-subtle-danger);
-    color: var(--color-emphasis-danger);
   }
   .bg-warning {
-    --link-theme-text-emphasis: var(--color-text-on-warning);
     background-color: var(--color-warning);
-    color: var(--color-text-on-warning);
   }
   .bg-subtle-warning {
-    --link-theme-text-emphasis: var(--color-emphasis-warning);
     background-color: var(--color-subtle-warning);
-    color: var(--color-emphasis-warning);
   }
   .bg-info {
-    --link-theme-text-emphasis: var(--color-text-on-info);
     background-color: var(--color-info);
-    color: var(--color-text-on-info);
   }
   .bg-subtle-info {
-    --link-theme-text-emphasis: var(--color-emphasis-info);
     background-color: var(--color-subtle-info);
-    color: var(--color-emphasis-info);
   }
   .bg-neutral {
-    --link-theme-text-emphasis: var(--color-text-on-neutral);
     background-color: var(--color-neutral);
-    color: var(--color-text-on-neutral);
   }
   .bg-subtle-neutral {
-    --link-theme-text-emphasis: var(--color-emphasis-neutral);
     background-color: var(--color-subtle-neutral);
-    color: var(--color-emphasis-neutral);
   }
   .bg-inverse {
-    --link-theme-text-emphasis: var(--color-text-on-inverse);
     background-color: var(--color-inverse);
-    color: var(--color-text-on-inverse);
   }
   .bg-subtle-inverse {
-    --link-theme-text-emphasis: var(--color-emphasis-inverse);
     background-color: var(--color-subtle-inverse);
-    color: var(--color-emphasis-inverse);
   }
   .color-primary {
     color: var(--color-primary);
@@ -866,11 +907,17 @@
   .color-emphasis-primary {
     color: var(--color-emphasis-primary);
   }
+  .color-text-on-primary {
+    color: var(--color-text-on-primary);
+  }
   .color-secondary {
     color: var(--color-secondary);
   }
   .color-emphasis-secondary {
     color: var(--color-emphasis-secondary);
+  }
+  .color-text-on-secondary {
+    color: var(--color-text-on-secondary);
   }
   .color-accent {
     color: var(--color-accent);
@@ -878,11 +925,17 @@
   .color-emphasis-accent {
     color: var(--color-emphasis-accent);
   }
+  .color-text-on-accent {
+    color: var(--color-text-on-accent);
+  }
   .color-success {
     color: var(--color-success);
   }
   .color-emphasis-success {
     color: var(--color-emphasis-success);
+  }
+  .color-text-on-success {
+    color: var(--color-text-on-success);
   }
   .color-danger {
     color: var(--color-danger);
@@ -890,11 +943,17 @@
   .color-emphasis-danger {
     color: var(--color-emphasis-danger);
   }
+  .color-text-on-danger {
+    color: var(--color-text-on-danger);
+  }
   .color-warning {
     color: var(--color-warning);
   }
   .color-emphasis-warning {
     color: var(--color-emphasis-warning);
+  }
+  .color-text-on-warning {
+    color: var(--color-text-on-warning);
   }
   .color-info {
     color: var(--color-info);
@@ -902,17 +961,26 @@
   .color-emphasis-info {
     color: var(--color-emphasis-info);
   }
+  .color-text-on-info {
+    color: var(--color-text-on-info);
+  }
   .color-neutral {
     color: var(--color-neutral);
   }
   .color-emphasis-neutral {
     color: var(--color-emphasis-neutral);
   }
+  .color-text-on-neutral {
+    color: var(--color-text-on-neutral);
+  }
   .color-inverse {
     color: var(--color-inverse);
   }
   .color-emphasis-inverse {
     color: var(--color-emphasis-inverse);
+  }
+  .color-text-on-inverse {
+    color: var(--color-text-on-inverse);
   }
   .color-inherit {
     color: inherit;

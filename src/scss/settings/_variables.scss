@@ -1,6 +1,11 @@
 :root {
-  /* Rayons */
-  --radius: 0.375rem;
+  /* Bordures : épaisseur, et rayons de 2px en 2px (md pour les composants) */
+  --border-width: 1px;
+  --border-radius-xs: 0.125rem;
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.375rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 0.625rem;
 
   /* États (survol, clic…) : part de couleur mélangée au fond, léger ou fort */
   --state-mix-soft: 20%;
