@@ -1,0 +1,94 @@
+@layer components {
+
+    :root {
+        // Forme : le même padding pour l'en-tête, le corps et le pied
+        --card-padding-block: 1rem;
+        --card-padding-inline: 1rem;
+        --card-border-radius: var(--border-radius-md);
+        --card-border-width: var(--border-width);
+
+        // Thème par défaut, sans classe .theme-*
+        --card-theme-background-solid: var(--color-neutral);
+        --card-theme-text-solid: var(--color-text-on-neutral);
+        --card-theme-background-subtle: var(--color-subtle-neutral);
+    }
+
+    // Une classe par couleur : hérité, un .theme-* sur un parent colore toutes ses cartes
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .theme-#{$color} {
+            --card-theme-background-solid: var(--color-#{$color});
+            --card-theme-text-solid: var(--color-text-on-#{$color});
+            --card-theme-background-subtle: var(--color-subtle-#{$color});
+        }
+    }
+
+    // Forme commune : en-tête, corps et pied empilés ; dans une grille, les cartes ont la même hauteur
+    // Le cadre et les traits ont la couleur du thème ; la variante dit le fond et le texte
+    .card-solid, .card-subtle, .card-outline {
+        display: flex;
+        flex-direction: column;
+        border: var(--card-border-width) solid var(--card-theme-background-solid);
+        border-radius: var(--card-border-radius);
+
+        // Une image en haut ou en bas : toute la largeur
+        > img {
+            width: 100%;
+        }
+
+        // Le premier et le dernier élément suivent les coins du cadre (rayon - bordure) : image, en-tête ou pied colorés
+        > :first-child {
+            border-start-start-radius: calc(var(--card-border-radius) - var(--card-border-width));
+            border-start-end-radius: calc(var(--card-border-radius) - var(--card-border-width));
+        }
+        > :last-child {
+            border-end-start-radius: calc(var(--card-border-radius) - var(--card-border-width));
+            border-end-end-radius: calc(var(--card-border-radius) - var(--card-border-width));
+        }
+
+        // Un trait sous l'en-tête et au-dessus du pied
+        > .card-header {
+            border-block-end: var(--card-border-width) solid var(--card-theme-background-solid);
+        }
+        > .card-footer {
+            border-block-start: var(--card-border-width) solid var(--card-theme-background-solid);
+        }
+    }
+
+    // Les zones : le corps prend la place qui reste, le pied reste en bas
+    .card-header, .card-body, .card-footer {
+        padding-block: var(--card-padding-block);
+        padding-inline: var(--card-padding-inline);
+    }
+
+    .card-body {
+        flex-grow: 1;
+    }
+
+    // Solid : fond plein ; les liens prennent la couleur du texte (l'emphasis serait illisible sur le fond plein)
+    // :where() : les .btn-* posés sur un <a> gardent leurs couleurs
+    .card-solid {
+        background-color: var(--card-theme-background-solid);
+        color: var(--card-theme-text-solid);
+
+        :where(a) {
+            color: inherit;
+        }
+    }
+
+    // Subtle : fond léger, cadre et traits de la même couleur ; le texte reste celui de la page
+    .card-subtle {
+        border-color: var(--card-theme-background-subtle);
+        background-color: var(--card-theme-background-subtle);
+
+        > .card-header,
+        > .card-footer {
+            border-color: var(--card-theme-background-subtle);
+        }
+    }
+
+    // Outline : cadre de la couleur du thème, sur le fond de la page
+    .card-outline {
+        background-color: transparent;
+    }
+
+}
