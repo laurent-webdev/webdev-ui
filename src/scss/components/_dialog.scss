@@ -8,7 +8,7 @@
         --dialog-padding-inline: 1rem;
         --dialog-border-radius: var(--border-radius-md);
         --dialog-border-width: var(--border-width);
-        // Largeur du breakpoint sm (36rem), la taille par défaut
+        // Largeur du breakpoint md (48rem), la taille par défaut
         --dialog-width: #{breakpoints.$screen-md};
         --dialog-transition-duration: 0.2s;
 

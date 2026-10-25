@@ -1617,11 +1617,11 @@
                     <button class="btn-close-subtle" type="button" commandfor="dialog-size-{{ size }}" command="close" aria-label="Fermer"></button>
                 </div>
                 <div class="dialog-body">
-                    <p>La largeur du breakpoint {{ size }}{% if size == 'sm' %}, la taille par défaut{% endif %}. Sur un petit écran, le dialogue garde 1rem d'écart avec les bords.</p>
+                    <p>La largeur du breakpoint {{ size }}{% if size == 'md' %}, la taille par défaut{% endif %}. Sur un petit écran, le dialogue garde 1rem d'écart avec les bords.</p>
                 </div>
             </dialog>
         {% endfor %}
-        <p class="mt-2">Le dialogue a la largeur du breakpoint du même nom : xs 22.5rem (360px), sm 36rem (576px, le défaut), md 48rem (768px), lg 64rem (1024px), xl 80rem (1280px).</p>
+        <p class="mt-2">Le dialogue a la largeur du breakpoint du même nom : xs 22.5rem (360px), sm 36rem (576px), md 48rem (768px, le défaut), lg 64rem (1024px), xl 80rem (1280px).</p>
 
         <h3 class="mt-4">HTML</h3>
         <pre class="mt-2"><code>&lt;button class="btn-solid theme-primary" type="button" commandfor="dialog-compte" command="show-modal"&gt;Mon compte&lt;/button&gt;
@@ -1705,7 +1705,7 @@
                 <tr><th scope="row">--dialog-padding-inline</th><td>1rem</td><td>côtés de l'en-tête, du corps et du pied</td></tr>
                 <tr><th scope="row">--dialog-border-radius</th><td>--border-radius-md</td><td>coins du cadre</td></tr>
                 <tr><th scope="row">--dialog-border-width</th><td>--border-width</td><td>cadre et traits</td></tr>
-                <tr><th scope="row">--dialog-width</th><td>36rem (breakpoint sm)</td><td>largeur du dialogue</td></tr>
+                <tr><th scope="row">--dialog-width</th><td>48rem (breakpoint md)</td><td>largeur du dialogue</td></tr>
                 <tr><th scope="row">--dialog-transition-duration</th><td>0.2s</td><td>apparition du dialogue et du fond assombri</td></tr>
                 <tr><th scope="row">--backdrop-background-color</th><td>noir à 50 % (65 % en sombre)</td><td>fond qui assombrit la page derrière un dialogue modal</td></tr>
                 <tr><th scope="row">--backdrop-filter</th><td>blur(5px)</td><td>flou de la page derrière un dialogue modal</td></tr>
