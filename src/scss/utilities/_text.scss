@@ -1,0 +1,54 @@
+@use '../settings/breakpoints';
+
+// Les classes d'alignement du texte ; $breakpoint est mis devant le nom de la classe (.md\:text-align-start), vide sans breakpoint
+// start et end suivent le sens d'écriture ; pas de justify : les espaces irréguliers gênent la lecture (dyslexie)
+@mixin text-align-classes($breakpoint: '') {
+    .#{$breakpoint}text-align-start { text-align: start; }
+    .#{$breakpoint}text-align-center { text-align: center; }
+    .#{$breakpoint}text-align-end { text-align: end; }
+}
+
+@layer utilities {
+
+    // Sans breakpoint, puis une fois par breakpoint, du plus petit au plus grand
+    @include text-align-classes;
+    @media (width >= breakpoints.$screen-xs) { @include text-align-classes('xs\\:'); }
+    @media (width >= breakpoints.$screen-sm) { @include text-align-classes('sm\\:'); }
+    @media (width >= breakpoints.$screen-md) { @include text-align-classes('md\\:'); }
+    @media (width >= breakpoints.$screen-lg) { @include text-align-classes('lg\\:'); }
+    @media (width >= breakpoints.$screen-xl) { @include text-align-classes('xl\\:'); }
+    // Une classe CSS ne peut pas commencer par un chiffre : le 2 de 2xl s'écrit échappé (\32 + espace)
+    @media (width >= breakpoints.$screen-2xl) { @include text-align-classes('\\32 xl\\:'); }
+
+    // Soulignement, sur le lien lui-même (il n'est pas hérité)
+    // text-decoration-line seul : l'épaisseur du survol et du clic des liens est gardée
+    .text-decoration-none { text-decoration-line: none; }
+    .text-decoration-underline { text-decoration-line: underline; }
+
+    // Casse : le texte reste écrit normalement dans le HTML ; pour les textes courts
+    .text-transform-uppercase { text-transform: uppercase; }
+    .text-transform-lowercase { text-transform: lowercase; }
+    // Première lettre de chaque mot, les autres lettres ne changent pas
+    .text-transform-capitalize { text-transform: capitalize; }
+    .text-transform-none { text-transform: none; }
+
+    // Retour à la ligne
+    .text-wrap-wrap { text-wrap: wrap; }
+    // Sur une seule ligne : peut dépasser du parent
+    .text-wrap-nowrap { text-wrap: nowrap; }
+    // Lignes de même longueur, pour les titres (6 lignes au plus dans Chrome)
+    .text-wrap-balance { text-wrap: balance; }
+    // Pas de mot seul sur la dernière ligne, pour les paragraphes
+    .text-wrap-pretty { text-wrap: pretty; }
+
+    // Une ligne, coupée par « … » ; hidden et pas clip : un enfant flex peut alors rétrécir
+    .text-truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
+    }
+
+    // Coupe un mot trop long (adresse, lien), aussi dans un enfant flex ou une cellule de tableau
+    .overflow-wrap-anywhere { overflow-wrap: anywhere; }
+
+}

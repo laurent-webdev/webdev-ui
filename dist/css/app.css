@@ -7366,6 +7366,121 @@
   }
 }
 @layer utilities {
+  .text-align-start {
+    text-align: start;
+  }
+  .text-align-center {
+    text-align: center;
+  }
+  .text-align-end {
+    text-align: end;
+  }
+  @media (width >= 22.5rem) {
+    .xs\:text-align-start {
+      text-align: start;
+    }
+    .xs\:text-align-center {
+      text-align: center;
+    }
+    .xs\:text-align-end {
+      text-align: end;
+    }
+  }
+  @media (width >= 36rem) {
+    .sm\:text-align-start {
+      text-align: start;
+    }
+    .sm\:text-align-center {
+      text-align: center;
+    }
+    .sm\:text-align-end {
+      text-align: end;
+    }
+  }
+  @media (width >= 48rem) {
+    .md\:text-align-start {
+      text-align: start;
+    }
+    .md\:text-align-center {
+      text-align: center;
+    }
+    .md\:text-align-end {
+      text-align: end;
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:text-align-start {
+      text-align: start;
+    }
+    .lg\:text-align-center {
+      text-align: center;
+    }
+    .lg\:text-align-end {
+      text-align: end;
+    }
+  }
+  @media (width >= 80rem) {
+    .xl\:text-align-start {
+      text-align: start;
+    }
+    .xl\:text-align-center {
+      text-align: center;
+    }
+    .xl\:text-align-end {
+      text-align: end;
+    }
+  }
+  @media (width >= 96rem) {
+    .\32 xl\:text-align-start {
+      text-align: start;
+    }
+    .\32 xl\:text-align-center {
+      text-align: center;
+    }
+    .\32 xl\:text-align-end {
+      text-align: end;
+    }
+  }
+  .text-decoration-none {
+    text-decoration-line: none;
+  }
+  .text-decoration-underline {
+    text-decoration-line: underline;
+  }
+  .text-transform-uppercase {
+    text-transform: uppercase;
+  }
+  .text-transform-lowercase {
+    text-transform: lowercase;
+  }
+  .text-transform-capitalize {
+    text-transform: capitalize;
+  }
+  .text-transform-none {
+    text-transform: none;
+  }
+  .text-wrap-wrap {
+    text-wrap: wrap;
+  }
+  .text-wrap-nowrap {
+    text-wrap: nowrap;
+  }
+  .text-wrap-balance {
+    text-wrap: balance;
+  }
+  .text-wrap-pretty {
+    text-wrap: pretty;
+  }
+  .text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+  }
+  .overflow-wrap-anywhere {
+    overflow-wrap: anywhere;
+  }
+}
+@layer utilities {
   .vertical-align-baseline {
     vertical-align: baseline;
   }
