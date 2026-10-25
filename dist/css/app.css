@@ -587,6 +587,208 @@
 }
 @layer components {
   :root {
+    --accordion-padding-block: 1rem;
+    --accordion-padding-inline: 1rem;
+    --accordion-border-radius: var(--border-radius-md);
+    --accordion-border-width: var(--border-width);
+    --accordion-transition-duration: .2s;
+    --accordion-theme-background-solid: var(--color-neutral);
+    --accordion-theme-text-solid: var(--color-text-on-neutral);
+    --accordion-theme-state-solid: var(--color-state-on-neutral);
+    --accordion-theme-background-subtle: var(--color-subtle-neutral);
+    --accordion-theme-text-emphasis: var(--color-emphasis-neutral);
+  }
+  .theme-primary {
+    --accordion-theme-background-solid: var(--color-primary);
+    --accordion-theme-text-solid: var(--color-text-on-primary);
+    --accordion-theme-state-solid: var(--color-state-on-primary);
+    --accordion-theme-background-subtle: var(--color-subtle-primary);
+    --accordion-theme-text-emphasis: var(--color-emphasis-primary);
+  }
+  .theme-secondary {
+    --accordion-theme-background-solid: var(--color-secondary);
+    --accordion-theme-text-solid: var(--color-text-on-secondary);
+    --accordion-theme-state-solid: var(--color-state-on-secondary);
+    --accordion-theme-background-subtle: var(--color-subtle-secondary);
+    --accordion-theme-text-emphasis: var(--color-emphasis-secondary);
+  }
+  .theme-accent {
+    --accordion-theme-background-solid: var(--color-accent);
+    --accordion-theme-text-solid: var(--color-text-on-accent);
+    --accordion-theme-state-solid: var(--color-state-on-accent);
+    --accordion-theme-background-subtle: var(--color-subtle-accent);
+    --accordion-theme-text-emphasis: var(--color-emphasis-accent);
+  }
+  .theme-success {
+    --accordion-theme-background-solid: var(--color-success);
+    --accordion-theme-text-solid: var(--color-text-on-success);
+    --accordion-theme-state-solid: var(--color-state-on-success);
+    --accordion-theme-background-subtle: var(--color-subtle-success);
+    --accordion-theme-text-emphasis: var(--color-emphasis-success);
+  }
+  .theme-danger {
+    --accordion-theme-background-solid: var(--color-danger);
+    --accordion-theme-text-solid: var(--color-text-on-danger);
+    --accordion-theme-state-solid: var(--color-state-on-danger);
+    --accordion-theme-background-subtle: var(--color-subtle-danger);
+    --accordion-theme-text-emphasis: var(--color-emphasis-danger);
+  }
+  .theme-warning {
+    --accordion-theme-background-solid: var(--color-warning);
+    --accordion-theme-text-solid: var(--color-text-on-warning);
+    --accordion-theme-state-solid: var(--color-state-on-warning);
+    --accordion-theme-background-subtle: var(--color-subtle-warning);
+    --accordion-theme-text-emphasis: var(--color-emphasis-warning);
+  }
+  .theme-info {
+    --accordion-theme-background-solid: var(--color-info);
+    --accordion-theme-text-solid: var(--color-text-on-info);
+    --accordion-theme-state-solid: var(--color-state-on-info);
+    --accordion-theme-background-subtle: var(--color-subtle-info);
+    --accordion-theme-text-emphasis: var(--color-emphasis-info);
+  }
+  .theme-neutral {
+    --accordion-theme-background-solid: var(--color-neutral);
+    --accordion-theme-text-solid: var(--color-text-on-neutral);
+    --accordion-theme-state-solid: var(--color-state-on-neutral);
+    --accordion-theme-background-subtle: var(--color-subtle-neutral);
+    --accordion-theme-text-emphasis: var(--color-emphasis-neutral);
+  }
+  .theme-inverse {
+    --accordion-theme-background-solid: var(--color-inverse);
+    --accordion-theme-text-solid: var(--color-text-on-inverse);
+    --accordion-theme-state-solid: var(--color-state-on-inverse);
+    --accordion-theme-background-subtle: var(--color-subtle-inverse);
+    --accordion-theme-text-emphasis: var(--color-emphasis-inverse);
+  }
+  .accordion-solid, .accordion-subtle, .accordion-outline {
+    block-size: fit-content;
+    border: var(--accordion-border-width) solid var(--accordion-theme-background-solid);
+    border-radius: var(--accordion-border-radius);
+  }
+  .accordion-solid > details + details, .accordion-subtle > details + details, .accordion-outline > details + details {
+    border-block-start: var(--accordion-border-width) solid var(--accordion-theme-background-solid);
+  }
+  .accordion-solid > details::details-content, .accordion-subtle > details::details-content, .accordion-outline > details::details-content {
+    block-size: 0;
+    overflow-y: clip;
+    transition: block-size var(--accordion-transition-duration), content-visibility var(--accordion-transition-duration) allow-discrete;
+  }
+  .accordion-solid > details[open]::details-content, .accordion-subtle > details[open]::details-content, .accordion-outline > details[open]::details-content {
+    block-size: auto;
+  }
+  .accordion-solid > details:not([open]) > .accordion-body, .accordion-subtle > details:not([open]) > .accordion-body, .accordion-outline > details:not([open]) > .accordion-body {
+    border-block-start-color: transparent;
+  }
+  .accordion-solid > details > summary, .accordion-subtle > details > summary, .accordion-outline > details > summary {
+    display: block;
+    position: relative;
+    padding-block: var(--accordion-padding-block);
+    padding-inline: var(--accordion-padding-inline) calc(var(--accordion-padding-inline) * 2 + 0.5em);
+    font-weight: var(--heading-font-weight);
+    transition-property: background-color, color;
+    transition-duration: var(--transition-duration);
+  }
+  .accordion-solid > details > summary::-webkit-details-marker, .accordion-subtle > details > summary::-webkit-details-marker, .accordion-outline > details > summary::-webkit-details-marker {
+    display: none;
+  }
+  .accordion-solid > details > summary::after, .accordion-subtle > details > summary::after, .accordion-outline > details > summary::after {
+    content: "";
+    position: absolute;
+    inset-inline-end: var(--accordion-padding-inline);
+    top: 50%;
+    width: 0.5em;
+    aspect-ratio: 1;
+    border-right: 0.125em solid currentColor;
+    border-bottom: 0.125em solid currentColor;
+    translate: 0 -75%;
+    rotate: 45deg;
+    transition-property: translate, rotate;
+    transition-duration: var(--accordion-transition-duration);
+  }
+  .accordion-solid > details > summary:focus-visible, .accordion-subtle > details > summary:focus-visible, .accordion-outline > details > summary:focus-visible {
+    outline: var(--focus-outline-width) solid currentColor;
+    outline-offset: calc(var(--focus-outline-width) * -1);
+  }
+  .accordion-solid > details[open] > summary::after, .accordion-subtle > details[open] > summary::after, .accordion-outline > details[open] > summary::after {
+    translate: 0 -25%;
+    rotate: 225deg;
+  }
+  .accordion-solid > details:first-of-type > summary, .accordion-subtle > details:first-of-type > summary, .accordion-outline > details:first-of-type > summary {
+    border-start-start-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+    border-start-end-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+  }
+  .accordion-solid > details:last-of-type:not([open]) > summary, .accordion-subtle > details:last-of-type:not([open]) > summary, .accordion-outline > details:last-of-type:not([open]) > summary {
+    border-end-start-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+    border-end-end-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+  }
+  .accordion-body {
+    padding-block: var(--accordion-padding-block);
+    padding-inline: var(--accordion-padding-inline);
+    border-block-start: var(--accordion-border-width) solid var(--accordion-theme-background-solid);
+  }
+  .accordion-solid > details > summary {
+    background-color: var(--accordion-theme-background-solid);
+    color: var(--accordion-theme-text-solid);
+  }
+  .accordion-solid > details > summary:hover {
+    background-color: color-mix(in srgb, var(--accordion-theme-background-solid), var(--accordion-theme-state-solid) var(--state-mix-soft));
+  }
+  .accordion-solid > details > summary:active {
+    background-color: color-mix(in srgb, var(--accordion-theme-background-solid), var(--accordion-theme-state-solid) var(--state-mix-strong));
+  }
+  .accordion-subtle {
+    border-color: var(--accordion-theme-background-subtle);
+  }
+  .accordion-subtle > details + details,
+  .accordion-subtle > details > .accordion-body {
+    border-block-start-color: var(--accordion-theme-background-subtle);
+  }
+  .accordion-subtle > details > summary {
+    background-color: var(--accordion-theme-background-subtle);
+    color: var(--accordion-theme-text-emphasis);
+  }
+  .accordion-subtle > details > summary:hover {
+    background-color: color-mix(in srgb, var(--accordion-theme-background-subtle), var(--accordion-theme-background-solid) var(--state-mix-soft));
+  }
+  .accordion-subtle > details > summary:active {
+    background-color: color-mix(in srgb, var(--accordion-theme-background-subtle), var(--accordion-theme-background-solid) var(--state-mix-strong));
+  }
+  .accordion-outline > details > summary {
+    background-color: transparent;
+    color: var(--accordion-theme-text-emphasis);
+  }
+  .accordion-outline > details > summary:hover {
+    background-color: var(--accordion-theme-background-solid);
+    color: var(--accordion-theme-text-solid);
+  }
+  .accordion-outline > details > summary:active {
+    background-color: color-mix(in srgb, var(--accordion-theme-background-solid), var(--accordion-theme-state-solid) var(--state-mix-soft));
+    color: var(--accordion-theme-text-solid);
+  }
+  .accordion-xs {
+    --accordion-padding-block: 0.5rem;
+    --accordion-padding-inline: 0.5rem;
+    font-size: var(--font-size-xs);
+  }
+  .accordion-sm {
+    --accordion-padding-block: 0.75rem;
+    --accordion-padding-inline: 0.75rem;
+    font-size: var(--font-size-sm);
+  }
+  .accordion-md {
+    --accordion-padding-block: 1rem;
+    --accordion-padding-inline: 1rem;
+    font-size: var(--font-size-md);
+  }
+  .accordion-lg {
+    --accordion-padding-block: 1.25rem;
+    --accordion-padding-inline: 1.25rem;
+    font-size: var(--font-size-lg);
+  }
+}
+@layer components {
+  :root {
     --btn-padding-block: 0.375rem;
     --btn-padding-inline: 1rem;
     --btn-border-radius: var(--border-radius-md);

@@ -1,0 +1,205 @@
+@layer components {
+
+    :root {
+        // Forme : le même padding pour le titre et le contenu
+        --accordion-padding-block: 1rem;
+        --accordion-padding-inline: 1rem;
+        --accordion-border-radius: var(--border-radius-md);
+        --accordion-border-width: var(--border-width);
+        // Ouverture et fermeture d'un panneau, rotation de la flèche
+        --accordion-transition-duration: .2s;
+
+        // Thème par défaut, sans classe .theme-*
+        --accordion-theme-background-solid: var(--color-neutral);
+        --accordion-theme-text-solid: var(--color-text-on-neutral);
+        --accordion-theme-state-solid: var(--color-state-on-neutral);
+        --accordion-theme-background-subtle: var(--color-subtle-neutral);
+        --accordion-theme-text-emphasis: var(--color-emphasis-neutral);
+    }
+
+    // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses accordéons
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .theme-#{$color} {
+            --accordion-theme-background-solid: var(--color-#{$color});
+            --accordion-theme-text-solid: var(--color-text-on-#{$color});
+            --accordion-theme-state-solid: var(--color-state-on-#{$color});
+            --accordion-theme-background-subtle: var(--color-subtle-#{$color});
+            --accordion-theme-text-emphasis: var(--color-emphasis-#{$color});
+        }
+    }
+
+    // Forme commune : chaque panneau est un <details>, ouvert et fermé par le navigateur, sans JS
+    // Le cadre et les traits ont la couleur du thème (subtle : celle du fond léger) ; la variante dit le fond et le texte du titre
+    .accordion-solid, .accordion-subtle, .accordion-outline {
+        // La hauteur de son contenu : dans une grille ou un flex, ne s'étire pas à la hauteur d'un voisin ouvert
+        // (stretch n'agrandit qu'une hauteur auto ; align-self: start rétrécirait la largeur dans un flex en colonne)
+        block-size: fit-content;
+        border: var(--accordion-border-width) solid var(--accordion-theme-background-solid);
+        border-radius: var(--accordion-border-radius);
+
+        // Un trait entre deux panneaux
+        > details + details {
+            border-block-start: var(--accordion-border-width) solid var(--accordion-theme-background-solid);
+        }
+
+        // Fermé : hauteur 0 ; la hauteur s'anime vers auto grâce à l'interpolate-size du reset
+        // allow-discrete sur content-visibility seulement : le contenu reste visible pendant la fermeture
+        > details::details-content {
+            block-size: 0;
+            overflow-y: clip;
+            transition:
+                block-size var(--accordion-transition-duration),
+                content-visibility var(--accordion-transition-duration) allow-discrete;
+        }
+        > details[open]::details-content {
+            block-size: auto;
+        }
+
+        // open est retiré dès le clic : le trait du contenu disparaît au début de la fermeture, pas à la fin
+        // transparent et pas 0 : le contenu qui se replie ne bouge pas d'1px
+        > details:not([open]) > .accordion-body {
+            border-block-start-color: transparent;
+        }
+
+        // Le titre : display: block retire le triangle natif, le texte reste en ligne (gras, lien…)
+        > details > summary {
+            display: block;
+            position: relative;
+            padding-block: var(--accordion-padding-block);
+            // À la fin, la place de la flèche
+            padding-inline: var(--accordion-padding-inline) calc(var(--accordion-padding-inline) * 2 + 0.5em);
+            font-weight: var(--heading-font-weight);
+            transition-property: background-color, color;
+            transition-duration: var(--transition-duration);
+
+            // Safari garde son triangle sans cette règle
+            &::-webkit-details-marker {
+                display: none;
+            }
+
+            // Flèche vers le bas, en deux bordures : couleur du texte, visible en contraste élevé
+            &::after {
+                content: "";
+                position: absolute;
+                inset-inline-end: var(--accordion-padding-inline);
+                top: 50%;
+                width: 0.5em;
+                aspect-ratio: 1;
+                // Côtés physiques : une flèche vers le bas ne dépend pas du sens d'écriture
+                border-right: 0.125em solid currentColor;
+                border-bottom: 0.125em solid currentColor;
+                // Centrée sur la hauteur du titre (-50 %), un peu remontée : la pointe est sous le centre du carré tourné
+                translate: 0 -75%;
+                rotate: 45deg;
+                transition-property: translate, rotate;
+                transition-duration: var(--accordion-transition-duration);
+            }
+
+            // Contour à l'intérieur du titre, de la couleur de son texte : le panneau suivant ne le cache pas
+            &:focus-visible {
+                outline: var(--focus-outline-width) solid currentColor;
+                outline-offset: calc(var(--focus-outline-width) * -1);
+            }
+        }
+
+        // Ouvert : la flèche se retourne vers le haut
+        > details[open] > summary::after {
+            translate: 0 -25%;
+            rotate: 225deg;
+        }
+
+        // Le fond du titre suit les coins du cadre : en haut du premier, en bas du dernier fermé
+        > details:first-of-type > summary {
+            border-start-start-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+            border-start-end-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+        }
+        > details:last-of-type:not([open]) > summary {
+            border-end-start-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+            border-end-end-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
+        }
+    }
+
+    // Le contenu, sur le fond de la page : son trait du haut apparaît avec lui à l'ouverture
+    .accordion-body {
+        padding-block: var(--accordion-padding-block);
+        padding-inline: var(--accordion-padding-inline);
+        border-block-start: var(--accordion-border-width) solid var(--accordion-theme-background-solid);
+    }
+
+    // Solid : titre en fond plein, mélangé à l'opposé du texte au survol et au clic
+    .accordion-solid > details > summary {
+        background-color: var(--accordion-theme-background-solid);
+        color: var(--accordion-theme-text-solid);
+
+        &:hover {
+            background-color: color-mix(in srgb, var(--accordion-theme-background-solid), var(--accordion-theme-state-solid) var(--state-mix-soft));
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--accordion-theme-background-solid), var(--accordion-theme-state-solid) var(--state-mix-strong));
+        }
+    }
+
+    // Subtle : titre en fond léger, renforcé par la couleur du thème au survol et au clic
+    .accordion-subtle {
+        // Cadre et traits de la couleur du fond léger
+        border-color: var(--accordion-theme-background-subtle);
+
+        > details + details,
+        > details > .accordion-body {
+            border-block-start-color: var(--accordion-theme-background-subtle);
+        }
+
+        > details > summary {
+            background-color: var(--accordion-theme-background-subtle);
+            color: var(--accordion-theme-text-emphasis);
+
+            &:hover {
+                background-color: color-mix(in srgb, var(--accordion-theme-background-subtle), var(--accordion-theme-background-solid) var(--state-mix-soft));
+            }
+            &:active {
+                background-color: color-mix(in srgb, var(--accordion-theme-background-subtle), var(--accordion-theme-background-solid) var(--state-mix-strong));
+            }
+        }
+    }
+
+    // Outline : titre sans fond, devient solid au survol et au clic
+    .accordion-outline > details > summary {
+        background-color: transparent;
+        color: var(--accordion-theme-text-emphasis);
+
+        &:hover {
+            background-color: var(--accordion-theme-background-solid);
+            color: var(--accordion-theme-text-solid);
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--accordion-theme-background-solid), var(--accordion-theme-state-solid) var(--state-mix-soft));
+            color: var(--accordion-theme-text-solid);
+        }
+    }
+
+    // Tailles : changent le padding et la taille du texte (titre et contenu), avec n'importe quelle variante
+    .accordion-xs {
+        --accordion-padding-block: 0.5rem;
+        --accordion-padding-inline: 0.5rem;
+        font-size: var(--font-size-xs);
+    }
+
+    .accordion-sm {
+        --accordion-padding-block: 0.75rem;
+        --accordion-padding-inline: 0.75rem;
+        font-size: var(--font-size-sm);
+    }
+
+    .accordion-md {
+        --accordion-padding-block: 1rem;
+        --accordion-padding-inline: 1rem;
+        font-size: var(--font-size-md);
+    }
+
+    .accordion-lg {
+        --accordion-padding-block: 1.25rem;
+        --accordion-padding-inline: 1.25rem;
+        font-size: var(--font-size-lg);
+    }
+
+}
