@@ -1,0 +1,11 @@
+@layer utilities {
+
+    // Transparence de tout l'élément, enfants compris ; le nom est la valeur en %
+    // Invisible mais toujours là : cliquable, focusable, lu par les lecteurs d'écran
+    .opacity-0 { opacity: 0%; }
+    .opacity-25 { opacity: 25%; }
+    .opacity-50 { opacity: 50%; }
+    .opacity-75 { opacity: 75%; }
+    .opacity-100 { opacity: 100%; }
+
+}

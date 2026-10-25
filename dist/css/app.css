@@ -2880,6 +2880,23 @@
   }
 }
 @layer utilities {
+  .opacity-0 {
+    opacity: 0%;
+  }
+  .opacity-25 {
+    opacity: 25%;
+  }
+  .opacity-50 {
+    opacity: 50%;
+  }
+  .opacity-75 {
+    opacity: 75%;
+  }
+  .opacity-100 {
+    opacity: 100%;
+  }
+}
+@layer utilities {
   .w-25 {
     width: 25%;
   }
