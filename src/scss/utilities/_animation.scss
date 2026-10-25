@@ -1,0 +1,69 @@
+@layer utilities {
+
+    :root {
+        // Une durée par animation : chacune a son rythme
+        --animation-fade-in-duration: 0.3s;
+        --animation-slide-in-duration: 0.3s;
+        --animation-scale-in-duration: 0.3s;
+        --animation-shake-duration: 0.8s;
+        --animation-spin-duration: 1s;
+    }
+
+    // Apparitions : se jouent quand l'élément s'affiche (chargement, ou hidden retiré)
+    // backwards : pendant un animation-delay, l'élément reste dans l'état de départ (caché)
+    .animation-fade-in { animation: animation-fade-in var(--animation-fade-in-duration) ease-out backwards; }
+    .animation-slide-in-top { animation: animation-slide-in-top var(--animation-slide-in-duration) ease-out backwards; }
+    .animation-slide-in-bottom { animation: animation-slide-in-bottom var(--animation-slide-in-duration) ease-out backwards; }
+    .animation-slide-in-start { animation: animation-slide-in-start var(--animation-slide-in-duration) ease-out backwards; }
+    .animation-slide-in-end { animation: animation-slide-in-end var(--animation-slide-in-duration) ease-out backwards; }
+    // De droite à gauche (arabe, hébreu) : start et end échangent leur côté, comme ms et me
+    .animation-slide-in-start:dir(rtl) { animation-name: animation-slide-in-end; }
+    .animation-slide-in-end:dir(rtl) { animation-name: animation-slide-in-start; }
+    .animation-scale-in { animation: animation-scale-in var(--animation-scale-in-duration) ease-out backwards; }
+
+    // Secousse : erreur de formulaire, avec un message écrit
+    .animation-shake { animation: animation-shake var(--animation-shake-duration) cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+
+    // Rotation en boucle : icône de chargement, avec un texte (figée si l'utilisateur réduit les animations)
+    .animation-spin { animation: animation-spin var(--animation-spin-duration) linear infinite; }
+
+    // translate, scale et rotate plutôt que transform : l'animation n'écrase pas le transform de l'élément
+    // Sans to : l'animation finit sur l'état normal de l'élément
+    @keyframes animation-fade-in {
+        from { opacity: 0; }
+    }
+
+    @keyframes animation-slide-in-top {
+        from { opacity: 0; translate: 0 -1rem; }
+    }
+
+    @keyframes animation-slide-in-bottom {
+        from { opacity: 0; translate: 0 1rem; }
+    }
+
+    // Arrive de la gauche
+    @keyframes animation-slide-in-start {
+        from { opacity: 0; translate: -1rem; }
+    }
+
+    // Arrive de la droite
+    @keyframes animation-slide-in-end {
+        from { opacity: 0; translate: 1rem; }
+    }
+
+    @keyframes animation-scale-in {
+        from { opacity: 0; scale: 0.9; }
+    }
+
+    @keyframes animation-shake {
+        10%, 90% { translate: -1px; }
+        20%, 80% { translate: 2px; }
+        30%, 50%, 70% { translate: -4px; }
+        40%, 60% { translate: 4px; }
+    }
+
+    @keyframes animation-spin {
+        to { rotate: 360deg; }
+    }
+
+}

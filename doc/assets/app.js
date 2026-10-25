@@ -10,3 +10,12 @@ toggle.addEventListener('click', () => {
     localStorage.setItem('theme', root.dataset.theme);
     toggle.setAttribute('aria-pressed', isDark());
 });
+
+// Démos : le bouton affiche ou masque son contenu (hidden) ; les animations se rejouent à chaque affichage
+document.querySelectorAll('[data-demo-toggle]').forEach((button) => {
+    const target = document.getElementById(button.getAttribute('aria-controls'));
+    button.addEventListener('click', () => {
+        target.hidden = !target.hidden;
+        button.setAttribute('aria-expanded', !target.hidden);
+    });
+});

@@ -780,6 +780,99 @@
   }
 }
 @layer utilities {
+  :root {
+    --animation-fade-in-duration: 0.3s;
+    --animation-slide-in-duration: 0.3s;
+    --animation-scale-in-duration: 0.3s;
+    --animation-shake-duration: 0.8s;
+    --animation-spin-duration: 1s;
+  }
+  .animation-fade-in {
+    animation: animation-fade-in var(--animation-fade-in-duration) ease-out backwards;
+  }
+  .animation-slide-in-top {
+    animation: animation-slide-in-top var(--animation-slide-in-duration) ease-out backwards;
+  }
+  .animation-slide-in-bottom {
+    animation: animation-slide-in-bottom var(--animation-slide-in-duration) ease-out backwards;
+  }
+  .animation-slide-in-start {
+    animation: animation-slide-in-start var(--animation-slide-in-duration) ease-out backwards;
+  }
+  .animation-slide-in-end {
+    animation: animation-slide-in-end var(--animation-slide-in-duration) ease-out backwards;
+  }
+  .animation-slide-in-start:dir(rtl) {
+    animation-name: animation-slide-in-end;
+  }
+  .animation-slide-in-end:dir(rtl) {
+    animation-name: animation-slide-in-start;
+  }
+  .animation-scale-in {
+    animation: animation-scale-in var(--animation-scale-in-duration) ease-out backwards;
+  }
+  .animation-shake {
+    animation: animation-shake var(--animation-shake-duration) cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  }
+  .animation-spin {
+    animation: animation-spin var(--animation-spin-duration) linear infinite;
+  }
+  @keyframes animation-fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes animation-slide-in-top {
+    from {
+      opacity: 0;
+      translate: 0 -1rem;
+    }
+  }
+  @keyframes animation-slide-in-bottom {
+    from {
+      opacity: 0;
+      translate: 0 1rem;
+    }
+  }
+  @keyframes animation-slide-in-start {
+    from {
+      opacity: 0;
+      translate: -1rem;
+    }
+  }
+  @keyframes animation-slide-in-end {
+    from {
+      opacity: 0;
+      translate: 1rem;
+    }
+  }
+  @keyframes animation-scale-in {
+    from {
+      opacity: 0;
+      scale: 0.9;
+    }
+  }
+  @keyframes animation-shake {
+    10%, 90% {
+      translate: -1px;
+    }
+    20%, 80% {
+      translate: 2px;
+    }
+    30%, 50%, 70% {
+      translate: -4px;
+    }
+    40%, 60% {
+      translate: 4px;
+    }
+  }
+  @keyframes animation-spin {
+    to {
+      rotate: 360deg;
+    }
+  }
+}
+@layer utilities {
   .aspect-ratio-auto {
     aspect-ratio: auto;
   }
