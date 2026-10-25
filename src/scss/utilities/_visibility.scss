@@ -1,0 +1,8 @@
+@layer utilities {
+
+    // Invisible mais garde sa place ; ni focusable, ni lu par les lecteurs d'écran
+    .visibility-hidden { visibility: hidden; }
+    // Réaffiche un enfant dans un parent visibility-hidden (impossible avec l'opacité)
+    .visibility-visible { visibility: visible; }
+
+}

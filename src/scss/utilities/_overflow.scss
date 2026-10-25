@@ -1,0 +1,26 @@
+@layer utilities {
+
+    // Les deux axes, puis un seul : le plus précis gagne (class="overflow-hidden overflow-y-auto")
+    // Barre de défilement seulement si le contenu dépasse
+    .overflow-auto { overflow: auto; }
+    // Coupe ce qui dépasse, mais crée une zone de défilement : position: sticky ne marche plus dedans
+    .overflow-hidden { overflow: hidden; }
+    // Coupe ce qui dépasse, sans zone de défilement : position: sticky marche encore
+    .overflow-clip { overflow: clip; }
+    // Valeur par défaut : rien n'est coupé
+    .overflow-visible { overflow: visible; }
+
+    // Horizontal : tableau large, bloc de code
+    .overflow-x-auto { overflow-x: auto; }
+    .overflow-x-hidden { overflow-x: hidden; }
+    // Coupe à droite et à gauche, le vertical reste visible
+    .overflow-x-clip { overflow-x: clip; }
+    .overflow-x-visible { overflow-x: visible; }
+
+    // Vertical : panneau qui défile sous une hauteur maximale
+    .overflow-y-auto { overflow-y: auto; }
+    .overflow-y-hidden { overflow-y: hidden; }
+    .overflow-y-clip { overflow-y: clip; }
+    .overflow-y-visible { overflow-y: visible; }
+
+}

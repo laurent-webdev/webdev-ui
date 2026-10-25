@@ -642,7 +642,7 @@
             <li>prefers-reduced-motion: reduce coupe toutes les animations (reset) : l'élément apparaît directement, la secousse ne se voit pas, l'icône est figée.</li>
             <li>Une animation se joue une fois, à l'affichage : pour la rejouer, masquer puis réafficher l'élément (hidden).</li>
             <li>Pas d'animation de disparition : il faut attendre sa fin en JS avant de masquer l'élément ; elles viendront avec les composants (dialog, toast).</li>
-            <li>slide-in-start, slide-in-end et shake bougent sur le côté : un bloc pleine largeur, hors container, dépasse du bord de l'écran pendant le mouvement, et une barre de défilement horizontale apparaît un instant. Dans un .container, la marge des côtés (1rem) absorbe le mouvement ; sinon, overflow-x: clip sur la section, dans le site.</li>
+            <li>slide-in-start, slide-in-end et shake bougent sur le côté : un bloc pleine largeur, hors container, dépasse du bord de l'écran pendant le mouvement, et une barre de défilement horizontale apparaît un instant. Dans un .container, la marge des côtés (1rem) absorbe le mouvement ; sinon, overflow-x-clip sur la section.</li>
             <li>start et end suivent le sens d'écriture : en arabe ou en hébreu, slide-in-start arrive de la droite.</li>
         </ul>
     </section>
@@ -723,6 +723,83 @@
             <li>Tout l'élément devient transparent : fond, texte, bordures, enfants. Pour un fond seul, color-mix() dans le site.</li>
             <li>De 25 en 25 : une autre valeur s'écrit dans le site (opacity: 10%).</li>
             <li>Pas de variante responsive (md:opacity-*) : ce n'est pas de la mise en page.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Visibilité</h2>
+        <p class="mt-4">Avant <span class="visibility-hidden">caché</span> après : visibility-hidden garde la place.</p>
+        <p class="mt-2">visibility-visible réaffiche un enfant : <span class="visibility-hidden">parent caché, <span class="visibility-visible">enfant visible</span></span></p>
+
+        <h3 class="mt-4">Cacher : quelle classe ?</h3>
+        <table class="mt-2">
+            <thead>
+                <tr>
+                    <th scope="col">Classe</th>
+                    <th scope="col">Garde sa place</th>
+                    <th scope="col">Lu par les lecteurs d'écran</th>
+                    <th scope="col">Cliquable, focusable</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">hidden, d-none</th><td>non</td><td>non</td><td>non</td></tr>
+                <tr><th scope="row">visibility-hidden</th><td>oui</td><td>non</td><td>non</td></tr>
+                <tr><th scope="row">opacity-0</th><td>oui</td><td>oui</td><td>oui</td></tr>
+                <tr><th scope="row">visually-hidden</th><td>non</td><td>oui</td><td>oui</td></tr>
+            </tbody>
+        </table>
+
+        <h3 class="mt-4">Contre-exemples</h3>
+        <pre class="mt-2"><code>&lt;span class="visibility-hidden"&gt;Chargement…&lt;/span&gt;</code></pre>
+        <p>Caché aussi pour les lecteurs d'écran. Un texte pour eux seuls : visually-hidden.</p>
+        <pre class="mt-2"><code>&lt;div class="opacity-0"&gt;
+    &lt;p class="visibility-visible"&gt;…&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        <p>Sans effet : visibility-visible ne réaffiche que dans un parent visibility-hidden, pas dans un parent transparent.</p>
+
+        <h3 class="mt-4">Limites</h3>
+        <ul>
+            <li>Pas de variante responsive : pour cacher selon l'écran, d-none md:d-block (la place n'est pas gardée).</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Overflow</h2>
+        <p class="mt-4">Des boîtes de 8rem de haut, avec un texte plus long</p>
+        <div class="grid gap-2 mt-2">
+            {% for overflow in ['auto', 'hidden', 'clip'] %}
+                <figure class="col-12 md:col-4">
+                    <div class="demo-box demo-height p-2 overflow-{{ overflow }}"{% if overflow == 'auto' %} tabindex="0" role="region" aria-label="Exemple overflow-auto"{% endif %}>
+                        <p>Un texte plus long que la boîte. Il continue sur plusieurs lignes, pour dépasser la hauteur de 8rem et voir ce que fait chaque valeur d'overflow quand le contenu ne tient plus dans son cadre.</p>
+                    </div>
+                    <figcaption>overflow-{{ overflow }}</figcaption>
+                </figure>
+            {% endfor %}
+        </div>
+        <p class="mt-2">hidden et clip coupent pareil à l'écran. Différence : hidden crée une zone de défilement (position: sticky ne marche plus dedans, le JS peut encore la faire défiler), clip non.</p>
+
+        <h3 class="mt-4">Exemple : un tableau large</h3>
+        <pre class="mt-2"><code>&lt;div class="overflow-x-auto" tabindex="0" role="region" aria-label="Tarifs"&gt;
+    &lt;table&gt;…&lt;/table&gt;
+&lt;/div&gt;</code></pre>
+        <p>Le tableau défile seul sur un petit écran, la page ne déborde pas. tabindex="0" : la zone défile aussi au clavier ; role et aria-label la nomment.</p>
+
+        <h3 class="mt-4">Exemple : une section pleine largeur avec slide-in-end</h3>
+        <pre class="mt-2"><code>&lt;section class="overflow-x-clip"&gt;
+    &lt;div class="animation-slide-in-end"&gt;…&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+        <p>Pas de barre de défilement horizontale pendant le mouvement, et position: sticky marche encore dans la section.</p>
+
+        <h3 class="mt-4">Contre-exemples</h3>
+        <pre class="mt-2"><code>&lt;body class="overflow-x-hidden"&gt;</code></pre>
+        <p>Cache la barre de défilement, mais aussi ce qui dépasse : le contenu est perdu pour l'utilisateur (WCAG 1.4.10), et position: sticky ne marche plus. Corriger l'élément qui déborde (min-w-0, w-100 sans marge…).</p>
+        <pre class="mt-2"><code>&lt;div class="overflow-y-auto"&gt;Texte long…&lt;/div&gt;</code></pre>
+        <p>Sans élément focusable dedans, la zone ne défile pas au clavier dans Safari. Ajouter tabindex="0", role="region" et aria-label.</p>
+
+        <h3 class="mt-4">Limites</h3>
+        <ul>
+            <li>overflow-x-auto (ou -hidden) rend aussi le vertical défilant : visible devient auto sur l'autre axe (spécification CSS). Un menu qui sort de la boîte est coupé. clip n'a pas ce défaut.</li>
+            <li>Pas de overflow-scroll (barres toujours affichées) ni de variante responsive : rarement utiles.</li>
         </ul>
     </section>
 
