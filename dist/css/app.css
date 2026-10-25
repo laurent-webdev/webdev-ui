@@ -91,6 +91,7 @@
 :root {
   --color-background: light-dark(#ffffff, oklch(0.17 0.008 228));
   --border-color: var(--color-neutral);
+  --box-shadow-color: light-dark(oklch(0 0 0 / 0.1), oklch(0 0 0 / 0.5));
   --color-primary: light-dark(oklch(0.592 0.112 228), oklch(0.592 0.112 228));
   --color-secondary: light-dark(oklch(0.64 0.15 355), oklch(0.64 0.15 355));
   --color-accent: light-dark(oklch(0.68 0.104 290), oklch(0.68 0.104 290));
@@ -201,6 +202,12 @@
   --border-radius-md: 0.375rem;
   --border-radius-lg: 0.5rem;
   --border-radius-xl: 0.625rem;
+  /* Ombres : de plus en plus hautes, couleur --box-shadow-color ; en px, comme --border-width */
+  --box-shadow-xs: 0 1px 2px var(--box-shadow-color);
+  --box-shadow-sm: 0 1px 3px var(--box-shadow-color), 0 1px 2px -1px var(--box-shadow-color);
+  --box-shadow-md: 0 4px 6px -1px var(--box-shadow-color), 0 2px 4px -2px var(--box-shadow-color);
+  --box-shadow-lg: 0 10px 15px -3px var(--box-shadow-color), 0 4px 6px -4px var(--box-shadow-color);
+  --box-shadow-xl: 0 20px 25px -5px var(--box-shadow-color), 0 8px 10px -6px var(--box-shadow-color);
   /* États (survol, clic…) : part de couleur mélangée au fond, léger ou fort */
   --state-mix-soft: 20%;
   --state-mix-strong: 30%;
@@ -1077,6 +1084,26 @@
   }
   .border-radius-circle {
     border-radius: 50%;
+  }
+}
+@layer utilities {
+  .box-shadow-none {
+    box-shadow: none;
+  }
+  .box-shadow-xs {
+    box-shadow: var(--box-shadow-xs);
+  }
+  .box-shadow-sm {
+    box-shadow: var(--box-shadow-sm);
+  }
+  .box-shadow-md {
+    box-shadow: var(--box-shadow-md);
+  }
+  .box-shadow-lg {
+    box-shadow: var(--box-shadow-lg);
+  }
+  .box-shadow-xl {
+    box-shadow: var(--box-shadow-xl);
   }
 }
 @layer utilities {

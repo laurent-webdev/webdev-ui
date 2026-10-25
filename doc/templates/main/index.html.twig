@@ -890,4 +890,34 @@
         </ul>
     </section>
 
+    <section>
+        <h2>Ombres</h2>
+        <div class="grid gap-6 mt-4">
+            {% for size in ['none', 'xs', 'sm', 'md', 'lg', 'xl'] %}
+                <div class="border-radius-md box-shadow-{{ size }} p-4 col-6 md:col-4">box-shadow-{{ size }}</div>
+            {% endfor %}
+        </div>
+
+        <h3 class="mt-4">Exemple : une carte</h3>
+        <div class="border border-radius-lg box-shadow-sm p-4 mt-2">border border-radius-lg box-shadow-sm p-4 : la bordure sépare la carte du fond, l'ombre la soulève.</div>
+
+        <h3 class="mt-4">Exemple : changer les ombres</h3>
+        <pre class="mt-2"><code>:root { --box-shadow-color: light-dark(oklch(0 0 0 / 0.15), oklch(0 0 0 / 0.6)); }
+:root { --box-shadow-md: 0 2px 8px var(--box-shadow-color); }</code></pre>
+        <p>--box-shadow-color change toutes les ombres, dans les deux thèmes ; --box-shadow-xs à -xl changent une taille.</p>
+
+        <h3 class="mt-4">Contre-exemples</h3>
+        <pre class="mt-2"><code>&lt;input class="box-shadow-sm border-0" type="text" name="nom" aria-label="Nom"&gt;</code></pre>
+        <p>Une ombre seule pour montrer un champ : presque invisible en sombre, retirée en contraste élevé (Windows). Le champ n'a plus de bord visible (WCAG 1.4.11). Garder une bordure.</p>
+        <pre class="mt-2"><code>.card { --box-shadow-color: oklch(0.5 0.1 228 / 0.3); }</code></pre>
+        <p>Sans effet sur un seul élément : les --box-shadow-* sont calculées dans :root, avec la couleur de :root. Sur un élément, redéfinir la taille (--box-shadow-md) ou écrire box-shadow.</p>
+
+        <h3 class="mt-4">Limites</h3>
+        <ul>
+            <li>En sombre, une ombre se voit peu : le fond est déjà presque noir. Séparer les blocs avec une bordure ou un fond subtle.</li>
+            <li>Pas d'ombre au survol, colorée ou intérieure (inset) : dans le site, ou avec les composants.</li>
+            <li>Pas de variante responsive : ce n'est pas de la mise en page.</li>
+        </ul>
+    </section>
+
 {% endblock %}

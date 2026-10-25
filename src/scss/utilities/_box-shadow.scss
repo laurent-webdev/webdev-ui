@@ -1,0 +1,9 @@
+@layer utilities {
+
+    // Ombres : l'échelle des variables globales ; décoratives, le contraste élevé (Windows) les retire
+    .box-shadow-none { box-shadow: none; }
+    @each $size in xs, sm, md, lg, xl {
+        .box-shadow-#{$size} { box-shadow: var(--box-shadow-#{$size}); }
+    }
+
+}
