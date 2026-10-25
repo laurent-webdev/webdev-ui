@@ -819,12 +819,6 @@
   .animation-slide-in-end {
     animation: animation-slide-in-end var(--animation-slide-in-duration) ease-out backwards;
   }
-  .animation-slide-in-start:dir(rtl) {
-    animation-name: animation-slide-in-end;
-  }
-  .animation-slide-in-end:dir(rtl) {
-    animation-name: animation-slide-in-start;
-  }
   .animation-scale-in {
     animation: animation-scale-in var(--animation-scale-in-duration) ease-out backwards;
   }
@@ -2932,6 +2926,188 @@
   }
   .overflow-y-visible {
     overflow-y: visible;
+  }
+}
+@layer utilities {
+  .position-static {
+    position: static;
+  }
+  .position-relative {
+    position: relative;
+  }
+  .position-absolute {
+    position: absolute;
+  }
+  .position-fixed {
+    position: fixed;
+  }
+  .position-sticky {
+    position: sticky;
+  }
+  @media (width >= 22.5rem) {
+    .xs\:position-static {
+      position: static;
+    }
+    .xs\:position-relative {
+      position: relative;
+    }
+    .xs\:position-absolute {
+      position: absolute;
+    }
+    .xs\:position-fixed {
+      position: fixed;
+    }
+    .xs\:position-sticky {
+      position: sticky;
+    }
+  }
+  @media (width >= 36rem) {
+    .sm\:position-static {
+      position: static;
+    }
+    .sm\:position-relative {
+      position: relative;
+    }
+    .sm\:position-absolute {
+      position: absolute;
+    }
+    .sm\:position-fixed {
+      position: fixed;
+    }
+    .sm\:position-sticky {
+      position: sticky;
+    }
+  }
+  @media (width >= 48rem) {
+    .md\:position-static {
+      position: static;
+    }
+    .md\:position-relative {
+      position: relative;
+    }
+    .md\:position-absolute {
+      position: absolute;
+    }
+    .md\:position-fixed {
+      position: fixed;
+    }
+    .md\:position-sticky {
+      position: sticky;
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:position-static {
+      position: static;
+    }
+    .lg\:position-relative {
+      position: relative;
+    }
+    .lg\:position-absolute {
+      position: absolute;
+    }
+    .lg\:position-fixed {
+      position: fixed;
+    }
+    .lg\:position-sticky {
+      position: sticky;
+    }
+  }
+  @media (width >= 80rem) {
+    .xl\:position-static {
+      position: static;
+    }
+    .xl\:position-relative {
+      position: relative;
+    }
+    .xl\:position-absolute {
+      position: absolute;
+    }
+    .xl\:position-fixed {
+      position: fixed;
+    }
+    .xl\:position-sticky {
+      position: sticky;
+    }
+  }
+  @media (width >= 96rem) {
+    .\32 xl\:position-static {
+      position: static;
+    }
+    .\32 xl\:position-relative {
+      position: relative;
+    }
+    .\32 xl\:position-absolute {
+      position: absolute;
+    }
+    .\32 xl\:position-fixed {
+      position: fixed;
+    }
+    .\32 xl\:position-sticky {
+      position: sticky;
+    }
+  }
+  .top-0 {
+    top: 0;
+  }
+  .top-50 {
+    top: 50%;
+  }
+  .top-100 {
+    top: 100%;
+  }
+  .bottom-0 {
+    bottom: 0;
+  }
+  .bottom-50 {
+    bottom: 50%;
+  }
+  .bottom-100 {
+    bottom: 100%;
+  }
+  .start-0 {
+    inset-inline-start: 0;
+  }
+  .start-50 {
+    inset-inline-start: 50%;
+  }
+  .start-100 {
+    inset-inline-start: 100%;
+  }
+  .end-0 {
+    inset-inline-end: 0;
+  }
+  .end-50 {
+    inset-inline-end: 50%;
+  }
+  .end-100 {
+    inset-inline-end: 100%;
+  }
+  .inset-0 {
+    inset: 0;
+  }
+  .translate-middle {
+    translate: -50% -50%;
+  }
+  .translate-middle-x {
+    translate: -50%;
+  }
+  .translate-middle-y {
+    translate: 0 -50%;
+  }
+  .z-index-auto {
+    z-index: auto;
+  }
+  .z-index-0 {
+    z-index: 0;
+  }
+  .z-index-1 {
+    z-index: 1;
+  }
+  .z-index-2 {
+    z-index: 2;
+  }
+  .z-index-3 {
+    z-index: 3;
   }
 }
 @layer utilities {

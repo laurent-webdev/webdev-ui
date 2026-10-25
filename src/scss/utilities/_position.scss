@@ -1,0 +1,57 @@
+@use '../settings/breakpoints';
+
+// Les classes de position ; $breakpoint est mis devant le nom de la classe (.md\:position-sticky), vide sans breakpoint
+// Mots-clés de position, pas des réglages : pas de variable CSS
+@mixin position-classes($breakpoint: '') {
+    .#{$breakpoint}position-static { position: static; }
+    // Repère pour un enfant position-absolute
+    .#{$breakpoint}position-relative { position: relative; }
+    .#{$breakpoint}position-absolute { position: absolute; }
+    .#{$breakpoint}position-fixed { position: fixed; }
+    // Reste collé en défilant : avec un décalage (top-0)
+    .#{$breakpoint}position-sticky { position: sticky; }
+}
+
+@layer utilities {
+
+    // Sans breakpoint, puis une fois par breakpoint, du plus petit au plus grand
+    @include position-classes;
+    @media (width >= breakpoints.$screen-xs) { @include position-classes('xs\\:'); }
+    @media (width >= breakpoints.$screen-sm) { @include position-classes('sm\\:'); }
+    @media (width >= breakpoints.$screen-md) { @include position-classes('md\\:'); }
+    @media (width >= breakpoints.$screen-lg) { @include position-classes('lg\\:'); }
+    @media (width >= breakpoints.$screen-xl) { @include position-classes('xl\\:'); }
+    // Une classe CSS ne peut pas commencer par un chiffre : le 2 de 2xl s'écrit échappé (\32 + espace)
+    @media (width >= breakpoints.$screen-2xl) { @include position-classes('\\32 xl\\:'); }
+
+    // Décalages, sans variante responsive : sans effet sur un élément position-static
+    // start et end suivent le sens d'écriture, comme ms et me
+    .top-0 { top: 0; }
+    .top-50 { top: 50%; }
+    .top-100 { top: 100%; }
+    .bottom-0 { bottom: 0; }
+    .bottom-50 { bottom: 50%; }
+    .bottom-100 { bottom: 100%; }
+    .start-0 { inset-inline-start: 0; }
+    .start-50 { inset-inline-start: 50%; }
+    .start-100 { inset-inline-start: 100%; }
+    .end-0 { inset-inline-end: 0; }
+    .end-50 { inset-inline-end: 50%; }
+    .end-100 { inset-inline-end: 100%; }
+    // Couvre tout le parent
+    .inset-0 { inset: 0; }
+
+    // Recule de la moitié de sa taille : centré sur le point posé par top-50 start-50
+    // translate plutôt que transform : n'écrase pas le transform de l'élément
+    .translate-middle { translate: -50% -50%; }
+    .translate-middle-x { translate: -50%; }
+    .translate-middle-y { translate: 0 -50%; }
+
+    // Ordre de superposition entre voisins ; dialog et popover natifs passent au-dessus de tout, sans z-index
+    .z-index-auto { z-index: auto; }
+    .z-index-0 { z-index: 0; }
+    .z-index-1 { z-index: 1; }
+    .z-index-2 { z-index: 2; }
+    .z-index-3 { z-index: 3; }
+
+}
