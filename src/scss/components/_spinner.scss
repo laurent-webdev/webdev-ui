@@ -1,0 +1,24 @@
+@layer components {
+
+    :root {
+        // Taille : suit le texte (1em), plus grand avec fs-*
+        --spinner-width: 1em;
+        // Épaisseur du cercle, en em : grandit avec le spinner
+        --spinner-border-width: 0.125em;
+    }
+
+    // Cercle ouvert qui tourne, de la couleur du texte : celle d'un bouton, d'un fond ou d'un color-*
+    .spinner {
+        display: inline-block;
+        flex-shrink: 0;
+        width: var(--spinner-width);
+        aspect-ratio: 1;
+        vertical-align: -0.125em;
+        border: var(--spinner-border-width) solid currentColor;
+        border-inline-end-color: transparent;
+        border-radius: 50%;
+        // Même rotation que .animation-spin : --animation-spin-duration règle les deux
+        animation: animation-spin var(--animation-spin-duration) linear infinite;
+    }
+
+}

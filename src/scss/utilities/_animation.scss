@@ -16,7 +16,7 @@
     .animation-slide-in-bottom { animation: animation-slide-in-bottom var(--animation-slide-in-duration) ease-out backwards; }
     .animation-slide-in-start { animation: animation-slide-in-start var(--animation-slide-in-duration) ease-out backwards; }
     .animation-slide-in-end { animation: animation-slide-in-end var(--animation-slide-in-duration) ease-out backwards; }
-    // De droite à gauche (arabe, hébreu) : start et end échangent leur côté, comme ms et me
+    // De droite à gauche : start et end échangent leur côté, comme ms et me
     .animation-slide-in-start:dir(rtl) { animation-name: animation-slide-in-end; }
     .animation-slide-in-end:dir(rtl) { animation-name: animation-slide-in-start; }
     .animation-scale-in { animation: animation-scale-in var(--animation-scale-in-duration) ease-out backwards; }
