@@ -139,6 +139,15 @@
   --color-emphasis-info: light-dark(oklch(from var(--color-info) 0.45 c h), oklch(from var(--color-info) 0.80 c h));
   --color-emphasis-neutral: light-dark(oklch(from var(--color-neutral) 0.45 c h), oklch(from var(--color-neutral) 0.80 c h));
   --color-emphasis-inverse: light-dark(oklch(from var(--color-inverse) 0.45 c h), oklch(from var(--color-inverse) 0.80 c h));
+  --color-emphasis-strong-primary: light-dark(oklch(from var(--color-primary) 0.35 c h), oklch(from var(--color-primary) 0.93 c h));
+  --color-emphasis-strong-secondary: light-dark(oklch(from var(--color-secondary) 0.35 c h), oklch(from var(--color-secondary) 0.93 c h));
+  --color-emphasis-strong-accent: light-dark(oklch(from var(--color-accent) 0.35 c h), oklch(from var(--color-accent) 0.93 c h));
+  --color-emphasis-strong-success: light-dark(oklch(from var(--color-success) 0.35 c h), oklch(from var(--color-success) 0.93 c h));
+  --color-emphasis-strong-danger: light-dark(oklch(from var(--color-danger) 0.35 c h), oklch(from var(--color-danger) 0.93 c h));
+  --color-emphasis-strong-warning: light-dark(oklch(from var(--color-warning) 0.35 c h), oklch(from var(--color-warning) 0.93 c h));
+  --color-emphasis-strong-info: light-dark(oklch(from var(--color-info) 0.35 c h), oklch(from var(--color-info) 0.93 c h));
+  --color-emphasis-strong-neutral: light-dark(oklch(from var(--color-neutral) 0.35 c h), oklch(from var(--color-neutral) 0.93 c h));
+  --color-emphasis-strong-inverse: light-dark(oklch(from var(--color-inverse) 0.35 c h), oklch(from var(--color-inverse) 0.93 c h));
 }
 
 :root {
@@ -601,6 +610,7 @@
     --accordion-theme-state-solid: var(--color-state-on-neutral);
     --accordion-theme-background-subtle: var(--color-subtle-neutral);
     --accordion-theme-text-emphasis: var(--color-emphasis-neutral);
+    --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-neutral);
   }
   .theme-primary {
     --accordion-theme-background-solid: var(--color-primary);
@@ -608,6 +618,7 @@
     --accordion-theme-state-solid: var(--color-state-on-primary);
     --accordion-theme-background-subtle: var(--color-subtle-primary);
     --accordion-theme-text-emphasis: var(--color-emphasis-primary);
+    --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-primary);
   }
   .theme-secondary {
     --accordion-theme-background-solid: var(--color-secondary);
@@ -615,6 +626,7 @@
     --accordion-theme-state-solid: var(--color-state-on-secondary);
     --accordion-theme-background-subtle: var(--color-subtle-secondary);
     --accordion-theme-text-emphasis: var(--color-emphasis-secondary);
+    --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-secondary);
   }
   .theme-accent {
     --accordion-theme-background-solid: var(--color-accent);
@@ -622,6 +634,7 @@
     --accordion-theme-state-solid: var(--color-state-on-accent);
     --accordion-theme-background-subtle: var(--color-subtle-accent);
     --accordion-theme-text-emphasis: var(--color-emphasis-accent);
+    --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-accent);
   }
   .theme-success {
     --accordion-theme-background-solid: var(--color-success);
@@ -629,6 +642,7 @@
     --accordion-theme-state-solid: var(--color-state-on-success);
     --accordion-theme-background-subtle: var(--color-subtle-success);
     --accordion-theme-text-emphasis: var(--color-emphasis-success);
+    --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-success);
   }
   .theme-danger {
     --accordion-theme-background-solid: var(--color-danger);
@@ -636,6 +650,7 @@
     --accordion-theme-state-solid: var(--color-state-on-danger);
     --accordion-theme-background-subtle: var(--color-subtle-danger);
     --accordion-theme-text-emphasis: var(--color-emphasis-danger);
+    --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-danger);
   }
   .theme-warning {
     --accordion-theme-background-solid: var(--color-warning);
@@ -643,6 +658,7 @@
     --accordion-theme-state-solid: var(--color-state-on-warning);
     --accordion-theme-background-subtle: var(--color-subtle-warning);
     --accordion-theme-text-emphasis: var(--color-emphasis-warning);
+    --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-warning);
   }
   .theme-info {
     --accordion-theme-background-solid: var(--color-info);
@@ -650,6 +666,7 @@
     --accordion-theme-state-solid: var(--color-state-on-info);
     --accordion-theme-background-subtle: var(--color-subtle-info);
     --accordion-theme-text-emphasis: var(--color-emphasis-info);
+    --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-info);
   }
   .theme-neutral {
     --accordion-theme-background-solid: var(--color-neutral);
@@ -657,6 +674,7 @@
     --accordion-theme-state-solid: var(--color-state-on-neutral);
     --accordion-theme-background-subtle: var(--color-subtle-neutral);
     --accordion-theme-text-emphasis: var(--color-emphasis-neutral);
+    --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-neutral);
   }
   .theme-inverse {
     --accordion-theme-background-solid: var(--color-inverse);
@@ -664,6 +682,7 @@
     --accordion-theme-state-solid: var(--color-state-on-inverse);
     --accordion-theme-background-subtle: var(--color-subtle-inverse);
     --accordion-theme-text-emphasis: var(--color-emphasis-inverse);
+    --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-inverse);
   }
   .accordion-solid, .accordion-subtle, .accordion-outline {
     block-size: fit-content;
@@ -754,9 +773,11 @@
   }
   .accordion-subtle > details > summary:hover {
     background-color: color-mix(in srgb, var(--accordion-theme-background-subtle), var(--accordion-theme-background-solid) var(--state-mix-soft));
+    color: var(--accordion-theme-text-emphasis-strong);
   }
   .accordion-subtle > details > summary:active {
     background-color: color-mix(in srgb, var(--accordion-theme-background-subtle), var(--accordion-theme-background-solid) var(--state-mix-strong));
+    color: var(--accordion-theme-text-emphasis-strong);
   }
   .accordion-outline > details > summary {
     background-color: transparent;
@@ -979,6 +1000,7 @@
     --btn-close-theme-state-solid: var(--color-state-on-neutral);
     --btn-close-theme-background-subtle: var(--color-subtle-neutral);
     --btn-close-theme-text-emphasis: var(--color-emphasis-neutral);
+    --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-neutral);
   }
   .theme-primary {
     --btn-close-theme-background-solid: var(--color-primary);
@@ -986,6 +1008,7 @@
     --btn-close-theme-state-solid: var(--color-state-on-primary);
     --btn-close-theme-background-subtle: var(--color-subtle-primary);
     --btn-close-theme-text-emphasis: var(--color-emphasis-primary);
+    --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-primary);
   }
   .theme-secondary {
     --btn-close-theme-background-solid: var(--color-secondary);
@@ -993,6 +1016,7 @@
     --btn-close-theme-state-solid: var(--color-state-on-secondary);
     --btn-close-theme-background-subtle: var(--color-subtle-secondary);
     --btn-close-theme-text-emphasis: var(--color-emphasis-secondary);
+    --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-secondary);
   }
   .theme-accent {
     --btn-close-theme-background-solid: var(--color-accent);
@@ -1000,6 +1024,7 @@
     --btn-close-theme-state-solid: var(--color-state-on-accent);
     --btn-close-theme-background-subtle: var(--color-subtle-accent);
     --btn-close-theme-text-emphasis: var(--color-emphasis-accent);
+    --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-accent);
   }
   .theme-success {
     --btn-close-theme-background-solid: var(--color-success);
@@ -1007,6 +1032,7 @@
     --btn-close-theme-state-solid: var(--color-state-on-success);
     --btn-close-theme-background-subtle: var(--color-subtle-success);
     --btn-close-theme-text-emphasis: var(--color-emphasis-success);
+    --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-success);
   }
   .theme-danger {
     --btn-close-theme-background-solid: var(--color-danger);
@@ -1014,6 +1040,7 @@
     --btn-close-theme-state-solid: var(--color-state-on-danger);
     --btn-close-theme-background-subtle: var(--color-subtle-danger);
     --btn-close-theme-text-emphasis: var(--color-emphasis-danger);
+    --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-danger);
   }
   .theme-warning {
     --btn-close-theme-background-solid: var(--color-warning);
@@ -1021,6 +1048,7 @@
     --btn-close-theme-state-solid: var(--color-state-on-warning);
     --btn-close-theme-background-subtle: var(--color-subtle-warning);
     --btn-close-theme-text-emphasis: var(--color-emphasis-warning);
+    --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-warning);
   }
   .theme-info {
     --btn-close-theme-background-solid: var(--color-info);
@@ -1028,6 +1056,7 @@
     --btn-close-theme-state-solid: var(--color-state-on-info);
     --btn-close-theme-background-subtle: var(--color-subtle-info);
     --btn-close-theme-text-emphasis: var(--color-emphasis-info);
+    --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-info);
   }
   .theme-neutral {
     --btn-close-theme-background-solid: var(--color-neutral);
@@ -1035,6 +1064,7 @@
     --btn-close-theme-state-solid: var(--color-state-on-neutral);
     --btn-close-theme-background-subtle: var(--color-subtle-neutral);
     --btn-close-theme-text-emphasis: var(--color-emphasis-neutral);
+    --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-neutral);
   }
   .theme-inverse {
     --btn-close-theme-background-solid: var(--color-inverse);
@@ -1042,6 +1072,7 @@
     --btn-close-theme-state-solid: var(--color-state-on-inverse);
     --btn-close-theme-background-subtle: var(--color-subtle-inverse);
     --btn-close-theme-text-emphasis: var(--color-emphasis-inverse);
+    --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-inverse);
   }
   .btn-close-solid, .btn-close-subtle, .btn-close-outline {
     width: var(--btn-close-size);
@@ -1087,9 +1118,11 @@
   }
   .btn-close-subtle:hover {
     background-color: color-mix(in srgb, var(--btn-close-theme-background-subtle), var(--btn-close-theme-background-solid) var(--state-mix-soft));
+    color: var(--btn-close-theme-text-emphasis-strong);
   }
   .btn-close-subtle:active {
     background-color: color-mix(in srgb, var(--btn-close-theme-background-subtle), var(--btn-close-theme-background-solid) var(--state-mix-strong));
+    color: var(--btn-close-theme-text-emphasis-strong);
   }
   .btn-close-outline {
     border-color: var(--btn-close-theme-background-solid);
@@ -1128,6 +1161,7 @@
     --btn-theme-state-solid: var(--color-state-on-neutral);
     --btn-theme-background-subtle: var(--color-subtle-neutral);
     --btn-theme-text-emphasis: var(--color-emphasis-neutral);
+    --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-neutral);
   }
   .theme-primary {
     --btn-theme-background-solid: var(--color-primary);
@@ -1135,6 +1169,7 @@
     --btn-theme-state-solid: var(--color-state-on-primary);
     --btn-theme-background-subtle: var(--color-subtle-primary);
     --btn-theme-text-emphasis: var(--color-emphasis-primary);
+    --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-primary);
   }
   .theme-secondary {
     --btn-theme-background-solid: var(--color-secondary);
@@ -1142,6 +1177,7 @@
     --btn-theme-state-solid: var(--color-state-on-secondary);
     --btn-theme-background-subtle: var(--color-subtle-secondary);
     --btn-theme-text-emphasis: var(--color-emphasis-secondary);
+    --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-secondary);
   }
   .theme-accent {
     --btn-theme-background-solid: var(--color-accent);
@@ -1149,6 +1185,7 @@
     --btn-theme-state-solid: var(--color-state-on-accent);
     --btn-theme-background-subtle: var(--color-subtle-accent);
     --btn-theme-text-emphasis: var(--color-emphasis-accent);
+    --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-accent);
   }
   .theme-success {
     --btn-theme-background-solid: var(--color-success);
@@ -1156,6 +1193,7 @@
     --btn-theme-state-solid: var(--color-state-on-success);
     --btn-theme-background-subtle: var(--color-subtle-success);
     --btn-theme-text-emphasis: var(--color-emphasis-success);
+    --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-success);
   }
   .theme-danger {
     --btn-theme-background-solid: var(--color-danger);
@@ -1163,6 +1201,7 @@
     --btn-theme-state-solid: var(--color-state-on-danger);
     --btn-theme-background-subtle: var(--color-subtle-danger);
     --btn-theme-text-emphasis: var(--color-emphasis-danger);
+    --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-danger);
   }
   .theme-warning {
     --btn-theme-background-solid: var(--color-warning);
@@ -1170,6 +1209,7 @@
     --btn-theme-state-solid: var(--color-state-on-warning);
     --btn-theme-background-subtle: var(--color-subtle-warning);
     --btn-theme-text-emphasis: var(--color-emphasis-warning);
+    --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-warning);
   }
   .theme-info {
     --btn-theme-background-solid: var(--color-info);
@@ -1177,6 +1217,7 @@
     --btn-theme-state-solid: var(--color-state-on-info);
     --btn-theme-background-subtle: var(--color-subtle-info);
     --btn-theme-text-emphasis: var(--color-emphasis-info);
+    --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-info);
   }
   .theme-neutral {
     --btn-theme-background-solid: var(--color-neutral);
@@ -1184,6 +1225,7 @@
     --btn-theme-state-solid: var(--color-state-on-neutral);
     --btn-theme-background-subtle: var(--color-subtle-neutral);
     --btn-theme-text-emphasis: var(--color-emphasis-neutral);
+    --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-neutral);
   }
   .theme-inverse {
     --btn-theme-background-solid: var(--color-inverse);
@@ -1191,6 +1233,7 @@
     --btn-theme-state-solid: var(--color-state-on-inverse);
     --btn-theme-background-subtle: var(--color-subtle-inverse);
     --btn-theme-text-emphasis: var(--color-emphasis-inverse);
+    --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-inverse);
   }
   .btn-solid, .btn-outline, .btn-subtle, .btn-text, .btn-link {
     display: inline-block;
@@ -1240,9 +1283,11 @@
   }
   .btn-subtle:hover {
     background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-soft));
+    color: var(--btn-theme-text-emphasis-strong);
   }
   .btn-subtle:active {
     background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-strong));
+    color: var(--btn-theme-text-emphasis-strong);
   }
   .btn-text {
     background-color: transparent;
@@ -1253,6 +1298,7 @@
   }
   .btn-text:active {
     background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-soft));
+    color: var(--btn-theme-text-emphasis-strong);
   }
   .btn-link {
     background-color: transparent;
@@ -1261,9 +1307,11 @@
   }
   .btn-link:hover {
     text-decoration-thickness: max(2px, 0.125rem, 0.08em);
+    color: var(--btn-theme-text-emphasis-strong);
   }
   .btn-link:active {
     text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
+    color: var(--btn-theme-text-emphasis-strong);
   }
   .btn-xs {
     --btn-padding-block: 0.125rem;

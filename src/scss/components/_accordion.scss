@@ -15,6 +15,7 @@
         --accordion-theme-state-solid: var(--color-state-on-neutral);
         --accordion-theme-background-subtle: var(--color-subtle-neutral);
         --accordion-theme-text-emphasis: var(--color-emphasis-neutral);
+        --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-neutral);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses accordéons
@@ -25,6 +26,7 @@
             --accordion-theme-state-solid: var(--color-state-on-#{$color});
             --accordion-theme-background-subtle: var(--color-subtle-#{$color});
             --accordion-theme-text-emphasis: var(--color-emphasis-#{$color});
+            --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-#{$color});
         }
     }
 
@@ -139,7 +141,7 @@
         }
     }
 
-    // Subtle : titre en fond léger, renforcé par la couleur du thème au survol et au clic
+    // Subtle : titre en fond léger, renforcé par la couleur du thème au survol et au clic, avec un texte plus fort
     .accordion-subtle {
         // Cadre et traits de la couleur du fond léger
         border-color: var(--accordion-theme-background-subtle);
@@ -155,9 +157,11 @@
 
             &:hover {
                 background-color: color-mix(in srgb, var(--accordion-theme-background-subtle), var(--accordion-theme-background-solid) var(--state-mix-soft));
+                color: var(--accordion-theme-text-emphasis-strong);
             }
             &:active {
                 background-color: color-mix(in srgb, var(--accordion-theme-background-subtle), var(--accordion-theme-background-solid) var(--state-mix-strong));
+                color: var(--accordion-theme-text-emphasis-strong);
             }
         }
     }

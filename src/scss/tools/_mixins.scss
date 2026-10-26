@@ -36,3 +36,10 @@
     --color-emphasis-#{$color}: light-dark(oklch(from var(--color-#{$color}) 0.45 c h), oklch(from var(--color-#{$color}) 0.80 c h));
   }
 }
+
+// Texte coloré plus fort, sur le subtle renforcé au survol et au clic : luminosité 0.35 en clair, 0.93 en sombre (≥ 4,5:1)
+@mixin emphasis-strong-colors($colors) {
+  @each $color in $colors {
+    --color-emphasis-strong-#{$color}: light-dark(oklch(from var(--color-#{$color}) 0.35 c h), oklch(from var(--color-#{$color}) 0.93 c h));
+  }
+}

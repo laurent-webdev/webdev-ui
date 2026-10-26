@@ -1169,6 +1169,7 @@
         <ul>
             <li>Le titre se prend au clavier (Tab) et s'ouvre avec Entrée ou Espace ; le navigateur annonce s'il est ouvert ou fermé : pas d'aria-expanded.</li>
             <li>Le contour de focus est dessiné à l'intérieur du titre, de la couleur du texte.</li>
+            <li>Au survol et au clic d'accordion-subtle, le fond se renforce et le texte devient plus fort (plus foncé en clair, plus clair en sombre) : le contraste reste d'au moins 4,5:1, comme btn-subtle.</li>
             <li>La flèche est dessinée en bordures : elle reste visible en contraste élevé (Windows).</li>
             <li>Dans Chrome, Ctrl+F ouvre le panneau fermé qui contient le texte cherché.</li>
         </ul>
@@ -1848,7 +1849,7 @@
         <ul>
             <li>La croix n'a pas de texte : aria-label="Fermer" donne son nom au bouton.</li>
             <li>24px au plus petit (btn-close-xs, le défaut), la cible tactile minimale (WCAG 2.5.8), comme btn-xs : ne pas descendre en dessous.</li>
-            <li>La croix a la couleur du texte de la variante : noir ou blanc sur solid, emphasis sur subtle et outline (au moins 4,5:1). Le contour de focus a la couleur du thème en emphasis, comme les boutons.</li>
+            <li>La croix a la couleur du texte de la variante : noir ou blanc sur solid, emphasis sur subtle et outline (au moins 4,5:1), plus forte sur le fond renforcé de subtle au survol et au clic. Le contour de focus a la couleur du thème en emphasis, comme les boutons.</li>
             <li>En contraste élevé (Windows), la croix prend la couleur du texte des boutons du système.</li>
         </ul>
 

@@ -13,6 +13,7 @@
         --btn-theme-state-solid: var(--color-state-on-neutral);
         --btn-theme-background-subtle: var(--color-subtle-neutral);
         --btn-theme-text-emphasis: var(--color-emphasis-neutral);
+        --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-neutral);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses boutons
@@ -23,6 +24,7 @@
             --btn-theme-state-solid: var(--color-state-on-#{$color});
             --btn-theme-background-subtle: var(--color-subtle-#{$color});
             --btn-theme-text-emphasis: var(--color-emphasis-#{$color});
+            --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-#{$color});
         }
     }
 
@@ -83,20 +85,22 @@
         }
     }
 
-    // Subtle : fond léger, renforcé par la couleur du thème au survol et au clic
+    // Subtle : fond léger, renforcé par la couleur du thème au survol et au clic, avec un texte plus fort
     .btn-subtle {
         background-color: var(--btn-theme-background-subtle);
         color: var(--btn-theme-text-emphasis);
 
         &:hover {
             background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-soft));
+            color: var(--btn-theme-text-emphasis-strong);
         }
         &:active {
             background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-strong));
+            color: var(--btn-theme-text-emphasis-strong);
         }
     }
 
-    // Text : texte seul, devient subtle au survol et au clic
+    // Text : texte seul, devient subtle au survol, subtle renforcé au clic (texte plus fort)
     .btn-text {
         background-color: transparent;
         color: var(--btn-theme-text-emphasis);
@@ -106,6 +110,7 @@
         }
         &:active {
             background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-soft));
+            color: var(--btn-theme-text-emphasis-strong);
         }
     }
 
@@ -117,9 +122,11 @@
 
         &:hover {
             text-decoration-thickness: max(2px, 0.125rem, 0.08em);
+            color: var(--btn-theme-text-emphasis-strong);
         }
         &:active {
             text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
+            color: var(--btn-theme-text-emphasis-strong);
         }
     }
 

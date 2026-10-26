@@ -12,6 +12,7 @@
         --btn-close-theme-state-solid: var(--color-state-on-neutral);
         --btn-close-theme-background-subtle: var(--color-subtle-neutral);
         --btn-close-theme-text-emphasis: var(--color-emphasis-neutral);
+        --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-neutral);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses boutons de fermeture
@@ -22,6 +23,7 @@
             --btn-close-theme-state-solid: var(--color-state-on-#{$color});
             --btn-close-theme-background-subtle: var(--color-subtle-#{$color});
             --btn-close-theme-text-emphasis: var(--color-emphasis-#{$color});
+            --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-#{$color});
         }
     }
 
@@ -74,16 +76,18 @@
         }
     }
 
-    // Subtle : fond léger, renforcé par la couleur du thème au survol et au clic
+    // Subtle : fond léger, renforcé par la couleur du thème au survol et au clic, avec une croix plus forte
     .btn-close-subtle {
         background-color: var(--btn-close-theme-background-subtle);
         color: var(--btn-close-theme-text-emphasis);
 
         &:hover {
             background-color: color-mix(in srgb, var(--btn-close-theme-background-subtle), var(--btn-close-theme-background-solid) var(--state-mix-soft));
+            color: var(--btn-close-theme-text-emphasis-strong);
         }
         &:active {
             background-color: color-mix(in srgb, var(--btn-close-theme-background-subtle), var(--btn-close-theme-background-solid) var(--state-mix-strong));
+            color: var(--btn-close-theme-text-emphasis-strong);
         }
     }
 
