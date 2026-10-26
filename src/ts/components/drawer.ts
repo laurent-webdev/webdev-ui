@@ -7,47 +7,56 @@ interface CommandEvent extends Event {
     source: HTMLButtonElement | null;
 }
 
-function isDrawer(element: EventTarget | null): element is HTMLDialogElement {
-    return element instanceof HTMLDialogElement && element.hasAttribute('data-drawer');
+export default class Drawer {
+
+    // cancel, command et close ne remontent pas : écoutés en capture sur document, pour tous les drawers de la page
+    // Le navigateur n'ajoute pas deux fois le même écouteur : un second start() ne double rien
+    static start() {
+        document.addEventListener('cancel', Drawer.onCancel, true);
+        document.addEventListener('command', Drawer.onCommand, true);
+        document.addEventListener('close', Drawer.onClose, true);
+    }
+
+    static isDrawer(element: EventTarget | null): element is HTMLDialogElement {
+        return element instanceof HTMLDialogElement && element.hasAttribute('data-drawer');
+    }
+
+    static slideClose(drawer: HTMLDialogElement, returnValue?: string) {
+        if (drawer.hasAttribute('data-closing')) return;
+        drawer.setAttribute('data-closing', '');
+
+        // getAnimations() lance la transition de data-closing ; allSettled : ferme aussi si elle est interrompue
+        Promise.allSettled(drawer.getAnimations().map(animation => animation.finished)).then(() => {
+            // Déjà fermé autrement pendant le glissement (close(), form method="dialog")
+            if (drawer.hasAttribute('data-closing')) drawer.close(returnValue);
+        });
+    }
+
+    // Échap, clic à côté (closedby="any"), command="request-close", requestClose()
+    static onCancel(event: Event) {
+        if (!Drawer.isDrawer(event.target)) return;
+        // Non annulable : le navigateur ferme d'un coup, onClose fait le ménage
+        if (!event.cancelable) return;
+
+        event.preventDefault();
+        Drawer.slideClose(event.target);
+    }
+
+    // command="close" : le navigateur ferme sans passer par cancel
+    static onCommand(event: Event) {
+        const {command, source} = event as CommandEvent;
+        if (command !== 'close' || !Drawer.isDrawer(event.target) || !event.target.open) return;
+
+        event.preventDefault();
+        // value du bouton : lue ensuite dans returnValue, comme en natif
+        Drawer.slideClose(event.target, source?.hasAttribute('value') ? source.value : undefined);
+    }
+
+    // Fermé, aussi d'un coup : sans data-closing, la prochaine ouverture glisse depuis le bord
+    static onClose(event: Event) {
+        if (Drawer.isDrawer(event.target)) event.target.removeAttribute('data-closing');
+    }
 }
 
-function slideClose(drawer: HTMLDialogElement, returnValue?: string) {
-    if (drawer.hasAttribute('data-closing')) return;
-    drawer.setAttribute('data-closing', '');
-
-    // getAnimations() lance la transition de data-closing ; allSettled : ferme aussi si elle est interrompue
-    Promise.allSettled(drawer.getAnimations().map(animation => animation.finished)).then(() => {
-        // Déjà fermé autrement pendant le glissement (close(), form method="dialog")
-        if (drawer.hasAttribute('data-closing')) drawer.close(returnValue);
-    });
-}
-
-// cancel, command et close ne remontent pas : écoutés en capture sur document, pour tous les drawers de la page
-
-// Échap, clic à côté (closedby="any"), command="request-close", requestClose()
-document.addEventListener('cancel', event => {
-    if (!isDrawer(event.target)) return;
-    // Non annulable : le navigateur ferme d'un coup, l'écouteur de close fait le ménage
-    if (!event.cancelable) return;
-
-    event.preventDefault();
-    slideClose(event.target);
-}, true);
-
-// command="close" : le navigateur ferme sans passer par cancel
-document.addEventListener('command', event => {
-    const {command, source} = event as CommandEvent;
-    if (command !== 'close' || !isDrawer(event.target) || !event.target.open) return;
-
-    event.preventDefault();
-    // value du bouton : lue ensuite dans returnValue, comme en natif
-    slideClose(event.target, source?.hasAttribute('value') ? source.value : undefined);
-}, true);
-
-// Fermé, aussi d'un coup : sans data-closing, la prochaine ouverture glisse depuis le bord
-document.addEventListener('close', event => {
-    if (isDrawer(event.target)) event.target.removeAttribute('data-closing');
-}, true);
-
-// Un module (isolatedModules) : ses fonctions et ses types restent dans ce fichier
-export {};
+// Démarré au chargement du fichier : le site n'écrit que data-drawer, sans JS
+Drawer.start();

@@ -11,6 +11,6 @@ workers:
     # Recompile le CSS propre à la doc (assets/styles/) à chaque modification
     sass:
         cmd: ['symfony', 'console', 'sass:build', '--watch']
-    # Reconstruit ../dist (la lib, à la racine du dépôt) à chaque modification de ../src : la doc le lit directement
+    # Reconstruit ../dist (la lib, à la racine du dépôt : CSS et JS, par gulp) à chaque modification de ../src : la doc le lit directement
     webdev-ui:
         cmd: ['npm', '--prefix', '..', 'run', 'watch']
