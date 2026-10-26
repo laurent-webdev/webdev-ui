@@ -1954,8 +1954,8 @@
         <p>La première ligne change tous les drawers (la largeur à gauche et à droite, la hauteur en haut et en bas), la deuxième seulement celui qui a la classe drawer-panier du site ; la dernière les colle au bord de l'écran, sans arrondi.</p>
 
         <h3 class="mt-4">JavaScript</h3>
-        <pre class="mt-2"><code>&lt;script type="module" src="…/js/drawer.js"&gt;&lt;/script&gt;</code></pre>
-        <p>drawer.js seul, ou bundle.js (tous les composants). Il n'y a rien à démarrer : il s'occupe de tous les &lt;dialog data-drawer&gt; de la page, aussi ceux ajoutés plus tard.</p>
+        <pre class="mt-2"><code>&lt;script type="module" src="…/js/bundle.js"&gt;&lt;/script&gt;</code></pre>
+        <p>bundle.js contient tous les composants. Il n'y a rien à démarrer : il s'occupe de tous les &lt;dialog data-drawer&gt; de la page, aussi ceux ajoutés plus tard.</p>
         <ul>
             <li>Il retient la fermeture du navigateur, pose l'attribut data-closing (le CSS fait glisser le panneau et éclaircit la page), puis appelle close() à la fin du glissement.</li>
             <li>Fermer depuis le JS du site : drawer.requestClose() glisse ; drawer.close() ferme d'un coup.</li>

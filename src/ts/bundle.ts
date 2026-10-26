@@ -1,2 +1,2 @@
-// Tous les composants en un fichier (dist/js/bundle.js) ; chacun est aussi publié seul (dist/js/<composant>.js)
+// Tous les composants en un fichier (dist/js/bundle.js), le seul JS publié
 import './components/drawer';

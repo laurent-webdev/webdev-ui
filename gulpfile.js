@@ -7,9 +7,7 @@ const esbuild = require('esbuild');
 // Les partiels (_*.scss) ne contiennent que des variables Sass : ils ne produisent pas de fichier CSS
 const SCSS = ['src/scss/**/*.scss', '!src/scss/**/_*.scss'];
 
-// Chaque composant est publié seul : src/ts/components/alert.ts → dist/js/alert.js
-const COMPONENTS = 'src/ts/components/*.ts';
-// Tous les composants en un fichier : src/ts/bundle.ts → dist/js/bundle.js
+// Tous les composants en un fichier, le seul JS publié : src/ts/bundle.ts → dist/js/bundle.js
 const BUNDLE = 'src/ts/bundle.ts';
 
 // ── CSS ──────────────────────────────────────────────
@@ -28,29 +26,8 @@ function buildCSSMin() {
         .pipe(gulp.dest('dist/css'));
 }
 
-// ── JS individuel ────────────────────────────────────
-// bundle: true pour qu'un composant qui importe un module commun (src/ts/utils/…) reste autonome
-function buildJS() {
-    return esbuild.build({
-        entryPoints: [COMPONENTS],
-        outdir: 'dist/js',
-        bundle: true,
-        format: 'esm',
-    });
-}
-
-function buildJSMin() {
-    return esbuild.build({
-        entryPoints: [COMPONENTS],
-        outdir: 'dist/js',
-        entryNames: '[name].min',
-        bundle: true,
-        minify: true,
-        format: 'esm',
-    });
-}
-
 // ── JS bundle ────────────────────────────────────────
+// bundle: true : les composants importés par bundle.ts, et les modules qu'ils importent, dans le même fichier
 function buildJSBundle() {
     return esbuild.build({
         entryPoints: [BUNDLE],
@@ -73,8 +50,6 @@ function buildJSBundleMin() {
 exports.build = gulp.parallel(
     buildCSS,
     buildCSSMin,
-    buildJS,
-    buildJSMin,
     buildJSBundle,
     buildJSBundleMin
 );
@@ -83,7 +58,7 @@ exports.build = gulp.parallel(
 // Reconstruit dist/ à chaque modification de src/ : la doc (doc/) lit dist/ directement
 function watchFiles() {
     gulp.watch('src/scss/**/*.scss', gulp.parallel(buildCSS, buildCSSMin));
-    gulp.watch('src/ts/**/*.ts', gulp.parallel(buildJS, buildJSMin, buildJSBundle, buildJSBundleMin));
+    gulp.watch('src/ts/**/*.ts', gulp.parallel(buildJSBundle, buildJSBundleMin));
 }
 
 exports.watch = gulp.series(exports.build, watchFiles);
