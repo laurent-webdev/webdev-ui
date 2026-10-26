@@ -1986,6 +1986,7 @@
         <h3 class="mt-4">Limites</h3>
         <ul>
             <li>La fermeture ne glisse qu'avec le JS du framework et data-drawer. Un &lt;form method="dialog"&gt; et close() ferment toujours d'un coup.</li>
+            <li>Échap pressé deux fois pendant le glissement ferme d'un coup : le navigateur ne laisse pas la page refuser deux fermetures de suite (protection contre les pages qui piègent l'utilisateur).</li>
             <li>Le site ne peut pas garder le panneau ouvert avec event.preventDefault() sur cancel : le JS du framework l'a déjà annulé pour le faire glisser. Pour un panneau qui ne se ferme qu'avec ses boutons : closedby="none".</li>
             <li>Pas encore de couleurs (.theme-*, solid, subtle, outline) ni de tailles : le fond est celui de la page, la largeur et la hauteur se changent avec --drawer-width et --drawer-height.</li>
             <li>Un contenu long fait défiler tout le panneau, en-tête compris.</li>
