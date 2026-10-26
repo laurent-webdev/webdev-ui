@@ -1700,6 +1700,44 @@
     --dropdown-min-width: 10rem;
     --dropdown-border-radius: var(--border-radius-md);
     --dropdown-border-width: var(--border-width);
+    --dropdown-theme-background-solid: var(--color-neutral);
+    --dropdown-theme-background-subtle: var(--color-subtle-neutral);
+  }
+  .theme-primary {
+    --dropdown-theme-background-solid: var(--color-primary);
+    --dropdown-theme-background-subtle: var(--color-subtle-primary);
+  }
+  .theme-secondary {
+    --dropdown-theme-background-solid: var(--color-secondary);
+    --dropdown-theme-background-subtle: var(--color-subtle-secondary);
+  }
+  .theme-accent {
+    --dropdown-theme-background-solid: var(--color-accent);
+    --dropdown-theme-background-subtle: var(--color-subtle-accent);
+  }
+  .theme-success {
+    --dropdown-theme-background-solid: var(--color-success);
+    --dropdown-theme-background-subtle: var(--color-subtle-success);
+  }
+  .theme-danger {
+    --dropdown-theme-background-solid: var(--color-danger);
+    --dropdown-theme-background-subtle: var(--color-subtle-danger);
+  }
+  .theme-warning {
+    --dropdown-theme-background-solid: var(--color-warning);
+    --dropdown-theme-background-subtle: var(--color-subtle-warning);
+  }
+  .theme-info {
+    --dropdown-theme-background-solid: var(--color-info);
+    --dropdown-theme-background-subtle: var(--color-subtle-info);
+  }
+  .theme-neutral {
+    --dropdown-theme-background-solid: var(--color-neutral);
+    --dropdown-theme-background-subtle: var(--color-subtle-neutral);
+  }
+  .theme-inverse {
+    --dropdown-theme-background-solid: var(--color-inverse);
+    --dropdown-theme-background-subtle: var(--color-subtle-inverse);
   }
   .dropdown {
     position-area: block-end span-inline-end;
@@ -1733,10 +1771,10 @@
     transition-duration: var(--transition-duration);
   }
   .dropdown-item:hover {
-    background-color: var(--color-subtle-neutral);
+    background-color: var(--dropdown-theme-background-subtle);
   }
   .dropdown-item:active {
-    background-color: color-mix(in srgb, var(--color-subtle-neutral), var(--color-neutral) var(--state-mix-soft));
+    background-color: color-mix(in srgb, var(--dropdown-theme-background-subtle), var(--dropdown-theme-background-solid) var(--state-mix-soft));
   }
   .dropdown-item:focus-visible {
     outline: var(--focus-outline-width) solid currentColor;

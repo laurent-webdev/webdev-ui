@@ -1999,7 +1999,7 @@
 
     <section>
         <h2>Dropdown</h2>
-        <p>Un menu qui s'ouvre sous un bouton : un popover natif, sans JavaScript. Le navigateur l'ouvre et le ferme (le bouton, Échap, un clic à côté), le place sous le bouton et le retourne vers le haut ou vers la gauche s'il n'y a pas la place.</p>
+        <p>Un menu qui s'ouvre sous un bouton : un popover natif, sans JavaScript. Le navigateur l'ouvre et le ferme (le bouton, Échap, un clic à côté), le place sous le bouton et le retourne vers le haut ou vers la gauche s'il n'y a pas la place. Les éléments gardent le texte de la page ; seul leur fond change au survol et au clic, de la couleur .theme-*.</p>
 
         <div class="d-flex flex-wrap-wrap gap-2 mt-2">
             <button class="btn-outline" type="button" popovertarget="dropdown-account">Mon compte</button>
@@ -2008,7 +2008,7 @@
                 <a class="dropdown-item" href="#">Réglages</a>
                 <button class="dropdown-item" type="button" disabled>Factures (bientôt)</button>
                 <hr>
-                <button class="dropdown-item" type="button" popovertarget="dropdown-account" popovertargetaction="hide">Se déconnecter</button>
+                <button class="dropdown-item theme-danger" type="button" popovertarget="dropdown-account" popovertargetaction="hide">Se déconnecter</button>
             </div>
 
             <button class="btn-outline" type="button" popovertarget="dropdown-free">Panneau libre</button>
@@ -2025,13 +2025,37 @@
             </div>
         </div>
 
+        <h3 class="mt-4">Couleurs</h3>
+        <div class="d-flex flex-wrap-wrap gap-2 mt-2">
+            <button class="btn-outline" type="button" popovertarget="dropdown-colors">Une couleur par élément</button>
+            <div class="dropdown" id="dropdown-colors" popover>
+                <button class="dropdown-item" type="button">sans thème (neutral)</button>
+                {% for theme in ['primary', 'secondary', 'accent', 'success', 'danger', 'warning', 'info', 'inverse'] %}
+                    <button class="dropdown-item theme-{{ theme }}" type="button">theme-{{ theme }}</button>
+                {% endfor %}
+            </div>
+
+            <button class="btn-outline" type="button" popovertarget="dropdown-theme-menu">theme-primary sur le menu</button>
+            <div class="dropdown theme-primary" id="dropdown-theme-menu" popover>
+                <a class="dropdown-item" href="#">Profil</a>
+                <a class="dropdown-item" href="#">Réglages</a>
+                <hr>
+                <button class="dropdown-item theme-danger" type="button" popovertarget="dropdown-theme-menu" popovertargetaction="hide">Se déconnecter</button>
+            </div>
+        </div>
+        <ul>
+            <li>Au repos, le texte de la page, sans fond. Au survol, le fond léger de la couleur ; au clic, ce fond renforcé. Le texte ne change jamais.</li>
+            <li>Sans thème, le fond est gris (neutral), comme les boutons. .theme-* sur le menu colore le survol de tous ses éléments ; sur un élément, seulement le sien (Se déconnecter en rouge).</li>
+            <li>Le menu lui-même garde le fond de la page et un cadre gris : .theme-* ne colore que le survol et le clic des éléments.</li>
+        </ul>
+
         <h3 class="mt-4">HTML</h3>
         <pre class="mt-2"><code>&lt;button class="btn-outline" type="button" popovertarget="menu-compte"&gt;Mon compte&lt;/button&gt;
 &lt;div class="dropdown" id="menu-compte" popover&gt;
     &lt;a class="dropdown-item" href="/profil"&gt;Profil&lt;/a&gt;
     &lt;a class="dropdown-item" href="/reglages"&gt;Réglages&lt;/a&gt;
     &lt;hr&gt;
-    &lt;button class="dropdown-item" type="button" popovertarget="menu-compte" popovertargetaction="hide"&gt;Se déconnecter&lt;/button&gt;
+    &lt;button class="dropdown-item theme-danger" type="button" popovertarget="menu-compte" popovertargetaction="hide"&gt;Se déconnecter&lt;/button&gt;
 &lt;/div&gt;</code></pre>
         <ul>
             <li>popovertarget sur le bouton, popover et le même id sur le menu : c'est tout, sans JavaScript.</li>
@@ -2075,6 +2099,8 @@
             <li>Pas de role="menu" : il est fait pour les menus d'application, qui se parcourent avec les flèches (ARIA Authoring Practices, comme Bootstrap 6). Un menu de liens est un bouton qui affiche une liste (motif « disclosure »).</li>
             <li>Un menu de navigation va dans un &lt;nav aria-label="…"&gt;, avec son bouton.</li>
             <li>Les liens du menu ne sont pas soulignés : ils sont seuls sur leur ligne, pas dans un texte.</li>
+            <li>Le texte de la page reste lisible sur tous les fonds, dans toutes les couleurs, en clair et en sombre (au moins 5,85:1 au clic) ; le contour de focus a la couleur du texte.</li>
+            <li>La couleur ne suffit pas à dire ce que fait un élément (WCAG 1.4.1), d'autant qu'elle n'apparaît qu'au survol : le texte le dit (« Supprimer »).</li>
             <li>Éléments de 36px de haut, plus que la cible tactile minimale de 24px (WCAG 2.5.8).</li>
             <li>Un bouton avec seulement une icône (⋮) a un aria-label (« Actions »).</li>
         </ul>
@@ -2091,6 +2117,9 @@
         <p>popovertarget ne marche que sur un &lt;button&gt; : le lien n'ouvre rien.</p>
         <pre class="mt-2"><code>&lt;button class="dropdown-item" type="button"&gt;Supprimer&lt;/button&gt;</code></pre>
         <p>Sans popovertarget="menu" popovertargetaction="hide", le menu reste ouvert après le clic.</p>
+        <pre class="mt-2"><code>&lt;button class="btn-solid theme-primary" type="button" popovertarget="menu"&gt;Menu&lt;/button&gt;
+&lt;div class="dropdown" id="menu" popover&gt;…&lt;/div&gt;</code></pre>
+        <p>Le .theme-* du bouton ne colore pas le menu : le menu n'est pas dans le bouton. Pour colorer le survol des éléments : &lt;div class="dropdown theme-primary"&gt;.</p>
 
         <h3 class="mt-4">Limites</h3>
         <ul>
@@ -2099,7 +2128,7 @@
             <li>Un clic sur un élément ne ferme pas le menu : un lien change de page, un bouton d'action a besoin de popovertargetaction="hide".</li>
             <li>Un menu plus haut que la place au-dessus et au-dessous du bouton dépasse de l'écran.</li>
             <li>Pas d'animation à l'ouverture ni à la fermeture.</li>
-            <li>Pas encore de couleurs (.theme-*), de tailles, de titres de groupe, de sous-menus, ni de flèche sur le bouton.</li>
+            <li>Pas de fond plein au survol : le texte de la page y serait illisible en sombre. Pas encore de tailles, de titres de groupe, de sous-menus, ni de flèche sur le bouton.</li>
         </ul>
     </section>
 
