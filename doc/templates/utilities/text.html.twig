@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Texte{% endblock %}
+
+{% block body %}
+    <h1>Texte</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Alignement, soulignement, casse, retour à la ligne et texte coupé : text-align-*, text-decoration-*, text-transform-*, text-wrap-*, text-truncate et overflow-wrap-anywhere.</p>
+
+    <h2 class="mt-10">Alignement</h2>
+    <p class="demo-box p-2 mt-2 text-align-start">text-align-start</p>
+    <p class="demo-box p-2 mt-2 text-align-center">text-align-center</p>
+    <p class="demo-box p-2 mt-2 text-align-end">text-align-end</p>
+    <p class="demo-box p-2 mt-2 text-align-center md:text-align-start">text-align-center md:text-align-start : centré sur téléphone, au début de la ligne à partir de md (768px)</p>
+
+    <h2 class="mt-10">Soulignement</h2>
+    <ul class="mt-2">
+        <li><a class="text-decoration-none" href="#">text-decoration-none</a></li>
+        <li><a class="btn-text text-decoration-underline" href="#">btn-text text-decoration-underline</a></li>
+    </ul>
+
+    <h2 class="mt-10">Casse</h2>
+    <p class="mt-2 text-transform-uppercase">text-transform-uppercase : écrit en minuscules dans le HTML</p>
+    <p class="text-transform-lowercase">text-transform-lowercase : Écrit Avec Des Majuscules Dans Le HTML</p>
+    <p class="text-transform-capitalize">text-transform-capitalize : la première lettre de chaque mot</p>
+    <p class="text-transform-uppercase">Un parent en majuscules, <span class="text-transform-none">text-transform-none sur un enfant</span></p>
+
+    <h2 class="mt-10">Retour à la ligne</h2>
+    <div class="grid mt-2">
+        <p class="demo-box p-2 fs-xl fw-medium text-wrap-wrap md:col-6">text-wrap-wrap : un titre assez long pour passer sur deux lignes</p>
+        <p class="demo-box p-2 fs-xl fw-medium text-wrap-balance md:col-6">text-wrap-balance : un titre assez long pour passer sur deux lignes</p>
+        <p class="demo-box p-2 text-wrap-wrap md:col-6">text-wrap-wrap : un paragraphe dont le dernier mot peut se retrouver tout seul sur la dernière ligne, selon la largeur de l'écran.</p>
+        <p class="demo-box p-2 text-wrap-pretty md:col-6">text-wrap-pretty : un paragraphe dont le dernier mot peut se retrouver tout seul sur la dernière ligne, selon la largeur de l'écran.</p>
+    </div>
+    <p class="mt-4">text-wrap-nowrap sur le bouton : son texte reste sur une ligne, le nom du produit passe à la ligne</p>
+    <div class="demo-frame d-flex align-items-center gap-2 mt-2">
+        <p class="demo-box p-2 flex-grow-1">Un nom de produit assez long, qui passe sur plusieurs lignes</p>
+        <button class="btn-solid theme-primary text-wrap-nowrap" type="button">Ajouter au panier</button>
+    </div>
+
+    <h2 class="mt-10">Texte coupé</h2>
+    <p class="demo-box p-2 mt-2 text-truncate">text-truncate : une seule ligne, coupée par trois points quand le texte est plus long que son parent</p>
+    <p class="mt-4">text-truncate sur un enfant flex : il rétrécit sans min-w-0</p>
+    <div class="demo-frame d-flex align-items-center gap-2 mt-2">
+        <p class="demo-box p-2 text-truncate"><a href="#">Un titre d'article très long, qui ne tient pas sur une ligne à côté du bouton</a></p>
+        <button class="btn-outline flex-shrink-0" type="button">Enregistrer</button>
+    </div>
+
+    <h2 class="mt-10">Mots longs</h2>
+    <p class="mt-2">overflow-wrap-anywhere : une adresse coupée dans un enfant flex, sans min-w-0 (aussi dans une cellule de tableau)</p>
+    <div class="demo-frame d-flex gap-2 mt-2">
+        <p class="demo-box p-2 flex-shrink-0">E-mail</p>
+        <p class="demo-box p-2 overflow-wrap-anywhere">prenom.nom-de-famille@un-nom-de-domaine-assez-long.fr</p>
+    </div>
+
+    <h2 class="mt-10">Exemple : un menu sans soulignement</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;nav aria-label="Principal"&gt;
+    &lt;ul class="d-flex gap-4"&gt;
+        &lt;li&gt;&lt;a class="text-decoration-none" href="/"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="text-decoration-none" href="/contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+    <p>Dans un menu, chaque lien est seul : on voit que c'est un lien sans soulignement.</p>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p&gt;Lisez &lt;a class="text-decoration-none" href="…"&gt;nos conditions&lt;/a&gt; avant de commander.&lt;/p&gt;</code></pre>
+    <p>Un lien sans soulignement au milieu d'un texte ne se voit que par sa couleur (WCAG 1.4.1, Lighthouse : « Links rely on color to be distinguishable »). Dans un texte, garder le soulignement.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;nav class="text-decoration-none"&gt;…&lt;/nav&gt;</code></pre>
+    <p>Sans effet : le soulignement n'est pas hérité, la classe va sur chaque &lt;a&gt;.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="text-decoration-underline"&gt;Important&lt;/span&gt;</code></pre>
+    <p>Un texte souligné qui n'est pas un lien se prend pour un lien. Pour insister : &lt;strong&gt;.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p class="text-transform-uppercase"&gt;Un long paragraphe…&lt;/p&gt;</code></pre>
+    <p>Un long texte en majuscules est difficile à lire, surtout avec une dyslexie (MDN) : les majuscules sont pour les textes courts (étiquette, bouton).</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p class="text-wrap-nowrap"&gt;Un long texte…&lt;/p&gt;</code></pre>
+    <p>Un long texte sur une seule ligne dépasse de l'écran sur téléphone (WCAG 1.4.10) : text-wrap-nowrap est pour quelques mots.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p&gt;Un texte avec &lt;span class="text-truncate"&gt;un morceau coupé&lt;/span&gt;&lt;/p&gt;</code></pre>
+    <p>Sans effet sur un élément inline : text-truncate a besoin d'un bloc (d-block, ou un enfant flex).</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>text-truncate cache la fin du texte à l'écran (les lecteurs d'écran la lisent) : le texte entier doit se lire ailleurs, sur la page de l'article par exemple. L'attribut title ne s'affiche ni au clavier ni au tactile. En zoom 200 %, le texte est encore plus coupé.</li>
+        <li>text-truncate coupe une seule ligne : pas de texte coupé après plusieurs lignes.</li>
+        <li>Un lien text-decoration-none ne change plus au survol ni au clic (le soulignement s'épaissit) : le site ajoute son propre survol s'il en veut un.</li>
+        <li>Le reset met déjà text-wrap: balance sur les titres h1 à h6 et pretty sur p, li, figcaption, blockquote et dd : les classes servent pour les autres éléments, ou à revenir à text-wrap-wrap.</li>
+        <li>text-wrap-balance n'équilibre que les textes courts (6 lignes au plus dans Chrome, 10 dans Firefox). text-wrap-pretty n'est pas encore dans tous les navigateurs : sans lui, le texte passe à la ligne normalement.</li>
+        <li>text-transform-capitalize met une majuscule à chaque mot, comme les titres en anglais, pas comme la typographie française ; il ne passe pas les autres lettres en minuscules.</li>
+        <li>Seul l'alignement a des variantes responsive.</li>
+        <li>Pas de justify (les espaces irréguliers gênent la lecture), ni de left / right (start et end suivent le sens d'écriture), ni de texte barré (balises &lt;s&gt; et &lt;del&gt;), ni d'espacement des lettres ou d'interligne (fs-* règle l'interligne).</li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Alerte{% endblock %}
+
+{% block body %}
+    <h1>Alerte</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Un message dans la page, sans JavaScript : une variante (alert-solid, -subtle, -outline) et une couleur .theme-*.</p>
+
+    {% for variant in ['solid', 'subtle', 'outline'] %}
+        <h2 class="mt-10">alert-{{ variant }}</h2>
+        <div class="grid gap-3 mt-2">
+            {% for color in colors %}
+                <div class="alert-{{ variant }} theme-{{ color }} md:col-6 lg:col-4">
+                    <p>theme-{{ color }}, avec <a href="#">un lien</a></p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <h2 class="mt-10">HTML</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="alert-subtle theme-warning"&gt;
+    &lt;p&gt;Attention : la maintenance aura lieu dimanche.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+    <p>Comme les boutons : une variante (alert-solid, alert-subtle, alert-outline) qui s'utilise seule, et une couleur .theme-*, neutral sans classe. Le contenu s'empile : titre, paragraphes, liste, boutons.</p>
+
+    <h2 class="mt-10">Exemple : un titre et une liste de liens</h2>
+    <div class="alert-subtle theme-danger mt-2">
+        <h3 class="fs-md">Erreur : le formulaire contient 2 erreurs</h3>
+        <ul class="mt-2">
+            <li><a href="#">Le champ e-mail est vide</a></li>
+            <li><a href="#">Le mot de passe est trop court</a></li>
+        </ul>
+    </div>
+
+    <h2 class="mt-10">Exemple : avec une icône</h2>
+    <div class="alert-outline theme-info d-flex gap-3 mt-2">
+        <svg class="flex-shrink-0" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7v.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <p>Information : la maintenance aura lieu dimanche de 2 h à 4 h.</p>
+    </div>
+    <p class="mt-2">Les utilitaires d-flex gap-3 sur l'alerte placent l'icône à côté du texte ; l'icône est décorative (aria-hidden), le texte dit « Information ».</p>
+
+    <h2 class="mt-10">Exemple : un bouton dans une alerte solid</h2>
+    <div class="alert-solid theme-primary mt-2">
+        <p>Une nouvelle version est disponible. <a href="#">Voir les nouveautés</a></p>
+        <button class="btn-solid theme-inverse mt-3" type="button">Mettre à jour</button>
+    </div>
+    <p class="mt-2">Dans alert-solid, les liens prennent la couleur du texte ; seul btn-solid est prévu sur un fond plein.</p>
+
+    <h2 class="mt-10">Exemple : un message affiché par le JS</h2>
+    <button class="btn-outline mt-2" type="button" aria-expanded="false" aria-controls="demo-alert-status" data-demo-toggle>Afficher / masquer le message</button>
+    <div class="mt-2" role="status" aria-live="polite">
+        <div class="alert-subtle theme-success" id="demo-alert-status" hidden>
+            <p>Succès : vos modifications sont enregistrées.</p>
+        </div>
+    </div>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div role="status" aria-live="polite"&gt;
+    &lt;div class="alert-subtle theme-success" hidden&gt;
+        &lt;p&gt;Succès : vos modifications sont enregistrées.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    <p>La zone role="status" est dans la page dès le chargement ; le JS du site retire hidden : le lecteur d'écran lit le message après ce qu'il est en train de lire.</p>
+
+    <h2 class="mt-10">Variables</h2>
+    <table class="mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Défaut</th>
+                <th scope="col">Rôle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">--alert-padding-block</th><td>1rem</td><td>haut et bas</td></tr>
+            <tr><th scope="row">--alert-padding-inline</th><td>1rem</td><td>côtés</td></tr>
+            <tr><th scope="row">--alert-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
+            <tr><th scope="row">--alert-border-width</th><td>--border-width</td><td>cadre</td></tr>
+        </tbody>
+    </table>
+    <p class="mt-2">Les couleurs viennent de .theme-* : le cadre a la couleur du thème (alert-subtle : celle du fond léger), la variante dit le fond et le texte.</p>
+
+    <h2 class="mt-10">Exemple : changer les valeurs</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --alert-padding-block: 0.75rem; }
+.alert-compact { --alert-padding-block: 0.5rem; --alert-padding-inline: 0.75rem; }</code></pre>
+    <p>La première ligne change toutes les alertes, la deuxième seulement celles qui ont la classe alert-compact du site.</p>
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul>
+        <li>Un message déjà dans la page au chargement (information permanente, erreurs après l'envoi d'un formulaire rechargé) : pas de role. MDN : role="alert" est fait pour un contenu affiché par le JS, pas pour celui du chargement.</li>
+        <li>Un message affiché par le JS après une action : dans une zone présente dès le chargement, vide ou cachée, où le JS met le message. role="status" aria-live="polite" pour une information ou un succès (lu après la lecture en cours ; MDN conseille d'ajouter aria-live="polite" pour les anciens lecteurs d'écran) ; role="alert" pour une erreur urgente (interrompt la lecture ; sans aria-live, VoiceOver sur iOS le lirait deux fois).</li>
+        <li>role="alert" avec parcimonie (MDN) : plusieurs alertes à la fois, ou inutiles, gênent.</li>
+        <li>La couleur ne suffit pas (WCAG 1.4.1) : le texte dit le type de message (« Erreur : », « Succès : »). Une icône seule, cachée aux lecteurs d'écran, ne compte pas.</li>
+        <li>Le texte est lisible dans toutes les variantes et toutes les couleurs (au moins 4,5:1, comme les boutons).</li>
+    </ul>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="alert-subtle theme-warning" role="alert"&gt;
+    &lt;p&gt;Attention : la maintenance aura lieu dimanche.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+    <p>Présente au chargement de la page : role="alert" n'est pas fait pour ça (MDN). Sans role, c'est un bloc de texte comme un autre.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="alert-subtle theme-success"&gt;&lt;p&gt;Paiement&lt;/p&gt;&lt;/div&gt;
+&lt;div class="alert-subtle theme-danger"&gt;&lt;p&gt;Paiement&lt;/p&gt;&lt;/div&gt;</code></pre>
+    <p>Seule la couleur dit si le paiement est accepté ou refusé (WCAG 1.4.1) : l'écrire, « Paiement accepté », « Paiement refusé ».</p>
+    <pre class="mt-2" tabindex="0"><code class="language-js">zone.append(alerte); // une alerte déjà remplie, avec role="status"</code></pre>
+    <p>Ajouter d'un coup une zone role="status" et son message : en général rien n'est lu (MDN). La zone doit exister avant, vide.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="alert-solid theme-primary"&gt;
+    &lt;a class="btn-outline" href="…"&gt;Voir&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+    <p>btn-outline, btn-text et btn-link sont faits pour le fond de la page et les fonds légers : sur un fond plein, seul btn-solid.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>Pas de bouton de fermeture ni de disparition automatique : il faut du JS. Ce sera le rôle des notifications, plus tard.</li>
+        <li>En clair, le cadre d'alert-subtle se voit à peine sur le fond de la page : le fond léger suffit à la délimiter.</li>
+        <li>Dans alert-solid, un .theme-* sur un lien ne change rien : les liens prennent toujours la couleur du texte.</li>
+        <li>Pas de tailles : changer les variables dans le site.</li>
+    </ul>
+{% endblock %}

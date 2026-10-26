@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dropdown{% endblock %}
+
+{% block body %}
+    <h1>Dropdown</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Un menu qui s'ouvre sous un bouton : un popover natif, sans JavaScript. Le navigateur l'ouvre et le ferme (le bouton, Échap, un clic à côté), le place sous le bouton et le retourne vers le haut ou vers la gauche s'il n'y a pas la place. Les éléments gardent le texte de la page ; seul leur fond change au survol et au clic, de la couleur .theme-*.</p>
+
+    <div class="d-flex flex-wrap-wrap gap-2 mt-2">
+        <button class="btn-outline" type="button" popovertarget="dropdown-account">Mon compte</button>
+        <div class="dropdown" id="dropdown-account" popover>
+            <a class="dropdown-item" href="#">Profil</a>
+            <a class="dropdown-item" href="#">Réglages</a>
+            <button class="dropdown-item" type="button" disabled>Factures (bientôt)</button>
+            <hr>
+            <button class="dropdown-item theme-danger" type="button" popovertarget="dropdown-account" popovertargetaction="hide">Se déconnecter</button>
+        </div>
+
+        <button class="btn-outline" type="button" popovertarget="dropdown-free">Panneau libre</button>
+        <div class="dropdown p-4" id="dropdown-free" popover>
+            <p>Un panneau avec du texte, un formulaire de filtres… : la classe p-4 lui donne de la place.</p>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end mt-2">
+        <button class="btn-outline" type="button" popovertarget="dropdown-end">Au bord droit</button>
+        <div class="dropdown" id="dropdown-end" popover>
+            <a class="dropdown-item" href="#">Profil</a>
+            <a class="dropdown-item" href="#">Réglages</a>
+        </div>
+    </div>
+
+    <h2 class="mt-10">Couleurs</h2>
+    <div class="d-flex flex-wrap-wrap gap-2 mt-2">
+        <button class="btn-outline" type="button" popovertarget="dropdown-colors">Une couleur par élément</button>
+        <div class="dropdown" id="dropdown-colors" popover>
+            <button class="dropdown-item" type="button">sans thème (neutral)</button>
+            {% for theme in ['primary', 'secondary', 'accent', 'success', 'danger', 'warning', 'info', 'inverse'] %}
+                <button class="dropdown-item theme-{{ theme }}" type="button">theme-{{ theme }}</button>
+            {% endfor %}
+        </div>
+
+        <button class="btn-outline" type="button" popovertarget="dropdown-theme-menu">theme-primary sur le menu</button>
+        <div class="dropdown theme-primary" id="dropdown-theme-menu" popover>
+            <a class="dropdown-item" href="#">Profil</a>
+            <a class="dropdown-item" href="#">Réglages</a>
+            <hr>
+            <button class="dropdown-item theme-danger" type="button" popovertarget="dropdown-theme-menu" popovertargetaction="hide">Se déconnecter</button>
+        </div>
+    </div>
+    <ul>
+        <li>Au repos, le texte de la page, sans fond. Au survol, le fond léger de la couleur ; au clic, ce fond renforcé. Le texte ne change jamais.</li>
+        <li>Sans thème, le fond est gris (neutral), comme les boutons. .theme-* sur le menu colore le survol de tous ses éléments ; sur un élément, seulement le sien (Se déconnecter en rouge).</li>
+        <li>Le menu lui-même garde le fond de la page et un cadre gris : .theme-* ne colore que le survol et le clic des éléments.</li>
+    </ul>
+
+    <h2 class="mt-10">HTML</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-outline" type="button" popovertarget="menu-compte"&gt;Mon compte&lt;/button&gt;
+&lt;div class="dropdown" id="menu-compte" popover&gt;
+    &lt;a class="dropdown-item" href="/profil"&gt;Profil&lt;/a&gt;
+    &lt;a class="dropdown-item" href="/reglages"&gt;Réglages&lt;/a&gt;
+    &lt;hr&gt;
+    &lt;button class="dropdown-item theme-danger" type="button" popovertarget="menu-compte" popovertargetaction="hide"&gt;Se déconnecter&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    <ul>
+        <li>popovertarget sur le bouton, popover et le même id sur le menu : c'est tout, sans JavaScript.</li>
+        <li>dropdown-item sur chaque lien ou bouton du menu ; &lt;hr&gt; sépare deux groupes.</li>
+        <li>Un bouton d'action se ferme après le clic avec popovertarget et popovertargetaction="hide" ; le JS du site fait l'action dans son écouteur click.</li>
+        <li>Un seul menu ouvert à la fois : en ouvrir un autre ferme le premier.</li>
+        <li>Pas la place à droite (le bouton « Au bord droit ») : le menu s'aligne sur la fin du bouton ; pas la place en dessous : il s'ouvre au-dessus.</li>
+        <li>Le menu reste sous le bouton quand la page défile. Il est dans le top layer : un parent en overflow: hidden ne le coupe pas, pas besoin de z-index.</li>
+    </ul>
+
+    <h2 class="mt-10">Variables</h2>
+    <table class="mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Défaut</th>
+                <th scope="col">Rôle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">--dropdown-padding-block</th><td>0.25rem</td><td>haut et bas du panneau, espace autour des séparateurs</td></tr>
+            <tr><th scope="row">--dropdown-padding-inline</th><td>0.25rem</td><td>côtés du panneau</td></tr>
+            <tr><th scope="row">--dropdown-item-padding-block</th><td>0.375rem</td><td>haut et bas d'un élément (36px de haut)</td></tr>
+            <tr><th scope="row">--dropdown-item-padding-inline</th><td>0.75rem</td><td>côtés d'un élément</td></tr>
+            <tr><th scope="row">--dropdown-min-width</th><td>10rem</td><td>largeur minimum du panneau</td></tr>
+            <tr><th scope="row">--dropdown-border-radius</th><td>--border-radius-md</td><td>coins du panneau (ceux des éléments suivent)</td></tr>
+            <tr><th scope="row">--dropdown-border-width</th><td>--border-width</td><td>cadre et séparateurs (couleur --border-color)</td></tr>
+        </tbody>
+    </table>
+
+    <h2 class="mt-10">Exemple : changer les valeurs</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --dropdown-min-width: 12rem; }
+.dropdown-langues { --dropdown-min-width: 6rem; }
+:root { --dropdown-item-padding-block: 0.5rem; }</code></pre>
+    <p>La première ligne change tous les menus, la deuxième seulement celui qui a la classe dropdown-langues du site ; la dernière rend les éléments plus hauts (40px).</p>
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul>
+        <li>Avec popovertarget, le navigateur annonce que le bouton ouvre un panneau et s'il est ouvert (aria-expanded implicite, MDN) : pas d'aria-expanded à écrire.</li>
+        <li>Au clavier : Tab passe du bouton au premier élément du menu, Échap ferme le menu et rend le focus au bouton (MDN).</li>
+        <li>Pas de role="menu" : il est fait pour les menus d'application, qui se parcourent avec les flèches (ARIA Authoring Practices, comme Bootstrap 6). Un menu de liens est un bouton qui affiche une liste (motif « disclosure »).</li>
+        <li>Un menu de navigation va dans un &lt;nav aria-label="…"&gt;, avec son bouton.</li>
+        <li>Les liens du menu ne sont pas soulignés : ils sont seuls sur leur ligne, pas dans un texte.</li>
+        <li>Le texte de la page reste lisible sur tous les fonds, dans toutes les couleurs, en clair et en sombre (au moins 5,85:1 au clic) ; le contour de focus a la couleur du texte.</li>
+        <li>La couleur ne suffit pas à dire ce que fait un élément (WCAG 1.4.1), d'autant qu'elle n'apparaît qu'au survol : le texte le dit (« Supprimer »).</li>
+        <li>Éléments de 36px de haut, plus que la cible tactile minimale de 24px (WCAG 2.5.8).</li>
+        <li>Un bouton avec seulement une icône (⋮) a un aria-label (« Actions »).</li>
+    </ul>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button popovertarget="menu" aria-expanded="false"&gt;Menu&lt;/button&gt;</code></pre>
+    <p>Redondant, et faux dès l'ouverture : l'attribut écrit ne change pas, alors que le navigateur annonce déjà l'état.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="dropdown" id="menu" popover role="menu"&gt;
+    &lt;a class="dropdown-item" href="/profil" role="menuitem"&gt;Profil&lt;/a&gt;</code></pre>
+    <p>Le lecteur d'écran annonce un menu d'application et propose les flèches, qui ne font rien.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="dropdown" id="menu"&gt;…&lt;/div&gt;</code></pre>
+    <p>Sans l'attribut popover, le menu est toujours affiché dans la page, et pas sous le bouton.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a href="#" popovertarget="menu"&gt;Menu&lt;/a&gt;</code></pre>
+    <p>popovertarget ne marche que sur un &lt;button&gt; : le lien n'ouvre rien.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="dropdown-item" type="button"&gt;Supprimer&lt;/button&gt;</code></pre>
+    <p>Sans popovertarget="menu" popovertargetaction="hide", le menu reste ouvert après le clic.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-solid theme-primary" type="button" popovertarget="menu"&gt;Menu&lt;/button&gt;
+&lt;div class="dropdown" id="menu" popover&gt;…&lt;/div&gt;</code></pre>
+    <p>Le .theme-* du bouton ne colore pas le menu : le menu n'est pas dans le bouton. Pour colorer le survol des éléments : &lt;div class="dropdown theme-primary"&gt;.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>Placé sous le bouton par le positionnement CSS par ancre (Baseline 2026 : Chrome 133, Firefox 147, Safari 26). Dans un navigateur plus ancien, le menu s'ouvre en haut de l'écran, centré ; il marche quand même (clavier, Échap, clic à côté).</li>
+        <li>S'ouvre au clic, pas au survol.</li>
+        <li>Un clic sur un élément ne ferme pas le menu : un lien change de page, un bouton d'action a besoin de popovertargetaction="hide".</li>
+        <li>Un menu plus haut que la place au-dessus et au-dessous du bouton dépasse de l'écran.</li>
+        <li>Pas d'animation à l'ouverture ni à la fermeture.</li>
+        <li>Pas de fond plein au survol : le texte de la page y serait illisible en sombre. Pas encore de tailles, de titres de groupe, de sous-menus, ni de flèche sur le bouton.</li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Animation{% endblock %}
+
+{% block body %}
+    <h1>Animation</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Huit animations d'apparition, d'erreur et de chargement, une classe chacune, sans JavaScript ; coupées quand l'utilisateur demande moins d'animations.</p>
+
+    <p class="mt-4">Une animation se joue quand l'élément s'affiche : au chargement de la page, ou quand le JS du site retire hidden.</p>
+    <button class="btn-outline mt-2" type="button" aria-expanded="false" aria-controls="demo-animations" data-demo-toggle>Afficher / masquer les animations</button>
+    <div class="grid gap-2 mt-2" id="demo-animations" hidden>
+        {% for animation in ['fade-in', 'slide-in-top', 'slide-in-bottom', 'slide-in-start', 'slide-in-end', 'scale-in', 'shake'] %}
+            <div class="demo-box animation-{{ animation }} p-2 col-6 md:col-4">animation-{{ animation }}</div>
+        {% endfor %}
+    </div>
+    <p class="d-flex align-items-center gap-2 mt-4" role="status" aria-live="polite">
+        <svg class="animation-spin" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        animation-spin : Chargement…
+    </p>
+
+    <h2 class="mt-10">Exemple : un message qui apparaît</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div role="status" aria-live="polite"&gt;
+    &lt;p class="animation-slide-in-top" id="message" hidden&gt;Enregistré&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+    <p>Le JS du site retire hidden (message.hidden = false) : le message glisse en place. La zone role="status" reste affichée et le message est dedans : une zone cachée puis affichée avec son message n'est en général pas lue (MDN).</p>
+
+    <h2 class="mt-10">Exemple : changer une durée</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --animation-fade-in-duration: 0.6s; }
+.hero { --animation-slide-in-duration: 0.5s; }</code></pre>
+    <p>Une variable par animation : --animation-fade-in-duration, --animation-slide-in-duration (les quatre slide-in) et --animation-scale-in-duration valent 0.3s, --animation-shake-duration 0.8s, --animation-spin-duration 1s. Dans :root pour tout le site, ou sur un seul bloc.</p>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;input class="animation-shake" type="email" name="email" aria-label="E-mail"&gt;</code></pre>
+    <p>La secousse seule ne dit pas ce qui ne va pas, et ne se voit pas si l'utilisateur réduit les animations. Toujours un message d'erreur écrit (WCAG 3.3.1).</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;svg class="animation-spin" aria-hidden="true"&gt;…&lt;/svg&gt;</code></pre>
+    <p>Une icône seule n'est pas annoncée par les lecteurs d'écran, et elle est figée si l'utilisateur réduit les animations. Toujours un texte, « Chargement… ».</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>prefers-reduced-motion: reduce coupe toutes les animations (reset) : l'élément apparaît directement, la secousse ne se voit pas, l'icône est figée.</li>
+        <li>Une animation se joue une fois, à l'affichage : pour la rejouer, masquer puis réafficher l'élément (hidden).</li>
+        <li>Pas d'animation de disparition : il faut attendre sa fin en JS avant de masquer l'élément ; elles viendront avec les composants (dialog, toast).</li>
+        <li>slide-in-start, slide-in-end et shake bougent sur le côté : un bloc pleine largeur, hors container, dépasse du bord de l'écran pendant le mouvement, et une barre de défilement horizontale apparaît un instant. Dans un .container, la marge des côtés (1rem) absorbe le mouvement ; sinon, overflow-x-clip sur la section.</li>
+        <li>slide-in-start arrive toujours de la gauche, slide-in-end de la droite : l'écriture de droite à gauche (arabe, hébreu) n'est pas encore prise en charge.</li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Largeur et hauteur{% endblock %}
+
+{% block body %}
+    <h1>Largeur et hauteur</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Largeurs en pourcentage du parent (w-25 à w-100, w-auto, w-fit-content), min-w-0, h-100 et min-h-100svh, avec des variantes xs: à 2xl:.</p>
+
+    <div class="demo-frame mt-4"><div class="demo-box p-2 w-25">w-25</div></div>
+    <div class="demo-frame mt-4"><div class="demo-box p-2 w-33">w-33 : un tiers</div></div>
+    <div class="demo-frame mt-4"><div class="demo-box p-2 w-50">w-50</div></div>
+    <div class="demo-frame mt-4"><div class="demo-box p-2 w-66">w-66 : deux tiers</div></div>
+    <div class="demo-frame mt-4"><div class="demo-box p-2 w-75">w-75</div></div>
+    <div class="demo-frame mt-4"><div class="demo-box p-2 w-100">w-100</div></div>
+    <div class="demo-frame mt-4"><div class="demo-box p-2 w-fit-content">w-fit-content : la largeur du texte</div></div>
+    <div class="demo-frame mt-4"><div class="demo-box p-2 md:w-50">md:w-50 : pleine largeur sur téléphone, la moitié à partir de md (768px)</div></div>
+    <p class="mt-4">d-flex : le texte prend la place qui reste, min-w-0 lui permet de rétrécir et de couper le mot long</p>
+    <div class="demo-frame d-flex gap-2 mt-2">
+        <div class="demo-box p-2 flex-shrink-0">Icône</div>
+        <p class="demo-box p-2 min-w-0">Anticonstitutionnellementanticonstitutionnellement</p>
+    </div>
+    <p class="mt-4">h-100 dans un parent de 8rem de haut : toute la hauteur du parent</p>
+    <div class="demo-frame demo-height d-flex align-items-start gap-2 mt-2">
+        <div class="demo-box p-2">sans classe</div>
+        <div class="demo-box p-2 h-100">h-100</div>
+    </div>
+
+    <h2 class="mt-10">Exemple : pied de page en bas de l'écran, même si la page est courte</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;body class="d-flex flex-direction-column min-h-100svh"&gt;
+    &lt;main class="flex-grow-1"&gt;…&lt;/main&gt;
+    &lt;footer&gt;…&lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+
+    <h2 class="mt-10">Contre-exemples (non affichés : ils déborderaient)</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="w-100 mx-4"&gt;…&lt;/div&gt;</code></pre>
+    <p>100 % du parent plus les marges : le bloc dépasse à droite. Sans classe, un bloc prend déjà toute la place qui reste entre ses marges.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="d-flex"&gt;
+    &lt;p&gt;Anticonstitutionnellementanticonstitutionnellement&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+    <p>Sans min-w-0, un enfant flex ne descend pas sous la largeur de son mot le plus long : il déborde sur petit écran.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>h-100 ne fait rien si le parent n'a pas de hauteur : la hauteur en % devient auto.</li>
+        <li>Autres hauteurs (bandeau à la moitié de l'écran…) : en CSS dans le site, en svh comme min-h-100svh.</li>
+        <li>min-h-100svh prend la hauteur de l'écran barres du navigateur affichées : quand elles se cachent sur téléphone, il reste un peu de place en bas.</li>
+    </ul>
+{% endblock %}

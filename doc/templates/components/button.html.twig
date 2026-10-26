@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bouton{% endblock %}
+
+{% block body %}
+    {% set themes = ['primary', 'secondary', 'accent', 'success', 'danger', 'warning', 'info', 'inverse'] %}
+    <h1>Bouton</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Un &lt;button&gt; pour une action, un &lt;a&gt; pour aller vers une page. La variante (btn-solid, -outline, -subtle, -text, -link) dit comment le bouton utilise sa couleur, .theme-* dit la couleur ; sans thème, il est gris (neutral).</p>
+
+    <h2 class="mt-10">Variantes et couleurs</h2>
+    {% for variant in ['solid', 'outline', 'subtle', 'text', 'link'] %}
+        <h3 class="fs-md mt-6">btn-{{ variant }}</h3>
+        <div class="d-flex flex-wrap-wrap gap-2 mt-2">
+            <button class="btn-{{ variant }}" type="button">sans thème</button>
+            {% for theme in themes %}
+                <button class="btn-{{ variant }} theme-{{ theme }}" type="button">{{ theme }}</button>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <ul class="mt-4">
+        <li>solid : fond plein, texte noir ou blanc (le plus lisible) ; le fond fonce ou s'éclaircit au survol et au clic.</li>
+        <li>outline : cadre et texte de la couleur, devient solid au survol.</li>
+        <li>subtle : fond léger ; le fond se renforce au survol et au clic.</li>
+        <li>text : sans fond, devient subtle au survol.</li>
+        <li>link : souligné comme un lien, le soulignement s'épaissit au survol et au clic.</li>
+    </ul>
+
+    <h2 class="mt-10">HTML</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-solid theme-primary" type="button"&gt;Enregistrer&lt;/button&gt;
+&lt;a class="btn-outline" href="/aide"&gt;Aide&lt;/a&gt;</code></pre>
+    <ul>
+        <li>Une seule classe de variante, sans classe de base : btn-solid s'utilise seule.</li>
+        <li>.theme-* sur un parent colore tous ses boutons : &lt;form class="theme-primary"&gt;.</li>
+    </ul>
+
+    <h2 class="mt-10">Tailles</h2>
+    <div class="theme-primary d-flex flex-wrap-wrap align-items-center gap-2 mt-2">
+        {% for size in ['xs', 'sm', 'md', 'lg'] %}
+            <button class="btn-solid btn-{{ size }}" type="button">btn-{{ size }}</button>
+        {% endfor %}
+    </div>
+    <div class="theme-primary d-flex flex-wrap-wrap align-items-center gap-2 mt-2">
+        {% for size in ['xs', 'sm', 'md', 'lg'] %}
+            <button class="btn-outline btn-{{ size }}" type="button">btn-{{ size }}</button>
+        {% endfor %}
+    </div>
+    <p class="mt-2">Hauteurs : 24, 31, 38 et 45px. Une taille va avec toutes les variantes (class="btn-outline btn-lg") ; btn-md a les valeurs du bouton sans taille.</p>
+
+    <h2 class="mt-10">Désactivé</h2>
+    <div class="theme-primary d-flex flex-wrap-wrap gap-2 mt-2">
+        {% for variant in ['solid', 'outline', 'subtle', 'text', 'link'] %}
+            <button class="btn-{{ variant }}" type="button" disabled>btn-{{ variant }}</button>
+        {% endfor %}
+    </div>
+    <p class="mt-2">L'attribut natif disabled : estompé, plus de survol ni de clic. Un &lt;fieldset disabled&gt; désactive aussi ses boutons.</p>
+
+    <h2 class="mt-10">Lien ou bouton</h2>
+    <div class="theme-primary d-flex flex-wrap-wrap gap-2 mt-2">
+        <button class="btn-solid" type="button">button solid</button>
+        <a class="btn-solid" href="#">a solid</a>
+        <button class="btn-outline" type="button">button outline</button>
+        <a class="btn-outline" href="#">a outline</a>
+        <button class="btn-link" type="button">button link</button>
+        <a class="btn-link" href="#">a link</a>
+    </div>
+    <p class="mt-2">Les mêmes classes sur &lt;button&gt; et sur &lt;a&gt; : le même rendu.</p>
+
+    <h2 class="mt-10">Variables</h2>
+    <table class="mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Défaut</th>
+                <th scope="col">Rôle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">--btn-padding-block</th><td>0.375rem</td><td>haut et bas (38px de haut)</td></tr>
+            <tr><th scope="row">--btn-padding-inline</th><td>1rem</td><td>côtés</td></tr>
+            <tr><th scope="row">--btn-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
+            <tr><th scope="row">--btn-border-width</th><td>--border-width</td><td>épaisseur du cadre</td></tr>
+        </tbody>
+    </table>
+
+    <h2 class="mt-10">Exemple : changer les valeurs</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --btn-padding-inline: 1.25rem; }
+.btn-lg { --btn-padding-inline: 1.5rem; }
+.btn-hero { --btn-padding-inline: 2rem; }</code></pre>
+    <p>La première ligne change les boutons sans taille (btn-md garde la valeur d'origine), la deuxième la grande taille, la dernière seulement le bouton qui a la classe btn-hero du site.</p>
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul>
+        <li>&lt;button type="button"&gt; pour une action, &lt;a href&gt; pour changer de page : le lecteur d'écran annonce le bon rôle, Entrée et Espace marchent sans JavaScript.</li>
+        <li>Le texte dit l'action (« Enregistrer », pas « OK ») ; un bouton avec seulement une icône a un aria-label.</li>
+        <li>Contour de focus de la couleur du thème (emphasis), lisible sur le fond de la page.</li>
+        <li>Texte lisible dans toutes les couleurs, au repos, au survol et au clic, en clair et en sombre.</li>
+        <li>btn-xs fait 24px de haut, la cible tactile minimale (WCAG 2.5.8).</li>
+    </ul>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="btn-solid" onclick="…"&gt;Valider&lt;/div&gt;</code></pre>
+    <p>Une &lt;div&gt; ne se prend pas au clavier et n'est pas annoncée comme un bouton : un &lt;button&gt;.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="btn-solid" href="#" onclick="supprimer()"&gt;Supprimer&lt;/a&gt;</code></pre>
+    <p>Une action dans un lien : un &lt;button&gt;, le lien est fait pour changer de page.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>Sur un fond plein (bg-*), seul btn-solid est prévu ; son contour de focus peut y manquer de contraste.</li>
+        <li>Pas encore de lien désactivé, de bouton avec icône seule ni de groupe de boutons.</li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Spinner{% endblock %}
+
+{% block body %}
+    <h1>Spinner</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Un cercle qui tourne pendant un chargement : &lt;span class="spinner"&gt;, de la couleur et de la taille du texte.</p>
+
+    <p class="mt-4" role="status" aria-live="polite"><span class="spinner"></span> spinner : couleur du texte</p>
+
+    <p class="mt-4">color-emphasis-* : les couleurs</p>
+    <div class="grid gap-2 mt-2">
+        {% for color in colors %}
+            <p class="col-6 md:col-4"><span class="spinner color-emphasis-{{ color }}"></span> color-emphasis-{{ color }}</p>
+        {% endfor %}
+    </div>
+
+    <p class="mt-4">fs-* : la taille suit le texte</p>
+    <div class="d-flex flex-wrap-wrap align-items-center gap-4 mt-2">
+        {% for size in ['sm', 'md', '2xl', '4xl'] %}
+            <p class="fs-{{ size }}"><span class="spinner"></span> fs-{{ size }}</p>
+        {% endfor %}
+    </div>
+
+    <h2 class="mt-10">Exemple : dans un bouton</h2>
+    <button class="btn-solid theme-primary mt-2" type="button"><span class="spinner"></span> Envoi…</button>
+    <p class="mt-2">Le spinner prend la couleur du texte du bouton, sur toutes les variantes.</p>
+
+    <h2 class="mt-10">Exemple : sans texte visible</h2>
+    <p class="mt-2" role="status" aria-live="polite"><span class="spinner color-emphasis-primary"></span><span class="visually-hidden">Chargement…</span></p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p role="status" aria-live="polite"&gt;&lt;span class="spinner"&gt;&lt;/span&gt;&lt;span class="visually-hidden"&gt;Chargement…&lt;/span&gt;&lt;/p&gt;</code></pre>
+    <p>visually-hidden : le texte est caché à l'écran, mais lu par les lecteurs d'écran (d-none et hidden le cachent à tout le monde).</p>
+
+    <h2 class="mt-10">Exemple : changer la taille ou l'épaisseur</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --spinner-border-width: 0.2em; }
+.loader { --spinner-width: 3rem; }</code></pre>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="spinner"&gt;&lt;/span&gt;</code></pre>
+    <p>Seul, il n'est pas annoncé par les lecteurs d'écran, et il est figé si l'utilisateur réduit les animations. Toujours un texte (visible ou visually-hidden) dans un role="status" aria-live="polite".</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="spinner color-success"&gt;&lt;/span&gt;</code></pre>
+    <p>color-* est la couleur brute : 1,87:1 sur fond blanc, à peine visible. Utiliser color-emphasis-success.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="spinner theme-primary"&gt;&lt;/span&gt;</code></pre>
+    <p>Sans effet : le spinner prend la couleur du texte, pas les .theme-* des composants. Utiliser color-emphasis-primary.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>prefers-reduced-motion: reduce fige le cercle (reset) : c'est le texte qui dit que ça charge.</li>
+        <li>role="status" est annoncé quand son contenu change : il doit être dans la page avant que le JS du site y mette le spinner et le texte.</li>
+        <li>La vitesse est celle de animation-spin : --animation-spin-duration règle les deux.</li>
+    </ul>
+{% endblock %}

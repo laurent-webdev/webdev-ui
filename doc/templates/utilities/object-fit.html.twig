@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Object-fit{% endblock %}
+
+{% block body %}
+    <h1>Object-fit</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Comment une image ou une vidéo remplit sa boîte : object-fit-contain, -cover, -fill, -none et -scale-down.</p>
+
+    <p class="mt-4">La même image (2 fois plus large que haute) dans des boîtes de 8rem de haut : img w-100 h-100 object-fit-*</p>
+    <div class="grid gap-2 mt-2">
+        {% for fit in ['contain', 'cover', 'fill', 'none', 'scale-down'] %}
+            <figure class="col-6 md:col-4">
+                <div class="demo-box demo-height">
+                    <img class="w-100 h-100 object-fit-{{ fit }}" src="{{ asset('images/demo-landscape.svg') }}" width="400" height="200" alt="">
+                </div>
+                <figcaption>object-fit-{{ fit }}</figcaption>
+            </figure>
+        {% endfor %}
+    </div>
+
+    <h2 class="mt-10">Exemple : un avatar rond, avec une image qui n'est pas carrée</h2>
+    <img class="aspect-ratio-1x1 object-fit-cover border-radius-circle mt-2" src="{{ asset('images/demo-landscape.svg') }}" width="96" height="96" alt="">
+    <p class="mt-2">width="96" donne la taille, aspect-ratio-1x1 le carré, object-fit-cover recadre l'image, border-radius-circle l'arrondit.</p>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;img class="object-fit-cover" src="…" width="400" height="200" alt="…"&gt;</code></pre>
+    <p>Sans effet : l'image garde ses proportions (hauteur auto), elle n'a pas de boîte à remplir. Lui donner une largeur et une hauteur : w-100 h-100 dans un parent qui a une hauteur, ou w-100 aspect-ratio-*.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;img class="w-100 h-100 object-fit-cover" src="logo.svg" alt="…"&gt;</code></pre>
+    <p>cover recadre les bords : sur un logo, un schéma ou une image avec du texte, une partie disparaît. Utiliser object-fit-contain.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>Seulement sur une image ou une vidéo (img, video) ; pour une image de fond, c'est background-size, dans le site.</li>
+        <li>Le recadrage est centré : pas d'utilitaire object-position pour l'instant (le régler dans le site).</li>
+        <li>Pas de variante responsive (md:object-fit-*).</li>
+    </ul>
+{% endblock %}

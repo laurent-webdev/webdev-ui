@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Container{% endblock %}
+
+{% block body %}
+    <h1>Container</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Un bloc centré qui s'arrête à une largeur maximum (96rem), avec une marge sur les côtés ; container-xs à container-2xl pour une largeur plus petite.</p>
+
+    <div class="container demo-frame mt-4">
+        <div class="demo-box p-2">container : centré, 96rem au plus, 1rem de marge sur les côtés (le cadre montre ses bords)</div>
+    </div>
+    <div class="container-2xl demo-frame mt-4"><div class="demo-box p-2">container-2xl : 96rem au plus, comme container</div></div>
+    <div class="container-xl demo-frame mt-4"><div class="demo-box p-2">container-xl : 80rem au plus</div></div>
+    <div class="container-lg demo-frame mt-4"><div class="demo-box p-2">container-lg : 64rem au plus</div></div>
+    <div class="container-md demo-frame mt-4"><div class="demo-box p-2">container-md : 48rem au plus</div></div>
+    <div class="container-sm demo-frame mt-4"><div class="demo-box p-2">container-sm : 36rem au plus</div></div>
+    <div class="container-xs demo-frame mt-4"><div class="demo-box p-2">container-xs : 22.5rem au plus</div></div>
+    <div class="container demo-frame mt-4">
+        <div class="grid">
+            <div class="demo-box p-2 md:col-6">container + grid : md:col-6</div>
+            <div class="demo-box p-2 md:col-6">md:col-6</div>
+        </div>
+    </div>
+{% endblock %}

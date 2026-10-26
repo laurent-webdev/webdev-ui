@@ -1,0 +1,165 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accordéon{% endblock %}
+
+{% block body %}
+    <h1>Accordéon</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Des panneaux qui s'ouvrent et se ferment : des &lt;details&gt; natifs, sans JavaScript, dans une variante (accordion-solid, -subtle, -outline) et une couleur .theme-*.</p>
+
+    {% for variant in ['solid', 'subtle', 'outline'] %}
+        <h2 class="mt-10">accordion-{{ variant }}</h2>
+        <div class="grid mt-2">
+            {% for theme in ['', 'theme-primary'] %}
+                <div class="accordion-{{ variant }} {{ theme }} md:col-6">
+                    <details name="demo-{{ variant }}-{{ loop.index }}" open>
+                        <summary>accordion-{{ variant }} {{ theme ?: 'sans thème (neutral)' }}</summary>
+                        <div class="accordion-body">
+                            <p>Le contenu reste sur le fond de la page.</p>
+                        </div>
+                    </details>
+                    <details name="demo-{{ variant }}-{{ loop.index }}">
+                        <summary>Deuxième panneau</summary>
+                        <div class="accordion-body">
+                            <p>Même name : il ferme le premier.</p>
+                        </div>
+                    </details>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <p class="mt-4">accordion-solid : toutes les couleurs. Côte à côte dans une grille, chaque accordéon garde la hauteur de son contenu quand un voisin s'ouvre</p>
+    <div class="grid mt-2">
+        {% for color in colors %}
+            <div class="accordion-solid theme-{{ color }} col-6 md:col-4">
+                <details>
+                    <summary>theme-{{ color }}</summary>
+                    <div class="accordion-body">
+                        <p>Contenu</p>
+                    </div>
+                </details>
+            </div>
+        {% endfor %}
+    </div>
+
+    <p class="mt-4">Tailles : padding et taille du texte, avec n'importe quelle variante ; accordion-md = le défaut</p>
+    <div class="grid mt-2">
+        {% for size in ['xs', 'sm', 'md', 'lg'] %}
+            <div class="accordion-outline accordion-{{ size }} md:col-6">
+                <details>
+                    <summary>accordion-outline accordion-{{ size }}</summary>
+                    <div class="accordion-body">
+                        <p>Le contenu suit la taille du texte.</p>
+                    </div>
+                </details>
+            </div>
+        {% endfor %}
+    </div>
+
+    <p class="mt-4">Un seul panneau ouvert à la fois : les &lt;details&gt; ont le même attribut name</p>
+    <div class="accordion-outline mt-2">
+        <details name="demo-accordion" open>
+            <summary>Faut-il du JavaScript ?</summary>
+            <div class="accordion-body">
+                <p>Non : &lt;details&gt; et &lt;summary&gt; ouvrent et ferment le panneau, à la souris, au doigt et au clavier (Entrée ou Espace).</p>
+            </div>
+        </details>
+        <details name="demo-accordion">
+            <summary>Que fait l'attribut name ?</summary>
+            <div class="accordion-body">
+                <p>Les &lt;details&gt; qui ont le même name forment un groupe : ouvrir l'un ferme les autres.</p>
+            </div>
+        </details>
+        <details name="demo-accordion">
+            <summary>Un titre <em>très</em> long, pour voir le retour à la ligne : la flèche reste centrée sur la hauteur du titre, et le texte ne passe jamais dessous</summary>
+            <div class="accordion-body">
+                <p>Plusieurs paragraphes dans le contenu.</p>
+                <p class="mt-2">Le deuxième, avec <a href="#">un lien</a> pour tester le clavier.</p>
+            </div>
+        </details>
+    </div>
+
+    <p class="mt-4">Plusieurs panneaux ouverts : sans name</p>
+    <div class="accordion-subtle theme-primary mt-2">
+        <details open>
+            <summary>Premier panneau</summary>
+            <div class="accordion-body">
+                <p>Ouvert au chargement : attribut open.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Deuxième panneau</summary>
+            <div class="accordion-body">
+                <p>Il s'ouvre sans fermer le premier.</p>
+            </div>
+        </details>
+    </div>
+
+    <h2 class="mt-10">HTML</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="accordion-subtle theme-primary"&gt;
+    &lt;details name="faq"&gt;
+        &lt;summary&gt;Question&lt;/summary&gt;
+        &lt;div class="accordion-body"&gt;Réponse&lt;/div&gt;
+    &lt;/details&gt;
+&lt;/div&gt;</code></pre>
+    <p>Comme les boutons : une variante (accordion-solid, accordion-subtle, accordion-outline) qui s'utilise seule, et une couleur .theme-*, neutral sans classe. Un seul panneau (un « Voir plus ») : un seul &lt;details&gt; dans l'accordéon.</p>
+
+    <h2 class="mt-10">Variables</h2>
+    <table class="mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Défaut</th>
+                <th scope="col">Rôle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">--accordion-padding-block</th><td>1rem</td><td>haut et bas du titre et du contenu</td></tr>
+            <tr><th scope="row">--accordion-padding-inline</th><td>1rem</td><td>côtés du titre et du contenu</td></tr>
+            <tr><th scope="row">--accordion-border-radius</th><td>--border-radius-md</td><td>coins du cadre</td></tr>
+            <tr><th scope="row">--accordion-border-width</th><td>--border-width</td><td>cadre et traits</td></tr>
+            <tr><th scope="row">--accordion-transition-duration</th><td>0.2s</td><td>ouverture, fermeture et flèche</td></tr>
+        </tbody>
+    </table>
+    <p class="mt-2">Les couleurs viennent de .theme-* : le cadre et les traits ont la couleur du thème (accordion-subtle : celle du fond léger), la variante dit le fond et le texte du titre ; le contenu reste sur le fond de la page. Le gras du titre : --heading-font-weight.</p>
+
+    <h2 class="mt-10">Exemple : changer les valeurs</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --accordion-padding-block: 0.75rem; }
+.accordion-lg { --accordion-padding-inline: 1.5rem; }
+.faq { --accordion-transition-duration: 0.4s; }</code></pre>
+    <p>La première ligne change les accordéons sans taille (accordion-md garde 1rem), la deuxième une taille, la troisième seulement ceux qui ont la classe faq du site.</p>
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul>
+        <li>Le titre se prend au clavier (Tab) et s'ouvre avec Entrée ou Espace ; le navigateur annonce s'il est ouvert ou fermé : pas d'aria-expanded.</li>
+        <li>Le contour de focus est dessiné à l'intérieur du titre, de la couleur du texte.</li>
+        <li>Au survol et au clic d'accordion-subtle, le fond se renforce et le texte devient plus fort (plus foncé en clair, plus clair en sombre) : le contraste reste d'au moins 4,5:1, comme btn-subtle.</li>
+        <li>La flèche est dessinée en bordures : elle reste visible en contraste élevé (Windows).</li>
+        <li>Dans Chrome, Ctrl+F ouvre le panneau fermé qui contient le texte cherché.</li>
+    </ul>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;details&gt;
+    &lt;summary&gt;Question&lt;/summary&gt;
+    &lt;p&gt;Réponse&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+    <p>Sans .accordion-body, la réponse est collée aux bords, sans trait au-dessus.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;summary aria-expanded="false"&gt;Question&lt;/summary&gt;</code></pre>
+    <p>Redondant : le navigateur annonce déjà l'état, et l'attribut ne suit pas quand le panneau s'ouvre.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;summary&gt;&lt;h3&gt;Question&lt;/h3&gt;&lt;/summary&gt;</code></pre>
+    <p>Permis en HTML, mais certains navigateurs donnent au summary le rôle de bouton : le h3 n'est plus annoncé comme un titre (MDN). Un titre se met avant l'accordéon.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;details name="faq" open&gt;…&lt;/details&gt;
+&lt;details name="faq" open&gt;…&lt;/details&gt;</code></pre>
+    <p>Dans un groupe name, seul le premier open s'ouvre (MDN).</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>L'animation ne marche que dans Chrome et Edge (interpolate-size, MDN : « Limited availability ») : dans Firefox et Safari, le panneau s'ouvre d'un coup. Pas d'animation non plus avec « réduire les animations ».</li>
+        <li>Un navigateur ancien ignore name : plusieurs panneaux peuvent être ouverts.</li>
+        <li>Un contenu plus large que l'accordéon (tableau) dépasse du cadre : le mettre dans un bloc overflow-x-auto.</li>
+        <li>Comme btn-subtle, le survol d'accordion-subtle sans thème (neutral) se voit à peine : le gris du thème est presque celui du fond léger.</li>
+        <li>Fermer le dernier panneau arrondit tout de suite le bas de son titre, pendant que le contenu se replie encore : les coins sont un instant visibles.</li>
+        <li>Pas de variante sans bordure, pas de style pour le titre ouvert : changer les variables dans le site.</li>
+        <li>Pas de taille responsive (md:accordion-lg) : réservé à la mise en page.</li>
+    </ul>
+{% endblock %}

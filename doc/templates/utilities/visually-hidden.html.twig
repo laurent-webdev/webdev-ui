@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Visually-hidden{% endblock %}
+
+{% block body %}
+    <h1>Visually-hidden</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Un texte caché à l'écran mais lu par les lecteurs d'écran : visually-hidden. hidden et d-none le cachent aux deux.</p>
+
+    <h2 class="mt-10">Exemple</h2>
+    <div class="d-flex flex-wrap-wrap gap-2 mt-2">
+        <button class="btn-solid theme-primary" type="button">Messages <span class="badge-solid theme-danger">3</span><span class="visually-hidden"> non lus</span></button>
+        <p role="status" aria-live="polite"><span class="spinner"></span><span class="visually-hidden">Chargement…</span></p>
+    </div>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-solid" type="button"&gt;Messages &lt;span class="badge-solid"&gt;3&lt;/span&gt;&lt;span class="visually-hidden"&gt; non lus&lt;/span&gt;&lt;/button&gt;
+&lt;p role="status" aria-live="polite"&gt;&lt;span class="spinner"&gt;&lt;/span&gt;&lt;span class="visually-hidden"&gt;Chargement…&lt;/span&gt;&lt;/p&gt;</code></pre>
+    <p>Le lecteur d'écran lit « Messages 3 non lus » et « Chargement… » ; à l'écran, seuls le nombre et le cercle se voient.</p>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="d-none"&gt; non lus&lt;/span&gt;</code></pre>
+    <p>d-none cache aussi le texte au lecteur d'écran : il n'entend que « 3 ».</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="visually-hidden" href="#main"&gt;Aller au contenu&lt;/a&gt;</code></pre>
+    <p>Un lien caché reste atteint au clavier mais invisible : l'utilisateur ne voit pas où est le focus.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>Pas encore de visually-hidden-focusable (un lien d'évitement qui apparaît au focus).</li>
+    </ul>
+{% endblock %}

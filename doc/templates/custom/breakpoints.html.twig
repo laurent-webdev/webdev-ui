@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Breakpoints{% endblock %}
+
+{% block body %}
+    <h1>Breakpoints</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Six largeurs d'écran, une au début de chaque famille d'appareils. Une classe sans préfixe vaut pour tous les écrans ; avec un préfixe (md:), elle vaut à partir de cette largeur.</p>
+
+    <h2 class="mt-10">Les largeurs</h2>
+    <table class="mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Préfixe</th>
+                <th scope="col">À partir de</th>
+                <th scope="col">Appareils</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">sans préfixe</th><td>0</td><td>tous, petits écrans compris (320px)</td></tr>
+            <tr><th scope="row">xs:</th><td>22.5rem (360px)</td><td>téléphones debout</td></tr>
+            <tr><th scope="row">sm:</th><td>36rem (576px)</td><td>petites tablettes, petits téléphones couchés</td></tr>
+            <tr><th scope="row">md:</th><td>48rem (768px)</td><td>tablettes debout, la plupart des téléphones couchés</td></tr>
+            <tr><th scope="row">lg:</th><td>64rem (1024px)</td><td>tablettes couchées, petits portables</td></tr>
+            <tr><th scope="row">xl:</th><td>80rem (1280px)</td><td>portables</td></tr>
+            <tr><th scope="row">2xl:</th><td>96rem (1536px)</td><td>grands portables, écrans de bureau</td></tr>
+        </tbody>
+    </table>
+
+    <h2 class="mt-10">Exemple</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="d-flex flex-direction-column md:flex-direction-row gap-4"&gt;…&lt;/div&gt;</code></pre>
+    <p>En colonne sur téléphone, en ligne à partir de 768px.</p>
+
+    <h2 class="mt-10">Quelles classes ont un préfixe</h2>
+    <p>Seulement la mise en page : display, flex, grille (col-*), espacements, gap, largeur et hauteur, aspect-ratio, position-* et alignement du texte. Pas les couleurs, les bordures, les ombres ni l'opacité, ni les tailles des composants.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>En rem : quand l'utilisateur agrandit le texte de son navigateur, la mise en page passe plus tôt en version mobile (Chrome et Firefox ; Safari se comporte comme en px).</li>
+        <li>var() ne marche pas dans une media query : les largeurs sont des variables SCSS (settings/_breakpoints.scss), les changer demande de recompiler le CSS.</li>
+        <li>Les préfixes suivent la largeur de l'écran, pas celle du bloc parent.</li>
+    </ul>
+{% endblock %}

@@ -13,4 +13,11 @@ final class MainController extends AbstractController
     {
         return $this->render('main/index.html.twig');
     }
+
+    // Tous les exemples à tester, sur une seule page
+    #[Route('/test', name: 'app_test')]
+    public function test(): Response
+    {
+        return $this->render('test.html.twig');
+    }
 }

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Opacité{% endblock %}
+
+{% block body %}
+    <h1>Opacité</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">L'opacité d'un élément et de ses enfants : opacity-0, -25, -50, -75 et -100.</p>
+
+    <div class="d-flex flex-wrap-wrap gap-4 mt-4">
+        {% for opacity in [0, 25, 50, 75, 100] %}
+            <figure>
+                <div class="bg-primary demo-square opacity-{{ opacity }}"></div>
+                <figcaption>opacity-{{ opacity }}</figcaption>
+            </figure>
+        {% endfor %}
+    </div>
+
+    <h2 class="mt-10">Exemple : une image décorative atténuée</h2>
+    <img class="w-100 aspect-ratio-21x9 object-fit-cover opacity-50 mt-2" src="{{ asset('images/demo-landscape.svg') }}" width="400" height="200" alt="">
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p class="opacity-50"&gt;Texte secondaire&lt;/p&gt;</code></pre>
+    <p>Le texte perd son contraste : noir à 50 % sur fond blanc, 3,95:1 (WCAG 1.4.3 demande 4,5:1). Pour un texte plus discret, une couleur lisible.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-solid opacity-0" type="button"&gt;Valider&lt;/button&gt;</code></pre>
+    <p>Invisible, mais toujours cliquable, focusable et lu par les lecteurs d'écran. Pour cacher : hidden ou d-none (pour tout le monde), visually-hidden (seulement à l'écran).</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="opacity-50"&gt;
+    &lt;img class="opacity-100" src="…" alt="…"&gt;
+&lt;/div&gt;</code></pre>
+    <p>Sans effet : l'opacité du parent s'applique à tous ses enfants, un enfant ne peut pas redevenir opaque.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>Tout l'élément devient transparent : fond, texte, bordures, enfants. Pour un fond seul, color-mix() dans le site.</li>
+        <li>De 25 en 25 : une autre valeur s'écrit dans le site (opacity: 10%).</li>
+        <li>Pas de variante responsive (md:opacity-*) : ce n'est pas de la mise en page.</li>
+    </ul>
+{% endblock %}

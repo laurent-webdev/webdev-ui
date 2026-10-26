@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ombres{% endblock %}
+
+{% block body %}
+    <h1>Ombres</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">box-shadow-none et box-shadow-xs à -xl, de plus en plus hautes, d'une seule couleur (--box-shadow-color).</p>
+
+    <div class="grid gap-6 mt-4">
+        {% for size in ['none', 'xs', 'sm', 'md', 'lg', 'xl'] %}
+            <div class="border-radius-md box-shadow-{{ size }} p-4 col-6 md:col-4">box-shadow-{{ size }}</div>
+        {% endfor %}
+    </div>
+
+    <h2 class="mt-10">Exemple : une carte</h2>
+    <div class="border border-radius-lg box-shadow-sm p-4 mt-2">border border-radius-lg box-shadow-sm p-4 : la bordure sépare la carte du fond, l'ombre la soulève.</div>
+
+    <h2 class="mt-10">Exemple : changer les ombres</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --box-shadow-color: light-dark(oklch(0 0 0 / 0.15), oklch(0 0 0 / 0.6)); }
+:root { --box-shadow-md: 0 2px 8px var(--box-shadow-color); }</code></pre>
+    <p>--box-shadow-color change toutes les ombres, dans les deux thèmes ; --box-shadow-xs à -xl changent une taille.</p>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;input class="box-shadow-sm border-0" type="text" name="nom" aria-label="Nom"&gt;</code></pre>
+    <p>Une ombre seule pour montrer un champ : presque invisible en sombre, retirée en contraste élevé (Windows). Le champ n'a plus de bord visible (WCAG 1.4.11). Garder une bordure.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-css">.card { --box-shadow-color: oklch(0.5 0.1 228 / 0.3); }</code></pre>
+    <p>Sans effet sur un seul élément : les --box-shadow-* sont calculées dans :root, avec la couleur de :root. Sur un élément, redéfinir la taille (--box-shadow-md) ou écrire box-shadow.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>En sombre, une ombre se voit peu : le fond est déjà presque noir. Séparer les blocs avec une bordure ou un fond subtle.</li>
+        <li>Pas d'ombre au survol, colorée ou intérieure (inset) : dans le site, ou avec les composants.</li>
+        <li>Pas de variante responsive : ce n'est pas de la mise en page.</li>
+    </ul>
+{% endblock %}

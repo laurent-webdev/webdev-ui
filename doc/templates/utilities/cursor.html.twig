@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Curseur{% endblock %}
+
+{% block body %}
+    <h1>Curseur</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Le curseur de la souris au survol : cursor-pointer, cursor-not-allowed, cursor-help…</p>
+
+    <p class="mt-4">Survoler chaque case pour voir son curseur</p>
+    <div class="d-flex flex-wrap-wrap gap-2 mt-2">
+        {% for cursor in ['none', 'auto', 'pointer', 'not-allowed', 'help', 'progress', 'wait', 'grab', 'grabbing', 'text', 'copy', 'alias'] %}
+            <div class="demo-box cursor-{{ cursor }} p-2">cursor-{{ cursor }}</div>
+        {% endfor %}
+    </div>
+
+    <h2 class="mt-10">Exemple : une case à cocher et son texte</h2>
+    <p class="mt-2"><label class="cursor-pointer"><input type="checkbox" name="demo-cursor"> Recevoir les nouveautés</label></p>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="cursor-pointer" onclick="…"&gt;Valider&lt;/div&gt;</code></pre>
+    <p>Un faux bouton : pas de focus au clavier, pas annoncé comme bouton par les lecteurs d'écran (WCAG 2.1.1 et 4.1.2). Utiliser &lt;button&gt;, qui a déjà la main.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-solid cursor-not-allowed" type="button" disabled&gt;…&lt;/button&gt;</code></pre>
+    <p>Sans effet : un bouton désactivé ne reçoit plus la souris (pointer-events: none), il garde la flèche.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>Sans effet sur un écran tactile : il n'y a pas de pointeur.</li>
+        <li>cursor-none masque le pointeur : seulement quand autre chose le remplace (jeu, vidéo en plein écran).</li>
+        <li>cursor-grab, cursor-grabbing, cursor-wait et cursor-progress suivent une action : le JS du site pose et retire la classe (glisser-déposer, chargement).</li>
+    </ul>
+{% endblock %}

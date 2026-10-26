@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Position{% endblock %}
+
+{% block body %}
+    <h1>Position</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">position-*, décalages (top-*, bottom-*, start-*, end-*, inset-0), centrage (translate-middle) et z-index-*.</p>
+
+    <p class="mt-4">position-relative sur le parent, position-absolute et les décalages sur les enfants</p>
+    <div class="demo-box demo-height position-relative mt-2">
+        <span class="bg-primary color-text-on-primary p-1 position-absolute top-0 start-0">top-0 start-0</span>
+        <span class="bg-primary color-text-on-primary p-1 position-absolute top-0 end-0">top-0 end-0</span>
+        <span class="bg-primary color-text-on-primary p-1 position-absolute top-50 start-50 translate-middle">top-50 start-50 translate-middle</span>
+        <span class="bg-primary color-text-on-primary p-1 position-absolute bottom-0 start-0">bottom-0 start-0</span>
+        <span class="bg-primary color-text-on-primary p-1 position-absolute bottom-0 end-0">bottom-0 end-0</span>
+    </div>
+
+    <h2 class="mt-10">Exemple : un badge sur le coin d'un bouton</h2>
+    <button class="btn-outline position-relative mt-4" type="button">
+        Messages
+        <span class="badge-solid theme-danger border-radius-pill position-absolute top-0 start-100 translate-middle">3<span class="visually-hidden"> non lus</span></span>
+    </button>
+
+    <h2 class="mt-10">Exemple : un en-tête collé en haut</h2>
+    <div class="demo-box demo-height overflow-y-auto mt-2" tabindex="0" role="region" aria-label="Exemple position-sticky">
+        <p class="bg-primary color-text-on-primary p-2 position-sticky top-0">position-sticky top-0 : reste en haut</p>
+        <p class="p-2">Faire défiler ce bloc. Le texte continue sur plusieurs lignes, pour que la boîte de 8rem défile et que l'en-tête reste collé en haut pendant que le reste passe dessous.</p>
+        <p class="p-2">Un deuxième paragraphe, pour avoir assez de texte à faire défiler.</p>
+    </div>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;aside class="md:position-sticky top-0"&gt;…&lt;/aside&gt;</code></pre>
+    <p>Une colonne collée seulement à partir de md : sur téléphone, elle défile avec la page (top-0 est sans effet sur un élément static).</p>
+
+    <h2 class="mt-10">Exemple : un calque qui couvre son parent</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="position-relative"&gt;
+    &lt;img src="…" alt="…"&gt;
+    &lt;div class="position-absolute inset-0"&gt;…&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div&gt;
+    &lt;span class="position-absolute top-0 end-0"&gt;…&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+    <p>Sans position-relative sur le parent, l'enfant se place par rapport au premier parent positionné, ou à la page : il part dans le coin de l'écran.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;header class="position-sticky"&gt;…&lt;/header&gt;</code></pre>
+    <p>Sans décalage, sticky ne colle pas. Ajouter top-0.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p class="z-index-3"&gt;…&lt;/p&gt;</code></pre>
+    <p>Sans effet sur un élément static : z-index demande une position (relative, absolute…) ou un enfant flex ou grid.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>Un en-tête fixed ou sticky peut cacher l'élément qui a le focus (WCAG 2.4.11) et prend beaucoup de place en zoom 200 % : prévoir scroll-padding-top dans le site, et un en-tête bas.</li>
+        <li>translate-middle utilise translate : une animation slide-in ou shake sur le même élément le remplace pendant le mouvement. Mettre l'animation sur un enfant.</li>
+        <li>Variantes responsive seulement pour position-* ; les décalages et z-index valent pour tous les écrans.</li>
+        <li>En écriture de droite à gauche (arabe, hébreu), start-50 translate-middle ne centre pas : translate recule toujours vers la gauche. Pas encore pris en charge.</li>
+        <li>z-index de 0 à 3, entre voisins : dialog et popover natifs passent au-dessus de tout sans z-index.</li>
+    </ul>
+{% endblock %}

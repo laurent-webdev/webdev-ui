@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Flex{% endblock %}
+
+{% block body %}
+    <h1>Flex</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Les propriétés du flex en classes au nom complet (flex-direction-column, justify-content-space-between…), avec des variantes xs: à 2xl:.</p>
+
+    <p class="mt-4">d-flex flex-direction-column md:flex-direction-row gap-2 : en colonne, en ligne dès md</p>
+    <div class="d-flex flex-direction-column md:flex-direction-row gap-2">
+        <div class="demo-box p-2">un</div>
+        <div class="demo-box p-2">deux</div>
+        <div class="demo-box p-2">trois</div>
+    </div>
+    <p class="mt-4">justify-content-start / center / end / space-between</p>
+    <div class="demo-frame d-flex justify-content-start gap-2 mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div></div>
+    <div class="demo-frame d-flex justify-content-center gap-2 mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div></div>
+    <div class="demo-frame d-flex justify-content-end gap-2 mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div></div>
+    <div class="demo-frame d-flex justify-content-space-between gap-2 mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div></div>
+    <p class="mt-4">justify-content-space-between / space-around / space-evenly : la différence se voit aux bords</p>
+    <div class="demo-frame d-flex justify-content-space-between mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div><div class="demo-box p-2">trois</div></div>
+    <div class="demo-frame d-flex justify-content-space-around mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div><div class="demo-box p-2">trois</div></div>
+    <div class="demo-frame d-flex justify-content-space-evenly mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div><div class="demo-box p-2">trois</div></div>
+    <p class="mt-4">align-items-start / center / end / baseline / stretch (le premier bloc est plus haut)</p>
+    <div class="demo-frame d-flex align-items-start gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">start</div></div>
+    <div class="demo-frame d-flex align-items-center gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">center</div></div>
+    <div class="demo-frame d-flex align-items-end gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">end</div></div>
+    <div class="demo-frame d-flex align-items-baseline gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">baseline</div></div>
+    <div class="demo-frame d-flex align-items-stretch gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">stretch</div></div>
+    <p class="mt-4">align-self : un enfant s'aligne autrement que les autres (parent en align-items-start)</p>
+    <div class="demo-frame d-flex align-items-start gap-2 mt-2">
+        <div class="demo-box p-6">haut</div>
+        <div class="demo-box p-2">start</div>
+        <div class="demo-box p-2 align-self-center">align-self-center</div>
+        <div class="demo-box p-2 align-self-end">align-self-end</div>
+    </div>
+    <p class="mt-4">d-flex flex-direction-column : le bouton s'étire ; align-self-start le garde à sa taille</p>
+    <div class="demo-frame d-flex flex-direction-column gap-2 p-2 mt-2">
+        <button class="btn-outline" type="button">étiré</button>
+        <button class="btn-outline align-self-start" type="button">align-self-start</button>
+    </div>
+    <p class="mt-4">flex-wrap-wrap : passe à la ligne quand la place manque</p>
+    <div class="demo-frame d-flex flex-wrap-wrap gap-2 mt-2">
+        <span class="demo-box p-2">étiquette</span><span class="demo-box p-2">étiquette longue</span><span class="demo-box p-2">étiquette</span><span class="demo-box p-2">encore une étiquette</span><span class="demo-box p-2">étiquette</span><span class="demo-box p-2">étiquette</span>
+    </div>
+    <p class="mt-4">flex-grow-1 : le champ prend la place libre ; flex-shrink-0 : le bouton garde sa taille</p>
+    <form class="d-flex flex-wrap-wrap align-items-center gap-2 mt-2">
+        <label for="demo-search">Recherche</label>
+        <input class="flex-grow-1" id="demo-search" type="search" name="q">
+        <button class="btn-solid theme-primary flex-shrink-0" type="submit">Rechercher</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gap{% endblock %}
+
+{% block body %}
+    <h1>Gap</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">L'espace entre les enfants d'une grille ou d'un flex : gap-*, row-gap-* et column-gap-*, de 0 à 12 (--space-*), avec des variantes xs: à 2xl:.</p>
+
+    <p>grid sans classe gap : 1rem (--grid-gap)</p>
+    <div class="grid">
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+    </div>
+    <p class="mt-4">gap-0</p>
+    <div class="grid gap-0">
+        <div class="demo-box demo-frame p-2 col-4">col-4</div>
+        <div class="demo-box demo-frame p-2 col-4">col-4</div>
+        <div class="demo-box demo-frame p-2 col-4">col-4</div>
+        <div class="demo-box demo-frame p-2 col-4">col-4</div>
+        <div class="demo-box demo-frame p-2 col-4">col-4</div>
+        <div class="demo-box demo-frame p-2 col-4">col-4</div>
+    </div>
+    <p class="mt-4">gap-2 row-gap-8 : le plus précis gagne</p>
+    <div class="grid gap-2 row-gap-8">
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+    </div>
+    <p class="mt-4">d-flex gap-4 : gap marche aussi en flex</p>
+    <div class="d-flex gap-4">
+        <div class="demo-box p-2">un</div>
+        <div class="demo-box p-2">deux</div>
+        <div class="demo-box p-2">trois</div>
+    </div>
+    <p class="mt-4">gap-2 md:gap-8 : grandit avec l'écran</p>
+    <div class="grid gap-2 md:gap-8">
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-4">col-4</div>
+    </div>
+{% endblock %}

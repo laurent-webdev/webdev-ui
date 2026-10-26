@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bouton de fermeture{% endblock %}
+
+{% block body %}
+    <h1>Bouton de fermeture</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Un bouton carré avec une croix, pour fermer un dialogue. Comme les boutons : une variante (btn-close-solid, btn-close-subtle, btn-close-outline) qui s'utilise seule, et une couleur .theme-*, neutral sans classe.</p>
+
+    <table class="mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Thème</th>
+                <th scope="col">btn-close-solid</th>
+                <th scope="col">btn-close-subtle</th>
+                <th scope="col">btn-close-outline</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for color in colors %}
+                <tr>
+                    <th scope="row">theme-{{ color }}</th>
+                    {% for variant in ['solid', 'subtle', 'outline'] %}
+                        <td><button class="btn-close-{{ variant }} theme-{{ color }}" type="button" aria-label="Fermer"></button></td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 class="mt-10">HTML</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-close-subtle" type="button" commandfor="dialog-compte" command="close" aria-label="Fermer"&gt;&lt;/button&gt;</code></pre>
+    <p>Les mêmes couleurs, survols et clics que le bouton du même nom : solid = fond plein, subtle = fond léger, outline = bordure qui devient solid au survol. La croix a la couleur du texte de la variante.</p>
+
+    <h2 class="mt-10">Tailles</h2>
+    {% for size in ['xs', 'sm', 'md', 'lg'] %}
+        <div class="d-flex align-items-center gap-2 mt-2">
+            <button class="btn-solid theme-primary btn-{{ size }}" type="button">btn-{{ size }}</button>
+            <button class="btn-close-subtle btn-close-{{ size }}" type="button" aria-label="Fermer"></button>
+            <button class="btn-close-outline theme-primary btn-close-{{ size }}" type="button" aria-label="Fermer"></button>
+        </div>
+    {% endfor %}
+    <p class="mt-2">btn-close-xs à btn-close-lg ont la hauteur du bouton de la même taille (24, 31, 38 et 45px) : côte à côte, ils sont alignés. Sans classe, la taille xs (24px), celle d'un en-tête de dialogue. Les tailles se combinent avec toutes les variantes.</p>
+
+    <h2 class="mt-10">Variables</h2>
+    <table class="mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Défaut</th>
+                <th scope="col">Rôle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">--btn-close-size</th><td>1.5rem (24px, la taille xs)</td><td>côté du carré, bordure comprise ; la croix suit ; réécrite par les tailles</td></tr>
+            <tr><th scope="row">--btn-close-border-radius</th><td>--border-radius-md</td><td>coins du carré et du contour de focus</td></tr>
+            <tr><th scope="row">--btn-close-border-width</th><td>--border-width</td><td>bordure (visible sur btn-close-outline)</td></tr>
+        </tbody>
+    </table>
+
+    <h2 class="mt-10">Exemple : changer les valeurs</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --btn-close-size: 2rem; }
+.btn-close-lg { --btn-close-size: 3rem; }
+.btn-close-rond { --btn-close-border-radius: 50%; }</code></pre>
+    <p>La première ligne agrandit les boutons de fermeture sans taille (btn-close-xs garde 24px), la deuxième la taille lg, la dernière rend ronds seulement ceux qui ont la classe btn-close-rond du site.</p>
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul>
+        <li>La croix n'a pas de texte : aria-label="Fermer" donne son nom au bouton.</li>
+        <li>24px au plus petit (btn-close-xs, le défaut), la cible tactile minimale (WCAG 2.5.8), comme btn-xs : ne pas descendre en dessous.</li>
+        <li>La croix a la couleur du texte de la variante : noir ou blanc sur solid, emphasis sur subtle et outline (au moins 4,5:1), plus forte sur le fond renforcé de subtle au survol et au clic. Le contour de focus a la couleur du thème en emphasis, comme les boutons.</li>
+        <li>En contraste élevé (Windows), la croix prend la couleur du texte des boutons du système.</li>
+    </ul>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-close-subtle" type="button"&gt;&lt;/button&gt;</code></pre>
+    <p>Sans aria-label, le bouton n'a pas de nom : le lecteur d'écran dit seulement « bouton » (Lighthouse le signale).</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-close-subtle" type="button"&gt;×&lt;/button&gt;</code></pre>
+    <p>Le caractère × comme nom : lu « multiplication » par certains lecteurs d'écran, et affiché en plus de la croix dessinée (il déborde du carré). La croix est déjà dessinée : aria-label="Fermer" suffit.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog-solid theme-primary"&gt;… &lt;button class="btn-close-outline" …&gt;&lt;/button&gt;</code></pre>
+    <p>Sur un fond plein, seul btn-close-solid est prévu, d'un autre thème (theme-inverse).</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>Sur un fond léger de la même couleur (dialog-subtle theme-success), btn-close-subtle a le même fond : seule la croix se voit, le carré apparaît au survol.</li>
+        <li>Sur un fond plein, le contour de focus garde la couleur du thème en emphasis et peut manquer de contraste, comme pour les boutons.</li>
+        <li>Pas d'état désactivé : rarement utile pour fermer.</li>
+    </ul>
+{% endblock %}

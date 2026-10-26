@@ -1,9 +1,25 @@
+{#- Place de la page dans doc_sections (config/packages/twig.yaml) : la page précédente et la suivante.
+    Page hors de la liste (accueil, page de test) : doc_prev et doc_next restent null -#}
+{%- set doc_pages = [] -%}
+{%- for section in doc_sections -%}
+    {%- for link in section.links -%}
+        {%- set doc_pages = doc_pages|merge([{route: link[0], label: link[1]}]) -%}
+    {%- endfor -%}
+{%- endfor -%}
+{%- set doc_index = null -%}
+{%- for page in doc_pages -%}
+    {%- if page.route == app.current_route -%}{%- set doc_index = loop.index0 -%}{%- endif -%}
+{%- endfor -%}
+{%- set doc_prev = doc_index is not null and doc_index > 0 ? doc_pages[doc_index - 1] : null -%}
+{%- set doc_next = doc_index is not null and doc_index < doc_pages|length - 1 ? doc_pages[doc_index + 1] : null -%}
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# Une page définit {% block title %} (« Accordéon ») : l'onglet affiche « Accordéon · webdev-ui » #}
+        <title>{% block title %}Documentation{% endblock %} · webdev-ui</title>
+        <meta name="description" content="{% block description %}{{ block('title') }} : documentation de webdev-ui, framework CSS/JS léger et sans dépendance.{% endblock %}">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {# Avant le CSS : pose le thème mémorisé sans flash au chargement #}
         <script>
@@ -11,6 +27,8 @@
             if (theme) document.documentElement.dataset.theme = theme;
         </script>
         <link rel="stylesheet" href="{{ asset('webdev-ui/css/app.css') }}">
+        {# Coloration du code (CDN) : <pre><code class="language-html">, language-css, language-scss, language-js, language-twig… #}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-a11y-dark.min.css" integrity="sha384-LhByJy5oevhOmy7ywcRYT9g2VUKoEoq2Dp6RWFFEaxG464ZGj/NEKM5fK7HS8g8O" crossorigin="anonymous" referrerpolicy="no-referrer">
         <link rel="stylesheet" href="{{ asset('styles/doc.css') }}">
         {% block stylesheets %}
         {% endblock %}
@@ -18,13 +36,57 @@
         {% block javascripts %}
             {# Le JS du framework, comme le CSS : dist/js/bundle.js #}
             <script type="module" src="{{ asset('webdev-ui/js/bundle.js') }}"></script>
+            {# Prism, puis l'autoloader qui charge depuis le CDN le langage de chaque bloc de code #}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/components/prism-core.min.js" integrity="sha384-zLRFO4dwowZvh8kzutOb5AWhH7f39HeJp+N7PtHF1SQtTBnifRx0AtmvTYs3F4YV" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha384-Uq05+JLko69eOiPr39ta9bh7kld5PKZoU+fF7g0EXTAriEollhZ+DrN8Q/Oi8J2Q" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
-        <main class="container py-8">
-            <button class="btn-solid theme-neutral" type="button" id="theme-toggle" aria-pressed="false">Thème sombre</button>
-            {% block body %}{% endblock %}
-        </main>
+    <body class="d-flex flex-direction-column min-h-100svh">
+        <header class="border-bottom">
+            <div class="container d-flex align-items-center gap-3 py-3">
+                {# Petit écran : le menu est dans un drawer #}
+                <button class="btn-outline btn-sm lg:d-none" type="button" commandfor="doc-menu" command="show-modal">Menu</button>
+                <a class="theme-primary fs-lg fw-bold text-decoration-none me-auto" href="{{ path('app_main') }}">webdev-ui</a>
+                <a class="btn-text btn-sm" href="{{ path('app_test') }}">Page de test</a>
+                <button class="btn-subtle btn-sm" type="button" id="theme-toggle" aria-pressed="false">Thème sombre</button>
+            </div>
+        </header>
+
+        <dialog class="drawer-start" id="doc-menu" data-dialog closedby="any" aria-labelledby="doc-menu-title">
+            <div class="drawer-header">
+                <p class="fs-lg fw-semibold" id="doc-menu-title">Menu</p>
+                <button class="btn-close-subtle" type="button" commandfor="doc-menu" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="drawer-body">
+                {{ include('_menu.html.twig') }}
+            </div>
+        </dialog>
+
+        <div class="container grid flex-grow-1 py-8">
+            {# Grand écran : le menu dans une colonne #}
+            <aside class="d-none lg:d-block lg:col-3">
+                {{ include('_menu.html.twig') }}
+            </aside>
+            <main class="lg:col-9">
+                {% block body %}{% endblock %}
+
+                {% if doc_prev or doc_next %}
+                    {# Lecture suivie : les pages voisines dans l'ordre du menu #}
+                    <nav class="d-flex flex-wrap-wrap gap-3 mt-12 pt-6 border-top" aria-label="Pages précédente et suivante">
+                        {% if doc_prev %}
+                            <a class="btn-outline" href="{{ path(doc_prev.route) }}" rel="prev"><span aria-hidden="true">← </span><span class="visually-hidden">Page précédente : </span>{{ doc_prev.label }}</a>
+                        {% endif %}
+                        {% if doc_next %}
+                            <a class="btn-outline ms-auto" href="{{ path(doc_next.route) }}" rel="next"><span class="visually-hidden">Page suivante : </span>{{ doc_next.label }}<span aria-hidden="true"> →</span></a>
+                        {% endif %}
+                    </nav>
+                {% endif %}
+            </main>
+        </div>
+
+        <footer class="border-top">
+            <p class="container py-6 fs-sm color-emphasis-neutral">webdev-ui · framework CSS/JS léger, natif et sans dépendance</p>
+        </footer>
     </body>
 </html>

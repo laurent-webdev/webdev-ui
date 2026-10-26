@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Display{% endblock %}
+
+{% block body %}
+    <h1>Display</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">d-none, d-inline, d-inline-block, d-block, d-flex, d-inline-flex et d-grid, avec des variantes xs: à 2xl: pour afficher ou cacher selon l'écran.</p>
+
+    <p class="demo-box p-2 mt-4 d-none md:d-block">d-none md:d-block : visible à partir de md (768px)</p>
+    <p class="demo-box p-2 mt-4 md:d-none">md:d-none : masqué à partir de md (768px)</p>
+    <p class="mt-4">d-inline-block : <span class="demo-box p-2 d-inline-block">prend un padding vertical</span> dans le texte</p>
+    <p class="mt-4">d-inline-flex gap-2 : <span class="demo-box p-1 d-inline-flex gap-2"><span>un</span><span>deux</span></span> dans le texte</p>
+    <p class="mt-4">d-grid gap-2 : boutons empilés, pleine largeur</p>
+    <div class="d-grid gap-2">
+        <button class="btn-solid theme-primary" type="button">Valider</button>
+        <button class="btn-outline" type="button">Annuler</button>
+    </div>
+    <p class="mt-4">grid d-none lg:d-grid : grille visible à partir de lg (1024px)</p>
+    <div class="grid d-none lg:d-grid">
+        <div class="demo-box p-2 col-6">col-6</div>
+        <div class="demo-box p-2 col-6">col-6</div>
+    </div>
+{% endblock %}

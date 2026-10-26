@@ -1,10 +1,10 @@
 twig:
     file_name_pattern: '*.twig'
     globals:
-        # Pages de la doc, dans l'ordre de lecture. Cette liste unique sert au menu latéral, au titre des onglets,
-        # au fil d'Ariane, aux liens « page précédente / suivante », au sitemap.xml et au llms.txt.
-        # Ajouter une page : ajouter [route, libellé, template] dans la bonne section.
-        # Le llms.txt reprend le {% block description %} du template.
+        # Les couleurs des .theme-* et des utilitaires, pour les boucles des démos
+        colors: [primary, secondary, accent, success, danger, warning, info, neutral, inverse]
+        # Pages de la doc, dans l'ordre du menu (base.html.twig). Une page = [route, libellé, template].
+        # Ajouter une page : sa ligne ici, sa méthode dans le contrôleur de sa section, son template.
         doc_sections:
             - id: custom
               label: Personnalisation
@@ -14,46 +14,46 @@ twig:
             - id: component
               label: Composants
               links:
-                  - [app_accordion, Accordion, components/accordion.html.twig]
-                  - [app_alert, Alert, components/alert.html.twig]
+                  - [app_accordion, Accordéon, components/accordion.html.twig]
+                  - [app_alert, Alerte, components/alert.html.twig]
                   - [app_badge, Badge, components/badge.html.twig]
-                  - [app_button, Button, components/button.html.twig]
-                  - [app_card, Card, components/card.html.twig]
-                  - [app_collapse, Collapse, components/collapse.html.twig]
-                  - [app_dialog, Dialog, components/dialog.html.twig]
+                  - [app_button, Bouton, components/button.html.twig]
+                  - [app_btn_close, Bouton de fermeture, components/btn-close.html.twig]
+                  - [app_card, Carte, components/card.html.twig]
+                  - [app_dialog, Dialogue, components/dialog.html.twig]
                   - [app_drawer, Drawer, components/drawer.html.twig]
                   - [app_dropdown, Dropdown, components/dropdown.html.twig]
-                  - [app_form, Form, components/form.html.twig]
-                  - [app_link, Link, components/link.html.twig]
-                  - [app_list, List, components/list.html.twig]
-                  - [app_navbar, Navbar, components/navbar.html.twig]
-                  - [app_outline, Outline, components/outline.html.twig]
-                  - [app_tab, Tab, components/tab.html.twig]
-                  - [app_table, Table, components/table.html.twig]
+                  - [app_form, Formulaire, components/form.html.twig]
+                  - [app_link, Lien, components/link.html.twig]
+                  - [app_spinner, Spinner, components/spinner.html.twig]
             - id: layout
               label: Mise en page
               links:
-                  - [app_columns, Columns, layouts/columns.html.twig]
                   - [app_container, Container, layouts/container.html.twig]
-                  - [app_flex, Flexbox, layouts/flex.html.twig]
+                  - [app_grid, Grille, layouts/grid.html.twig]
             - id: utility
               label: Utilitaires
               links:
                   - [app_animation, Animation, utilities/animation.html.twig]
-                  - [app_background, Background, utilities/background.html.twig]
-                  - [app_border, Border, utilities/border.html.twig]
-                  - [app_color, Color, utilities/color.html.twig]
-                  - [app_cursor, Cursor, utilities/cursor.html.twig]
+                  - [app_aspect_ratio, Aspect-ratio, utilities/aspect-ratio.html.twig]
+                  - [app_border, Bordures, utilities/border.html.twig]
+                  - [app_colors, Couleurs, utilities/colors.html.twig]
+                  - [app_cursor, Curseur, utilities/cursor.html.twig]
                   - [app_display, Display, utilities/display.html.twig]
-                  - [app_font, Font, utilities/font.html.twig]
-                  - [app_image, Image, utilities/image.html.twig]
+                  - [app_spacing, Espacements, utilities/spacing.html.twig]
+                  - [app_flex, Flex, utilities/flex.html.twig]
+                  - [app_gap, Gap, utilities/gap.html.twig]
+                  - [app_sizing, Largeur et hauteur, utilities/sizing.html.twig]
+                  - [app_object_fit, Object-fit, utilities/object-fit.html.twig]
+                  - [app_box_shadow, Ombres, utilities/box-shadow.html.twig]
+                  - [app_opacity, Opacité, utilities/opacity.html.twig]
                   - [app_overflow, Overflow, utilities/overflow.html.twig]
                   - [app_position, Position, utilities/position.html.twig]
-                  - [app_shadow, Shadow, utilities/shadow.html.twig]
-                  - [app_sizing, Sizing, utilities/sizing.html.twig]
-                  - [app_spacing, Spacing, utilities/spacing.html.twig]
-                  - [app_text, Text, utilities/text.html.twig]
-                  - [app_visibility, Visibility, utilities/visibility.html.twig]
+                  - [app_text, Texte, utilities/text.html.twig]
+                  - [app_font, Typographie, utilities/font.html.twig]
+                  - [app_vertical_align, Vertical-align, utilities/vertical-align.html.twig]
+                  - [app_visibility, Visibilité, utilities/visibility.html.twig]
+                  - [app_visually_hidden, Visually-hidden, utilities/visually-hidden.html.twig]
 
 when@test:
     twig:

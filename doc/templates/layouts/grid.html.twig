@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Grille{% endblock %}
+
+{% block body %}
+    <h1>Grille</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Une grille de 12 colonnes en CSS Grid : grid sur le parent, col-1 à col-12 sur les enfants, avec des variantes xs: à 2xl: ; sans classe, un enfant prend toute la largeur.</p>
+
+    <div class="grid mt-4">
+        <div class="demo-box p-2">sans classe : pleine largeur</div>
+    </div>
+    <div class="grid mt-4">
+        <div class="demo-box p-2 col-6">col-6</div>
+        <div class="demo-box p-2 col-6">col-6</div>
+    </div>
+    <div class="grid mt-4">
+        <div class="demo-box p-2 col-4">col-4</div>
+        <div class="demo-box p-2 col-8">col-8</div>
+    </div>
+    <div class="grid mt-4">
+        <div class="demo-box p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</div>
+        <div class="demo-box p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</div>
+        <div class="demo-box p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</div>
+        <div class="demo-box p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</div>
+    </div>
+    <div class="grid mt-4">
+        <p class="demo-box p-2 col-3">col-3 avec un mot très long : Anticonstitutionnellementanticonstitutionnellement</p>
+        <div class="demo-box p-2 col-9">col-9</div>
+    </div>
+    <div class="grid mt-4">
+        <div class="demo-box p-2 md:col-6">
+            <p>md:col-6 avec une grille dedans</p>
+            <div class="grid mt-2">
+                <div class="demo-frame p-2 col-6">col-6</div>
+                <div class="demo-frame p-2 col-6">col-6</div>
+            </div>
+        </div>
+        <div class="demo-box p-2 md:col-6">md:col-6</div>
+    </div>
+{% endblock %}

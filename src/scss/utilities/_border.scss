@@ -14,9 +14,18 @@
     // Retire la bordure, aussi celle d'un composant
     .border-0 { border: 0; }
 
-    // Couleur brute, écrite après les bordures pour remplacer le gris (class="border border-color-danger")
+    // Épaisseur en px, écrite après les bordures pour remplacer --border-width (class="border border-2")
+    @each $width in 1, 2, 3, 4, 5 {
+        .border-#{$width} { border-width: #{$width}px; }
+    }
+
+    // Couleur, écrite après les bordures pour remplacer le gris (class="border border-danger")
+    // Brute : décorative ; emphasis : lisible sur le fond de page, pour une bordure qui doit se voir
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
-        .border-color-#{$color} { border-color: var(--color-#{$color}); }
+        .border-#{$color} { border-color: var(--color-#{$color}); }
+    }
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .border-emphasis-#{$color} { border-color: var(--color-emphasis-#{$color}); }
     }
 
     // Arrondis : l'échelle des variables globales

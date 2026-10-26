@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Typographie{% endblock %}
+
+{% block body %}
+    <h1>Typographie</h1>
+    <p class="fs-lg color-emphasis-neutral mb-6">Tailles (fs-*), interligne (line-height-*), graisses (fw-*), italique (fst-*) et police à chasse fixe (font-monospace) : les classes lisent les variables de la typographie.</p>
+
+    <h2 class="mt-10">Titres</h2>
+    <h1>Titre h1 (3xl)</h1>
+    <h2>Titre h2 (2xl)</h2>
+    <h3>Titre h3 (xl)</h3>
+    <h4>Titre h4 (lg)</h4>
+    <h5>Titre h5 (md)</h5>
+    <h6>Titre h6 (sm)</h6>
+
+    <h2 class="mt-10">Tailles</h2>
+    <p class="fs-xs">.fs-xs</p>
+    <p class="fs-sm">.fs-sm</p>
+    <p class="fs-md">.fs-md</p>
+    <p class="fs-lg">.fs-lg</p>
+    <p class="fs-xl">.fs-xl</p>
+    <p class="fs-2xl">.fs-2xl</p>
+    <p class="fs-3xl">.fs-3xl</p>
+    <p class="fs-4xl">.fs-4xl</p>
+    <p class="fs-5xl">.fs-5xl</p>
+    <p class="fs-6xl">.fs-6xl</p>
+
+    <h2 class="mt-10">Interligne</h2>
+    <p>Chaque fs-* pose déjà l'interligne de sa taille : 1.5 pour le texte (xs à lg), puis de moins en moins pour les titres, 1.2 au plus serré. line-height-* change l'interligne seul, en gardant la taille.</p>
+    <ul>
+        <li>line-height-xs … line-height-6xl : l'interligne de la taille du même nom (--line-height-*) ;</li>
+        <li>line-height-1 : une seule ligne, la boîte colle au texte.</li>
+    </ul>
+    <p class="demo-box p-2 mt-2 fs-2xl">fs-2xl : un grand texte d'introduction, sur plusieurs lignes, avec l'interligne de sa taille (1.3), plus serré que celui du texte.</p>
+    <p class="demo-box p-2 mt-2 fs-2xl line-height-md">fs-2xl line-height-md : la même taille, avec l'interligne du texte (1.5), plus aéré pour un paragraphe à lire.</p>
+    <p class="d-flex flex-wrap-wrap gap-2 mt-2">
+        <span class="demo-box p-2 fs-5xl">42</span>
+        <span class="demo-box p-2 fs-5xl line-height-1">42</span>
+    </p>
+    <p class="mt-2">Le même nombre en fs-5xl, puis avec line-height-1 : la boîte n'a plus d'espace au-dessus et en dessous du chiffre.</p>
+
+    <h3 class="mt-6">Exemple : un chiffre clé</h3>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p&gt;&lt;span class="d-block fs-5xl fw-bold line-height-1"&gt;98 %&lt;/span&gt; de clients satisfaits&lt;/p&gt;</code></pre>
+
+    <h3 class="mt-6">Exemple : changer les valeurs</h3>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --line-height-md: 1.6; }</code></pre>
+    <p>Le texte de taille md, fs-md et line-height-md passent à 1.6 ensemble.</p>
+
+    <h3 class="mt-6">Contre-exemples</h3>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p class="line-height-1"&gt;Un paragraphe de plusieurs lignes…&lt;/p&gt;</code></pre>
+    <p>Sur plusieurs lignes, les lignes se touchent : une majuscule accentuée (É) touche le « g » ou le « p » de la ligne du dessus. line-height-1 est fait pour une seule ligne.</p>
+
+    <h3 class="mt-6">Limites</h3>
+    <ul>
+        <li>Plusieurs classes ont la même valeur (xs à lg : 1.5 ; 3xl à 6xl : 1.2) : chacune suit sa variable, elles restent différentes si un site change l'échelle.</li>
+        <li>Pas de variante responsive (comme fs-*).</li>
+        <li>Un utilisateur qui agrandit l'interligne avec une extension (WCAG 1.4.12) passe devant ces classes : le contenu ne doit pas être coupé (pas de hauteur fixe sur un bloc de texte).</li>
+    </ul>
+
+    <h2 class="mt-10">Graisses</h2>
+    <p class="fw-light">.fw-light</p>
+    <p class="fw-normal">.fw-normal</p>
+    <p class="fw-medium">.fw-medium</p>
+    <p class="fw-semibold">.fw-semibold</p>
+    <p class="fw-bold">.fw-bold</p>
+
+    <h2 class="mt-10">Style et famille</h2>
+    <p class="fst-italic">.fst-italic</p>
+    <p><em class="fst-normal">.fst-normal sur un em</em></p>
+    <p class="font-monospace">.font-monospace</p>
+    <p>Du <code>code</code> dans un paragraphe.</p>
+{% endblock %}
