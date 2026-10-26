@@ -1548,7 +1548,7 @@
 
     <section>
         <h2>Dialogues</h2>
-        <p>Un &lt;dialog&gt; natif, du même style que les cartes : une variante (dialog-solid, dialog-subtle, dialog-outline) qui s'utilise seule, une couleur .theme-*, et les zones dialog-header, dialog-body, dialog-footer. Les boutons l'ouvrent et le ferment sans JavaScript, avec les attributs command et commandfor.</p>
+        <p>Un &lt;dialog&gt; natif, du même style que les cartes : une variante (dialog-solid, dialog-subtle, dialog-outline) qui s'utilise seule, une couleur .theme-*, et les zones dialog-header, dialog-body, dialog-footer. Les boutons l'ouvrent et le ferment sans JavaScript, avec les attributs command et commandfor. Avec data-dialog, le JS du framework l'efface aussi à la fermeture.</p>
 
         <h3 class="mt-4">Comportements : l'attribut closedby</h3>
         <div class="d-flex flex-wrap-wrap gap-2 mt-2">
@@ -1557,7 +1557,7 @@
             <button class="btn-outline" type="button" commandfor="dialog-none" command="show-modal">closedby="none"</button>
         </div>
 
-        <dialog class="dialog-outline" id="dialog-default" aria-labelledby="dialog-default-title">
+        <dialog class="dialog-outline" id="dialog-default" data-dialog aria-labelledby="dialog-default-title">
             <div class="dialog-header">
                 <h2 class="fs-lg" id="dialog-default-title">Sans closedby</h2>
                 <button class="btn-close-subtle" type="button" commandfor="dialog-default" command="close" aria-label="Fermer"></button>
@@ -1570,7 +1570,7 @@
             </div>
         </dialog>
 
-        <dialog class="dialog-outline" id="dialog-any" aria-labelledby="dialog-any-title" closedby="any">
+        <dialog class="dialog-outline" id="dialog-any" data-dialog aria-labelledby="dialog-any-title" closedby="any">
             <div class="dialog-header">
                 <h2 class="fs-lg" id="dialog-any-title">closedby="any"</h2>
                 <button class="btn-close-subtle" type="button" commandfor="dialog-any" command="close" aria-label="Fermer"></button>
@@ -1583,7 +1583,7 @@
             </div>
         </dialog>
 
-        <dialog class="dialog-outline" id="dialog-none" aria-labelledby="dialog-none-title" closedby="none">
+        <dialog class="dialog-outline" id="dialog-none" data-dialog aria-labelledby="dialog-none-title" closedby="none">
             <div class="dialog-header">
                 <h2 class="fs-lg" id="dialog-none-title">closedby="none"</h2>
             </div>
@@ -1620,7 +1620,7 @@
         </div>
 
         {% for dialog in [{variant: 'solid', theme: 'theme-primary'}, {variant: 'subtle', theme: 'theme-success'}, {variant: 'outline', theme: ''}] %}
-            <dialog class="dialog-{{ dialog.variant }} {{ dialog.theme }}" id="dialog-{{ dialog.variant }}" aria-labelledby="dialog-{{ dialog.variant }}-title">
+            <dialog class="dialog-{{ dialog.variant }} {{ dialog.theme }}" id="dialog-{{ dialog.variant }}" data-dialog aria-labelledby="dialog-{{ dialog.variant }}-title">
                 <div class="dialog-header">
                     <h2 class="fs-lg" id="dialog-{{ dialog.variant }}-title">dialog-{{ dialog.variant }} {{ dialog.theme ?: 'sans thème (neutral)' }}</h2>
                     <button class="{{ dialog.variant == 'solid' ? 'btn-close-solid theme-inverse' : 'btn-close-subtle' }}" type="button" commandfor="dialog-{{ dialog.variant }}" command="close" aria-label="Fermer"></button>
@@ -1646,7 +1646,7 @@
         </div>
 
         {% for size in ['xs', 'sm', 'md', 'lg', 'xl'] %}
-            <dialog class="dialog-outline dialog-{{ size }}" id="dialog-size-{{ size }}" aria-labelledby="dialog-size-{{ size }}-title">
+            <dialog class="dialog-outline dialog-{{ size }}" id="dialog-size-{{ size }}" data-dialog aria-labelledby="dialog-size-{{ size }}-title">
                 <div class="dialog-header">
                     <h2 class="fs-lg" id="dialog-size-{{ size }}-title">dialog-{{ size }}</h2>
                     <button class="btn-close-subtle" type="button" commandfor="dialog-size-{{ size }}" command="close" aria-label="Fermer"></button>
@@ -1661,7 +1661,7 @@
         <h3 class="mt-4">HTML</h3>
         <pre class="mt-2"><code>&lt;button class="btn-solid theme-primary" type="button" commandfor="dialog-compte" command="show-modal"&gt;Mon compte&lt;/button&gt;
 
-&lt;dialog class="dialog-outline" id="dialog-compte" aria-labelledby="dialog-compte-title"&gt;
+&lt;dialog class="dialog-outline" id="dialog-compte" data-dialog aria-labelledby="dialog-compte-title"&gt;
     &lt;div class="dialog-header"&gt;
         &lt;h2 id="dialog-compte-title"&gt;Mon compte&lt;/h2&gt;
         &lt;button class="btn-close-subtle" type="button" commandfor="dialog-compte" command="close" aria-label="Fermer"&gt;&lt;/button&gt;
@@ -1674,14 +1674,15 @@
 &lt;/dialog&gt;</code></pre>
         <ul>
             <li>command="show-modal" ouvre le dialogue en modal (le reste de la page est inactif), command="close" le ferme ; commandfor donne l'id du dialogue.</li>
-            <li>command="request-close" demande la fermeture comme Échap : le JS du site peut la refuser (événement cancel), par exemple quand un formulaire n'est pas enregistré.</li>
+            <li>command="request-close" demande la fermeture comme Échap : le JS du site peut la refuser (événement cancel), par exemple quand un formulaire n'est pas enregistré ; pas encore avec data-dialog (voir les limites).</li>
+            <li>data-dialog : le JS du framework l'efface (transparent, un peu plus petit, la page s'éclaircit) avant de le fermer. Sans data-dialog ou sans le JS, il marche aussi, mais disparaît d'un coup.</li>
             <li>Dans un formulaire, &lt;form method="dialog"&gt; ferme le dialogue quand il est envoyé, sans quitter la page.</li>
             <li>En-tête : le titre et la croix sur une ligne ; pied : les boutons à droite, le principal en dernier. Les classes de taille (dialog-xs à dialog-lg) se posent sur le &lt;dialog&gt;.</li>
         </ul>
 
         <h3 class="mt-4">La croix à gauche</h3>
         <button class="btn-outline mt-2" type="button" commandfor="dialog-close-start" command="show-modal">Croix à gauche</button>
-        <dialog class="dialog-outline" id="dialog-close-start" aria-labelledby="dialog-close-start-title">
+        <dialog class="dialog-outline" id="dialog-close-start" data-dialog aria-labelledby="dialog-close-start-title">
             <div class="dialog-header">
                 <button class="btn-close-subtle" type="button" commandfor="dialog-close-start" command="close" aria-label="Fermer"></button>
                 <h2 class="fs-lg" id="dialog-close-start-title">Croix à gauche</h2>
@@ -1694,7 +1695,7 @@
 
         <h3 class="mt-4">Exemple : une confirmation</h3>
         <button class="btn-solid theme-danger mt-2" type="button" commandfor="dialog-confirm" command="show-modal">Supprimer le fichier</button>
-        <dialog class="dialog-outline dialog-xs" id="dialog-confirm" role="alertdialog" aria-labelledby="dialog-confirm-title" aria-describedby="dialog-confirm-description">
+        <dialog class="dialog-outline dialog-xs" id="dialog-confirm" data-dialog role="alertdialog" aria-labelledby="dialog-confirm-title" aria-describedby="dialog-confirm-description">
             <div class="dialog-header">
                 <h2 class="fs-lg" id="dialog-confirm-title">Supprimer le fichier ?</h2>
             </div>
@@ -1710,7 +1711,7 @@
 
         <h3 class="mt-4">Exemple : un contenu long</h3>
         <button class="btn-outline mt-2" type="button" commandfor="dialog-long" command="show-modal">Conditions d'utilisation</button>
-        <dialog class="dialog-outline dialog-md" id="dialog-long" aria-labelledby="dialog-long-title">
+        <dialog class="dialog-outline dialog-md" id="dialog-long" data-dialog aria-labelledby="dialog-long-title">
             <div class="dialog-header">
                 <h2 class="fs-lg" id="dialog-long-title">Conditions d'utilisation</h2>
                 <button class="btn-close-subtle" type="button" commandfor="dialog-long" command="close" aria-label="Fermer"></button>
@@ -1741,7 +1742,7 @@
                 <tr><th scope="row">--dialog-border-radius</th><td>--border-radius-md</td><td>coins du cadre</td></tr>
                 <tr><th scope="row">--dialog-border-width</th><td>--border-width</td><td>cadre et traits</td></tr>
                 <tr><th scope="row">--dialog-width</th><td>48rem (breakpoint md)</td><td>largeur du dialogue</td></tr>
-                <tr><th scope="row">--dialog-transition-duration</th><td>0.2s</td><td>apparition du dialogue et du fond assombri</td></tr>
+                <tr><th scope="row">--dialog-transition-duration</th><td>0.2s</td><td>apparition et disparition du dialogue et du fond assombri</td></tr>
                 <tr><th scope="row">--backdrop-background-color</th><td>noir à 50 % (65 % en sombre)</td><td>fond qui assombrit la page derrière un dialogue modal</td></tr>
                 <tr><th scope="row">--backdrop-filter</th><td>blur(5px)</td><td>flou de la page derrière un dialogue modal</td></tr>
             </tbody>
@@ -1754,6 +1755,23 @@
 :root { --backdrop-filter: none; }</code></pre>
         <p>La première ligne change tous les dialogues sans taille, la deuxième seulement celui qui a la classe dialog-panier du site ; la troisième éclaircit le fond derrière, la dernière retire le flou.</p>
 
+        <h3 class="mt-4">JavaScript</h3>
+        <pre class="mt-2"><code>&lt;script type="module" src="…/js/bundle.js"&gt;&lt;/script&gt;</code></pre>
+        <p>bundle.js contient tous les composants. Il n'y a rien à démarrer : il s'occupe de tous les &lt;dialog data-dialog&gt; de la page (dialogues et drawers), aussi ceux ajoutés plus tard.</p>
+        <ul>
+            <li>Il retient la fermeture du navigateur, pose l'attribut data-closing (le CSS efface le dialogue et éclaircit la page), puis appelle close() à la fin de l'animation.</li>
+            <li>Fermer depuis le JS du site : dialog.requestClose() s'anime ; dialog.close() ferme d'un coup.</li>
+        </ul>
+        <p class="mt-2">Événements, tous ceux du navigateur, écoutés sur le &lt;dialog&gt; :</p>
+        <ul>
+            <li>command : un bouton commandfor l'ouvre ou le ferme (event.source = le bouton) ;</li>
+            <li>cancel : Échap, clic à côté (closedby="any"), command="request-close" ou requestClose() ;</li>
+            <li>close : le dialogue est fermé, après l'animation (returnValue = le value du bouton de fermeture).</li>
+        </ul>
+        <pre class="mt-2"><code>document.getElementById('dialog-confirm').addEventListener('close', (event) =&gt; {
+    if (event.target.returnValue === 'supprimer') { … }
+});</code></pre>
+
         <h3 class="mt-4">Accessibilité</h3>
         <ul>
             <li>Toujours command="show-modal" (ou showModal() en JS) : le reste de la page est inactif, Échap ferme, le focus va dans le dialogue puis revient sur le bouton d'ouverture à la fermeture (MDN).</li>
@@ -1761,7 +1779,7 @@
             <li>Au moins un bouton visible pour fermer (MDN), même quand Échap ferme : tout le monde n'a pas de clavier.</li>
             <li>autofocus sur l'élément à utiliser en premier ; sans autofocus, le focus va sur le premier élément focusable (souvent la croix).</li>
             <li>&lt;div class="dialog-header"&gt; et &lt;div class="dialog-footer"&gt; plutôt que &lt;header&gt; et &lt;footer&gt; : posés hors d'un &lt;main&gt; ou d'une &lt;section&gt;, ils deviendraient l'en-tête et le pied de toute la page pour les lecteurs d'écran.</li>
-            <li>prefers-reduced-motion : le dialogue apparaît sans animation, le flou et l'assombrissement d'un coup.</li>
+            <li>prefers-reduced-motion : le dialogue apparaît et disparaît sans animation, le flou et l'assombrissement d'un coup.</li>
         </ul>
 
         <h3 class="mt-4">Contre-exemples</h3>
@@ -1776,7 +1794,9 @@
         <ul>
             <li>command et commandfor sont récents (Baseline 2025 : Chrome 135, Firefox 144, Safari 26.2) : dans un navigateur plus ancien, le bouton ne fait rien. Le JS du site peut ouvrir le dialogue avec showModal().</li>
             <li>closedby n'est pas encore dans Safari : il est ignoré, le dialogue garde le comportement par défaut (Échap ferme ; pas de clic à côté avec any ; Échap ferme quand même avec none).</li>
-            <li>Pas d'animation à la fermeture : elle demande la propriété overlay (pas encore dans Firefox ni Safari) ou du JS ; le dialogue disparaît d'un coup.</li>
+            <li>La fermeture ne s'anime qu'avec le JS du framework et data-dialog (la propriété CSS overlay, qui le ferait sans JS, n'est pas encore dans Firefox ni Safari). Un &lt;form method="dialog"&gt; et close() ferment toujours d'un coup.</li>
+            <li>Échap pressé deux fois pendant l'animation ferme d'un coup : le navigateur ne laisse pas la page refuser deux fermetures de suite (protection contre les pages qui piègent l'utilisateur).</li>
+            <li>Avec data-dialog, le site ne peut pas garder le dialogue ouvert avec event.preventDefault() sur cancel : le JS du framework l'a déjà annulé pour l'animer. Pour un dialogue qui ne se ferme qu'avec ses boutons : closedby="none" ; pour refuser la fermeture d'un formulaire pas enregistré : pas de data-dialog sur ce dialogue.</li>
             <li>Quand un dialogue modal est ouvert, la page derrière ne défile plus (overflow: hidden) : la barre de défilement disparaît, mais sa place est gardée (scrollbar-gutter: stable dans le reset), la page ne bouge pas. Sous Windows, une page trop courte pour défiler garde une bande vide à droite, de la largeur de la barre ; sur Mac et téléphone, les barres sont posées sur la page : rien ne change.</li>
             <li>Le flou demande du calcul au navigateur : sur un vieux téléphone, l'ouverture peut saccader (:root { --backdrop-filter: none; } le retire).</li>
             <li>Un contenu long fait défiler tout le dialogue, en-tête et pied compris : pas d'option pour faire défiler le corps seul, pour l'instant.</li>
@@ -1879,7 +1899,7 @@
             {% endfor %}
         </div>
 
-        <dialog class="drawer-start" id="drawer-start" data-drawer aria-labelledby="drawer-start-title" closedby="any">
+        <dialog class="drawer-start" id="drawer-start" data-dialog aria-labelledby="drawer-start-title" closedby="any">
             <div class="drawer-header">
                 <h2 class="fs-lg" id="drawer-start-title">Menu</h2>
                 <button class="btn-close-subtle" type="button" commandfor="drawer-start" command="close" aria-label="Fermer"></button>
@@ -1896,7 +1916,7 @@
         </dialog>
 
         {% for side in ['end', 'top', 'bottom'] %}
-            <dialog class="drawer-{{ side }}" id="drawer-{{ side }}" data-drawer aria-labelledby="drawer-{{ side }}-title" closedby="any">
+            <dialog class="drawer-{{ side }}" id="drawer-{{ side }}" data-dialog aria-labelledby="drawer-{{ side }}-title" closedby="any">
                 <div class="drawer-header">
                     <h2 class="fs-lg" id="drawer-{{ side }}-title">drawer-{{ side }}</h2>
                     <button class="btn-close-subtle" type="button" commandfor="drawer-{{ side }}" command="close" aria-label="Fermer"></button>
@@ -1910,7 +1930,7 @@
         <h3 class="mt-4">HTML</h3>
         <pre class="mt-2"><code>&lt;button class="btn-outline" type="button" commandfor="menu" command="show-modal" aria-label="Menu"&gt;…&lt;/button&gt;
 
-&lt;dialog class="drawer-start" id="menu" data-drawer aria-labelledby="menu-title" closedby="any"&gt;
+&lt;dialog class="drawer-start" id="menu" data-dialog aria-labelledby="menu-title" closedby="any"&gt;
     &lt;div class="drawer-header"&gt;
         &lt;h2 id="menu-title"&gt;Menu&lt;/h2&gt;
         &lt;button class="btn-close-subtle" type="button" commandfor="menu" command="close" aria-label="Fermer"&gt;&lt;/button&gt;
@@ -1923,7 +1943,7 @@
             <li>Comme le dialogue : command="show-modal" l'ouvre, command="close" le ferme, closedby dit comment il se ferme ; sans JavaScript.</li>
             <li>drawer-start et drawer-end : toute la hauteur, --drawer-width de large ; drawer-top et drawer-bottom : toute la largeur, --drawer-height de haut. Toujours à --drawer-inset (1rem) des bords de l'écran, avec un cadre et des coins arrondis.</li>
             <li>Le fond derrière, le flou et la page bloquée sont ceux du dialogue (--backdrop-background-color, --backdrop-filter).</li>
-            <li>data-drawer : le JS du framework le fait glisser vers son bord avant de le fermer. Sans data-drawer ou sans le JS, il marche aussi, mais se ferme d'un coup.</li>
+            <li>data-dialog : le JS du framework le fait glisser vers son bord avant de le fermer, le même que pour les dialogues. Sans data-dialog ou sans le JS, il marche aussi, mais se ferme d'un coup.</li>
         </ul>
 
         <h3 class="mt-4">Variables</h3>
@@ -1954,17 +1974,10 @@
         <p>La première ligne change tous les drawers (la largeur à gauche et à droite, la hauteur en haut et en bas), la deuxième seulement celui qui a la classe drawer-panier du site ; la dernière les colle au bord de l'écran, sans arrondi.</p>
 
         <h3 class="mt-4">JavaScript</h3>
-        <pre class="mt-2"><code>&lt;script type="module" src="…/js/bundle.js"&gt;&lt;/script&gt;</code></pre>
-        <p>bundle.js contient tous les composants. Il n'y a rien à démarrer : il s'occupe de tous les &lt;dialog data-drawer&gt; de la page, aussi ceux ajoutés plus tard.</p>
+        <p>Le même JS que les dialogues (section « Dialogues », dans bundle.js) : data-dialog sur un drawer le fait glisser vers son bord avant de le fermer. Le JS pose l'attribut data-closing, le CSS du drawer fait glisser le panneau et éclaircit la page, puis le JS appelle close() à la fin du glissement.</p>
         <ul>
-            <li>Il retient la fermeture du navigateur, pose l'attribut data-closing (le CSS fait glisser le panneau et éclaircit la page), puis appelle close() à la fin du glissement.</li>
             <li>Fermer depuis le JS du site : drawer.requestClose() glisse ; drawer.close() ferme d'un coup.</li>
-        </ul>
-        <p class="mt-2">Événements, tous ceux du navigateur, écoutés sur le &lt;dialog&gt; :</p>
-        <ul>
-            <li>command : un bouton commandfor l'ouvre ou le ferme (event.source = le bouton) ;</li>
-            <li>cancel : Échap, clic à côté, command="request-close" ou requestClose() ;</li>
-            <li>close : le panneau est fermé, après le glissement (returnValue = le value du bouton de fermeture).</li>
+            <li>Événements : ceux du navigateur, comme le dialogue (command, cancel, close) ; close arrive après le glissement.</li>
         </ul>
         <pre class="mt-2"><code>document.getElementById('menu').addEventListener('close', () => { … });</code></pre>
 
@@ -1985,7 +1998,7 @@
 
         <h3 class="mt-4">Limites</h3>
         <ul>
-            <li>La fermeture ne glisse qu'avec le JS du framework et data-drawer. Un &lt;form method="dialog"&gt; et close() ferment toujours d'un coup.</li>
+            <li>La fermeture ne glisse qu'avec le JS du framework et data-dialog. Un &lt;form method="dialog"&gt; et close() ferment toujours d'un coup.</li>
             <li>Échap pressé deux fois pendant le glissement ferme d'un coup : le navigateur ne laisse pas la page refuser deux fermetures de suite (protection contre les pages qui piègent l'utilisateur).</li>
             <li>Le site ne peut pas garder le panneau ouvert avec event.preventDefault() sur cancel : le JS du framework l'a déjà annulé pour le faire glisser. Pour un panneau qui ne se ferme qu'avec ses boutons : closedby="none".</li>
             <li>Pas encore de couleurs (.theme-*, solid, subtle, outline) ni de tailles : le fond est celui de la page, la largeur et la hauteur se changent avec --drawer-width et --drawer-height.</li>

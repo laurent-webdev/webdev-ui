@@ -1539,6 +1539,14 @@
       backdrop-filter: none;
     }
   }
+  .dialog-solid[data-closing], .dialog-subtle[data-closing], .dialog-outline[data-closing] {
+    opacity: 0;
+    scale: 0.95;
+  }
+  .dialog-solid[data-closing]::backdrop, .dialog-subtle[data-closing]::backdrop, .dialog-outline[data-closing]::backdrop {
+    background-color: transparent;
+    backdrop-filter: none;
+  }
   .dialog-header, .dialog-body, .dialog-footer {
     padding-block: var(--dialog-padding-block);
     padding-inline: var(--dialog-padding-inline);

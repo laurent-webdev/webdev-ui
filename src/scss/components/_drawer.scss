@@ -72,7 +72,7 @@
         }
     }
 
-    // À la fermeture (drawer.ts) : repart vers son bord, la page s'éclaircit, puis le JS ferme le dialogue
+    // À la fermeture (dialog.ts) : repart vers son bord, la page s'éclaircit, puis le JS ferme le dialogue
     .drawer-start[data-closing] { translate: calc(-100% - var(--drawer-inset)) 0; }
     .drawer-end[data-closing] { translate: calc(100% + var(--drawer-inset)) 0; }
     .drawer-top[data-closing] { translate: 0 calc(-100% - var(--drawer-inset)); }

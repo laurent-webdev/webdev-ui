@@ -87,6 +87,17 @@
         }
     }
 
+    // À la fermeture (dialog.ts) : redevient transparent et un peu plus petit, la page s'éclaircit, puis le JS ferme le dialogue
+    .dialog-solid[data-closing], .dialog-subtle[data-closing], .dialog-outline[data-closing] {
+        opacity: 0;
+        scale: 0.95;
+    }
+
+    .dialog-solid[data-closing]::backdrop, .dialog-subtle[data-closing]::backdrop, .dialog-outline[data-closing]::backdrop {
+        background-color: transparent;
+        backdrop-filter: none;
+    }
+
     // Les zones
     .dialog-header, .dialog-body, .dialog-footer {
         padding-block: var(--dialog-padding-block);
