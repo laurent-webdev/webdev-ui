@@ -149,6 +149,24 @@
   --color-info-emphasis-strong: light-dark(oklch(from var(--color-info) 0.35 c h), oklch(from var(--color-info) 0.93 c h));
   --color-neutral-emphasis-strong: light-dark(oklch(from var(--color-neutral) 0.35 c h), oklch(from var(--color-neutral) 0.93 c h));
   --color-inverse-emphasis-strong: light-dark(oklch(from var(--color-inverse) 0.35 c h), oklch(from var(--color-inverse) 0.93 c h));
+  --color-primary-border: color-mix(in srgb, var(--color-primary), var(--color-primary-contrast) 10%);
+  --color-primary-subtle-border: color-mix(in srgb, var(--color-primary-subtle), CanvasText 10%);
+  --color-secondary-border: color-mix(in srgb, var(--color-secondary), var(--color-secondary-contrast) 10%);
+  --color-secondary-subtle-border: color-mix(in srgb, var(--color-secondary-subtle), CanvasText 10%);
+  --color-accent-border: color-mix(in srgb, var(--color-accent), var(--color-accent-contrast) 10%);
+  --color-accent-subtle-border: color-mix(in srgb, var(--color-accent-subtle), CanvasText 10%);
+  --color-success-border: color-mix(in srgb, var(--color-success), var(--color-success-contrast) 10%);
+  --color-success-subtle-border: color-mix(in srgb, var(--color-success-subtle), CanvasText 10%);
+  --color-danger-border: color-mix(in srgb, var(--color-danger), var(--color-danger-contrast) 10%);
+  --color-danger-subtle-border: color-mix(in srgb, var(--color-danger-subtle), CanvasText 10%);
+  --color-warning-border: color-mix(in srgb, var(--color-warning), var(--color-warning-contrast) 10%);
+  --color-warning-subtle-border: color-mix(in srgb, var(--color-warning-subtle), CanvasText 10%);
+  --color-info-border: color-mix(in srgb, var(--color-info), var(--color-info-contrast) 10%);
+  --color-info-subtle-border: color-mix(in srgb, var(--color-info-subtle), CanvasText 10%);
+  --color-neutral-border: color-mix(in srgb, var(--color-neutral), var(--color-neutral-contrast) 10%);
+  --color-neutral-subtle-border: color-mix(in srgb, var(--color-neutral-subtle), CanvasText 10%);
+  --color-inverse-border: color-mix(in srgb, var(--color-inverse), var(--color-inverse-contrast) 10%);
+  --color-inverse-subtle-border: color-mix(in srgb, var(--color-inverse-subtle), CanvasText 10%);
 }
 
 :root {
@@ -612,6 +630,8 @@
     --accordion-theme-subtle: var(--color-neutral-subtle);
     --accordion-theme-emphasis: var(--color-neutral-emphasis);
     --accordion-theme-emphasis-strong: var(--color-neutral-emphasis-strong);
+    --accordion-theme-border: var(--color-neutral-border);
+    --accordion-theme-subtle-border: var(--color-neutral-subtle-border);
   }
   .theme-primary {
     --accordion-theme-color: var(--color-primary);
@@ -620,6 +640,8 @@
     --accordion-theme-subtle: var(--color-primary-subtle);
     --accordion-theme-emphasis: var(--color-primary-emphasis);
     --accordion-theme-emphasis-strong: var(--color-primary-emphasis-strong);
+    --accordion-theme-border: var(--color-primary-border);
+    --accordion-theme-subtle-border: var(--color-primary-subtle-border);
   }
   .theme-secondary {
     --accordion-theme-color: var(--color-secondary);
@@ -628,6 +650,8 @@
     --accordion-theme-subtle: var(--color-secondary-subtle);
     --accordion-theme-emphasis: var(--color-secondary-emphasis);
     --accordion-theme-emphasis-strong: var(--color-secondary-emphasis-strong);
+    --accordion-theme-border: var(--color-secondary-border);
+    --accordion-theme-subtle-border: var(--color-secondary-subtle-border);
   }
   .theme-accent {
     --accordion-theme-color: var(--color-accent);
@@ -636,6 +660,8 @@
     --accordion-theme-subtle: var(--color-accent-subtle);
     --accordion-theme-emphasis: var(--color-accent-emphasis);
     --accordion-theme-emphasis-strong: var(--color-accent-emphasis-strong);
+    --accordion-theme-border: var(--color-accent-border);
+    --accordion-theme-subtle-border: var(--color-accent-subtle-border);
   }
   .theme-success {
     --accordion-theme-color: var(--color-success);
@@ -644,6 +670,8 @@
     --accordion-theme-subtle: var(--color-success-subtle);
     --accordion-theme-emphasis: var(--color-success-emphasis);
     --accordion-theme-emphasis-strong: var(--color-success-emphasis-strong);
+    --accordion-theme-border: var(--color-success-border);
+    --accordion-theme-subtle-border: var(--color-success-subtle-border);
   }
   .theme-danger {
     --accordion-theme-color: var(--color-danger);
@@ -652,6 +680,8 @@
     --accordion-theme-subtle: var(--color-danger-subtle);
     --accordion-theme-emphasis: var(--color-danger-emphasis);
     --accordion-theme-emphasis-strong: var(--color-danger-emphasis-strong);
+    --accordion-theme-border: var(--color-danger-border);
+    --accordion-theme-subtle-border: var(--color-danger-subtle-border);
   }
   .theme-warning {
     --accordion-theme-color: var(--color-warning);
@@ -660,6 +690,8 @@
     --accordion-theme-subtle: var(--color-warning-subtle);
     --accordion-theme-emphasis: var(--color-warning-emphasis);
     --accordion-theme-emphasis-strong: var(--color-warning-emphasis-strong);
+    --accordion-theme-border: var(--color-warning-border);
+    --accordion-theme-subtle-border: var(--color-warning-subtle-border);
   }
   .theme-info {
     --accordion-theme-color: var(--color-info);
@@ -668,6 +700,8 @@
     --accordion-theme-subtle: var(--color-info-subtle);
     --accordion-theme-emphasis: var(--color-info-emphasis);
     --accordion-theme-emphasis-strong: var(--color-info-emphasis-strong);
+    --accordion-theme-border: var(--color-info-border);
+    --accordion-theme-subtle-border: var(--color-info-subtle-border);
   }
   .theme-neutral {
     --accordion-theme-color: var(--color-neutral);
@@ -676,6 +710,8 @@
     --accordion-theme-subtle: var(--color-neutral-subtle);
     --accordion-theme-emphasis: var(--color-neutral-emphasis);
     --accordion-theme-emphasis-strong: var(--color-neutral-emphasis-strong);
+    --accordion-theme-border: var(--color-neutral-border);
+    --accordion-theme-subtle-border: var(--color-neutral-subtle-border);
   }
   .theme-inverse {
     --accordion-theme-color: var(--color-inverse);
@@ -684,14 +720,16 @@
     --accordion-theme-subtle: var(--color-inverse-subtle);
     --accordion-theme-emphasis: var(--color-inverse-emphasis);
     --accordion-theme-emphasis-strong: var(--color-inverse-emphasis-strong);
+    --accordion-theme-border: var(--color-inverse-border);
+    --accordion-theme-subtle-border: var(--color-inverse-subtle-border);
   }
   .accordion-solid, .accordion-subtle, .accordion-outline {
     block-size: fit-content;
-    border: var(--accordion-border-width) solid var(--accordion-theme-color);
+    border: var(--accordion-border-width) solid var(--accordion-theme-border);
     border-radius: var(--accordion-border-radius);
   }
   .accordion-solid > details + details, .accordion-subtle > details + details, .accordion-outline > details + details {
-    border-block-start: var(--accordion-border-width) solid var(--accordion-theme-color);
+    border-block-start: var(--accordion-border-width) solid var(--accordion-theme-border);
   }
   .accordion-solid > details::details-content, .accordion-subtle > details::details-content, .accordion-outline > details::details-content {
     block-size: 0;
@@ -749,7 +787,7 @@
   .accordion-body {
     padding-block: var(--accordion-padding-block);
     padding-inline: var(--accordion-padding-inline);
-    border-block-start: var(--accordion-border-width) solid var(--accordion-theme-color);
+    border-block-start: var(--accordion-border-width) solid var(--accordion-theme-border);
   }
   .accordion-solid > details > summary {
     background-color: var(--accordion-theme-color);
@@ -762,11 +800,11 @@
     background-color: color-mix(in srgb, var(--accordion-theme-color), var(--accordion-theme-state) var(--state-mix-strong));
   }
   .accordion-subtle {
-    border-color: var(--accordion-theme-subtle);
+    border-color: var(--accordion-theme-subtle-border);
   }
   .accordion-subtle > details + details,
   .accordion-subtle > details > .accordion-body {
-    border-block-start-color: var(--accordion-theme-subtle);
+    border-block-start-color: var(--accordion-theme-subtle-border);
   }
   .accordion-subtle > details > summary {
     background-color: var(--accordion-theme-subtle);

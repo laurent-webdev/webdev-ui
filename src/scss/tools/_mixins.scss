@@ -43,3 +43,11 @@
     --color-#{$color}-emphasis-strong: light-dark(oklch(from var(--color-#{$color}) 0.35 c h), oklch(from var(--color-#{$color}) 0.93 c h));
   }
 }
+
+// Bordures : la couleur avec un peu de son contraste (CanvasText : noir en clair, blanc en sombre, le contraste du subtle)
+@mixin border-colors($colors) {
+  @each $color in $colors {
+    --color-#{$color}-border: color-mix(in srgb, var(--color-#{$color}), var(--color-#{$color}-contrast) 10%);
+    --color-#{$color}-subtle-border: color-mix(in srgb, var(--color-#{$color}-subtle), CanvasText 10%);
+  }
+}

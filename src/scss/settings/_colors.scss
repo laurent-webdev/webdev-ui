@@ -1,6 +1,6 @@
 @use '../tools/mixins';
 
-// Les couleurs qui ont des dérivées (contrast, state, subtle, emphasis, emphasis-strong)
+// Les couleurs qui ont des dérivées (contrast, state, subtle, emphasis, emphasis-strong, border)
 $colors: primary, secondary, accent, success, danger, warning, info, neutral, inverse;
 
 :root {
@@ -43,4 +43,5 @@ $colors: primary, secondary, accent, success, danger, warning, info, neutral, in
   @include mixins.subtle-colors($colors);
   @include mixins.emphasis-colors($colors);
   @include mixins.emphasis-strong-colors($colors);
+  @include mixins.border-colors($colors);
 }

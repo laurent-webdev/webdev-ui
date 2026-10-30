@@ -16,6 +16,8 @@
         --accordion-theme-subtle: var(--color-neutral-subtle);
         --accordion-theme-emphasis: var(--color-neutral-emphasis);
         --accordion-theme-emphasis-strong: var(--color-neutral-emphasis-strong);
+        --accordion-theme-border: var(--color-neutral-border);
+        --accordion-theme-subtle-border: var(--color-neutral-subtle-border);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses accordéons
@@ -27,21 +29,23 @@
             --accordion-theme-subtle: var(--color-#{$color}-subtle);
             --accordion-theme-emphasis: var(--color-#{$color}-emphasis);
             --accordion-theme-emphasis-strong: var(--color-#{$color}-emphasis-strong);
+            --accordion-theme-border: var(--color-#{$color}-border);
+            --accordion-theme-subtle-border: var(--color-#{$color}-subtle-border);
         }
     }
 
     // Forme commune : chaque panneau est un <details>, ouvert et fermé par le navigateur, sans JS
-    // Le cadre et les traits ont la couleur du thème (subtle : celle du fond léger) ; la variante dit le fond et le texte du titre
+    // Le cadre et les traits ont la couleur de bordure du thème (subtle : celle du fond léger) ; la variante dit le fond et le texte du titre
     .accordion-solid, .accordion-subtle, .accordion-outline {
         // La hauteur de son contenu : dans une grille ou un flex, ne s'étire pas à la hauteur d'un voisin ouvert
         // (stretch n'agrandit qu'une hauteur auto ; align-self: start rétrécirait la largeur dans un flex en colonne)
         block-size: fit-content;
-        border: var(--accordion-border-width) solid var(--accordion-theme-color);
+        border: var(--accordion-border-width) solid var(--accordion-theme-border);
         border-radius: var(--accordion-border-radius);
 
         // Un trait entre deux panneaux
         > details + details {
-            border-block-start: var(--accordion-border-width) solid var(--accordion-theme-color);
+            border-block-start: var(--accordion-border-width) solid var(--accordion-theme-border);
         }
 
         // Fermé : hauteur 0 ; la hauteur s'anime vers auto grâce à l'interpolate-size du reset
@@ -125,7 +129,7 @@
     .accordion-body {
         padding-block: var(--accordion-padding-block);
         padding-inline: var(--accordion-padding-inline);
-        border-block-start: var(--accordion-border-width) solid var(--accordion-theme-color);
+        border-block-start: var(--accordion-border-width) solid var(--accordion-theme-border);
     }
 
     // Solid : titre en fond plein, mélangé à l'opposé du texte au survol et au clic
@@ -143,12 +147,12 @@
 
     // Subtle : titre en fond léger, renforcé par la couleur du thème au survol et au clic, avec un texte plus fort
     .accordion-subtle {
-        // Cadre et traits de la couleur du fond léger
-        border-color: var(--accordion-theme-subtle);
+        // Cadre et traits : la bordure du fond léger
+        border-color: var(--accordion-theme-subtle-border);
 
         > details + details,
         > details > .accordion-body {
-            border-block-start-color: var(--accordion-theme-subtle);
+            border-block-start-color: var(--accordion-theme-subtle-border);
         }
 
         > details > summary {
