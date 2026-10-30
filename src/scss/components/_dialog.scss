@@ -16,6 +16,8 @@
         --dialog-theme-color: var(--color-neutral);
         --dialog-theme-contrast: var(--color-neutral-contrast);
         --dialog-theme-subtle: var(--color-neutral-subtle);
+        --dialog-theme-border: var(--color-neutral-border);
+        --dialog-theme-subtle-border: var(--color-neutral-subtle-border);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses dialogues
@@ -24,6 +26,8 @@
             --dialog-theme-color: var(--color-#{$color});
             --dialog-theme-contrast: var(--color-#{$color}-contrast);
             --dialog-theme-subtle: var(--color-#{$color}-subtle);
+            --dialog-theme-border: var(--color-#{$color}-border);
+            --dialog-theme-subtle-border: var(--color-#{$color}-subtle-border);
         }
     }
 
@@ -41,7 +45,7 @@
         max-height: calc(100% - 2rem);
         // Le padding est dans les zones (natif : 1em sur le dialogue)
         padding: 0;
-        border: var(--dialog-border-width) solid var(--dialog-theme-color);
+        border: var(--dialog-border-width) solid var(--dialog-theme-border);
         border-radius: var(--dialog-border-radius);
         box-shadow: var(--box-shadow-xl);
         transition-property: opacity, scale;
@@ -67,10 +71,10 @@
 
         // Un trait sous l'en-tête et au-dessus du pied
         > .dialog-header {
-            border-block-end: var(--dialog-border-width) solid var(--dialog-theme-color);
+            border-block-end: var(--dialog-border-width) solid var(--dialog-theme-border);
         }
         > .dialog-footer {
-            border-block-start: var(--dialog-border-width) solid var(--dialog-theme-color);
+            border-block-start: var(--dialog-border-width) solid var(--dialog-theme-border);
         }
     }
 
@@ -134,18 +138,18 @@
         }
     }
 
-    // Subtle : fond léger, cadre et traits de la même couleur ; le texte reste celui de la page
+    // Subtle : fond léger, cadre et traits de sa couleur de bordure ; le texte reste celui de la page
     .dialog-subtle {
-        border-color: var(--dialog-theme-subtle);
+        border-color: var(--dialog-theme-subtle-border);
         background-color: var(--dialog-theme-subtle);
 
         > .dialog-header,
         > .dialog-footer {
-            border-color: var(--dialog-theme-subtle);
+            border-color: var(--dialog-theme-subtle-border);
         }
     }
 
-    // Outline : cadre de la couleur du thème, sur le fond de la page (natif : Canvas, pas notre fond sombre)
+    // Outline : le cadre seul, sur le fond de la page (natif : Canvas, pas notre fond sombre)
     .dialog-outline {
         background-color: var(--color-background);
     }

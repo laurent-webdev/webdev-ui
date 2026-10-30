@@ -76,7 +76,7 @@
             <tr><th scope="row">--alert-border-width</th><td>--border-width</td><td>cadre</td></tr>
         </tbody>
     </table>
-    <p class="mt-2">Les couleurs viennent de .theme-* : le cadre a la couleur du thème (alert-subtle : celle du fond léger), la variante dit le fond et le texte.</p>
+    <p class="mt-2">Les couleurs viennent de .theme-* : le cadre a la couleur de bordure du thème (--color-*-border ; alert-subtle : --color-*-subtle-border), la variante dit le fond et le texte.</p>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --alert-padding-block: 0.75rem; }
@@ -110,7 +110,6 @@
     <h2 class="mt-10">Limites</h2>
     <ul>
         <li>Pas de bouton de fermeture ni de disparition automatique : il faut du JS. Ce sera le rôle des notifications, plus tard.</li>
-        <li>En clair, le cadre d'alert-subtle se voit à peine sur le fond de la page : le fond léger suffit à la délimiter.</li>
         <li>Dans alert-solid, un .theme-* sur un lien ne change rien : les liens prennent toujours la couleur du texte.</li>
         <li>Pas de tailles : changer les variables dans le site.</li>
     </ul>

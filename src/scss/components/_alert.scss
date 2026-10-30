@@ -12,6 +12,8 @@
         --alert-theme-contrast: var(--color-neutral-contrast);
         --alert-theme-subtle: var(--color-neutral-subtle);
         --alert-theme-emphasis: var(--color-neutral-emphasis);
+        --alert-theme-border: var(--color-neutral-border);
+        --alert-theme-subtle-border: var(--color-neutral-subtle-border);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore toutes ses alertes
@@ -21,6 +23,8 @@
             --alert-theme-contrast: var(--color-#{$color}-contrast);
             --alert-theme-subtle: var(--color-#{$color}-subtle);
             --alert-theme-emphasis: var(--color-#{$color}-emphasis);
+            --alert-theme-border: var(--color-#{$color}-border);
+            --alert-theme-subtle-border: var(--color-#{$color}-subtle-border);
         }
     }
 
@@ -28,7 +32,7 @@
     .alert-solid, .alert-subtle, .alert-outline {
         padding-block: var(--alert-padding-block);
         padding-inline: var(--alert-padding-inline);
-        border: var(--alert-border-width) solid var(--alert-theme-color);
+        border: var(--alert-border-width) solid var(--alert-theme-border);
         border-radius: var(--alert-border-radius);
     }
 
@@ -43,14 +47,14 @@
         }
     }
 
-    // Subtle : fond léger, cadre de la même couleur
+    // Subtle : fond léger, cadre de sa couleur de bordure
     .alert-subtle {
-        border-color: var(--alert-theme-subtle);
+        border-color: var(--alert-theme-subtle-border);
         background-color: var(--alert-theme-subtle);
         color: var(--alert-theme-emphasis);
     }
 
-    // Outline : cadre de la couleur du thème, sur le fond de la page
+    // Outline : le cadre seul, sur le fond de la page
     .alert-outline {
         background-color: transparent;
         color: var(--alert-theme-emphasis);
