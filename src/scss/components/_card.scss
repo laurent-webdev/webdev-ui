@@ -11,6 +11,8 @@
         --card-theme-color: var(--color-neutral);
         --card-theme-contrast: var(--color-neutral-contrast);
         --card-theme-subtle: var(--color-neutral-subtle);
+        --card-theme-border: var(--color-neutral-border);
+        --card-theme-subtle-border: var(--color-neutral-subtle-border);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore toutes ses cartes
@@ -19,15 +21,17 @@
             --card-theme-color: var(--color-#{$color});
             --card-theme-contrast: var(--color-#{$color}-contrast);
             --card-theme-subtle: var(--color-#{$color}-subtle);
+            --card-theme-border: var(--color-#{$color}-border);
+            --card-theme-subtle-border: var(--color-#{$color}-subtle-border);
         }
     }
 
     // Forme commune : en-tête, corps et pied empilés ; dans une grille, les cartes ont la même hauteur
-    // Le cadre et les traits ont la couleur du thème ; la variante dit le fond et le texte
+    // Le cadre et les traits ont la couleur de bordure du thème (subtle : celle du fond léger) ; la variante dit le fond et le texte
     .card-solid, .card-subtle, .card-outline {
         display: flex;
         flex-direction: column;
-        border: var(--card-border-width) solid var(--card-theme-color);
+        border: var(--card-border-width) solid var(--card-theme-border);
         border-radius: var(--card-border-radius);
 
         // Une image en haut ou en bas : toute la largeur
@@ -47,10 +51,10 @@
 
         // Un trait sous l'en-tête et au-dessus du pied
         > .card-header {
-            border-block-end: var(--card-border-width) solid var(--card-theme-color);
+            border-block-end: var(--card-border-width) solid var(--card-theme-border);
         }
         > .card-footer {
-            border-block-start: var(--card-border-width) solid var(--card-theme-color);
+            border-block-start: var(--card-border-width) solid var(--card-theme-border);
         }
     }
 
@@ -75,18 +79,18 @@
         }
     }
 
-    // Subtle : fond léger, cadre et traits de la même couleur ; le texte reste celui de la page
+    // Subtle : fond léger, cadre et traits de sa couleur de bordure ; le texte reste celui de la page
     .card-subtle {
-        border-color: var(--card-theme-subtle);
+        border-color: var(--card-theme-subtle-border);
         background-color: var(--card-theme-subtle);
 
         > .card-header,
         > .card-footer {
-            border-color: var(--card-theme-subtle);
+            border-color: var(--card-theme-subtle-border);
         }
     }
 
-    // Outline : cadre de la couleur du thème, sur le fond de la page
+    // Outline : le cadre seul, sur le fond de la page
     .card-outline {
         background-color: transparent;
     }

@@ -117,7 +117,7 @@
             <tr><th scope="row">--card-border-width</th><td>--border-width</td><td>cadre et traits</td></tr>
         </tbody>
     </table>
-    <p class="mt-2">Les couleurs viennent de .theme-* : le cadre et les traits ont la couleur du thème (card-subtle : celle du fond léger), la variante dit le fond. Le texte reste celui de la page, sauf sur card-solid (noir ou blanc).</p>
+    <p class="mt-2">Les couleurs viennent de .theme-* : le cadre et les traits ont la couleur de bordure du thème (--color-*-border ; card-subtle : --color-*-subtle-border), la variante dit le fond. Le texte reste celui de la page, sauf sur card-solid (noir ou blanc).</p>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --card-padding-inline: 1.5rem; }
@@ -146,7 +146,7 @@
 
     <h2 class="mt-10">Limites</h2>
     <ul>
-        <li>Les traits sous l'en-tête et au-dessus du pied ne se voient que sur card-outline : sur card-solid et card-subtle, ils ont la couleur du fond, l'en-tête et le pied sont séparés par leur padding.</li>
+        <li>Les traits sous l'en-tête et au-dessus du pied ont la couleur du cadre : discrets sur card-solid et card-subtle, plus marqués sur card-outline.</li>
         <li>Seul le premier ou le dernier élément de la carte suit ses coins : une image dans un lien ou dans un &lt;picture&gt; garde ses coins carrés (le rayon du parent ne coupe pas l'image).</li>
         <li>Pas de carte entièrement cliquable, ni de carte horizontale (image à côté) : plus tard, si besoin.</li>
         <li>Un .theme-* sur la carte colore aussi ses boutons, liens et badges (les tokens sont hérités) : sur card-solid, un btn-solid du même thème disparaît dans le fond, lui donner un autre thème (theme-inverse).</li>
