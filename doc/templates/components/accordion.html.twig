@@ -4,15 +4,31 @@
 
 {% block body %}
     <h1>Accordéon</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Des panneaux qui s'ouvrent et se ferment : des &lt;details&gt; natifs, sans JavaScript, dans une variante (accordion-solid, -subtle, -outline) et une couleur .theme-*.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Des panneaux qui s'ouvrent et se ferment : des &lt;details&gt; natifs, sans JavaScript, accordion par défaut, ou une variante (accordion-solid, -subtle, -outline) avec une couleur .theme-*.</p>
+
+    <h2 class="mt-10">Par défaut</h2>
+    <div class="accordion mt-2">
+        <details name="demo-default" open>
+            <summary>accordion</summary>
+            <div class="accordion-body">
+                <p>Pas de couleur : fond transparent, cadre et traits --border-color, le texte autour, un fond gris léger au survol et au clic du titre. Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres.</p>
+            </div>
+        </details>
+        <details name="demo-default">
+            <summary>Deuxième panneau</summary>
+            <div class="accordion-body">
+                <p>Même name : il ferme le premier.</p>
+            </div>
+        </details>
+    </div>
 
     {% for variant in ['solid', 'subtle', 'outline'] %}
         <h2 class="mt-10">accordion-{{ variant }}</h2>
         <div class="grid mt-2">
-            {% for theme in ['', 'theme-primary'] %}
+            {% for theme in ['theme-neutral', 'theme-primary'] %}
                 <div class="accordion-{{ variant }} {{ theme }} md:col-6">
                     <details name="demo-{{ variant }}-{{ loop.index }}" open>
-                        <summary>accordion-{{ variant }} {{ theme ?: 'sans thème (neutral)' }}</summary>
+                        <summary>accordion-{{ variant }} {{ theme }}</summary>
                         <div class="accordion-body">
                             <p>Le contenu reste sur le fond de la page.</p>
                         </div>
@@ -45,9 +61,9 @@
     <p class="mt-4">Tailles : padding et taille du texte, avec n'importe quelle variante ; accordion-md = le défaut</p>
     <div class="grid mt-2">
         {% for size in ['xs', 'sm', 'md', 'lg'] %}
-            <div class="accordion-outline accordion-{{ size }} md:col-6">
+            <div class="accordion accordion-{{ size }} md:col-6">
                 <details>
-                    <summary>accordion-outline accordion-{{ size }}</summary>
+                    <summary>accordion accordion-{{ size }}</summary>
                     <div class="accordion-body">
                         <p>Le contenu suit la taille du texte.</p>
                     </div>
@@ -57,7 +73,7 @@
     </div>
 
     <p class="mt-4">Un seul panneau ouvert à la fois : les &lt;details&gt; ont le même attribut name</p>
-    <div class="accordion-outline mt-2">
+    <div class="accordion mt-2">
         <details name="demo-accordion" open>
             <summary>Faut-il du JavaScript ?</summary>
             <div class="accordion-body">
@@ -102,7 +118,7 @@
         &lt;div class="accordion-body"&gt;Réponse&lt;/div&gt;
     &lt;/details&gt;
 &lt;/div&gt;</code></pre>
-    <p>Comme les boutons : une variante (accordion-solid, accordion-subtle, accordion-outline) qui s'utilise seule, et une couleur .theme-*, neutral sans classe. Un seul panneau (un « Voir plus ») : un seul &lt;details&gt; dans l'accordéon.</p>
+    <p>Comme les boutons : une variante (accordion-solid, accordion-subtle, accordion-outline) qui s'utilise seule, et une couleur .theme-*. accordion seul : le défaut, sans couleur. Un seul panneau (un « Voir plus ») : un seul &lt;details&gt; dans l'accordéon.</p>
 
     <h2 class="mt-10">Variables</h2>
     <table class="mt-2">
@@ -139,6 +155,8 @@
     </ul>
 
     <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="accordion-solid"&gt;…&lt;/div&gt;</code></pre>
+    <p>Une variante sans .theme-* n'a pas de couleur : le titre n'a pas de fond. Écrire accordion, ou accordion-solid avec une couleur (theme-neutral pour le gris).</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;details&gt;
     &lt;summary&gt;Question&lt;/summary&gt;
     &lt;p&gt;Réponse&lt;/p&gt;
@@ -157,7 +175,7 @@
         <li>L'animation ne marche que dans Chrome et Edge (interpolate-size, MDN : « Limited availability ») : dans Firefox et Safari, le panneau s'ouvre d'un coup. Pas d'animation non plus avec « réduire les animations ».</li>
         <li>Un navigateur ancien ignore name : plusieurs panneaux peuvent être ouverts.</li>
         <li>Un contenu plus large que l'accordéon (tableau) dépasse du cadre : le mettre dans un bloc overflow-x-auto.</li>
-        <li>Comme btn-subtle, le survol d'accordion-subtle sans thème (neutral) se voit à peine : le gris du thème est presque celui du fond léger.</li>
+        <li>Comme btn-subtle, le survol d'accordion-subtle theme-neutral se voit à peine : le gris du thème est presque celui du fond léger.</li>
         <li>Fermer le dernier panneau arrondit tout de suite le bas de son titre, pendant que le contenu se replie encore : les coins sont un instant visibles.</li>
         <li>Pas de variante sans bordure, pas de style pour le titre ouvert : changer les variables dans le site.</li>
         <li>Pas de taille responsive (md:accordion-lg) : réservé à la mise en page.</li>

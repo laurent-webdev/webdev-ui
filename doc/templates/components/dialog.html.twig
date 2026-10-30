@@ -4,19 +4,22 @@
 
 {% block body %}
     <h1>Dialogue</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Un &lt;dialog&gt; natif, du même style que les cartes : une variante (dialog-solid, dialog-subtle, dialog-outline) qui s'utilise seule, une couleur .theme-*, et les zones dialog-header, dialog-body, dialog-footer. Les boutons l'ouvrent et le ferment sans JavaScript, avec les attributs command et commandfor. Avec data-dialog, le JS du framework l'efface aussi à la fermeture.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un &lt;dialog&gt; natif, du même style que les cartes : dialog par défaut, ou une variante (dialog-solid, dialog-subtle, dialog-outline) avec une couleur .theme-*, et les zones dialog-header, dialog-body, dialog-footer. Les boutons l'ouvrent et le ferment sans JavaScript, avec les attributs command et commandfor. Avec data-dialog, le JS du framework l'efface aussi à la fermeture.</p>
+
+    <h2 class="mt-10">Par défaut</h2>
+    <p class="mt-2">dialog n'a pas de couleur : cadre et traits --border-color, le fond de la page (transparent, la page se verrait derrière le texte). Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres. Les dialogues ci-dessous sont en dialog, sauf dans « Variantes ».</p>
 
     <h2 class="mt-10">Comportements : l'attribut closedby</h2>
     <div class="d-flex flex-wrap-wrap gap-2 mt-2">
-        <button class="btn-outline" type="button" commandfor="dialog-default" command="show-modal">Sans closedby</button>
-        <button class="btn-outline" type="button" commandfor="dialog-any" command="show-modal">closedby="any"</button>
-        <button class="btn-outline" type="button" commandfor="dialog-none" command="show-modal">closedby="none"</button>
+        <button class="btn" type="button" commandfor="dialog-default" command="show-modal">Sans closedby</button>
+        <button class="btn" type="button" commandfor="dialog-any" command="show-modal">closedby="any"</button>
+        <button class="btn" type="button" commandfor="dialog-none" command="show-modal">closedby="none"</button>
     </div>
 
-    <dialog class="dialog-outline" id="dialog-default" data-dialog aria-labelledby="dialog-default-title">
+    <dialog class="dialog" id="dialog-default" data-dialog aria-labelledby="dialog-default-title">
         <div class="dialog-header">
             <h2 class="fs-lg" id="dialog-default-title">Sans closedby</h2>
-            <button class="btn-close-subtle" type="button" commandfor="dialog-default" command="close" aria-label="Fermer"></button>
+            <button class="btn-close" type="button" commandfor="dialog-default" command="close" aria-label="Fermer"></button>
         </div>
         <div class="dialog-body">
             <p>Se ferme avec Échap ou un bouton. Le focus est sur le premier élément focusable (la croix) ; à la fermeture, il revient sur le bouton qui a ouvert le dialogue.</p>
@@ -26,10 +29,10 @@
         </div>
     </dialog>
 
-    <dialog class="dialog-outline" id="dialog-any" data-dialog aria-labelledby="dialog-any-title" closedby="any">
+    <dialog class="dialog" id="dialog-any" data-dialog aria-labelledby="dialog-any-title" closedby="any">
         <div class="dialog-header">
             <h2 class="fs-lg" id="dialog-any-title">closedby="any"</h2>
-            <button class="btn-close-subtle" type="button" commandfor="dialog-any" command="close" aria-label="Fermer"></button>
+            <button class="btn-close" type="button" commandfor="dialog-any" command="close" aria-label="Fermer"></button>
         </div>
         <div class="dialog-body">
             <p>Se ferme avec Échap, un bouton, ou un clic à côté du dialogue.</p>
@@ -39,7 +42,7 @@
         </div>
     </dialog>
 
-    <dialog class="dialog-outline" id="dialog-none" data-dialog aria-labelledby="dialog-none-title" closedby="none">
+    <dialog class="dialog" id="dialog-none" data-dialog aria-labelledby="dialog-none-title" closedby="none">
         <div class="dialog-header">
             <h2 class="fs-lg" id="dialog-none-title">closedby="none"</h2>
         </div>
@@ -47,7 +50,7 @@
             <p>Se ferme seulement avec un bouton du dialogue : ni Échap, ni clic à côté. Pour un choix que la personne doit faire.</p>
         </div>
         <div class="dialog-footer">
-            <button class="btn-outline" type="button" commandfor="dialog-none" command="close">Refuser</button>
+            <button class="btn" type="button" commandfor="dialog-none" command="close">Refuser</button>
             <button class="btn-solid theme-primary" type="button" commandfor="dialog-none" command="close">Accepter</button>
         </div>
     </dialog>
@@ -70,15 +73,15 @@
 
     <h2 class="mt-10">Variantes</h2>
     <div class="d-flex flex-wrap-wrap gap-2 mt-2">
-        {% for dialog in [{variant: 'solid', theme: 'theme-primary'}, {variant: 'subtle', theme: 'theme-success'}, {variant: 'outline', theme: ''}] %}
-            <button class="btn-outline" type="button" commandfor="dialog-{{ dialog.variant }}" command="show-modal">dialog-{{ dialog.variant }} {{ dialog.theme }}</button>
+        {% for dialog in [{variant: 'solid', theme: 'theme-primary'}, {variant: 'subtle', theme: 'theme-success'}, {variant: 'outline', theme: 'theme-neutral'}] %}
+            <button class="btn" type="button" commandfor="dialog-{{ dialog.variant }}" command="show-modal">dialog-{{ dialog.variant }} {{ dialog.theme }}</button>
         {% endfor %}
     </div>
 
-    {% for dialog in [{variant: 'solid', theme: 'theme-primary'}, {variant: 'subtle', theme: 'theme-success'}, {variant: 'outline', theme: ''}] %}
+    {% for dialog in [{variant: 'solid', theme: 'theme-primary'}, {variant: 'subtle', theme: 'theme-success'}, {variant: 'outline', theme: 'theme-neutral'}] %}
         <dialog class="dialog-{{ dialog.variant }} {{ dialog.theme }}" id="dialog-{{ dialog.variant }}" data-dialog aria-labelledby="dialog-{{ dialog.variant }}-title">
             <div class="dialog-header">
-                <h2 class="fs-lg" id="dialog-{{ dialog.variant }}-title">dialog-{{ dialog.variant }} {{ dialog.theme ?: 'sans thème (neutral)' }}</h2>
+                <h2 class="fs-lg" id="dialog-{{ dialog.variant }}-title">dialog-{{ dialog.variant }} {{ dialog.theme }}</h2>
                 <button class="{{ dialog.variant == 'solid' ? 'btn-close-solid theme-inverse' : 'btn-close-subtle' }}" type="button" commandfor="dialog-{{ dialog.variant }}" command="close" aria-label="Fermer"></button>
             </div>
             <div class="dialog-body">
@@ -86,7 +89,7 @@
             </div>
             <div class="dialog-footer">
                 {% if dialog.variant != 'solid' %}
-                    <button class="btn-outline" type="button" commandfor="dialog-{{ dialog.variant }}" command="close">Annuler</button>
+                    <button class="btn" type="button" commandfor="dialog-{{ dialog.variant }}" command="close">Annuler</button>
                 {% endif %}
                 <button class="btn-solid {{ dialog.variant == 'solid' ? 'theme-inverse' : 'theme-primary' }}" type="button" commandfor="dialog-{{ dialog.variant }}" command="close">OK</button>
             </div>
@@ -97,15 +100,15 @@
     <h2 class="mt-10">Tailles</h2>
     <div class="d-flex flex-wrap-wrap gap-2 mt-2">
         {% for size in ['xs', 'sm', 'md', 'lg', 'xl'] %}
-            <button class="btn-outline" type="button" commandfor="dialog-size-{{ size }}" command="show-modal">dialog-{{ size }}</button>
+            <button class="btn" type="button" commandfor="dialog-size-{{ size }}" command="show-modal">dialog-{{ size }}</button>
         {% endfor %}
     </div>
 
     {% for size in ['xs', 'sm', 'md', 'lg', 'xl'] %}
-        <dialog class="dialog-outline dialog-{{ size }}" id="dialog-size-{{ size }}" data-dialog aria-labelledby="dialog-size-{{ size }}-title">
+        <dialog class="dialog dialog-{{ size }}" id="dialog-size-{{ size }}" data-dialog aria-labelledby="dialog-size-{{ size }}-title">
             <div class="dialog-header">
                 <h2 class="fs-lg" id="dialog-size-{{ size }}-title">dialog-{{ size }}</h2>
-                <button class="btn-close-subtle" type="button" commandfor="dialog-size-{{ size }}" command="close" aria-label="Fermer"></button>
+                <button class="btn-close" type="button" commandfor="dialog-size-{{ size }}" command="close" aria-label="Fermer"></button>
             </div>
             <div class="dialog-body">
                 <p>La largeur du breakpoint {{ size }}{% if size == 'md' %}, la taille par défaut{% endif %}. Sur un petit écran, le dialogue garde 1rem d'écart avec les bords.</p>
@@ -117,14 +120,14 @@
     <h2 class="mt-10">HTML</h2>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-solid theme-primary" type="button" commandfor="dialog-compte" command="show-modal"&gt;Mon compte&lt;/button&gt;
 
-&lt;dialog class="dialog-outline" id="dialog-compte" data-dialog aria-labelledby="dialog-compte-title"&gt;
+&lt;dialog class="dialog" id="dialog-compte" data-dialog aria-labelledby="dialog-compte-title"&gt;
     &lt;div class="dialog-header"&gt;
         &lt;h2 id="dialog-compte-title"&gt;Mon compte&lt;/h2&gt;
-        &lt;button class="btn-close-subtle" type="button" commandfor="dialog-compte" command="close" aria-label="Fermer"&gt;&lt;/button&gt;
+        &lt;button class="btn-close" type="button" commandfor="dialog-compte" command="close" aria-label="Fermer"&gt;&lt;/button&gt;
     &lt;/div&gt;
     &lt;div class="dialog-body"&gt;…&lt;/div&gt;
     &lt;div class="dialog-footer"&gt;
-        &lt;button class="btn-outline" type="button" commandfor="dialog-compte" command="close"&gt;Annuler&lt;/button&gt;
+        &lt;button class="btn" type="button" commandfor="dialog-compte" command="close"&gt;Annuler&lt;/button&gt;
         &lt;button class="btn-solid theme-primary" type="button" commandfor="dialog-compte" command="close"&gt;Enregistrer&lt;/button&gt;
     &lt;/div&gt;
 &lt;/dialog&gt;</code></pre>
@@ -137,10 +140,10 @@
     </ul>
 
     <h2 class="mt-10">La croix à gauche</h2>
-    <button class="btn-outline mt-2" type="button" commandfor="dialog-close-start" command="show-modal">Croix à gauche</button>
-    <dialog class="dialog-outline" id="dialog-close-start" data-dialog aria-labelledby="dialog-close-start-title">
+    <button class="btn mt-2" type="button" commandfor="dialog-close-start" command="show-modal">Croix à gauche</button>
+    <dialog class="dialog" id="dialog-close-start" data-dialog aria-labelledby="dialog-close-start-title">
         <div class="dialog-header">
-            <button class="btn-close-subtle" type="button" commandfor="dialog-close-start" command="close" aria-label="Fermer"></button>
+            <button class="btn-close" type="button" commandfor="dialog-close-start" command="close" aria-label="Fermer"></button>
             <h2 class="fs-lg" id="dialog-close-start-title">Croix à gauche</h2>
         </div>
         <div class="dialog-body">
@@ -151,7 +154,7 @@
 
     <h2 class="mt-10">Exemple : une confirmation</h2>
     <button class="btn-solid theme-danger mt-2" type="button" commandfor="dialog-confirm" command="show-modal">Supprimer le fichier</button>
-    <dialog class="dialog-outline dialog-xs" id="dialog-confirm" data-dialog role="alertdialog" aria-labelledby="dialog-confirm-title" aria-describedby="dialog-confirm-description">
+    <dialog class="dialog dialog-xs" id="dialog-confirm" data-dialog role="alertdialog" aria-labelledby="dialog-confirm-title" aria-describedby="dialog-confirm-description">
         <div class="dialog-header">
             <h2 class="fs-lg" id="dialog-confirm-title">Supprimer le fichier ?</h2>
         </div>
@@ -159,18 +162,18 @@
             <p id="dialog-confirm-description">Le fichier rapport.pdf sera supprimé définitivement.</p>
         </div>
         <div class="dialog-footer">
-            <button class="btn-outline" type="button" commandfor="dialog-confirm" command="close" autofocus>Annuler</button>
+            <button class="btn" type="button" commandfor="dialog-confirm" command="close" autofocus>Annuler</button>
             <button class="btn-solid theme-danger" type="button" commandfor="dialog-confirm" command="close" value="supprimer">Supprimer</button>
         </div>
     </dialog>
     <p class="mt-2">role="alertdialog" : un message qui demande une réponse, lu avec sa description (aria-describedby). autofocus sur Annuler, le choix sans risque (ARIA Authoring Practices). value="supprimer" : le JS du site lit le choix dans returnValue à la fermeture.</p>
 
     <h2 class="mt-10">Exemple : un contenu long</h2>
-    <button class="btn-outline mt-2" type="button" commandfor="dialog-long" command="show-modal">Conditions d'utilisation</button>
-    <dialog class="dialog-outline dialog-md" id="dialog-long" data-dialog aria-labelledby="dialog-long-title">
+    <button class="btn mt-2" type="button" commandfor="dialog-long" command="show-modal">Conditions d'utilisation</button>
+    <dialog class="dialog dialog-md" id="dialog-long" data-dialog aria-labelledby="dialog-long-title">
         <div class="dialog-header">
             <h2 class="fs-lg" id="dialog-long-title">Conditions d'utilisation</h2>
-            <button class="btn-close-subtle" type="button" commandfor="dialog-long" command="close" aria-label="Fermer"></button>
+            <button class="btn-close" type="button" commandfor="dialog-long" command="close" aria-label="Fermer"></button>
         </div>
         <div class="dialog-body">
             {% for i in 1..12 %}
@@ -239,11 +242,13 @@
     </ul>
 
     <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog-outline" open&gt;…&lt;/dialog&gt;</code></pre>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog-solid"&gt;…&lt;/dialog&gt;</code></pre>
+    <p>Une variante sans .theme-* n'a pas de couleur : le dialogue n'a pas de fond, et la page se voit à travers. Écrire dialog, ou dialog-solid avec une couleur (theme-neutral pour le gris).</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog" open&gt;…&lt;/dialog&gt;</code></pre>
     <p>L'attribut open écrit dans le HTML affiche un dialogue non modal : pas de fond assombri, Échap ne ferme pas, le focus reste dans la page.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog-outline" tabindex="-1"&gt;…&lt;/dialog&gt;</code></pre>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog" tabindex="-1"&gt;…&lt;/dialog&gt;</code></pre>
     <p>Pas de tabindex sur un &lt;dialog&gt; (MDN) : il ne reçoit pas le focus, ce sont ses éléments qui le reçoivent.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog-outline" closedby="none"&gt;&lt;p&gt;Chargement…&lt;/p&gt;&lt;/dialog&gt;</code></pre>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog" closedby="none"&gt;&lt;p&gt;Chargement…&lt;/p&gt;&lt;/dialog&gt;</code></pre>
     <p>closedby="none" sans bouton : la personne est bloquée. Un chargement s'affiche dans la page (spinner dans un role="status"), pas dans un dialogue qu'on ne peut pas fermer.</p>
 
     <h2 class="mt-10">Limites</h2>

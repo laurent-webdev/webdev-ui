@@ -95,7 +95,7 @@
         align-items: center;
         gap: 1rem;
 
-        > :is(.btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child {
+        > :is(.btn-close, .btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child {
             margin-inline-start: auto;
         }
     }

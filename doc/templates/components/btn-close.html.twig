@@ -4,8 +4,13 @@
 
 {% block body %}
     <h1>Bouton de fermeture</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Un bouton carré avec une croix, pour fermer un dialogue. Comme les boutons : une variante (btn-close-solid, btn-close-subtle, btn-close-outline) qui s'utilise seule, et une couleur .theme-*, neutral sans classe.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un bouton carré avec une croix, pour fermer un dialogue. Comme les boutons : btn-close par défaut, ou une variante (btn-close-solid, btn-close-subtle, btn-close-outline) avec une couleur .theme-*.</p>
 
+    <h2 class="mt-10">Par défaut</h2>
+    <p class="mt-2"><button class="btn-close" type="button" aria-label="Fermer"></button></p>
+    <p class="mt-2">btn-close n'a pas de couleur : fond transparent, cadre --border-color, la croix de la couleur du texte autour, un fond gris léger au survol et au clic. Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres.</p>
+
+    <h2 class="mt-10">Variantes et couleurs</h2>
     <table class="mt-2">
         <thead>
             <tr>
@@ -28,14 +33,14 @@
     </table>
 
     <h2 class="mt-10">HTML</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-close-subtle" type="button" commandfor="dialog-compte" command="close" aria-label="Fermer"&gt;&lt;/button&gt;</code></pre>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-close" type="button" commandfor="dialog-compte" command="close" aria-label="Fermer"&gt;&lt;/button&gt;</code></pre>
     <p>Les mêmes couleurs, survols et clics que le bouton du même nom : solid = fond plein, subtle = fond léger, outline = bordure qui devient solid au survol. La croix a la couleur du texte de la variante.</p>
 
     <h2 class="mt-10">Tailles</h2>
     {% for size in ['xs', 'sm', 'md', 'lg'] %}
         <div class="d-flex align-items-center gap-2 mt-2">
             <button class="btn-solid theme-primary btn-{{ size }}" type="button">btn-{{ size }}</button>
-            <button class="btn-close-subtle btn-close-{{ size }}" type="button" aria-label="Fermer"></button>
+            <button class="btn-close btn-close-{{ size }}" type="button" aria-label="Fermer"></button>
             <button class="btn-close-outline theme-primary btn-close-{{ size }}" type="button" aria-label="Fermer"></button>
         </div>
     {% endfor %}
@@ -53,7 +58,7 @@
         <tbody>
             <tr><th scope="row">--btn-close-size</th><td>1.5rem (24px, la taille xs)</td><td>côté du carré, bordure comprise ; la croix suit ; réécrite par les tailles</td></tr>
             <tr><th scope="row">--btn-close-border-radius</th><td>--border-radius-md</td><td>coins du carré et du contour de focus</td></tr>
-            <tr><th scope="row">--btn-close-border-width</th><td>--border-width</td><td>bordure (visible sur btn-close-outline)</td></tr>
+            <tr><th scope="row">--btn-close-border-width</th><td>--border-width</td><td>bordure (visible sur btn-close et btn-close-outline)</td></tr>
         </tbody>
     </table>
 
@@ -72,9 +77,11 @@
     </ul>
 
     <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-close-subtle" type="button"&gt;&lt;/button&gt;</code></pre>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-close-subtle" type="button" aria-label="Fermer"&gt;&lt;/button&gt;</code></pre>
+    <p>Une variante sans .theme-* n'a pas de couleur : pas de fond. Écrire btn-close, ou btn-close-subtle avec une couleur (theme-neutral pour le gris).</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-close" type="button"&gt;&lt;/button&gt;</code></pre>
     <p>Sans aria-label, le bouton n'a pas de nom : le lecteur d'écran dit seulement « bouton » (Lighthouse le signale).</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-close-subtle" type="button"&gt;×&lt;/button&gt;</code></pre>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-close" type="button"&gt;×&lt;/button&gt;</code></pre>
     <p>Le caractère × comme nom : lu « multiplication » par certains lecteurs d'écran, et affiché en plus de la croix dessinée (il déborde du carré). La croix est déjà dessinée : aria-label="Fermer" suffit.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog-solid theme-primary"&gt;… &lt;button class="btn-close-outline" …&gt;&lt;/button&gt;</code></pre>
     <p>Sur un fond plein, seul btn-close-solid est prévu, d'un autre thème (theme-inverse).</p>

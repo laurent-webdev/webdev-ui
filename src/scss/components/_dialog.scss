@@ -11,13 +11,6 @@
         // Largeur du breakpoint md (48rem), la taille par défaut
         --dialog-width: #{breakpoints.$screen-md};
         --dialog-transition-duration: 0.2s;
-
-        // Thème par défaut, sans classe .theme-*
-        --dialog-theme-color: var(--color-neutral);
-        --dialog-theme-contrast: var(--color-neutral-contrast);
-        --dialog-theme-subtle: var(--color-neutral-subtle);
-        --dialog-theme-border: var(--color-neutral-border);
-        --dialog-theme-subtle-border: var(--color-neutral-subtle-border);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses dialogues
@@ -37,15 +30,15 @@
     }
 
     // Forme commune : en-tête, corps et pied empilés, au-dessus de la page
-    // Le cadre et les traits ont la couleur du thème ; la variante dit le fond et le texte
-    .dialog-solid, .dialog-subtle, .dialog-outline {
+    // Cadre et traits gris ; les variantes les colorent et disent le fond et le texte
+    .dialog, .dialog-solid, .dialog-subtle, .dialog-outline {
         width: var(--dialog-width);
         // 1rem d'écart avec les bords de l'écran, comme le container
         max-width: calc(100% - 2rem);
         max-height: calc(100% - 2rem);
         // Le padding est dans les zones (natif : 1em sur le dialogue)
         padding: 0;
-        border: var(--dialog-border-width) solid var(--dialog-theme-border);
+        border: var(--dialog-border-width) solid var(--border-color);
         border-radius: var(--dialog-border-radius);
         box-shadow: var(--box-shadow-xl);
         transition-property: opacity, scale;
@@ -71,33 +64,33 @@
 
         // Un trait sous l'en-tête et au-dessus du pied
         > .dialog-header {
-            border-block-end: var(--dialog-border-width) solid var(--dialog-theme-border);
+            border-block-end: var(--dialog-border-width) solid var(--border-color);
         }
         > .dialog-footer {
-            border-block-start: var(--dialog-border-width) solid var(--dialog-theme-border);
+            border-block-start: var(--dialog-border-width) solid var(--border-color);
         }
     }
 
     // À l'ouverture : arrive transparent et un peu plus petit, la page s'assombrit et se floute
     @starting-style {
-        .dialog-solid[open], .dialog-subtle[open], .dialog-outline[open] {
+        .dialog[open], .dialog-solid[open], .dialog-subtle[open], .dialog-outline[open] {
             opacity: 0;
             scale: 0.95;
         }
 
-        .dialog-solid[open]::backdrop, .dialog-subtle[open]::backdrop, .dialog-outline[open]::backdrop {
+        .dialog[open]::backdrop, .dialog-solid[open]::backdrop, .dialog-subtle[open]::backdrop, .dialog-outline[open]::backdrop {
             background-color: transparent;
             backdrop-filter: none;
         }
     }
 
     // À la fermeture (dialog.ts) : redevient transparent et un peu plus petit, la page s'éclaircit, puis le JS ferme le dialogue
-    .dialog-solid[data-closing], .dialog-subtle[data-closing], .dialog-outline[data-closing] {
+    .dialog[data-closing], .dialog-solid[data-closing], .dialog-subtle[data-closing], .dialog-outline[data-closing] {
         opacity: 0;
         scale: 0.95;
     }
 
-    .dialog-solid[data-closing]::backdrop, .dialog-subtle[data-closing]::backdrop, .dialog-outline[data-closing]::backdrop {
+    .dialog[data-closing]::backdrop, .dialog-solid[data-closing]::backdrop, .dialog-subtle[data-closing]::backdrop, .dialog-outline[data-closing]::backdrop {
         background-color: transparent;
         backdrop-filter: none;
     }
@@ -114,7 +107,7 @@
         align-items: center;
         gap: 1rem;
 
-        > :is(.btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child {
+        > :is(.btn-close, .btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child {
             margin-inline-start: auto;
         }
     }
@@ -125,6 +118,21 @@
         flex-wrap: wrap;
         justify-content: end;
         gap: 0.5rem;
+    }
+
+    // Par défaut, sans couleur : cadre et traits gris ; le fond de la page, pas transparent : la page se verrait derrière le texte
+    .dialog {
+        background-color: var(--color-background);
+    }
+
+    // Solid et outline : cadre et traits de la couleur de bordure du thème
+    .dialog-solid, .dialog-outline {
+        border-color: var(--dialog-theme-border);
+
+        > .dialog-header,
+        > .dialog-footer {
+            border-color: var(--dialog-theme-border);
+        }
     }
 
     // Solid : fond plein ; les liens prennent la couleur du texte (l'emphasis serait illisible sur le fond plein)

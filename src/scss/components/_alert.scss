@@ -6,14 +6,6 @@
         --alert-padding-inline: 1rem;
         --alert-border-radius: var(--border-radius-md);
         --alert-border-width: var(--border-width);
-
-        // Thème par défaut, sans classe .theme-*
-        --alert-theme-color: var(--color-neutral);
-        --alert-theme-contrast: var(--color-neutral-contrast);
-        --alert-theme-subtle: var(--color-neutral-subtle);
-        --alert-theme-emphasis: var(--color-neutral-emphasis);
-        --alert-theme-border: var(--color-neutral-border);
-        --alert-theme-subtle-border: var(--color-neutral-subtle-border);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore toutes ses alertes
@@ -23,22 +15,26 @@
             --alert-theme-contrast: var(--color-#{$color}-contrast);
             --alert-theme-subtle: var(--color-#{$color}-subtle);
             --alert-theme-emphasis: var(--color-#{$color}-emphasis);
-            --alert-theme-border: var(--color-#{$color}-border);
-            --alert-theme-subtle-border: var(--color-#{$color}-subtle-border);
         }
     }
 
     // Forme commune : un bloc de message, le contenu s'empile (titre, paragraphes, liste…)
-    .alert-solid, .alert-subtle, .alert-outline {
+    .alert, .alert-solid, .alert-subtle, .alert-outline {
         padding-block: var(--alert-padding-block);
         padding-inline: var(--alert-padding-inline);
-        border: var(--alert-border-width) solid var(--alert-theme-border);
+        border: var(--alert-border-width) solid var(--border-color);
         border-radius: var(--alert-border-radius);
+    }
+
+    // Par défaut, sans couleur : fond transparent, cadre gris, le texte autour
+    .alert {
+        background-color: transparent;
     }
 
     // Solid : fond plein ; les liens prennent la couleur du texte (l'emphasis serait illisible sur le fond plein)
     // :where() : les .btn-* posés sur un <a> gardent leurs couleurs
     .alert-solid {
+        border-color: var(--alert-theme-color);
         background-color: var(--alert-theme-color);
         color: var(--alert-theme-contrast);
 
@@ -47,15 +43,16 @@
         }
     }
 
-    // Subtle : fond léger, cadre de sa couleur de bordure
+    // Subtle : fond léger, cadre de la même couleur
     .alert-subtle {
-        border-color: var(--alert-theme-subtle-border);
+        border-color: var(--alert-theme-subtle);
         background-color: var(--alert-theme-subtle);
         color: var(--alert-theme-emphasis);
     }
 
-    // Outline : le cadre seul, sur le fond de la page
+    // Outline : cadre de la couleur du thème, sur le fond de la page
     .alert-outline {
+        border-color: var(--alert-theme-color);
         background-color: transparent;
         color: var(--alert-theme-emphasis);
     }

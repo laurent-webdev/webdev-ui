@@ -6,12 +6,6 @@
         --badge-padding-inline: 0.5em;
         --badge-border-radius: var(--border-radius-md);
         --badge-border-width: var(--border-width);
-
-        // Thème par défaut, sans classe .theme-*
-        --badge-theme-color: var(--color-neutral);
-        --badge-theme-contrast: var(--color-neutral-contrast);
-        --badge-theme-subtle: var(--color-neutral-subtle);
-        --badge-theme-emphasis: var(--color-neutral-emphasis);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses badges
@@ -25,7 +19,7 @@
     }
 
     // Forme commune : une étiquette dans la ligne de texte, sur la ligne de base du texte autour
-    .badge-solid, .badge-subtle, .badge-outline {
+    .badge, .badge-solid, .badge-subtle, .badge-outline {
         display: inline-block;
         padding-block: var(--badge-padding-block);
         padding-inline: var(--badge-padding-inline);
@@ -34,12 +28,18 @@
         font-weight: var(--font-weight-semibold);
         line-height: 1;
         text-wrap: nowrap;
-        border: var(--badge-border-width) solid var(--badge-theme-color);
+        border: var(--badge-border-width) solid var(--border-color);
         border-radius: var(--badge-border-radius);
+    }
+
+    // Par défaut, sans couleur : fond transparent, cadre gris, le texte autour
+    .badge {
+        background-color: transparent;
     }
 
     // Solid : fond plein
     .badge-solid {
+        border-color: var(--badge-theme-color);
         background-color: var(--badge-theme-color);
         color: var(--badge-theme-contrast);
     }
@@ -53,6 +53,7 @@
 
     // Outline : cadre de la couleur du thème, sur le fond de la page
     .badge-outline {
+        border-color: var(--badge-theme-color);
         background-color: transparent;
         color: var(--badge-theme-emphasis);
     }

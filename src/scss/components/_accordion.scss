@@ -8,16 +8,6 @@
         --accordion-border-width: var(--border-width);
         // Ouverture et fermeture d'un panneau, rotation de la flèche
         --accordion-transition-duration: .2s;
-
-        // Thème par défaut, sans classe .theme-*
-        --accordion-theme-color: var(--color-neutral);
-        --accordion-theme-contrast: var(--color-neutral-contrast);
-        --accordion-theme-state: var(--color-neutral-state);
-        --accordion-theme-subtle: var(--color-neutral-subtle);
-        --accordion-theme-emphasis: var(--color-neutral-emphasis);
-        --accordion-theme-emphasis-strong: var(--color-neutral-emphasis-strong);
-        --accordion-theme-border: var(--color-neutral-border);
-        --accordion-theme-subtle-border: var(--color-neutral-subtle-border);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses accordéons
@@ -35,17 +25,17 @@
     }
 
     // Forme commune : chaque panneau est un <details>, ouvert et fermé par le navigateur, sans JS
-    // Le cadre et les traits ont la couleur de bordure du thème (subtle : celle du fond léger) ; la variante dit le fond et le texte du titre
-    .accordion-solid, .accordion-subtle, .accordion-outline {
+    // Cadre et traits gris ; les variantes les colorent et disent le fond et le texte du titre
+    .accordion, .accordion-solid, .accordion-subtle, .accordion-outline {
         // La hauteur de son contenu : dans une grille ou un flex, ne s'étire pas à la hauteur d'un voisin ouvert
         // (stretch n'agrandit qu'une hauteur auto ; align-self: start rétrécirait la largeur dans un flex en colonne)
         block-size: fit-content;
-        border: var(--accordion-border-width) solid var(--accordion-theme-border);
+        border: var(--accordion-border-width) solid var(--border-color);
         border-radius: var(--accordion-border-radius);
 
         // Un trait entre deux panneaux
         > details + details {
-            border-block-start: var(--accordion-border-width) solid var(--accordion-theme-border);
+            border-block-start: var(--accordion-border-width) solid var(--border-color);
         }
 
         // Fermé : hauteur 0 ; la hauteur s'anime vers auto grâce à l'interpolate-size du reset
@@ -129,7 +119,27 @@
     .accordion-body {
         padding-block: var(--accordion-padding-block);
         padding-inline: var(--accordion-padding-inline);
-        border-block-start: var(--accordion-border-width) solid var(--accordion-theme-border);
+        border-block-start: var(--accordion-border-width) solid var(--border-color);
+    }
+
+    // Par défaut, sans couleur : pas de fond, le texte autour ; au survol et au clic du titre, un fond gris léger
+    .accordion > details > summary {
+        &:hover {
+            background-color: var(--color-neutral-subtle);
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+        }
+    }
+
+    // Solid et outline : cadre et traits de la couleur de bordure du thème
+    .accordion-solid, .accordion-outline {
+        border-color: var(--accordion-theme-border);
+
+        > details + details,
+        > details > .accordion-body {
+            border-block-start-color: var(--accordion-theme-border);
+        }
     }
 
     // Solid : titre en fond plein, mélangé à l'opposé du texte au survol et au clic

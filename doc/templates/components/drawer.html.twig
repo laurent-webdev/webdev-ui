@@ -8,14 +8,14 @@
 
     <div class="d-flex flex-wrap-wrap gap-2 mt-2">
         {% for side in ['start', 'end', 'top', 'bottom'] %}
-            <button class="btn-outline" type="button" commandfor="drawer-{{ side }}" command="show-modal">drawer-{{ side }}</button>
+            <button class="btn" type="button" commandfor="drawer-{{ side }}" command="show-modal">drawer-{{ side }}</button>
         {% endfor %}
     </div>
 
     <dialog class="drawer-start" id="drawer-start" data-dialog aria-labelledby="drawer-start-title" closedby="any">
         <div class="drawer-header">
             <h2 class="fs-lg" id="drawer-start-title">Menu</h2>
-            <button class="btn-close-subtle" type="button" commandfor="drawer-start" command="close" aria-label="Fermer"></button>
+            <button class="btn-close" type="button" commandfor="drawer-start" command="close" aria-label="Fermer"></button>
         </div>
         <div class="drawer-body">
             <nav aria-label="Menu principal">
@@ -32,7 +32,7 @@
         <dialog class="drawer-{{ side }}" id="drawer-{{ side }}" data-dialog aria-labelledby="drawer-{{ side }}-title" closedby="any">
             <div class="drawer-header">
                 <h2 class="fs-lg" id="drawer-{{ side }}-title">drawer-{{ side }}</h2>
-                <button class="btn-close-subtle" type="button" commandfor="drawer-{{ side }}" command="close" aria-label="Fermer"></button>
+                <button class="btn-close" type="button" commandfor="drawer-{{ side }}" command="close" aria-label="Fermer"></button>
             </div>
             <div class="drawer-body">
                 <p>{% if side == 'end' %}Toute la hauteur, 20rem de large, à 1rem des bords ; sur un téléphone, une bande de la page reste visible à gauche.{% else %}Toute la largeur, 20rem de haut, à 1rem des bords ; un contenu plus long défile dans le panneau.{% endif %} Se ferme avec Échap, la croix ou un clic à côté (closedby="any").</p>
@@ -41,12 +41,12 @@
     {% endfor %}
 
     <h2 class="mt-10">HTML</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-outline" type="button" commandfor="menu" command="show-modal" aria-label="Menu"&gt;…&lt;/button&gt;
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn" type="button" commandfor="menu" command="show-modal" aria-label="Menu"&gt;…&lt;/button&gt;
 
 &lt;dialog class="drawer-start" id="menu" data-dialog aria-labelledby="menu-title" closedby="any"&gt;
     &lt;div class="drawer-header"&gt;
         &lt;h2 id="menu-title"&gt;Menu&lt;/h2&gt;
-        &lt;button class="btn-close-subtle" type="button" commandfor="menu" command="close" aria-label="Fermer"&gt;&lt;/button&gt;
+        &lt;button class="btn-close" type="button" commandfor="menu" command="close" aria-label="Fermer"&gt;&lt;/button&gt;
     &lt;/div&gt;
     &lt;div class="drawer-body"&gt;
         &lt;nav aria-label="Menu principal"&gt;…&lt;/nav&gt;

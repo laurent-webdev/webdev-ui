@@ -19,7 +19,7 @@
     <h2 class="mt-10">Contre-exemples</h2>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="cursor-pointer" onclick="…"&gt;Valider&lt;/div&gt;</code></pre>
     <p>Un faux bouton : pas de focus au clavier, pas annoncé comme bouton par les lecteurs d'écran (WCAG 2.1.1 et 4.1.2). Utiliser &lt;button&gt;, qui a déjà la main.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-solid cursor-not-allowed" type="button" disabled&gt;…&lt;/button&gt;</code></pre>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn cursor-not-allowed" type="button" disabled&gt;…&lt;/button&gt;</code></pre>
     <p>Sans effet : un bouton désactivé ne reçoit plus la souris (pointer-events: none), il garde la flèche.</p>
 
     <h2 class="mt-10">Limites</h2>

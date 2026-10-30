@@ -6,13 +6,6 @@
         --card-padding-inline: 1rem;
         --card-border-radius: var(--border-radius-md);
         --card-border-width: var(--border-width);
-
-        // Thème par défaut, sans classe .theme-*
-        --card-theme-color: var(--color-neutral);
-        --card-theme-contrast: var(--color-neutral-contrast);
-        --card-theme-subtle: var(--color-neutral-subtle);
-        --card-theme-border: var(--color-neutral-border);
-        --card-theme-subtle-border: var(--color-neutral-subtle-border);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore toutes ses cartes
@@ -27,11 +20,11 @@
     }
 
     // Forme commune : en-tête, corps et pied empilés ; dans une grille, les cartes ont la même hauteur
-    // Le cadre et les traits ont la couleur de bordure du thème (subtle : celle du fond léger) ; la variante dit le fond et le texte
-    .card-solid, .card-subtle, .card-outline {
+    // Cadre et traits gris ; les variantes les colorent et disent le fond et le texte
+    .card, .card-solid, .card-subtle, .card-outline {
         display: flex;
         flex-direction: column;
-        border: var(--card-border-width) solid var(--card-theme-border);
+        border: var(--card-border-width) solid var(--border-color);
         border-radius: var(--card-border-radius);
 
         // Une image en haut ou en bas : toute la largeur
@@ -51,10 +44,10 @@
 
         // Un trait sous l'en-tête et au-dessus du pied
         > .card-header {
-            border-block-end: var(--card-border-width) solid var(--card-theme-border);
+            border-block-end: var(--card-border-width) solid var(--border-color);
         }
         > .card-footer {
-            border-block-start: var(--card-border-width) solid var(--card-theme-border);
+            border-block-start: var(--card-border-width) solid var(--border-color);
         }
     }
 
@@ -66,6 +59,21 @@
 
     .card-body {
         flex-grow: 1;
+    }
+
+    // Par défaut, sans couleur : fond transparent, cadre et traits gris, le texte autour
+    .card {
+        background-color: transparent;
+    }
+
+    // Solid et outline : cadre et traits de la couleur de bordure du thème
+    .card-solid, .card-outline {
+        border-color: var(--card-theme-border);
+
+        > .card-header,
+        > .card-footer {
+            border-color: var(--card-theme-border);
+        }
     }
 
     // Solid : fond plein ; les liens prennent la couleur du texte (l'emphasis serait illisible sur le fond plein)

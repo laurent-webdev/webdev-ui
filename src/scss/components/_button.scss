@@ -6,14 +6,6 @@
         --btn-padding-inline: 1rem;
         --btn-border-radius: var(--border-radius-md);
         --btn-border-width: var(--border-width);
-
-        // Thème par défaut, sans classe .theme-*
-        --btn-theme-color: var(--color-neutral);
-        --btn-theme-contrast: var(--color-neutral-contrast);
-        --btn-theme-state: var(--color-neutral-state);
-        --btn-theme-subtle: var(--color-neutral-subtle);
-        --btn-theme-emphasis: var(--color-neutral-emphasis);
-        --btn-theme-emphasis-strong: var(--color-neutral-emphasis-strong);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses boutons
@@ -29,7 +21,7 @@
     }
 
     // Forme commune : la bordure existe toujours, toutes les variantes ont la même taille
-    .btn-solid, .btn-outline, .btn-subtle, .btn-text, .btn-link {
+    .btn, .btn-solid, .btn-outline, .btn-subtle, .btn-text, .btn-link {
         // Sur un <a> aussi : une boîte comme <button>, centrée, sans soulignement (btn-link le remet)
         display: inline-block;
         text-align: center;
@@ -41,9 +33,9 @@
         transition-property: background-color, border-color, color;
         transition-duration: var(--transition-duration);
 
-        // Couleur du thème en emphasis : visible sur le fond de page, même pour neutral ou warning
+        // Couleur du thème en emphasis : visible sur le fond de page, même pour neutral ou warning ; sans thème, celle du texte
         &:focus-visible {
-            outline: var(--focus-outline-width) solid var(--btn-theme-emphasis);
+            outline: var(--focus-outline-width) solid var(--btn-theme-emphasis, currentColor);
             outline-offset: var(--focus-outline-offset);
         }
 
@@ -51,6 +43,20 @@
         &:disabled {
             opacity: var(--disabled-opacity);
             pointer-events: none;
+        }
+    }
+
+    // Par défaut, sans couleur : fond transparent, le texte autour, cadre gris ; au survol et au clic, un fond gris léger
+    .btn {
+        border-color: var(--border-color);
+        background-color: transparent;
+        color: inherit;
+
+        &:hover {
+            background-color: var(--color-neutral-subtle);
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
         }
     }
 

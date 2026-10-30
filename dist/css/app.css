@@ -624,14 +624,6 @@
     --accordion-border-radius: var(--border-radius-md);
     --accordion-border-width: var(--border-width);
     --accordion-transition-duration: .2s;
-    --accordion-theme-color: var(--color-neutral);
-    --accordion-theme-contrast: var(--color-neutral-contrast);
-    --accordion-theme-state: var(--color-neutral-state);
-    --accordion-theme-subtle: var(--color-neutral-subtle);
-    --accordion-theme-emphasis: var(--color-neutral-emphasis);
-    --accordion-theme-emphasis-strong: var(--color-neutral-emphasis-strong);
-    --accordion-theme-border: var(--color-neutral-border);
-    --accordion-theme-subtle-border: var(--color-neutral-subtle-border);
   }
   .theme-primary {
     --accordion-theme-color: var(--color-primary);
@@ -723,26 +715,26 @@
     --accordion-theme-border: var(--color-inverse-border);
     --accordion-theme-subtle-border: var(--color-inverse-subtle-border);
   }
-  .accordion-solid, .accordion-subtle, .accordion-outline {
+  .accordion, .accordion-solid, .accordion-subtle, .accordion-outline {
     block-size: fit-content;
-    border: var(--accordion-border-width) solid var(--accordion-theme-border);
+    border: var(--accordion-border-width) solid var(--border-color);
     border-radius: var(--accordion-border-radius);
   }
-  .accordion-solid > details + details, .accordion-subtle > details + details, .accordion-outline > details + details {
-    border-block-start: var(--accordion-border-width) solid var(--accordion-theme-border);
+  .accordion > details + details, .accordion-solid > details + details, .accordion-subtle > details + details, .accordion-outline > details + details {
+    border-block-start: var(--accordion-border-width) solid var(--border-color);
   }
-  .accordion-solid > details::details-content, .accordion-subtle > details::details-content, .accordion-outline > details::details-content {
+  .accordion > details::details-content, .accordion-solid > details::details-content, .accordion-subtle > details::details-content, .accordion-outline > details::details-content {
     block-size: 0;
     overflow-y: clip;
     transition: block-size var(--accordion-transition-duration), content-visibility var(--accordion-transition-duration) allow-discrete;
   }
-  .accordion-solid > details[open]::details-content, .accordion-subtle > details[open]::details-content, .accordion-outline > details[open]::details-content {
+  .accordion > details[open]::details-content, .accordion-solid > details[open]::details-content, .accordion-subtle > details[open]::details-content, .accordion-outline > details[open]::details-content {
     block-size: auto;
   }
-  .accordion-solid > details:not([open]) > .accordion-body, .accordion-subtle > details:not([open]) > .accordion-body, .accordion-outline > details:not([open]) > .accordion-body {
+  .accordion > details:not([open]) > .accordion-body, .accordion-solid > details:not([open]) > .accordion-body, .accordion-subtle > details:not([open]) > .accordion-body, .accordion-outline > details:not([open]) > .accordion-body {
     border-block-start-color: transparent;
   }
-  .accordion-solid > details > summary, .accordion-subtle > details > summary, .accordion-outline > details > summary {
+  .accordion > details > summary, .accordion-solid > details > summary, .accordion-subtle > details > summary, .accordion-outline > details > summary {
     display: block;
     position: relative;
     padding-block: var(--accordion-padding-block);
@@ -751,10 +743,10 @@
     transition-property: background-color, color;
     transition-duration: var(--transition-duration);
   }
-  .accordion-solid > details > summary::-webkit-details-marker, .accordion-subtle > details > summary::-webkit-details-marker, .accordion-outline > details > summary::-webkit-details-marker {
+  .accordion > details > summary::-webkit-details-marker, .accordion-solid > details > summary::-webkit-details-marker, .accordion-subtle > details > summary::-webkit-details-marker, .accordion-outline > details > summary::-webkit-details-marker {
     display: none;
   }
-  .accordion-solid > details > summary::after, .accordion-subtle > details > summary::after, .accordion-outline > details > summary::after {
+  .accordion > details > summary::after, .accordion-solid > details > summary::after, .accordion-subtle > details > summary::after, .accordion-outline > details > summary::after {
     content: "";
     position: absolute;
     inset-inline-end: var(--accordion-padding-inline);
@@ -768,26 +760,40 @@
     transition-property: translate, rotate;
     transition-duration: var(--accordion-transition-duration);
   }
-  .accordion-solid > details > summary:focus-visible, .accordion-subtle > details > summary:focus-visible, .accordion-outline > details > summary:focus-visible {
+  .accordion > details > summary:focus-visible, .accordion-solid > details > summary:focus-visible, .accordion-subtle > details > summary:focus-visible, .accordion-outline > details > summary:focus-visible {
     outline: var(--focus-outline-width) solid currentColor;
     outline-offset: calc(var(--focus-outline-width) * -1);
   }
-  .accordion-solid > details[open] > summary::after, .accordion-subtle > details[open] > summary::after, .accordion-outline > details[open] > summary::after {
+  .accordion > details[open] > summary::after, .accordion-solid > details[open] > summary::after, .accordion-subtle > details[open] > summary::after, .accordion-outline > details[open] > summary::after {
     translate: 0 -25%;
     rotate: 225deg;
   }
-  .accordion-solid > details:first-of-type > summary, .accordion-subtle > details:first-of-type > summary, .accordion-outline > details:first-of-type > summary {
+  .accordion > details:first-of-type > summary, .accordion-solid > details:first-of-type > summary, .accordion-subtle > details:first-of-type > summary, .accordion-outline > details:first-of-type > summary {
     border-start-start-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
     border-start-end-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
   }
-  .accordion-solid > details:last-of-type:not([open]) > summary, .accordion-subtle > details:last-of-type:not([open]) > summary, .accordion-outline > details:last-of-type:not([open]) > summary {
+  .accordion > details:last-of-type:not([open]) > summary, .accordion-solid > details:last-of-type:not([open]) > summary, .accordion-subtle > details:last-of-type:not([open]) > summary, .accordion-outline > details:last-of-type:not([open]) > summary {
     border-end-start-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
     border-end-end-radius: calc(var(--accordion-border-radius) - var(--accordion-border-width));
   }
   .accordion-body {
     padding-block: var(--accordion-padding-block);
     padding-inline: var(--accordion-padding-inline);
-    border-block-start: var(--accordion-border-width) solid var(--accordion-theme-border);
+    border-block-start: var(--accordion-border-width) solid var(--border-color);
+  }
+  .accordion > details > summary:hover {
+    background-color: var(--color-neutral-subtle);
+  }
+  .accordion > details > summary:active {
+    background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+  }
+  .accordion-solid, .accordion-outline {
+    border-color: var(--accordion-theme-border);
+  }
+  .accordion-solid > details + details,
+  .accordion-solid > details > .accordion-body, .accordion-outline > details + details,
+  .accordion-outline > details > .accordion-body {
+    border-block-start-color: var(--accordion-theme-border);
   }
   .accordion-solid > details > summary {
     background-color: var(--accordion-theme-color);
@@ -857,92 +863,72 @@
     --alert-padding-inline: 1rem;
     --alert-border-radius: var(--border-radius-md);
     --alert-border-width: var(--border-width);
-    --alert-theme-color: var(--color-neutral);
-    --alert-theme-contrast: var(--color-neutral-contrast);
-    --alert-theme-subtle: var(--color-neutral-subtle);
-    --alert-theme-emphasis: var(--color-neutral-emphasis);
-    --alert-theme-border: var(--color-neutral-border);
-    --alert-theme-subtle-border: var(--color-neutral-subtle-border);
   }
   .theme-primary {
     --alert-theme-color: var(--color-primary);
     --alert-theme-contrast: var(--color-primary-contrast);
     --alert-theme-subtle: var(--color-primary-subtle);
     --alert-theme-emphasis: var(--color-primary-emphasis);
-    --alert-theme-border: var(--color-primary-border);
-    --alert-theme-subtle-border: var(--color-primary-subtle-border);
   }
   .theme-secondary {
     --alert-theme-color: var(--color-secondary);
     --alert-theme-contrast: var(--color-secondary-contrast);
     --alert-theme-subtle: var(--color-secondary-subtle);
     --alert-theme-emphasis: var(--color-secondary-emphasis);
-    --alert-theme-border: var(--color-secondary-border);
-    --alert-theme-subtle-border: var(--color-secondary-subtle-border);
   }
   .theme-accent {
     --alert-theme-color: var(--color-accent);
     --alert-theme-contrast: var(--color-accent-contrast);
     --alert-theme-subtle: var(--color-accent-subtle);
     --alert-theme-emphasis: var(--color-accent-emphasis);
-    --alert-theme-border: var(--color-accent-border);
-    --alert-theme-subtle-border: var(--color-accent-subtle-border);
   }
   .theme-success {
     --alert-theme-color: var(--color-success);
     --alert-theme-contrast: var(--color-success-contrast);
     --alert-theme-subtle: var(--color-success-subtle);
     --alert-theme-emphasis: var(--color-success-emphasis);
-    --alert-theme-border: var(--color-success-border);
-    --alert-theme-subtle-border: var(--color-success-subtle-border);
   }
   .theme-danger {
     --alert-theme-color: var(--color-danger);
     --alert-theme-contrast: var(--color-danger-contrast);
     --alert-theme-subtle: var(--color-danger-subtle);
     --alert-theme-emphasis: var(--color-danger-emphasis);
-    --alert-theme-border: var(--color-danger-border);
-    --alert-theme-subtle-border: var(--color-danger-subtle-border);
   }
   .theme-warning {
     --alert-theme-color: var(--color-warning);
     --alert-theme-contrast: var(--color-warning-contrast);
     --alert-theme-subtle: var(--color-warning-subtle);
     --alert-theme-emphasis: var(--color-warning-emphasis);
-    --alert-theme-border: var(--color-warning-border);
-    --alert-theme-subtle-border: var(--color-warning-subtle-border);
   }
   .theme-info {
     --alert-theme-color: var(--color-info);
     --alert-theme-contrast: var(--color-info-contrast);
     --alert-theme-subtle: var(--color-info-subtle);
     --alert-theme-emphasis: var(--color-info-emphasis);
-    --alert-theme-border: var(--color-info-border);
-    --alert-theme-subtle-border: var(--color-info-subtle-border);
   }
   .theme-neutral {
     --alert-theme-color: var(--color-neutral);
     --alert-theme-contrast: var(--color-neutral-contrast);
     --alert-theme-subtle: var(--color-neutral-subtle);
     --alert-theme-emphasis: var(--color-neutral-emphasis);
-    --alert-theme-border: var(--color-neutral-border);
-    --alert-theme-subtle-border: var(--color-neutral-subtle-border);
   }
   .theme-inverse {
     --alert-theme-color: var(--color-inverse);
     --alert-theme-contrast: var(--color-inverse-contrast);
     --alert-theme-subtle: var(--color-inverse-subtle);
     --alert-theme-emphasis: var(--color-inverse-emphasis);
-    --alert-theme-border: var(--color-inverse-border);
-    --alert-theme-subtle-border: var(--color-inverse-subtle-border);
   }
-  .alert-solid, .alert-subtle, .alert-outline {
+  .alert, .alert-solid, .alert-subtle, .alert-outline {
     padding-block: var(--alert-padding-block);
     padding-inline: var(--alert-padding-inline);
-    border: var(--alert-border-width) solid var(--alert-theme-border);
+    border: var(--alert-border-width) solid var(--border-color);
     border-radius: var(--alert-border-radius);
   }
+  .alert {
+    background-color: transparent;
+  }
   .alert-solid {
+    border-color: var(--alert-theme-color);
     background-color: var(--alert-theme-color);
     color: var(--alert-theme-contrast);
   }
@@ -950,11 +936,12 @@
     color: inherit;
   }
   .alert-subtle {
-    border-color: var(--alert-theme-subtle-border);
+    border-color: var(--alert-theme-subtle);
     background-color: var(--alert-theme-subtle);
     color: var(--alert-theme-emphasis);
   }
   .alert-outline {
+    border-color: var(--alert-theme-color);
     background-color: transparent;
     color: var(--alert-theme-emphasis);
   }
@@ -965,10 +952,6 @@
     --badge-padding-inline: 0.5em;
     --badge-border-radius: var(--border-radius-md);
     --badge-border-width: var(--border-width);
-    --badge-theme-color: var(--color-neutral);
-    --badge-theme-contrast: var(--color-neutral-contrast);
-    --badge-theme-subtle: var(--color-neutral-subtle);
-    --badge-theme-emphasis: var(--color-neutral-emphasis);
   }
   .theme-primary {
     --badge-theme-color: var(--color-primary);
@@ -1024,7 +1007,7 @@
     --badge-theme-subtle: var(--color-inverse-subtle);
     --badge-theme-emphasis: var(--color-inverse-emphasis);
   }
-  .badge-solid, .badge-subtle, .badge-outline {
+  .badge, .badge-solid, .badge-subtle, .badge-outline {
     display: inline-block;
     padding-block: var(--badge-padding-block);
     padding-inline: var(--badge-padding-inline);
@@ -1032,10 +1015,14 @@
     font-weight: var(--font-weight-semibold);
     line-height: 1;
     text-wrap: nowrap;
-    border: var(--badge-border-width) solid var(--badge-theme-color);
+    border: var(--badge-border-width) solid var(--border-color);
     border-radius: var(--badge-border-radius);
   }
+  .badge {
+    background-color: transparent;
+  }
   .badge-solid {
+    border-color: var(--badge-theme-color);
     background-color: var(--badge-theme-color);
     color: var(--badge-theme-contrast);
   }
@@ -1045,6 +1032,7 @@
     color: var(--badge-theme-emphasis);
   }
   .badge-outline {
+    border-color: var(--badge-theme-color);
     background-color: transparent;
     color: var(--badge-theme-emphasis);
   }
@@ -1054,12 +1042,6 @@
     --btn-close-size: 1.5rem;
     --btn-close-border-radius: var(--border-radius-md);
     --btn-close-border-width: var(--border-width);
-    --btn-close-theme-color: var(--color-neutral);
-    --btn-close-theme-contrast: var(--color-neutral-contrast);
-    --btn-close-theme-state: var(--color-neutral-state);
-    --btn-close-theme-subtle: var(--color-neutral-subtle);
-    --btn-close-theme-emphasis: var(--color-neutral-emphasis);
-    --btn-close-theme-emphasis-strong: var(--color-neutral-emphasis-strong);
   }
   .theme-primary {
     --btn-close-theme-color: var(--color-primary);
@@ -1133,7 +1115,7 @@
     --btn-close-theme-emphasis: var(--color-inverse-emphasis);
     --btn-close-theme-emphasis-strong: var(--color-inverse-emphasis-strong);
   }
-  .btn-close-solid, .btn-close-subtle, .btn-close-outline {
+  .btn-close, .btn-close-solid, .btn-close-subtle, .btn-close-outline {
     width: var(--btn-close-size);
     aspect-ratio: 1;
     padding: 0;
@@ -1142,7 +1124,7 @@
     transition-property: background-color, border-color, color;
     transition-duration: var(--transition-duration);
   }
-  .btn-close-solid::before, .btn-close-subtle::before, .btn-close-outline::before {
+  .btn-close::before, .btn-close-solid::before, .btn-close-subtle::before, .btn-close-outline::before {
     content: "";
     display: block;
     aspect-ratio: 1;
@@ -1151,15 +1133,26 @@
     mask-size: contain;
     mask-repeat: no-repeat;
   }
-  .btn-close-solid:focus-visible, .btn-close-subtle:focus-visible, .btn-close-outline:focus-visible {
-    outline: var(--focus-outline-width) solid var(--btn-close-theme-emphasis);
+  .btn-close:focus-visible, .btn-close-solid:focus-visible, .btn-close-subtle:focus-visible, .btn-close-outline:focus-visible {
+    outline: var(--focus-outline-width) solid var(--btn-close-theme-emphasis, currentColor);
     outline-offset: var(--focus-outline-offset);
   }
   @media (forced-colors: active) {
-    .btn-close-solid::before, .btn-close-subtle::before, .btn-close-outline::before {
+    .btn-close::before, .btn-close-solid::before, .btn-close-subtle::before, .btn-close-outline::before {
       forced-color-adjust: none;
       background-color: ButtonText;
     }
+  }
+  .btn-close {
+    border-color: var(--border-color);
+    background-color: transparent;
+    color: inherit;
+  }
+  .btn-close:hover {
+    background-color: var(--color-neutral-subtle);
+  }
+  .btn-close:active {
+    background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
   }
   .btn-close-solid {
     background-color: var(--btn-close-theme-color);
@@ -1215,12 +1208,6 @@
     --btn-padding-inline: 1rem;
     --btn-border-radius: var(--border-radius-md);
     --btn-border-width: var(--border-width);
-    --btn-theme-color: var(--color-neutral);
-    --btn-theme-contrast: var(--color-neutral-contrast);
-    --btn-theme-state: var(--color-neutral-state);
-    --btn-theme-subtle: var(--color-neutral-subtle);
-    --btn-theme-emphasis: var(--color-neutral-emphasis);
-    --btn-theme-emphasis-strong: var(--color-neutral-emphasis-strong);
   }
   .theme-primary {
     --btn-theme-color: var(--color-primary);
@@ -1294,7 +1281,7 @@
     --btn-theme-emphasis: var(--color-inverse-emphasis);
     --btn-theme-emphasis-strong: var(--color-inverse-emphasis-strong);
   }
-  .btn-solid, .btn-outline, .btn-subtle, .btn-text, .btn-link {
+  .btn, .btn-solid, .btn-outline, .btn-subtle, .btn-text, .btn-link {
     display: inline-block;
     text-align: center;
     text-decoration: none;
@@ -1305,13 +1292,24 @@
     transition-property: background-color, border-color, color;
     transition-duration: var(--transition-duration);
   }
-  .btn-solid:focus-visible, .btn-outline:focus-visible, .btn-subtle:focus-visible, .btn-text:focus-visible, .btn-link:focus-visible {
-    outline: var(--focus-outline-width) solid var(--btn-theme-emphasis);
+  .btn:focus-visible, .btn-solid:focus-visible, .btn-outline:focus-visible, .btn-subtle:focus-visible, .btn-text:focus-visible, .btn-link:focus-visible {
+    outline: var(--focus-outline-width) solid var(--btn-theme-emphasis, currentColor);
     outline-offset: var(--focus-outline-offset);
   }
-  .btn-solid:disabled, .btn-outline:disabled, .btn-subtle:disabled, .btn-text:disabled, .btn-link:disabled {
+  .btn:disabled, .btn-solid:disabled, .btn-outline:disabled, .btn-subtle:disabled, .btn-text:disabled, .btn-link:disabled {
     opacity: var(--disabled-opacity);
     pointer-events: none;
+  }
+  .btn {
+    border-color: var(--border-color);
+    background-color: transparent;
+    color: inherit;
+  }
+  .btn:hover {
+    background-color: var(--color-neutral-subtle);
+  }
+  .btn:active {
+    background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
   }
   .btn-solid {
     background-color: var(--btn-theme-color);
@@ -1399,11 +1397,6 @@
     --card-padding-inline: 1rem;
     --card-border-radius: var(--border-radius-md);
     --card-border-width: var(--border-width);
-    --card-theme-color: var(--color-neutral);
-    --card-theme-contrast: var(--color-neutral-contrast);
-    --card-theme-subtle: var(--color-neutral-subtle);
-    --card-theme-border: var(--color-neutral-border);
-    --card-theme-subtle-border: var(--color-neutral-subtle-border);
   }
   .theme-primary {
     --card-theme-color: var(--color-primary);
@@ -1468,28 +1461,28 @@
     --card-theme-border: var(--color-inverse-border);
     --card-theme-subtle-border: var(--color-inverse-subtle-border);
   }
-  .card-solid, .card-subtle, .card-outline {
+  .card, .card-solid, .card-subtle, .card-outline {
     display: flex;
     flex-direction: column;
-    border: var(--card-border-width) solid var(--card-theme-border);
+    border: var(--card-border-width) solid var(--border-color);
     border-radius: var(--card-border-radius);
   }
-  .card-solid > img, .card-subtle > img, .card-outline > img {
+  .card > img, .card-solid > img, .card-subtle > img, .card-outline > img {
     width: 100%;
   }
-  .card-solid > :first-child, .card-subtle > :first-child, .card-outline > :first-child {
+  .card > :first-child, .card-solid > :first-child, .card-subtle > :first-child, .card-outline > :first-child {
     border-start-start-radius: calc(var(--card-border-radius) - var(--card-border-width));
     border-start-end-radius: calc(var(--card-border-radius) - var(--card-border-width));
   }
-  .card-solid > :last-child, .card-subtle > :last-child, .card-outline > :last-child {
+  .card > :last-child, .card-solid > :last-child, .card-subtle > :last-child, .card-outline > :last-child {
     border-end-start-radius: calc(var(--card-border-radius) - var(--card-border-width));
     border-end-end-radius: calc(var(--card-border-radius) - var(--card-border-width));
   }
-  .card-solid > .card-header, .card-subtle > .card-header, .card-outline > .card-header {
-    border-block-end: var(--card-border-width) solid var(--card-theme-border);
+  .card > .card-header, .card-solid > .card-header, .card-subtle > .card-header, .card-outline > .card-header {
+    border-block-end: var(--card-border-width) solid var(--border-color);
   }
-  .card-solid > .card-footer, .card-subtle > .card-footer, .card-outline > .card-footer {
-    border-block-start: var(--card-border-width) solid var(--card-theme-border);
+  .card > .card-footer, .card-solid > .card-footer, .card-subtle > .card-footer, .card-outline > .card-footer {
+    border-block-start: var(--card-border-width) solid var(--border-color);
   }
   .card-header, .card-body, .card-footer {
     padding-block: var(--card-padding-block);
@@ -1497,6 +1490,17 @@
   }
   .card-body {
     flex-grow: 1;
+  }
+  .card {
+    background-color: transparent;
+  }
+  .card-solid, .card-outline {
+    border-color: var(--card-theme-border);
+  }
+  .card-solid > .card-header,
+  .card-solid > .card-footer, .card-outline > .card-header,
+  .card-outline > .card-footer {
+    border-color: var(--card-theme-border);
   }
   .card-solid {
     background-color: var(--card-theme-color);
@@ -1525,11 +1529,6 @@
     --dialog-border-width: var(--border-width);
     --dialog-width: 48rem;
     --dialog-transition-duration: 0.2s;
-    --dialog-theme-color: var(--color-neutral);
-    --dialog-theme-contrast: var(--color-neutral-contrast);
-    --dialog-theme-subtle: var(--color-neutral-subtle);
-    --dialog-theme-border: var(--color-neutral-border);
-    --dialog-theme-subtle-border: var(--color-neutral-subtle-border);
   }
   .theme-primary {
     --dialog-theme-color: var(--color-primary);
@@ -1597,52 +1596,52 @@
   :root:has(dialog:modal) {
     overflow: hidden;
   }
-  .dialog-solid, .dialog-subtle, .dialog-outline {
+  .dialog, .dialog-solid, .dialog-subtle, .dialog-outline {
     width: var(--dialog-width);
     max-width: calc(100% - 2rem);
     max-height: calc(100% - 2rem);
     padding: 0;
-    border: var(--dialog-border-width) solid var(--dialog-theme-border);
+    border: var(--dialog-border-width) solid var(--border-color);
     border-radius: var(--dialog-border-radius);
     box-shadow: var(--box-shadow-xl);
     transition-property: opacity, scale;
     transition-duration: var(--dialog-transition-duration);
   }
-  .dialog-solid::backdrop, .dialog-subtle::backdrop, .dialog-outline::backdrop {
+  .dialog::backdrop, .dialog-solid::backdrop, .dialog-subtle::backdrop, .dialog-outline::backdrop {
     background-color: var(--backdrop-background-color);
     backdrop-filter: var(--backdrop-filter);
     transition-property: background-color, backdrop-filter;
     transition-duration: var(--dialog-transition-duration);
   }
-  .dialog-solid > :first-child, .dialog-subtle > :first-child, .dialog-outline > :first-child {
+  .dialog > :first-child, .dialog-solid > :first-child, .dialog-subtle > :first-child, .dialog-outline > :first-child {
     border-start-start-radius: calc(var(--dialog-border-radius) - var(--dialog-border-width));
     border-start-end-radius: calc(var(--dialog-border-radius) - var(--dialog-border-width));
   }
-  .dialog-solid > :last-child, .dialog-subtle > :last-child, .dialog-outline > :last-child {
+  .dialog > :last-child, .dialog-solid > :last-child, .dialog-subtle > :last-child, .dialog-outline > :last-child {
     border-end-start-radius: calc(var(--dialog-border-radius) - var(--dialog-border-width));
     border-end-end-radius: calc(var(--dialog-border-radius) - var(--dialog-border-width));
   }
-  .dialog-solid > .dialog-header, .dialog-subtle > .dialog-header, .dialog-outline > .dialog-header {
-    border-block-end: var(--dialog-border-width) solid var(--dialog-theme-border);
+  .dialog > .dialog-header, .dialog-solid > .dialog-header, .dialog-subtle > .dialog-header, .dialog-outline > .dialog-header {
+    border-block-end: var(--dialog-border-width) solid var(--border-color);
   }
-  .dialog-solid > .dialog-footer, .dialog-subtle > .dialog-footer, .dialog-outline > .dialog-footer {
-    border-block-start: var(--dialog-border-width) solid var(--dialog-theme-border);
+  .dialog > .dialog-footer, .dialog-solid > .dialog-footer, .dialog-subtle > .dialog-footer, .dialog-outline > .dialog-footer {
+    border-block-start: var(--dialog-border-width) solid var(--border-color);
   }
   @starting-style {
-    .dialog-solid[open], .dialog-subtle[open], .dialog-outline[open] {
+    .dialog[open], .dialog-solid[open], .dialog-subtle[open], .dialog-outline[open] {
       opacity: 0;
       scale: 0.95;
     }
-    .dialog-solid[open]::backdrop, .dialog-subtle[open]::backdrop, .dialog-outline[open]::backdrop {
+    .dialog[open]::backdrop, .dialog-solid[open]::backdrop, .dialog-subtle[open]::backdrop, .dialog-outline[open]::backdrop {
       background-color: transparent;
       backdrop-filter: none;
     }
   }
-  .dialog-solid[data-closing], .dialog-subtle[data-closing], .dialog-outline[data-closing] {
+  .dialog[data-closing], .dialog-solid[data-closing], .dialog-subtle[data-closing], .dialog-outline[data-closing] {
     opacity: 0;
     scale: 0.95;
   }
-  .dialog-solid[data-closing]::backdrop, .dialog-subtle[data-closing]::backdrop, .dialog-outline[data-closing]::backdrop {
+  .dialog[data-closing]::backdrop, .dialog-solid[data-closing]::backdrop, .dialog-subtle[data-closing]::backdrop, .dialog-outline[data-closing]::backdrop {
     background-color: transparent;
     backdrop-filter: none;
   }
@@ -1655,7 +1654,7 @@
     align-items: center;
     gap: 1rem;
   }
-  .dialog-header > :is(.btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child {
+  .dialog-header > :is(.btn-close, .btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child {
     margin-inline-start: auto;
   }
   .dialog-footer {
@@ -1663,6 +1662,17 @@
     flex-wrap: wrap;
     justify-content: end;
     gap: 0.5rem;
+  }
+  .dialog {
+    background-color: var(--color-background);
+  }
+  .dialog-solid, .dialog-outline {
+    border-color: var(--dialog-theme-border);
+  }
+  .dialog-solid > .dialog-header,
+  .dialog-solid > .dialog-footer, .dialog-outline > .dialog-header,
+  .dialog-outline > .dialog-footer {
+    border-color: var(--dialog-theme-border);
   }
   .dialog-solid {
     background-color: var(--dialog-theme-color);
@@ -1794,7 +1804,7 @@
     align-items: center;
     gap: 1rem;
   }
-  .drawer-header > :is(.btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child {
+  .drawer-header > :is(.btn-close, .btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child {
     margin-inline-start: auto;
   }
 }
@@ -1963,9 +1973,6 @@
   }
 }
 @layer components {
-  :root {
-    --link-theme-emphasis: var(--color-neutral-emphasis);
-  }
   .theme-primary {
     --link-theme-emphasis: var(--color-primary-emphasis);
   }

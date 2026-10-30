@@ -5,14 +5,6 @@
         --btn-close-size: 1.5rem;
         --btn-close-border-radius: var(--border-radius-md);
         --btn-close-border-width: var(--border-width);
-
-        // Thème par défaut, sans classe .theme-*
-        --btn-close-theme-color: var(--color-neutral);
-        --btn-close-theme-contrast: var(--color-neutral-contrast);
-        --btn-close-theme-state: var(--color-neutral-state);
-        --btn-close-theme-subtle: var(--color-neutral-subtle);
-        --btn-close-theme-emphasis: var(--color-neutral-emphasis);
-        --btn-close-theme-emphasis-strong: var(--color-neutral-emphasis-strong);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses boutons de fermeture
@@ -28,7 +20,7 @@
     }
 
     // Forme commune : un carré, la bordure existe toujours, toutes les variantes ont la même taille
-    .btn-close-solid, .btn-close-subtle, .btn-close-outline {
+    .btn-close, .btn-close-solid, .btn-close-subtle, .btn-close-outline {
         width: var(--btn-close-size);
         aspect-ratio: 1;
         padding: 0;
@@ -48,9 +40,9 @@
             mask-repeat: no-repeat;
         }
 
-        // Couleur du thème en emphasis, comme les boutons
+        // Couleur du thème en emphasis, comme les boutons ; sans thème, celle du texte
         &:focus-visible {
-            outline: var(--focus-outline-width) solid var(--btn-close-theme-emphasis);
+            outline: var(--focus-outline-width) solid var(--btn-close-theme-emphasis, currentColor);
             outline-offset: var(--focus-outline-offset);
         }
 
@@ -60,6 +52,20 @@
                 forced-color-adjust: none;
                 background-color: ButtonText;
             }
+        }
+    }
+
+    // Par défaut, sans couleur : fond transparent, le texte autour, cadre gris ; au survol et au clic, un fond gris léger
+    .btn-close {
+        border-color: var(--border-color);
+        background-color: transparent;
+        color: inherit;
+
+        &:hover {
+            background-color: var(--color-neutral-subtle);
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
         }
     }
 

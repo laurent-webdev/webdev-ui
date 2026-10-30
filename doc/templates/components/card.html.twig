@@ -4,15 +4,25 @@
 
 {% block body %}
     <h1>Carte</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Un bloc de contenu avec un en-tête, un corps et un pied : card-solid, -subtle ou -outline, et une couleur .theme-*.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un bloc de contenu avec un en-tête, un corps et un pied : card par défaut, ou card-solid, -subtle, -outline avec une couleur .theme-*.</p>
+
+    <h2 class="mt-10">Par défaut</h2>
+    <article class="card mt-2">
+        <header class="card-header">
+            <h3 class="fs-md">card</h3>
+        </header>
+        <div class="card-body">
+            <p>Pas de couleur : fond transparent, cadre et traits --border-color, le texte autour. Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres.</p>
+        </div>
+    </article>
 
     {% for variant in ['solid', 'subtle', 'outline'] %}
         <h2 class="mt-10">card-{{ variant }}</h2>
         <div class="grid gap-4 mt-2">
-            {% for theme in ['', 'theme-primary', 'theme-success'] %}
+            {% for theme in ['theme-neutral', 'theme-primary', 'theme-success'] %}
                 <article class="card-{{ variant }} {{ theme }} md:col-4">
                     <header class="card-header">
-                        <h3 class="fs-md">card-{{ variant }} {{ theme ?: 'sans thème (neutral)' }}</h3>
+                        <h3 class="fs-md">card-{{ variant }} {{ theme }}</h3>
                     </header>
                     <div class="card-body">
                         <p>Le corps prend la place qui reste{% if loop.index == 2 %}, même quand une carte voisine a plus de texte : dans une grille, les cartes ont la même hauteur et les pieds restent alignés en bas{% endif %}.</p>
@@ -40,7 +50,7 @@
                 <p>Pied bg-primary-subtle</p>
             </footer>
         </article>
-        <article class="card-outline md:col-6 lg:col-3">
+        <article class="card md:col-6 lg:col-3">
             <header class="card-header bg-neutral-subtle">
                 <h3 class="fs-md">En-tête bg-neutral-subtle</h3>
             </header>
@@ -82,11 +92,11 @@
     &lt;div class="card-body"&gt;…&lt;/div&gt;
     &lt;footer class="card-footer"&gt;…&lt;/footer&gt;
 &lt;/article&gt;</code></pre>
-    <p>Comme les boutons : une variante (card-solid, card-subtle, card-outline) qui s'utilise seule, et une couleur .theme-*, neutral sans classe. L'image, l'en-tête et le pied sont facultatifs ; le corps est toujours là.</p>
+    <p>Comme les boutons : une variante (card-solid, card-subtle, card-outline) qui s'utilise seule, et une couleur .theme-*. card seul : le défaut, sans couleur. L'image, l'en-tête et le pied sont facultatifs ; le corps est toujours là.</p>
 
     <h2 class="mt-10">Exemple : une image en haut</h2>
     <div class="grid gap-4 mt-2">
-        <article class="card-outline md:col-6 lg:col-4">
+        <article class="card md:col-6 lg:col-4">
             <img class="aspect-ratio-16x9 object-fit-cover" src="{{ asset('images/demo-landscape.svg') }}" alt="" width="400" height="200">
             <div class="card-body">
                 <h3 class="fs-lg">Titre de l'article</h3>
@@ -133,11 +143,13 @@
     </ul>
 
     <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;article class="card-solid"&gt;…&lt;/article&gt;</code></pre>
+    <p>Une variante sans .theme-* n'a pas de couleur : pas de fond. Écrire card, ou card-solid avec une couleur (theme-neutral pour le gris).</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a href="/article"&gt;
-    &lt;article class="card-outline"&gt;… &lt;button&gt;Partager&lt;/button&gt;&lt;/article&gt;
+    &lt;article class="card"&gt;… &lt;button&gt;Partager&lt;/button&gt;&lt;/article&gt;
 &lt;/a&gt;</code></pre>
     <p>Une carte entière dans un lien : un bouton dans un lien est interdit (W3C), et le lecteur d'écran lit tout le contenu comme nom du lien. Mettre le lien sur le titre.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card-subtle"&gt;&lt;p&gt;Texte&lt;/p&gt;&lt;/div&gt;</code></pre>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card"&gt;&lt;p&gt;Texte&lt;/p&gt;&lt;/div&gt;</code></pre>
     <p>Sans .card-body, le texte est collé aux bords.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card-solid theme-primary"&gt;
     &lt;div class="card-body"&gt;&lt;a class="btn-outline" href="…"&gt;Voir&lt;/a&gt;&lt;/div&gt;

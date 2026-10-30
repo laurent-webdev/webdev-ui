@@ -3,16 +3,22 @@
 {% block title %}Bouton{% endblock %}
 
 {% block body %}
-    {% set themes = ['primary', 'secondary', 'accent', 'success', 'danger', 'warning', 'info', 'inverse'] %}
-    <h1>Bouton</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Un &lt;button&gt; pour une action, un &lt;a&gt; pour aller vers une page. La variante (btn-solid, -outline, -subtle, -text, -link) dit comment le bouton utilise sa couleur, .theme-* dit la couleur ; sans thème, il est gris (neutral).</p>
+        <h1>Bouton</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un &lt;button&gt; pour une action, un &lt;a&gt; pour aller vers une page. La variante (btn-solid, -outline, -subtle, -text, -link) dit comment le bouton utilise sa couleur, .theme-* dit la couleur ; btn seul est le bouton par défaut, sans couleur.</p>
+
+    <h2 class="mt-10">Par défaut</h2>
+    <div class="d-flex flex-wrap-wrap align-items-center gap-2 mt-2">
+        {% for size in ['xs', 'sm', 'md', 'lg'] %}
+            <button class="btn btn-{{ size }}" type="button">btn btn-{{ size }}</button>
+        {% endfor %}
+    </div>
+    <p class="mt-2">btn n'a pas de couleur : fond transparent, cadre --border-color, le texte autour, un fond gris léger au survol et au clic. Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres.</p>
 
     <h2 class="mt-10">Variantes et couleurs</h2>
     {% for variant in ['solid', 'outline', 'subtle', 'text', 'link'] %}
         <h3 class="fs-md mt-6">btn-{{ variant }}</h3>
         <div class="d-flex flex-wrap-wrap gap-2 mt-2">
-            <button class="btn-{{ variant }}" type="button">sans thème</button>
-            {% for theme in themes %}
+            {% for theme in colors %}
                 <button class="btn-{{ variant }} theme-{{ theme }}" type="button">{{ theme }}</button>
             {% endfor %}
         </div>
@@ -27,9 +33,9 @@
 
     <h2 class="mt-10">HTML</h2>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-solid theme-primary" type="button"&gt;Enregistrer&lt;/button&gt;
-&lt;a class="btn-outline" href="/aide"&gt;Aide&lt;/a&gt;</code></pre>
+&lt;a class="btn" href="/aide"&gt;Aide&lt;/a&gt;</code></pre>
     <ul>
-        <li>Une seule classe de variante, sans classe de base : btn-solid s'utilise seule.</li>
+        <li>btn seul : le défaut. Une variante s'utilise seule, avec une couleur : btn-solid theme-primary, jamais btn btn-solid.</li>
         <li>.theme-* sur un parent colore tous ses boutons : &lt;form class="theme-primary"&gt;.</li>
     </ul>
 
@@ -92,15 +98,17 @@
     <ul>
         <li>&lt;button type="button"&gt; pour une action, &lt;a href&gt; pour changer de page : le lecteur d'écran annonce le bon rôle, Entrée et Espace marchent sans JavaScript.</li>
         <li>Le texte dit l'action (« Enregistrer », pas « OK ») ; un bouton avec seulement une icône a un aria-label.</li>
-        <li>Contour de focus de la couleur du thème (emphasis), lisible sur le fond de la page.</li>
+        <li>Contour de focus de la couleur du thème (emphasis), lisible sur le fond de la page ; sur btn, celle du texte.</li>
         <li>Texte lisible dans toutes les couleurs, au repos, au survol et au clic, en clair et en sombre.</li>
         <li>btn-xs fait 24px de haut, la cible tactile minimale (WCAG 2.5.8).</li>
     </ul>
 
     <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="btn-solid" onclick="…"&gt;Valider&lt;/div&gt;</code></pre>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-solid" type="button"&gt;Valider&lt;/button&gt;</code></pre>
+    <p>Une variante sans .theme-* n'a pas de couleur : le bouton n'a pas de fond. Écrire btn, ou btn-solid avec une couleur (theme-neutral pour le gris).</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="btn" onclick="…"&gt;Valider&lt;/div&gt;</code></pre>
     <p>Une &lt;div&gt; ne se prend pas au clavier et n'est pas annoncée comme un bouton : un &lt;button&gt;.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="btn-solid" href="#" onclick="supprimer()"&gt;Supprimer&lt;/a&gt;</code></pre>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="btn" href="#" onclick="supprimer()"&gt;Supprimer&lt;/a&gt;</code></pre>
     <p>Une action dans un lien : un &lt;button&gt;, le lien est fait pour changer de page.</p>
 
     <h2 class="mt-10">Limites</h2>

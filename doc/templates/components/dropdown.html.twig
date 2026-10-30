@@ -7,7 +7,7 @@
     <p class="fs-lg color-neutral-emphasis mb-6">Un menu qui s'ouvre sous un bouton : un popover natif, sans JavaScript. Le navigateur l'ouvre et le ferme (le bouton, Échap, un clic à côté), le place sous le bouton et le retourne vers le haut ou vers la gauche s'il n'y a pas la place. Les éléments gardent le texte de la page ; seul leur fond change au survol et au clic, de la couleur .theme-*.</p>
 
     <div class="d-flex flex-wrap-wrap gap-2 mt-2">
-        <button class="btn-outline" type="button" popovertarget="dropdown-account">Mon compte</button>
+        <button class="btn" type="button" popovertarget="dropdown-account">Mon compte</button>
         <div class="dropdown" id="dropdown-account" popover>
             <a class="dropdown-item" href="#">Profil</a>
             <a class="dropdown-item" href="#">Réglages</a>
@@ -16,14 +16,14 @@
             <button class="dropdown-item theme-danger" type="button" popovertarget="dropdown-account" popovertargetaction="hide">Se déconnecter</button>
         </div>
 
-        <button class="btn-outline" type="button" popovertarget="dropdown-free">Panneau libre</button>
+        <button class="btn" type="button" popovertarget="dropdown-free">Panneau libre</button>
         <div class="dropdown p-4" id="dropdown-free" popover>
             <p>Un panneau avec du texte, un formulaire de filtres… : la classe p-4 lui donne de la place.</p>
         </div>
     </div>
 
     <div class="d-flex justify-content-end mt-2">
-        <button class="btn-outline" type="button" popovertarget="dropdown-end">Au bord droit</button>
+        <button class="btn" type="button" popovertarget="dropdown-end">Au bord droit</button>
         <div class="dropdown" id="dropdown-end" popover>
             <a class="dropdown-item" href="#">Profil</a>
             <a class="dropdown-item" href="#">Réglages</a>
@@ -32,7 +32,7 @@
 
     <h2 class="mt-10">Couleurs</h2>
     <div class="d-flex flex-wrap-wrap gap-2 mt-2">
-        <button class="btn-outline" type="button" popovertarget="dropdown-colors">Une couleur par élément</button>
+        <button class="btn" type="button" popovertarget="dropdown-colors">Une couleur par élément</button>
         <div class="dropdown" id="dropdown-colors" popover>
             <button class="dropdown-item" type="button">sans thème (neutral)</button>
             {% for theme in ['primary', 'secondary', 'accent', 'success', 'danger', 'warning', 'info', 'inverse'] %}
@@ -40,7 +40,7 @@
             {% endfor %}
         </div>
 
-        <button class="btn-outline" type="button" popovertarget="dropdown-theme-menu">theme-primary sur le menu</button>
+        <button class="btn" type="button" popovertarget="dropdown-theme-menu">theme-primary sur le menu</button>
         <div class="dropdown theme-primary" id="dropdown-theme-menu" popover>
             <a class="dropdown-item" href="#">Profil</a>
             <a class="dropdown-item" href="#">Réglages</a>
@@ -50,12 +50,12 @@
     </div>
     <ul>
         <li>Au repos, le texte de la page, sans fond. Au survol, le fond léger de la couleur ; au clic, ce fond renforcé. Le texte ne change jamais.</li>
-        <li>Sans thème, le fond est gris (neutral), comme les boutons. .theme-* sur le menu colore le survol de tous ses éléments ; sur un élément, seulement le sien (Se déconnecter en rouge).</li>
+        <li>Sans thème, le fond est gris (neutral). .theme-* sur le menu colore le survol de tous ses éléments ; sur un élément, seulement le sien (Se déconnecter en rouge).</li>
         <li>Le menu lui-même garde le fond de la page et un cadre gris : .theme-* ne colore que le survol et le clic des éléments.</li>
     </ul>
 
     <h2 class="mt-10">HTML</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-outline" type="button" popovertarget="menu-compte"&gt;Mon compte&lt;/button&gt;
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn" type="button" popovertarget="menu-compte"&gt;Mon compte&lt;/button&gt;
 &lt;div class="dropdown" id="menu-compte" popover&gt;
     &lt;a class="dropdown-item" href="/profil"&gt;Profil&lt;/a&gt;
     &lt;a class="dropdown-item" href="/reglages"&gt;Réglages&lt;/a&gt;
