@@ -14,7 +14,7 @@
 
     <h2 class="mt-10">Soulignement</h2>
     <ul class="mt-2">
-        <li><a class="text-decoration-none" href="#">text-decoration-none</a></li>
+        <li><a class="link text-decoration-none" href="#">text-decoration-none</a></li>
         <li><a class="btn text-decoration-underline" href="#">btn text-decoration-underline</a></li>
     </ul>
 
@@ -41,7 +41,7 @@
     <p class="demo-box p-2 mt-2 text-truncate">text-truncate : une seule ligne, coupée par trois points quand le texte est plus long que son parent</p>
     <p class="mt-4">text-truncate sur un enfant flex : il rétrécit sans min-w-0</p>
     <div class="demo-frame d-flex align-items-center gap-2 mt-2">
-        <p class="demo-box p-2 text-truncate"><a href="#">Un titre d'article très long, qui ne tient pas sur une ligne à côté du bouton</a></p>
+        <p class="demo-box p-2 text-truncate"><a class="link" href="#">Un titre d'article très long, qui ne tient pas sur une ligne à côté du bouton</a></p>
         <button class="btn flex-shrink-0" type="button">Enregistrer</button>
     </div>
 
@@ -55,14 +55,14 @@
     <h2 class="mt-10">Exemple : un menu sans soulignement</h2>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;nav aria-label="Principal"&gt;
     &lt;ul class="d-flex gap-4"&gt;
-        &lt;li&gt;&lt;a class="text-decoration-none" href="/"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a class="text-decoration-none" href="/contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="link text-decoration-none" href="/"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="link text-decoration-none" href="/contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
 &lt;/nav&gt;</code></pre>
     <p>Dans un menu, chaque lien est seul : on voit que c'est un lien sans soulignement.</p>
 
     <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p&gt;Lisez &lt;a class="text-decoration-none" href="…"&gt;nos conditions&lt;/a&gt; avant de commander.&lt;/p&gt;</code></pre>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p&gt;Lisez &lt;a class="link text-decoration-none" href="…"&gt;nos conditions&lt;/a&gt; avant de commander.&lt;/p&gt;</code></pre>
     <p>Un lien sans soulignement au milieu d'un texte ne se voit que par sa couleur (WCAG 1.4.1, Lighthouse : « Links rely on color to be distinguishable »). Dans un texte, garder le soulignement.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;nav class="text-decoration-none"&gt;…&lt;/nav&gt;</code></pre>
     <p>Sans effet : le soulignement n'est pas hérité, la classe va sur chaque &lt;a&gt;.</p>

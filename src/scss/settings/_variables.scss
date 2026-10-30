@@ -21,6 +21,10 @@
   --state-mix-soft: 20%;
   --state-mix-strong: 30%;
 
+  /* Soulignement des liens : épaisseur au repos (deux fois au survol, trois fois au clic), distance avec le texte */
+  --text-decoration-thickness: max(1px, 0.0625rem, 0.04em);
+  --text-underline-offset: 0.15em;
+
   /* Contour de focus (:focus-visible) */
   --focus-outline-width: 2px;
   --focus-outline-offset: 1px;

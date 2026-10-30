@@ -5,25 +5,4 @@
         background-color: var(--color-background);
     }
 
-    // Liens : soulignés (natif) ; couleur du thème dans components/_link.scss
-    // Dans base, les classes .btn-* gagnent toujours
-    a {
-        color: var(--link-theme-emphasis);
-        // Survol et clic : soulignement épaissi, la couleur ne change pas (le contraste reste le même sur tous les fonds)
-        // Survol 2px, clic 3px : chaque valeur du clic × 2/3, grandit avec le texte
-        &:hover {
-            text-decoration-thickness: max(2px, 0.125rem, 0.08em);
-        }
-        &:active {
-            text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
-        }
-
-        // Contour de la couleur du lien, comme les boutons ; currentColor suit aussi color-inherit
-        &:focus-visible {
-            outline: var(--focus-outline-width) solid currentColor;
-            outline-offset: var(--focus-outline-offset);
-            border-radius: var(--border-radius-md);
-        }
-    }
-
 }

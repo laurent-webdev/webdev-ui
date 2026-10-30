@@ -50,24 +50,24 @@
 
     <h3 class="mt-6">Exemples</h3>
     <div class="bg-primary color-primary-contrast p-4 mt-2">
-        <p>bg-primary color-primary-contrast : texte noir ou blanc ; avec color-inherit, les <a class="color-inherit" href="#">liens</a> prennent sa couleur. Au survol, le soulignement s'épaissit.</p>
+        <p>bg-primary color-primary-contrast : texte noir ou blanc ; les <a class="link" href="#">liens</a> prennent sa couleur, sans autre classe. Au survol, le soulignement s'épaissit.</p>
         <button class="btn-solid theme-neutral mt-2" type="button">btn-solid : son propre fond, toujours lisible</button>
     </div>
     <div class="bg-success-subtle p-4 mt-2">
-        <p>bg-success-subtle : texte et <a href="#">liens</a> normaux, lisibles sans autre classe.</p>
+        <p>bg-success-subtle : texte et <a class="link" href="#">liens</a> normaux, lisibles sans autre classe.</p>
         <button class="btn-outline theme-success mt-2" type="button">btn-outline theme-success</button>
     </div>
     <div class="bg-success-subtle color-success-emphasis p-4 mt-2">
-        <p>bg-success-subtle color-success-emphasis : texte vert ; avec color-inherit, le <a class="color-inherit" href="#">lien</a> aussi.</p>
+        <p>bg-success-subtle color-success-emphasis : texte vert ; le <a class="link" href="#">lien</a> aussi.</p>
     </div>
 
     <h3 class="mt-6">Contre-exemples (non affichés : ils seraient illisibles)</h3>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;section class="bg-warning"&gt;…&lt;/section&gt;</code></pre>
     <p>Un fond plein sans color-*-contrast garde le texte de la page : en sombre, blanc sur jaune, 1,44:1. Toujours écrire la paire bg-warning color-warning-contrast.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;section class="bg-primary color-primary-contrast"&gt;
-    &lt;a href="…"&gt;…&lt;/a&gt;
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;section class="bg-primary color-primary-contrast theme-primary"&gt;
+    &lt;a class="link" href="…"&gt;…&lt;/a&gt;
 &lt;/section&gt;</code></pre>
-    <p>Un fond ne change pas la couleur des liens : gris sur bleu, 1,87:1. Ajouter color-inherit sur le lien.</p>
+    <p>Sous un .theme-*, le lien prend la couleur emphasis du thème, peu lisible sur le fond plein. Ajouter color-inherit sur le lien.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;section class="bg-primary color-primary-contrast"&gt;
     &lt;button class="btn-outline theme-neutral" type="button"&gt;…&lt;/button&gt;
 &lt;/section&gt;</code></pre>
@@ -77,9 +77,9 @@
 
     <h3 class="mt-6">Limites</h3>
     <ul>
-        <li>Les fonds (bg-*, bg-*-subtle) ne posent que le fond : sur un fond plein, le texte demande color-*-contrast et chaque lien color-inherit.</li>
+        <li>Les fonds (bg-*, bg-*-subtle) ne posent que le fond : sur un fond plein, le texte demande color-*-contrast, et les liens .link le suivent.</li>
         <li>Sur un fond plein (bg-*), seul btn-solid est prévu.</li>
         <li>Sur un fond plein, le contour de focus des boutons garde la couleur du thème : il peut manquer de contraste (WCAG 1.4.11 demande 3:1).</li>
-        <li>Dans un fond, la couleur des liens ne change pas au survol : c'est le soulignement qui s'épaissit.</li>
+        <li>Dans un fond, la couleur des liens .link ne change pas au survol : c'est le soulignement qui s'épaissit.</li>
     </ul>
 {% endblock %}

@@ -243,6 +243,9 @@
   /* États (survol, clic…) : part de couleur mélangée au fond, léger ou fort */
   --state-mix-soft: 20%;
   --state-mix-strong: 30%;
+  /* Soulignement des liens : épaisseur au repos (deux fois au survol, trois fois au clic), distance avec le texte */
+  --text-decoration-thickness: max(1px, 0.0625rem, 0.04em);
+  --text-underline-offset: 0.15em;
   /* Contour de focus (:focus-visible) */
   --focus-outline-width: 2px;
   --focus-outline-offset: 1px;
@@ -255,20 +258,6 @@
 @layer base {
   body {
     background-color: var(--color-background);
-  }
-  a {
-    color: var(--link-theme-emphasis);
-  }
-  a:hover {
-    text-decoration-thickness: max(2px, 0.125rem, 0.08em);
-  }
-  a:active {
-    text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
-  }
-  a:focus-visible {
-    outline: var(--focus-outline-width) solid currentColor;
-    outline-offset: var(--focus-outline-offset);
-    border-radius: var(--border-radius-md);
   }
 }
 @layer base {
@@ -932,7 +921,8 @@
     background-color: var(--alert-theme-color);
     color: var(--alert-theme-contrast);
   }
-  .alert-solid :where(a) {
+  .alert-solid :where(a),
+  .alert-solid .link {
     color: inherit;
   }
   .alert-subtle {
@@ -1361,14 +1351,16 @@
     background-color: transparent;
     color: var(--btn-theme-emphasis);
     text-decoration: underline;
+    text-decoration-thickness: var(--text-decoration-thickness);
+    text-underline-offset: var(--text-underline-offset);
   }
   .btn-link:hover {
-    text-decoration-thickness: max(2px, 0.125rem, 0.08em);
-    color: var(--btn-theme-emphasis-strong);
+    text-decoration-thickness: calc(var(--text-decoration-thickness) * 2);
+    text-decoration-skip-ink: none;
   }
   .btn-link:active {
-    text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
-    color: var(--btn-theme-emphasis-strong);
+    text-decoration-thickness: calc(var(--text-decoration-thickness) * 3);
+    text-decoration-skip-ink: none;
   }
   .btn-xs {
     --btn-padding-block: 0.125rem;
@@ -1506,7 +1498,8 @@
     background-color: var(--card-theme-color);
     color: var(--card-theme-contrast);
   }
-  .card-solid :where(a) {
+  .card-solid :where(a),
+  .card-solid .link {
     color: inherit;
   }
   .card-subtle {
@@ -1678,7 +1671,8 @@
     background-color: var(--dialog-theme-color);
     color: var(--dialog-theme-contrast);
   }
-  .dialog-solid :where(a) {
+  .dialog-solid :where(a),
+  .dialog-solid .link {
     color: inherit;
   }
   .dialog-subtle {
@@ -1999,6 +1993,24 @@
   }
   .theme-inverse {
     --link-theme-emphasis: var(--color-inverse-emphasis);
+  }
+  .link {
+    color: var(--link-theme-emphasis);
+    text-decoration-thickness: var(--text-decoration-thickness);
+    text-underline-offset: var(--text-underline-offset);
+  }
+  .link:hover {
+    text-decoration-thickness: calc(var(--text-decoration-thickness) * 2);
+    text-decoration-skip-ink: none;
+  }
+  .link:active {
+    text-decoration-thickness: calc(var(--text-decoration-thickness) * 3);
+    text-decoration-skip-ink: none;
+  }
+  .link:focus-visible {
+    outline: var(--focus-outline-width) solid currentColor;
+    outline-offset: var(--focus-outline-offset);
+    border-radius: var(--border-radius-md);
   }
 }
 @layer components {

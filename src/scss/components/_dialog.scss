@@ -141,7 +141,8 @@
         background-color: var(--dialog-theme-color);
         color: var(--dialog-theme-contrast);
 
-        :where(a) {
+        :where(a),
+        .link {
             color: inherit;
         }
     }

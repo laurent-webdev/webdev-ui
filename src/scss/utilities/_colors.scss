@@ -31,7 +31,7 @@
         }
     }
 
-    // Couleur du parent : un lien prend la couleur du texte autour (<a class="color-inherit">)
+    // Couleur du parent : sous un .theme-*, un lien reprend la couleur du texte autour (<a class="color-inherit">)
     .color-inherit {
         color: inherit;
     }

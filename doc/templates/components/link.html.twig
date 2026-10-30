@@ -4,19 +4,85 @@
 
 {% block body %}
     <h1>Lien</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">L'élément &lt;a&gt; est stylé sans classe : souligné, gris sans thème, le soulignement s'épaissit au survol et au clic. .theme-* change sa couleur.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">La classe link sur un &lt;a&gt; : souligné, de la couleur du texte autour. .theme-* lui donne une couleur. Au survol et au clic, le soulignement s'épaissit. Sans la classe, un &lt;a&gt; garde le style du navigateur.</p>
 
-    <p>Un paragraphe avec <a href="#">un lien au milieu du texte</a>, pour voir sa couleur, son survol et son clic.</p>
-    <p>
-        <a class="theme-inverse" href="#">inverse</a>
-        <a class="theme-primary" href="#">primary</a>
-        <a class="theme-secondary" href="#">secondary</a>
-        <a class="theme-accent" href="#">accent</a>
-        <a class="theme-success" href="#">success</a>
-        <a class="theme-danger" href="#">danger</a>
-        <a class="theme-warning" href="#">warning</a>
-        <a class="theme-info" href="#">info</a>
+    <h2 class="mt-10">Par défaut</h2>
+    <p class="mt-2">Un paragraphe avec <a class="link" href="#">un lien au milieu du texte</a>, pour voir son survol et son clic.</p>
+    <p class="color-danger-emphasis mt-2">Un texte coloré : <a class="link" href="#">le lien</a> prend sa couleur.</p>
+    <div class="bg-primary color-primary-contrast p-4 mt-2">
+        <p>Sur un fond plein : <a class="link" href="#">le lien</a> prend le texte noir ou blanc, sans autre classe.</p>
+    </div>
+
+    <h2 class="mt-10">Couleurs</h2>
+    <p class="d-flex flex-wrap-wrap gap-3 mt-2">
+        {% for color in colors %}
+            <a class="link theme-{{ color }}" href="#">{{ color }}</a>
+        {% endfor %}
     </p>
-    <p>Comparé aux boutons : <a href="#">lien</a> <button class="btn-link theme-neutral" type="button">btn-link theme-neutral</button> <a class="theme-primary" href="#">lien primary</a> <button class="btn-link theme-primary" type="button">btn-link primary</button></p>
-    <p class="theme-danger">Un parent theme-danger : <a href="#">lien</a> et <button class="btn-link" type="button">btn-link</button> prennent la même couleur.</p>
+    <p class="mt-2">.theme-* donne au lien la couleur emphasis, lisible sur le fond de la page et sur les fonds légers (au moins 4,5:1). Sur un parent, il colore tous ses liens :</p>
+    <p class="theme-danger mt-2">Un parent theme-danger : <a class="link" href="#">lien</a> et <button class="btn-link" type="button">btn-link</button> prennent la même couleur.</p>
+
+    <h2 class="mt-10">Survol et clic</h2>
+    <p class="mt-2"><a class="link" href="#">lien</a> <button class="btn-link" type="button">btn-link</button> <a class="link theme-primary" href="#">lien primary</a> <button class="btn-link theme-primary" type="button">btn-link primary</button></p>
+    <ul class="mt-2">
+        <li>Le soulignement a trois épaisseurs : 1, 2 et 3 fois --text-decoration-thickness, soit 1, 2 et 3px à taille normale. Il grandit avec le texte (à 32px : 1,28, 2,56 et 3,84px).</li>
+        <li>La couleur ne change pas : le contraste reste le même sur tous les fonds.</li>
+        <li>Au survol et au clic, la ligne n'est plus coupée sous les g, p et y : épaisse, elle paraîtrait hachée.</li>
+        <li>btn-link a le même effet.</li>
+    </ul>
+
+    <h2 class="mt-10">HTML</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="link" href="/aide"&gt;Aide&lt;/a&gt;
+&lt;a class="link theme-primary" href="/aide"&gt;Aide&lt;/a&gt;</code></pre>
+    <p>link va sur un &lt;a&gt;. Sans elle, le lien garde le style du navigateur : bleu, violet une fois visité.</p>
+
+    <h2 class="mt-10">Variables</h2>
+    <table class="mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Défaut</th>
+                <th scope="col">Rôle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">--text-decoration-thickness</th><td>max(1px, 0.0625rem, 0.04em)</td><td>épaisseur du soulignement au repos ; deux fois au survol, trois fois au clic</td></tr>
+            <tr><th scope="row">--text-underline-offset</th><td>0.15em</td><td>distance entre le texte et le soulignement</td></tr>
+        </tbody>
+    </table>
+    <p class="mt-2">Elles valent aussi pour btn-link.</p>
+
+    <h2 class="mt-10">Exemple : changer les valeurs</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --link-theme-emphasis: var(--color-primary-emphasis); }
+:root { --text-decoration-thickness: 2px; }
+.lien-aere { --text-underline-offset: 0.3em; }</code></pre>
+    <p>La première ligne donne une couleur à tous les liens sans thème (sur un fond plein, ajouter color-inherit), la deuxième épaissit le soulignement (2, 4 et 6px), la dernière éloigne le soulignement seulement sur les liens qui ont la classe lien-aere du site.</p>
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul>
+        <li>Le soulignement montre que c'est un lien sans passer par la couleur (WCAG 1.4.1) : le garder dans un texte.</li>
+        <li>&lt;a href&gt; pour changer de page, &lt;button&gt; pour une action : le lecteur d'écran annonce le bon rôle.</li>
+        <li>Le texte du lien dit où il mène, pas « cliquez ici » (WCAG 2.4.4).</li>
+        <li>Contour de focus de la couleur du lien.</li>
+    </ul>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="theme-primary" href="/aide"&gt;Aide&lt;/a&gt;</code></pre>
+    <p>Sans link, .theme-* ne fait rien : le lien garde le style du navigateur. Écrire class="link theme-primary".</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p&gt;Lire &lt;a class="link text-decoration-none" href="/aide"&gt;l'aide&lt;/a&gt; avant de continuer.&lt;/p&gt;</code></pre>
+    <p>Sans soulignement et de la couleur du texte, le lien ne se voit plus (WCAG 1.4.1, Lighthouse). Seul sur sa ligne, dans un menu, il peut s'en passer.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;section class="bg-primary color-primary-contrast theme-primary"&gt;
+    &lt;a class="link" href="…"&gt;…&lt;/a&gt;
+&lt;/section&gt;</code></pre>
+    <p>Sous un .theme-*, le lien prend la couleur emphasis, peu lisible sur le fond plein : ajouter color-inherit sur le lien.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="link" href="#" onclick="supprimer()"&gt;Supprimer&lt;/a&gt;</code></pre>
+    <p>Une action dans un lien : un &lt;button&gt;, le lien est fait pour changer de page.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>Un &lt;a&gt; sans link suit le navigateur, y compris sur un fond plein, où il peut être illisible. Dans alert-solid, card-solid et dialog-solid, il prend la couleur du texte.</li>
+        <li>Sur un fond plein sans color-*-contrast, le lien garde le texte de la page, comme le reste du texte : voir la page Couleurs.</li>
+        <li>Au survol et au clic, la ligne continue passe sur le bas des g, p et y.</li>
+        <li>Pas de lien désactivé.</li>
+    </ul>
 {% endblock %}

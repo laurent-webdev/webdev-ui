@@ -8,7 +8,7 @@
 
     <h2 class="mt-10">Par défaut</h2>
     <div class="alert mt-2">
-        <p>alert n'a pas de couleur : fond transparent, cadre --border-color, le texte autour, avec <a href="#">un lien</a>. Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres.</p>
+        <p>alert n'a pas de couleur : fond transparent, cadre --border-color, le texte autour, avec <a class="link" href="#">un lien</a>. Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres.</p>
     </div>
 
     {% for variant in ['solid', 'subtle', 'outline'] %}
@@ -16,7 +16,7 @@
         <div class="grid gap-3 mt-2">
             {% for color in colors %}
                 <div class="alert-{{ variant }} theme-{{ color }} md:col-6 lg:col-4">
-                    <p>theme-{{ color }}, avec <a href="#">un lien</a></p>
+                    <p>theme-{{ color }}, avec <a class="link" href="#">un lien</a></p>
                 </div>
             {% endfor %}
         </div>
@@ -32,8 +32,8 @@
     <div class="alert-subtle theme-danger mt-2">
         <h3 class="fs-md">Erreur : le formulaire contient 2 erreurs</h3>
         <ul class="mt-2">
-            <li><a href="#">Le champ e-mail est vide</a></li>
-            <li><a href="#">Le mot de passe est trop court</a></li>
+            <li><a class="link" href="#">Le champ e-mail est vide</a></li>
+            <li><a class="link" href="#">Le mot de passe est trop court</a></li>
         </ul>
     </div>
 
@@ -46,7 +46,7 @@
 
     <h2 class="mt-10">Exemple : un bouton dans une alerte solid</h2>
     <div class="alert-solid theme-primary mt-2">
-        <p>Une nouvelle version est disponible. <a href="#">Voir les nouveautés</a></p>
+        <p>Une nouvelle version est disponible. <a class="link" href="#">Voir les nouveautés</a></p>
         <button class="btn-solid theme-inverse mt-3" type="button">Mettre à jour</button>
     </div>
     <p class="mt-2">Dans alert-solid, les liens prennent la couleur du texte ; seul btn-solid est prévu sur un fond plein.</p>

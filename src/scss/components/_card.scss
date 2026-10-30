@@ -82,7 +82,8 @@
         background-color: var(--card-theme-color);
         color: var(--card-theme-contrast);
 
-        :where(a) {
+        :where(a),
+        .link {
             color: inherit;
         }
     }

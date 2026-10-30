@@ -38,7 +38,8 @@
         background-color: var(--alert-theme-color);
         color: var(--alert-theme-contrast);
 
-        :where(a) {
+        :where(a),
+        .link {
             color: inherit;
         }
     }

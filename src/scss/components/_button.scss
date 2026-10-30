@@ -125,14 +125,16 @@
         background-color: transparent;
         color: var(--btn-theme-emphasis);
         text-decoration: underline;
+        text-decoration-thickness: var(--text-decoration-thickness);
+        text-underline-offset: var(--text-underline-offset);
 
         &:hover {
-            text-decoration-thickness: max(2px, 0.125rem, 0.08em);
-            color: var(--btn-theme-emphasis-strong);
+            text-decoration-thickness: calc(var(--text-decoration-thickness) * 2);
+            text-decoration-skip-ink: none;
         }
         &:active {
-            text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
-            color: var(--btn-theme-emphasis-strong);
+            text-decoration-thickness: calc(var(--text-decoration-thickness) * 3);
+            text-decoration-skip-ink: none;
         }
     }
 

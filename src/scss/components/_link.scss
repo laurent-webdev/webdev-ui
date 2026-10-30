@@ -7,4 +7,29 @@
         }
     }
 
+    // Sur un <a>, souligné nativement ; sans thème, la variable n'a pas de valeur et le lien prend la couleur du texte autour
+    .link {
+        color: var(--link-theme-emphasis);
+        text-decoration-thickness: var(--text-decoration-thickness);
+        text-underline-offset: var(--text-underline-offset);
+
+        // Survol et clic : soulignement deux, puis trois fois plus épais, la couleur ne change pas (le contraste reste le même sur tous les fonds)
+        // Ligne continue : épaisse, elle paraîtrait hachée, coupée sous les g, p et y
+        &:hover {
+            text-decoration-thickness: calc(var(--text-decoration-thickness) * 2);
+            text-decoration-skip-ink: none;
+        }
+        &:active {
+            text-decoration-thickness: calc(var(--text-decoration-thickness) * 3);
+            text-decoration-skip-ink: none;
+        }
+
+        // Contour de la couleur du lien, comme les boutons ; currentColor suit aussi color-inherit
+        &:focus-visible {
+            outline: var(--focus-outline-width) solid currentColor;
+            outline-offset: var(--focus-outline-offset);
+            border-radius: var(--border-radius-md);
+        }
+    }
+
 }
