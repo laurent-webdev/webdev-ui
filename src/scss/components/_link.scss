@@ -2,13 +2,13 @@
 
     :root {
         // Thème par défaut, sans classe .theme-*
-        --link-theme-text-emphasis: var(--color-emphasis-neutral);
+        --link-theme-emphasis: var(--color-neutral-emphasis);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses liens
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
         .theme-#{$color} {
-            --link-theme-text-emphasis: var(--color-emphasis-#{$color});
+            --link-theme-emphasis: var(--color-#{$color}-emphasis);
         }
     }
 

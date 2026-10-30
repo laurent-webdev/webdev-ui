@@ -10,23 +10,23 @@
         --accordion-transition-duration: .2s;
 
         // Thème par défaut, sans classe .theme-*
-        --accordion-theme-background-solid: var(--color-neutral);
-        --accordion-theme-text-solid: var(--color-text-on-neutral);
-        --accordion-theme-state-solid: var(--color-state-on-neutral);
-        --accordion-theme-background-subtle: var(--color-subtle-neutral);
-        --accordion-theme-text-emphasis: var(--color-emphasis-neutral);
-        --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-neutral);
+        --accordion-theme-color: var(--color-neutral);
+        --accordion-theme-contrast: var(--color-neutral-contrast);
+        --accordion-theme-state: var(--color-neutral-state);
+        --accordion-theme-subtle: var(--color-neutral-subtle);
+        --accordion-theme-emphasis: var(--color-neutral-emphasis);
+        --accordion-theme-emphasis-strong: var(--color-neutral-emphasis-strong);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses accordéons
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
         .theme-#{$color} {
-            --accordion-theme-background-solid: var(--color-#{$color});
-            --accordion-theme-text-solid: var(--color-text-on-#{$color});
-            --accordion-theme-state-solid: var(--color-state-on-#{$color});
-            --accordion-theme-background-subtle: var(--color-subtle-#{$color});
-            --accordion-theme-text-emphasis: var(--color-emphasis-#{$color});
-            --accordion-theme-text-emphasis-strong: var(--color-emphasis-strong-#{$color});
+            --accordion-theme-color: var(--color-#{$color});
+            --accordion-theme-contrast: var(--color-#{$color}-contrast);
+            --accordion-theme-state: var(--color-#{$color}-state);
+            --accordion-theme-subtle: var(--color-#{$color}-subtle);
+            --accordion-theme-emphasis: var(--color-#{$color}-emphasis);
+            --accordion-theme-emphasis-strong: var(--color-#{$color}-emphasis-strong);
         }
     }
 
@@ -36,12 +36,12 @@
         // La hauteur de son contenu : dans une grille ou un flex, ne s'étire pas à la hauteur d'un voisin ouvert
         // (stretch n'agrandit qu'une hauteur auto ; align-self: start rétrécirait la largeur dans un flex en colonne)
         block-size: fit-content;
-        border: var(--accordion-border-width) solid var(--accordion-theme-background-solid);
+        border: var(--accordion-border-width) solid var(--accordion-theme-color);
         border-radius: var(--accordion-border-radius);
 
         // Un trait entre deux panneaux
         > details + details {
-            border-block-start: var(--accordion-border-width) solid var(--accordion-theme-background-solid);
+            border-block-start: var(--accordion-border-width) solid var(--accordion-theme-color);
         }
 
         // Fermé : hauteur 0 ; la hauteur s'anime vers auto grâce à l'interpolate-size du reset
@@ -125,43 +125,43 @@
     .accordion-body {
         padding-block: var(--accordion-padding-block);
         padding-inline: var(--accordion-padding-inline);
-        border-block-start: var(--accordion-border-width) solid var(--accordion-theme-background-solid);
+        border-block-start: var(--accordion-border-width) solid var(--accordion-theme-color);
     }
 
     // Solid : titre en fond plein, mélangé à l'opposé du texte au survol et au clic
     .accordion-solid > details > summary {
-        background-color: var(--accordion-theme-background-solid);
-        color: var(--accordion-theme-text-solid);
+        background-color: var(--accordion-theme-color);
+        color: var(--accordion-theme-contrast);
 
         &:hover {
-            background-color: color-mix(in srgb, var(--accordion-theme-background-solid), var(--accordion-theme-state-solid) var(--state-mix-soft));
+            background-color: color-mix(in srgb, var(--accordion-theme-color), var(--accordion-theme-state) var(--state-mix-soft));
         }
         &:active {
-            background-color: color-mix(in srgb, var(--accordion-theme-background-solid), var(--accordion-theme-state-solid) var(--state-mix-strong));
+            background-color: color-mix(in srgb, var(--accordion-theme-color), var(--accordion-theme-state) var(--state-mix-strong));
         }
     }
 
     // Subtle : titre en fond léger, renforcé par la couleur du thème au survol et au clic, avec un texte plus fort
     .accordion-subtle {
         // Cadre et traits de la couleur du fond léger
-        border-color: var(--accordion-theme-background-subtle);
+        border-color: var(--accordion-theme-subtle);
 
         > details + details,
         > details > .accordion-body {
-            border-block-start-color: var(--accordion-theme-background-subtle);
+            border-block-start-color: var(--accordion-theme-subtle);
         }
 
         > details > summary {
-            background-color: var(--accordion-theme-background-subtle);
-            color: var(--accordion-theme-text-emphasis);
+            background-color: var(--accordion-theme-subtle);
+            color: var(--accordion-theme-emphasis);
 
             &:hover {
-                background-color: color-mix(in srgb, var(--accordion-theme-background-subtle), var(--accordion-theme-background-solid) var(--state-mix-soft));
-                color: var(--accordion-theme-text-emphasis-strong);
+                background-color: color-mix(in srgb, var(--accordion-theme-subtle), var(--accordion-theme-color) var(--state-mix-soft));
+                color: var(--accordion-theme-emphasis-strong);
             }
             &:active {
-                background-color: color-mix(in srgb, var(--accordion-theme-background-subtle), var(--accordion-theme-background-solid) var(--state-mix-strong));
-                color: var(--accordion-theme-text-emphasis-strong);
+                background-color: color-mix(in srgb, var(--accordion-theme-subtle), var(--accordion-theme-color) var(--state-mix-strong));
+                color: var(--accordion-theme-emphasis-strong);
             }
         }
     }
@@ -169,15 +169,15 @@
     // Outline : titre sans fond, devient solid au survol et au clic
     .accordion-outline > details > summary {
         background-color: transparent;
-        color: var(--accordion-theme-text-emphasis);
+        color: var(--accordion-theme-emphasis);
 
         &:hover {
-            background-color: var(--accordion-theme-background-solid);
-            color: var(--accordion-theme-text-solid);
+            background-color: var(--accordion-theme-color);
+            color: var(--accordion-theme-contrast);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--accordion-theme-background-solid), var(--accordion-theme-state-solid) var(--state-mix-soft));
-            color: var(--accordion-theme-text-solid);
+            background-color: color-mix(in srgb, var(--accordion-theme-color), var(--accordion-theme-state) var(--state-mix-soft));
+            color: var(--accordion-theme-contrast);
         }
     }
 

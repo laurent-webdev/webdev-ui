@@ -4,14 +4,14 @@
 
 {% block body %}
     <h1>Spinner</h1>
-    <p class="fs-lg color-emphasis-neutral mb-6">Un cercle qui tourne pendant un chargement : &lt;span class="spinner"&gt;, de la couleur et de la taille du texte.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un cercle qui tourne pendant un chargement : &lt;span class="spinner"&gt;, de la couleur et de la taille du texte.</p>
 
     <p class="mt-4" role="status" aria-live="polite"><span class="spinner"></span> spinner : couleur du texte</p>
 
-    <p class="mt-4">color-emphasis-* : les couleurs</p>
+    <p class="mt-4">color-*-emphasis : les couleurs</p>
     <div class="grid gap-2 mt-2">
         {% for color in colors %}
-            <p class="col-6 md:col-4"><span class="spinner color-emphasis-{{ color }}"></span> color-emphasis-{{ color }}</p>
+            <p class="col-6 md:col-4"><span class="spinner color-{{ color }}-emphasis"></span> color-{{ color }}-emphasis</p>
         {% endfor %}
     </div>
 
@@ -27,7 +27,7 @@
     <p class="mt-2">Le spinner prend la couleur du texte du bouton, sur toutes les variantes.</p>
 
     <h2 class="mt-10">Exemple : sans texte visible</h2>
-    <p class="mt-2" role="status" aria-live="polite"><span class="spinner color-emphasis-primary"></span><span class="visually-hidden">Chargement…</span></p>
+    <p class="mt-2" role="status" aria-live="polite"><span class="spinner color-primary-emphasis"></span><span class="visually-hidden">Chargement…</span></p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p role="status" aria-live="polite"&gt;&lt;span class="spinner"&gt;&lt;/span&gt;&lt;span class="visually-hidden"&gt;Chargement…&lt;/span&gt;&lt;/p&gt;</code></pre>
     <p>visually-hidden : le texte est caché à l'écran, mais lu par les lecteurs d'écran (d-none et hidden le cachent à tout le monde).</p>
 
@@ -39,9 +39,9 @@
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="spinner"&gt;&lt;/span&gt;</code></pre>
     <p>Seul, il n'est pas annoncé par les lecteurs d'écran, et il est figé si l'utilisateur réduit les animations. Toujours un texte (visible ou visually-hidden) dans un role="status" aria-live="polite".</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="spinner color-success"&gt;&lt;/span&gt;</code></pre>
-    <p>color-* est la couleur brute : 1,87:1 sur fond blanc, à peine visible. Utiliser color-emphasis-success.</p>
+    <p>color-* est la couleur brute : 1,87:1 sur fond blanc, à peine visible. Utiliser color-success-emphasis.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="spinner theme-primary"&gt;&lt;/span&gt;</code></pre>
-    <p>Sans effet : le spinner prend la couleur du texte, pas les .theme-* des composants. Utiliser color-emphasis-primary.</p>
+    <p>Sans effet : le spinner prend la couleur du texte, pas les .theme-* des composants. Utiliser color-primary-emphasis.</p>
 
     <h2 class="mt-10">Limites</h2>
     <ul>

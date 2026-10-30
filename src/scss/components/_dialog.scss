@@ -13,17 +13,17 @@
         --dialog-transition-duration: 0.2s;
 
         // Thème par défaut, sans classe .theme-*
-        --dialog-theme-background-solid: var(--color-neutral);
-        --dialog-theme-text-solid: var(--color-text-on-neutral);
-        --dialog-theme-background-subtle: var(--color-subtle-neutral);
+        --dialog-theme-color: var(--color-neutral);
+        --dialog-theme-contrast: var(--color-neutral-contrast);
+        --dialog-theme-subtle: var(--color-neutral-subtle);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses dialogues
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
         .theme-#{$color} {
-            --dialog-theme-background-solid: var(--color-#{$color});
-            --dialog-theme-text-solid: var(--color-text-on-#{$color});
-            --dialog-theme-background-subtle: var(--color-subtle-#{$color});
+            --dialog-theme-color: var(--color-#{$color});
+            --dialog-theme-contrast: var(--color-#{$color}-contrast);
+            --dialog-theme-subtle: var(--color-#{$color}-subtle);
         }
     }
 
@@ -41,7 +41,7 @@
         max-height: calc(100% - 2rem);
         // Le padding est dans les zones (natif : 1em sur le dialogue)
         padding: 0;
-        border: var(--dialog-border-width) solid var(--dialog-theme-background-solid);
+        border: var(--dialog-border-width) solid var(--dialog-theme-color);
         border-radius: var(--dialog-border-radius);
         box-shadow: var(--box-shadow-xl);
         transition-property: opacity, scale;
@@ -67,10 +67,10 @@
 
         // Un trait sous l'en-tête et au-dessus du pied
         > .dialog-header {
-            border-block-end: var(--dialog-border-width) solid var(--dialog-theme-background-solid);
+            border-block-end: var(--dialog-border-width) solid var(--dialog-theme-color);
         }
         > .dialog-footer {
-            border-block-start: var(--dialog-border-width) solid var(--dialog-theme-background-solid);
+            border-block-start: var(--dialog-border-width) solid var(--dialog-theme-color);
         }
     }
 
@@ -126,8 +126,8 @@
     // Solid : fond plein ; les liens prennent la couleur du texte (l'emphasis serait illisible sur le fond plein)
     // :where() : les .btn-* posés sur un <a> gardent leurs couleurs
     .dialog-solid {
-        background-color: var(--dialog-theme-background-solid);
-        color: var(--dialog-theme-text-solid);
+        background-color: var(--dialog-theme-color);
+        color: var(--dialog-theme-contrast);
 
         :where(a) {
             color: inherit;
@@ -136,12 +136,12 @@
 
     // Subtle : fond léger, cadre et traits de la même couleur ; le texte reste celui de la page
     .dialog-subtle {
-        border-color: var(--dialog-theme-background-subtle);
-        background-color: var(--dialog-theme-background-subtle);
+        border-color: var(--dialog-theme-subtle);
+        background-color: var(--dialog-theme-subtle);
 
         > .dialog-header,
         > .dialog-footer {
-            border-color: var(--dialog-theme-background-subtle);
+            border-color: var(--dialog-theme-subtle);
         }
     }
 

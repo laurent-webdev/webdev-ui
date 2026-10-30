@@ -1,35 +1,45 @@
 @use '../tools/mixins';
 
-// Les couleurs qui ont des dérivées (texte, state, subtle, emphasis, emphasis-strong)
+// Les couleurs qui ont des dérivées (contrast, state, subtle, emphasis, emphasis-strong)
 $colors: primary, secondary, accent, success, danger, warning, info, neutral, inverse;
 
-:root { color-scheme: light dark; }
-:root[data-theme="light"] { color-scheme: light; }
-:root[data-theme="dark"] { color-scheme: dark; }
+:root {
+  color-scheme: light dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
 
 :root {
-  --color-background: light-dark(#ffffff, oklch(0.17 0.008 228));
-  // Bordures : gris neutre, décoratif
-  --border-color: var(--color-neutral);
+  // Couleur d'arrière-plan
+  --color-background: light-dark(#ffffff, oklch(0.18 0.005 245));
+  // Bordures : gris léger, décoratif
+  --border-color: light-dark(oklch(0.84 0.008 245), oklch(0.41 0.014 245));
   // Bord d'un champ de formulaire : gris plus foncé, au moins 3:1 sur le fond de page (le bord seul montre le champ)
-  --form-input-border-color: light-dark(oklch(0.64 0.012 228), oklch(0.52 0.012 228));
+  --form-input-border-color: light-dark(oklch(0.65 0.015 225), oklch(0.50 0.015 225));
   // Ombres : noir transparent, plus opaque en sombre (le fond est déjà presque noir)
   --box-shadow-color: light-dark(oklch(0 0 0 / 0.1), oklch(0 0 0 / 0.5));
   // Derrière un dialogue modal : la page assombrie, plus en sombre
   --backdrop-background-color: light-dark(oklch(0 0 0 / 0.5), oklch(0 0 0 / 0.65));
 
-  --color-primary: light-dark(oklch(0.592 0.112 228), oklch(0.592 0.112 228));
-  --color-secondary: light-dark(oklch(0.64 0.15 355), oklch(0.64 0.15 355));
-  --color-accent: light-dark(oklch(0.68 0.104 290), oklch(0.68 0.104 290));
-  --color-success: light-dark(oklch(0.78 0.16 167), oklch(0.78 0.16 167));
-  --color-danger: light-dark(oklch(0.71 0.185 25), oklch(0.71 0.185 25));
-  --color-warning: light-dark(oklch(0.88 0.135 86), oklch(0.88 0.135 86));
-  --color-info: light-dark(oklch(0.72 0.165 262), oklch(0.72 0.165 262));
-  --color-neutral: light-dark(oklch(0.93 0.008 228), oklch(0.33 0.012 228));
-  --color-inverse: light-dark(oklch(0.32 0.015 228), oklch(0.86 0.008 228));
+  --color-primary: light-dark(oklch(0.80 0.15 345), oklch(0.65 0.15 345));
+  --color-secondary: light-dark(oklch(0.80 0.15 210), oklch(0.65 0.15 210));
+  --color-accent: light-dark(oklch(0.80 0.15 300), oklch(0.65 0.15 300));
+  --color-success: light-dark(oklch(0.80 0.15 165), oklch(0.65 0.15 165));
+  --color-warning: light-dark(oklch(0.80 0.15 90), oklch(0.65 0.15 90));
+  --color-danger: light-dark(oklch(0.80 0.20 25), oklch(0.65 0.18 25));
+  --color-info: light-dark(oklch(0.80 0.15 255), oklch(0.65 0.15 255));
+  --color-neutral: light-dark(oklch(0.80 0 0), oklch(0.65 0 0));
+  --color-inverse: light-dark(oklch(0.30 0 0), oklch(0.85 0 0));
 
-  @include mixins.text-on-colors($colors);
-  @include mixins.state-on-colors($colors);
+
+  @include mixins.contrast-colors($colors);
+  @include mixins.state-colors($colors);
   @include mixins.subtle-colors($colors);
   @include mixins.emphasis-colors($colors);
   @include mixins.emphasis-strong-colors($colors);

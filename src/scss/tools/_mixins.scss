@@ -7,39 +7,39 @@
 
 // Couleurs dérivées : une variable par couleur de la liste, calculée à partir de --color-<nom>
 
-// Texte noir ou blanc, le plus lisible : luminance WCAG comparée à 0.179, blanc en dessous, noir au-dessus (≥ 4,58:1)
-@mixin text-on-colors($colors) {
+// Noir ou blanc, le plus lisible sur cette couleur : luminance WCAG comparée à 0.179, blanc en dessous, noir au-dessus (≥ 4,58:1)
+@mixin contrast-colors($colors) {
   $channel: "clamp(0, (0.179 - (0.2126 * r + 0.7152 * g + 0.0722 * b)) * infinity, 1)";
 
   @each $color in $colors {
-    --color-text-on-#{$color}: color(from var(--color-#{$color}) srgb-linear #{$channel} #{$channel} #{$channel});
+    --color-#{$color}-contrast: color(from var(--color-#{$color}) srgb-linear #{$channel} #{$channel} #{$channel});
   }
 }
 
-// Inverse du texte : mélangée au fond au survol, le contraste ne peut qu'augmenter
-@mixin state-on-colors($colors) {
+// Inverse du contraste : mélangée au fond au survol et au clic, le contraste ne peut qu'augmenter
+@mixin state-colors($colors) {
   @each $color in $colors {
-    --color-state-on-#{$color}: color(from var(--color-text-on-#{$color}) srgb calc(1 - r) calc(1 - g) calc(1 - b));
+    --color-#{$color}-state: color(from var(--color-#{$color}-contrast) srgb calc(1 - r) calc(1 - g) calc(1 - b));
   }
 }
 
 // Fond léger : luminosité 0.85 en clair, 0.22 en sombre (+ 12 % de celle de la couleur), saturation à 30 %
 @mixin subtle-colors($colors) {
   @each $color in $colors {
-    --color-subtle-#{$color}: light-dark(oklch(from var(--color-#{$color}) calc(l * 0.12 + 0.85) calc(c * 0.3) h), oklch(from var(--color-#{$color}) calc(l * 0.12 + 0.22) calc(c * 0.3) h));
+    --color-#{$color}-subtle: light-dark(oklch(from var(--color-#{$color}) calc(l * 0.12 + 0.85) calc(c * 0.3) h), oklch(from var(--color-#{$color}) calc(l * 0.12 + 0.22) calc(c * 0.3) h));
   }
 }
 
 // Texte coloré sur le fond de page et le subtle : même teinte, luminosité 0.45 en clair, 0.80 en sombre (≥ 4,5:1)
 @mixin emphasis-colors($colors) {
   @each $color in $colors {
-    --color-emphasis-#{$color}: light-dark(oklch(from var(--color-#{$color}) 0.45 c h), oklch(from var(--color-#{$color}) 0.80 c h));
+    --color-#{$color}-emphasis: light-dark(oklch(from var(--color-#{$color}) 0.45 c h), oklch(from var(--color-#{$color}) 0.80 c h));
   }
 }
 
 // Texte coloré plus fort, sur le subtle renforcé au survol et au clic : luminosité 0.35 en clair, 0.93 en sombre (≥ 4,5:1)
 @mixin emphasis-strong-colors($colors) {
   @each $color in $colors {
-    --color-emphasis-strong-#{$color}: light-dark(oklch(from var(--color-#{$color}) 0.35 c h), oklch(from var(--color-#{$color}) 0.93 c h));
+    --color-#{$color}-emphasis-strong: light-dark(oklch(from var(--color-#{$color}) 0.35 c h), oklch(from var(--color-#{$color}) 0.93 c h));
   }
 }

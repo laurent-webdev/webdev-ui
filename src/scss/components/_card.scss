@@ -8,17 +8,17 @@
         --card-border-width: var(--border-width);
 
         // Thème par défaut, sans classe .theme-*
-        --card-theme-background-solid: var(--color-neutral);
-        --card-theme-text-solid: var(--color-text-on-neutral);
-        --card-theme-background-subtle: var(--color-subtle-neutral);
+        --card-theme-color: var(--color-neutral);
+        --card-theme-contrast: var(--color-neutral-contrast);
+        --card-theme-subtle: var(--color-neutral-subtle);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore toutes ses cartes
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
         .theme-#{$color} {
-            --card-theme-background-solid: var(--color-#{$color});
-            --card-theme-text-solid: var(--color-text-on-#{$color});
-            --card-theme-background-subtle: var(--color-subtle-#{$color});
+            --card-theme-color: var(--color-#{$color});
+            --card-theme-contrast: var(--color-#{$color}-contrast);
+            --card-theme-subtle: var(--color-#{$color}-subtle);
         }
     }
 
@@ -27,7 +27,7 @@
     .card-solid, .card-subtle, .card-outline {
         display: flex;
         flex-direction: column;
-        border: var(--card-border-width) solid var(--card-theme-background-solid);
+        border: var(--card-border-width) solid var(--card-theme-color);
         border-radius: var(--card-border-radius);
 
         // Une image en haut ou en bas : toute la largeur
@@ -47,10 +47,10 @@
 
         // Un trait sous l'en-tête et au-dessus du pied
         > .card-header {
-            border-block-end: var(--card-border-width) solid var(--card-theme-background-solid);
+            border-block-end: var(--card-border-width) solid var(--card-theme-color);
         }
         > .card-footer {
-            border-block-start: var(--card-border-width) solid var(--card-theme-background-solid);
+            border-block-start: var(--card-border-width) solid var(--card-theme-color);
         }
     }
 
@@ -67,8 +67,8 @@
     // Solid : fond plein ; les liens prennent la couleur du texte (l'emphasis serait illisible sur le fond plein)
     // :where() : les .btn-* posés sur un <a> gardent leurs couleurs
     .card-solid {
-        background-color: var(--card-theme-background-solid);
-        color: var(--card-theme-text-solid);
+        background-color: var(--card-theme-color);
+        color: var(--card-theme-contrast);
 
         :where(a) {
             color: inherit;
@@ -77,12 +77,12 @@
 
     // Subtle : fond léger, cadre et traits de la même couleur ; le texte reste celui de la page
     .card-subtle {
-        border-color: var(--card-theme-background-subtle);
-        background-color: var(--card-theme-background-subtle);
+        border-color: var(--card-theme-subtle);
+        background-color: var(--card-theme-subtle);
 
         > .card-header,
         > .card-footer {
-            border-color: var(--card-theme-background-subtle);
+            border-color: var(--card-theme-subtle);
         }
     }
 

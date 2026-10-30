@@ -6,11 +6,11 @@ body {
 /* Boîte de démo : le fond montre le padding, le cadre montre la marge */
 .demo-frame {
   display: flow-root; /* garde la marge du bloc intérieur dans le cadre */
-  outline: 1px dashed var(--color-emphasis-neutral);
+  outline: 1px dashed var(--color-neutral-emphasis);
 }
 
 .demo-box {
-  background-color: var(--color-subtle-primary);
+  background-color: var(--color-primary-subtle);
 }
 
 /* Élément carré, pour la démo border-radius-circle */

@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Carte</h1>
-    <p class="fs-lg color-emphasis-neutral mb-6">Un bloc de contenu avec un en-tête, un corps et un pied : card-solid, -subtle ou -outline, et une couleur .theme-*.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un bloc de contenu avec un en-tête, un corps et un pied : card-solid, -subtle ou -outline, et une couleur .theme-*.</p>
 
     {% for variant in ['solid', 'subtle', 'outline'] %}
         <h2 class="mt-10">card-{{ variant }}</h2>
@@ -30,47 +30,47 @@
     <p class="mt-2">Le premier et le dernier élément de la carte suivent ses coins : le fond d'un en-tête ou d'un pied ne dépasse pas de l'arrondi.</p>
     <div class="grid gap-4 mt-2">
         <article class="card-outline theme-primary md:col-6 lg:col-3">
-            <header class="card-header bg-primary color-text-on-primary">
+            <header class="card-header bg-primary color-primary-contrast">
                 <h3 class="fs-md">En-tête bg-primary</h3>
             </header>
             <div class="card-body">
                 <p>card-outline theme-primary</p>
             </div>
-            <footer class="card-footer bg-subtle-primary">
-                <p>Pied bg-subtle-primary</p>
+            <footer class="card-footer bg-primary-subtle">
+                <p>Pied bg-primary-subtle</p>
             </footer>
         </article>
         <article class="card-outline md:col-6 lg:col-3">
-            <header class="card-header bg-subtle-neutral">
-                <h3 class="fs-md">En-tête bg-subtle-neutral</h3>
+            <header class="card-header bg-neutral-subtle">
+                <h3 class="fs-md">En-tête bg-neutral-subtle</h3>
             </header>
             <div class="card-body">
                 <p>card-outline sans thème</p>
             </div>
-            <footer class="card-footer bg-subtle-neutral">
-                <p>Pied bg-subtle-neutral</p>
+            <footer class="card-footer bg-neutral-subtle">
+                <p>Pied bg-neutral-subtle</p>
             </footer>
         </article>
         <article class="card-subtle theme-success md:col-6 lg:col-3">
-            <header class="card-header bg-success color-text-on-success">
+            <header class="card-header bg-success color-success-contrast">
                 <h3 class="fs-md">En-tête bg-success</h3>
             </header>
             <div class="card-body">
                 <p>card-subtle theme-success</p>
             </div>
-            <footer class="card-footer bg-success color-text-on-success">
+            <footer class="card-footer bg-success color-success-contrast">
                 <p>Pied bg-success</p>
             </footer>
         </article>
         <article class="card-solid theme-primary md:col-6 lg:col-3">
-            <header class="card-header bg-subtle-primary color-emphasis-primary">
-                <h3 class="fs-md">En-tête bg-subtle-primary</h3>
+            <header class="card-header bg-primary-subtle color-primary-emphasis">
+                <h3 class="fs-md">En-tête bg-primary-subtle</h3>
             </header>
             <div class="card-body">
                 <p>card-solid theme-primary</p>
             </div>
-            <footer class="card-footer bg-subtle-primary color-emphasis-primary">
-                <p>Pied bg-subtle-primary</p>
+            <footer class="card-footer bg-primary-subtle color-primary-emphasis">
+                <p>Pied bg-primary-subtle</p>
             </footer>
         </article>
     </div>

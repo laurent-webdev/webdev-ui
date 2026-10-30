@@ -8,14 +8,14 @@
         --form-input-border-width: var(--border-width);
 
         // Thème par défaut, sans classe .theme-* : bordure au survol et au focus
-        --form-input-theme-border-color: var(--color-emphasis-neutral);
+        --form-input-theme-emphasis: var(--color-neutral-emphasis);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur le formulaire colore tous ses champs
     // Emphasis et pas la couleur pleine : neutral, success ou warning seraient trop clairs sur le fond de page (3:1)
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
         .theme-#{$color} {
-            --form-input-theme-border-color: var(--color-emphasis-#{$color});
+            --form-input-theme-emphasis: var(--color-#{$color}-emphasis);
         }
     }
 
@@ -29,13 +29,13 @@
         background-color: var(--color-background);
 
         &:hover {
-            border-color: var(--form-input-theme-border-color);
+            border-color: var(--form-input-theme-emphasis);
         }
 
         // Comme les boutons : un contour de la couleur du thème
         &:focus-visible {
-            border-color: var(--form-input-theme-border-color);
-            outline: var(--focus-outline-width) solid var(--form-input-theme-border-color);
+            border-color: var(--form-input-theme-emphasis);
+            outline: var(--focus-outline-width) solid var(--form-input-theme-emphasis);
             outline-offset: var(--focus-outline-offset);
         }
 

@@ -8,23 +8,23 @@
         --btn-border-width: var(--border-width);
 
         // Thème par défaut, sans classe .theme-*
-        --btn-theme-background-solid: var(--color-neutral);
-        --btn-theme-text-solid: var(--color-text-on-neutral);
-        --btn-theme-state-solid: var(--color-state-on-neutral);
-        --btn-theme-background-subtle: var(--color-subtle-neutral);
-        --btn-theme-text-emphasis: var(--color-emphasis-neutral);
-        --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-neutral);
+        --btn-theme-color: var(--color-neutral);
+        --btn-theme-contrast: var(--color-neutral-contrast);
+        --btn-theme-state: var(--color-neutral-state);
+        --btn-theme-subtle: var(--color-neutral-subtle);
+        --btn-theme-emphasis: var(--color-neutral-emphasis);
+        --btn-theme-emphasis-strong: var(--color-neutral-emphasis-strong);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses boutons
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
         .theme-#{$color} {
-            --btn-theme-background-solid: var(--color-#{$color});
-            --btn-theme-text-solid: var(--color-text-on-#{$color});
-            --btn-theme-state-solid: var(--color-state-on-#{$color});
-            --btn-theme-background-subtle: var(--color-subtle-#{$color});
-            --btn-theme-text-emphasis: var(--color-emphasis-#{$color});
-            --btn-theme-text-emphasis-strong: var(--color-emphasis-strong-#{$color});
+            --btn-theme-color: var(--color-#{$color});
+            --btn-theme-contrast: var(--color-#{$color}-contrast);
+            --btn-theme-state: var(--color-#{$color}-state);
+            --btn-theme-subtle: var(--color-#{$color}-subtle);
+            --btn-theme-emphasis: var(--color-#{$color}-emphasis);
+            --btn-theme-emphasis-strong: var(--color-#{$color}-emphasis-strong);
         }
     }
 
@@ -43,7 +43,7 @@
 
         // Couleur du thème en emphasis : visible sur le fond de page, même pour neutral ou warning
         &:focus-visible {
-            outline: var(--focus-outline-width) solid var(--btn-theme-text-emphasis);
+            outline: var(--focus-outline-width) solid var(--btn-theme-emphasis);
             outline-offset: var(--focus-outline-offset);
         }
 
@@ -56,77 +56,77 @@
 
     // Solid : fond plein, mélangé à l'opposé du texte
     .btn-solid {
-        background-color: var(--btn-theme-background-solid);
-        color: var(--btn-theme-text-solid);
+        background-color: var(--btn-theme-color);
+        color: var(--btn-theme-contrast);
 
         &:hover {
-            background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--state-mix-soft));
+            background-color: color-mix(in srgb, var(--btn-theme-color), var(--btn-theme-state) var(--state-mix-soft));
         }
         &:active {
-            background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--state-mix-strong));
+            background-color: color-mix(in srgb, var(--btn-theme-color), var(--btn-theme-state) var(--state-mix-strong));
         }
     }
 
     // Outline : bordure seule, devient solid au survol et au clic
     .btn-outline {
-        border-color: var(--btn-theme-background-solid);
+        border-color: var(--btn-theme-color);
         background-color: transparent;
-        color: var(--btn-theme-text-emphasis);
+        color: var(--btn-theme-emphasis);
 
         // Bordure transparente : le fond passe dessous, elle a toujours sa couleur
         &:hover,
         &:active {
             border-color: transparent;
-            background-color: var(--btn-theme-background-solid);
-            color: var(--btn-theme-text-solid);
+            background-color: var(--btn-theme-color);
+            color: var(--btn-theme-contrast);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--btn-theme-background-solid), var(--btn-theme-state-solid) var(--state-mix-soft));
+            background-color: color-mix(in srgb, var(--btn-theme-color), var(--btn-theme-state) var(--state-mix-soft));
         }
     }
 
     // Subtle : fond léger, renforcé par la couleur du thème au survol et au clic, avec un texte plus fort
     .btn-subtle {
-        background-color: var(--btn-theme-background-subtle);
-        color: var(--btn-theme-text-emphasis);
+        background-color: var(--btn-theme-subtle);
+        color: var(--btn-theme-emphasis);
 
         &:hover {
-            background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-soft));
-            color: var(--btn-theme-text-emphasis-strong);
+            background-color: color-mix(in srgb, var(--btn-theme-subtle), var(--btn-theme-color) var(--state-mix-soft));
+            color: var(--btn-theme-emphasis-strong);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-strong));
-            color: var(--btn-theme-text-emphasis-strong);
+            background-color: color-mix(in srgb, var(--btn-theme-subtle), var(--btn-theme-color) var(--state-mix-strong));
+            color: var(--btn-theme-emphasis-strong);
         }
     }
 
     // Text : texte seul, devient subtle au survol, subtle renforcé au clic (texte plus fort)
     .btn-text {
         background-color: transparent;
-        color: var(--btn-theme-text-emphasis);
+        color: var(--btn-theme-emphasis);
 
         &:hover {
-            background-color: var(--btn-theme-background-subtle);
+            background-color: var(--btn-theme-subtle);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--btn-theme-background-subtle), var(--btn-theme-background-solid) var(--state-mix-soft));
-            color: var(--btn-theme-text-emphasis-strong);
+            background-color: color-mix(in srgb, var(--btn-theme-subtle), var(--btn-theme-color) var(--state-mix-soft));
+            color: var(--btn-theme-emphasis-strong);
         }
     }
 
     // Link : souligné comme un lien ; au survol et au clic, le soulignement s'épaissit, comme les liens
     .btn-link {
         background-color: transparent;
-        color: var(--btn-theme-text-emphasis);
+        color: var(--btn-theme-emphasis);
         text-decoration: underline;
 
         &:hover {
             text-decoration-thickness: max(2px, 0.125rem, 0.08em);
-            color: var(--btn-theme-text-emphasis-strong);
+            color: var(--btn-theme-emphasis-strong);
         }
         &:active {
             text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
-            color: var(--btn-theme-text-emphasis-strong);
+            color: var(--btn-theme-emphasis-strong);
         }
     }
 

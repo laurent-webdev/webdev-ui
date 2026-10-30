@@ -4,11 +4,11 @@
 
 {% block body %}
     <h1>Vertical-align</h1>
-    <p class="fs-lg color-emphasis-neutral mb-6">L'alignement vertical d'un élément dans une ligne de texte ou dans une cellule de tableau.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">L'alignement vertical d'un élément dans une ligne de texte ou dans une cellule de tableau.</p>
 
     <p class="mt-4">Un carré de 24px dans une ligne de texte</p>
     {% for align in ['baseline', 'top', 'middle', 'bottom', 'text-top', 'text-bottom'] %}
-        <p class="mt-2">Texte xg <svg class="color-emphasis-primary vertical-align-{{ align }}" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="currentColor"/></svg> vertical-align-{{ align }}</p>
+        <p class="mt-2">Texte xg <svg class="color-primary-emphasis vertical-align-{{ align }}" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="currentColor"/></svg> vertical-align-{{ align }}</p>
     {% endfor %}
 
     <h2 class="mt-10">Exemple : les cellules d'un tableau</h2>

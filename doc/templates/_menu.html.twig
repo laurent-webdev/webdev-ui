@@ -3,10 +3,10 @@
 <nav class="theme-primary d-grid gap-6" aria-label="Documentation">
     {% for section in doc_sections %}
         <div>
-            <h2 class="fs-xs text-transform-uppercase color-emphasis-neutral px-3 mb-2">{{ section.label }}</h2>
+            <h2 class="fs-xs text-transform-uppercase color-neutral-emphasis px-3 mb-2">{{ section.label }}</h2>
             {% for link in section.links %}
                 {% set current = app.current_route == link[0] %}
-                <a class="dropdown-item{{ current ? ' fw-semibold color-emphasis-primary' }}" href="{{ path(link[0]) }}"{% if current %} aria-current="page"{% endif %}>{{ link[1] }}</a>
+                <a class="dropdown-item{{ current ? ' fw-semibold color-primary-emphasis' }}" href="{{ path(link[0]) }}"{% if current %} aria-current="page"{% endif %}>{{ link[1] }}</a>
             {% endfor %}
         </div>
     {% endfor %}

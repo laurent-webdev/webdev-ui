@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Formulaire</h1>
-    <p class="fs-lg color-emphasis-neutral mb-6">Les champs sont ceux du navigateur, en attendant la refonte du formulaire : form-input (md, le défaut), form-input-sm, -md et -lg, sur input, select et textarea, posent la taille, le fond, le cadre et l'arrondi ; le cadre prend la couleur du thème (.theme-*) au survol et au focus. Le navigateur vérifie les champs (required, type="email", minlength…) et affiche ses messages, sans JavaScript.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Les champs sont ceux du navigateur, en attendant la refonte du formulaire : form-input (md, le défaut), form-input-sm, -md et -lg, sur input, select et textarea, posent la taille, le fond, le cadre et l'arrondi ; le cadre prend la couleur du thème (.theme-*) au survol et au focus. Le navigateur vérifie les champs (required, type="email", minlength…) et affiche ses messages, sans JavaScript.</p>
 
     <form class="grid mt-2">
         <div class="d-grid gap-2 md:col-6">
@@ -14,12 +14,12 @@
         <div class="d-grid gap-2 md:col-6">
             <label for="form-email">Adresse e-mail (obligatoire)</label>
             <input class="form-input" id="form-email" type="email" name="email" autocomplete="email" required aria-describedby="form-email-help">
-            <p class="fs-sm color-emphasis-neutral" id="form-email-help">Exemple : nom@domaine.fr</p>
+            <p class="fs-sm color-neutral-emphasis" id="form-email-help">Exemple : nom@domaine.fr</p>
         </div>
         <div class="d-grid gap-2 md:col-6">
             <label for="form-password">Mot de passe (obligatoire)</label>
             <input class="form-input" id="form-password" type="password" name="password" autocomplete="new-password" minlength="12" required aria-describedby="form-password-help">
-            <p class="fs-sm color-emphasis-neutral" id="form-password-help">12 caractères au moins.</p>
+            <p class="fs-sm color-neutral-emphasis" id="form-password-help">12 caractères au moins.</p>
         </div>
         <div class="d-grid gap-2 md:col-6">
             <label for="form-country">Pays</label>
@@ -60,7 +60,7 @@
     <div class="d-grid gap-2 mt-2">
         <label for="form-server-email">Adresse e-mail (obligatoire)</label>
         <input class="form-input" id="form-server-email" type="email" name="server-email" value="nom@domaine.fr" autocomplete="email" required aria-invalid="true" aria-describedby="form-server-email-error">
-        <p class="fs-sm color-emphasis-danger" id="form-server-email-error">Erreur : cette adresse a déjà un compte.</p>
+        <p class="fs-sm color-danger-emphasis" id="form-server-email-error">Erreur : cette adresse a déjà un compte.</p>
     </div>
     <p class="mt-2">Après l'envoi, la page revient avec le message sous le champ : avec aria-invalid="true", le lecteur d'écran annonce « invalide » ; le message, relié par aria-describedby, est lu avec le champ.</p>
 
@@ -199,12 +199,12 @@
         <div class="d-grid gap-2 sm:col-6 lg:col-4">
             <label for="form-all-required">Obligatoire (required)</label>
             <input class="form-input" id="form-all-required" type="text" name="all-required" required aria-describedby="form-all-required-help">
-            <p class="fs-sm color-emphasis-neutral" id="form-all-required-help">Vide, l'envoi s'arrête ici.</p>
+            <p class="fs-sm color-neutral-emphasis" id="form-all-required-help">Vide, l'envoi s'arrête ici.</p>
         </div>
         <div class="d-grid gap-2 sm:col-6 lg:col-4">
             <label for="form-all-invalid">En erreur (aria-invalid)</label>
             <input class="form-input" id="form-all-invalid" type="text" name="all-invalid" value="Valeur refusée" aria-invalid="true" aria-describedby="form-all-invalid-error">
-            <p class="fs-sm color-emphasis-danger" id="form-all-invalid-error">Erreur : cette valeur n'est pas acceptée.</p>
+            <p class="fs-sm color-danger-emphasis" id="form-all-invalid-error">Erreur : cette valeur n'est pas acceptée.</p>
         </div>
         <div class="d-grid gap-2 sm:col-6 lg:col-4">
             <label for="form-all-readonly">Lecture seule (readonly)</label>
@@ -313,7 +313,7 @@
         <li>Un champ obligatoire le dit dans son libellé (« obligatoire ») et a l'attribut required ; un astérisque seul ne se comprend pas sans explication.</li>
         <li>Une erreur se dit en texte, pas seulement en couleur (WCAG 1.4.1) : « Erreur : … » sous le champ, relié par aria-describedby, et aria-invalid="true" sur le champ.</li>
         <li>Cadre des champs : au moins 3:1 sur le fond de la page, en clair et en sombre (WCAG 1.4.11) : seul, il montre où écrire. Au survol et au focus, la couleur emphasis du thème : au moins 4,5:1.</li>
-        <li>Aide et erreur : color-emphasis-neutral et color-emphasis-danger, au moins 4,5:1 sur le fond de la page.</li>
+        <li>Aide et erreur : color-neutral-emphasis et color-danger-emphasis, au moins 4,5:1 sur le fond de la page.</li>
         <li>Le bouton d'envoi n'est jamais désactivé en attendant que le formulaire soit rempli : l'utilisateur ne saurait pas ce qui manque. Le navigateur l'arrête au premier champ en erreur et le dit.</li>
         <li>Un champ désactivé n'est pas envoyé et Tab passe par-dessus ; pour une valeur affichée qui doit être envoyée : readonly.</li>
     </ul>

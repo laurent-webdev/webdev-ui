@@ -1,7 +1,7 @@
 @layer utilities {
 
     // Une classe par couleur : la couleur est dans le nom, sans .theme-* (réservé aux composants)
-    // Les fonds ne posent que le fond : le texte se choisit avec color-* (class="bg-primary color-text-on-primary")
+    // Les fonds ne posent que le fond : le texte se choisit avec color-* (class="bg-primary color-primary-contrast")
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
         // Fond plein
         .bg-#{$color} {
@@ -9,8 +9,8 @@
         }
 
         // Fond léger : le texte normal y reste lisible
-        .bg-subtle-#{$color} {
-            background-color: var(--color-subtle-#{$color});
+        .bg-#{$color}-subtle {
+            background-color: var(--color-#{$color}-subtle);
         }
     }
 
@@ -21,13 +21,13 @@
         }
 
         // Texte coloré, lisible sur le fond de page et sur un fond subtle
-        .color-emphasis-#{$color} {
-            color: var(--color-emphasis-#{$color});
+        .color-#{$color}-emphasis {
+            color: var(--color-#{$color}-emphasis);
         }
 
         // Texte noir ou blanc, lisible sur le fond plein de la même couleur (bg-*)
-        .color-text-on-#{$color} {
-            color: var(--color-text-on-#{$color});
+        .color-#{$color}-contrast {
+            color: var(--color-#{$color}-contrast);
         }
     }
 

@@ -25,7 +25,7 @@
         .border-#{$color} { border-color: var(--color-#{$color}); }
     }
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
-        .border-emphasis-#{$color} { border-color: var(--color-emphasis-#{$color}); }
+        .border-#{$color}-emphasis { border-color: var(--color-#{$color}-emphasis); }
     }
 
     // Arrondis : l'échelle des variables globales

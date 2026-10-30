@@ -8,7 +8,7 @@
     // Liens : soulignés (natif) ; couleur du thème dans components/_link.scss
     // Dans base, les classes .btn-* gagnent toujours
     a {
-        color: var(--link-theme-text-emphasis);
+        color: var(--link-theme-emphasis);
 
         // Survol et clic : soulignement épaissi, la couleur ne change pas (le contraste reste le même sur tous les fonds)
         // Survol 2px, clic 3px : chaque valeur du clic × 2/3, grandit avec le texte

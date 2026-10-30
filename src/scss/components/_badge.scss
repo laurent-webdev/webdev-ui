@@ -8,19 +8,19 @@
         --badge-border-width: var(--border-width);
 
         // Thème par défaut, sans classe .theme-*
-        --badge-theme-background-solid: var(--color-neutral);
-        --badge-theme-text-solid: var(--color-text-on-neutral);
-        --badge-theme-background-subtle: var(--color-subtle-neutral);
-        --badge-theme-text-emphasis: var(--color-emphasis-neutral);
+        --badge-theme-color: var(--color-neutral);
+        --badge-theme-contrast: var(--color-neutral-contrast);
+        --badge-theme-subtle: var(--color-neutral-subtle);
+        --badge-theme-emphasis: var(--color-neutral-emphasis);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses badges
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
         .theme-#{$color} {
-            --badge-theme-background-solid: var(--color-#{$color});
-            --badge-theme-text-solid: var(--color-text-on-#{$color});
-            --badge-theme-background-subtle: var(--color-subtle-#{$color});
-            --badge-theme-text-emphasis: var(--color-emphasis-#{$color});
+            --badge-theme-color: var(--color-#{$color});
+            --badge-theme-contrast: var(--color-#{$color}-contrast);
+            --badge-theme-subtle: var(--color-#{$color}-subtle);
+            --badge-theme-emphasis: var(--color-#{$color}-emphasis);
         }
     }
 
@@ -34,27 +34,27 @@
         font-weight: var(--font-weight-semibold);
         line-height: 1;
         text-wrap: nowrap;
-        border: var(--badge-border-width) solid var(--badge-theme-background-solid);
+        border: var(--badge-border-width) solid var(--badge-theme-color);
         border-radius: var(--badge-border-radius);
     }
 
     // Solid : fond plein
     .badge-solid {
-        background-color: var(--badge-theme-background-solid);
-        color: var(--badge-theme-text-solid);
+        background-color: var(--badge-theme-color);
+        color: var(--badge-theme-contrast);
     }
 
     // Subtle : fond léger, cadre de la même couleur
     .badge-subtle {
-        border-color: var(--badge-theme-background-subtle);
-        background-color: var(--badge-theme-background-subtle);
-        color: var(--badge-theme-text-emphasis);
+        border-color: var(--badge-theme-subtle);
+        background-color: var(--badge-theme-subtle);
+        color: var(--badge-theme-emphasis);
     }
 
     // Outline : cadre de la couleur du thème, sur le fond de la page
     .badge-outline {
         background-color: transparent;
-        color: var(--badge-theme-text-emphasis);
+        color: var(--badge-theme-emphasis);
     }
 
 }

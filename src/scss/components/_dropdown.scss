@@ -11,15 +11,15 @@
         --dropdown-border-width: var(--border-width);
 
         // Thème des éléments par défaut, sans classe .theme-*
-        --dropdown-theme-background-solid: var(--color-neutral);
-        --dropdown-theme-background-subtle: var(--color-subtle-neutral);
+        --dropdown-theme-color: var(--color-neutral);
+        --dropdown-theme-subtle: var(--color-neutral-subtle);
     }
 
     // Une classe par couleur : hérité, sur le menu elle colore tous ses éléments, sur un élément seulement lui
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
         .theme-#{$color} {
-            --dropdown-theme-background-solid: var(--color-#{$color});
-            --dropdown-theme-background-subtle: var(--color-subtle-#{$color});
+            --dropdown-theme-color: var(--color-#{$color});
+            --dropdown-theme-subtle: var(--color-#{$color}-subtle);
         }
     }
 
@@ -64,10 +64,10 @@
 
         // Seul le fond change : léger au survol, renforcé au clic ; le texte de la page y reste lisible
         &:hover {
-            background-color: var(--dropdown-theme-background-subtle);
+            background-color: var(--dropdown-theme-subtle);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--dropdown-theme-background-subtle), var(--dropdown-theme-background-solid) var(--state-mix-soft));
+            background-color: color-mix(in srgb, var(--dropdown-theme-subtle), var(--dropdown-theme-color) var(--state-mix-soft));
         }
 
         // Contour à l'intérieur de l'élément : l'élément voisin ne le cache pas

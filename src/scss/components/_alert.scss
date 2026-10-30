@@ -8,19 +8,19 @@
         --alert-border-width: var(--border-width);
 
         // Thème par défaut, sans classe .theme-*
-        --alert-theme-background-solid: var(--color-neutral);
-        --alert-theme-text-solid: var(--color-text-on-neutral);
-        --alert-theme-background-subtle: var(--color-subtle-neutral);
-        --alert-theme-text-emphasis: var(--color-emphasis-neutral);
+        --alert-theme-color: var(--color-neutral);
+        --alert-theme-contrast: var(--color-neutral-contrast);
+        --alert-theme-subtle: var(--color-neutral-subtle);
+        --alert-theme-emphasis: var(--color-neutral-emphasis);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore toutes ses alertes
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
         .theme-#{$color} {
-            --alert-theme-background-solid: var(--color-#{$color});
-            --alert-theme-text-solid: var(--color-text-on-#{$color});
-            --alert-theme-background-subtle: var(--color-subtle-#{$color});
-            --alert-theme-text-emphasis: var(--color-emphasis-#{$color});
+            --alert-theme-color: var(--color-#{$color});
+            --alert-theme-contrast: var(--color-#{$color}-contrast);
+            --alert-theme-subtle: var(--color-#{$color}-subtle);
+            --alert-theme-emphasis: var(--color-#{$color}-emphasis);
         }
     }
 
@@ -28,15 +28,15 @@
     .alert-solid, .alert-subtle, .alert-outline {
         padding-block: var(--alert-padding-block);
         padding-inline: var(--alert-padding-inline);
-        border: var(--alert-border-width) solid var(--alert-theme-background-solid);
+        border: var(--alert-border-width) solid var(--alert-theme-color);
         border-radius: var(--alert-border-radius);
     }
 
     // Solid : fond plein ; les liens prennent la couleur du texte (l'emphasis serait illisible sur le fond plein)
     // :where() : les .btn-* posés sur un <a> gardent leurs couleurs
     .alert-solid {
-        background-color: var(--alert-theme-background-solid);
-        color: var(--alert-theme-text-solid);
+        background-color: var(--alert-theme-color);
+        color: var(--alert-theme-contrast);
 
         :where(a) {
             color: inherit;
@@ -45,15 +45,15 @@
 
     // Subtle : fond léger, cadre de la même couleur
     .alert-subtle {
-        border-color: var(--alert-theme-background-subtle);
-        background-color: var(--alert-theme-background-subtle);
-        color: var(--alert-theme-text-emphasis);
+        border-color: var(--alert-theme-subtle);
+        background-color: var(--alert-theme-subtle);
+        color: var(--alert-theme-emphasis);
     }
 
     // Outline : cadre de la couleur du thème, sur le fond de la page
     .alert-outline {
         background-color: transparent;
-        color: var(--alert-theme-text-emphasis);
+        color: var(--alert-theme-emphasis);
     }
 
 }

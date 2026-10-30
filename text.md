@@ -8,7 +8,7 @@ Légende : `[x]` fait dans la v2 · `[ ]` à faire · ~~barré~~ écarté (avec 
 
 - [x] Réglages (`settings/`) : couleurs oklch clair / sombre, espacements `--space-0` à `-12`, typographie, variables globales (rayon, états, focus, désactivé, transition)
 - [x] Breakpoints `xs` 360, `sm` 576, `md` 768, `lg` 1024, `xl` 1280, `2xl` 1536px (en rem)
-- [x] Couleurs dérivées : `text-on`, `state-on`, `subtle`, `emphasis` (mixins)
+- [x] Couleurs dérivées : `contrast`, `state`, `subtle`, `emphasis` (mixins)
 - [x] Thème clair / sombre (`color-scheme`, `light-dark()`, `data-theme`)
 - [x] Système de thème `.theme-*` (boutons, liens)
 - [x] Reset (`_reset.scss`)
@@ -61,7 +61,7 @@ Légende : `[x]` fait dans la v2 · `[ ]` à faire · ~~barré~~ écarté (avec 
 - [x] Display : `d-none`, `d-inline`, `d-inline-block`, `d-block`, `d-flex`, `d-inline-flex`, `d-grid`, responsive
 - [x] Flex : direction, wrap, `justify-content-*`, `align-items-*`, `align-self-*`, grow, shrink, responsive
 - [x] Largeur et hauteur : `w-25` à `w-100` (tiers compris), `w-auto`, `w-fit-content`, `min-w-0`, `h-100`, `min-h-100svh`, responsive
-- [x] Couleurs : `bg-*`, `bg-subtle-*`, `color-*`, `color-emphasis-*`, `color-inherit`
+- [x] Couleurs : `bg-*`, `bg-*-subtle`, `color-*`, `color-*-emphasis`, `color-inherit`
 - [x] Police : `fs-*`, `fw-*`, `fst-italic` / `-normal`, `font-monospace`
 - [ ] Texte : alignement `text-align-*` (responsive), majuscules, soulignement, `nowrap`, coupure, troncature (`text.scss` de l'archive)
 - [ ] Interligne `lh-*`, espacement des lettres (`ls-*` de l'archive) : à trier

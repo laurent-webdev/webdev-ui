@@ -7,23 +7,23 @@
         --btn-close-border-width: var(--border-width);
 
         // Thème par défaut, sans classe .theme-*
-        --btn-close-theme-background-solid: var(--color-neutral);
-        --btn-close-theme-text-solid: var(--color-text-on-neutral);
-        --btn-close-theme-state-solid: var(--color-state-on-neutral);
-        --btn-close-theme-background-subtle: var(--color-subtle-neutral);
-        --btn-close-theme-text-emphasis: var(--color-emphasis-neutral);
-        --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-neutral);
+        --btn-close-theme-color: var(--color-neutral);
+        --btn-close-theme-contrast: var(--color-neutral-contrast);
+        --btn-close-theme-state: var(--color-neutral-state);
+        --btn-close-theme-subtle: var(--color-neutral-subtle);
+        --btn-close-theme-emphasis: var(--color-neutral-emphasis);
+        --btn-close-theme-emphasis-strong: var(--color-neutral-emphasis-strong);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses boutons de fermeture
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
         .theme-#{$color} {
-            --btn-close-theme-background-solid: var(--color-#{$color});
-            --btn-close-theme-text-solid: var(--color-text-on-#{$color});
-            --btn-close-theme-state-solid: var(--color-state-on-#{$color});
-            --btn-close-theme-background-subtle: var(--color-subtle-#{$color});
-            --btn-close-theme-text-emphasis: var(--color-emphasis-#{$color});
-            --btn-close-theme-text-emphasis-strong: var(--color-emphasis-strong-#{$color});
+            --btn-close-theme-color: var(--color-#{$color});
+            --btn-close-theme-contrast: var(--color-#{$color}-contrast);
+            --btn-close-theme-state: var(--color-#{$color}-state);
+            --btn-close-theme-subtle: var(--color-#{$color}-subtle);
+            --btn-close-theme-emphasis: var(--color-#{$color}-emphasis);
+            --btn-close-theme-emphasis-strong: var(--color-#{$color}-emphasis-strong);
         }
     }
 
@@ -50,7 +50,7 @@
 
         // Couleur du thème en emphasis, comme les boutons
         &:focus-visible {
-            outline: var(--focus-outline-width) solid var(--btn-close-theme-text-emphasis);
+            outline: var(--focus-outline-width) solid var(--btn-close-theme-emphasis);
             outline-offset: var(--focus-outline-offset);
         }
 
@@ -65,47 +65,47 @@
 
     // Solid : fond plein, mélangé à l'opposé du texte
     .btn-close-solid {
-        background-color: var(--btn-close-theme-background-solid);
-        color: var(--btn-close-theme-text-solid);
+        background-color: var(--btn-close-theme-color);
+        color: var(--btn-close-theme-contrast);
 
         &:hover {
-            background-color: color-mix(in srgb, var(--btn-close-theme-background-solid), var(--btn-close-theme-state-solid) var(--state-mix-soft));
+            background-color: color-mix(in srgb, var(--btn-close-theme-color), var(--btn-close-theme-state) var(--state-mix-soft));
         }
         &:active {
-            background-color: color-mix(in srgb, var(--btn-close-theme-background-solid), var(--btn-close-theme-state-solid) var(--state-mix-strong));
+            background-color: color-mix(in srgb, var(--btn-close-theme-color), var(--btn-close-theme-state) var(--state-mix-strong));
         }
     }
 
     // Subtle : fond léger, renforcé par la couleur du thème au survol et au clic, avec une croix plus forte
     .btn-close-subtle {
-        background-color: var(--btn-close-theme-background-subtle);
-        color: var(--btn-close-theme-text-emphasis);
+        background-color: var(--btn-close-theme-subtle);
+        color: var(--btn-close-theme-emphasis);
 
         &:hover {
-            background-color: color-mix(in srgb, var(--btn-close-theme-background-subtle), var(--btn-close-theme-background-solid) var(--state-mix-soft));
-            color: var(--btn-close-theme-text-emphasis-strong);
+            background-color: color-mix(in srgb, var(--btn-close-theme-subtle), var(--btn-close-theme-color) var(--state-mix-soft));
+            color: var(--btn-close-theme-emphasis-strong);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--btn-close-theme-background-subtle), var(--btn-close-theme-background-solid) var(--state-mix-strong));
-            color: var(--btn-close-theme-text-emphasis-strong);
+            background-color: color-mix(in srgb, var(--btn-close-theme-subtle), var(--btn-close-theme-color) var(--state-mix-strong));
+            color: var(--btn-close-theme-emphasis-strong);
         }
     }
 
     // Outline : bordure seule, devient solid au survol et au clic
     .btn-close-outline {
-        border-color: var(--btn-close-theme-background-solid);
+        border-color: var(--btn-close-theme-color);
         background-color: transparent;
-        color: var(--btn-close-theme-text-emphasis);
+        color: var(--btn-close-theme-emphasis);
 
         // Bordure transparente : le fond passe dessous, elle a toujours sa couleur
         &:hover,
         &:active {
             border-color: transparent;
-            background-color: var(--btn-close-theme-background-solid);
-            color: var(--btn-close-theme-text-solid);
+            background-color: var(--btn-close-theme-color);
+            color: var(--btn-close-theme-contrast);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--btn-close-theme-background-solid), var(--btn-close-theme-state-solid) var(--state-mix-soft));
+            background-color: color-mix(in srgb, var(--btn-close-theme-color), var(--btn-close-theme-state) var(--state-mix-soft));
         }
     }
 

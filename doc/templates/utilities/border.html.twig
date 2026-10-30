@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Bordures</h1>
-    <p class="fs-lg color-emphasis-neutral mb-6">Bordures (border, border-x, border-top…), épaisseur (border-1 à -5), couleur (border-*, border-emphasis-*) et arrondis (border-radius-0 à -xl, -pill, -circle).</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Bordures (border, border-x, border-top…), épaisseur (border-1 à -5), couleur (border-*, border-*-emphasis) et arrondis (border-radius-0 à -xl, -pill, -circle).</p>
 
     <div class="d-flex flex-wrap-wrap gap-4 mt-4">
         <div class="border p-4">border</div>
@@ -22,9 +22,9 @@
     <p class="mt-4">border-1 à border-5 : l'épaisseur en px, avec border ou un côté</p>
     <div class="d-flex flex-wrap-wrap gap-4 mt-2">
         {% for width in 1..5 %}
-            <div class="border border-{{ width }} border-emphasis-neutral p-4">border-{{ width }}</div>
+            <div class="border border-{{ width }} border-neutral-emphasis p-4">border-{{ width }}</div>
         {% endfor %}
-        <div class="border-start border-4 border-emphasis-primary p-4">border-start border-4</div>
+        <div class="border-start border-4 border-primary-emphasis p-4">border-start border-4</div>
     </div>
     <p class="mt-4">border border-* : couleur brute, décorative</p>
     <div class="grid gap-2 mt-2">
@@ -32,10 +32,10 @@
             <div class="border border-{{ color }} p-2 col-6 md:col-4">border-{{ color }}</div>
         {% endfor %}
     </div>
-    <p class="mt-4">border border-emphasis-* : couleur foncée en clair, claire en sombre, pour une bordure qui doit se voir</p>
+    <p class="mt-4">border border-*-emphasis : couleur foncée en clair, claire en sombre, pour une bordure qui doit se voir</p>
     <div class="grid gap-2 mt-2">
         {% for color in colors %}
-            <div class="border border-emphasis-{{ color }} p-2 col-6 md:col-4">border-emphasis-{{ color }}</div>
+            <div class="border border-{{ color }}-emphasis p-2 col-6 md:col-4">border-{{ color }}-emphasis</div>
         {% endfor %}
     </div>
     <p class="mt-4">border-radius-* : xs 2px, sm 4px, md 6px (composants), lg 8px, xl 10px, pill, circle</p>
@@ -50,15 +50,15 @@
     <div class="border border-radius-lg p-4 mt-2">border border-radius-lg p-4</div>
 
     <h2 class="mt-10">Exemple : une citation</h2>
-    <blockquote class="border-start border-4 border-emphasis-primary ps-4 mt-2">
-        <p>border-start border-4 border-emphasis-primary ps-4 : un trait épais sur le côté, qui suit le sens d'écriture.</p>
+    <blockquote class="border-start border-4 border-primary-emphasis ps-4 mt-2">
+        <p>border-start border-4 border-primary-emphasis ps-4 : un trait épais sur le côté, qui suit le sens d'écriture.</p>
     </blockquote>
 
     <h2 class="mt-10">Contre-exemples</h2>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="border-primary border-2"&gt;…&lt;/div&gt;</code></pre>
     <p>Sans border (ou un côté), il n'y a pas de bordure à colorer ni à épaissir : rien ne change.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="border border-warning"&gt;Attention : …&lt;/div&gt;</code></pre>
-    <p>Une couleur brute sur le fond de page est souvent trop claire pour se voir (jaune 1,4:1 en clair) : border-emphasis-warning.</p>
+    <p>Une couleur brute sur le fond de page est souvent trop claire pour se voir (jaune 1,4:1 en clair) : border-warning-emphasis.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="border-radius-circle p-4"&gt;Texte&lt;/div&gt;</code></pre>
     <p>circle sur un élément qui n'est pas carré : une ellipse. Pour des bouts ronds, border-radius-pill.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;input class="border" type="text" name="nom"&gt;</code></pre>
@@ -66,8 +66,8 @@
 
     <h2 class="mt-10">Limites</h2>
     <ul>
-        <li>Bordure par défaut : 1,23:1 sur le fond de page en clair, 1,57:1 en sombre ; faite pour séparer, pas pour montrer un composant.</li>
-        <li>border-* sur le fond de page : en clair, seules primary, secondary et inverse dépassent 3:1 ; en sombre, toutes sauf neutral. border-emphasis-* : au moins 4,5:1 dans toutes les couleurs.</li>
+        <li>Bordure par défaut : 1,63:1 sur le fond de page en clair, 2,12:1 en sombre ; faite pour séparer, pas pour montrer un composant.</li>
+        <li>border-* sur le fond de page : en clair, seules primary, secondary et inverse dépassent 3:1 ; en sombre, toutes sauf neutral. border-*-emphasis : au moins 4,5:1 dans toutes les couleurs.</li>
         <li>border-1 à -5 sont en px, fixes : changer --border-width ne les change pas (il change border sans épaisseur et les composants).</li>
         <li>Pas d'arrondi par coin ni de style pointillé en classe : écrire le CSS dans le site.</li>
     </ul>
