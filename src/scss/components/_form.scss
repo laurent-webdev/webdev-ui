@@ -17,6 +17,17 @@
         border-radius: var(--form-input-border-radius);
         // Le fond de la page : le fond natif (Field) n'est pas notre fond sombre
         background-color: var(--color-background);
+
+        // Champ fichier : bouton collé au cadre, même hauteur qu'un champ de texte
+        &::file-selector-button {
+            padding-block: var(--form-input-padding-block);
+            padding-inline: var(--form-input-padding-inline);
+            margin-block: calc(-1 * var(--form-input-padding-block));
+            margin-inline: calc(-1 * var(--form-input-padding-inline)) var(--form-input-padding-inline);
+            border: 0;
+            border-inline-end: var(--form-input-border-width) solid var(--form-input-border-color);
+            font: inherit;
+        }
     }
 
     // Tailles : les paddings et le texte du bouton de la même taille

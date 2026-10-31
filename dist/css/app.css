@@ -1898,6 +1898,15 @@
     border-radius: var(--form-input-border-radius);
     background-color: var(--color-background);
   }
+  .form-input::file-selector-button, .form-input-sm::file-selector-button, .form-input-md::file-selector-button, .form-input-lg::file-selector-button {
+    padding-block: var(--form-input-padding-block);
+    padding-inline: var(--form-input-padding-inline);
+    margin-block: calc(-1 * var(--form-input-padding-block));
+    margin-inline: calc(-1 * var(--form-input-padding-inline)) var(--form-input-padding-inline);
+    border: 0;
+    border-inline-end: var(--form-input-border-width) solid var(--form-input-border-color);
+    font: inherit;
+  }
   .form-input-sm {
     --form-input-padding-block: 0.25rem;
     --form-input-padding-inline: 0.75rem;

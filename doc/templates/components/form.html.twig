@@ -188,7 +188,7 @@
         </div>
         <div class="d-grid gap-2 sm:col-6 lg:col-4">
             <label for="form-all-file">Fichier (file)</label>
-            <input id="form-all-file" type="file" name="all-file">
+            <input class="form-input" id="form-all-file" type="file" name="all-file">
         </div>
         <div class="d-grid gap-2">
             <label for="form-all-textarea">Texte long (textarea)</label>
@@ -277,6 +277,7 @@
 &lt;/fieldset&gt;</code></pre>
     <ul>
         <li>form-input (ou une taille) sur input, select et textarea ; les cases et les boutons radio n'ont pas de classe.</li>
+        <li>Sur un champ fichier (type="file"), form-input colle le bouton du navigateur au cadre : le champ a la même hauteur qu'un champ de texte de la même taille.</li>
         <li>Une case dans son libellé n'a besoin ni de for ni d'id.</li>
         <li>Mettre en page : d-grid gap-2 autour d'un libellé et de son champ, la grille (grid, md:col-6) pour les placer côte à côte.</li>
     </ul>
@@ -335,6 +336,7 @@
         <li>À vérifier : un champ et un bouton de la même taille ont la même hauteur (31, 38 et 45px), aussi pour les dates et les listes.</li>
         <li>Les messages d'erreur du navigateur sont des bulles, dans la langue du navigateur, qui disparaissent au bout de quelques secondes. Des messages sous les champs, écrits par le site, demanderont du JavaScript (plus tard).</li>
         <li>month et week n'ont pas de sélecteur dans Firefox ni dans Safari sur ordinateur : un champ de texte à la place, où l'utilisateur doit écrire 2026-10 ou 2026-W43 (MDN). datetime-local dans Safari sur ordinateur : un calendrier, l'heure s'écrit à la main. Pour un mois, deux listes (mois et année) marchent partout.</li>
-        <li>À vérifier dans Safari : le padding d'une liste (select) native.</li>
+        <li>Dans un champ fichier étroit, le navigateur coupe le nom du fichier : lui laisser de la largeur. Le texte du bouton (« Choisir un fichier ») et sa couleur sont ceux du navigateur.</li>
+        <li>À vérifier dans Safari : le padding d'une liste (select) native et le champ fichier.</li>
     </ul>
 {% endblock %}
