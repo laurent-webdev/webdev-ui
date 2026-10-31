@@ -31,17 +31,11 @@
         background-color: transparent;
     }
 
-    // Solid : fond plein ; les liens prennent la couleur du texte (l'emphasis serait illisible sur le fond plein)
-    // :where() : les .btn-* posés sur un <a> gardent leurs couleurs
+    // Solid : fond plein
     .alert-solid {
         border-color: var(--alert-theme-color);
         background-color: var(--alert-theme-color);
         color: var(--alert-theme-contrast);
-
-        :where(a),
-        .link {
-            color: inherit;
-        }
     }
 
     // Subtle : fond léger, cadre de la même couleur

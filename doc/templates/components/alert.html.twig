@@ -16,7 +16,7 @@
         <div class="grid gap-3 mt-2">
             {% for color in colors %}
                 <div class="alert-{{ variant }} theme-{{ color }} md:col-6 lg:col-4">
-                    <p>theme-{{ color }}, avec <a class="link" href="#">un lien</a></p>
+                    <p>theme-{{ color }}, avec <a class="link{% if variant == 'solid' %} color-inherit{% endif %}" href="#">un lien</a></p>
                 </div>
             {% endfor %}
         </div>
@@ -46,10 +46,10 @@
 
     <h2 class="mt-10">Exemple : un bouton dans une alerte solid</h2>
     <div class="alert-solid theme-primary mt-2">
-        <p>Une nouvelle version est disponible. <a class="link" href="#">Voir les nouveautés</a></p>
+        <p>Une nouvelle version est disponible. <a class="link color-inherit" href="#">Voir les nouveautés</a></p>
         <button class="btn-solid theme-inverse mt-3" type="button">Mettre à jour</button>
     </div>
-    <p class="mt-2">Dans alert-solid, les liens prennent la couleur du texte ; seul btn-solid est prévu sur un fond plein.</p>
+    <p class="mt-2">Sur un fond plein, seul btn-solid est prévu, avec un autre thème que l'alerte ; color-inherit donne au lien la couleur du texte.</p>
 
     <h2 class="mt-10">Exemple : un message affiché par le JS</h2>
     <button class="btn mt-2" type="button" aria-expanded="false" aria-controls="demo-alert-status" data-demo-toggle>Afficher / masquer le message</button>
@@ -113,12 +113,15 @@
     &lt;a class="btn-outline" href="…"&gt;Voir&lt;/a&gt;
 &lt;/div&gt;</code></pre>
     <p>btn-outline, btn-text et btn-link sont faits pour le fond de la page et les fonds légers : sur un fond plein, seul btn-solid.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="alert-solid theme-primary"&gt;
+    &lt;a class="link" href="…"&gt;Voir&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+    <p>Le lien prend le thème de l'alerte, comme partout : la couleur emphasis, peu lisible sur le fond plein. Écrire class="link color-inherit".</p>
 
     <h2 class="mt-10">Limites</h2>
     <ul>
         <li>Pas de bouton de fermeture ni de disparition automatique : il faut du JS. Ce sera le rôle des notifications, plus tard.</li>
         <li>En clair, le cadre d'alert-subtle se voit à peine sur le fond de la page : le fond léger suffit à la délimiter.</li>
-        <li>Dans alert-solid, un .theme-* sur un lien ne change rien : les liens prennent toujours la couleur du texte.</li>
         <li>Pas de tailles : changer les variables dans le site.</li>
     </ul>
 {% endblock %}

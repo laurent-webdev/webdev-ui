@@ -26,7 +26,7 @@
                     </header>
                     <div class="card-body">
                         <p>Le corps prend la place qui reste{% if loop.index == 2 %}, même quand une carte voisine a plus de texte : dans une grille, les cartes ont la même hauteur et les pieds restent alignés en bas{% endif %}.</p>
-                        <p class="mt-2"><a class="link" href="#">Un lien</a></p>
+                        <p class="mt-2"><a class="link{% if variant == 'solid' %} color-inherit{% endif %}" href="#">Un lien</a></p>
                     </div>
                     <footer class="card-footer">
                         <button class="btn-solid btn-sm{% if variant == 'solid' %} theme-inverse{% endif %}" type="button">Action</button>
@@ -139,7 +139,7 @@
         <li>&lt;article&gt; pour un contenu qui se comprend seul (un article, un produit), sinon &lt;div&gt; ; le titre de la carte suit la hiérarchie de la page (h2, h3…).</li>
         <li>Une image qui ne dit rien de plus que le texte : alt="".</li>
         <li>Plusieurs liens « Lire la suite » : chacun dit où il mène (WCAG 2.4.4), avec un texte visually-hidden : Lire la suite&lt;span class="visually-hidden"&gt; : titre de l'article&lt;/span&gt;.</li>
-        <li>Sur card-solid, le texte est noir ou blanc (au moins 4,58:1) et les liens prennent sa couleur ; sur card-subtle, le texte de la page reste très lisible.</li>
+        <li>Sur card-solid, le texte est noir ou blanc (au moins 4,58:1) ; sur card-subtle, le texte de la page reste très lisible.</li>
     </ul>
 
     <h2 class="mt-10">Contre-exemples</h2>
@@ -155,6 +155,10 @@
     &lt;div class="card-body"&gt;&lt;a class="btn-outline" href="…"&gt;Voir&lt;/a&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
     <p>Sur un fond plein, seuls btn-solid et badge-solid sont prévus.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card-solid theme-primary"&gt;
+    &lt;div class="card-body"&gt;&lt;a class="link" href="…"&gt;Voir&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    <p>Le lien prend le thème de la carte, comme partout : la couleur emphasis, peu lisible sur le fond plein. Écrire class="link color-inherit".</p>
 
     <h2 class="mt-10">Limites</h2>
     <ul>

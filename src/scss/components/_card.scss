@@ -76,16 +76,10 @@
         }
     }
 
-    // Solid : fond plein ; les liens prennent la couleur du texte (l'emphasis serait illisible sur le fond plein)
-    // :where() : les .btn-* posés sur un <a> gardent leurs couleurs
+    // Solid : fond plein
     .card-solid {
         background-color: var(--card-theme-color);
         color: var(--card-theme-contrast);
-
-        :where(a),
-        .link {
-            color: inherit;
-        }
     }
 
     // Subtle : fond léger, cadre et traits de sa couleur de bordure ; le texte reste celui de la page

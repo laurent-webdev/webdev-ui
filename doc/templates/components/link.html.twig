@@ -21,6 +21,8 @@
     </p>
     <p class="mt-2">.theme-* donne au lien la couleur emphasis, lisible sur le fond de la page et sur les fonds légers (au moins 4,5:1). Sur un parent, il colore tous ses liens :</p>
     <p class="theme-danger mt-2">Un parent theme-danger : <a class="link" href="#">lien</a> et <button class="btn-link" type="button">btn-link</button> prennent la même couleur.</p>
+    <p class="mt-2">Le thème du lien passe devant celui du parent :</p>
+    <p class="theme-danger mt-2">Un parent theme-danger : <a class="link theme-primary" href="#">lien theme-primary</a> et <button class="btn-link theme-primary" type="button">btn-link theme-primary</button> gardent le leur.</p>
 
     <h2 class="mt-10">Survol et clic</h2>
     <p class="mt-2"><a class="link" href="#">lien</a> <button class="btn-link" type="button">btn-link</button> <a class="link theme-primary" href="#">lien primary</a> <button class="btn-link theme-primary" type="button">btn-link primary</button></p>
@@ -73,14 +75,17 @@
     <p>Sans soulignement et de la couleur du texte, le lien ne se voit plus (WCAG 1.4.1, Lighthouse). Seul sur sa ligne, dans un menu, il peut s'en passer.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;section class="bg-primary color-primary-contrast theme-primary"&gt;
     &lt;a class="link" href="…"&gt;…&lt;/a&gt;
-&lt;/section&gt;</code></pre>
-    <p>Sous un .theme-*, le lien prend la couleur emphasis, peu lisible sur le fond plein : ajouter color-inherit sur le lien.</p>
+&lt;/section&gt;
+&lt;div class="card-solid theme-primary"&gt;
+    &lt;a class="link" href="…"&gt;…&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+    <p>Sous un .theme-*, le lien prend la couleur emphasis, peu lisible sur le fond plein : ajouter color-inherit sur le lien. Pareil dans alert-solid, card-solid et dialog-solid.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="link" href="#" onclick="supprimer()"&gt;Supprimer&lt;/a&gt;</code></pre>
     <p>Une action dans un lien : un &lt;button&gt;, le lien est fait pour changer de page.</p>
 
     <h2 class="mt-10">Limites</h2>
     <ul>
-        <li>Un &lt;a&gt; sans link suit le navigateur, y compris sur un fond plein, où il peut être illisible. Dans alert-solid, card-solid et dialog-solid, il prend la couleur du texte.</li>
+        <li>Un &lt;a&gt; sans link suit le navigateur, y compris sur un fond plein, où il peut être illisible.</li>
         <li>Sur un fond plein sans color-*-contrast, le lien garde le texte de la page, comme le reste du texte : voir la page Couleurs.</li>
         <li>Au survol et au clic, la ligne continue passe sur le bas des g, p et y.</li>
         <li>Pas de lien désactivé.</li>

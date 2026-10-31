@@ -6,80 +6,52 @@
     <h1>Page de test</h1>
     <p class="fs-lg color-neutral-emphasis mb-6">Pour essayer un exemple avant de le mettre dans sa page.</p>
 
-    <h2 class="mt-10">Ça ne marche pas : dans une carte</h2>
-    <p class="mt-2">Chaque ligne a les mêmes classes : à gauche un &lt;a&gt;, à droite un &lt;button&gt;. Ils devraient être pareils, le texte du &lt;a&gt; est noir.</p>
-    <ul class="mt-2">
-        <li>En clair : a btn-solid theme-inverse est illisible.</li>
-        <li>En sombre : a btn-subtle theme-inverse est illisible.</li>
-    </ul>
-    <div class="card-solid theme-primary mt-2">
-        <div class="card-body">
-            <p class="d-flex flex-wrap-wrap gap-2 mb-2">
-                <a class="btn-outline theme-danger" href="#">a btn-outline theme-danger</a>
-                <button class="btn-outline theme-danger" type="button">button btn-outline theme-danger</button>
-            </p>
-            <p class="d-flex flex-wrap-wrap gap-2 mb-2">
-                <a class="btn-solid theme-inverse" href="#">a btn-solid theme-inverse</a>
-                <button class="btn-solid theme-inverse" type="button">button btn-solid theme-inverse</button>
-            </p>
-            <p class="d-flex flex-wrap-wrap gap-2">
-                <a class="btn-subtle theme-inverse" href="#">a btn-subtle theme-inverse</a>
-                <button class="btn-subtle theme-inverse" type="button">button btn-subtle theme-inverse</button>
-            </p>
-        </div>
-    </div>
-
-    <h2 class="mt-10">Ça ne marche pas : dans un dialogue</h2>
-    <p class="mt-2"><button class="btn-solid theme-primary" type="button" commandfor="exemple-dialog" command="show-modal">Ouvrir le dialogue</button></p>
-    <dialog class="dialog-solid theme-primary" id="exemple-dialog" aria-labelledby="exemple-dialog-titre">
-        <div class="dialog-header">
-            <h3 id="exemple-dialog-titre">Le même problème</h3>
-        </div>
-        <div class="dialog-body">
-            <p class="d-flex flex-wrap-wrap gap-2 mb-2">
-                <a class="btn-outline theme-danger" href="#">a btn-outline theme-danger</a>
-                <button class="btn-outline theme-danger" type="button">button btn-outline theme-danger</button>
-            </p>
-            <p class="d-flex flex-wrap-wrap gap-2 mb-2">
-                <a class="btn-solid theme-inverse" href="#">a btn-solid theme-inverse</a>
-                <button class="btn-solid theme-inverse" type="button">button btn-solid theme-inverse</button>
-            </p>
-            <p class="d-flex flex-wrap-wrap gap-2">
-                <a class="btn-subtle theme-inverse" href="#">a btn-subtle theme-inverse</a>
-                <button class="btn-subtle theme-inverse" type="button">button btn-subtle theme-inverse</button>
-            </p>
-        </div>
-        <div class="dialog-footer">
-            <button class="btn-solid theme-inverse" type="button" commandfor="exemple-dialog" command="close">Fermer</button>
-        </div>
-    </dialog>
-
-    <h2 class="mt-10">Ça marche : dans une alerte</h2>
-    <p class="mt-2">Les mêmes classes : le &lt;a&gt; et le &lt;button&gt; sont pareils.</p>
-    <div class="alert-solid theme-primary mt-2">
+    {% set exemples %}
         <p class="d-flex flex-wrap-wrap gap-2 mb-2">
-            <a class="btn-outline theme-danger" href="#">a btn-outline theme-danger</a>
-            <button class="btn-outline theme-danger" type="button">button btn-outline theme-danger</button>
+            <a class="btn-solid" href="#">a btn-solid : thème du parent</a>
+            <button class="btn-solid" type="button">button btn-solid : thème du parent</button>
         </p>
         <p class="d-flex flex-wrap-wrap gap-2 mb-2">
             <a class="btn-solid theme-inverse" href="#">a btn-solid theme-inverse</a>
             <button class="btn-solid theme-inverse" type="button">button btn-solid theme-inverse</button>
         </p>
-        <p class="d-flex flex-wrap-wrap gap-2">
-            <a class="btn-subtle theme-inverse" href="#">a btn-subtle theme-inverse</a>
-            <button class="btn-subtle theme-inverse" type="button">button btn-subtle theme-inverse</button>
+        <p class="d-flex flex-wrap-wrap gap-2 mb-2">
+            <a class="btn-subtle theme-danger" href="#">a btn-subtle theme-danger</a>
+            <button class="btn-subtle theme-danger" type="button">button btn-subtle theme-danger</button>
         </p>
-    </div>
+        <p class="d-flex flex-wrap-wrap gap-4">
+            <a class="link" href="#">link : thème du parent</a>
+            <a class="link theme-danger" href="#">link theme-danger</a>
+            <a class="link color-inherit" href="#">link color-inherit : couleur du texte</a>
+            <a href="#">a sans classe : navigateur</a>
+        </p>
+    {% endset %}
 
-    <h2 class="mt-10">À quoi sert la règle : un lien sans classe</h2>
-    <div class="alert-solid theme-primary mt-2">
-        <p>Dans une alerte : <a href="#">lien sans classe</a>, il prend la couleur du texte.</p>
-    </div>
+    <h2 class="mt-10">Sans composant : un parent theme-primary</h2>
+    <div class="theme-primary mt-2">{{ exemples }}</div>
+
+    <h2 class="mt-10">Dans une carte solid theme-primary</h2>
     <div class="card-solid theme-primary mt-2">
-        <div class="card-body">
-            <p>Dans une carte : <a href="#">lien sans classe</a>, pareil.</p>
-        </div>
+        <div class="card-body">{{ exemples }}</div>
     </div>
-    <p class="mt-2">Hors de ces composants, il garde le bleu du navigateur : <a href="#">lien sans classe</a>.</p>
 
+    <h2 class="mt-10">Dans une carte subtle theme-primary</h2>
+    <div class="card-subtle theme-primary mt-2">
+        <div class="card-body">{{ exemples }}</div>
+    </div>
+
+    <h2 class="mt-10">Dans une alerte solid theme-primary</h2>
+    <div class="alert-solid theme-primary mt-2">{{ exemples }}</div>
+
+    <h2 class="mt-10">Dans un dialogue solid theme-primary</h2>
+    <p class="mt-2"><button class="btn-solid theme-primary" type="button" commandfor="exemple-dialog" command="show-modal">Ouvrir le dialogue</button></p>
+    <dialog class="dialog-solid theme-primary" id="exemple-dialog" aria-labelledby="exemple-dialog-titre">
+        <div class="dialog-header">
+            <h3 id="exemple-dialog-titre">Le même exemple</h3>
+        </div>
+        <div class="dialog-body">{{ exemples }}</div>
+        <div class="dialog-footer">
+            <button class="btn-solid theme-inverse" type="button" commandfor="exemple-dialog" command="close">Fermer</button>
+        </div>
+    </dialog>
 {% endblock %}

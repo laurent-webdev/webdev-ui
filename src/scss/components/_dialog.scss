@@ -135,16 +135,10 @@
         }
     }
 
-    // Solid : fond plein ; les liens prennent la couleur du texte (l'emphasis serait illisible sur le fond plein)
-    // :where() : les .btn-* posés sur un <a> gardent leurs couleurs
+    // Solid : fond plein
     .dialog-solid {
         background-color: var(--dialog-theme-color);
         color: var(--dialog-theme-contrast);
-
-        :where(a),
-        .link {
-            color: inherit;
-        }
     }
 
     // Subtle : fond léger, cadre et traits de sa couleur de bordure ; le texte reste celui de la page
