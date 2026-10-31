@@ -6,17 +6,7 @@
         --form-input-padding-inline: 1rem;
         --form-input-border-radius: var(--border-radius-md);
         --form-input-border-width: var(--border-width);
-
-        // Thème par défaut, sans classe .theme-* : bordure au survol et au focus
-        --form-input-theme-emphasis: var(--color-neutral-emphasis);
-    }
-
-    // Une classe par couleur : hérité, un .theme-* sur le formulaire colore tous ses champs
-    // Emphasis et pas la couleur pleine : neutral, success ou warning seraient trop clairs sur le fond de page (3:1)
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
-        .theme-#{$color} {
-            --form-input-theme-emphasis: var(--color-#{$color}-emphasis);
-        }
+        --form-input-border-color: var(--border-color)
     }
 
     // Forme commune des champs : chaque taille s'utilise seule, comme le container
@@ -27,23 +17,6 @@
         border-radius: var(--form-input-border-radius);
         // Le fond de la page : le fond natif (Field) n'est pas notre fond sombre
         background-color: var(--color-background);
-
-        &:hover {
-            border-color: var(--form-input-theme-emphasis);
-        }
-
-        // Comme les boutons : un contour de la couleur du thème
-        &:focus-visible {
-            border-color: var(--form-input-theme-emphasis);
-            outline: var(--focus-outline-width) solid var(--form-input-theme-emphasis);
-            outline-offset: var(--focus-outline-offset);
-        }
-
-        // Le fond et le cadre remplacent l'aspect désactivé natif : estompé, comme les boutons
-        &:disabled {
-            opacity: var(--disabled-opacity);
-            pointer-events: none;
-        }
     }
 
     // Tailles : les paddings et le texte du bouton de la même taille

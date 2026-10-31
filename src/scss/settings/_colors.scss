@@ -20,8 +20,6 @@ $colors: primary, secondary, accent, success, danger, warning, info, neutral, in
   --color-background: light-dark(#ffffff, oklch(0.18 0.005 245));
   // Bordures : gris léger, décoratif
   --border-color: light-dark(oklch(0.84 0.008 245), oklch(0.41 0.014 245));
-  // Bord d'un champ de formulaire : gris plus foncé, au moins 3:1 sur le fond de page (le bord seul montre le champ)
-  --form-input-border-color: light-dark(oklch(0.65 0.015 225), oklch(0.50 0.015 225));
   // Ombres : noir transparent, plus opaque en sombre (le fond est déjà presque noir)
   --box-shadow-color: light-dark(oklch(0 0 0 / 0.1), oklch(0 0 0 / 0.5));
   // Derrière un dialogue modal : la page assombrie, plus en sombre

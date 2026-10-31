@@ -92,7 +92,6 @@
 :root {
   --color-background: light-dark(#ffffff, oklch(0.18 0.005 245));
   --border-color: light-dark(oklch(0.84 0.008 245), oklch(0.41 0.014 245));
-  --form-input-border-color: light-dark(oklch(0.65 0.015 225), oklch(0.50 0.015 225));
   --box-shadow-color: light-dark(oklch(0 0 0 / 0.1), oklch(0 0 0 / 0.5));
   --backdrop-background-color: light-dark(oklch(0 0 0 / 0.5), oklch(0 0 0 / 0.65));
   --color-primary: light-dark(oklch(0.80 0.15 345), oklch(0.65 0.15 345));
@@ -1890,34 +1889,7 @@
     --form-input-padding-inline: 1rem;
     --form-input-border-radius: var(--border-radius-md);
     --form-input-border-width: var(--border-width);
-    --form-input-theme-emphasis: var(--color-neutral-emphasis);
-  }
-  .theme-primary {
-    --form-input-theme-emphasis: var(--color-primary-emphasis);
-  }
-  .theme-secondary {
-    --form-input-theme-emphasis: var(--color-secondary-emphasis);
-  }
-  .theme-accent {
-    --form-input-theme-emphasis: var(--color-accent-emphasis);
-  }
-  .theme-success {
-    --form-input-theme-emphasis: var(--color-success-emphasis);
-  }
-  .theme-danger {
-    --form-input-theme-emphasis: var(--color-danger-emphasis);
-  }
-  .theme-warning {
-    --form-input-theme-emphasis: var(--color-warning-emphasis);
-  }
-  .theme-info {
-    --form-input-theme-emphasis: var(--color-info-emphasis);
-  }
-  .theme-neutral {
-    --form-input-theme-emphasis: var(--color-neutral-emphasis);
-  }
-  .theme-inverse {
-    --form-input-theme-emphasis: var(--color-inverse-emphasis);
+    --form-input-border-color: var(--border-color) ;
   }
   .form-input, .form-input-sm, .form-input-md, .form-input-lg {
     padding-block: var(--form-input-padding-block);
@@ -1925,18 +1897,6 @@
     border: var(--form-input-border-width) solid var(--form-input-border-color);
     border-radius: var(--form-input-border-radius);
     background-color: var(--color-background);
-  }
-  .form-input:hover, .form-input-sm:hover, .form-input-md:hover, .form-input-lg:hover {
-    border-color: var(--form-input-theme-emphasis);
-  }
-  .form-input:focus-visible, .form-input-sm:focus-visible, .form-input-md:focus-visible, .form-input-lg:focus-visible {
-    border-color: var(--form-input-theme-emphasis);
-    outline: var(--focus-outline-width) solid var(--form-input-theme-emphasis);
-    outline-offset: var(--focus-outline-offset);
-  }
-  .form-input:disabled, .form-input-sm:disabled, .form-input-md:disabled, .form-input-lg:disabled {
-    opacity: var(--disabled-opacity);
-    pointer-events: none;
   }
   .form-input-sm {
     --form-input-padding-block: 0.25rem;
