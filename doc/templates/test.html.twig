@@ -2,56 +2,67 @@
 
 {% block title %}Page de test{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        @layer reset {
+            #demo-dans-le-layer p { margin: 0; }
+        }
+        #demo-hors-layer p { margin: 0; }
+    </style>
+{% endblock %}
+
 {% block body %}
     <h1>Page de test</h1>
     <p class="fs-lg color-neutral-emphasis mb-6">Pour essayer un exemple avant de le mettre dans sa page.</p>
 
-    {% set exemples %}
-        <p class="d-flex flex-wrap-wrap gap-2 mb-2">
-            <a class="btn-solid" href="#">a btn-solid : thème du parent</a>
-            <button class="btn-solid" type="button">button btn-solid : thème du parent</button>
-        </p>
-        <p class="d-flex flex-wrap-wrap gap-2 mb-2">
-            <a class="btn-solid theme-inverse" href="#">a btn-solid theme-inverse</a>
-            <button class="btn-solid theme-inverse" type="button">button btn-solid theme-inverse</button>
-        </p>
-        <p class="d-flex flex-wrap-wrap gap-2 mb-2">
-            <a class="btn-subtle theme-danger" href="#">a btn-subtle theme-danger</a>
-            <button class="btn-subtle theme-danger" type="button">button btn-subtle theme-danger</button>
-        </p>
-        <p class="d-flex flex-wrap-wrap gap-4">
-            <a class="link" href="#">link : thème du parent</a>
-            <a class="link theme-danger" href="#">link theme-danger</a>
-            <a class="link color-inherit" href="#">link color-inherit : couleur du texte</a>
-            <a href="#">a sans classe : navigateur</a>
-        </p>
-    {% endset %}
+    <h2 class="mt-10">Le dernier :where() : _reset.scss</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-scss">// Aujourd'hui
+:where(:not(dialog, [popover])) {
+    margin: 0;
+}
 
-    <h2 class="mt-10">Sans composant : un parent theme-primary</h2>
-    <div class="theme-primary mt-2">{{ exemples }}</div>
+// Sans :where() : la règle reste, elle retire toujours les marges du navigateur
+:not(dialog, [popover]) {
+    margin: 0;
+}</code></pre>
+    <p class="mt-2">Le commentaire du fichier dit que :where() laisse passer les classes devant. Ce sont les layers qui s'en chargent : voici le test, avec une règle encore plus forte que celle sans :where().</p>
 
-    <h2 class="mt-10">Dans une carte solid theme-primary</h2>
-    <div class="card-solid theme-primary mt-2">
-        <div class="card-body">{{ exemples }}</div>
+    <div class="grid mt-4">
+        <section class="md:col-6">
+            <h3 class="fs-md">Une règle très forte, dans le layer reset</h3>
+            <pre class="mt-2" tabindex="0"><code class="language-css">@layer reset {
+    #demo-dans-le-layer p { margin: 0; }
+}</code></pre>
+            <div class="mt-2" id="demo-dans-le-layer">
+                <p class="bg-primary-subtle p-2 mb-8">p mb-8</p>
+                <p class="bg-primary-subtle p-2">p</p>
+            </div>
+            <p class="mt-2">Il y a un espace : mb-8 gagne, malgré un id dans la règle du reset. Le layer utilities passe devant le layer reset, quelle que soit la force de la règle.</p>
+        </section>
+        <section class="md:col-6">
+            <h3 class="fs-md">La même règle, hors layer</h3>
+            <pre class="mt-2" tabindex="0"><code class="language-css">#demo-hors-layer p { margin: 0; }</code></pre>
+            <div class="mt-2" id="demo-hors-layer">
+                <p class="bg-danger-subtle p-2 mb-8">p mb-8</p>
+                <p class="bg-danger-subtle p-2">p</p>
+            </div>
+            <p class="mt-2">Plus d'espace : mb-8 perd. C'est la seule différence entre les deux colonnes : le layer décide, pas la force du sélecteur.</p>
+        </section>
     </div>
 
-    <h2 class="mt-10">Dans une carte subtle theme-primary</h2>
-    <div class="card-subtle theme-primary mt-2">
-        <div class="card-body">{{ exemples }}</div>
-    </div>
-
-    <h2 class="mt-10">Dans une alerte solid theme-primary</h2>
-    <div class="alert-solid theme-primary mt-2">{{ exemples }}</div>
-
-    <h2 class="mt-10">Dans un dialogue solid theme-primary</h2>
-    <p class="mt-2"><button class="btn-solid theme-primary" type="button" commandfor="exemple-dialog" command="show-modal">Ouvrir le dialogue</button></p>
-    <dialog class="dialog-solid theme-primary" id="exemple-dialog" aria-labelledby="exemple-dialog-titre">
+    <h2 class="mt-10">Dialogue et popover : toujours exclus</h2>
+    <p class="mt-2 d-flex flex-wrap-wrap gap-2">
+        <button class="btn-solid theme-primary" type="button" commandfor="demo-where-dialog" command="show-modal">Ouvrir le dialogue</button>
+        <button class="btn-solid theme-primary" type="button" popovertarget="demo-where-popover">Ouvrir le popover</button>
+    </p>
+    <dialog class="dialog-outline theme-primary dialog-sm" id="demo-where-dialog" aria-labelledby="demo-where-dialog-titre">
         <div class="dialog-header">
-            <h3 id="exemple-dialog-titre">Le même exemple</h3>
+            <h3 class="fs-lg" id="demo-where-dialog-titre">Centré dans la page</h3>
         </div>
-        <div class="dialog-body">{{ exemples }}</div>
         <div class="dialog-footer">
-            <button class="btn-solid theme-inverse" type="button" commandfor="exemple-dialog" command="close">Fermer</button>
+            <button class="btn-solid theme-primary" type="button" commandfor="demo-where-dialog" command="close">Fermer</button>
         </div>
     </dialog>
+    <div id="demo-where-popover" popover>Centré dans la page.</div>
+    <p class="mt-2">:not(dialog, [popover]) reste dans la règle : ils gardent leur centrage natif, avec ou sans :where().</p>
 {% endblock %}
