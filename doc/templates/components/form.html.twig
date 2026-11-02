@@ -34,15 +34,15 @@
             <label for="form-message">Message</label>
             <textarea class="form-input" id="form-message" name="message" rows="4" placeholder="Une question, une remarque…"></textarea>
         </div>
-        <fieldset class="md:col-6">
+        <fieldset class="form-field md:col-6">
             <legend>Être contacté</legend>
-            <label class="d-block"><input type="radio" name="contact" value="email" checked> Par e-mail</label>
-            <label class="d-block"><input type="radio" name="contact" value="phone"> Par téléphone</label>
+            <label><input type="radio" name="contact" value="email" checked> Par e-mail</label>
+            <label><input type="radio" name="contact" value="phone"> Par téléphone</label>
         </fieldset>
-        <fieldset class="md:col-6">
+        <fieldset class="form-field md:col-6">
             <legend>Recevoir</legend>
-            <label class="d-block"><input type="checkbox" name="news"> Les nouveautés, une fois par mois</label>
-            <label class="d-block"><input type="checkbox" name="offers" disabled> Les offres des partenaires (bientôt)</label>
+            <label><input type="checkbox" name="news"> Les nouveautés, une fois par mois</label>
+            <label><input type="checkbox" name="offers" disabled> Les offres des partenaires (bientôt)</label>
         </fieldset>
         <div>
             <label><input type="checkbox" name="terms" required> J'accepte les conditions d'utilisation (obligatoire)</label>
@@ -168,23 +168,23 @@
         </div>
 
         <h3 class="fs-lg mt-4">Cases, boutons radio et switchs</h3>
-        <fieldset class="sm:col-6 lg:col-4">
+        <fieldset class="form-field sm:col-6 lg:col-4">
             <legend>Cases à cocher (checkbox)</legend>
-            <label class="d-block"><input type="checkbox" name="all-checkbox" value="a" checked> Cochée</label>
-            <label class="d-block"><input type="checkbox" name="all-checkbox" value="b"> Pas cochée</label>
-            <label class="d-block"><input type="checkbox" name="all-checkbox" value="c" disabled> Désactivée</label>
+            <label><input type="checkbox" name="all-checkbox" value="a" checked> Cochée</label>
+            <label><input type="checkbox" name="all-checkbox" value="b"> Pas cochée</label>
+            <label><input type="checkbox" name="all-checkbox" value="c" disabled> Désactivée</label>
         </fieldset>
-        <fieldset class="sm:col-6 lg:col-4">
+        <fieldset class="form-field sm:col-6 lg:col-4">
             <legend>Boutons radio (radio)</legend>
-            <label class="d-block"><input type="radio" name="all-radio" value="a" checked> Choisi</label>
-            <label class="d-block"><input type="radio" name="all-radio" value="b"> Pas choisi</label>
-            <label class="d-block"><input type="radio" name="all-radio" value="c" disabled> Désactivé</label>
+            <label><input type="radio" name="all-radio" value="a" checked> Choisi</label>
+            <label><input type="radio" name="all-radio" value="b"> Pas choisi</label>
+            <label><input type="radio" name="all-radio" value="c" disabled> Désactivé</label>
         </fieldset>
-        <fieldset class="sm:col-6 lg:col-4">
+        <fieldset class="form-field sm:col-6 lg:col-4">
             <legend>Switchs (role="switch")</legend>
-            <label class="d-block"><input class="form-switch" type="checkbox" role="switch" name="all-switch-a" checked> Allumé</label>
-            <label class="d-block"><input class="form-switch" type="checkbox" role="switch" name="all-switch-b"> Éteint</label>
-            <label class="d-block"><input class="form-switch" type="checkbox" role="switch" name="all-switch-c" disabled> Désactivé</label>
+            <label><input class="form-switch" type="checkbox" role="switch" name="all-switch-a" checked> Allumé</label>
+            <label><input class="form-switch" type="checkbox" role="switch" name="all-switch-b"> Éteint</label>
+            <label><input class="form-switch" type="checkbox" role="switch" name="all-switch-c" disabled> Désactivé</label>
         </fieldset>
 
         <h3 class="fs-lg mt-4">Autres</h3>
@@ -237,9 +237,98 @@
         <li>Pas montrés : hidden (une valeur envoyée sans être affichée) et image (un bouton d'envoi en image).</li>
     </ul>
 
+    <h2 class="mt-10">Libellé à côté ou au-dessus</h2>
+    <p class="mt-2">Les mêmes champs, le libellé à côté (formulaire horizontal), puis au-dessus.</p>
+    {% set layout_fields = [['text', 'Texte'], ['email', 'Adresse e-mail'], ['password', 'Mot de passe'], ['search', 'Recherche'], ['tel', 'Téléphone'], ['url', 'Site web'], ['number', 'Nombre'], ['date', 'Date'], ['time', 'Heure'], ['datetime-local', 'Date et heure'], ['month', 'Mois'], ['week', 'Semaine'], ['file', 'Fichier']] %}
+
+    <h3 class="fs-lg mt-4">À côté</h3>
+    <div class="grid row-gap-3 align-items-center mt-2">
+        {% for field in layout_fields %}
+            <label class="md:col-3" for="side-{{ field[0] }}">{{ field[1] }}</label>
+            <input class="form-input md:col-9" id="side-{{ field[0] }}" type="{{ field[0] }}" name="side-{{ field[0] }}">
+        {% endfor %}
+        <label class="md:col-3" for="side-select">Liste</label>
+        <select class="form-input md:col-9" id="side-select" name="side-select">
+            <option>Choisir…</option>
+            <option>Pomme</option>
+        </select>
+        <label class="md:col-3" for="side-textarea">Message</label>
+        <textarea class="form-input md:col-9" id="side-textarea" name="side-textarea" rows="3"></textarea>
+        <label class="md:col-3" for="side-range">Volume</label>
+        <input class="form-range md:col-9" id="side-range" type="range" name="side-range">
+        <label class="md:col-3" for="side-color">Couleur</label>
+        <div class="md:col-9"><input id="side-color" type="color" name="side-color" value="#118ab2"></div>
+        <label class="md:col-3" for="side-checkbox">Case à cocher</label>
+        <div class="md:col-9"><input class="form-checkbox theme-primary" id="side-checkbox" type="checkbox" name="side-checkbox" checked></div>
+        <label class="md:col-3" for="side-radio">Bouton radio</label>
+        <div class="md:col-9"><input class="form-radio theme-primary" id="side-radio" type="radio" name="side-radio" checked></div>
+        <label class="md:col-3" for="side-switch">Switch</label>
+        <div class="md:col-9"><input class="form-switch-solid theme-primary" id="side-switch" type="checkbox" role="switch" name="side-switch" checked></div>
+    </div>
+
+    <h3 class="fs-lg mt-4">Au-dessus</h3>
+    <div class="grid mt-2">
+        {% for field in layout_fields %}
+            <div class="form-field sm:col-6 lg:col-4">
+                <label for="top-{{ field[0] }}">{{ field[1] }}</label>
+                <input class="form-input" id="top-{{ field[0] }}" type="{{ field[0] }}" name="top-{{ field[0] }}">
+            </div>
+        {% endfor %}
+        <div class="form-field sm:col-6 lg:col-4">
+            <label for="top-select">Liste</label>
+            <select class="form-input" id="top-select" name="top-select">
+                <option>Choisir…</option>
+                <option>Pomme</option>
+            </select>
+        </div>
+        <div class="form-field sm:col-6 lg:col-4">
+            <label for="top-textarea">Message</label>
+            <textarea class="form-input" id="top-textarea" name="top-textarea" rows="3"></textarea>
+        </div>
+        <div class="form-field sm:col-6 lg:col-4">
+            <label for="top-range">Volume</label>
+            <input class="form-range" id="top-range" type="range" name="top-range">
+        </div>
+        <div class="form-field sm:col-6 lg:col-4">
+            <label for="top-color">Couleur</label>
+            <input id="top-color" type="color" name="top-color" value="#118ab2">
+        </div>
+        <div class="form-field sm:col-6 lg:col-4">
+            <label for="top-checkbox">Case à cocher</label>
+            <input class="form-checkbox theme-primary" id="top-checkbox" type="checkbox" name="top-checkbox" checked>
+        </div>
+        <div class="form-field sm:col-6 lg:col-4">
+            <label for="top-radio">Bouton radio</label>
+            <input class="form-radio theme-primary" id="top-radio" type="radio" name="top-radio" checked>
+        </div>
+        <div class="form-field sm:col-6 lg:col-4">
+            <label for="top-switch">Switch</label>
+            <input class="form-switch-solid theme-primary" id="top-switch" type="checkbox" role="switch" name="top-switch" checked>
+        </div>
+    </div>
+    <pre class="mt-4" tabindex="0"><code class="language-html">&lt;!-- À côté : le libellé dans sa colonne, le champ dans l'autre --&gt;
+&lt;div class="grid row-gap-3 align-items-center"&gt;
+    &lt;label class="md:col-3" for="name"&gt;Nom&lt;/label&gt;
+    &lt;input class="form-input md:col-9" id="name" type="text" name="name"&gt;
+
+    &lt;label class="md:col-3" for="news"&gt;Nouveautés&lt;/label&gt;
+    &lt;div class="md:col-9"&gt;&lt;input class="form-checkbox" id="news" type="checkbox" name="news"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Au-dessus : form-field, pour une case aussi --&gt;
+&lt;div class="form-field"&gt;
+    &lt;label for="alerts"&gt;Alertes&lt;/label&gt;
+    &lt;input class="form-switch-solid theme-primary" id="alerts" type="checkbox" role="switch" name="alerts"&gt;
+&lt;/div&gt;</code></pre>
+    <ul>
+        <li>À côté : une grille, le libellé en md:col-3 et le champ en md:col-9 (sous md, le libellé passe au-dessus). Une case, un bouton radio, un switch ou une couleur va dans un &lt;div&gt; de sa colonne : la grille l'étirerait sur toute la cellule. Le libellé remplit sa colonne : un clic dans le vide de la colonne coche la case, comme dans le formulaire horizontal de Bootstrap.</li>
+        <li>Au-dessus : form-field, le libellé relié par for et id. Le libellé, la case et le bouton radio gardent leur largeur ; les champs et le range prennent toute la largeur.</li>
+        <li>Case puis texte sur la même ligne, le plus courant : la case dans son libellé, &lt;label&gt;&lt;input type="checkbox"&gt; Texte&lt;/label&gt;, comme dans les autres exemples de la page.</li>
+    </ul>
+
     <h2 class="mt-10">Switch</h2>
     <p class="mt-2">Un réglage allumé ou éteint : un vrai &lt;input type="checkbox"&gt; avec role="switch", sans JavaScript. form-switch le dessine, sans couleur ; form-switch-solid, avec un .theme-*, lui donne sa couleur quand il est allumé.</p>
-    <div class="d-flex flex-direction-column gap-2 mt-2">
+    <div class="form-field mt-2">
         <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="switch-email" checked> Notifications par e-mail</label>
         <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="switch-sms"> Alertes par SMS</label>
         <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="switch-sync" disabled> Synchronisation (bientôt)</label>
@@ -247,7 +336,7 @@
     </div>
 
     <h3 class="fs-lg mt-4">Variantes</h3>
-    <div class="d-flex flex-direction-column gap-2 mt-2">
+    <div class="form-field mt-2">
         <label><input class="form-switch" type="checkbox" role="switch" name="switch-default" checked> form-switch, sans couleur</label>
         <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="switch-solid" checked> form-switch-solid theme-primary</label>
     </div>
@@ -255,12 +344,12 @@
     <h3 class="fs-lg mt-4">Solid, dans toutes les couleurs</h3>
     <div class="grid mt-2">
         {% for color in colors %}
-            <label class="sm:col-6 lg:col-4"><input class="form-switch-solid theme-{{ color }}" type="checkbox" role="switch" name="switch-solid-{{ color }}" checked> theme-{{ color }}</label>
+            <div class="sm:col-6 lg:col-4"><label><input class="form-switch-solid theme-{{ color }}" type="checkbox" role="switch" name="switch-solid-{{ color }}" checked> theme-{{ color }}</label></div>
         {% endfor %}
     </div>
 
     <h3 class="fs-lg mt-4">Tailles</h3>
-    <div class="d-flex flex-direction-column gap-2 mt-2">
+    <div class="form-field mt-2">
         {% for size in ['sm', 'md', 'lg'] %}
             <label><input class="form-switch-solid form-switch-{{ size }} theme-primary" type="checkbox" role="switch" name="switch-size-{{ size }}" checked> form-switch-{{ size }}</label>
         {% endfor %}
@@ -307,10 +396,10 @@
                 <label for="form-group-{{ size }}-color">Couleur</label>
                 <input id="form-group-{{ size }}-color" type="color" name="group-{{ size }}-color" value="#118ab2">
             </div>
-            <div class="md:col-4">
-                <label class="d-block"><input type="checkbox" name="group-{{ size }}-box" checked> Case à cocher</label>
-                <label class="d-block"><input type="radio" name="group-{{ size }}-radio" checked> Bouton radio</label>
-                <label class="d-block"><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="group-{{ size }}-switch" checked> Switch</label>
+            <div class="form-field md:col-4">
+                <label><input type="checkbox" name="group-{{ size }}-box" checked> Case à cocher</label>
+                <label><input type="radio" name="group-{{ size }}-radio" checked> Bouton radio</label>
+                <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="group-{{ size }}-switch" checked> Switch</label>
             </div>
             <div class="d-flex flex-wrap-wrap gap-2">
                 <button class="btn-solid theme-primary" type="button">Envoyer</button>
@@ -414,7 +503,7 @@
     &lt;input class="form-input-lg" id="search" type="search" name="q"&gt;
 &lt;/div&gt;
 
-&lt;fieldset&gt;
+&lt;fieldset class="form-field"&gt;
     &lt;legend&gt;Être contacté&lt;/legend&gt;
     &lt;label&gt;&lt;input type="radio" name="contact" value="email" checked&gt; Par e-mail&lt;/label&gt;
     &lt;label&gt;&lt;input type="radio" name="contact" value="phone"&gt; Par téléphone&lt;/label&gt;
@@ -430,7 +519,8 @@
         <li>Sur un champ fichier (type="file"), form-input colle le bouton du navigateur au cadre : le champ a la même hauteur qu'un champ de texte de la même taille.</li>
         <li>Sur une liste déroulante (select sans multiple ni size), form-input remplace la flèche du navigateur par une flèche dessinée, à la distance du padding du bord : celle de Chromium restait collée au cadre. La liste qui s'ouvre reste celle du navigateur.</li>
         <li>Une case dans son libellé n'a besoin ni de for ni d'id.</li>
-        <li>form-field ne fait que la mise en page : il empile un libellé, son champ et son message, avec le même espace partout. Il ne vérifie rien et n'ajoute aucune couleur. Pas de form-field autour d'un fieldset (cases, boutons radio).</li>
+        <li>form-field ne fait que la mise en page : il empile un libellé, son champ et son message, avec le même espace partout. Il ne vérifie rien et n'ajoute aucune couleur. Pas de form-field autour d'un fieldset : sur le fieldset lui-même (class="form-field"), il empile ses cases ou ses boutons radio.</li>
+        <li>Dans un form-field, un libellé prend la largeur de son texte, une case et un bouton radio la leur (align-self: start) : ils ne sont cliquables que sur eux-mêmes, pas sur toute la ligne. Les champs, eux, gardent toute la largeur.</li>
         <li>Mettre en page : form-field autour d'un libellé et de son champ, la grille (grid, md:col-6) pour les placer côte à côte.</li>
     </ul>
 
@@ -492,6 +582,11 @@
     &lt;p&gt;Être contacté&lt;/p&gt;
     &lt;label&gt;&lt;input type="radio" name="contact"&gt; Par e-mail&lt;/label&gt;</code></pre>
     <p>La question n'est pas reliée aux réponses : un &lt;fieldset&gt; et une &lt;legend&gt;.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;fieldset&gt;
+    &lt;legend&gt;Recevoir&lt;/legend&gt;
+    &lt;label class="d-block"&gt;&lt;input type="checkbox" name="news"&gt; Les nouveautés&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+    <p>Un libellé en bloc (d-block) prend toute la ligne : un clic dans le vide, loin de la case, la coche. Le fieldset en form-field empile les libellés à la largeur de leur texte.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;input class="form-input" id="email" type="email" name="email" aria-invalid="true"&gt;</code></pre>
     <p>En erreur sans message : rien ne se voit à l'écran, et le lecteur d'écran dit seulement « invalide ».</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="grid"&gt;
