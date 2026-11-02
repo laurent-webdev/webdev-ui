@@ -6,17 +6,53 @@
         --form-input-padding-inline: 1rem;
         --form-input-border-radius: var(--border-radius-md);
         --form-input-border-width: var(--border-width);
-        --form-input-border-color: var(--border-color)
+        --form-input-border-color: var(--border-color);
+
+        // Espace entre le libellé, le champ et son message
+        --form-field-gap: 0.5rem;
+
+        // Switch : la largeur vaut deux fois la hauteur
+        --form-switch-height: 1.25rem;
+        --form-switch-border-width: var(--border-width);
+    }
+
+    // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses champs, ses switchs, ses range, ses cases et ses boutons radio
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .theme-#{$color} {
+            --form-input-theme-color: var(--color-#{$color});
+            --form-input-theme-contrast: var(--color-#{$color}-contrast);
+            --form-input-theme-emphasis: var(--color-#{$color}-emphasis);
+            --form-switch-theme-color: var(--color-#{$color});
+            --form-switch-theme-contrast: var(--color-#{$color}-contrast);
+            --form-switch-theme-border: var(--color-#{$color}-border);
+            --form-switch-theme-emphasis: var(--color-#{$color}-emphasis);
+            --form-control-theme-color: var(--color-#{$color});
+            --form-control-theme-emphasis: var(--color-#{$color}-emphasis);
+        }
+    }
+
+    // Libellé, champ et message empilés ; flex : le champ garde sa hauteur à côté d'un message
+    .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: var(--form-field-gap);
     }
 
     // Forme commune des champs : chaque taille s'utilise seule, comme le container
     .form-input, .form-input-sm, .form-input-md, .form-input-lg {
         padding-block: var(--form-input-padding-block);
         padding-inline: var(--form-input-padding-inline);
-        border: var(--form-input-border-width) solid var(--form-input-border-color);
+        // Cadre de la couleur du thème ; sans thème, le gris des champs
+        border: var(--form-input-border-width) solid var(--form-input-theme-color, var(--form-input-border-color));
         border-radius: var(--form-input-border-radius);
         // Le fond de la page : le fond natif (Field) n'est pas notre fond sombre
         background-color: var(--color-background);
+
+        // Comme les boutons : la couleur du thème en emphasis, visible sur le fond de page ; sans thème, celle du texte
+        &:focus-visible {
+            outline: var(--focus-outline-width) solid var(--form-input-theme-emphasis, currentColor);
+            outline-offset: var(--focus-outline-offset);
+        }
 
         // Champ fichier : bouton collé au cadre, même hauteur qu'un champ de texte
         &::file-selector-button {
@@ -25,9 +61,26 @@
             margin-block: calc(-1 * var(--form-input-padding-block));
             margin-inline: calc(-1 * var(--form-input-padding-inline)) var(--form-input-padding-inline);
             border: 0;
-            border-inline-end: var(--form-input-border-width) solid var(--form-input-border-color);
+            border-inline-end: var(--form-input-border-width) solid var(--form-input-theme-color, var(--form-input-border-color));
             font: inherit;
         }
+
+        // Son fond : plein de la couleur du thème, comme btn-solid ; sans thème, les couleurs du navigateur ; désactivé, l'aspect du navigateur
+        &:enabled::file-selector-button {
+            background-color: var(--form-input-theme-color, ButtonFace);
+            color: var(--form-input-theme-contrast, ButtonText);
+        }
+    }
+
+    // Liste déroulante : la flèche native colle au cadre dans Chromium ; une flèche dessinée, à la distance du padding
+    select:is(.form-input, .form-input-sm, .form-input-md, .form-input-lg):not([multiple], [size]) {
+        appearance: none;
+        padding-inline-end: calc(var(--form-input-padding-inline) * 2 + 1em);
+        // Gris moyen, lisible sur les deux fonds : un SVG en url() ne lit pas currentColor
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23808080' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right var(--form-input-padding-inline) center;
+        background-size: 1em;
     }
 
     // Tailles : les paddings et le texte du bouton de la même taille
@@ -47,6 +100,146 @@
         --form-input-padding-block: 0.5rem;
         --form-input-padding-inline: 1.25rem;
         font-size: var(--font-size-lg);
+    }
+
+    // Switch : une case à cocher avec role="switch", redessinée ; chaque variante s'utilise seule
+    .form-switch, .form-switch-solid {
+        appearance: none;
+        flex-shrink: 0;
+        width: calc(var(--form-switch-height) * 2);
+        height: var(--form-switch-height);
+        padding: 0.125rem;
+        // Le cadre des champs ; le curseur, en couleur du texte, montre le switch
+        border: var(--form-switch-border-width) solid var(--form-input-border-color);
+        border-radius: 50rem;
+        vertical-align: middle;
+        transition-property: background-color, border-color;
+        transition-duration: var(--transition-duration);
+
+        // Le curseur rond : un élément plutôt qu'une image, pour suivre le thème et le texte
+        &::before {
+            content: "";
+            display: block;
+            height: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background-color: currentColor;
+            transition-property: margin-inline-start, background-color;
+            transition-duration: var(--transition-duration);
+        }
+
+        // Allumé : le curseur se déplace de la hauteur (la largeur moins la hauteur)
+        &:checked::before {
+            margin-inline-start: var(--form-switch-height);
+        }
+
+        // Comme les boutons : la couleur du thème en emphasis, visible sur le fond de page ; sans thème, celle du texte
+        &:focus-visible {
+            outline: var(--focus-outline-width) solid var(--form-switch-theme-emphasis, currentColor);
+            outline-offset: var(--focus-outline-offset);
+        }
+
+        // Désactivé : estompé, plus de clic, comme les boutons (appearance: none retire l'aspect natif)
+        &:disabled {
+            opacity: var(--disabled-opacity);
+            pointer-events: none;
+        }
+    }
+
+    // Par défaut, sans couleur : allumé, la couleur du texte
+    .form-switch:checked {
+        border-color: currentColor;
+        background-color: currentColor;
+
+        &::before {
+            background-color: var(--color-background);
+        }
+    }
+
+    // Solid : allumé, fond plein de la couleur du thème, cadre un peu plus marqué, curseur noir ou blanc ; sans thème, le curseur reste visible
+    .form-switch-solid:checked {
+        border-color: var(--form-switch-theme-border);
+        background-color: var(--form-switch-theme-color);
+
+        &::before {
+            background-color: var(--form-switch-theme-contrast, currentColor);
+        }
+    }
+
+    // Contraste élevé (Windows) : le fond forcé effacerait le curseur ; après les variantes, pour passer devant
+    @media (forced-colors: active) {
+        .form-switch, .form-switch-solid {
+            &::before {
+                background-color: ButtonText;
+            }
+            &:checked {
+                border-color: Highlight;
+                background-color: Highlight;
+
+                &::before {
+                    background-color: HighlightText;
+                }
+            }
+        }
+    }
+
+    // Tailles : combinables avec toutes les variantes
+    .form-switch-sm { --form-switch-height: 1rem; }
+    .form-switch-md { --form-switch-height: 1.25rem; }
+    .form-switch-lg { --form-switch-height: 1.5rem; }
+
+    // Range, case à cocher, bouton radio : ceux du navigateur, colorés par accent-color ; sans thème, la couleur du navigateur
+    .form-range, .form-checkbox, .form-radio {
+        accent-color: var(--form-control-theme-color);
+
+        // Comme les boutons ; autour du range entier, le rond seul demanderait de redessiner le range
+        &:focus-visible {
+            outline: var(--focus-outline-width) solid var(--form-control-theme-emphasis, currentColor);
+            outline-offset: var(--focus-outline-offset);
+        }
+    }
+
+    // L'arrondi donne sa forme au contour de focus
+    .form-range { border-radius: var(--border-radius-md); }
+    .form-checkbox { border-radius: var(--border-radius-xs); }
+    .form-radio { border-radius: 50%; }
+
+    // Tailles d'un groupe : sur un parent (form, fieldset, form-field), tout ce qu'il contient change d'un coup
+    .form-sm {
+        --form-input-padding-block: 0.25rem;
+        --form-input-padding-inline: 0.75rem;
+        --form-switch-height: 1rem;
+        --form-control-zoom: 0.875;
+        --btn-padding-block: 0.25rem;
+        --btn-padding-inline: 0.75rem;
+        font-size: var(--font-size-sm);
+    }
+
+    .form-md {
+        --form-input-padding-block: 0.375rem;
+        --form-input-padding-inline: 1rem;
+        --form-switch-height: 1.25rem;
+        --form-control-zoom: 1;
+        --btn-padding-block: 0.375rem;
+        --btn-padding-inline: 1rem;
+        font-size: var(--font-size-md);
+    }
+
+    .form-lg {
+        --form-input-padding-block: 0.5rem;
+        --form-input-padding-inline: 1.25rem;
+        --form-switch-height: 1.5rem;
+        --form-control-zoom: 1.125;
+        --btn-padding-block: 0.5rem;
+        --btn-padding-inline: 1.25rem;
+        font-size: var(--font-size-lg);
+    }
+
+    // Cases, boutons radio, range et couleur restent natifs : le zoom les agrandit comme le texte (14, 16, 18px)
+    .form-sm, .form-md, .form-lg {
+        input:is([type="checkbox"]:not([role="switch"]), [type="radio"], [type="range"], [type="color"]) {
+            zoom: var(--form-control-zoom);
+        }
     }
 
 }

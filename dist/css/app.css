@@ -1889,14 +1889,125 @@
     --form-input-padding-inline: 1rem;
     --form-input-border-radius: var(--border-radius-md);
     --form-input-border-width: var(--border-width);
-    --form-input-border-color: var(--border-color) ;
+    --form-input-border-color: var(--border-color);
+    --form-field-gap: 0.5rem;
+    --form-switch-height: 1.25rem;
+    --form-switch-border-width: var(--border-width);
+  }
+  .theme-primary {
+    --form-input-theme-color: var(--color-primary);
+    --form-input-theme-contrast: var(--color-primary-contrast);
+    --form-input-theme-emphasis: var(--color-primary-emphasis);
+    --form-switch-theme-color: var(--color-primary);
+    --form-switch-theme-contrast: var(--color-primary-contrast);
+    --form-switch-theme-border: var(--color-primary-border);
+    --form-switch-theme-emphasis: var(--color-primary-emphasis);
+    --form-control-theme-color: var(--color-primary);
+    --form-control-theme-emphasis: var(--color-primary-emphasis);
+  }
+  .theme-secondary {
+    --form-input-theme-color: var(--color-secondary);
+    --form-input-theme-contrast: var(--color-secondary-contrast);
+    --form-input-theme-emphasis: var(--color-secondary-emphasis);
+    --form-switch-theme-color: var(--color-secondary);
+    --form-switch-theme-contrast: var(--color-secondary-contrast);
+    --form-switch-theme-border: var(--color-secondary-border);
+    --form-switch-theme-emphasis: var(--color-secondary-emphasis);
+    --form-control-theme-color: var(--color-secondary);
+    --form-control-theme-emphasis: var(--color-secondary-emphasis);
+  }
+  .theme-accent {
+    --form-input-theme-color: var(--color-accent);
+    --form-input-theme-contrast: var(--color-accent-contrast);
+    --form-input-theme-emphasis: var(--color-accent-emphasis);
+    --form-switch-theme-color: var(--color-accent);
+    --form-switch-theme-contrast: var(--color-accent-contrast);
+    --form-switch-theme-border: var(--color-accent-border);
+    --form-switch-theme-emphasis: var(--color-accent-emphasis);
+    --form-control-theme-color: var(--color-accent);
+    --form-control-theme-emphasis: var(--color-accent-emphasis);
+  }
+  .theme-success {
+    --form-input-theme-color: var(--color-success);
+    --form-input-theme-contrast: var(--color-success-contrast);
+    --form-input-theme-emphasis: var(--color-success-emphasis);
+    --form-switch-theme-color: var(--color-success);
+    --form-switch-theme-contrast: var(--color-success-contrast);
+    --form-switch-theme-border: var(--color-success-border);
+    --form-switch-theme-emphasis: var(--color-success-emphasis);
+    --form-control-theme-color: var(--color-success);
+    --form-control-theme-emphasis: var(--color-success-emphasis);
+  }
+  .theme-danger {
+    --form-input-theme-color: var(--color-danger);
+    --form-input-theme-contrast: var(--color-danger-contrast);
+    --form-input-theme-emphasis: var(--color-danger-emphasis);
+    --form-switch-theme-color: var(--color-danger);
+    --form-switch-theme-contrast: var(--color-danger-contrast);
+    --form-switch-theme-border: var(--color-danger-border);
+    --form-switch-theme-emphasis: var(--color-danger-emphasis);
+    --form-control-theme-color: var(--color-danger);
+    --form-control-theme-emphasis: var(--color-danger-emphasis);
+  }
+  .theme-warning {
+    --form-input-theme-color: var(--color-warning);
+    --form-input-theme-contrast: var(--color-warning-contrast);
+    --form-input-theme-emphasis: var(--color-warning-emphasis);
+    --form-switch-theme-color: var(--color-warning);
+    --form-switch-theme-contrast: var(--color-warning-contrast);
+    --form-switch-theme-border: var(--color-warning-border);
+    --form-switch-theme-emphasis: var(--color-warning-emphasis);
+    --form-control-theme-color: var(--color-warning);
+    --form-control-theme-emphasis: var(--color-warning-emphasis);
+  }
+  .theme-info {
+    --form-input-theme-color: var(--color-info);
+    --form-input-theme-contrast: var(--color-info-contrast);
+    --form-input-theme-emphasis: var(--color-info-emphasis);
+    --form-switch-theme-color: var(--color-info);
+    --form-switch-theme-contrast: var(--color-info-contrast);
+    --form-switch-theme-border: var(--color-info-border);
+    --form-switch-theme-emphasis: var(--color-info-emphasis);
+    --form-control-theme-color: var(--color-info);
+    --form-control-theme-emphasis: var(--color-info-emphasis);
+  }
+  .theme-neutral {
+    --form-input-theme-color: var(--color-neutral);
+    --form-input-theme-contrast: var(--color-neutral-contrast);
+    --form-input-theme-emphasis: var(--color-neutral-emphasis);
+    --form-switch-theme-color: var(--color-neutral);
+    --form-switch-theme-contrast: var(--color-neutral-contrast);
+    --form-switch-theme-border: var(--color-neutral-border);
+    --form-switch-theme-emphasis: var(--color-neutral-emphasis);
+    --form-control-theme-color: var(--color-neutral);
+    --form-control-theme-emphasis: var(--color-neutral-emphasis);
+  }
+  .theme-inverse {
+    --form-input-theme-color: var(--color-inverse);
+    --form-input-theme-contrast: var(--color-inverse-contrast);
+    --form-input-theme-emphasis: var(--color-inverse-emphasis);
+    --form-switch-theme-color: var(--color-inverse);
+    --form-switch-theme-contrast: var(--color-inverse-contrast);
+    --form-switch-theme-border: var(--color-inverse-border);
+    --form-switch-theme-emphasis: var(--color-inverse-emphasis);
+    --form-control-theme-color: var(--color-inverse);
+    --form-control-theme-emphasis: var(--color-inverse-emphasis);
+  }
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--form-field-gap);
   }
   .form-input, .form-input-sm, .form-input-md, .form-input-lg {
     padding-block: var(--form-input-padding-block);
     padding-inline: var(--form-input-padding-inline);
-    border: var(--form-input-border-width) solid var(--form-input-border-color);
+    border: var(--form-input-border-width) solid var(--form-input-theme-color, var(--form-input-border-color));
     border-radius: var(--form-input-border-radius);
     background-color: var(--color-background);
+  }
+  .form-input:focus-visible, .form-input-sm:focus-visible, .form-input-md:focus-visible, .form-input-lg:focus-visible {
+    outline: var(--focus-outline-width) solid var(--form-input-theme-emphasis, currentColor);
+    outline-offset: var(--focus-outline-offset);
   }
   .form-input::file-selector-button, .form-input-sm::file-selector-button, .form-input-md::file-selector-button, .form-input-lg::file-selector-button {
     padding-block: var(--form-input-padding-block);
@@ -1904,8 +2015,20 @@
     margin-block: calc(-1 * var(--form-input-padding-block));
     margin-inline: calc(-1 * var(--form-input-padding-inline)) var(--form-input-padding-inline);
     border: 0;
-    border-inline-end: var(--form-input-border-width) solid var(--form-input-border-color);
+    border-inline-end: var(--form-input-border-width) solid var(--form-input-theme-color, var(--form-input-border-color));
     font: inherit;
+  }
+  .form-input:enabled::file-selector-button, .form-input-sm:enabled::file-selector-button, .form-input-md:enabled::file-selector-button, .form-input-lg:enabled::file-selector-button {
+    background-color: var(--form-input-theme-color, ButtonFace);
+    color: var(--form-input-theme-contrast, ButtonText);
+  }
+  select:is(.form-input, .form-input-sm, .form-input-md, .form-input-lg):not([multiple], [size]) {
+    appearance: none;
+    padding-inline-end: calc(var(--form-input-padding-inline) * 2 + 1em);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23808080' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right var(--form-input-padding-inline) center;
+    background-size: 1em;
   }
   .form-input-sm {
     --form-input-padding-block: 0.25rem;
@@ -1921,6 +2044,120 @@
     --form-input-padding-block: 0.5rem;
     --form-input-padding-inline: 1.25rem;
     font-size: var(--font-size-lg);
+  }
+  .form-switch, .form-switch-solid {
+    appearance: none;
+    flex-shrink: 0;
+    width: calc(var(--form-switch-height) * 2);
+    height: var(--form-switch-height);
+    padding: 0.125rem;
+    border: var(--form-switch-border-width) solid var(--form-input-border-color);
+    border-radius: 50rem;
+    vertical-align: middle;
+    transition-property: background-color, border-color;
+    transition-duration: var(--transition-duration);
+  }
+  .form-switch::before, .form-switch-solid::before {
+    content: "";
+    display: block;
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: currentColor;
+    transition-property: margin-inline-start, background-color;
+    transition-duration: var(--transition-duration);
+  }
+  .form-switch:checked::before, .form-switch-solid:checked::before {
+    margin-inline-start: var(--form-switch-height);
+  }
+  .form-switch:focus-visible, .form-switch-solid:focus-visible {
+    outline: var(--focus-outline-width) solid var(--form-switch-theme-emphasis, currentColor);
+    outline-offset: var(--focus-outline-offset);
+  }
+  .form-switch:disabled, .form-switch-solid:disabled {
+    opacity: var(--disabled-opacity);
+    pointer-events: none;
+  }
+  .form-switch:checked {
+    border-color: currentColor;
+    background-color: currentColor;
+  }
+  .form-switch:checked::before {
+    background-color: var(--color-background);
+  }
+  .form-switch-solid:checked {
+    border-color: var(--form-switch-theme-border);
+    background-color: var(--form-switch-theme-color);
+  }
+  .form-switch-solid:checked::before {
+    background-color: var(--form-switch-theme-contrast, currentColor);
+  }
+  @media (forced-colors: active) {
+    .form-switch::before, .form-switch-solid::before {
+      background-color: ButtonText;
+    }
+    .form-switch:checked, .form-switch-solid:checked {
+      border-color: Highlight;
+      background-color: Highlight;
+    }
+    .form-switch:checked::before, .form-switch-solid:checked::before {
+      background-color: HighlightText;
+    }
+  }
+  .form-switch-sm {
+    --form-switch-height: 1rem;
+  }
+  .form-switch-md {
+    --form-switch-height: 1.25rem;
+  }
+  .form-switch-lg {
+    --form-switch-height: 1.5rem;
+  }
+  .form-range, .form-checkbox, .form-radio {
+    accent-color: var(--form-control-theme-color);
+  }
+  .form-range:focus-visible, .form-checkbox:focus-visible, .form-radio:focus-visible {
+    outline: var(--focus-outline-width) solid var(--form-control-theme-emphasis, currentColor);
+    outline-offset: var(--focus-outline-offset);
+  }
+  .form-range {
+    border-radius: var(--border-radius-md);
+  }
+  .form-checkbox {
+    border-radius: var(--border-radius-xs);
+  }
+  .form-radio {
+    border-radius: 50%;
+  }
+  .form-sm {
+    --form-input-padding-block: 0.25rem;
+    --form-input-padding-inline: 0.75rem;
+    --form-switch-height: 1rem;
+    --form-control-zoom: 0.875;
+    --btn-padding-block: 0.25rem;
+    --btn-padding-inline: 0.75rem;
+    font-size: var(--font-size-sm);
+  }
+  .form-md {
+    --form-input-padding-block: 0.375rem;
+    --form-input-padding-inline: 1rem;
+    --form-switch-height: 1.25rem;
+    --form-control-zoom: 1;
+    --btn-padding-block: 0.375rem;
+    --btn-padding-inline: 1rem;
+    font-size: var(--font-size-md);
+  }
+  .form-lg {
+    --form-input-padding-block: 0.5rem;
+    --form-input-padding-inline: 1.25rem;
+    --form-switch-height: 1.5rem;
+    --form-control-zoom: 1.125;
+    --btn-padding-block: 0.5rem;
+    --btn-padding-inline: 1.25rem;
+    font-size: var(--font-size-lg);
+  }
+  .form-sm input:is([type=checkbox]:not([role=switch]), [type=radio], [type=range], [type=color]), .form-md input:is([type=checkbox]:not([role=switch]), [type=radio], [type=range], [type=color]), .form-lg input:is([type=checkbox]:not([role=switch]), [type=radio], [type=range], [type=color]) {
+    zoom: var(--form-control-zoom);
   }
 }
 @layer components {
