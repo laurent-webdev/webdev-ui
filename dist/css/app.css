@@ -90,7 +90,7 @@
 }
 
 :root {
-  --color-background: light-dark(#ffffff, oklch(0.18 0.005 245));
+  --color-background: light-dark(oklch(1 0 0), oklch(0.18 0.005 245));
   --border-color: light-dark(oklch(0.84 0.008 245), oklch(0.41 0.014 245));
   --box-shadow-color: light-dark(oklch(0 0 0 / 0.1), oklch(0 0 0 / 0.5));
   --backdrop-background-color: light-dark(oklch(0 0 0 / 0.5), oklch(0 0 0 / 0.65));
