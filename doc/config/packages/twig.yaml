@@ -31,6 +31,7 @@ twig:
                   - [app_pagination, Pagination, components/pagination.html.twig]
                   - [app_spinner, Spinner, components/spinner.html.twig]
                   - [app_table, Tableau, components/table.html.twig]
+                  - [app_toast, Toast, components/toast.html.twig]
             - id: layout
               label: Mise en page
               links:

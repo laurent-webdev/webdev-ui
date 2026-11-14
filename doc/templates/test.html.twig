@@ -3,66 +3,9 @@
 {% block title %}Page de test{% endblock %}
 
 {% block stylesheets %}
-    <style>
-        @layer reset {
-            #demo-dans-le-layer p { margin: 0; }
-        }
-        #demo-hors-layer p { margin: 0; }
-    </style>
 {% endblock %}
 
 {% block body %}
     <h1>Page de test</h1>
     <p class="fs-lg color-neutral-emphasis mb-6">Pour essayer un exemple avant de le mettre dans sa page.</p>
-
-    <h2 class="mt-10">Le dernier :where() : _reset.scss</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-scss">// Aujourd'hui
-:where(:not(dialog, [popover])) {
-    margin: 0;
-}
-
-// Sans :where() : la règle reste, elle retire toujours les marges du navigateur
-:not(dialog, [popover]) {
-    margin: 0;
-}</code></pre>
-    <p class="mt-2">Le commentaire du fichier dit que :where() laisse passer les classes devant. Ce sont les layers qui s'en chargent : voici le test, avec une règle encore plus forte que celle sans :where().</p>
-
-    <div class="grid mt-4">
-        <section class="md:col-6">
-            <h3 class="fs-md">Une règle très forte, dans le layer reset</h3>
-            <pre class="mt-2" tabindex="0"><code class="language-css">@layer reset {
-    #demo-dans-le-layer p { margin: 0; }
-}</code></pre>
-            <div class="mt-2" id="demo-dans-le-layer">
-                <p class="bg-primary-subtle p-2 mb-8">p mb-8</p>
-                <p class="bg-primary-subtle p-2">p</p>
-            </div>
-            <p class="mt-2">Il y a un espace : mb-8 gagne, malgré un id dans la règle du reset. Le layer utilities passe devant le layer reset, quelle que soit la force de la règle.</p>
-        </section>
-        <section class="md:col-6">
-            <h3 class="fs-md">La même règle, hors layer</h3>
-            <pre class="mt-2" tabindex="0"><code class="language-css">#demo-hors-layer p { margin: 0; }</code></pre>
-            <div class="mt-2" id="demo-hors-layer">
-                <p class="bg-danger-subtle p-2 mb-8">p mb-8</p>
-                <p class="bg-danger-subtle p-2">p</p>
-            </div>
-            <p class="mt-2">Plus d'espace : mb-8 perd. C'est la seule différence entre les deux colonnes : le layer décide, pas la force du sélecteur.</p>
-        </section>
-    </div>
-
-    <h2 class="mt-10">Dialogue et popover : toujours exclus</h2>
-    <p class="mt-2 d-flex flex-wrap-wrap gap-2">
-        <button class="btn-solid theme-primary" type="button" commandfor="demo-where-dialog" command="show-modal">Ouvrir le dialogue</button>
-        <button class="btn-solid theme-primary" type="button" popovertarget="demo-where-popover">Ouvrir le popover</button>
-    </p>
-    <dialog class="dialog-outline theme-primary dialog-sm" id="demo-where-dialog" aria-labelledby="demo-where-dialog-titre">
-        <div class="dialog-header">
-            <h3 class="fs-lg" id="demo-where-dialog-titre">Centré dans la page</h3>
-        </div>
-        <div class="dialog-footer">
-            <button class="btn-solid theme-primary" type="button" commandfor="demo-where-dialog" command="close">Fermer</button>
-        </div>
-    </dialog>
-    <div id="demo-where-popover" popover>Centré dans la page.</div>
-    <p class="mt-2">:not(dialog, [popover]) reste dans la règle : ils gardent leur centrage natif, avec ou sans :where().</p>
 {% endblock %}

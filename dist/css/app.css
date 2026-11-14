@@ -1103,6 +1103,7 @@
   .btn-close, .btn-close-solid, .btn-close-subtle, .btn-close-outline {
     width: var(--btn-close-size);
     aspect-ratio: 1;
+    flex-shrink: 0;
     padding: 0;
     border: var(--btn-close-border-width) solid transparent;
     border-radius: var(--btn-close-border-radius);
@@ -2992,6 +2993,157 @@
   .table-lg {
     --table-cell-padding-block: 0.75rem;
     --table-cell-padding-inline: 1rem;
+  }
+}
+@layer components {
+  :root {
+    --toast-padding-block: 0.75rem;
+    --toast-padding-inline: 1rem;
+    --toast-border-radius: var(--border-radius-md);
+    --toast-border-width: var(--border-width);
+    --toast-width: 22rem;
+    --toast-inset: 1rem;
+    --toast-duration: 5s;
+    --toast-transition-duration: 0.2s;
+  }
+  .theme-primary {
+    --toast-theme-color: var(--color-primary);
+    --toast-theme-contrast: var(--color-primary-contrast);
+    --toast-theme-subtle: var(--color-primary-subtle);
+    --toast-theme-emphasis: var(--color-primary-emphasis);
+  }
+  .theme-secondary {
+    --toast-theme-color: var(--color-secondary);
+    --toast-theme-contrast: var(--color-secondary-contrast);
+    --toast-theme-subtle: var(--color-secondary-subtle);
+    --toast-theme-emphasis: var(--color-secondary-emphasis);
+  }
+  .theme-accent {
+    --toast-theme-color: var(--color-accent);
+    --toast-theme-contrast: var(--color-accent-contrast);
+    --toast-theme-subtle: var(--color-accent-subtle);
+    --toast-theme-emphasis: var(--color-accent-emphasis);
+  }
+  .theme-success {
+    --toast-theme-color: var(--color-success);
+    --toast-theme-contrast: var(--color-success-contrast);
+    --toast-theme-subtle: var(--color-success-subtle);
+    --toast-theme-emphasis: var(--color-success-emphasis);
+  }
+  .theme-danger {
+    --toast-theme-color: var(--color-danger);
+    --toast-theme-contrast: var(--color-danger-contrast);
+    --toast-theme-subtle: var(--color-danger-subtle);
+    --toast-theme-emphasis: var(--color-danger-emphasis);
+  }
+  .theme-warning {
+    --toast-theme-color: var(--color-warning);
+    --toast-theme-contrast: var(--color-warning-contrast);
+    --toast-theme-subtle: var(--color-warning-subtle);
+    --toast-theme-emphasis: var(--color-warning-emphasis);
+  }
+  .theme-info {
+    --toast-theme-color: var(--color-info);
+    --toast-theme-contrast: var(--color-info-contrast);
+    --toast-theme-subtle: var(--color-info-subtle);
+    --toast-theme-emphasis: var(--color-info-emphasis);
+  }
+  .theme-neutral {
+    --toast-theme-color: var(--color-neutral);
+    --toast-theme-contrast: var(--color-neutral-contrast);
+    --toast-theme-subtle: var(--color-neutral-subtle);
+    --toast-theme-emphasis: var(--color-neutral-emphasis);
+  }
+  .theme-inverse {
+    --toast-theme-color: var(--color-inverse);
+    --toast-theme-contrast: var(--color-inverse-contrast);
+    --toast-theme-subtle: var(--color-inverse-subtle);
+    --toast-theme-emphasis: var(--color-inverse-emphasis);
+  }
+  .toast-container {
+    position: fixed;
+    inset-block: auto var(--toast-inset);
+    inset-inline: auto var(--toast-inset);
+    width: var(--toast-width);
+    max-width: calc(100% - var(--toast-inset) * 2);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: visible;
+    background-color: transparent;
+    color: inherit;
+    pointer-events: none;
+  }
+  .toast-container > * {
+    pointer-events: auto;
+    animation: toast-hide var(--toast-transition-duration) var(--toast-duration) forwards;
+  }
+  .toast-container > *:hover, .toast-container > *:focus-within {
+    animation-play-state: paused;
+  }
+  .toast-container > :has(a[href], button:not([data-toast-close])) {
+    animation: none;
+  }
+  .toast-container > * + * {
+    margin-block-start: 0.5rem;
+  }
+  .toast-container-top {
+    inset-block: var(--toast-inset) auto;
+  }
+  .toast-container-start {
+    inset-inline: var(--toast-inset) auto;
+  }
+  .toast, .toast-solid, .toast-subtle, .toast-outline {
+    display: flex;
+    align-items: start;
+    gap: 0.75rem;
+    padding-block: var(--toast-padding-block);
+    padding-inline: var(--toast-padding-inline);
+    border: var(--toast-border-width) solid var(--border-color);
+    border-radius: var(--toast-border-radius);
+    box-shadow: var(--box-shadow-lg);
+    transition-property: opacity, translate;
+    transition-duration: var(--toast-transition-duration);
+  }
+  .toast > :is(.btn-close, .btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child, .toast-solid > :is(.btn-close, .btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child, .toast-subtle > :is(.btn-close, .btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child, .toast-outline > :is(.btn-close, .btn-close-solid, .btn-close-subtle, .btn-close-outline):last-child {
+    margin-inline-start: auto;
+  }
+  .toast[data-closing], .toast-solid[data-closing], .toast-subtle[data-closing], .toast-outline[data-closing] {
+    animation: none;
+    opacity: 0;
+  }
+  @starting-style {
+    .toast, .toast-solid, .toast-subtle, .toast-outline {
+      opacity: 0;
+      translate: 0 1rem;
+    }
+    .toast-container-top > * {
+      translate: 0 -1rem;
+    }
+  }
+  .toast {
+    background-color: var(--color-background);
+  }
+  .toast-solid {
+    border-color: var(--toast-theme-color);
+    background-color: var(--toast-theme-color);
+    color: var(--toast-theme-contrast);
+  }
+  .toast-subtle {
+    border-color: var(--toast-theme-subtle);
+    background-color: var(--toast-theme-subtle);
+    color: var(--toast-theme-emphasis);
+  }
+  .toast-outline {
+    border-color: var(--toast-theme-color);
+    background-color: var(--color-background);
+    color: var(--toast-theme-emphasis);
+  }
+  @keyframes toast-hide {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
   }
 }
 @layer utilities {

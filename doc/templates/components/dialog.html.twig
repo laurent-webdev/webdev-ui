@@ -82,7 +82,7 @@
         <dialog class="dialog-{{ dialog.variant }} {{ dialog.theme }}" id="dialog-{{ dialog.variant }}" data-dialog aria-labelledby="dialog-{{ dialog.variant }}-title">
             <div class="dialog-header">
                 <h2 class="fs-lg" id="dialog-{{ dialog.variant }}-title">dialog-{{ dialog.variant }} {{ dialog.theme }}</h2>
-                <button class="{{ dialog.variant == 'solid' ? 'btn-close-solid theme-inverse' : 'btn-close-subtle' }}" type="button" commandfor="dialog-{{ dialog.variant }}" command="close" aria-label="Fermer"></button>
+                <button class="{{ dialog.variant == 'solid' ? 'btn-close-solid' : 'btn-close-subtle' }}" type="button" commandfor="dialog-{{ dialog.variant }}" command="close" aria-label="Fermer"></button>
             </div>
             <div class="dialog-body">
                 <p>Le texte suit la variante du dialogue. <a class="link{% if dialog.variant == 'solid' %} color-inherit{% endif %}" href="#">Un lien</a></p>
@@ -95,7 +95,7 @@
             </div>
         </dialog>
     {% endfor %}
-    <p class="mt-2">Comme les cartes : le cadre et les traits ont la couleur de bordure du thème (--color-*-border ; dialog-subtle : --color-*-subtle-border) ; le texte reste celui de la page, sauf sur dialog-solid (noir ou blanc). Sur dialog-solid, seuls btn-solid et btn-close-solid sont prévus, d'un autre thème (theme-inverse). Sur dialog-outline, le fond est celui de la page.</p>
+    <p class="mt-2">Comme les cartes : le cadre et les traits ont la couleur de bordure du thème (--color-*-border ; dialog-subtle : --color-*-subtle-border) ; le texte reste celui de la page, sauf sur dialog-solid (noir ou blanc). Sur dialog-solid, seul btn-solid est prévu, d'un autre thème (theme-inverse) ; la croix, btn-close-solid, prend le thème du dialogue : le carré se fond dans le fond, on ne voit que la croix. Sur dialog-outline, le fond est celui de la page.</p>
 
     <h2 class="mt-10">Tailles</h2>
     <div class="d-flex flex-wrap-wrap gap-2 mt-2">

@@ -19,3 +19,13 @@ document.querySelectorAll('[data-demo-toggle]').forEach((button) => {
         button.setAttribute('aria-expanded', !target.hidden);
     });
 });
+
+// Démos : le bouton ajoute une copie de son <template> (data-demo-toast = id du modèle) au conteneur data-toast de son dialogue ou de la page,
+// ou à celui de data-demo-toast-container (id du conteneur)
+document.querySelectorAll('[data-demo-toast]').forEach((button) => {
+    const template = document.getElementById(button.dataset.demoToast);
+    const container = button.dataset.demoToastContainer
+        ? document.getElementById(button.dataset.demoToastContainer)
+        : button.closest('dialog, body').querySelector('[data-toast]');
+    button.addEventListener('click', () => container.append(template.content.cloneNode(true)));
+});

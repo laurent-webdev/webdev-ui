@@ -23,6 +23,8 @@
     .btn-close, .btn-close-solid, .btn-close-subtle, .btn-close-outline {
         width: var(--btn-close-size);
         aspect-ratio: 1;
+        // Dans une ligne en flex (en-tête, toast), un texte long ne la rétrécit pas
+        flex-shrink: 0;
         padding: 0;
         border: var(--btn-close-border-width) solid transparent;
         border-radius: var(--btn-close-border-radius);

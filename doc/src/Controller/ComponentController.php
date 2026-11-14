@@ -110,4 +110,10 @@ final class ComponentController extends AbstractController
     {
         return $this->render('components/table.html.twig');
     }
+
+    #[Route('/toast', name: 'app_toast')]
+    public function toast(): Response
+    {
+        return $this->render('components/toast.html.twig');
+    }
 }

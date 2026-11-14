@@ -97,3 +97,38 @@ var Tab = class _Tab {
   }
 };
 Tab.start();
+
+// src/ts/components/toast.ts
+var Toast = class _Toast {
+  // Écouteurs délégués sur document : marche pour les toasts ajoutés plus tard, sans les surveiller
+  static start() {
+    document.addEventListener("click", _Toast.onClick);
+    document.addEventListener("animationend", _Toast.onAnimationEnd);
+    _Toast.showContainers();
+  }
+  // Les conteneurs popover="manual" de la page, ouverts une fois pour toutes : dans le top layer, au-dessus de la page
+  // Sans popover (dans un dialogue, déjà dans le top layer), le conteneur s'affiche seul
+  static showContainers() {
+    document.querySelectorAll("[data-toast][popover]").forEach((container) => {
+      if (!container.matches(":popover-open")) container.showPopover();
+    });
+  }
+  static findToast(element) {
+    return element instanceof Element ? element.closest("[data-toast] > *") : null;
+  }
+  // La croix (data-toast-close) : data-closing lance le fondu, le toast est retiré à la fin
+  static onClick(event) {
+    if (!(event.target instanceof Element) || !event.target.closest("[data-toast-close]")) return;
+    const toast = _Toast.findToast(event.target);
+    if (!toast || toast.hasAttribute("data-closing")) return;
+    toast.setAttribute("data-closing", "");
+    Promise.allSettled(toast.getAnimations().map((animation) => animation.finished)).then(() => toast.remove());
+  }
+  // Fin du minuteur : toast-hide l'a fait disparaître, il est retiré
+  static onAnimationEnd(event) {
+    if (event.animationName !== "toast-hide") return;
+    const toast = _Toast.findToast(event.target);
+    if (toast && toast === event.target) toast.remove();
+  }
+};
+Toast.start();
