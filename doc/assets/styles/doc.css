@@ -24,3 +24,20 @@ body {
   height: 8rem;
 }
 
+
+/* Fond chargé derrière les démos du verre (glass) : couleurs, rayures, une bande noire et une blanche (le pire cas du texte) */
+.demo-glass {
+  padding: 2rem 1rem;
+  background:
+    linear-gradient(90deg, oklch(0 0 0) 0 15%, transparent 15% 85%, oklch(1 0 0) 85%),
+    repeating-linear-gradient(45deg, oklch(0 0 0 / 0.35) 0 0.75rem, transparent 0.75rem 2rem),
+    linear-gradient(135deg, oklch(0.75 0.18 30), oklch(0.7 0.18 140), oklch(0.6 0.2 260));
+}
+
+/* Gros mots blancs dans le fond : on voit le flou à travers le verre */
+.demo-glass-text {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+  color: oklch(1 0 0);
+}

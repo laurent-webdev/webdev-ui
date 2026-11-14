@@ -17,6 +17,9 @@
   /* Derrière un dialogue modal : la page floutée (couleur : --backdrop-background-color) */
   --backdrop-filter: blur(5px);
 
+  /* Verre (.glass) : ce qui est derrière, flouté et un peu plus saturé (couleur : --glass-background-color) */
+  --glass-backdrop-filter: blur(16px) saturate(180%);
+
   /* États (survol, clic…) : part de couleur mélangée au fond, léger ou fort */
   --state-mix-soft: 20%;
   --state-mix-strong: 30%;

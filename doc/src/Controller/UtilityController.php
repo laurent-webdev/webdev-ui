@@ -69,6 +69,12 @@ final class UtilityController extends AbstractController
         return $this->render('utilities/gap.html.twig');
     }
 
+    #[Route('/glass', name: 'app_glass')]
+    public function glass(): Response
+    {
+        return $this->render('utilities/glass.html.twig');
+    }
+
     #[Route('/object-fit', name: 'app_object_fit')]
     public function objectFit(): Response
     {

@@ -61,7 +61,7 @@ Pas de préfixe. Tout en minuscules, mots séparés par `-`. **Lisible avant tou
 - **Une variable n'existe que si un site voudra la changer.** Une formule ou une valeur réglée pour le contraste va en dur. Fichiers propres, lisibles par un débutant, sans variable pseudo-utile ni indirection (`--x-current`).
 - **Peu de variables par composant** : padding, rayon (pointe vers `--border-radius-md`), épaisseur de bordure (vers `--border-width` : toutes les bordures changent ensemble), parfois une largeur ou une durée. Le reste (transition, focus, survol, clic) lit les globales directement ; on le personnalise en surchargeant la globale sur la classe.
 - **Padding des composants en vraies valeurs** (`0.375rem`), pas en `--space-*` : changer l'échelle ne redimensionne pas les composants.
-- **Où** : `settings/_colors.scss` (couleurs, `--border-color`, `--box-shadow-color`, `--backdrop-background-color`) ; `_spacing.scss` (`--space-0` à `-12`, `n × 0.25rem`) ; `_typography.scss` ; `_variables.scss` (rayons, ombres, `--border-width`, `--state-mix-soft` / `-strong`, `--transition-duration`, `--focus-outline-*`, `--disabled-opacity`, soulignement des liens, `--backdrop-filter`).
+- **Où** : `settings/_colors.scss` (couleurs, `--border-color`, `--box-shadow-color`, `--backdrop-background-color`, `--glass-background-color`) ; `_spacing.scss` (`--space-0` à `-12`, `n × 0.25rem`) ; `_typography.scss` ; `_variables.scss` (rayons, ombres, `--border-width`, `--state-mix-soft` / `-strong`, `--transition-duration`, `--focus-outline-*`, `--disabled-opacity`, soulignement des liens, `--backdrop-filter`, `--glass-backdrop-filter`).
 - **Changer une valeur = une ligne dans le site**, sans `!important` ni spécificité (le CSS du site, hors layer, gagne toujours) :
     - une échelle : `:root { --border-radius-md: 8px; }` ;
     - le défaut d'un composant : `:root { --btn-padding-inline: 1.25rem; }` ;
@@ -132,12 +132,13 @@ Faits (le détail est dans le SCSS et dans la page de doc de chacun) :
 
 ## Utilitaires
 
-Un fichier par famille dans `utilities/` : spacing, gap, display, flex, sizing, border, colors, font, text, cursor, object-fit, aspect-ratio, animation, visually-hidden, opacity, visibility, overflow, position, vertical-align, box-shadow.
+Un fichier par famille dans `utilities/` : spacing, gap, display, flex, sizing, border, colors, font, text, cursor, object-fit, aspect-ratio, animation, visually-hidden, opacity, visibility, overflow, position, vertical-align, box-shadow, glass.
 
 - **Générés par boucle ou mixin, valeurs lues dans les variables CSS** (`.m-2 { margin: var(--space-2); }`). Les mots-clés (`d-flex`, `cursor-pointer`) n'ont pas de variable.
 - **Forme des fichiers responsive** (choisie par Laurent) : un mixin `<famille>-classes($breakpoint: '')` dans le fichier, une ligne par classe, appelé sans préfixe puis dans les 6 `@media (width >= …)` recopiées. Pas de `@content` avec `using`.
 - **Ordre d'écriture : tous les côtés, puis un axe, puis un côté**, pour que le plus précis gagne (`class="m-4 mt-0"`, `class="gap-2 row-gap-8"`, `class="border border-2 border-primary"`).
 - **Couleurs** : `bg-<nom>` et `bg-<nom>-subtle` ne posent que le fond ; le texte se choisit à part : `color-<nom>-contrast` (sur le fond plein : toujours la paire `bg-* color-*-contrast`), `color-<nom>-emphasis` (texte coloré), `color-<nom>` (couleur brute, icônes et décoration seulement), `color-inherit`.
+- **Verre** : `glass`, un effet nommé comme `visually-hidden`, à ajouter à un composant sans couleur ou `-outline` (card, accordion, dialog, drawer, toast, navbar, dropdown…), jamais sur un `-solid` (texte noir ou blanc sur le verre). `--glass-background-color` (le fond de la page à 70 % : le texte de la page garde 7:1 devant du noir ou du blanc, le texte coloré tombe à 3:1) et `--glass-backdrop-filter` ; fond plein sous `prefers-reduced-transparency: reduce`. `backdrop-filter` fait de l'élément la référence des éléments fixés qu'il contient : le conteneur de toasts d'un dialogue en verre se met dans son coin.
 - **Cacher** : `hidden` / `d-none` (caché à tous), `visually-hidden` (lu par les lecteurs d'écran), `visibility-hidden` (garde sa place), `opacity-0` (reste cliquable et lu).
 - **Écartés volontairement** : `order-*` et `*-reverse` (l'ordre affiché ne suit plus le DOM, WCAG 1.3.2), `text-align-justify`, `overflow-scroll`, largeurs en `vw` (les `w-*` sont en %), z-index nommés (`<dialog>` et `popover` passent au-dessus par le top layer), `!important` dans les utilitaires.
 - Animations : une variable de durée par animation (`--animation-fade-in-duration`), propriétés `translate` / `scale` / `rotate` (pas `transform`), pas de clignotement.

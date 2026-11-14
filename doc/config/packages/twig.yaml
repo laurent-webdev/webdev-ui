@@ -57,6 +57,7 @@ twig:
                   - [app_position, Position, utilities/position.html.twig]
                   - [app_text, Texte, utilities/text.html.twig]
                   - [app_font, Typographie, utilities/font.html.twig]
+                  - [app_glass, Verre, utilities/glass.html.twig]
                   - [app_vertical_align, Vertical-align, utilities/vertical-align.html.twig]
                   - [app_visibility, Visibilité, utilities/visibility.html.twig]
                   - [app_visually_hidden, Visually-hidden, utilities/visually-hidden.html.twig]

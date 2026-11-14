@@ -1,0 +1,18 @@
+@layer utilities {
+
+    // Verre dépoli : un fond translucide, clair ou foncé selon le thème, et ce qui est derrière flouté
+    // Sur un composant sans couleur (card, dialog, drawer, toast, navbar, dropdown…) : il remplace son fond
+    .glass {
+        background-color: var(--glass-background-color);
+        backdrop-filter: var(--glass-backdrop-filter);
+    }
+
+    // Réglage « Réduire la transparence » du système : le fond de la page, plein, sans flou
+    @media (prefers-reduced-transparency: reduce) {
+        .glass {
+            background-color: var(--color-background);
+            backdrop-filter: none;
+        }
+    }
+
+}
