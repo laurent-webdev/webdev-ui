@@ -1,0 +1,204 @@
+@use '../settings/breakpoints';
+
+// navbar-expand : les liens dans la barre, plus de bouton de menu ; $breakpoint est mis devant le nom de la classe (.md\:navbar-expand)
+@mixin navbar-expand-classes($breakpoint: '') {
+    .#{$breakpoint}navbar-expand {
+        > .navbar-list {
+            display: flex;
+            flex-direction: row;
+        }
+
+        > .navbar-toggle {
+            display: none;
+        }
+    }
+}
+
+@layer components {
+
+    :root {
+        // Forme : la barre, puis ses éléments ; les côtés seulement sur une barre colorée (navbar-subtle, navbar-solid)
+        --navbar-padding-block: 0.5rem;
+        --navbar-padding-inline: 1rem;
+        --navbar-item-padding-block: 0.5rem;
+        --navbar-item-padding-inline: 0.75rem;
+        --navbar-item-border-radius: var(--border-radius-md);
+
+        // Thème par défaut, sans classe .theme-*
+        --navbar-theme-color: var(--color-neutral);
+        --navbar-theme-contrast: var(--color-neutral-contrast);
+        --navbar-theme-state: var(--color-neutral-state);
+        --navbar-theme-subtle: var(--color-neutral-subtle);
+        --navbar-theme-emphasis: var(--color-neutral-emphasis);
+    }
+
+    // Une classe par couleur : hérité, sur la barre elle colore tous ses éléments, sur un élément seulement lui
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .theme-#{$color} {
+            --navbar-theme-color: var(--color-#{$color});
+            --navbar-theme-contrast: var(--color-#{$color}-contrast);
+            --navbar-theme-state: var(--color-#{$color}-state);
+            --navbar-theme-subtle: var(--color-#{$color}-subtle);
+            --navbar-theme-emphasis: var(--color-#{$color}-emphasis);
+        }
+    }
+
+    // Forme commune : le nom du site au début, les liens ou le bouton du menu au bout ; navbar, sans couleur, n'a ni fond ni padding sur les côtés (aligné sur le texte de la page)
+    .navbar, .navbar-subtle, .navbar-solid {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: var(--navbar-padding-block);
+
+        // Sans navbar-expand, les liens sont dans le drawer : la liste de la barre est cachée ; dans la barre, un lien ne passe pas à la ligne
+        > .navbar-list {
+            display: none;
+            white-space: nowrap;
+        }
+    }
+
+    // Le nom du site : plus grand, sans soulignement
+    .navbar-brand {
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-semibold);
+        color: inherit;
+        text-decoration: none;
+
+        // Comme les boutons, la couleur du thème en emphasis
+        &:focus-visible {
+            outline: var(--focus-outline-width) solid var(--navbar-theme-emphasis);
+            outline-offset: var(--focus-outline-offset);
+        }
+    }
+
+    // Les liens : empilés sur toute la largeur dans le drawer, en ligne dans la barre (navbar-expand)
+    .navbar-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        // Sans puces ni retrait ; "" et pas none : avec none, Safari n'annonce plus une liste
+        padding-inline-start: 0;
+        list-style-type: "";
+    }
+
+    // Un lien ou un bouton de la liste
+    .navbar-item {
+        display: block;
+        width: 100%;
+        padding-block: var(--navbar-item-padding-block);
+        padding-inline: var(--navbar-item-padding-inline);
+        border: 0;
+        border-radius: var(--navbar-item-border-radius);
+        background-color: transparent;
+        color: inherit;
+        text-align: start;
+        text-decoration: none;
+        transition-property: background-color;
+        transition-duration: var(--transition-duration);
+
+        // Seul le fond change : léger au survol, renforcé au clic ; le texte de la page y reste lisible
+        &:hover {
+            background-color: var(--navbar-theme-subtle);
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--navbar-theme-subtle), var(--navbar-theme-color) var(--state-mix-soft));
+        }
+
+        // En cours : le fond du clic, sans gras pour que le texte ne bouge pas
+        &[aria-current]:not([aria-current="false"]) {
+            background-color: color-mix(in srgb, var(--navbar-theme-subtle), var(--navbar-theme-color) var(--state-mix-soft));
+        }
+
+        // Comme les boutons, la couleur du thème en emphasis ; à l'intérieur de l'élément : l'élément voisin ne le cache pas
+        &:focus-visible {
+            outline: var(--focus-outline-width) solid var(--navbar-theme-emphasis);
+            outline-offset: calc(var(--focus-outline-width) * -1);
+        }
+
+        // Désactivé : estompé, plus de survol ni de clic, comme les boutons
+        &:disabled {
+            opacity: var(--disabled-opacity);
+            pointer-events: none;
+        }
+    }
+
+    // Le bouton du menu : un bouton du framework (btn, btn-subtle…) avec trois traits ; un carré, le padding des côtés égal à celui du haut
+    .navbar-toggle {
+        --btn-padding-inline: var(--btn-padding-block);
+
+        // Les trois traits : un masque SVG sur ::before, de la couleur du texte du bouton
+        &::before {
+            content: "";
+            display: block;
+            width: 1.5em;
+            aspect-ratio: 1;
+            background-color: currentColor;
+            mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M2.5 4h11M2.5 8h11M2.5 12h11' stroke='black' stroke-width='1.25' stroke-linecap='round'/></svg>");
+            mask-size: contain;
+            mask-repeat: no-repeat;
+        }
+
+        // Contraste élevé (Windows) : le fond forcé effacerait les traits, ils prennent la couleur du texte des boutons
+        @media (forced-colors: active) {
+            &::before {
+                forced-color-adjust: none;
+                background-color: ButtonText;
+            }
+        }
+    }
+
+    // Subtle et solid : un fond, de l'air entre son bord et le nom du site
+    // Seuls les liens de la barre changent (> .navbar-list) : le drawer garde le fond et le texte de la page
+    .navbar-subtle, .navbar-solid {
+        padding-inline: var(--navbar-padding-inline);
+    }
+
+    // Subtle : fond léger, le texte de la page ; les fonds des liens un cran plus forts, renforcés par la couleur du thème
+    .navbar-subtle {
+        background-color: var(--navbar-theme-subtle);
+
+        > .navbar-list .navbar-item {
+            &:hover {
+                background-color: color-mix(in srgb, var(--navbar-theme-subtle), var(--navbar-theme-color) var(--state-mix-soft));
+            }
+            &:active,
+            &[aria-current]:not([aria-current="false"]) {
+                background-color: color-mix(in srgb, var(--navbar-theme-subtle), var(--navbar-theme-color) var(--state-mix-strong));
+            }
+        }
+    }
+
+    // Solid : fond plein, son texte ; les fonds des liens mélangés à l'opposé du texte, comme les boutons solid
+    .navbar-solid {
+        background-color: var(--navbar-theme-color);
+        color: var(--navbar-theme-contrast);
+
+        > .navbar-list .navbar-item {
+            &:hover {
+                background-color: color-mix(in srgb, var(--navbar-theme-color), var(--navbar-theme-state) var(--state-mix-soft));
+            }
+            &:active,
+            &[aria-current]:not([aria-current="false"]) {
+                background-color: color-mix(in srgb, var(--navbar-theme-color), var(--navbar-theme-state) var(--state-mix-strong));
+            }
+        }
+
+        // Contour de la couleur du texte : l'emphasis du thème serait trop proche du fond plein
+        > .navbar-brand:focus-visible,
+        > .navbar-list .navbar-item:focus-visible {
+            outline-color: currentColor;
+        }
+    }
+
+    // Sans breakpoint, puis une fois par breakpoint, du plus petit au plus grand
+    @include navbar-expand-classes;
+    @media (width >= breakpoints.$screen-xs) { @include navbar-expand-classes('xs\\:'); }
+    @media (width >= breakpoints.$screen-sm) { @include navbar-expand-classes('sm\\:'); }
+    @media (width >= breakpoints.$screen-md) { @include navbar-expand-classes('md\\:'); }
+    @media (width >= breakpoints.$screen-lg) { @include navbar-expand-classes('lg\\:'); }
+    @media (width >= breakpoints.$screen-xl) { @include navbar-expand-classes('xl\\:'); }
+    // Une classe CSS ne peut pas commencer par un chiffre : le 2 de 2xl s'écrit échappé (\32 + espace)
+    @media (width >= breakpoints.$screen-2xl) { @include navbar-expand-classes('\\32 xl\\:'); }
+
+}

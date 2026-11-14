@@ -26,6 +26,7 @@ twig:
                   - [app_form, Formulaire, components/form.html.twig]
                   - [app_link, Lien, components/link.html.twig]
                   - [app_list, Liste, components/list.html.twig]
+                  - [app_navbar, Navbar, components/navbar.html.twig]
                   - [app_tab, Onglets, components/tab.html.twig]
                   - [app_spinner, Spinner, components/spinner.html.twig]
                   - [app_table, Tableau, components/table.html.twig]

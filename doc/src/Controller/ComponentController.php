@@ -81,6 +81,12 @@ final class ComponentController extends AbstractController
         return $this->render('components/list.html.twig');
     }
 
+    #[Route('/navbar', name: 'app_navbar')]
+    public function navbar(): Response
+    {
+        return $this->render('components/navbar.html.twig');
+    }
+
     #[Route('/spinner', name: 'app_spinner')]
     public function spinner(): Response
     {

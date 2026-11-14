@@ -1,0 +1,271 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Navbar{% endblock %}
+
+{% block body %}
+    {% set links = ['Accueil', 'Produits', 'Tarifs', 'Contact'] %}
+
+    <h1>Navbar</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">La barre de navigation du site : son nom, puis ses liens. Sur un petit écran, un bouton ouvre les liens dans un drawer ; à partir du breakpoint choisi, ils passent dans la barre. navbar n'a pas de fond : ses liens gardent le texte de la page, la couleur .theme-* n'apparaît que sur leur fond, au survol, au clic et sur la page en cours. navbar-subtle et navbar-solid donnent à la barre un fond de la couleur du thème.</p>
+
+    <nav class="navbar md:navbar-expand border-bottom mt-2" aria-label="Principal (démo)">
+        <a class="navbar-brand" href="#">Mon site</a>
+        <ul class="navbar-list">
+            {% for link in links %}
+                <li><a class="navbar-item" href="#"{% if loop.first %} aria-current="true"{% endif %}>{{ link }}</a></li>
+            {% endfor %}
+        </ul>
+        <button class="btn navbar-toggle" type="button" commandfor="navbar-menu" command="show-modal" aria-label="Menu"></button>
+        <dialog class="drawer-end" id="navbar-menu" data-dialog aria-labelledby="navbar-menu-title" closedby="any">
+            <div class="drawer-header">
+                <h2 class="fs-lg" id="navbar-menu-title">Menu</h2>
+                <button class="btn-close" type="button" commandfor="navbar-menu" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="drawer-body">
+                <ul class="navbar-list">
+                    {% for link in links %}
+                        <li><a class="navbar-item" href="#"{% if loop.first %} aria-current="true"{% endif %}>{{ link }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </dialog>
+    </nav>
+    <ul class="mt-4">
+        <li>Sous 768px (md), la barre montre le nom du site et un bouton ; le bouton ouvre le drawer, les liens y sont empilés sur toute la largeur. Échap, la croix ou un clic à côté le ferment.</li>
+        <li>À partir de 768px, les liens sont dans la barre, au bout ; le bouton disparaît. Rétrécir la fenêtre pour voir le passage.</li>
+        <li>Au survol, un fond léger ; au clic, ce fond renforcé ; la page en cours (aria-current) garde le fond du clic. Le texte ne change jamais.</li>
+    </ul>
+
+    <h2 class="mt-10">Couleurs</h2>
+    <nav class="navbar navbar-expand mt-2" aria-label="sans thème (démo)">
+        <a class="navbar-brand" href="#">sans thème</a>
+        <ul class="navbar-list">
+            {% for link in links|slice(0, 3) %}
+                <li><a class="navbar-item" href="#"{% if loop.index == 2 %} aria-current="true"{% endif %}>{{ link }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+    {% for color in colors|filter(color => color != 'neutral') %}
+        <nav class="navbar navbar-expand theme-{{ color }}" aria-label="theme-{{ color }} (démo)">
+            <a class="navbar-brand" href="#">theme-{{ color }}</a>
+            <ul class="navbar-list">
+                {% for link in links|slice(0, 3) %}
+                    <li><a class="navbar-item" href="#"{% if loop.index == 2 %} aria-current="true"{% endif %}>{{ link }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    {% endfor %}
+    <ul class="mt-4">
+        <li>Sans thème, les fonds sont gris (neutral). .theme-* sur la barre colore tous ses liens, ceux du drawer compris ; sur un lien, seulement le sien.</li>
+        <li>navbar n'a pas de fond : .theme-* ne colore que les fonds des liens et le contour de focus. Pour une barre colorée, navbar-subtle ou navbar-solid.</li>
+        <li>Ces barres sont en navbar-expand, sans breakpoint : les liens toujours dans la barre, sans bouton ni drawer.</li>
+    </ul>
+
+    {% for variant in ['subtle', 'solid'] %}
+        <h2 class="mt-10">navbar-{{ variant }}</h2>
+        {% for color in colors %}
+            <nav class="navbar-{{ variant }} navbar-expand theme-{{ color }} mt-2" aria-label="navbar-{{ variant }} theme-{{ color }} (démo)">
+                <a class="navbar-brand" href="#">theme-{{ color }}</a>
+                <ul class="navbar-list">
+                    {% for link in links|slice(0, 3) %}
+                        <li><a class="navbar-item" href="#"{% if loop.index == 2 %} aria-current="true"{% endif %}>{{ link }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        {% endfor %}
+        <ul class="mt-4">
+            {% if variant == 'subtle' %}
+                <li>Un fond léger de la couleur du thème, le texte de la page. Les fonds des liens sont un cran plus forts que sur navbar : au survol, le fond léger renforcé par la couleur, au clic et sur la page en cours encore plus.</li>
+                <li>Le contour de focus reste en emphasis du thème.</li>
+            {% else %}
+                <li>Un fond plein de la couleur du thème, le texte en -contrast (noir ou blanc, le plus lisible). Au survol, au clic et sur la page en cours, le fond se mélange à l'opposé du texte, comme les boutons solid : le contraste augmente.</li>
+                <li>Le contour de focus a la couleur du texte : l'emphasis du thème serait trop proche du fond plein.</li>
+            {% endif %}
+            <li>De l'air sur les côtés (--navbar-padding-inline) : le nom du site ne touche pas le bord du fond.</li>
+            <li>Seuls les liens de la barre changent : dans le drawer, les liens gardent le fond et le texte de la page, et les fonds de navbar.</li>
+            <li>Sans .theme-*, la barre est en neutral, comme les liens de navbar.</li>
+        </ul>
+    {% endfor %}
+
+    <h2 class="mt-10">Quand passer les liens dans la barre</h2>
+    <table class="table mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Classe</th>
+                <th scope="col">Les liens dans la barre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">aucune</th><td>jamais : le bouton et le drawer sur tous les écrans</td></tr>
+            <tr><th scope="row">navbar-expand</th><td>toujours : pas de bouton ni de drawer</td></tr>
+            <tr><th scope="row">xs:navbar-expand … 2xl:navbar-expand</th><td>à partir de ce breakpoint (xs 360px, sm 576px, md 768px, lg 1024px, xl 1280px, 2xl 1536px)</td></tr>
+        </tbody>
+    </table>
+    <p class="mt-2">Dans la barre, un lien ne passe pas à la ligne : choisir le breakpoint où tous les liens tiennent sur la largeur, md pour quatre ou cinq liens courts, lg ou xl pour plus.</p>
+    <nav class="navbar mt-4 border-bottom" aria-label="Toujours le drawer (démo)">
+        <a class="navbar-brand" href="#">Sans navbar-expand</a>
+        <button class="btn navbar-toggle" type="button" commandfor="navbar-always-menu" command="show-modal" aria-label="Menu"></button>
+        <dialog class="drawer-end" id="navbar-always-menu" data-dialog aria-labelledby="navbar-always-menu-title" closedby="any">
+            <div class="drawer-header">
+                <h2 class="fs-lg" id="navbar-always-menu-title">Menu</h2>
+                <button class="btn-close" type="button" commandfor="navbar-always-menu" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="drawer-body">
+                <ul class="navbar-list">
+                    {% for link in links %}
+                        <li><a class="navbar-item" href="#">{{ link }}</a></li>
+                    {% endfor %}
+                    <li><button class="navbar-item" type="button">Se déconnecter</button></li>
+                </ul>
+            </div>
+        </dialog>
+    </nav>
+    <p class="mt-2">Sans navbar-expand, le bouton et le drawer sur tous les écrans ; il n'y a alors qu'une liste, celle du drawer. Un &lt;button&gt; y prend aussi navbar-item.</p>
+
+    <h2 class="mt-10">HTML</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;nav class="navbar md:navbar-expand" aria-label="Principal"&gt;
+    &lt;a class="navbar-brand" href="/"&gt;Mon site&lt;/a&gt;
+
+    &lt;ul class="navbar-list"&gt;
+        &lt;li&gt;&lt;a class="navbar-item" href="/" aria-current="page"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="navbar-item" href="/produits"&gt;Produits&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;button class="btn navbar-toggle" type="button" commandfor="menu" command="show-modal" aria-label="Menu"&gt;&lt;/button&gt;
+    &lt;dialog class="drawer-end" id="menu" data-dialog aria-labelledby="menu-title" closedby="any"&gt;
+        &lt;div class="drawer-header"&gt;
+            &lt;h2 id="menu-title"&gt;Menu&lt;/h2&gt;
+            &lt;button class="btn-close" type="button" commandfor="menu" command="close" aria-label="Fermer"&gt;&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class="drawer-body"&gt;
+            &lt;ul class="navbar-list"&gt;
+                &lt;li&gt;&lt;a class="navbar-item" href="/" aria-current="page"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a class="navbar-item" href="/produits"&gt;Produits&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/dialog&gt;
+&lt;/nav&gt;</code></pre>
+    <ul>
+        <li>navbar (sans fond), navbar-subtle ou navbar-solid sur un &lt;nav&gt; avec un aria-label : une seule de ces classes, avec .theme-* pour la couleur ; navbar-brand sur le lien du nom du site (ou d'un logo).</li>
+        <li>Les liens sont écrits deux fois : une navbar-list dans la barre, enfant direct de la navbar, et la même dans le drawer. Une seule se montre à la fois ; l'autre est en display: none, ni lue ni prise au clavier. Dans le site, une boucle du template écrit les deux.</li>
+        <li>navbar-item sur chaque &lt;a&gt; (ou &lt;button&gt;) ; aria-current="page" sur le lien de la page affichée, dans les deux listes. Les &lt;li&gt; n'ont pas de classe.</li>
+        <li>Le drawer est un drawer du framework, tel quel : tous ses côtés (drawer-start, drawer-end…), ses variables et son JavaScript (data-dialog : il glisse avant de se fermer). Voir sa page.</li>
+        <li>navbar-toggle s'ajoute à un bouton du framework (btn, btn-subtle theme-primary…) : il en fait un carré avec trois traits, et le cache quand les liens sont dans la barre. Pas de JavaScript : command="show-modal" ouvre le drawer.</li>
+    </ul>
+
+    <h2 class="mt-10">Exemple : en haut de la page</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;header class="border-bottom"&gt;
+    &lt;nav class="navbar md:navbar-expand container theme-primary" aria-label="Principal"&gt;
+        &lt;a class="navbar-brand" href="/"&gt;Mon site&lt;/a&gt;
+        &lt;ul class="navbar-list"&gt;…&lt;/ul&gt;
+        &lt;button class="btn-subtle navbar-toggle" type="button" commandfor="menu" command="show-modal" aria-label="Menu"&gt;&lt;/button&gt;
+        &lt;dialog class="drawer-start" id="menu" data-dialog aria-labelledby="menu-title" closedby="any"&gt;…&lt;/dialog&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+    <ul>
+        <li>&lt;header&gt; prend toute la largeur et le trait dessous (border-bottom) ; container sur la navbar aligne son contenu sur celui de la page.</li>
+        <li>theme-primary sur la navbar colore les liens de la barre et du drawer, et le bouton btn-subtle.</li>
+        <li>drawer-start : le menu glisse depuis la gauche.</li>
+    </ul>
+
+    <h2 class="mt-10">Exemple : une barre colorée</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;header&gt;
+    &lt;nav class="navbar-solid theme-primary md:navbar-expand" aria-label="Principal"&gt;
+        &lt;a class="navbar-brand" href="/"&gt;Mon site&lt;/a&gt;
+        &lt;ul class="navbar-list"&gt;…&lt;/ul&gt;
+        &lt;button class="btn-solid theme-inverse navbar-toggle" type="button" commandfor="menu" command="show-modal" aria-label="Menu"&gt;&lt;/button&gt;
+        &lt;dialog class="drawer-end" id="menu" data-dialog aria-labelledby="menu-title" closedby="any"&gt;…&lt;/dialog&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+    <ul>
+        <li>La bande colorée prend toute la largeur de son parent, avec --navbar-padding-inline sur les côtés.</li>
+        <li>Sur un fond plein, le bouton du menu est un btn-solid d'un autre thème (inverse) : un btn, gris et transparent, passerait sous le texte de la barre au survol.</li>
+        <li>Le drawer garde le fond et le texte de la page ; ses liens prennent les fonds de primary au survol.</li>
+    </ul>
+
+    <h2 class="mt-10">Variables</h2>
+    <table class="table mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Défaut</th>
+                <th scope="col">Rôle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">--navbar-padding-block</th><td>0.5rem</td><td>haut et bas de la barre (56px de haut avec les liens)</td></tr>
+            <tr><th scope="row">--navbar-padding-inline</th><td>1rem</td><td>côtés de navbar-subtle et navbar-solid (navbar n'en a pas : aligné sur le texte de la page)</td></tr>
+            <tr><th scope="row">--navbar-item-padding-block</th><td>0.5rem</td><td>haut et bas d'un lien (40px de haut)</td></tr>
+            <tr><th scope="row">--navbar-item-padding-inline</th><td>0.75rem</td><td>côtés d'un lien</td></tr>
+            <tr><th scope="row">--navbar-item-border-radius</th><td>--border-radius-md</td><td>coins du fond d'un lien</td></tr>
+        </tbody>
+    </table>
+    <p class="mt-2">Le drawer a ses propres variables (--drawer-width…), le bouton les siennes (--btn-padding-block) : voir leurs pages.</p>
+
+    <h2 class="mt-10">Exemple : changer les valeurs</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --navbar-padding-block: 1rem; }
+:root { --navbar-item-border-radius: var(--border-radius-pill); }
+.navbar-compacte { --navbar-item-padding-inline: 0.5rem; }</code></pre>
+    <p>La première ligne donne plus de hauteur à toutes les barres, la deuxième un fond en pilule aux liens ; la dernière rapproche seulement les liens de la barre qui a la classe navbar-compacte du site.</p>
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul>
+        <li>&lt;nav&gt; et son aria-label : le lecteur d'écran annonce une zone de navigation (« Principal ») et permet d'y aller directement. Un aria-label différent sur chaque &lt;nav&gt; de la page.</li>
+        <li>aria-current="page" sur le lien de la page affichée : le lecteur d'écran annonce « page actuelle ». À l'écran, seulement le fond du clic : 1,26 à 2,01:1 contre la page en clair, 1,76 à 2,41:1 en sombre (les fonds de la liste, calculé), sous les 3:1 (WCAG 1.4.11), et par la couleur seule (WCAG 1.4.1).</li>
+        <li>Le bouton est un &lt;button&gt; avec un aria-label (« Menu ») : les trois traits ne disent rien au lecteur d'écran. Il ouvre un dialogue modal : le focus va dans le drawer, la page derrière n'est plus atteignable, Échap le ferme et le focus revient sur le bouton, sans JavaScript. Pas d'aria-expanded : le bouton ouvre une boîte de dialogue, qui s'annonce elle-même.</li>
+        <li>Une seule liste se montre à la fois : l'autre, en display: none, n'est ni lue ni prise au clavier.</li>
+        <li>Le texte de la page reste lisible sur tous les fonds, dans toutes les couleurs (les mêmes fonds que la liste, calculé) : au moins 14,91:1 au survol et 10,46:1 au clic et sur la page en cours en clair, 12,59:1 et 7,80:1 en sombre. Le contour de focus a la couleur du thème en emphasis, à l'intérieur du lien, au moins 3,71:1 sur tous ses fonds en clair, 4,18:1 en sombre.</li>
+        <li>navbar-subtle : le texte de la page sur les fonds des liens, au moins 10,46:1 au survol et 8,60:1 au clic et sur la page en cours en clair, 7,80:1 et 6,14:1 en sombre ; le contour de focus en emphasis, au moins 3,05:1 en clair (inverse, au clic), 3,29:1 en sombre (calculé).</li>
+        <li>navbar-solid : le texte -contrast sur le fond plein, au moins 8,65:1 en clair et 5,97:1 en sombre, plus encore au survol et au clic (le fond se mélange à l'opposé du texte) ; le contour de focus a la couleur du texte (calculé).</li>
+        <li>Liens de 40px de haut, bouton de 38px : plus que la cible tactile minimale de 24px (WCAG 2.5.8).</li>
+        <li>En contraste élevé (Windows), les trois traits prennent la couleur du texte des boutons.</li>
+    </ul>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-subtle navbar-toggle" type="button" commandfor="menu" command="show-modal" aria-label="Menu"&gt;&lt;/button&gt;</code></pre>
+    <p>Une variante du bouton sans .theme-* (ni sur lui, ni sur la navbar) : pas de couleur, les trois traits sans fond ni cadre, et rien ne change au survol. btn pour un bouton sans couleur, ou .theme-* sur la navbar.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn navbar-toggle" type="button" commandfor="menu" command="show-modal"&gt;&lt;/button&gt;</code></pre>
+    <p>Sans aria-label : un bouton sans nom, le lecteur d'écran dit seulement « bouton ».</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;nav class="navbar md:navbar-expand" aria-label="Principal"&gt;
+    &lt;a class="navbar-brand" href="/"&gt;Mon site&lt;/a&gt;
+    &lt;div&gt;
+        &lt;ul class="navbar-list"&gt;…&lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+    <p>La liste de la barre dans un &lt;div&gt; : elle n'est plus enfant direct de la navbar, elle s'affiche empilée sur tous les écrans, à côté du bouton. La mettre directement dans la navbar.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;nav class="navbar md:navbar-expand" aria-label="Principal"&gt;
+    &lt;a class="navbar-brand" href="/"&gt;Mon site&lt;/a&gt;
+    &lt;button class="btn navbar-toggle" …&gt;&lt;/button&gt;
+    &lt;dialog class="drawer-end" …&gt;
+        &lt;div class="drawer-body"&gt;&lt;ul class="navbar-list"&gt;…&lt;/ul&gt;&lt;/div&gt;
+    &lt;/dialog&gt;
+&lt;/nav&gt;</code></pre>
+    <p>md:navbar-expand sans la liste de la barre : à partir de 768px, le bouton disparaît et aucun lien ne se voit. Écrire la liste deux fois, ou retirer navbar-expand.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="navbar-item active" href="/"&gt;Accueil&lt;/a&gt;</code></pre>
+    <p>Pas de classe d'état : aria-current="page", que le lecteur d'écran annonce et que le style lit. Dans les deux listes.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="navbar" aria-label="Principal"&gt;…&lt;/div&gt;</code></pre>
+    <p>Un &lt;div&gt; : pas de zone de navigation pour le lecteur d'écran, et un aria-label sur un &lt;div&gt; sans rôle n'est pas lu. Un &lt;nav&gt;.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;header class="bg-primary color-primary-contrast"&gt;
+    &lt;nav class="navbar md:navbar-expand" aria-label="Principal"&gt;…&lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+    <p>Une barre colorée par les utilitaires : le fond léger du survol et de la page en cours passe sous le texte de la barre (la couleur -contrast), qui peut devenir illisible. navbar-solid theme-primary, qui règle aussi les fonds des liens.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;nav class="navbar-solid theme-primary md:navbar-expand" aria-label="Principal"&gt;
+    …
+    &lt;button class="btn navbar-toggle" type="button" commandfor="menu" command="show-modal" aria-label="Menu"&gt;&lt;/button&gt;
+&lt;/nav&gt;</code></pre>
+    <p>Sur navbar-solid, un btn : son cadre gris se voit mal, et son fond gris du survol passe sous les trois traits. Un btn-solid d'un autre thème (theme-inverse).</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;nav class="navbar navbar-solid theme-primary" aria-label="Principal"&gt;…&lt;/nav&gt;</code></pre>
+    <p>Deux classes de barre : navbar-solid s'utilise seule, à la place de navbar.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>Les liens sont écrits deux fois dans le HTML : une boucle du template du site.</li>
+        <li>Élargir la fenêtre avec le drawer ouvert le laisse ouvert, par-dessus la page, jusqu'à ce qu'on le ferme.</li>
+        <li>Un lien vers une ancre de la même page (#contact) laisse le drawer ouvert : c'est un dialogue modal, que seul un bouton, Échap ou un clic à côté ferment.</li>
+        <li>Pas de menu déroulant dans la barre, pas de barre fixée en haut au défilement : un besoin du site pour l'instant.</li>
+        <li>La bande de navbar-subtle et navbar-solid prend la largeur de son parent ; avec container sur la navbar, elle s'arrête à 96rem sur les très grands écrans. Pas de container à l'intérieur de la barre : ses enfants directs sont le nom, la liste, le bouton et le drawer.</li>
+        <li>Le drawer garde le fond de la page : la couleur pleine de navbar-solid n'y est pas.</li>
+        <li>Dans la barre, un lien ne passe pas à la ligne : avec trop de liens pour la largeur, la barre déborde ; choisir un breakpoint plus grand.</li>
+        <li>Dans une écriture de droite à gauche, drawer-start et drawer-end glissent du mauvais côté (voir la page Drawer).</li>
+    </ul>
+{% endblock %}

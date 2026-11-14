@@ -2344,6 +2344,248 @@
 }
 @layer components {
   :root {
+    --navbar-padding-block: 0.5rem;
+    --navbar-padding-inline: 1rem;
+    --navbar-item-padding-block: 0.5rem;
+    --navbar-item-padding-inline: 0.75rem;
+    --navbar-item-border-radius: var(--border-radius-md);
+    --navbar-theme-color: var(--color-neutral);
+    --navbar-theme-contrast: var(--color-neutral-contrast);
+    --navbar-theme-state: var(--color-neutral-state);
+    --navbar-theme-subtle: var(--color-neutral-subtle);
+    --navbar-theme-emphasis: var(--color-neutral-emphasis);
+  }
+  .theme-primary {
+    --navbar-theme-color: var(--color-primary);
+    --navbar-theme-contrast: var(--color-primary-contrast);
+    --navbar-theme-state: var(--color-primary-state);
+    --navbar-theme-subtle: var(--color-primary-subtle);
+    --navbar-theme-emphasis: var(--color-primary-emphasis);
+  }
+  .theme-secondary {
+    --navbar-theme-color: var(--color-secondary);
+    --navbar-theme-contrast: var(--color-secondary-contrast);
+    --navbar-theme-state: var(--color-secondary-state);
+    --navbar-theme-subtle: var(--color-secondary-subtle);
+    --navbar-theme-emphasis: var(--color-secondary-emphasis);
+  }
+  .theme-accent {
+    --navbar-theme-color: var(--color-accent);
+    --navbar-theme-contrast: var(--color-accent-contrast);
+    --navbar-theme-state: var(--color-accent-state);
+    --navbar-theme-subtle: var(--color-accent-subtle);
+    --navbar-theme-emphasis: var(--color-accent-emphasis);
+  }
+  .theme-success {
+    --navbar-theme-color: var(--color-success);
+    --navbar-theme-contrast: var(--color-success-contrast);
+    --navbar-theme-state: var(--color-success-state);
+    --navbar-theme-subtle: var(--color-success-subtle);
+    --navbar-theme-emphasis: var(--color-success-emphasis);
+  }
+  .theme-danger {
+    --navbar-theme-color: var(--color-danger);
+    --navbar-theme-contrast: var(--color-danger-contrast);
+    --navbar-theme-state: var(--color-danger-state);
+    --navbar-theme-subtle: var(--color-danger-subtle);
+    --navbar-theme-emphasis: var(--color-danger-emphasis);
+  }
+  .theme-warning {
+    --navbar-theme-color: var(--color-warning);
+    --navbar-theme-contrast: var(--color-warning-contrast);
+    --navbar-theme-state: var(--color-warning-state);
+    --navbar-theme-subtle: var(--color-warning-subtle);
+    --navbar-theme-emphasis: var(--color-warning-emphasis);
+  }
+  .theme-info {
+    --navbar-theme-color: var(--color-info);
+    --navbar-theme-contrast: var(--color-info-contrast);
+    --navbar-theme-state: var(--color-info-state);
+    --navbar-theme-subtle: var(--color-info-subtle);
+    --navbar-theme-emphasis: var(--color-info-emphasis);
+  }
+  .theme-neutral {
+    --navbar-theme-color: var(--color-neutral);
+    --navbar-theme-contrast: var(--color-neutral-contrast);
+    --navbar-theme-state: var(--color-neutral-state);
+    --navbar-theme-subtle: var(--color-neutral-subtle);
+    --navbar-theme-emphasis: var(--color-neutral-emphasis);
+  }
+  .theme-inverse {
+    --navbar-theme-color: var(--color-inverse);
+    --navbar-theme-contrast: var(--color-inverse-contrast);
+    --navbar-theme-state: var(--color-inverse-state);
+    --navbar-theme-subtle: var(--color-inverse-subtle);
+    --navbar-theme-emphasis: var(--color-inverse-emphasis);
+  }
+  .navbar, .navbar-subtle, .navbar-solid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: var(--navbar-padding-block);
+  }
+  .navbar > .navbar-list, .navbar-subtle > .navbar-list, .navbar-solid > .navbar-list {
+    display: none;
+    white-space: nowrap;
+  }
+  .navbar-brand {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: inherit;
+    text-decoration: none;
+  }
+  .navbar-brand:focus-visible {
+    outline: var(--focus-outline-width) solid var(--navbar-theme-emphasis);
+    outline-offset: var(--focus-outline-offset);
+  }
+  .navbar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-inline-start: 0;
+    list-style-type: "";
+  }
+  .navbar-item {
+    display: block;
+    width: 100%;
+    padding-block: var(--navbar-item-padding-block);
+    padding-inline: var(--navbar-item-padding-inline);
+    border: 0;
+    border-radius: var(--navbar-item-border-radius);
+    background-color: transparent;
+    color: inherit;
+    text-align: start;
+    text-decoration: none;
+    transition-property: background-color;
+    transition-duration: var(--transition-duration);
+  }
+  .navbar-item:hover {
+    background-color: var(--navbar-theme-subtle);
+  }
+  .navbar-item:active {
+    background-color: color-mix(in srgb, var(--navbar-theme-subtle), var(--navbar-theme-color) var(--state-mix-soft));
+  }
+  .navbar-item[aria-current]:not([aria-current=false]) {
+    background-color: color-mix(in srgb, var(--navbar-theme-subtle), var(--navbar-theme-color) var(--state-mix-soft));
+  }
+  .navbar-item:focus-visible {
+    outline: var(--focus-outline-width) solid var(--navbar-theme-emphasis);
+    outline-offset: calc(var(--focus-outline-width) * -1);
+  }
+  .navbar-item:disabled {
+    opacity: var(--disabled-opacity);
+    pointer-events: none;
+  }
+  .navbar-toggle {
+    --btn-padding-inline: var(--btn-padding-block);
+  }
+  .navbar-toggle::before {
+    content: "";
+    display: block;
+    width: 1.5em;
+    aspect-ratio: 1;
+    background-color: currentColor;
+    mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M2.5 4h11M2.5 8h11M2.5 12h11' stroke='black' stroke-width='1.25' stroke-linecap='round'/></svg>");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+  }
+  @media (forced-colors: active) {
+    .navbar-toggle::before {
+      forced-color-adjust: none;
+      background-color: ButtonText;
+    }
+  }
+  .navbar-subtle, .navbar-solid {
+    padding-inline: var(--navbar-padding-inline);
+  }
+  .navbar-subtle {
+    background-color: var(--navbar-theme-subtle);
+  }
+  .navbar-subtle > .navbar-list .navbar-item:hover {
+    background-color: color-mix(in srgb, var(--navbar-theme-subtle), var(--navbar-theme-color) var(--state-mix-soft));
+  }
+  .navbar-subtle > .navbar-list .navbar-item:active, .navbar-subtle > .navbar-list .navbar-item[aria-current]:not([aria-current=false]) {
+    background-color: color-mix(in srgb, var(--navbar-theme-subtle), var(--navbar-theme-color) var(--state-mix-strong));
+  }
+  .navbar-solid {
+    background-color: var(--navbar-theme-color);
+    color: var(--navbar-theme-contrast);
+  }
+  .navbar-solid > .navbar-list .navbar-item:hover {
+    background-color: color-mix(in srgb, var(--navbar-theme-color), var(--navbar-theme-state) var(--state-mix-soft));
+  }
+  .navbar-solid > .navbar-list .navbar-item:active, .navbar-solid > .navbar-list .navbar-item[aria-current]:not([aria-current=false]) {
+    background-color: color-mix(in srgb, var(--navbar-theme-color), var(--navbar-theme-state) var(--state-mix-strong));
+  }
+  .navbar-solid > .navbar-brand:focus-visible,
+  .navbar-solid > .navbar-list .navbar-item:focus-visible {
+    outline-color: currentColor;
+  }
+  .navbar-expand > .navbar-list {
+    display: flex;
+    flex-direction: row;
+  }
+  .navbar-expand > .navbar-toggle {
+    display: none;
+  }
+  @media (width >= 22.5rem) {
+    .xs\:navbar-expand > .navbar-list {
+      display: flex;
+      flex-direction: row;
+    }
+    .xs\:navbar-expand > .navbar-toggle {
+      display: none;
+    }
+  }
+  @media (width >= 36rem) {
+    .sm\:navbar-expand > .navbar-list {
+      display: flex;
+      flex-direction: row;
+    }
+    .sm\:navbar-expand > .navbar-toggle {
+      display: none;
+    }
+  }
+  @media (width >= 48rem) {
+    .md\:navbar-expand > .navbar-list {
+      display: flex;
+      flex-direction: row;
+    }
+    .md\:navbar-expand > .navbar-toggle {
+      display: none;
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:navbar-expand > .navbar-list {
+      display: flex;
+      flex-direction: row;
+    }
+    .lg\:navbar-expand > .navbar-toggle {
+      display: none;
+    }
+  }
+  @media (width >= 80rem) {
+    .xl\:navbar-expand > .navbar-list {
+      display: flex;
+      flex-direction: row;
+    }
+    .xl\:navbar-expand > .navbar-toggle {
+      display: none;
+    }
+  }
+  @media (width >= 96rem) {
+    .\32 xl\:navbar-expand > .navbar-list {
+      display: flex;
+      flex-direction: row;
+    }
+    .\32 xl\:navbar-expand > .navbar-toggle {
+      display: none;
+    }
+  }
+}
+@layer components {
+  :root {
     --spinner-width: 1em;
     --spinner-border-width: 0.125em;
   }
