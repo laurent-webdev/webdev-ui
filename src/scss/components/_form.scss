@@ -60,6 +60,19 @@
             outline-offset: var(--focus-outline-offset);
         }
 
+        // En erreur (aria-invalid écrit par le serveur ou le JS, avec son message) : le thème danger, cadre et focus
+        &[aria-invalid="true"] {
+            --form-input-theme-color: var(--color-danger);
+            --form-input-theme-contrast: var(--color-danger-contrast);
+            --form-input-theme-emphasis: var(--color-danger-emphasis);
+        }
+
+        // Désactivé : estompé, comme les boutons ; notre fond, notre cadre et le color: inherit du reset effacent l'aspect natif
+        &:disabled {
+            opacity: var(--disabled-opacity);
+            pointer-events: none;
+        }
+
         // Champ fichier : bouton collé au cadre, même hauteur qu'un champ de texte
         &::file-selector-button {
             padding-block: var(--form-input-padding-block);

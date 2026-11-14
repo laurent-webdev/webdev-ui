@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Paris
 
 # Outils de base
-RUN apt-get update -y && apt-get install -y ca-certificates curl wget nano git zip unzip gnupg2 lsb-release tzdata
+RUN apt-get update -y && apt-get install -y ca-certificates curl wget nano git zip unzip gnupg2 lsb-release tzdata libatomic1
 
 # PHP (dépôt sury.org)
 RUN curl -sSLo /tmp/sury.deb https://packages.sury.org/debsuryorg-archive-keyring.deb

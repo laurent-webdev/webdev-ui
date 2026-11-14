@@ -2013,6 +2013,15 @@
     outline: var(--focus-outline-width) solid var(--form-input-theme-emphasis, currentColor);
     outline-offset: var(--focus-outline-offset);
   }
+  .form-input[aria-invalid=true], .form-input-sm[aria-invalid=true], .form-input-md[aria-invalid=true], .form-input-lg[aria-invalid=true] {
+    --form-input-theme-color: var(--color-danger);
+    --form-input-theme-contrast: var(--color-danger-contrast);
+    --form-input-theme-emphasis: var(--color-danger-emphasis);
+  }
+  .form-input:disabled, .form-input-sm:disabled, .form-input-md:disabled, .form-input-lg:disabled {
+    opacity: var(--disabled-opacity);
+    pointer-events: none;
+  }
   .form-input::file-selector-button, .form-input-sm::file-selector-button, .form-input-md::file-selector-button, .form-input-lg::file-selector-button {
     padding-block: var(--form-input-padding-block);
     padding-inline: var(--form-input-padding-inline);

@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Formulaire</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Les champs sont ceux du navigateur, en attendant la refonte du formulaire : form-input (md, le défaut), form-input-sm, -md et -lg, sur input, select et textarea, posent la taille, le fond, le cadre et l'arrondi ; avec un .theme-*, le cadre prend la couleur du thème et le contour de focus est celui des boutons. Le navigateur vérifie les champs (required, type="email", minlength…) et affiche ses messages, sans JavaScript.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Les champs du navigateur, mis en forme : form-input (md, le défaut), form-input-sm, -md et -lg, sur input, select et textarea, posent la taille, le fond, le cadre et l'arrondi ; avec un .theme-*, le cadre prend la couleur du thème et le contour de focus est celui des boutons ; avec aria-invalid="true", le thème danger. Les cases, les boutons radio et le range restent ceux du navigateur, colorés par accent-color ; le switch est dessiné. Le navigateur vérifie les champs (required, type="email", minlength…) et affiche ses messages, sans JavaScript.</p>
 
     <form class="grid mt-2">
         <div class="form-field md:col-6">
@@ -62,7 +62,18 @@
         <input class="form-input" id="form-server-email" type="email" name="server-email" value="nom@domaine.fr" autocomplete="email" required aria-invalid="true" aria-describedby="form-server-email-error">
         <p class="fs-sm color-danger-emphasis" id="form-server-email-error">Erreur : cette adresse a déjà un compte.</p>
     </div>
-    <p class="mt-2">Après l'envoi, la page revient avec le message sous le champ : avec aria-invalid="true", le lecteur d'écran annonce « invalide » ; le message, relié par aria-describedby, est lu avec le champ.</p>
+    <p class="mt-2">Après l'envoi, la page revient avec le message sous le champ. aria-invalid="true" fait tout : le champ prend le thème danger (cadre et contour de focus rouges, bouton rouge sur un champ fichier) et le lecteur d'écran annonce « invalide » ; le message, relié par aria-describedby, est lu avec le champ. Pas de classe en plus : l'état est l'attribut.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="form-field"&gt;
+    &lt;label for="email"&gt;Adresse e-mail (obligatoire)&lt;/label&gt;
+    &lt;input class="form-input" id="email" type="email" name="email" value="nom@domaine.fr" autocomplete="email" required aria-invalid="true" aria-describedby="email-error"&gt;
+    &lt;p class="fs-sm color-danger-emphasis" id="email-error"&gt;Erreur : cette adresse a déjà un compte.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+    <ul>
+        <li>Le message est toujours écrit, sous le champ, et commence par « Erreur : » : la couleur seule ne dit rien (WCAG 1.4.1).</li>
+        <li>Sans JavaScript, les erreurs avant l'envoi restent celles du navigateur (required, type="email", minlength…) : il arrête l'envoi au premier champ en erreur et affiche son message.</li>
+        <li>Le champ corrigé reste rouge jusqu'au prochain envoi : le JavaScript du site peut retirer aria-invalid quand la valeur change.</li>
+        <li>Pas de :user-invalid (le champ rouge dès qu'on le quitte, sans envoi) : le cadre rouge arriverait seul, sans message en texte (WCAG 1.4.1).</li>
+    </ul>
 
     <h2 class="mt-10">Tous les champs</h2>
     <p class="mt-2">Chaque type de champ du HTML, rangé dans la grille : une colonne sur téléphone, deux à partir de sm (sm:col-6), trois à partir de lg (lg:col-4). Effacer remet le formulaire comme au chargement.</p>
@@ -564,6 +575,7 @@
         <li>autocomplete sur les champs qui parlent de l'utilisateur (name, email, tel, new-password…) : le navigateur les remplit (WCAG 1.3.5).</li>
         <li>Un champ obligatoire le dit dans son libellé (« obligatoire ») et a l'attribut required ; un astérisque seul ne se comprend pas sans explication.</li>
         <li>Une erreur se dit en texte, pas seulement en couleur (WCAG 1.4.1) : « Erreur : … » sous le champ, relié par aria-describedby, et aria-invalid="true" sur le champ.</li>
+        <li>Cadre d'un champ en erreur, le rouge de danger : 2,43:1 sur le fond de la page en clair, sous les 3:1, et 5,34:1 en sombre (calculé) ; c'est le message qui dit l'erreur, le cadre ne fait que la souligner. Contour de focus en danger emphasis : 7,82:1 en clair, 8,19:1 en sombre.</li>
         <li>Cadre des champs (WCAG 1.4.11 : 3:1 quand il montre seul où écrire) : le gris est à 1,63:1 sur le fond de la page en clair et 2,12:1 en sombre ; la couleur du thème à 1,75 à 2,43:1 en clair (inverse à part) et au moins 5,34:1 en sombre. Contour de focus, en emphasis : au moins 6,37:1 sur le fond de la page en clair, 8,19:1 en sombre (calculé).</li>
         <li>Aide et erreur : color-neutral-emphasis et color-danger-emphasis, au moins 4,5:1 sur le fond de la page.</li>
         <li>Le bouton d'envoi n'est jamais désactivé en attendant que le formulaire soit rempli : l'utilisateur ne saurait pas ce qui manque. Le navigateur l'arrête au premier champ en erreur et le dit.</li>
@@ -588,7 +600,9 @@
 &lt;/fieldset&gt;</code></pre>
     <p>Un libellé en bloc (d-block) prend toute la ligne : un clic dans le vide, loin de la case, la coche. Le fieldset en form-field empile les libellés à la largeur de leur texte.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;input class="form-input" id="email" type="email" name="email" aria-invalid="true"&gt;</code></pre>
-    <p>En erreur sans message : rien ne se voit à l'écran, et le lecteur d'écran dit seulement « invalide ».</p>
+    <p>En erreur sans message : le cadre rouge ne dit pas ce qui ne va pas, et le lecteur d'écran dit seulement « invalide ».</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;input class="form-input theme-danger" id="email" type="email" name="email" aria-invalid="true" aria-describedby="email-error"&gt;</code></pre>
+    <p>theme-danger en plus d'aria-invalid : inutile, l'attribut pose déjà le thème danger. Avec la classe seule, le champ est rouge mais le lecteur d'écran ne sait pas qu'il est en erreur.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="grid"&gt;
     &lt;div class="d-grid gap-2 md:col-6"&gt;
         &lt;label for="name"&gt;Nom&lt;/label&gt;
@@ -618,10 +632,11 @@
 
     <h2 class="mt-10">Limites</h2>
     <ul>
-        <li>Le style des champs est en refonte : erreurs, cases et fieldset sont ceux du navigateur, différents d'un navigateur à l'autre (ils suivent le thème clair ou sombre).</li>
-        <li>Désactivé, un champ est estompé et ne réagit plus au survol, comme les boutons : le fond et le cadre remplacent l'aspect désactivé du navigateur.</li>
+        <li>Le style des champs est en refonte : les bulles d'erreur du navigateur, les cases et le fieldset sont ceux du navigateur, différents d'un navigateur à l'autre (ils suivent le thème clair ou sombre).</li>
+        <li>aria-invalid ne change que les champs (form-input) : une case, un bouton radio ou un switch en erreur gardent leur aspect (accent-color ne colore que la case cochée), seul le message dit l'erreur.</li>
+        <li>Désactivé, un champ est estompé (--disabled-opacity), comme les boutons : notre fond, notre cadre et la couleur du texte remplacent l'aspect désactivé du navigateur, qui ne se verrait plus.</li>
         <li>Un champ fait 31, 38 et 45px, comme le bouton, sauf les dates et les heures dans Chromium (33, 40 et 47px). Les listes font 31, 38 et 45px dans Chromium et Firefox. À vérifier : Safari.</li>
-        <li>La flèche des listes est un gris moyen, le même en clair et en sombre (3,95:1 sur le fond clair, 4,75:1 sur le fond sombre) : une image ne prend ni la couleur du texte ni celle du thème. Elle est toujours à droite, même dans une écriture de droite à gauche. Désactivée, une liste a l'air active dans Firefox (dans Chromium, son texte est estompé).</li>
+        <li>La flèche des listes est un gris moyen, le même en clair et en sombre (3,95:1 sur le fond clair, 4,75:1 sur le fond sombre) : une image ne prend ni la couleur du texte ni celle du thème. Elle est toujours à droite, même dans une écriture de droite à gauche.</li>
         <li>Les messages d'erreur du navigateur sont des bulles, dans la langue du navigateur, qui disparaissent au bout de quelques secondes. Des messages sous les champs, écrits par le site, demanderont du JavaScript (plus tard).</li>
         <li>month et week n'ont pas de sélecteur dans Firefox ni dans Safari sur ordinateur : un champ de texte à la place, où l'utilisateur doit écrire 2026-10 ou 2026-W43 (MDN). datetime-local dans Safari sur ordinateur : un calendrier, l'heure s'écrit à la main. Pour un mois, deux listes (mois et année) marchent partout.</li>
         <li>Dans un champ fichier étroit, le navigateur coupe le nom du fichier : lui laisser de la largeur. Le texte du bouton (« Choisir un fichier ») et sa couleur sont ceux du navigateur.</li>
