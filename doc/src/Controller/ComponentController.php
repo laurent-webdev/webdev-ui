@@ -86,4 +86,10 @@ final class ComponentController extends AbstractController
     {
         return $this->render('components/spinner.html.twig');
     }
+
+    #[Route('/tab', name: 'app_tab')]
+    public function tab(): Response
+    {
+        return $this->render('components/tab.html.twig');
+    }
 }

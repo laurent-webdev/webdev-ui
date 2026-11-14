@@ -13,6 +13,7 @@
         // Thème des éléments par défaut, sans classe .theme-*
         --dropdown-theme-color: var(--color-neutral);
         --dropdown-theme-subtle: var(--color-neutral-subtle);
+        --dropdown-theme-emphasis: var(--color-neutral-emphasis);
     }
 
     // Une classe par couleur : hérité, sur le menu elle colore tous ses éléments, sur un élément seulement lui
@@ -20,6 +21,7 @@
         .theme-#{$color} {
             --dropdown-theme-color: var(--color-#{$color});
             --dropdown-theme-subtle: var(--color-#{$color}-subtle);
+            --dropdown-theme-emphasis: var(--color-#{$color}-emphasis);
         }
     }
 
@@ -70,9 +72,9 @@
             background-color: color-mix(in srgb, var(--dropdown-theme-subtle), var(--dropdown-theme-color) var(--state-mix-soft));
         }
 
-        // Contour à l'intérieur de l'élément : l'élément voisin ne le cache pas
+        // Comme les boutons, la couleur du thème en emphasis ; à l'intérieur de l'élément : l'élément voisin ne le cache pas
         &:focus-visible {
-            outline: var(--focus-outline-width) solid currentColor;
+            outline: var(--focus-outline-width) solid var(--dropdown-theme-emphasis);
             outline-offset: calc(var(--focus-outline-width) * -1);
         }
 

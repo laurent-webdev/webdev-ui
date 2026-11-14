@@ -1,0 +1,203 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Onglets{% endblock %}
+
+{% block body %}
+    <h1>Onglets</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">Une rangée d'onglets qui affichent un panneau à la fois (motif « Tabs » de l'ARIA APG). Le JavaScript du framework change l'onglet au clic et au clavier ; le HTML porte l'état de départ. Un trait sous l'onglet choisi ; au survol et au clic, seul le fond change, de la couleur .theme-*.</p>
+
+    <div class="tab mt-2" role="tablist" aria-label="Mon compte (démo)" data-tab>
+        <button class="tab-item" id="tab-profile" type="button" role="tab" aria-selected="true" aria-controls="tab-profile-panel">Profil</button>
+        <button class="tab-item" id="tab-security" type="button" role="tab" aria-selected="false" aria-controls="tab-security-panel" tabindex="-1">Sécurité</button>
+        <button class="tab-item" id="tab-notifications" type="button" role="tab" aria-selected="false" aria-controls="tab-notifications-panel" tabindex="-1">Notifications</button>
+        <button class="tab-item" id="tab-invoices" type="button" role="tab" aria-selected="false" aria-controls="tab-invoices-panel" tabindex="-1" disabled>Factures (bientôt)</button>
+    </div>
+    <div class="pt-4" id="tab-profile-panel" role="tabpanel" aria-labelledby="tab-profile" tabindex="0">
+        <p>Le panneau Profil : nom, photo, adresse e-mail.</p>
+    </div>
+    <div class="pt-4" id="tab-security-panel" role="tabpanel" aria-labelledby="tab-security" tabindex="0" hidden>
+        <p>Le panneau Sécurité : mot de passe, double authentification.</p>
+    </div>
+    <div class="pt-4" id="tab-notifications-panel" role="tabpanel" aria-labelledby="tab-notifications" tabindex="0" hidden>
+        <p>Le panneau Notifications : e-mails, alertes.</p>
+    </div>
+    <div class="pt-4" id="tab-invoices-panel" role="tabpanel" aria-labelledby="tab-invoices" tabindex="0" hidden>
+        <p>Le panneau Factures.</p>
+    </div>
+    <ul class="mt-4">
+        <li>Au clic, l'onglet est choisi et son panneau s'affiche. Au clavier : Tab va sur l'onglet choisi, ← et → passent à l'onglet d'à côté et l'affichent aussitôt, Début et Fin au premier et au dernier ; Tab suivant va dans le panneau.</li>
+        <li>L'onglet choisi a un trait dessous ; au survol, un fond léger, au clic, ce fond renforcé. Le texte ne change jamais, et ne bouge pas.</li>
+        <li>Désactivé (un bouton disabled) : estompé, sauté par les flèches.</li>
+    </ul>
+
+    <h2 class="mt-10">Couleurs</h2>
+    {% for color in colors %}
+        <div class="tab theme-{{ color }} mt-4" role="tablist" aria-label="theme-{{ color }} (démo)" data-tab>
+            <button class="tab-item" id="tab-{{ color }}-1" type="button" role="tab" aria-selected="true" aria-controls="tab-{{ color }}-1-panel">theme-{{ color }}</button>
+            <button class="tab-item" id="tab-{{ color }}-2" type="button" role="tab" aria-selected="false" aria-controls="tab-{{ color }}-2-panel" tabindex="-1">Deuxième onglet</button>
+        </div>
+        <div class="pt-2" id="tab-{{ color }}-1-panel" role="tabpanel" aria-labelledby="tab-{{ color }}-1" tabindex="0">
+            <p>Le trait de l'onglet choisi est en {{ color }} emphasis.</p>
+        </div>
+        <div class="pt-2" id="tab-{{ color }}-2-panel" role="tabpanel" aria-labelledby="tab-{{ color }}-2" tabindex="0" hidden>
+            <p>Le deuxième panneau.</p>
+        </div>
+    {% endfor %}
+    <ul class="mt-4">
+        <li>Sans thème, neutral : un trait gris foncé, un fond gris au survol. .theme-* sur la rangée colore tous ses onglets ; sur un onglet, seulement le sien.</li>
+        <li>Le trait sous la rangée reste gris : .theme-* ne colore que le trait de l'onglet choisi et les fonds.</li>
+    </ul>
+
+    <h2 class="mt-10">Vertical</h2>
+    <div class="grid mt-2">
+        <div class="tab theme-primary md:col-3" role="tablist" aria-label="Réglages (démo)" aria-orientation="vertical" data-tab>
+            <button class="tab-item" id="tab-v-general" type="button" role="tab" aria-selected="true" aria-controls="tab-v-general-panel">Général</button>
+            <button class="tab-item" id="tab-v-display" type="button" role="tab" aria-selected="false" aria-controls="tab-v-display-panel" tabindex="-1">Affichage</button>
+            <button class="tab-item" id="tab-v-privacy" type="button" role="tab" aria-selected="false" aria-controls="tab-v-privacy-panel" tabindex="-1">Confidentialité et données personnelles</button>
+            <button class="tab-item" id="tab-v-advanced" type="button" role="tab" aria-selected="false" aria-controls="tab-v-advanced-panel" tabindex="-1">Avancé</button>
+        </div>
+        <div class="md:col-9" id="tab-v-general-panel" role="tabpanel" aria-labelledby="tab-v-general" tabindex="0">
+            <p>Le panneau Général : langue, fuseau horaire.</p>
+        </div>
+        <div class="md:col-9" id="tab-v-display-panel" role="tabpanel" aria-labelledby="tab-v-display" tabindex="0" hidden>
+            <p>Le panneau Affichage : thème, taille du texte.</p>
+        </div>
+        <div class="md:col-9" id="tab-v-privacy-panel" role="tabpanel" aria-labelledby="tab-v-privacy" tabindex="0" hidden>
+            <p>Le panneau Confidentialité : cookies, export des données.</p>
+        </div>
+        <div class="md:col-9" id="tab-v-advanced-panel" role="tabpanel" aria-labelledby="tab-v-advanced" tabindex="0" hidden>
+            <p>Le panneau Avancé.</p>
+        </div>
+    </div>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="grid"&gt;
+    &lt;div class="tab md:col-3" role="tablist" aria-label="Réglages" aria-orientation="vertical" data-tab&gt;
+        &lt;button class="tab-item" id="onglet-general" type="button" role="tab" aria-selected="true" aria-controls="panneau-general"&gt;Général&lt;/button&gt;
+        …
+    &lt;/div&gt;
+    &lt;div class="md:col-9" id="panneau-general" role="tabpanel" aria-labelledby="onglet-general" tabindex="0"&gt;…&lt;/div&gt;
+    …
+&lt;/div&gt;</code></pre>
+    <ul>
+        <li>aria-orientation="vertical" sur la rangée : l'ARIA le demande pour des onglets empilés, et le style le lit. Pas de classe en plus.</li>
+        <li>Les onglets s'empilent, le trait gris passe sur le côté du panneau, le trait de l'onglet choisi aussi ; un texte long passe à la ligne.</li>
+        <li>Au clavier, ↑ et ↓ en plus de ← et →.</li>
+        <li>La grille place les onglets à gauche à partir de md (md:col-3, md:col-9) ; sur petit écran, ils s'empilent au-dessus du panneau, sur toute la largeur.</li>
+    </ul>
+
+    <h2 class="mt-10">HTML</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="tab" role="tablist" aria-label="Mon compte" data-tab&gt;
+    &lt;button class="tab-item" id="onglet-profil" type="button" role="tab" aria-selected="true" aria-controls="panneau-profil"&gt;Profil&lt;/button&gt;
+    &lt;button class="tab-item" id="onglet-securite" type="button" role="tab" aria-selected="false" aria-controls="panneau-securite" tabindex="-1"&gt;Sécurité&lt;/button&gt;
+&lt;/div&gt;
+&lt;div id="panneau-profil" role="tabpanel" aria-labelledby="onglet-profil" tabindex="0"&gt;…&lt;/div&gt;
+&lt;div id="panneau-securite" role="tabpanel" aria-labelledby="onglet-securite" tabindex="0" hidden&gt;…&lt;/div&gt;</code></pre>
+    <ul>
+        <li>tab sur la rangée (role="tablist", un aria-label ou un aria-labelledby qui dit de quoi parlent les onglets, et data-tab pour le JavaScript) ; tab-item sur chaque &lt;button type="button" role="tab"&gt;.</li>
+        <li>Chaque onglet a un id et aria-controls vers son panneau ; chaque panneau, role="tabpanel" et aria-labelledby vers son onglet.</li>
+        <li>L'état de départ est écrit dans le HTML : aria-selected="true" sur l'onglet choisi, "false" et tabindex="-1" sur les autres, hidden sur leurs panneaux. Le JavaScript le change ensuite.</li>
+        <li>Les panneaux n'ont pas de classe : l'espace se règle avec les utilitaires (pt-4).</li>
+        <li>tabindex="0" sur un panneau : Tab y va après l'onglet, même s'il ne contient rien de cliquable. S'il commence par un lien ou un champ, il peut s'en passer.</li>
+    </ul>
+
+    <h2 class="mt-10">Exemple : beaucoup d'onglets</h2>
+    <div class="tab mt-2" role="tablist" aria-label="Mois (démo)" data-tab>
+        {% for month in ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre'] %}
+            <button class="tab-item" id="tab-month-{{ loop.index }}" type="button" role="tab" aria-selected="{{ loop.first ? 'true' : 'false' }}" aria-controls="tab-month-{{ loop.index }}-panel"{% if not loop.first %} tabindex="-1"{% endif %}>{{ month }}</button>
+        {% endfor %}
+    </div>
+    {% for month in ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre'] %}
+        <div class="pt-4" id="tab-month-{{ loop.index }}-panel" role="tabpanel" aria-labelledby="tab-month-{{ loop.index }}" tabindex="0"{% if not loop.first %} hidden{% endif %}>
+            <p>Les chiffres de {{ month|lower }}.</p>
+        </div>
+    {% endfor %}
+    <p>Quand les onglets ne tiennent pas sur la largeur, la rangée défile sur le côté, sans passer à la ligne. Au clavier, l'onglet atteint par une flèche défile dans la vue.</p>
+
+    <h2 class="mt-10">Variables</h2>
+    <table class="mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Défaut</th>
+                <th scope="col">Rôle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">--tab-item-padding-block</th><td>0.5rem</td><td>haut et bas d'un onglet (42px de haut avec le trait)</td></tr>
+            <tr><th scope="row">--tab-item-padding-inline</th><td>1rem</td><td>côtés d'un onglet</td></tr>
+            <tr><th scope="row">--tab-border-radius</th><td>--border-radius-md</td><td>coins du haut d'un onglet, pour le fond au survol</td></tr>
+            <tr><th scope="row">--tab-border-width</th><td>--border-width</td><td>trait sous la rangée (couleur --border-color)</td></tr>
+            <tr><th scope="row">--tab-item-border-width</th><td>0.125rem</td><td>trait sous l'onglet choisi</td></tr>
+        </tbody>
+    </table>
+
+    <h2 class="mt-10">Exemple : changer les valeurs</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --tab-item-border-width: 0.1875rem; }
+.onglets-compacts { --tab-item-padding-inline: 0.75rem; }
+:root { --tab-border-radius: 0; }</code></pre>
+    <p>La première ligne épaissit le trait de l'onglet choisi partout, la deuxième rapproche seulement les onglets de la rangée qui a la classe onglets-compacts du site ; la dernière donne un fond carré au survol.</p>
+
+    <h2 class="mt-10">JavaScript</h2>
+    <p>Fourni par dist/js/bundle.js, rien à écrire : il agit sur les rangées data-tab, aussi celles ajoutées plus tard dans la page. Il change aria-selected, tabindex et hidden, jamais le style.</p>
+    <table class="mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Événement</th>
+                <th scope="col">Envoyé</th>
+                <th scope="col">detail</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">tab-beforechange</th><td>sur la rangée, avant le changement ; annulable (preventDefault() garde l'onglet en cours)</td><td>tab (l'onglet demandé), previousTab (l'onglet en cours)</td></tr>
+            <tr><th scope="row">tab-change</th><td>sur la rangée, après le changement</td><td>tab, previousTab</td></tr>
+        </tbody>
+    </table>
+    <pre class="mt-2" tabindex="0"><code class="language-js">document.addEventListener('tab-beforechange', (event) =&gt; {
+    if (formulaireModifie &amp;&amp; !confirm('Quitter sans enregistrer ?')) event.preventDefault();
+});
+
+document.addEventListener('tab-change', (event) =&gt; {
+    const panneau = document.getElementById(event.detail.tab.getAttribute('aria-controls'));
+    // Charger le contenu du panneau…
+});</code></pre>
+    <p>Les deux événements remontent jusqu'à document : un seul écouteur suffit pour toutes les rangées. Ils ne sont pas envoyés au chargement, ni quand on clique sur l'onglet déjà choisi.</p>
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul>
+        <li>Le lecteur d'écran annonce un onglet, s'il est sélectionné et sa place dans la rangée (1 sur 3) : role="tab" et aria-selected, dans un role="tablist" qui a un nom (aria-label).</li>
+        <li>Au clavier (ARIA APG) : un seul onglet dans l'ordre du Tab, les flèches pour les autres (↑ et ↓ aussi en vertical ; en horizontal, elles restent pour faire défiler la page) ; l'onglet atteint s'affiche aussitôt (activation automatique, conseillée quand les panneaux sont déjà dans la page).</li>
+        <li>L'onglet choisi se voit sans la couleur : un trait dessous, en emphasis, au moins 4,5:1 sur le fond de la page dans toutes les couleurs. En contraste élevé (Windows), le trait garde une couleur du système ; les autres onglets n'en ont pas.</li>
+        <li>Le texte de la page reste lisible sur les fonds du survol et du clic, dans toutes les couleurs (les mêmes fonds que la liste : au moins 10,46:1 en clair, 7,80:1 en sombre). Le contour de focus a la couleur du thème en emphasis, comme les boutons, à l'intérieur de l'onglet, au moins 3,71:1 sur tous ses fonds en clair, 4,18:1 en sombre (calculé).</li>
+        <li>Onglets de 42px de haut, plus que la cible tactile minimale de 24px (WCAG 2.5.8).</li>
+        <li>Des &lt;button type="button"&gt; : dans un formulaire, un onglet n'envoie rien.</li>
+    </ul>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="tab" role="tablist" data-tab&gt;
+    &lt;a class="tab-item" href="/profil" role="tab"&gt;Profil&lt;/a&gt;
+    &lt;a class="tab-item" href="/securite" role="tab"&gt;Sécurité&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+    <p>Des onglets qui changent de page : ce sont des liens de navigation, pas des onglets. Une &lt;nav&gt; avec aria-current="page" sur le lien de la page affichée.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="tab-item" type="button" role="tab" aria-selected="false" aria-controls="panneau-securite"&gt;Sécurité&lt;/button&gt;</code></pre>
+    <p>Sans tabindex="-1" sur un onglet non choisi : Tab s'arrête sur chaque onglet au lieu d'aller dans le panneau.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div id="panneau-securite" role="tabpanel" aria-labelledby="onglet-securite"&gt;…&lt;/div&gt;</code></pre>
+    <p>Sans hidden sur le panneau d'un onglet non choisi : tous les panneaux s'affichent au chargement, jusqu'au premier clic.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="tab" role="tablist" aria-label="Mon compte"&gt;</code></pre>
+    <p>Sans data-tab : le JavaScript ne fait rien, les onglets ne changent pas.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="tab flex-direction-column" role="tablist" aria-label="Réglages" data-tab&gt;</code></pre>
+    <p>Des onglets empilés par un utilitaire : le lecteur d'écran les annonce en rangée, ↑ et ↓ ne marchent pas, et les traits restent dessous. aria-orientation="vertical" fait les trois.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="tab-item active" type="button" role="tab"&gt;Profil&lt;/button&gt;</code></pre>
+    <p>Pas de classe d'état : aria-selected="true", que le lecteur d'écran annonce et que le style lit.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card-solid theme-primary"&gt;
+    &lt;div class="tab" role="tablist" aria-label="Mon compte" data-tab&gt;…&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    <p>Sur un fond plein, les onglets héritent du thème de la carte : le trait emphasis et le fond léger du survol passent sous le texte de la carte, qui peut devenir illisible. Les mettre sur le fond de la page ou un fond subtle.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>Sans JavaScript, seul le premier panneau se voit : les autres restent cachés. Pour un contenu qui doit se lire sans JavaScript, un accordéon.</li>
+        <li>Pas de lien vers un onglet par l'adresse (#panneau).</li>
+        <li>Dans une écriture de droite à gauche, ← et → ne sont pas inversés.</li>
+        <li>Pas d'animation au changement de panneau.</li>
+        <li>Un onglet ne passe pas à la ligne : un texte long élargit l'onglet, la rangée défile.</li>
+    </ul>
+{% endblock %}

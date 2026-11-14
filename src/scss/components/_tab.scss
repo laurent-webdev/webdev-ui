@@ -1,0 +1,99 @@
+@layer components {
+
+    :root {
+        // Forme : chaque onglet, puis les traits
+        --tab-item-padding-block: 0.5rem;
+        --tab-item-padding-inline: 1rem;
+        --tab-border-radius: var(--border-radius-md);
+        --tab-border-width: var(--border-width);
+        --tab-item-border-width: 0.125rem;
+
+        // Thème des onglets par défaut, sans classe .theme-*
+        --tab-theme-color: var(--color-neutral);
+        --tab-theme-subtle: var(--color-neutral-subtle);
+        --tab-theme-emphasis: var(--color-neutral-emphasis);
+    }
+
+    // Une classe par couleur : hérité, sur la rangée elle colore tous ses onglets, sur un onglet seulement lui
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .theme-#{$color} {
+            --tab-theme-color: var(--color-#{$color});
+            --tab-theme-subtle: var(--color-#{$color}-subtle);
+            --tab-theme-emphasis: var(--color-#{$color}-emphasis);
+        }
+    }
+
+    // La rangée d'onglets : sur une ligne, un trait gris dessous ; défile sur le côté quand elle ne tient pas
+    .tab {
+        display: flex;
+        overflow-x: auto;
+        border-block-end: var(--tab-border-width) solid var(--border-color);
+    }
+
+    // Un onglet : un bouton sans cadre, le haut arrondi pour le fond au survol
+    .tab-item {
+        flex-shrink: 0;
+        padding-block: var(--tab-item-padding-block);
+        // La place du trait de l'onglet choisi : le texte ne bouge pas quand il change
+        padding-block-end: calc(var(--tab-item-padding-block) + var(--tab-item-border-width));
+        padding-inline: var(--tab-item-padding-inline);
+        border: 0;
+        border-start-start-radius: var(--tab-border-radius);
+        border-start-end-radius: var(--tab-border-radius);
+        background-color: transparent;
+        color: inherit;
+        white-space: nowrap;
+        transition-property: background-color;
+        transition-duration: var(--transition-duration);
+
+        // Seul le fond change : léger au survol, renforcé au clic ; le texte de la page y reste lisible
+        &:hover {
+            background-color: var(--tab-theme-subtle);
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--tab-theme-subtle), var(--tab-theme-color) var(--state-mix-soft));
+        }
+
+        // Choisi : un trait dessous en emphasis, visible sur le fond de page ; il prend la place du padding
+        &[aria-selected="true"] {
+            padding-block-end: var(--tab-item-padding-block);
+            border-block-end: var(--tab-item-border-width) solid var(--tab-theme-emphasis);
+        }
+
+        // Comme les boutons, la couleur du thème en emphasis ; à l'intérieur de l'onglet : la rangée qui défile couperait un contour à l'extérieur
+        &:focus-visible {
+            outline: var(--focus-outline-width) solid var(--tab-theme-emphasis);
+            outline-offset: calc(var(--focus-outline-width) * -1);
+        }
+
+        // Désactivé : estompé, plus de survol ni de clic, comme les boutons
+        &:disabled {
+            opacity: var(--disabled-opacity);
+            pointer-events: none;
+        }
+    }
+
+    // Vertical : aria-orientation, que l'ARIA demande déjà, suffit ; onglets empilés, les traits sur le côté du panneau
+    .tab[aria-orientation="vertical"] {
+        flex-direction: column;
+        border-block-end: 0;
+        border-inline-end: var(--tab-border-width) solid var(--border-color);
+
+        // Toute la largeur, le texte au début et à la ligne s'il est long ; arrondi du côté opposé au trait
+        > .tab-item {
+            padding-block-end: var(--tab-item-padding-block);
+            padding-inline-end: calc(var(--tab-item-padding-inline) + var(--tab-item-border-width));
+            border-start-end-radius: 0;
+            border-end-start-radius: var(--tab-border-radius);
+            text-align: start;
+            white-space: normal;
+
+            &[aria-selected="true"] {
+                padding-inline-end: var(--tab-item-padding-inline);
+                border-block-end: 0;
+                border-inline-end: var(--tab-item-border-width) solid var(--tab-theme-emphasis);
+            }
+        }
+    }
+
+}
