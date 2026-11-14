@@ -11,17 +11,19 @@
         <p class="mt-2">Texte xg <svg class="color-primary-emphasis vertical-align-{{ align }}" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="currentColor"/></svg> vertical-align-{{ align }}</p>
     {% endfor %}
 
-    <h2 class="mt-10">Exemple : les cellules d'un tableau</h2>
-    <table class="mt-2">
-        <tbody>
-            <tr>
-                <th class="border p-2" scope="row">Trois<br>lignes<br>de texte</th>
-                <td class="border p-2 vertical-align-top">vertical-align-top</td>
-                <td class="border p-2">sans classe (middle)</td>
-                <td class="border p-2 vertical-align-bottom">vertical-align-bottom</td>
-            </tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="exemple-les-cellules-d-un-tableau">Exemple : les cellules d'un tableau</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="exemple-les-cellules-d-un-tableau" tabindex="0">
+        <table>
+            <tbody>
+                <tr>
+                    <th class="border p-2" scope="row">Trois<br>lignes<br>de texte</th>
+                    <td class="border p-2 vertical-align-top">vertical-align-top</td>
+                    <td class="border p-2">sans classe (middle)</td>
+                    <td class="border p-2 vertical-align-bottom">vertical-align-bottom</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <p class="mt-2">Une cellule est centrée par défaut : vertical-align-top aligne le haut des cellules quand les textes n'ont pas la même longueur.</p>
 
     <h2 class="mt-10">Contre-exemples</h2>

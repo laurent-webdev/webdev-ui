@@ -112,23 +112,25 @@
     {% endfor %}
     <p>Quand les onglets ne tiennent pas sur la largeur, la rangée défile sur le côté, sans passer à la ligne. Au clavier, l'onglet atteint par une flèche défile dans la vue.</p>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--tab-item-padding-block</th><td>0.5rem</td><td>haut et bas d'un onglet (42px de haut avec le trait)</td></tr>
-            <tr><th scope="row">--tab-item-padding-inline</th><td>1rem</td><td>côtés d'un onglet</td></tr>
-            <tr><th scope="row">--tab-border-radius</th><td>--border-radius-md</td><td>coins du haut d'un onglet, pour le fond au survol</td></tr>
-            <tr><th scope="row">--tab-border-width</th><td>--border-width</td><td>trait sous la rangée (couleur --border-color)</td></tr>
-            <tr><th scope="row">--tab-item-border-width</th><td>0.125rem</td><td>trait sous l'onglet choisi</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--tab-item-padding-block</th><td>0.5rem</td><td>haut et bas d'un onglet (42px de haut avec le trait)</td></tr>
+                <tr><th scope="row">--tab-item-padding-inline</th><td>1rem</td><td>côtés d'un onglet</td></tr>
+                <tr><th scope="row">--tab-border-radius</th><td>--border-radius-md</td><td>coins du haut d'un onglet, pour le fond au survol</td></tr>
+                <tr><th scope="row">--tab-border-width</th><td>--border-width</td><td>trait sous la rangée (couleur --border-color)</td></tr>
+                <tr><th scope="row">--tab-item-border-width</th><td>0.125rem</td><td>trait sous l'onglet choisi</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --tab-item-border-width: 0.1875rem; }
@@ -136,21 +138,23 @@
 :root { --tab-border-radius: 0px; }</code></pre>
     <p>La première ligne épaissit le trait de l'onglet choisi partout, la deuxième rapproche seulement les onglets de la rangée qui a la classe onglets-compacts du site ; la dernière donne un fond carré au survol.</p>
 
-    <h2 class="mt-10">JavaScript</h2>
+    <h2 class="mt-10" id="javascript">JavaScript</h2>
     <p>Fourni par dist/js/bundle.js, rien à écrire : il agit sur les rangées data-tab, aussi celles ajoutées plus tard dans la page. Il change aria-selected, tabindex et hidden, jamais le style.</p>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Événement</th>
-                <th scope="col">Envoyé</th>
-                <th scope="col">detail</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">tab-beforechange</th><td>sur la rangée, avant le changement ; annulable (preventDefault() garde l'onglet en cours)</td><td>tab (l'onglet demandé), previousTab (l'onglet en cours)</td></tr>
-            <tr><th scope="row">tab-change</th><td>sur la rangée, après le changement</td><td>tab, previousTab</td></tr>
-        </tbody>
-    </table>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="javascript" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Événement</th>
+                    <th scope="col">Envoyé</th>
+                    <th scope="col">detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">tab-beforechange</th><td>sur la rangée, avant le changement ; annulable (preventDefault() garde l'onglet en cours)</td><td>tab (l'onglet demandé), previousTab (l'onglet en cours)</td></tr>
+                <tr><th scope="row">tab-change</th><td>sur la rangée, après le changement</td><td>tab, previousTab</td></tr>
+            </tbody>
+        </table>
+    </div>
     <pre class="mt-2" tabindex="0"><code class="language-js">document.addEventListener('tab-beforechange', (event) =&gt; {
     if (formulaireModifie &amp;&amp; !confirm('Quitter sans enregistrer ?')) event.preventDefault();
 });

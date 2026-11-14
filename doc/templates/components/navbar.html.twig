@@ -87,20 +87,22 @@
         </ul>
     {% endfor %}
 
-    <h2 class="mt-10">Quand passer les liens dans la barre</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Classe</th>
-                <th scope="col">Les liens dans la barre</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">aucune</th><td>jamais : le bouton et le drawer sur tous les écrans</td></tr>
-            <tr><th scope="row">navbar-expand</th><td>toujours : pas de bouton ni de drawer</td></tr>
-            <tr><th scope="row">xs:navbar-expand … 2xl:navbar-expand</th><td>à partir de ce breakpoint (xs 360px, sm 576px, md 768px, lg 1024px, xl 1280px, 2xl 1536px)</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="quand-passer-les-liens-dans-la-barre">Quand passer les liens dans la barre</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="quand-passer-les-liens-dans-la-barre" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Classe</th>
+                    <th scope="col">Les liens dans la barre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">aucune</th><td>jamais : le bouton et le drawer sur tous les écrans</td></tr>
+                <tr><th scope="row">navbar-expand</th><td>toujours : pas de bouton ni de drawer</td></tr>
+                <tr><th scope="row">xs:navbar-expand … 2xl:navbar-expand</th><td>à partir de ce breakpoint (xs 360px, sm 576px, md 768px, lg 1024px, xl 1280px, 2xl 1536px)</td></tr>
+            </tbody>
+        </table>
+    </div>
     <p class="mt-2">Dans la barre, un lien ne passe pas à la ligne : choisir le breakpoint où tous les liens tiennent sur la largeur, md pour quatre ou cinq liens courts, lg ou xl pour plus.</p>
     <nav class="navbar mt-4 border-bottom" aria-label="Toujours le drawer (démo)">
         <a class="navbar-brand" href="#">Sans navbar-expand</a>
@@ -183,23 +185,25 @@
         <li>Le drawer garde le fond et le texte de la page ; ses liens prennent les fonds de primary au survol.</li>
     </ul>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--navbar-padding-block</th><td>0.5rem</td><td>haut et bas de la barre (56px de haut avec les liens)</td></tr>
-            <tr><th scope="row">--navbar-padding-inline</th><td>1rem</td><td>côtés de navbar-subtle et navbar-solid (navbar n'en a pas : aligné sur le texte de la page)</td></tr>
-            <tr><th scope="row">--navbar-item-padding-block</th><td>0.5rem</td><td>haut et bas d'un lien (40px de haut)</td></tr>
-            <tr><th scope="row">--navbar-item-padding-inline</th><td>0.75rem</td><td>côtés d'un lien</td></tr>
-            <tr><th scope="row">--navbar-item-border-radius</th><td>--border-radius-md</td><td>coins du fond d'un lien</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--navbar-padding-block</th><td>0.5rem</td><td>haut et bas de la barre (56px de haut avec les liens)</td></tr>
+                <tr><th scope="row">--navbar-padding-inline</th><td>1rem</td><td>côtés de navbar-subtle et navbar-solid (navbar n'en a pas : aligné sur le texte de la page)</td></tr>
+                <tr><th scope="row">--navbar-item-padding-block</th><td>0.5rem</td><td>haut et bas d'un lien (40px de haut)</td></tr>
+                <tr><th scope="row">--navbar-item-padding-inline</th><td>0.75rem</td><td>côtés d'un lien</td></tr>
+                <tr><th scope="row">--navbar-item-border-radius</th><td>--border-radius-md</td><td>coins du fond d'un lien</td></tr>
+            </tbody>
+        </table>
+    </div>
     <p class="mt-2">Le drawer a ses propres variables (--drawer-width…), le bouton les siennes (--btn-padding-block) : voir leurs pages.</p>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>

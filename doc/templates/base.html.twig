@@ -77,22 +77,28 @@
         </nav>
 
         <div class="container flex-grow-1 py-8">
-            <main>
-                {% block body %}{% endblock %}
+            {# Le contenu dans une carte en verre, au-dessus du fond à vagues #}
+            <main class="card glass">
+                <div class="card-body p-4 md:p-10">
+                    {% block body %}{% endblock %}
 
-                {% if doc_prev or doc_next %}
-                    {# Lecture suivie : les pages voisines dans l'ordre du menu #}
-                    <nav class="d-flex flex-wrap-wrap gap-3 mt-12 pt-6 border-top" aria-label="Pages précédente et suivante">
-                        {% if doc_prev %}
-                            <a class="btn" href="{{ path(doc_prev.route) }}" rel="prev"><span aria-hidden="true">← </span><span class="visually-hidden">Page précédente : </span>{{ doc_prev.label }}</a>
-                        {% endif %}
-                        {% if doc_next %}
-                            <a class="btn ms-auto" href="{{ path(doc_next.route) }}" rel="next"><span class="visually-hidden">Page suivante : </span>{{ doc_next.label }}<span aria-hidden="true"> →</span></a>
-                        {% endif %}
-                    </nav>
-                {% endif %}
+                    {% if doc_prev or doc_next %}
+                        {# Lecture suivie : les pages voisines dans l'ordre du menu #}
+                        <nav class="d-flex flex-wrap-wrap gap-3 mt-12 pt-6 border-top" aria-label="Pages précédente et suivante">
+                            {% if doc_prev %}
+                                <a class="btn" href="{{ path(doc_prev.route) }}" rel="prev"><span aria-hidden="true">← </span><span class="visually-hidden">Page précédente : </span>{{ doc_prev.label }}</a>
+                            {% endif %}
+                            {% if doc_next %}
+                                <a class="btn ms-auto" href="{{ path(doc_next.route) }}" rel="next"><span class="visually-hidden">Page suivante : </span>{{ doc_next.label }}<span aria-hidden="true"> →</span></a>
+                            {% endif %}
+                        </nav>
+                    {% endif %}
+                </div>
             </main>
         </div>
+
+        {# Hors de la carte : un élément fixé d'une démo (position-fixed) ; dans la carte, backdrop-filter le placerait par rapport à elle #}
+        {% block fixed %}{% endblock %}
 
         <footer class="border-top">
             <p class="container py-6 fs-sm color-neutral-emphasis">webdev-ui · framework CSS/JS léger, natif et sans dépendance</p>

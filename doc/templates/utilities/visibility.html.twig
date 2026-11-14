@@ -9,23 +9,25 @@
     <p class="mt-4">Avant <span class="visibility-hidden">caché</span> après : visibility-hidden garde la place.</p>
     <p class="mt-2">visibility-visible réaffiche un enfant : <span class="visibility-hidden">parent caché, <span class="visibility-visible">enfant visible</span></span></p>
 
-    <h2 class="mt-10">Cacher : quelle classe ?</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Classe</th>
-                <th scope="col">Garde sa place</th>
-                <th scope="col">Lu par les lecteurs d'écran</th>
-                <th scope="col">Cliquable, focusable</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">hidden, d-none</th><td>non</td><td>non</td><td>non</td></tr>
-            <tr><th scope="row">visibility-hidden</th><td>oui</td><td>non</td><td>non</td></tr>
-            <tr><th scope="row">opacity-0</th><td>oui</td><td>oui</td><td>oui</td></tr>
-            <tr><th scope="row">visually-hidden</th><td>non</td><td>oui</td><td>oui</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="cacher-quelle-classe">Cacher : quelle classe ?</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="cacher-quelle-classe" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Classe</th>
+                    <th scope="col">Garde sa place</th>
+                    <th scope="col">Lu par les lecteurs d'écran</th>
+                    <th scope="col">Cliquable, focusable</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">hidden, d-none</th><td>non</td><td>non</td><td>non</td></tr>
+                <tr><th scope="row">visibility-hidden</th><td>oui</td><td>non</td><td>non</td></tr>
+                <tr><th scope="row">opacity-0</th><td>oui</td><td>oui</td><td>oui</td></tr>
+                <tr><th scope="row">visually-hidden</th><td>non</td><td>oui</td><td>oui</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Contre-exemples</h2>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="visibility-hidden"&gt;Chargement…&lt;/span&gt;</code></pre>

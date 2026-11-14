@@ -71,25 +71,27 @@
         <li>Le menu reste sous le bouton quand la page défile. Il est dans le top layer : un parent en overflow: hidden ne le coupe pas, pas besoin de z-index.</li>
     </ul>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--dropdown-padding-block</th><td>0.25rem</td><td>haut et bas du panneau, espace autour des séparateurs</td></tr>
-            <tr><th scope="row">--dropdown-padding-inline</th><td>0.25rem</td><td>côtés du panneau</td></tr>
-            <tr><th scope="row">--dropdown-item-padding-block</th><td>0.375rem</td><td>haut et bas d'un élément (36px de haut)</td></tr>
-            <tr><th scope="row">--dropdown-item-padding-inline</th><td>0.75rem</td><td>côtés d'un élément</td></tr>
-            <tr><th scope="row">--dropdown-min-width</th><td>10rem</td><td>largeur minimum du panneau</td></tr>
-            <tr><th scope="row">--dropdown-border-radius</th><td>--border-radius-md</td><td>coins du panneau (ceux des éléments suivent)</td></tr>
-            <tr><th scope="row">--dropdown-border-width</th><td>--border-width</td><td>cadre et séparateurs (couleur --border-color)</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--dropdown-padding-block</th><td>0.25rem</td><td>haut et bas du panneau, espace autour des séparateurs</td></tr>
+                <tr><th scope="row">--dropdown-padding-inline</th><td>0.25rem</td><td>côtés du panneau</td></tr>
+                <tr><th scope="row">--dropdown-item-padding-block</th><td>0.375rem</td><td>haut et bas d'un élément (36px de haut)</td></tr>
+                <tr><th scope="row">--dropdown-item-padding-inline</th><td>0.75rem</td><td>côtés d'un élément</td></tr>
+                <tr><th scope="row">--dropdown-min-width</th><td>10rem</td><td>largeur minimum du panneau</td></tr>
+                <tr><th scope="row">--dropdown-border-radius</th><td>--border-radius-md</td><td>coins du panneau (ceux des éléments suivent)</td></tr>
+                <tr><th scope="row">--dropdown-border-width</th><td>--border-width</td><td>cadre et séparateurs (couleur --border-color)</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --dropdown-min-width: 12rem; }

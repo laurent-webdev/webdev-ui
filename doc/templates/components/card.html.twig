@@ -111,22 +111,24 @@
         </article>
     </div>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--card-padding-block</th><td>1rem</td><td>haut et bas de l'en-tête, du corps et du pied</td></tr>
-            <tr><th scope="row">--card-padding-inline</th><td>1rem</td><td>côtés de l'en-tête, du corps et du pied</td></tr>
-            <tr><th scope="row">--card-border-radius</th><td>--border-radius-md</td><td>coins du cadre et de l'image</td></tr>
-            <tr><th scope="row">--card-border-width</th><td>--border-width</td><td>cadre et traits</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--card-padding-block</th><td>1rem</td><td>haut et bas de l'en-tête, du corps et du pied</td></tr>
+                <tr><th scope="row">--card-padding-inline</th><td>1rem</td><td>côtés de l'en-tête, du corps et du pied</td></tr>
+                <tr><th scope="row">--card-border-radius</th><td>--border-radius-md</td><td>coins du cadre et de l'image</td></tr>
+                <tr><th scope="row">--card-border-width</th><td>--border-width</td><td>cadre et traits</td></tr>
+            </tbody>
+        </table>
+    </div>
     <p class="mt-2">Les couleurs viennent de .theme-* : le cadre et les traits ont la couleur de bordure du thème (--color-*-border ; card-subtle : --color-*-subtle-border), la variante dit le fond. Le texte reste celui de la page, sauf sur card-solid (noir ou blanc).</p>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>

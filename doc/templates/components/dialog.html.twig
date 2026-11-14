@@ -9,7 +9,7 @@
     <h2 class="mt-10">Par défaut</h2>
     <p class="mt-2">dialog n'a pas de couleur : cadre et traits --border-color, le fond de la page (transparent, la page se verrait derrière le texte). Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres. Les dialogues ci-dessous sont en dialog, sauf dans « Variantes ».</p>
 
-    <h2 class="mt-10">Comportements : l'attribut closedby</h2>
+    <h2 class="mt-10" id="comportements-l-attribut-closedby">Comportements : l'attribut closedby</h2>
     <div class="d-flex flex-wrap-wrap gap-2 mt-2">
         <button class="btn" type="button" commandfor="dialog-default" command="show-modal">Sans closedby</button>
         <button class="btn" type="button" commandfor="dialog-any" command="show-modal">closedby="any"</button>
@@ -55,21 +55,23 @@
         </div>
     </dialog>
 
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">closedby</th>
-                <th scope="col">Échap</th>
-                <th scope="col">Clic à côté</th>
-                <th scope="col">Bouton du dialogue</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">any</th><td>oui</td><td>oui</td><td>oui</td></tr>
-            <tr><th scope="row">closerequest (défaut d'un modal)</th><td>oui</td><td>non</td><td>oui</td></tr>
-            <tr><th scope="row">none</th><td>non</td><td>non</td><td>oui</td></tr>
-        </tbody>
-    </table>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="comportements-l-attribut-closedby" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">closedby</th>
+                    <th scope="col">Échap</th>
+                    <th scope="col">Clic à côté</th>
+                    <th scope="col">Bouton du dialogue</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">any</th><td>oui</td><td>oui</td><td>oui</td></tr>
+                <tr><th scope="row">closerequest (défaut d'un modal)</th><td>oui</td><td>non</td><td>oui</td></tr>
+                <tr><th scope="row">none</th><td>non</td><td>non</td><td>oui</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Variantes</h2>
     <div class="d-flex flex-wrap-wrap gap-2 mt-2">
@@ -186,26 +188,28 @@
         </div>
     </dialog>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--dialog-padding-block</th><td>1rem</td><td>haut et bas de l'en-tête, du corps et du pied</td></tr>
-            <tr><th scope="row">--dialog-padding-inline</th><td>1rem</td><td>côtés de l'en-tête, du corps et du pied</td></tr>
-            <tr><th scope="row">--dialog-border-radius</th><td>--border-radius-md</td><td>coins du cadre</td></tr>
-            <tr><th scope="row">--dialog-border-width</th><td>--border-width</td><td>cadre et traits</td></tr>
-            <tr><th scope="row">--dialog-width</th><td>48rem (breakpoint md)</td><td>largeur du dialogue</td></tr>
-            <tr><th scope="row">--dialog-transition-duration</th><td>0.2s</td><td>apparition et disparition du dialogue et du fond assombri</td></tr>
-            <tr><th scope="row">--backdrop-background-color</th><td>noir à 50 % (65 % en sombre)</td><td>fond qui assombrit la page derrière un dialogue modal</td></tr>
-            <tr><th scope="row">--backdrop-filter</th><td>blur(5px)</td><td>flou de la page derrière un dialogue modal</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--dialog-padding-block</th><td>1rem</td><td>haut et bas de l'en-tête, du corps et du pied</td></tr>
+                <tr><th scope="row">--dialog-padding-inline</th><td>1rem</td><td>côtés de l'en-tête, du corps et du pied</td></tr>
+                <tr><th scope="row">--dialog-border-radius</th><td>--border-radius-md</td><td>coins du cadre</td></tr>
+                <tr><th scope="row">--dialog-border-width</th><td>--border-width</td><td>cadre et traits</td></tr>
+                <tr><th scope="row">--dialog-width</th><td>48rem (breakpoint md)</td><td>largeur du dialogue</td></tr>
+                <tr><th scope="row">--dialog-transition-duration</th><td>0.2s</td><td>apparition et disparition du dialogue et du fond assombri</td></tr>
+                <tr><th scope="row">--backdrop-background-color</th><td>noir à 50 % (65 % en sombre)</td><td>fond qui assombrit la page derrière un dialogue modal</td></tr>
+                <tr><th scope="row">--backdrop-filter</th><td>blur(5px)</td><td>flou de la page derrière un dialogue modal</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --dialog-width: 40rem; }

@@ -120,23 +120,25 @@
 &lt;/div&gt;</code></pre>
     <p>Comme les boutons : une variante (accordion-solid, accordion-subtle, accordion-outline) qui s'utilise seule, et une couleur .theme-*. accordion seul : le défaut, sans couleur. Un seul panneau (un « Voir plus ») : un seul &lt;details&gt; dans l'accordéon.</p>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--accordion-padding-block</th><td>1rem</td><td>haut et bas du titre et du contenu</td></tr>
-            <tr><th scope="row">--accordion-padding-inline</th><td>1rem</td><td>côtés du titre et du contenu</td></tr>
-            <tr><th scope="row">--accordion-border-radius</th><td>--border-radius-md</td><td>coins du cadre</td></tr>
-            <tr><th scope="row">--accordion-border-width</th><td>--border-width</td><td>cadre et traits</td></tr>
-            <tr><th scope="row">--accordion-transition-duration</th><td>0.2s</td><td>ouverture, fermeture et flèche</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--accordion-padding-block</th><td>1rem</td><td>haut et bas du titre et du contenu</td></tr>
+                <tr><th scope="row">--accordion-padding-inline</th><td>1rem</td><td>côtés du titre et du contenu</td></tr>
+                <tr><th scope="row">--accordion-border-radius</th><td>--border-radius-md</td><td>coins du cadre</td></tr>
+                <tr><th scope="row">--accordion-border-width</th><td>--border-width</td><td>cadre et traits</td></tr>
+                <tr><th scope="row">--accordion-transition-duration</th><td>0.2s</td><td>ouverture, fermeture et flèche</td></tr>
+            </tbody>
+        </table>
+    </div>
     <p class="mt-2">Les couleurs viennent de .theme-* : le cadre et les traits ont la couleur de bordure du thème (--color-*-border ; accordion-subtle : --color-*-subtle-border), la variante dit le fond et le texte du titre ; le contenu reste sur le fond de la page. Le gras du titre : --heading-font-weight.</p>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>

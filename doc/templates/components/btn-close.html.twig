@@ -10,27 +10,29 @@
     <p class="mt-2"><button class="btn-close" type="button" aria-label="Fermer"></button></p>
     <p class="mt-2">btn-close n'a pas de couleur : fond transparent, cadre --border-color, la croix de la couleur du texte autour, un fond gris léger au survol et au clic. Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres.</p>
 
-    <h2 class="mt-10">Variantes et couleurs</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Thème</th>
-                <th scope="col">btn-close-solid</th>
-                <th scope="col">btn-close-subtle</th>
-                <th scope="col">btn-close-outline</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for color in colors %}
+    <h2 class="mt-10" id="variantes-et-couleurs">Variantes et couleurs</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variantes-et-couleurs" tabindex="0">
+        <table class="table">
+            <thead>
                 <tr>
-                    <th scope="row">theme-{{ color }}</th>
-                    {% for variant in ['solid', 'subtle', 'outline'] %}
-                        <td><button class="btn-close-{{ variant }} theme-{{ color }}" type="button" aria-label="Fermer"></button></td>
-                    {% endfor %}
+                    <th scope="col">Thème</th>
+                    <th scope="col">btn-close-solid</th>
+                    <th scope="col">btn-close-subtle</th>
+                    <th scope="col">btn-close-outline</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for color in colors %}
+                    <tr>
+                        <th scope="row">theme-{{ color }}</th>
+                        {% for variant in ['solid', 'subtle', 'outline'] %}
+                            <td><button class="btn-close-{{ variant }} theme-{{ color }}" type="button" aria-label="Fermer"></button></td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">HTML</h2>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-close" type="button" commandfor="dialog-compte" command="close" aria-label="Fermer"&gt;&lt;/button&gt;</code></pre>
@@ -46,21 +48,23 @@
     {% endfor %}
     <p class="mt-2">btn-close-xs à btn-close-lg ont la hauteur du bouton de la même taille (24, 31, 38 et 45px) : côte à côte, ils sont alignés. Sans classe, la taille xs (24px), celle d'un en-tête de dialogue. Les tailles se combinent avec toutes les variantes.</p>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--btn-close-size</th><td>1.5rem (24px, la taille xs)</td><td>côté du carré, bordure comprise ; la croix suit ; réécrite par les tailles</td></tr>
-            <tr><th scope="row">--btn-close-border-radius</th><td>--border-radius-md</td><td>coins du carré et du contour de focus</td></tr>
-            <tr><th scope="row">--btn-close-border-width</th><td>--border-width</td><td>bordure (visible sur btn-close et btn-close-outline)</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--btn-close-size</th><td>1.5rem (24px, la taille xs)</td><td>côté du carré, bordure comprise ; la croix suit ; réécrite par les tailles</td></tr>
+                <tr><th scope="row">--btn-close-border-radius</th><td>--border-radius-md</td><td>coins du carré et du contour de focus</td></tr>
+                <tr><th scope="row">--btn-close-border-width</th><td>--border-width</td><td>bordure (visible sur btn-close et btn-close-outline)</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --btn-close-size: 2rem; }

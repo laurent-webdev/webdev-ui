@@ -143,21 +143,23 @@
 &lt;li&gt;&lt;button class="pagination-item" type="button" disabled&gt;Précédent&lt;/button&gt;&lt;/li&gt;</code></pre>
     <p>Quand le JavaScript du site change les résultats sans changer de page : des &lt;button type="button"&gt;, même style ; disabled sur Précédent ou Suivant ; aria-current="true" (pas "page") sur le numéro affiché, déplacé par le JavaScript du site.</p>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--pagination-item-padding-block</th><td>0.375rem</td><td>haut et bas d'un élément (38px de haut) ; réécrite par les tailles</td></tr>
-            <tr><th scope="row">--pagination-item-padding-inline</th><td>0.75rem</td><td>côtés d'un élément, pour un nombre long ou un mot ; réécrite par les tailles</td></tr>
-            <tr><th scope="row">--pagination-item-border-radius</th><td>--border-radius-md</td><td>coins d'un élément ; ceux des deux bouts dans pagination-group</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--pagination-item-padding-block</th><td>0.375rem</td><td>haut et bas d'un élément (38px de haut) ; réécrite par les tailles</td></tr>
+                <tr><th scope="row">--pagination-item-padding-inline</th><td>0.75rem</td><td>côtés d'un élément, pour un nombre long ou un mot ; réécrite par les tailles</td></tr>
+                <tr><th scope="row">--pagination-item-border-radius</th><td>--border-radius-md</td><td>coins d'un élément ; ceux des deux bouts dans pagination-group</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --pagination-item-border-radius: var(--border-radius-pill); }

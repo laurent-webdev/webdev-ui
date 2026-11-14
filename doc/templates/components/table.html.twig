@@ -8,25 +8,27 @@
     <h1>Tableau</h1>
     <p class="fs-lg color-neutral-emphasis mb-6">Un tableau de données natif : un trait sous chaque ligne, les cellules alignées en haut, les chiffres de même largeur. Des options qui se combinent : rayures, survol, un trait autour de chaque cellule ou aucun trait, et trois tailles. Les cellules gardent le texte de la page ; .theme-* colore le fond, les traits, les rayures et le survol.</p>
 
-    <table class="table mt-2">
-        <caption>Commandes de novembre</caption>
-        <thead>
-            <tr>
-                <th scope="col">N°</th>
-                <th scope="col">Client</th>
-                <th scope="col">Statut</th>
-                <th scope="col" class="text-align-end">Montant</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">1042</th><td>Durand</td><td>Payée</td><td class="text-align-end">128,00 €</td></tr>
-            <tr><th scope="row">1043</th><td>Martin</td><td>En attente du virement, relancée le 12 novembre</td><td class="text-align-end">1 111,10 €</td></tr>
-            <tr><th scope="row">1044</th><td>Petit</td><td>Annulée</td><td class="text-align-end">9,90 €</td></tr>
-        </tbody>
-        <tfoot>
-            <tr><th scope="row" colspan="3">Total</th><td class="text-align-end">1 249,00 €</td></tr>
-        </tfoot>
-    </table>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="table-orders-caption" tabindex="0">
+        <table class="table">
+            <caption id="table-orders-caption">Commandes de novembre</caption>
+            <thead>
+                <tr>
+                    <th scope="col">N°</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col" class="text-align-end">Montant</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">1042</th><td>Durand</td><td>Payée</td><td class="text-align-end">128,00 €</td></tr>
+                <tr><th scope="row">1043</th><td>Martin</td><td>En attente du virement, relancée le 12 novembre</td><td class="text-align-end">1 111,10 €</td></tr>
+                <tr><th scope="row">1044</th><td>Petit</td><td>Annulée</td><td class="text-align-end">9,90 €</td></tr>
+            </tbody>
+            <tfoot>
+                <tr><th scope="row" colspan="3">Total</th><td class="text-align-end">1 249,00 €</td></tr>
+            </tfoot>
+        </table>
+    </div>
     <ul class="mt-4">
         <li>Toute la largeur, un trait gris sous chaque ligne ; la légende et les en-têtes alignés comme le texte (centrés en natif).</li>
         <li>Les cellules sont alignées en haut : une cellule sur deux lignes (le statut de la commande 1043, sur un écran étroit) se lit avec ses voisines.</li>
@@ -207,21 +209,23 @@
         <li>role="region" et aria-labelledby vers la légende : le lecteur d'écran dit ce qui a pris le focus.</li>
     </ul>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--table-cell-padding-block</th><td>0.5rem</td><td>haut et bas de chaque cellule (40px de haut par ligne de texte)</td></tr>
-            <tr><th scope="row">--table-cell-padding-inline</th><td>0.75rem</td><td>côtés de chaque cellule</td></tr>
-            <tr><th scope="row">--table-border-width</th><td>--border-width</td><td>épaisseur des traits (couleur --border-color) ; 0px dans table-borderless</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--table-cell-padding-block</th><td>0.5rem</td><td>haut et bas de chaque cellule (40px de haut par ligne de texte)</td></tr>
+                <tr><th scope="row">--table-cell-padding-inline</th><td>0.75rem</td><td>côtés de chaque cellule</td></tr>
+                <tr><th scope="row">--table-border-width</th><td>--border-width</td><td>épaisseur des traits (couleur --border-color) ; 0px dans table-borderless</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --table-cell-padding-inline: 1rem; }

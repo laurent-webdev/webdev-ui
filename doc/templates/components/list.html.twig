@@ -116,22 +116,24 @@
 &lt;li&gt;&lt;a class="list-item d-flex justify-content-space-between align-items-center gap-2" href="/messages"&gt;Messages &lt;span class="badge-subtle theme-primary"&gt;12&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;</code></pre>
     <p>Les utilitaires flex sur le &lt;li&gt; de texte, ou sur le lien : le badge part au bout de la ligne. Le lecteur d'écran lit « Messages 12 » : un texte plus clair (« 12 non lus ») se met dans le badge, ou en visually-hidden.</p>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--list-item-padding-block</th><td>0.5rem</td><td>haut et bas d'un élément (40px de haut)</td></tr>
-            <tr><th scope="row">--list-item-padding-inline</th><td>1rem</td><td>côtés d'un élément</td></tr>
-            <tr><th scope="row">--list-border-radius</th><td>--border-radius-md</td><td>coins de la liste (ceux du premier et du dernier élément suivent)</td></tr>
-            <tr><th scope="row">--list-border-width</th><td>--border-width</td><td>cadre et traits entre les éléments (couleur --border-color) ; 0px dans list-borderless</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--list-item-padding-block</th><td>0.5rem</td><td>haut et bas d'un élément (40px de haut)</td></tr>
+                <tr><th scope="row">--list-item-padding-inline</th><td>1rem</td><td>côtés d'un élément</td></tr>
+                <tr><th scope="row">--list-border-radius</th><td>--border-radius-md</td><td>coins de la liste (ceux du premier et du dernier élément suivent)</td></tr>
+                <tr><th scope="row">--list-border-width</th><td>--border-width</td><td>cadre et traits entre les éléments (couleur --border-color) ; 0px dans list-borderless</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --list-item-padding-block: 0.375rem; }

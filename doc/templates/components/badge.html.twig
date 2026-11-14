@@ -44,22 +44,24 @@
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="badge-subtle theme-success"&gt;Payée&lt;/span&gt;</code></pre>
     <p>Comme les boutons : une variante (badge-solid, badge-subtle, badge-outline) qui s'utilise seule, et une couleur .theme-*. badge seul : le défaut, sans couleur.</p>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--badge-padding-block</th><td>0.25em</td><td>haut et bas</td></tr>
-            <tr><th scope="row">--badge-padding-inline</th><td>0.5em</td><td>côtés</td></tr>
-            <tr><th scope="row">--badge-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
-            <tr><th scope="row">--badge-border-width</th><td>--border-width</td><td>cadre</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--badge-padding-block</th><td>0.25em</td><td>haut et bas</td></tr>
+                <tr><th scope="row">--badge-padding-inline</th><td>0.5em</td><td>côtés</td></tr>
+                <tr><th scope="row">--badge-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
+                <tr><th scope="row">--badge-border-width</th><td>--border-width</td><td>cadre</td></tr>
+            </tbody>
+        </table>
+    </div>
     <p class="mt-2">Les couleurs viennent de .theme-* : le cadre a la couleur du thème (badge-subtle : celle du fond léger), la variante dit le fond et le texte. Le padding est en em : il suit la taille du badge.</p>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>

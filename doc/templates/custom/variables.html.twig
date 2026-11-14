@@ -18,96 +18,104 @@
         <li>Une couleur a une valeur claire et une sombre : light-dark(clair, sombre).</li>
     </ul>
 
-    <h2 class="mt-10">Couleurs</h2>
+    <h2 class="mt-10" id="couleurs">Couleurs</h2>
     <p class="mt-2">settings/_colors.scss : des couleurs oklch, chacune avec sa valeur pour le thème clair et pour le sombre.</p>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--color-primary</th><td>couleur principale de la marque (bleu)</td></tr>
-            <tr><th scope="row">--color-secondary</th><td>deuxième couleur de la marque (rose)</td></tr>
-            <tr><th scope="row">--color-accent</th><td>couleur d'accent (violet)</td></tr>
-            <tr><th scope="row">--color-success</th><td>succès (vert)</td></tr>
-            <tr><th scope="row">--color-danger</th><td>erreur, danger (rouge)</td></tr>
-            <tr><th scope="row">--color-warning</th><td>avertissement (jaune)</td></tr>
-            <tr><th scope="row">--color-info</th><td>information (bleu)</td></tr>
-            <tr><th scope="row">--color-neutral</th><td>gris clair en clair, gris foncé en sombre</td></tr>
-            <tr><th scope="row">--color-inverse</th><td>presque noir en clair, presque blanc en sombre</td></tr>
-            <tr><th scope="row">--color-background</th><td>fond de la page</td></tr>
-            <tr><th scope="row">--border-color</th><td>bordures décoratives</td></tr>
-            <tr><th scope="row">--form-input-border-color</th><td>cadre des champs de formulaire (au moins 3:1 sur le fond)</td></tr>
-            <tr><th scope="row">--box-shadow-color</th><td>couleur de toutes les ombres</td></tr>
-            <tr><th scope="row">--backdrop-background-color</th><td>la page assombrie derrière un dialogue</td></tr>
-        </tbody>
-    </table>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="couleurs" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--color-primary</th><td>couleur principale de la marque (bleu)</td></tr>
+                <tr><th scope="row">--color-secondary</th><td>deuxième couleur de la marque (rose)</td></tr>
+                <tr><th scope="row">--color-accent</th><td>couleur d'accent (violet)</td></tr>
+                <tr><th scope="row">--color-success</th><td>succès (vert)</td></tr>
+                <tr><th scope="row">--color-danger</th><td>erreur, danger (rouge)</td></tr>
+                <tr><th scope="row">--color-warning</th><td>avertissement (jaune)</td></tr>
+                <tr><th scope="row">--color-info</th><td>information (bleu)</td></tr>
+                <tr><th scope="row">--color-neutral</th><td>gris clair en clair, gris foncé en sombre</td></tr>
+                <tr><th scope="row">--color-inverse</th><td>presque noir en clair, presque blanc en sombre</td></tr>
+                <tr><th scope="row">--color-background</th><td>fond de la page</td></tr>
+                <tr><th scope="row">--border-color</th><td>bordures décoratives</td></tr>
+                <tr><th scope="row">--form-input-border-color</th><td>cadre des champs de formulaire (au moins 3:1 sur le fond)</td></tr>
+                <tr><th scope="row">--box-shadow-color</th><td>couleur de toutes les ombres</td></tr>
+                <tr><th scope="row">--backdrop-background-color</th><td>la page assombrie derrière un dialogue</td></tr>
+            </tbody>
+        </table>
+    </div>
     <p class="mt-2">Chaque couleur a ses dérivées, calculées dans le navigateur : --color-*-contrast (noir ou blanc, lisible sur la couleur), --color-*-state (survol et clic), --color-*-subtle (fond léger), --color-*-emphasis (texte coloré lisible sur le fond de page), --color-*-emphasis-strong (texte sur le fond léger renforcé), --color-*-border et --color-*-subtle-border (bordures décoratives : la couleur et son fond léger, avec 10 % de contraste). Changer --color-primary change toutes ses dérivées.</p>
 
-    <h2 class="mt-10">Espacements</h2>
+    <h2 class="mt-10" id="espacements">Espacements</h2>
     <p class="mt-2">settings/_spacing.scss : l'échelle des utilitaires de marge, de padding et de gap.</p>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--space</th><td>0.25rem</td><td>un cran : la changer agrandit ou réduit toute l'échelle</td></tr>
-            <tr><th scope="row">--space-0 à --space-12</th><td>0 à 3rem</td><td>n crans (--space-4 = 1rem)</td></tr>
-        </tbody>
-    </table>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="espacements" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--space</th><td>0.25rem</td><td>un cran : la changer agrandit ou réduit toute l'échelle</td></tr>
+                <tr><th scope="row">--space-0 à --space-12</th><td>0 à 3rem</td><td>n crans (--space-4 = 1rem)</td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    <h2 class="mt-10">Typographie</h2>
+    <h2 class="mt-10" id="typographie">Typographie</h2>
     <p class="mt-2">settings/_typography.scss.</p>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--font-family</th><td>polices du système</td><td>texte</td></tr>
-            <tr><th scope="row">--font-family-monospace</th><td>polices du système</td><td>code</td></tr>
-            <tr><th scope="row">--font-size-xs à -lg</th><td>12, 14, 16, 18px</td><td>texte, tailles fixes</td></tr>
-            <tr><th scope="row">--font-size-xl à -6xl</th><td>de 20-24px à 48-80px</td><td>titres, grandissent avec l'écran</td></tr>
-            <tr><th scope="row">--font-weight-light à -bold</th><td>300 à 700</td><td>graisses</td></tr>
-            <tr><th scope="row">--line-height-xs à -6xl</th><td>1.5 à 1.2</td><td>interligne de chaque taille</td></tr>
-            <tr><th scope="row">--heading-font-weight</th><td>--font-weight-medium</td><td>graisse des titres</td></tr>
-        </tbody>
-    </table>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="typographie" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--font-family</th><td>polices du système</td><td>texte</td></tr>
+                <tr><th scope="row">--font-family-monospace</th><td>polices du système</td><td>code</td></tr>
+                <tr><th scope="row">--font-size-xs à -lg</th><td>12, 14, 16, 18px</td><td>texte, tailles fixes</td></tr>
+                <tr><th scope="row">--font-size-xl à -6xl</th><td>de 20-24px à 48-80px</td><td>titres, grandissent avec l'écran</td></tr>
+                <tr><th scope="row">--font-weight-light à -bold</th><td>300 à 700</td><td>graisses</td></tr>
+                <tr><th scope="row">--line-height-xs à -6xl</th><td>1.5 à 1.2</td><td>interligne de chaque taille</td></tr>
+                <tr><th scope="row">--heading-font-weight</th><td>--font-weight-medium</td><td>graisse des titres</td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    <h2 class="mt-10">Formes et états</h2>
+    <h2 class="mt-10" id="formes-et-etats">Formes et états</h2>
     <p class="mt-2">settings/_variables.scss.</p>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--border-width</th><td>1px</td><td>toutes les bordures, composants compris</td></tr>
-            <tr><th scope="row">--border-radius-xs à -xl</th><td>2 à 10px</td><td>arrondis ; md pour les composants</td></tr>
-            <tr><th scope="row">--box-shadow-xs à -xl</th><td>de plus en plus hautes</td><td>ombres</td></tr>
-            <tr><th scope="row">--backdrop-filter</th><td>blur(5px)</td><td>flou de la page derrière un dialogue</td></tr>
-            <tr><th scope="row">--state-mix-soft</th><td>20%</td><td>survol</td></tr>
-            <tr><th scope="row">--state-mix-strong</th><td>30%</td><td>clic</td></tr>
-            <tr><th scope="row">--focus-outline-width</th><td>2px</td><td>épaisseur du contour de focus</td></tr>
-            <tr><th scope="row">--focus-outline-offset</th><td>1px</td><td>écart du contour de focus</td></tr>
-            <tr><th scope="row">--text-decoration-thickness</th><td>max(1px, 0.0625rem, 0.04em)</td><td>soulignement de link et de btn-link : deux fois au survol, trois fois au clic</td></tr>
-            <tr><th scope="row">--text-underline-offset</th><td>0.15em</td><td>distance entre le texte et le soulignement</td></tr>
-            <tr><th scope="row">--disabled-opacity</th><td>0.5</td><td>élément désactivé</td></tr>
-            <tr><th scope="row">--transition-duration</th><td>0.15s</td><td>changement de couleur au survol</td></tr>
-        </tbody>
-    </table>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="formes-et-etats" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--border-width</th><td>1px</td><td>toutes les bordures, composants compris</td></tr>
+                <tr><th scope="row">--border-radius-xs à -xl</th><td>2 à 10px</td><td>arrondis ; md pour les composants</td></tr>
+                <tr><th scope="row">--box-shadow-xs à -xl</th><td>de plus en plus hautes</td><td>ombres</td></tr>
+                <tr><th scope="row">--backdrop-filter</th><td>blur(5px)</td><td>flou de la page derrière un dialogue</td></tr>
+                <tr><th scope="row">--state-mix-soft</th><td>20%</td><td>survol</td></tr>
+                <tr><th scope="row">--state-mix-strong</th><td>30%</td><td>clic</td></tr>
+                <tr><th scope="row">--focus-outline-width</th><td>2px</td><td>épaisseur du contour de focus</td></tr>
+                <tr><th scope="row">--focus-outline-offset</th><td>1px</td><td>écart du contour de focus</td></tr>
+                <tr><th scope="row">--text-decoration-thickness</th><td>max(1px, 0.0625rem, 0.04em)</td><td>soulignement de link et de btn-link : deux fois au survol, trois fois au clic</td></tr>
+                <tr><th scope="row">--text-underline-offset</th><td>0.15em</td><td>distance entre le texte et le soulignement</td></tr>
+                <tr><th scope="row">--disabled-opacity</th><td>0.5</td><td>élément désactivé</td></tr>
+                <tr><th scope="row">--transition-duration</th><td>0.15s</td><td>changement de couleur au survol</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Limites</h2>
     <ul>

@@ -6,25 +6,27 @@
     <h1>Breakpoints</h1>
     <p class="fs-lg color-neutral-emphasis mb-6">Six largeurs d'écran, une au début de chaque famille d'appareils. Une classe sans préfixe vaut pour tous les écrans ; avec un préfixe (md:), elle vaut à partir de cette largeur.</p>
 
-    <h2 class="mt-10">Les largeurs</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Préfixe</th>
-                <th scope="col">À partir de</th>
-                <th scope="col">Appareils</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">sans préfixe</th><td>0</td><td>tous, petits écrans compris (320px)</td></tr>
-            <tr><th scope="row">xs:</th><td>22.5rem (360px)</td><td>téléphones debout</td></tr>
-            <tr><th scope="row">sm:</th><td>36rem (576px)</td><td>petites tablettes, petits téléphones couchés</td></tr>
-            <tr><th scope="row">md:</th><td>48rem (768px)</td><td>tablettes debout, la plupart des téléphones couchés</td></tr>
-            <tr><th scope="row">lg:</th><td>64rem (1024px)</td><td>tablettes couchées, petits portables</td></tr>
-            <tr><th scope="row">xl:</th><td>80rem (1280px)</td><td>portables</td></tr>
-            <tr><th scope="row">2xl:</th><td>96rem (1536px)</td><td>grands portables, écrans de bureau</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="les-largeurs">Les largeurs</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="les-largeurs" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Préfixe</th>
+                    <th scope="col">À partir de</th>
+                    <th scope="col">Appareils</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">sans préfixe</th><td>0</td><td>tous, petits écrans compris (320px)</td></tr>
+                <tr><th scope="row">xs:</th><td>22.5rem (360px)</td><td>téléphones debout</td></tr>
+                <tr><th scope="row">sm:</th><td>36rem (576px)</td><td>petites tablettes, petits téléphones couchés</td></tr>
+                <tr><th scope="row">md:</th><td>48rem (768px)</td><td>tablettes debout, la plupart des téléphones couchés</td></tr>
+                <tr><th scope="row">lg:</th><td>64rem (1024px)</td><td>tablettes couchées, petits portables</td></tr>
+                <tr><th scope="row">xl:</th><td>80rem (1280px)</td><td>portables</td></tr>
+                <tr><th scope="row">2xl:</th><td>96rem (1536px)</td><td>grands portables, écrans de bureau</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Exemple</h2>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="d-flex flex-direction-column md:flex-direction-row gap-4"&gt;…&lt;/div&gt;</code></pre>

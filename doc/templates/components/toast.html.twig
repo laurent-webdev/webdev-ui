@@ -164,26 +164,28 @@ document.querySelector('[data-toast]').append(modele.content.cloneNode(true));</
 &lt;/dialog&gt;</code></pre>
     <p>Un dialogue modal ouvert passe devant le conteneur de la page, et rend le reste de la page inactif : ses toasts ne se verraient pas et ne seraient pas lus. Le dialogue a son propre conteneur, sans popover : il est déjà dans le top layer avec le dialogue. Il se place toujours en bas à droite de l'écran.</p>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--toast-padding-block</th><td>0.75rem</td><td>haut et bas d'un toast</td></tr>
-            <tr><th scope="row">--toast-padding-inline</th><td>1rem</td><td>côtés d'un toast</td></tr>
-            <tr><th scope="row">--toast-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
-            <tr><th scope="row">--toast-border-width</th><td>--border-width</td><td>cadre</td></tr>
-            <tr><th scope="row">--toast-width</th><td>22rem</td><td>largeur du conteneur (sur un petit écran, toute la largeur moins les écarts)</td></tr>
-            <tr><th scope="row">--toast-inset</th><td>1rem</td><td>écart entre le conteneur et les bords de l'écran</td></tr>
-            <tr><th scope="row">--toast-duration</th><td>5s</td><td>temps d'affichage avant le fondu</td></tr>
-            <tr><th scope="row">--toast-transition-duration</th><td>0.2s</td><td>apparition et fondu</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--toast-padding-block</th><td>0.75rem</td><td>haut et bas d'un toast</td></tr>
+                <tr><th scope="row">--toast-padding-inline</th><td>1rem</td><td>côtés d'un toast</td></tr>
+                <tr><th scope="row">--toast-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
+                <tr><th scope="row">--toast-border-width</th><td>--border-width</td><td>cadre</td></tr>
+                <tr><th scope="row">--toast-width</th><td>22rem</td><td>largeur du conteneur (sur un petit écran, toute la largeur moins les écarts)</td></tr>
+                <tr><th scope="row">--toast-inset</th><td>1rem</td><td>écart entre le conteneur et les bords de l'écran</td></tr>
+                <tr><th scope="row">--toast-duration</th><td>5s</td><td>temps d'affichage avant le fondu</td></tr>
+                <tr><th scope="row">--toast-transition-duration</th><td>0.2s</td><td>apparition et fondu</td></tr>
+            </tbody>
+        </table>
+    </div>
     <p class="mt-2">Les couleurs viennent de .theme-*, comme l'alerte : la variante dit le fond, le cadre et le texte.</p>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
@@ -192,27 +194,29 @@ document.querySelector('[data-toast]').append(modele.content.cloneNode(true));</
 .toast-erreur { --toast-duration: 12s; }</code></pre>
     <p>La première ligne laisse tous les toasts 8 secondes ; la deuxième descend le conteneur du haut sous un en-tête de 4rem ; la dernière laisse plus longtemps les toasts qui ont la classe toast-erreur du site.</p>
 
-    <h2 class="mt-10">JavaScript</h2>
+    <h2 class="mt-10" id="javascript">JavaScript</h2>
     <ul>
         <li>toast.ts, dans dist/js/bundle.js : au chargement, il ouvre les conteneurs data-toast qui ont popover (showPopover()) ; il retire un toast de la page à la fin de son fondu ; la croix data-toast-close pose data-closing (le fondu), puis il retire le toast.</li>
         <li>Les écouteurs sont sur document : ils marchent pour les toasts ajoutés plus tard, sans surveiller la page.</li>
         <li>Pas d'événement : le site sait quand il ajoute un toast.</li>
         <li>Un conteneur ajouté après le chargement : le site l'ouvre lui-même, avec showPopover().</li>
     </ul>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Attribut</th>
-                <th scope="col">Sur</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">data-toast</th><td>le conteneur</td><td>le JavaScript l'ouvre et retire ses toasts</td></tr>
-            <tr><th scope="row">data-toast-close</th><td>la croix</td><td>ferme le toast qui la contient</td></tr>
-            <tr><th scope="row">data-closing</th><td>le toast, posé par le JavaScript</td><td>le fondu de fermeture ; le toast est retiré à la fin</td></tr>
-        </tbody>
-    </table>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="javascript" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Attribut</th>
+                    <th scope="col">Sur</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">data-toast</th><td>le conteneur</td><td>le JavaScript l'ouvre et retire ses toasts</td></tr>
+                <tr><th scope="row">data-toast-close</th><td>la croix</td><td>ferme le toast qui la contient</td></tr>
+                <tr><th scope="row">data-closing</th><td>le toast, posé par le JavaScript</td><td>le fondu de fermeture ; le toast est retiré à la fin</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Accessibilité</h2>
     <ul>

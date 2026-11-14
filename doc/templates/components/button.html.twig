@@ -71,22 +71,24 @@
     </div>
     <p class="mt-2">Les mêmes classes sur &lt;button&gt; et sur &lt;a&gt; : le même rendu.</p>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--btn-padding-block</th><td>0.375rem</td><td>haut et bas (38px de haut)</td></tr>
-            <tr><th scope="row">--btn-padding-inline</th><td>1rem</td><td>côtés</td></tr>
-            <tr><th scope="row">--btn-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
-            <tr><th scope="row">--btn-border-width</th><td>--border-width</td><td>épaisseur du cadre</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--btn-padding-block</th><td>0.375rem</td><td>haut et bas (38px de haut)</td></tr>
+                <tr><th scope="row">--btn-padding-inline</th><td>1rem</td><td>côtés</td></tr>
+                <tr><th scope="row">--btn-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
+                <tr><th scope="row">--btn-border-width</th><td>--border-width</td><td>épaisseur du cadre</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --btn-padding-inline: 1.25rem; }

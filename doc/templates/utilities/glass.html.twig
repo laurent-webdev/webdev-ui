@@ -111,20 +111,22 @@
         <li>L'effet ne se voit que s'il y a quelque chose derrière : une barre collante au-dessus du contenu qui défile, une carte sur une image, un dialogue ou un toast au-dessus de la page.</li>
     </ul>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--glass-background-color</th><td>--color-background à 70 %</td><td>le fond du verre ; clair ou foncé selon le thème</td></tr>
-            <tr><th scope="row">--glass-backdrop-filter</th><td>blur(16px) saturate(180%)</td><td>ce qui est derrière : flouté et un peu plus saturé</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--glass-background-color</th><td>--color-background à 70 %</td><td>le fond du verre ; clair ou foncé selon le thème</td></tr>
+                <tr><th scope="row">--glass-backdrop-filter</th><td>blur(16px) saturate(180%)</td><td>ce qui est derrière : flouté et un peu plus saturé</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --glass-backdrop-filter: blur(8px) saturate(150%); }

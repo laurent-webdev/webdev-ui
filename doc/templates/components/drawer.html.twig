@@ -121,19 +121,6 @@
     <button class="btn mt-2" type="button" aria-expanded="false" aria-controls="drawer-fixed" data-demo-toggle>Afficher / masquer le menu fixé</button>
     <p class="mt-2">À partir de md, à droite (le menu de cette doc est déjà fixé à gauche, en drawer-start) : la page se décale pour lui laisser la place.</p>
 
-    <nav class="drawer-end position-fixed d-none md:d-block demo-drawer-fixed" id="drawer-fixed" aria-label="Menu (démo)" hidden>
-        <div class="drawer-header">
-            <p class="fs-lg fw-semibold">Mon site</p>
-        </div>
-        <div class="drawer-body">
-            <ul class="navbar-list">
-                {% for link in ['Accueil', 'Produits', 'Blog', 'À propos', 'Contact'] %}
-                    <li><a class="navbar-item" href="#"{% if loop.first %} aria-current="page"{% endif %}>{{ link }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
-    </nav>
-
     <pre class="mt-4" tabindex="0"><code class="language-html">&lt;nav class="drawer-start position-fixed d-none md:d-block" aria-label="Menu"&gt;
     &lt;div class="drawer-header"&gt;&lt;p&gt;Mon site&lt;/p&gt;&lt;/div&gt;
     &lt;div class="drawer-body"&gt;
@@ -167,26 +154,28 @@
 
 &lt;aside class="drawer-start d-none md:d-block" aria-label="Filtres"&gt;…&lt;/aside&gt;</code></pre>
 
-    <h2 class="mt-10">Variables</h2>
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Variable</th>
-                <th scope="col">Défaut</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><th scope="row">--drawer-width</th><td>20rem (320px)</td><td>largeur de drawer-start et drawer-end</td></tr>
-            <tr><th scope="row">--drawer-height</th><td>20rem (320px)</td><td>hauteur de drawer-top et drawer-bottom</td></tr>
-            <tr><th scope="row">--drawer-padding-block</th><td>1rem</td><td>haut et bas de l'en-tête et du corps</td></tr>
-            <tr><th scope="row">--drawer-padding-inline</th><td>1rem</td><td>côtés de l'en-tête et du corps</td></tr>
-            <tr><th scope="row">--drawer-inset</th><td>0.75rem</td><td>écart avec les bords de l'écran (0px : collé au bord)</td></tr>
-            <tr><th scope="row">--drawer-border-radius</th><td>--border-radius-md</td><td>coins du panneau</td></tr>
-            <tr><th scope="row">--drawer-border-width</th><td>--border-width</td><td>cadre (couleur --border-color)</td></tr>
-            <tr><th scope="row">--drawer-transition-duration</th><td>0.2s</td><td>glissement à l'ouverture et apparition du fond</td></tr>
-        </tbody>
-    </table>
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--drawer-width</th><td>20rem (320px)</td><td>largeur de drawer-start et drawer-end</td></tr>
+                <tr><th scope="row">--drawer-height</th><td>20rem (320px)</td><td>hauteur de drawer-top et drawer-bottom</td></tr>
+                <tr><th scope="row">--drawer-padding-block</th><td>1rem</td><td>haut et bas de l'en-tête et du corps</td></tr>
+                <tr><th scope="row">--drawer-padding-inline</th><td>1rem</td><td>côtés de l'en-tête et du corps</td></tr>
+                <tr><th scope="row">--drawer-inset</th><td>0.75rem</td><td>écart avec les bords de l'écran (0px : collé au bord)</td></tr>
+                <tr><th scope="row">--drawer-border-radius</th><td>--border-radius-md</td><td>coins du panneau</td></tr>
+                <tr><th scope="row">--drawer-border-width</th><td>--border-width</td><td>cadre (couleur --border-color)</td></tr>
+                <tr><th scope="row">--drawer-transition-duration</th><td>0.2s</td><td>glissement à l'ouverture et apparition du fond</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --drawer-width: 24rem; --drawer-height: 15rem; }
@@ -234,7 +223,24 @@
         <li>Toujours là : une barre collante ou fixée en haut du site passe par-dessus le panneau ou dessous. Le site change lui-même inset-block-start et height sur son panneau.</li>
         <li>Toujours là : toute la hauteur de l'écran, même avec peu de contenu ; dans une page courte, la page s'allonge d'autant.</li>
         <li>Collé : un parent ou un ancêtre en overflow: hidden ou auto l'empêche de coller (une règle de position: sticky).</li>
+        <li>Fixé : dans un ancêtre en glass (backdrop-filter), transform ou filter, le panneau se place par rapport à cet ancêtre et plus à l'écran (une règle de position: fixed) : le mettre hors de lui.</li>
         <li>Écriture de droite à gauche : drawer-start se met bien à droite, mais glisse depuis la gauche (le déplacement translate ne suit pas le sens d'écriture).</li>
         <li>command, commandfor et closedby ont les mêmes limites que pour le dialogue (navigateurs récents ; closedby pas encore dans Safari).</li>
     </ul>
+{% endblock %}
+
+{# Le menu fixé de la démo « Fixé » : hors de la carte de la page, qui en serait la référence (backdrop-filter) #}
+{% block fixed %}
+    <nav class="drawer-end position-fixed d-none md:d-block demo-drawer-fixed" id="drawer-fixed" aria-label="Menu (démo)" hidden>
+        <div class="drawer-header">
+            <p class="fs-lg fw-semibold">Mon site</p>
+        </div>
+        <div class="drawer-body">
+            <ul class="navbar-list">
+                {% for link in ['Accueil', 'Produits', 'Blog', 'À propos', 'Contact'] %}
+                    <li><a class="navbar-item" href="#"{% if loop.first %} aria-current="page"{% endif %}>{{ link }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
 {% endblock %}
