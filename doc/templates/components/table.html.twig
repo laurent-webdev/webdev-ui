@@ -6,7 +6,7 @@
     {% set fruits = {'Pommes': 12, 'Poires': 7, 'Prunes': 140, 'Kiwis': 3} %}
 
     <h1>Tableau</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Un tableau de données natif : un trait sous chaque ligne, les cellules alignées en haut, les chiffres de même largeur. Des options qui se combinent : rayures, survol, un trait autour de chaque cellule ou aucun trait, et trois tailles. Les cellules gardent le texte de la page ; les rayures et le survol sont un fond gris léger.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un tableau de données natif : un trait sous chaque ligne, les cellules alignées en haut, les chiffres de même largeur. Des options qui se combinent : rayures, survol, un trait autour de chaque cellule ou aucun trait, et trois tailles. Les cellules gardent le texte de la page ; .theme-* colore le fond, les traits, les rayures et le survol.</p>
 
     <table class="table mt-2">
         <caption>Commandes de novembre</caption>
@@ -45,7 +45,7 @@
             {% endfor %}
         </tbody>
     </table>
-    <p class="mt-2">Une ligne du corps sur deux a un fond gris léger, en commençant par la première : l'œil suit une ligne longue sans glisser sur la voisine.</p>
+    <p class="mt-2">Une ligne du corps sur deux a un fond léger (gris sans thème), en commençant par la première : l'œil suit une ligne longue sans glisser sur la voisine.</p>
 
     <h2 class="mt-10">table-hover</h2>
     <table class="table table-hover mt-2">
@@ -59,7 +59,7 @@
             {% endfor %}
         </tbody>
     </table>
-    <p class="mt-2">La ligne du corps sous la souris prend un fond gris, plus marqué qu'une rayure : il se voit aussi avec table-striped. L'en-tête et le pied ne changent pas.</p>
+    <p class="mt-2">La ligne du corps sous la souris prend un fond plus marqué qu'une rayure : il se voit aussi avec table-striped. L'en-tête et le pied ne changent pas.</p>
 
     <h2 class="mt-10">table-bordered et table-borderless</h2>
     <div class="grid mt-2">
@@ -89,6 +89,40 @@
     <ul class="mt-4">
         <li>table-bordered : un trait autour de chaque cellule, le tableau encadré. Pour des colonnes de chiffres serrées, où l'œil cherche une case.</li>
         <li>table-borderless : plus aucun trait (--table-border-width à 0). Pour un tableau court, ou avec table-striped : les rayures séparent déjà les lignes.</li>
+    </ul>
+
+    <h2 class="mt-10">Couleurs</h2>
+    <div class="grid mt-2">
+        <table class="table table-striped table-hover md:col-4">
+            <caption>sans thème</caption>
+            <thead>
+                <tr><th scope="col">Fruit</th><th scope="col" class="text-align-end">Quantité</th></tr>
+            </thead>
+            <tbody>
+                {% for name, quantity in fruits %}
+                    <tr><td>{{ name }}</td><td class="text-align-end">{{ quantity }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% for color in colors|filter(color => color != 'neutral') %}
+            <table class="table table-striped table-hover theme-{{ color }} md:col-4">
+                <caption>theme-{{ color }}</caption>
+                <thead>
+                    <tr><th scope="col">Fruit</th><th scope="col" class="text-align-end">Quantité</th></tr>
+                </thead>
+                <tbody>
+                    {% for name, quantity in fruits %}
+                        <tr><td>{{ name }}</td><td class="text-align-end">{{ quantity }}</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+    </div>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;table class="table table-striped table-hover theme-primary"&gt;…&lt;/table&gt;</code></pre>
+    <ul>
+        <li>.theme-* sur le tableau, ou sur un parent : un fond léger, des traits de sa couleur de bordure ; les rayures et le survol renforcent ce fond avec la couleur du thème. Le texte reste celui de la page.</li>
+        <li>Sans thème : le fond de la page et des traits gris ; les rayures et le survol sont calculés comme avec theme-neutral.</li>
+        <li>La légende reste sur le fond de la page.</li>
     </ul>
 
     <h2 class="mt-10">Tailles</h2>
@@ -200,8 +234,9 @@
         <li>Un &lt;table&gt; natif : le lecteur d'écran annonce le tableau, son nombre de lignes et de colonnes, et se déplace de cellule en cellule. Pas d'aria-* à écrire.</li>
         <li>&lt;caption&gt; donne son nom au tableau ; il est en haut, lu avant les cellules. Sans légende visible, un aria-label sur le &lt;table&gt;.</li>
         <li>&lt;th scope&gt; relie chaque cellule à ses en-têtes : le lecteur d'écran dit « Montant, 128,00 € » en passant sur la cellule.</li>
-        <li>Les rayures, le survol et les traits gris sont décoratifs : le tableau se lit sans eux (en contraste élevé, Windows retire les fonds). Le survol n'aide que la souris ; les rayures aident tout le monde.</li>
-        <li>Le texte de la page reste lisible sur les fonds gris (les mêmes que le survol et le clic de la liste, calculé) : au moins 14,91:1 sur une rayure et 10,46:1 au survol en clair, 12,59:1 et 7,80:1 en sombre.</li>
+        <li>Le fond, les rayures, le survol et les traits sont décoratifs : le tableau se lit sans eux (en contraste élevé, Windows retire les fonds). Le survol n'aide que la souris ; les rayures aident tout le monde.</li>
+        <li>Le texte de la page reste lisible sur tous les fonds, dans toutes les couleurs et sans thème (calculé) : au moins 14,91:1 sur le fond, 10,46:1 sur une rayure et 8,60:1 au survol en clair, 12,59:1, 7,80:1 et 6,14:1 en sombre.</li>
+        <li>La couleur du tableau ne dit rien à elle seule (WCAG 1.4.1) : elle le met en valeur ; ce qu'il contient, sa légende le dit.</li>
         <li>Un tableau trop large défile dans sa zone (exemple plus haut) : WCAG 1.4.10 l'accepte pour un tableau de données, qu'on lit en deux dimensions. La zone se prend au clavier (tabindex="0") et a un nom (role="region", aria-labelledby) ; son contour de focus est celui du navigateur.</li>
     </ul>
 
@@ -218,16 +253,16 @@
     &lt;table class="table"&gt;…&lt;/table&gt;
 &lt;/div&gt;</code></pre>
     <p>La zone qui défile sans tabindex="0", role="region" ni aria-labelledby : dans Safari, le clavier ne peut pas la faire défiler, et le lecteur d'écran ne dit pas ce qu'elle contient.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;tr class="bg-danger-subtle"&gt;
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;tr class="theme-danger"&gt;
     &lt;th scope="row"&gt;1044&lt;/th&gt;&lt;td&gt;Petit&lt;/td&gt;
 &lt;/tr&gt;</code></pre>
-    <p>Une ligne en rouge pour dire qu'elle pose problème : la couleur seule ne suffit pas (WCAG 1.4.1), et elle disparaît sous le survol. Le texte le dit : une colonne Statut (« Annulée »).</p>
+    <p>Une ligne en rouge pour dire qu'elle pose problème : .theme-* sur une ligne ne colore que sa rayure et son survol, pas son fond, et la couleur seule ne suffit pas (WCAG 1.4.1). Le texte le dit : une colonne Statut (« Annulée »).</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;table class="table table-bordered table-borderless"&gt;…&lt;/table&gt;</code></pre>
     <p>Deux options contraires : table-borderless gagne, plus aucun trait. L'une ou l'autre.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card-solid theme-primary"&gt;
     &lt;table class="table table-striped"&gt;…&lt;/table&gt;
 &lt;/div&gt;</code></pre>
-    <p>Sur un fond plein, les rayures et le survol gris passent sous le texte de la carte (sa couleur -contrast), qui peut devenir illisible. Le mettre sur le fond de la page ou un fond subtle.</p>
+    <p>Sur un fond plein, le tableau hérite du thème de la carte : son fond léger passe sous le texte de la carte (sa couleur -contrast), qui peut devenir illisible. Le mettre sur le fond de la page ou un fond subtle.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;table class="table"&gt;
     &lt;tr&gt;&lt;td&gt;menu&lt;/td&gt;&lt;td&gt;contenu de la page&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;</code></pre>
@@ -236,6 +271,7 @@
     <h2 class="mt-10">Limites</h2>
     <ul>
         <li>Le trait sous la dernière ligne ferme le tableau ; dans une zone encadrée (border sur le &lt;div&gt;), il double le cadre en bas.</li>
+        <li>.theme-* se pose sur le tableau ou un parent : sur une ligne ou une cellule, le fond du tableau reste dessous.</li>
         <li>Les coins de table-bordered sont carrés : border-collapse (le reset) ne garde pas d'arrondi.</li>
         <li>Sur un écran tactile, la ligne touchée garde le fond du survol jusqu'au toucher suivant.</li>
         <li>Pas de tri, pas d'en-tête qui reste en haut au défilement, pas de lignes à choisir : un besoin du site.</li>

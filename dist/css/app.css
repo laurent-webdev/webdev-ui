@@ -2477,8 +2477,54 @@
     --table-cell-padding-inline: 0.75rem;
     --table-border-width: var(--border-width);
   }
+  .theme-primary {
+    --table-theme-color: var(--color-primary);
+    --table-theme-subtle: var(--color-primary-subtle);
+    --table-theme-subtle-border: var(--color-primary-subtle-border);
+  }
+  .theme-secondary {
+    --table-theme-color: var(--color-secondary);
+    --table-theme-subtle: var(--color-secondary-subtle);
+    --table-theme-subtle-border: var(--color-secondary-subtle-border);
+  }
+  .theme-accent {
+    --table-theme-color: var(--color-accent);
+    --table-theme-subtle: var(--color-accent-subtle);
+    --table-theme-subtle-border: var(--color-accent-subtle-border);
+  }
+  .theme-success {
+    --table-theme-color: var(--color-success);
+    --table-theme-subtle: var(--color-success-subtle);
+    --table-theme-subtle-border: var(--color-success-subtle-border);
+  }
+  .theme-danger {
+    --table-theme-color: var(--color-danger);
+    --table-theme-subtle: var(--color-danger-subtle);
+    --table-theme-subtle-border: var(--color-danger-subtle-border);
+  }
+  .theme-warning {
+    --table-theme-color: var(--color-warning);
+    --table-theme-subtle: var(--color-warning-subtle);
+    --table-theme-subtle-border: var(--color-warning-subtle-border);
+  }
+  .theme-info {
+    --table-theme-color: var(--color-info);
+    --table-theme-subtle: var(--color-info-subtle);
+    --table-theme-subtle-border: var(--color-info-subtle-border);
+  }
+  .theme-neutral {
+    --table-theme-color: var(--color-neutral);
+    --table-theme-subtle: var(--color-neutral-subtle);
+    --table-theme-subtle-border: var(--color-neutral-subtle-border);
+  }
+  .theme-inverse {
+    --table-theme-color: var(--color-inverse);
+    --table-theme-subtle: var(--color-inverse-subtle);
+    --table-theme-subtle-border: var(--color-inverse-subtle-border);
+  }
   .table {
     width: 100%;
+    background-color: var(--table-theme-subtle, transparent);
     block-size: fit-content;
     font-variant-numeric: tabular-nums;
   }
@@ -2488,25 +2534,25 @@
   .table > :is(thead, tbody, tfoot) > tr > :is(th, td) {
     padding-block: var(--table-cell-padding-block);
     padding-inline: var(--table-cell-padding-inline);
-    border-block-end: var(--table-border-width) solid var(--border-color);
+    border-block-end: var(--table-border-width) solid var(--table-theme-subtle-border, var(--border-color));
     text-align: inherit;
     vertical-align: top;
   }
   .table-bordered > :is(thead, tbody, tfoot) > tr > :is(th, td) {
-    border: var(--table-border-width) solid var(--border-color);
+    border: var(--table-border-width) solid var(--table-theme-subtle-border, var(--border-color));
   }
   .table-borderless {
     --table-border-width: 0;
   }
   .table-striped > tbody > tr:nth-child(odd) {
-    background-color: var(--color-neutral-subtle);
+    background-color: color-mix(in srgb, var(--table-theme-subtle, var(--color-neutral-subtle)), var(--table-theme-color, var(--color-neutral)) var(--state-mix-soft));
   }
   .table-hover > tbody > tr {
     transition-property: background-color;
     transition-duration: var(--transition-duration);
   }
   .table-hover > tbody > tr:hover {
-    background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+    background-color: color-mix(in srgb, var(--table-theme-subtle, var(--color-neutral-subtle)), var(--table-theme-color, var(--color-neutral)) var(--state-mix-strong));
   }
   .table-sm {
     --table-cell-padding-block: 0.25rem;

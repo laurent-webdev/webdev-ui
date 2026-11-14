@@ -7,9 +7,20 @@
         --table-border-width: var(--border-width);
     }
 
-    // Toute la largeur, un trait gris sous chaque ligne, le texte de la page
+    // Une classe par couleur : hérité, un .theme-* sur le tableau ou un parent colore son fond, ses traits, ses rayures et son survol
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .theme-#{$color} {
+            --table-theme-color: var(--color-#{$color});
+            --table-theme-subtle: var(--color-#{$color}-subtle);
+            --table-theme-subtle-border: var(--color-#{$color}-subtle-border);
+        }
+    }
+
+    // Toute la largeur, un trait sous chaque ligne, le texte de la page
+    // Sans thème : le fond de la page, des traits gris ; avec un thème, son fond léger et sa couleur de bordure
     .table {
         width: 100%;
+        background-color: var(--table-theme-subtle, transparent);
         // La hauteur de ses lignes : dans une grille ou un flex, ne s'étire pas à la hauteur d'un voisin, comme la liste
         block-size: fit-content;
         // Chiffres de même largeur : les colonnes de nombres s'alignent
@@ -24,7 +35,7 @@
         > :is(thead, tbody, tfoot) > tr > :is(th, td) {
             padding-block: var(--table-cell-padding-block);
             padding-inline: var(--table-cell-padding-inline);
-            border-block-end: var(--table-border-width) solid var(--border-color);
+            border-block-end: var(--table-border-width) solid var(--table-theme-subtle-border, var(--border-color));
             text-align: inherit;
             vertical-align: top;
         }
@@ -35,7 +46,7 @@
     // Bordered : un trait autour de chaque cellule, le tableau encadré
     .table-bordered {
         > :is(thead, tbody, tfoot) > tr > :is(th, td) {
-            border: var(--table-border-width) solid var(--border-color);
+            border: var(--table-border-width) solid var(--table-theme-subtle-border, var(--border-color));
         }
     }
 
@@ -44,10 +55,10 @@
         --table-border-width: 0;
     }
 
-    // Striped : une ligne sur deux en fond gris léger ; le texte de la page y reste lisible
+    // Striped : une ligne sur deux, le fond léger renforcé par la couleur du thème (neutral sans thème) ; le texte de la page y reste lisible
     .table-striped {
         > tbody > tr:nth-child(odd) {
-            background-color: var(--color-neutral-subtle);
+            background-color: color-mix(in srgb, var(--table-theme-subtle, var(--color-neutral-subtle)), var(--table-theme-color, var(--color-neutral)) var(--state-mix-soft));
         }
     }
 
@@ -58,7 +69,7 @@
             transition-duration: var(--transition-duration);
 
             &:hover {
-                background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+                background-color: color-mix(in srgb, var(--table-theme-subtle, var(--color-neutral-subtle)), var(--table-theme-color, var(--color-neutral)) var(--state-mix-strong));
             }
         }
     }
