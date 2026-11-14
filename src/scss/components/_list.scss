@@ -1,0 +1,100 @@
+@layer components {
+
+    :root {
+        // Forme : la liste, puis ses éléments
+        --list-item-padding-block: 0.5rem;
+        --list-item-padding-inline: 1rem;
+        --list-border-radius: var(--border-radius-md);
+        --list-border-width: var(--border-width);
+
+        // Thème des éléments par défaut, sans classe .theme-*
+        --list-theme-color: var(--color-neutral);
+        --list-theme-subtle: var(--color-neutral-subtle);
+    }
+
+    // Une classe par couleur : hérité, sur la liste elle colore tous ses éléments, sur un élément seulement lui
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .theme-#{$color} {
+            --list-theme-color: var(--color-#{$color});
+            --list-theme-subtle: var(--color-#{$color}-subtle);
+        }
+    }
+
+    // Une liste encadrée, un trait entre les éléments
+    .list {
+        // Sans puces ni retrait ; "" et pas none : avec none, Safari n'annonce plus une liste
+        padding-inline-start: 0;
+        list-style-type: "";
+        border: var(--list-border-width) solid var(--border-color);
+        border-radius: var(--list-border-radius);
+        // La hauteur de ses éléments : dans une grille ou un flex, ne s'étire pas à la hauteur d'un voisin, comme l'accordéon
+        block-size: fit-content;
+
+        // Un élément de texte : le padding est sur le <li>
+        > li {
+            padding-block: var(--list-item-padding-block);
+            padding-inline: var(--list-item-padding-inline);
+        }
+
+        // Un lien ou un bouton : le padding est sur lui, cliquable sur toute la ligne
+        > li:has(> .list-item) {
+            padding: 0;
+        }
+
+        > li + li {
+            border-block-start: var(--list-border-width) solid var(--border-color);
+        }
+
+        // Le premier et le dernier élément suivent les coins du cadre (rayon - bordure) : le fond au survol ne dépasse pas
+        > li:first-child {
+            border-start-start-radius: calc(var(--list-border-radius) - var(--list-border-width));
+            border-start-end-radius: calc(var(--list-border-radius) - var(--list-border-width));
+        }
+        > li:last-child {
+            border-end-start-radius: calc(var(--list-border-radius) - var(--list-border-width));
+            border-end-end-radius: calc(var(--list-border-radius) - var(--list-border-width));
+        }
+    }
+
+    // Un lien ou un bouton de la liste : toute la largeur, texte au début, les coins de son <li>
+    .list-item {
+        display: block;
+        width: 100%;
+        padding-block: var(--list-item-padding-block);
+        padding-inline: var(--list-item-padding-inline);
+        border: 0;
+        border-radius: inherit;
+        background-color: transparent;
+        color: inherit;
+        text-align: start;
+        text-decoration: none;
+        transition-property: background-color;
+        transition-duration: var(--transition-duration);
+
+        // Seul le fond change : léger au survol, renforcé au clic ; le texte de la page y reste lisible
+        &:hover {
+            background-color: var(--list-theme-subtle);
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--list-theme-subtle), var(--list-theme-color) var(--state-mix-soft));
+        }
+
+        // En cours : le fond du clic, sans gras pour que le texte ne bouge pas
+        &[aria-current]:not([aria-current="false"]) {
+            background-color: color-mix(in srgb, var(--list-theme-subtle), var(--list-theme-color) var(--state-mix-soft));
+        }
+
+        // Contour à l'intérieur de l'élément : l'élément voisin ne le cache pas
+        &:focus-visible {
+            outline: var(--focus-outline-width) solid currentColor;
+            outline-offset: calc(var(--focus-outline-width) * -1);
+        }
+
+        // Désactivé : estompé, plus de survol ni de clic, comme les boutons
+        &:disabled {
+            opacity: var(--disabled-opacity);
+            pointer-events: none;
+        }
+    }
+
+}

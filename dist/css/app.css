@@ -2222,6 +2222,108 @@
 }
 @layer components {
   :root {
+    --list-item-padding-block: 0.5rem;
+    --list-item-padding-inline: 1rem;
+    --list-border-radius: var(--border-radius-md);
+    --list-border-width: var(--border-width);
+    --list-theme-color: var(--color-neutral);
+    --list-theme-subtle: var(--color-neutral-subtle);
+  }
+  .theme-primary {
+    --list-theme-color: var(--color-primary);
+    --list-theme-subtle: var(--color-primary-subtle);
+  }
+  .theme-secondary {
+    --list-theme-color: var(--color-secondary);
+    --list-theme-subtle: var(--color-secondary-subtle);
+  }
+  .theme-accent {
+    --list-theme-color: var(--color-accent);
+    --list-theme-subtle: var(--color-accent-subtle);
+  }
+  .theme-success {
+    --list-theme-color: var(--color-success);
+    --list-theme-subtle: var(--color-success-subtle);
+  }
+  .theme-danger {
+    --list-theme-color: var(--color-danger);
+    --list-theme-subtle: var(--color-danger-subtle);
+  }
+  .theme-warning {
+    --list-theme-color: var(--color-warning);
+    --list-theme-subtle: var(--color-warning-subtle);
+  }
+  .theme-info {
+    --list-theme-color: var(--color-info);
+    --list-theme-subtle: var(--color-info-subtle);
+  }
+  .theme-neutral {
+    --list-theme-color: var(--color-neutral);
+    --list-theme-subtle: var(--color-neutral-subtle);
+  }
+  .theme-inverse {
+    --list-theme-color: var(--color-inverse);
+    --list-theme-subtle: var(--color-inverse-subtle);
+  }
+  .list {
+    padding-inline-start: 0;
+    list-style-type: "";
+    border: var(--list-border-width) solid var(--border-color);
+    border-radius: var(--list-border-radius);
+    block-size: fit-content;
+  }
+  .list > li {
+    padding-block: var(--list-item-padding-block);
+    padding-inline: var(--list-item-padding-inline);
+  }
+  .list > li:has(> .list-item) {
+    padding: 0;
+  }
+  .list > li + li {
+    border-block-start: var(--list-border-width) solid var(--border-color);
+  }
+  .list > li:first-child {
+    border-start-start-radius: calc(var(--list-border-radius) - var(--list-border-width));
+    border-start-end-radius: calc(var(--list-border-radius) - var(--list-border-width));
+  }
+  .list > li:last-child {
+    border-end-start-radius: calc(var(--list-border-radius) - var(--list-border-width));
+    border-end-end-radius: calc(var(--list-border-radius) - var(--list-border-width));
+  }
+  .list-item {
+    display: block;
+    width: 100%;
+    padding-block: var(--list-item-padding-block);
+    padding-inline: var(--list-item-padding-inline);
+    border: 0;
+    border-radius: inherit;
+    background-color: transparent;
+    color: inherit;
+    text-align: start;
+    text-decoration: none;
+    transition-property: background-color;
+    transition-duration: var(--transition-duration);
+  }
+  .list-item:hover {
+    background-color: var(--list-theme-subtle);
+  }
+  .list-item:active {
+    background-color: color-mix(in srgb, var(--list-theme-subtle), var(--list-theme-color) var(--state-mix-soft));
+  }
+  .list-item[aria-current]:not([aria-current=false]) {
+    background-color: color-mix(in srgb, var(--list-theme-subtle), var(--list-theme-color) var(--state-mix-soft));
+  }
+  .list-item:focus-visible {
+    outline: var(--focus-outline-width) solid currentColor;
+    outline-offset: calc(var(--focus-outline-width) * -1);
+  }
+  .list-item:disabled {
+    opacity: var(--disabled-opacity);
+    pointer-events: none;
+  }
+}
+@layer components {
+  :root {
     --spinner-width: 1em;
     --spinner-border-width: 0.125em;
   }

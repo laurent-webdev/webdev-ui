@@ -25,6 +25,7 @@ twig:
                   - [app_dropdown, Dropdown, components/dropdown.html.twig]
                   - [app_form, Formulaire, components/form.html.twig]
                   - [app_link, Lien, components/link.html.twig]
+                  - [app_list, Liste, components/list.html.twig]
                   - [app_spinner, Spinner, components/spinner.html.twig]
             - id: layout
               label: Mise en page

@@ -75,6 +75,12 @@ final class ComponentController extends AbstractController
         return $this->render('components/link.html.twig');
     }
 
+    #[Route('/list', name: 'app_list')]
+    public function list(): Response
+    {
+        return $this->render('components/list.html.twig');
+    }
+
     #[Route('/spinner', name: 'app_spinner')]
     public function spinner(): Response
     {

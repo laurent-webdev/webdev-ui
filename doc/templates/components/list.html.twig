@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste{% endblock %}
+
+{% block body %}
+    <h1>Liste</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">Une liste encadrée, un trait entre les éléments : du texte, ou des liens et des boutons cliquables sur toute la ligne. Les éléments gardent le texte de la page ; la couleur .theme-* n'apparaît que sur leur fond, au survol, au clic et sur l'élément en cours.</p>
+
+    <div class="grid mt-2">
+        <ul class="list md:col-6">
+            <li>Un élément de texte</li>
+            <li>Un deuxième élément</li>
+            <li>Un troisième, assez long pour passer à la ligne dans une colonne étroite</li>
+        </ul>
+        <ul class="list md:col-6">
+            <li><a class="list-item" href="#">Profil</a></li>
+            <li><a class="list-item" href="#">Réglages</a></li>
+            <li><button class="list-item" type="button" disabled>Factures (bientôt)</button></li>
+            <li><button class="list-item" type="button">Se déconnecter</button></li>
+        </ul>
+    </div>
+    <ul>
+        <li>Des &lt;li&gt; de texte : la liste ne réagit pas à la souris.</li>
+        <li>Des liens et des boutons (list-item) : toute la ligne se clique ; au survol, un fond léger, au clic, ce fond renforcé. Le texte ne change jamais.</li>
+        <li>Désactivé (un bouton disabled) : estompé, comme les boutons.</li>
+    </ul>
+
+    <h2 class="mt-10">Couleurs</h2>
+    <div class="grid mt-2">
+        <ul class="list md:col-6">
+            <li><button class="list-item" type="button">sans thème (neutral)</button></li>
+            {% for theme in ['primary', 'secondary', 'accent', 'success', 'danger', 'warning', 'info', 'inverse'] %}
+                <li><button class="list-item theme-{{ theme }}" type="button">theme-{{ theme }}</button></li>
+            {% endfor %}
+        </ul>
+        <ul class="list theme-primary md:col-6">
+            <li><a class="list-item" href="#">Profil</a></li>
+            <li><a class="list-item" href="#" aria-current="true">Réglages (en cours)</a></li>
+            <li><a class="list-item" href="#">Notifications</a></li>
+            <li><button class="list-item theme-danger" type="button">Se déconnecter</button></li>
+        </ul>
+    </div>
+    <ul>
+        <li>Sans thème, le fond est gris (neutral). .theme-* sur la liste colore le survol de tous ses éléments ; sur un élément, seulement le sien (Se déconnecter en rouge).</li>
+        <li>La liste elle-même garde un cadre gris et pas de fond : .theme-* ne colore que les fonds des éléments.</li>
+    </ul>
+
+    <h2 class="mt-10">Élément en cours</h2>
+    <nav class="mt-2" aria-label="Mon compte (démo)">
+        <ul class="list theme-primary">
+            <li><a class="list-item" href="#">Profil</a></li>
+            <li><a class="list-item" href="#" aria-current="true">Réglages</a></li>
+            <li><a class="list-item" href="#">Notifications</a></li>
+        </ul>
+    </nav>
+    <ul>
+        <li>aria-current sur le lien de la page affichée : le fond du clic. Le texte ne change pas, il ne bouge pas d'un élément à l'autre.</li>
+        <li>aria-current="page" dans une navigation (le lien de la page où l'on est) ; "step" pour une étape, "true" pour l'élément choisi dans un groupe. La démo utilise "true" : ses liens ne mènent nulle part.</li>
+    </ul>
+
+    <h2 class="mt-10">HTML</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;ul class="list"&gt;
+    &lt;li&gt;Un élément&lt;/li&gt;
+    &lt;li&gt;Un autre élément&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;nav aria-label="Mon compte"&gt;
+    &lt;ul class="list theme-primary"&gt;
+        &lt;li&gt;&lt;a class="list-item" href="/profil"&gt;Profil&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="list-item" href="/reglages" aria-current="page"&gt;Réglages&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;button class="list-item" type="button"&gt;Se déconnecter&lt;/button&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+    <ul>
+        <li>list sur un &lt;ul&gt; ou un &lt;ol&gt; : sans puces ni retrait, un cadre et un trait entre les &lt;li&gt;. Les &lt;li&gt; n'ont pas de classe.</li>
+        <li>list-item sur le lien ou le bouton d'un &lt;li&gt; : il prend toute la ligne, et le padding du &lt;li&gt; passe sur lui.</li>
+        <li>.theme-* sur la liste ou sur un élément ; sans thème, neutral.</li>
+        <li>Dans une grille ou un flex, la liste garde la hauteur de ses éléments : elle ne s'étire pas à la hauteur d'une voisine plus longue (Couleurs).</li>
+    </ul>
+
+    <h2 class="mt-10">Exemple : un texte et un badge</h2>
+    <div class="grid mt-2">
+        <ul class="list md:col-6">
+            <li class="d-flex justify-content-space-between align-items-center gap-2">Messages <span class="badge-subtle theme-primary">12</span></li>
+            <li class="d-flex justify-content-space-between align-items-center gap-2">Factures <span class="badge-subtle theme-danger">1 en retard</span></li>
+        </ul>
+        <ul class="list md:col-6">
+            <li><a class="list-item d-flex justify-content-space-between align-items-center gap-2" href="#">Messages <span class="badge-subtle theme-primary">12</span></a></li>
+            <li><a class="list-item d-flex justify-content-space-between align-items-center gap-2" href="#">Factures <span class="badge-subtle theme-danger">1 en retard</span></a></li>
+        </ul>
+    </div>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;li class="d-flex justify-content-space-between align-items-center gap-2"&gt;Messages &lt;span class="badge-subtle theme-primary"&gt;12&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="list-item d-flex justify-content-space-between align-items-center gap-2" href="/messages"&gt;Messages &lt;span class="badge-subtle theme-primary"&gt;12&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;</code></pre>
+    <p>Les utilitaires flex sur le &lt;li&gt; de texte, ou sur le lien : le badge part au bout de la ligne. Le lecteur d'écran lit « Messages 12 » : un texte plus clair (« 12 non lus ») se met dans le badge, ou en visually-hidden.</p>
+
+    <h2 class="mt-10">Variables</h2>
+    <table class="mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Défaut</th>
+                <th scope="col">Rôle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">--list-item-padding-block</th><td>0.5rem</td><td>haut et bas d'un élément (40px de haut)</td></tr>
+            <tr><th scope="row">--list-item-padding-inline</th><td>1rem</td><td>côtés d'un élément</td></tr>
+            <tr><th scope="row">--list-border-radius</th><td>--border-radius-md</td><td>coins de la liste (ceux du premier et du dernier élément suivent)</td></tr>
+            <tr><th scope="row">--list-border-width</th><td>--border-width</td><td>cadre et traits entre les éléments (couleur --border-color)</td></tr>
+        </tbody>
+    </table>
+
+    <h2 class="mt-10">Exemple : changer les valeurs</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --list-item-padding-block: 0.375rem; }
+.menu-compte { --list-item-padding-inline: 0.75rem; }
+:root { --list-border-radius: 0; }</code></pre>
+    <p>La première ligne rend tous les éléments plus bas (36px), la deuxième change seulement la liste qui a la classe menu-compte du site ; la dernière donne des coins carrés à toutes les listes.</p>
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul>
+        <li>Un &lt;ul&gt; ou un &lt;ol&gt; et des &lt;li&gt; : le lecteur d'écran annonce « liste, 3 éléments » et permet de passer d'un élément à l'autre.</li>
+        <li>Sans puces : list-style-type: "" plutôt que none. Avec none, Safari et VoiceOver n'annoncent plus une liste (MDN) ; la chaîne vide garde la liste (testé par Manuel Matuzović, choisi par Bootstrap 6), sans role="list", que le validateur W3C signale comme redondant.</li>
+        <li>Une liste de navigation va dans un &lt;nav aria-label="…"&gt; ; aria-current="page" sur le lien de la page affichée, le lecteur d'écran annonce « page actuelle ».</li>
+        <li>L'élément en cours n'est montré que par son fond : 1,26 à 2,01:1 contre la page en clair, 1,76 à 2,41:1 en sombre (calculé), sous les 3:1 (WCAG 1.4.11), et par la couleur seule (WCAG 1.4.1). Le lecteur d'écran l'annonce (aria-current) ; en contraste élevé (Windows), le fond disparaît et rien ne le montre.</li>
+        <li>Le texte de la page reste lisible sur tous les fonds, dans toutes les couleurs (calculé) : au moins 14,91:1 au survol et 10,46:1 au clic et en cours en clair, 12,59:1 et 7,80:1 en sombre. Le contour de focus a la couleur du texte, à l'intérieur de l'élément.</li>
+        <li>Les liens ne sont pas soulignés : ils sont seuls sur leur ligne, pas dans un texte.</li>
+        <li>Éléments de 40px de haut, plus que la cible tactile minimale de 24px (WCAG 2.5.8).</li>
+        <li>La couleur ne dit pas ce que fait un élément (elle n'apparaît qu'au survol) : le texte le dit (« Se déconnecter »).</li>
+    </ul>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="list"&gt;
+    &lt;a class="list-item" href="/profil"&gt;Profil&lt;/a&gt;
+    &lt;a class="list-item" href="/reglages"&gt;Réglages&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+    <p>Sans &lt;ul&gt; ni &lt;li&gt; : le lecteur d'écran n'annonce pas de liste, et les traits entre les éléments manquent (ils sont entre les &lt;li&gt;).</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;li&gt;&lt;a href="/profil"&gt;Profil&lt;/a&gt;&lt;/li&gt;</code></pre>
+    <p>Un lien sans list-item : seul son texte se clique, il est souligné et sans fond au survol.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;li class="list-item"&gt;Un élément de texte&lt;/li&gt;</code></pre>
+    <p>list-item sur un élément de texte : il prend un fond au survol, comme s'il se cliquait. list-item ne va que sur un lien ou un bouton.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;li&gt;&lt;a class="list-item active" href="/reglages"&gt;Réglages&lt;/a&gt;&lt;/li&gt;</code></pre>
+    <p>Pas de classe d'état : aria-current="page", que le lecteur d'écran annonce.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;ul class="list" role="list"&gt;</code></pre>
+    <p>role="list" est inutile : list garde la liste dans Safari, et le validateur W3C signale un rôle redondant.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card-solid theme-primary"&gt;
+    &lt;ul class="list"&gt;…&lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+    <p>Sur un fond plein, la liste hérite du thème de la carte : au survol, son fond léger passe sous le texte de la carte (noir ou blanc), qui peut devenir illisible. La mettre sur le fond de la page ou un fond subtle.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>list-style-type: "" garde la liste dans Safari d'après un test de 2023 (Safari 16.5 sur macOS, iOS 15) ; MDN ne documente que role="list". À vérifier avec VoiceOver. Dans un &lt;nav&gt;, Safari garde la liste de toute façon.</li>
+        <li>Un &lt;ol class="list"&gt; perd ses numéros : pour une liste numérotée, les écrire dans le texte, ou garder un &lt;ol&gt; sans classe.</li>
+        <li>Le padding passe du &lt;li&gt; au lien par :has() (Baseline 2023) : dans un navigateur plus ancien, un élément cliquable a un padding en double.</li>
+        <li>Pas encore de tailles, de liste horizontale, de titres de groupe ni de variante sans cadre (dans une carte) : un besoin rare se règle avec les variables.</li>
+        <li>L'élément en cours ne se voit que par la couleur de son fond, presque invisible en clair dans certaines couleurs (voir Accessibilité). Un site qui veut un repère de plus l'ajoute en une ligne : .list-item[aria-current] { text-decoration: underline; }.</li>
+        <li>Pas de fond plein sur l'élément en cours : le texte de la page y serait illisible dans certaines couleurs.</li>
+    </ul>
+{% endblock %}

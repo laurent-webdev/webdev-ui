@@ -92,7 +92,7 @@ Pas de préfixe. Tout en minuscules, mots séparés par `-`. **Lisible avant tou
     - outline : cadre + emphasis, devient solid au survol ;
     - text : devient subtle au survol (retrait envisagé) ;
     - link : souligné, l'épaisseur grandit au survol et au clic, la couleur ne change pas.
-- **Listes d'éléments** (dropdown, et plus tard `list`, `navbar`, `tab`) : au repos, le texte de la page ; la couleur du thème n'apparaît que dans les états (survol, clic, élément en cours), sur le fond seulement.
+- **Listes d'éléments** (dropdown, list, et plus tard `navbar`, `tab`) : au repos, le texte de la page ; la couleur du thème n'apparaît que dans les états (survol, clic, élément en cours), sur le fond seulement. L'élément en cours (`aria-current`) : le fond du clic seul, pas de gras (le texte bougerait) ; sous 3:1 contre la page et par la couleur seule (WCAG 1.4.1, 1.4.11) : choix de Laurent, dit dans la doc.
 
 ## Composants
 
@@ -116,6 +116,7 @@ Faits (le détail est dans le SCSS et dans la page de doc de chacun) :
 - **drawer** : un `<dialog>` modal, le côté est la variante (`drawer-start`, `-end`, `-top`, `-bottom`), écart `--drawer-inset`. Pas encore de thème ni de variantes de couleur.
 - **dialog.ts** : fermeture animée des `<dialog data-dialog>` (dialogues et drawers) : annule `cancel` et `command="close"`, pose `data-closing`, appelle `close()` à la fin des animations. Solution d'attente (voir « Décisions en attente »).
 - **dropdown** : `popover` + `popovertarget` + positionnement par ancre, sans JS. Pas de `role="menu"` ni d'`aria-expanded` écrit (motif « disclosure »). `.dropdown-item` sur `<a>` ou `<button>`, seul le fond change. Pas de variantes : neutral dans son `:root`.
+- **list** : `<ul class="list">` + `<li>` sans classe (le padding) ; `.list-item` sur le `<a>` ou le `<button>` d'un `<li>`, qui prend le padding par `:has()` (toute la ligne se clique). Comme le dropdown : seul le fond change, pas de variantes, neutral dans son `:root`, pas de tailles. Puces retirées par `list-style-type: ""` (avec `none`, Safari n'annonce plus la liste ; `role="list"` = warning W3C). `block-size: fit-content` comme l'accordéon.
 - **form**, en refonte ; tout le reste garde le natif :
     - `.form-input` / `-sm` / `-md` / `-lg` (chaque taille s'utilise seule) : padding, taille, fond `--color-background`, arrondi ; cadre `--form-input-border-color`, celui du thème avec un `.theme-*` ; focus comme les boutons ; survol natif ; désactivé estompé comme les boutons (notre fond, notre cadre et le `color: inherit` du reset effacent l'aspect natif). En erreur, `[aria-invalid="true"]` pose les tokens du thème danger (cadre 2,43:1 en clair, accepté : le message dit l'erreur) ; message en utilitaires (`fs-sm color-danger-emphasis`), pas de classe. Pas de `:user-invalid` : cadre rouge sans message en texte (WCAG 1.4.1). Champ fichier : bouton collé au cadre, comme `btn-solid` sur `:enabled`, `ButtonFace` / `ButtonText` sans thème. Liste sans `multiple` ni `size` : `appearance: none` et une flèche SVG grise `#808080` (une pour les deux thèmes, `right` physique) à `--form-input-padding-inline` du bord, la flèche native de Chromium collant au cadre.
     - `.form-range`, `.form-checkbox`, `.form-radio` : le dessin natif coloré par `accent-color` (tokens `--form-control-theme-*`) ; focus comme les boutons, autour du range entier (un contour sur le rond seul demanderait de redessiner le range : Laurent garde le natif).
@@ -205,10 +206,10 @@ src/ts/
 
 ## Ordre de travail
 
-- Faits : `accordion`, `alert`, `badge`, `button`, `btn-close`, `card`, `dialog`, `drawer`, `dropdown`, `link`, `spinner`.
+- Faits : `accordion`, `alert`, `badge`, `button`, `btn-close`, `card`, `dialog`, `drawer`, `dropdown`, `link`, `list`, `spinner`.
 - En refonte : `form`.
-- À faire : `list`, `navbar`, `tab` (`tab.ts` prévu), `table`.
-- Plus tard : notifications (conteneur fixé, fermeture, minuteur, animations, avec du JS), `.section` (`--section-padding-block` fluide), `.list-unstyled`, `visually-hidden-focusable`.
+- À faire : `navbar`, `tab` (`tab.ts` prévu), `table`.
+- Plus tard : notifications (conteneur fixé, fermeture, minuteur, animations, avec du JS), `.section` (`--section-padding-block` fluide), `.list-unstyled` (`list-style-type: ""`, comme `.list`), `visually-hidden-focusable`.
 - Remplacés : `collapse` (= `accordion`), `outline` (= `border border-*`).
 
 ## Décisions en attente
@@ -220,6 +221,8 @@ src/ts/
 - **Fermeture animée en CSS seul** le jour où `overlay` sera dans Firefox et Safari : supprimer `dialog.ts`. D'ici là, Échap pressé deux fois ferme d'un coup, et un `preventDefault()` du site sur `cancel` est sans effet (un événement `dialog-beforeclose` annulable réglerait ça).
 - **Écriture de droite à gauche** : pas de règle `:dir(rtl)` tant que personne ne le demande (`slide-in-start` / `-end`, `translate-middle`, `drawer-*` glissent du mauvais côté ; limite dite dans la doc).
 - **Grille sur petit écran** : 12 colonnes = 11 espaces, largeur minimum ; en essai : `--grid-gap` à 1rem et `gap-*` pour les cas serrés.
+- **Liste** : `list-style-type: ""` garde la liste dans Safari d'après un test de 2023 (Matuzović, Safari 16.5) repris par Bootstrap 6, pas par MDN : à vérifier avec VoiceOver.
+- **En-tête de la doc** : déborde à 320px (« Thème sombre » coupé), `base.html.twig`.
 - **Formulaire** : dates et heures à 33, 40, 47px dans Chromium (au lieu de 31, 38, 45) ; Safari pas testé (flèche des listes, champ fichier, switch, zoom des cases) ; Firefox : focus et thème sombre des cases et des radios pas vus ; en clair, les couleurs pleines (switch allumé, cases, range, cadre des champs) sont sous 3:1 sur le fond de page (choix de Laurent, dit dans la doc).
 - `btn-close` à 24px (Laurent avait demandé 20px, sous la cible tactile minimale).
 - Retrait de `btn-text`.
