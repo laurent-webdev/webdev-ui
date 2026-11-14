@@ -1,0 +1,82 @@
+@layer components {
+
+    :root {
+        // Forme : chaque cellule, puis les traits
+        --table-cell-padding-block: 0.5rem;
+        --table-cell-padding-inline: 0.75rem;
+        --table-border-width: var(--border-width);
+    }
+
+    // Toute la largeur, un trait gris sous chaque ligne, le texte de la page
+    .table {
+        width: 100%;
+        // La hauteur de ses lignes : dans une grille ou un flex, ne s'étire pas à la hauteur d'un voisin, comme la liste
+        block-size: fit-content;
+        // Chiffres de même largeur : les colonnes de nombres s'alignent
+        font-variant-numeric: tabular-nums;
+
+        // Alignée comme le texte autour, centrée en natif
+        > caption {
+            text-align: inherit;
+        }
+
+        // En haut : une cellule sur plusieurs lignes se lit avec ses voisines ; th aligné comme td, centré en natif
+        > :is(thead, tbody, tfoot) > tr > :is(th, td) {
+            padding-block: var(--table-cell-padding-block);
+            padding-inline: var(--table-cell-padding-inline);
+            border-block-end: var(--table-border-width) solid var(--border-color);
+            text-align: inherit;
+            vertical-align: top;
+        }
+    }
+
+    // Options : s'ajoutent à .table et se combinent entre elles
+
+    // Bordered : un trait autour de chaque cellule, le tableau encadré
+    .table-bordered {
+        > :is(thead, tbody, tfoot) > tr > :is(th, td) {
+            border: var(--table-border-width) solid var(--border-color);
+        }
+    }
+
+    // Borderless : plus aucun trait
+    .table-borderless {
+        --table-border-width: 0;
+    }
+
+    // Striped : une ligne sur deux en fond gris léger ; le texte de la page y reste lisible
+    .table-striped {
+        > tbody > tr:nth-child(odd) {
+            background-color: var(--color-neutral-subtle);
+        }
+    }
+
+    // Hover : la ligne sous la souris, plus marquée qu'une rayure ; après striped pour passer devant
+    .table-hover {
+        > tbody > tr {
+            transition-property: background-color;
+            transition-duration: var(--transition-duration);
+
+            &:hover {
+                background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+            }
+        }
+    }
+
+    // Tailles : changent le padding des cellules, avec toutes les options ; le texte se règle avec fs-*
+    .table-sm {
+        --table-cell-padding-block: 0.25rem;
+        --table-cell-padding-inline: 0.5rem;
+    }
+
+    .table-md {
+        --table-cell-padding-block: 0.5rem;
+        --table-cell-padding-inline: 0.75rem;
+    }
+
+    .table-lg {
+        --table-cell-padding-block: 0.75rem;
+        --table-cell-padding-inline: 1rem;
+    }
+
+}

@@ -2471,6 +2471,56 @@
     border-inline-end: var(--tab-item-border-width) solid var(--tab-theme-emphasis);
   }
 }
+@layer components {
+  :root {
+    --table-cell-padding-block: 0.5rem;
+    --table-cell-padding-inline: 0.75rem;
+    --table-border-width: var(--border-width);
+  }
+  .table {
+    width: 100%;
+    block-size: fit-content;
+    font-variant-numeric: tabular-nums;
+  }
+  .table > caption {
+    text-align: inherit;
+  }
+  .table > :is(thead, tbody, tfoot) > tr > :is(th, td) {
+    padding-block: var(--table-cell-padding-block);
+    padding-inline: var(--table-cell-padding-inline);
+    border-block-end: var(--table-border-width) solid var(--border-color);
+    text-align: inherit;
+    vertical-align: top;
+  }
+  .table-bordered > :is(thead, tbody, tfoot) > tr > :is(th, td) {
+    border: var(--table-border-width) solid var(--border-color);
+  }
+  .table-borderless {
+    --table-border-width: 0;
+  }
+  .table-striped > tbody > tr:nth-child(odd) {
+    background-color: var(--color-neutral-subtle);
+  }
+  .table-hover > tbody > tr {
+    transition-property: background-color;
+    transition-duration: var(--transition-duration);
+  }
+  .table-hover > tbody > tr:hover {
+    background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+  }
+  .table-sm {
+    --table-cell-padding-block: 0.25rem;
+    --table-cell-padding-inline: 0.5rem;
+  }
+  .table-md {
+    --table-cell-padding-block: 0.5rem;
+    --table-cell-padding-inline: 0.75rem;
+  }
+  .table-lg {
+    --table-cell-padding-block: 0.75rem;
+    --table-cell-padding-inline: 1rem;
+  }
+}
 @layer utilities {
   :root {
     --animation-fade-in-duration: 0.3s;

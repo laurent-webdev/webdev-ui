@@ -92,4 +92,10 @@ final class ComponentController extends AbstractController
     {
         return $this->render('components/tab.html.twig');
     }
+
+    #[Route('/table', name: 'app_table')]
+    public function table(): Response
+    {
+        return $this->render('components/table.html.twig');
+    }
 }

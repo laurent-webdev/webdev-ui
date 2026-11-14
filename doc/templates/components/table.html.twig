@@ -1,0 +1,245 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau{% endblock %}
+
+{% block body %}
+    {% set fruits = {'Pommes': 12, 'Poires': 7, 'Prunes': 140, 'Kiwis': 3} %}
+
+    <h1>Tableau</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un tableau de données natif : un trait sous chaque ligne, les cellules alignées en haut, les chiffres de même largeur. Des options qui se combinent : rayures, survol, un trait autour de chaque cellule ou aucun trait, et trois tailles. Les cellules gardent le texte de la page ; les rayures et le survol sont un fond gris léger.</p>
+
+    <table class="table mt-2">
+        <caption>Commandes de novembre</caption>
+        <thead>
+            <tr>
+                <th scope="col">N°</th>
+                <th scope="col">Client</th>
+                <th scope="col">Statut</th>
+                <th scope="col" class="text-align-end">Montant</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">1042</th><td>Durand</td><td>Payée</td><td class="text-align-end">128,00 €</td></tr>
+            <tr><th scope="row">1043</th><td>Martin</td><td>En attente du virement, relancée le 12 novembre</td><td class="text-align-end">1 111,10 €</td></tr>
+            <tr><th scope="row">1044</th><td>Petit</td><td>Annulée</td><td class="text-align-end">9,90 €</td></tr>
+        </tbody>
+        <tfoot>
+            <tr><th scope="row" colspan="3">Total</th><td class="text-align-end">1 249,00 €</td></tr>
+        </tfoot>
+    </table>
+    <ul class="mt-4">
+        <li>Toute la largeur, un trait gris sous chaque ligne ; la légende et les en-têtes alignés comme le texte (centrés en natif).</li>
+        <li>Les cellules sont alignées en haut : une cellule sur deux lignes (le statut de la commande 1043, sur un écran étroit) se lit avec ses voisines.</li>
+        <li>Les chiffres ont tous la même largeur : alignés à droite avec text-align-end, les montants tombent juste, chiffre sous chiffre.</li>
+    </ul>
+
+    <h2 class="mt-10">table-striped</h2>
+    <table class="table table-striped mt-2">
+        <caption>Stock (rayures)</caption>
+        <thead>
+            <tr><th scope="col">Fruit</th><th scope="col" class="text-align-end">Quantité</th></tr>
+        </thead>
+        <tbody>
+            {% for name, quantity in fruits %}
+                <tr><td>{{ name }}</td><td class="text-align-end">{{ quantity }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p class="mt-2">Une ligne du corps sur deux a un fond gris léger, en commençant par la première : l'œil suit une ligne longue sans glisser sur la voisine.</p>
+
+    <h2 class="mt-10">table-hover</h2>
+    <table class="table table-hover mt-2">
+        <caption>Stock (survol)</caption>
+        <thead>
+            <tr><th scope="col">Fruit</th><th scope="col" class="text-align-end">Quantité</th></tr>
+        </thead>
+        <tbody>
+            {% for name, quantity in fruits %}
+                <tr><td>{{ name }}</td><td class="text-align-end">{{ quantity }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p class="mt-2">La ligne du corps sous la souris prend un fond gris, plus marqué qu'une rayure : il se voit aussi avec table-striped. L'en-tête et le pied ne changent pas.</p>
+
+    <h2 class="mt-10">table-bordered et table-borderless</h2>
+    <div class="grid mt-2">
+        <table class="table table-bordered md:col-6">
+            <caption>table-bordered</caption>
+            <thead>
+                <tr><th scope="col">Fruit</th><th scope="col" class="text-align-end">Quantité</th></tr>
+            </thead>
+            <tbody>
+                {% for name, quantity in fruits %}
+                    <tr><td>{{ name }}</td><td class="text-align-end">{{ quantity }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="table table-borderless md:col-6">
+            <caption>table-borderless</caption>
+            <thead>
+                <tr><th scope="col">Fruit</th><th scope="col" class="text-align-end">Quantité</th></tr>
+            </thead>
+            <tbody>
+                {% for name, quantity in fruits %}
+                    <tr><td>{{ name }}</td><td class="text-align-end">{{ quantity }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <ul class="mt-4">
+        <li>table-bordered : un trait autour de chaque cellule, le tableau encadré. Pour des colonnes de chiffres serrées, où l'œil cherche une case.</li>
+        <li>table-borderless : plus aucun trait (--table-border-width à 0). Pour un tableau court, ou avec table-striped : les rayures séparent déjà les lignes.</li>
+    </ul>
+
+    <h2 class="mt-10">Tailles</h2>
+    <div class="grid mt-2">
+        {% for size in ['sm', 'md', 'lg'] %}
+            <table class="table table-striped table-{{ size }} md:col-4">
+                <caption>table-{{ size }}</caption>
+                <thead>
+                    <tr><th scope="col">Fruit</th><th scope="col" class="text-align-end">Quantité</th></tr>
+                </thead>
+                <tbody>
+                    {% for name, quantity in fruits %}
+                        <tr><td>{{ name }}</td><td class="text-align-end">{{ quantity }}</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+    </div>
+    <ul class="mt-4">
+        <li>Les tailles changent le padding des cellules : 32px de haut par ligne de texte en table-sm, 40px en table-md (le défaut), 48px en table-lg.</li>
+        <li>Le texte garde sa taille : fs-sm sur le tableau pour l'écrire plus petit.</li>
+    </ul>
+
+    <h2 class="mt-10">HTML</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;table class="table table-striped"&gt;
+    &lt;caption&gt;Commandes de novembre&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th scope="col"&gt;N°&lt;/th&gt;
+            &lt;th scope="col"&gt;Client&lt;/th&gt;
+            &lt;th scope="col" class="text-align-end"&gt;Montant&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;th scope="row"&gt;1042&lt;/th&gt;
+            &lt;td&gt;Durand&lt;/td&gt;
+            &lt;td class="text-align-end"&gt;128,00 €&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+    <ul>
+        <li>table sur le &lt;table&gt;, toujours ; les options (table-striped, table-hover, table-bordered, table-borderless) et la taille s'ajoutent à côté et se combinent : class="table table-striped table-hover table-sm".</li>
+        <li>Les autres balises n'ont pas de classe : &lt;caption&gt; en premier, puis &lt;thead&gt;, &lt;tbody&gt; et &lt;tfoot&gt;.</li>
+        <li>&lt;th scope="col"&gt; pour l'en-tête d'une colonne, &lt;th scope="row"&gt; pour celui d'une ligne (la première cellule, quand elle nomme la ligne).</li>
+        <li>Un nombre à droite : text-align-end sur ses cellules et sur l'en-tête de sa colonne.</li>
+    </ul>
+
+    <h2 class="mt-10">Exemple : trop large pour l'écran</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="table-sales-caption" tabindex="0">
+        <table class="table table-striped table-hover">
+            <caption id="table-sales-caption">Ventes de l'année, en euros</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Magasin</th>
+                    {% for month in ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août'] %}
+                        <th scope="col" class="text-align-end">{{ month }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for shop in ['Bordeaux', 'Lyon', 'Nantes'] %}
+                    <tr>
+                        <th scope="row">{{ shop }}</th>
+                        {% for month in 1..8 %}
+                            <td class="text-align-end">{{ (month * 1234 + loop.parent.loop.index * 567)|number_format(0, ',', ' ') }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="overflow-x-auto" role="region" aria-labelledby="ventes-legende" tabindex="0"&gt;
+    &lt;table class="table"&gt;
+        &lt;caption id="ventes-legende"&gt;Ventes de l'année, en euros&lt;/caption&gt;
+        …
+    &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+    <ul>
+        <li>Sur un petit écran, le tableau défile sur le côté dans son &lt;div&gt; ; la page, elle, ne déborde pas. Pas de classe en plus : l'utilitaire overflow-x-auto.</li>
+        <li>tabindex="0" : la zone se prend au clavier, les flèches la font défiler (sinon, sans lien dans le tableau, Safari ne laisse pas y aller).</li>
+        <li>role="region" et aria-labelledby vers la légende : le lecteur d'écran dit ce qui a pris le focus.</li>
+    </ul>
+
+    <h2 class="mt-10">Variables</h2>
+    <table class="table mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Défaut</th>
+                <th scope="col">Rôle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">--table-cell-padding-block</th><td>0.5rem</td><td>haut et bas de chaque cellule (40px de haut par ligne de texte)</td></tr>
+            <tr><th scope="row">--table-cell-padding-inline</th><td>0.75rem</td><td>côtés de chaque cellule</td></tr>
+            <tr><th scope="row">--table-border-width</th><td>--border-width</td><td>épaisseur des traits (couleur --border-color) ; 0 dans table-borderless</td></tr>
+        </tbody>
+    </table>
+
+    <h2 class="mt-10">Exemple : changer les valeurs</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --table-cell-padding-inline: 1rem; }
+.table-sm { --table-cell-padding-block: 0.125rem; }
+.tableau-factures { --table-border-width: 2px; }</code></pre>
+    <p>La première ligne écarte les colonnes des tableaux sans taille (table-md garde la valeur d'origine), la deuxième serre encore la petite taille, la dernière épaissit seulement les traits du tableau qui a la classe tableau-factures du site.</p>
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul>
+        <li>Un &lt;table&gt; natif : le lecteur d'écran annonce le tableau, son nombre de lignes et de colonnes, et se déplace de cellule en cellule. Pas d'aria-* à écrire.</li>
+        <li>&lt;caption&gt; donne son nom au tableau ; il est en haut, lu avant les cellules. Sans légende visible, un aria-label sur le &lt;table&gt;.</li>
+        <li>&lt;th scope&gt; relie chaque cellule à ses en-têtes : le lecteur d'écran dit « Montant, 128,00 € » en passant sur la cellule.</li>
+        <li>Les rayures, le survol et les traits gris sont décoratifs : le tableau se lit sans eux (en contraste élevé, Windows retire les fonds). Le survol n'aide que la souris ; les rayures aident tout le monde.</li>
+        <li>Le texte de la page reste lisible sur les fonds gris (les mêmes que le survol et le clic de la liste, calculé) : au moins 14,91:1 sur une rayure et 10,46:1 au survol en clair, 12,59:1 et 7,80:1 en sombre.</li>
+        <li>Un tableau trop large défile dans sa zone (exemple plus haut) : WCAG 1.4.10 l'accepte pour un tableau de données, qu'on lit en deux dimensions. La zone se prend au clavier (tabindex="0") et a un nom (role="region", aria-labelledby) ; son contour de focus est celui du navigateur.</li>
+    </ul>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;table class="table-striped"&gt;…&lt;/table&gt;</code></pre>
+    <p>Une option sans table : les rayures, mais ni padding, ni traits, ni alignement. table d'abord, l'option à côté.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;tr&gt;
+    &lt;td class="fw-bold"&gt;Montant&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+    <p>Un en-tête en gras dans un &lt;td&gt; : il se voit, mais le lecteur d'écran ne le relie pas aux cellules. &lt;th scope="col"&gt; ou &lt;th scope="row"&gt;.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;table class="table d-block overflow-x-auto"&gt;…&lt;/table&gt;</code></pre>
+    <p>Le tableau lui-même en display: block pour le faire défiler : certains navigateurs retirent alors sa structure, le lecteur d'écran ne l'annonce plus comme un tableau. Le faire défiler dans un &lt;div&gt; (exemple plus haut).</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="overflow-x-auto"&gt;
+    &lt;table class="table"&gt;…&lt;/table&gt;
+&lt;/div&gt;</code></pre>
+    <p>La zone qui défile sans tabindex="0", role="region" ni aria-labelledby : dans Safari, le clavier ne peut pas la faire défiler, et le lecteur d'écran ne dit pas ce qu'elle contient.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;tr class="bg-danger-subtle"&gt;
+    &lt;th scope="row"&gt;1044&lt;/th&gt;&lt;td&gt;Petit&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+    <p>Une ligne en rouge pour dire qu'elle pose problème : la couleur seule ne suffit pas (WCAG 1.4.1), et elle disparaît sous le survol. Le texte le dit : une colonne Statut (« Annulée »).</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;table class="table table-bordered table-borderless"&gt;…&lt;/table&gt;</code></pre>
+    <p>Deux options contraires : table-borderless gagne, plus aucun trait. L'une ou l'autre.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card-solid theme-primary"&gt;
+    &lt;table class="table table-striped"&gt;…&lt;/table&gt;
+&lt;/div&gt;</code></pre>
+    <p>Sur un fond plein, les rayures et le survol gris passent sous le texte de la carte (sa couleur -contrast), qui peut devenir illisible. Le mettre sur le fond de la page ou un fond subtle.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;table class="table"&gt;
+    &lt;tr&gt;&lt;td&gt;menu&lt;/td&gt;&lt;td&gt;contenu de la page&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+    <p>Un tableau pour mettre en page : le lecteur d'écran annonce un tableau qui n'en est pas un. La grille (grid, col-*) ou les utilitaires flex.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>Le trait sous la dernière ligne ferme le tableau ; dans une zone encadrée (border sur le &lt;div&gt;), il double le cadre en bas.</li>
+        <li>Les coins de table-bordered sont carrés : border-collapse (le reset) ne garde pas d'arrondi.</li>
+        <li>Sur un écran tactile, la ligne touchée garde le fond du survol jusqu'au toucher suivant.</li>
+        <li>Pas de tri, pas d'en-tête qui reste en haut au défilement, pas de lignes à choisir : un besoin du site.</li>
+        <li>Pas de mise en pile sur petit écran (chaque ligne en bloc) : elle demande de changer le display des lignes, et le tableau n'est plus annoncé comme un tableau. Le défilement sur le côté le garde.</li>
+        <li>Un mot très long (une adresse web) ne passe pas à la ligne : il élargit sa colonne ; dans une zone qui défile, le tableau défile.</li>
+    </ul>
+{% endblock %}
