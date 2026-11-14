@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Drawer</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Un panneau qui glisse depuis un bord de l'écran, par-dessus la page : un &lt;dialog&gt; natif ouvert en modal, comme les dialogues. La classe dit le bord (drawer-start, drawer-end, drawer-top, drawer-bottom) et s'utilise seule.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un panneau qui glisse depuis un bord de l'écran, par-dessus la page : un &lt;dialog&gt; natif ouvert en modal, comme les dialogues. La classe dit le bord (drawer-start, drawer-end, drawer-top, drawer-bottom) et s'utilise seule. Sur un &lt;aside&gt; ou un &lt;nav&gt;, le même panneau reste toujours là, dans la page.</p>
 
     <div class="d-flex flex-wrap-wrap gap-2 mt-2">
         {% for side in ['start', 'end', 'top', 'bottom'] %}
@@ -35,7 +35,7 @@
                 <button class="btn-close" type="button" commandfor="drawer-{{ side }}" command="close" aria-label="Fermer"></button>
             </div>
             <div class="drawer-body">
-                <p>{% if side == 'end' %}Toute la hauteur, 20rem de large, à 1rem des bords ; sur un téléphone, une bande de la page reste visible à gauche.{% else %}Toute la largeur, 20rem de haut, à 1rem des bords ; un contenu plus long défile dans le panneau.{% endif %} Se ferme avec Échap, la croix ou un clic à côté (closedby="any").</p>
+                <p>{% if side == 'end' %}Toute la hauteur, 20rem de large, à 0.75rem des bords ; sur un téléphone, une bande de la page reste visible à gauche.{% else %}Toute la largeur, 20rem de haut, à 0.75rem des bords ; un contenu plus long défile dans le panneau.{% endif %} Se ferme avec Échap, la croix ou un clic à côté (closedby="any").</p>
             </div>
         </dialog>
     {% endfor %}
@@ -54,10 +54,118 @@
 &lt;/dialog&gt;</code></pre>
     <ul>
         <li>Comme le dialogue : command="show-modal" l'ouvre, command="close" le ferme, closedby dit comment il se ferme ; sans JavaScript.</li>
-        <li>drawer-start et drawer-end : toute la hauteur, --drawer-width de large ; drawer-top et drawer-bottom : toute la largeur, --drawer-height de haut. Toujours à --drawer-inset (1rem) des bords de l'écran, avec un cadre et des coins arrondis.</li>
+        <li>drawer-start et drawer-end : toute la hauteur, --drawer-width de large ; drawer-top et drawer-bottom : toute la largeur, --drawer-height de haut. Toujours à --drawer-inset (0.75rem) des bords de l'écran, avec un cadre et des coins arrondis.</li>
         <li>Le fond derrière, le flou et la page bloquée sont ceux du dialogue (--backdrop-background-color, --backdrop-filter).</li>
         <li>data-dialog : le JS du framework le fait glisser vers son bord avant de le fermer, le même que pour les dialogues. Sans data-dialog ou sans le JS, il marche aussi, mais se ferme d'un coup.</li>
     </ul>
+
+    <h2 class="mt-10">Toujours là : sur un &lt;aside&gt; ou un &lt;nav&gt;</h2>
+    <p>Les mêmes classes sur un &lt;aside&gt; (un contenu à côté de la page : des filtres) ou un &lt;nav&gt; (un menu) au lieu d'un &lt;dialog&gt; : le panneau ne s'ouvre ni ne se ferme, il reste dans la page. Même forme, mêmes zones, mêmes variables, sans JavaScript. drawer-start et drawer-end seulement : en haut ou en bas, un panneau toujours là, c'est un en-tête ou un pied de page.</p>
+
+    <h3 class="mt-6">Collé : une colonne à côté du contenu</h3>
+    {# Le même contenu dans le panneau et dans le drawer du petit écran #}
+    {% set drawer_filters %}
+        <fieldset class="form-field">
+            <legend>Catégories</legend>
+            {% for category in ['Livres', 'Musique', 'Films', 'Jeux', 'Bandes dessinées'] %}
+                <label><input class="form-checkbox theme-primary" type="checkbox" name="category"> {{ category }}</label>
+            {% endfor %}
+        </fieldset>
+    {% endset %}
+
+    <button class="btn mt-2 md:d-none" type="button" commandfor="drawer-filters" command="show-modal">Filtres</button>
+
+    <dialog class="drawer-start" id="drawer-filters" data-dialog closedby="any" aria-labelledby="drawer-filters-title">
+        <div class="drawer-header">
+            <h4 class="fs-lg" id="drawer-filters-title">Filtres</h4>
+            <button class="btn-close" type="button" commandfor="drawer-filters" command="close" aria-label="Fermer"></button>
+        </div>
+        <div class="drawer-body">
+            {{ drawer_filters }}
+        </div>
+    </dialog>
+
+    <div class="d-flex gap-4 mt-2">
+        <aside class="drawer-start d-none md:d-block" aria-label="Filtres">
+            <div class="drawer-header">
+                <h4 class="fs-lg">Filtres</h4>
+            </div>
+            <div class="drawer-body">
+                {{ drawer_filters }}
+            </div>
+        </aside>
+        <div class="flex-grow-1">
+            {% for i in 1..12 %}
+                <h4 class="fs-md{% if not loop.first %} mt-6{% endif %}">Résultat {{ i }}</h4>
+                <p>Le contenu défile, le panneau reste collé en haut de l'écran, à côté du contenu, sans le cacher. Il fait toute la hauteur de l'écran : il ne bouge qu'avec un contenu plus long que lui. En bas du contenu, il s'arrête avec lui et remonte avec la fin de la page.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <pre class="mt-4" tabindex="0"><code class="language-html">&lt;div class="d-flex gap-4"&gt;
+    &lt;aside class="drawer-start d-none md:d-block" aria-label="Filtres"&gt;
+        &lt;div class="drawer-header"&gt;&lt;h2&gt;Filtres&lt;/h2&gt;&lt;/div&gt;
+        &lt;div class="drawer-body"&gt;…&lt;/div&gt;
+    &lt;/aside&gt;
+    &lt;main class="flex-grow-1"&gt;…&lt;/main&gt;
+&lt;/div&gt;</code></pre>
+    <ul>
+        <li>Une colonne de la mise en page (position: sticky) : il ne cache jamais le contenu. En faisant défiler, il reste en haut de l'écran à --drawer-inset du bord, et s'arrête avec le bas de son parent.</li>
+        <li>Toute la hauteur de l'écran moins les écarts ; un contenu plus long défile dans le panneau.</li>
+        <li>Dans un parent en flex : il garde --drawer-width de large, le contenu prend le reste (flex-grow-1).</li>
+        <li>md:d-block, pas md:d-flex : en flex, l'en-tête et le corps se mettraient côte à côte.</li>
+    </ul>
+
+    <h3 class="mt-6">Fixé : contre le bord de l'écran</h3>
+    <p>position-fixed en plus : le panneau se met contre le bord de l'écran, comme un drawer ouvert, et ne bouge plus en faisant défiler. Un menu de côté, toujours à l'écran. Il passe par-dessus la page : le site décale son contenu de la place du panneau.</p>
+    <button class="btn mt-2" type="button" aria-expanded="false" aria-controls="drawer-fixed" data-demo-toggle>Afficher / masquer le menu fixé</button>
+    <p class="mt-2">À partir de md : la page de la doc se décale pour lui laisser la place.</p>
+
+    <nav class="drawer-start position-fixed d-none md:d-block demo-drawer-fixed" id="drawer-fixed" aria-label="Menu (démo)" hidden>
+        <div class="drawer-header">
+            <p class="fs-lg fw-semibold">Mon site</p>
+        </div>
+        <div class="drawer-body">
+            <ul class="navbar-list">
+                {% for link in ['Accueil', 'Produits', 'Blog', 'À propos', 'Contact'] %}
+                    <li><a class="navbar-item" href="#"{% if loop.first %} aria-current="page"{% endif %}>{{ link }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
+
+    <pre class="mt-4" tabindex="0"><code class="language-html">&lt;nav class="drawer-start position-fixed d-none md:d-block" aria-label="Menu"&gt;
+    &lt;div class="drawer-header"&gt;&lt;p&gt;Mon site&lt;/p&gt;&lt;/div&gt;
+    &lt;div class="drawer-body"&gt;
+        &lt;ul class="navbar-list"&gt;
+            &lt;li&gt;&lt;a class="navbar-item" href="/" aria-current="page"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
+            …
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+    <pre class="mt-2" tabindex="0"><code class="language-css">/* Dans le CSS du site : la place du panneau, sa largeur et les deux écarts, à partir de md comme md:d-block */
+@media (width >= 48rem) {
+    body { padding-inline-start: calc(var(--drawer-width) + var(--drawer-inset) * 2); }
+}</code></pre>
+    <ul>
+        <li>Les écarts et la hauteur sont ceux du drawer ; drawer-end position-fixed se met à droite (le site décale alors avec padding-inline-end).</li>
+        <li>Le décalage est au site : le framework ne sait pas ce qui est à côté. Sur le body, l'en-tête et le pied de page se décalent aussi ; sur un seul bloc, l'en-tête passe sous le panneau.</li>
+        <li>Les liens : navbar-list et navbar-item, comme dans le drawer de la navbar (le texte de la page, un fond léger au survol, la page en cours avec aria-current).</li>
+    </ul>
+
+    <h3 class="mt-6">Petit écran</h3>
+    <p>Sur un téléphone, un panneau de 20rem ne laisse presque rien au contenu : d-none md:d-block le cache sous md, et le même contenu va dans un vrai drawer, ouvert par un bouton caché à partir de md. Deux copies du contenu, comme la navbar et le menu de cette doc : une seule se voit à la fois. La démo « Collé » le fait : sur un petit écran, son bouton Filtres.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn md:d-none" type="button" commandfor="filtres" command="show-modal"&gt;Filtres&lt;/button&gt;
+
+&lt;dialog class="drawer-start" id="filtres" data-dialog closedby="any" aria-labelledby="filtres-titre"&gt;
+    &lt;div class="drawer-header"&gt;
+        &lt;h2 id="filtres-titre"&gt;Filtres&lt;/h2&gt;
+        &lt;button class="btn-close" type="button" commandfor="filtres" command="close" aria-label="Fermer"&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="drawer-body"&gt;…&lt;/div&gt;
+&lt;/dialog&gt;
+
+&lt;aside class="drawer-start d-none md:d-block" aria-label="Filtres"&gt;…&lt;/aside&gt;</code></pre>
 
     <h2 class="mt-10">Variables</h2>
     <table class="table mt-2">
@@ -73,7 +181,7 @@
             <tr><th scope="row">--drawer-height</th><td>20rem (320px)</td><td>hauteur de drawer-top et drawer-bottom</td></tr>
             <tr><th scope="row">--drawer-padding-block</th><td>1rem</td><td>haut et bas de l'en-tête et du corps</td></tr>
             <tr><th scope="row">--drawer-padding-inline</th><td>1rem</td><td>côtés de l'en-tête et du corps</td></tr>
-            <tr><th scope="row">--drawer-inset</th><td>1rem</td><td>écart avec les bords de l'écran (0 : collé au bord)</td></tr>
+            <tr><th scope="row">--drawer-inset</th><td>0.75rem</td><td>écart avec les bords de l'écran (0 : collé au bord)</td></tr>
             <tr><th scope="row">--drawer-border-radius</th><td>--border-radius-md</td><td>coins du panneau</td></tr>
             <tr><th scope="row">--drawer-border-width</th><td>--border-width</td><td>cadre (couleur --border-color)</td></tr>
             <tr><th scope="row">--drawer-transition-duration</th><td>0.2s</td><td>glissement à l'ouverture et apparition du fond</td></tr>
@@ -101,13 +209,19 @@
         <li>Un bouton d'ouverture avec seulement une icône (☰) a un aria-label (« Menu »).</li>
         <li>La croix visible, même avec closedby="any" : tout le monde n'a pas de clavier ni ne pense à cliquer à côté.</li>
         <li>prefers-reduced-motion : le panneau apparaît et disparaît sans glisser.</li>
+        <li>Toujours là : un &lt;aside&gt; ou un &lt;nav&gt;, pas un &lt;dialog&gt; affiché en permanence, qui resterait un dialogue pour les lecteurs d'écran sur un panneau qui ne s'ouvre jamais. &lt;nav&gt; pour un menu de liens (le repère navigation), &lt;aside&gt; pour un contenu à côté (le repère complémentaire), chacun avec un aria-label. Pas de &lt;nav&gt; dans un &lt;aside&gt; : deux repères pour la même chose.</li>
+        <li>Toujours là, sans lien ni champ (un texte seul) et plus long que l'écran : tabindex="0" sur le panneau, pour le faire défiler au clavier, comme un bloc de code.</li>
     </ul>
 
     <h2 class="mt-10">Contre-exemples</h2>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;aside class="drawer-start" hidden&gt;…&lt;/aside&gt;</code></pre>
-    <p>Sur un &lt;aside&gt; ou un &lt;div&gt;, rien ne marche : il faudrait refaire en JS le focus, Échap, le fond et la page inactive, que &lt;dialog&gt; fait déjà.</p>
+    <p>Un panneau qui s'ouvre et se ferme sur un &lt;aside&gt; ou un &lt;div&gt; (hidden changé en JS) : il faudrait refaire en JS le focus, Échap, le fond et la page inactive, que &lt;dialog&gt; fait déjà. Sur un &lt;aside&gt;, le panneau est toujours là.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="drawer-start" open&gt;…&lt;/dialog&gt;</code></pre>
-    <p>L'attribut open écrit dans le HTML affiche un panneau non modal : pas de fond, Échap ne ferme pas, le focus reste dans la page.</p>
+    <p>L'attribut open écrit dans le HTML affiche un panneau non modal : pas de fond, Échap ne ferme pas, le focus reste dans la page. Pour un panneau toujours là, il resterait un dialogue pour les lecteurs d'écran : un &lt;aside&gt; ou un &lt;nav&gt;.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;nav class="drawer-start position-fixed" aria-label="Menu"&gt;…&lt;/nav&gt;</code></pre>
+    <p>Fixé sans le décalage du site, il cache le début de la page ; sans d-none md:d-block, il couvre presque tout un téléphone.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;aside class="drawer-top" aria-label="Annonce"&gt;…&lt;/aside&gt;</code></pre>
+    <p>drawer-top et drawer-bottom ne sont prévus que sur un &lt;dialog&gt; : sur un &lt;aside&gt;, ils ne collent pas et gardent 20rem de haut.</p>
 
     <h2 class="mt-10">Limites</h2>
     <ul>
@@ -117,7 +231,9 @@
         <li>Pas encore de couleurs (.theme-*, solid, subtle, outline) ni de tailles : le fond est celui de la page, la largeur et la hauteur se changent avec --drawer-width et --drawer-height.</li>
         <li>Un contenu long fait défiler tout le panneau, en-tête compris.</li>
         <li>En haut et en bas, la hauteur est fixe : un contenu court laisse de la place vide en dessous.</li>
-        <li>Pas de panneau toujours affiché sur grand écran (une colonne de menu à partir de md) : c'est de la mise en page, à voir avec la navbar.</li>
+        <li>Toujours là : une barre collante ou fixée en haut du site passe par-dessus le panneau ou dessous. Le site change lui-même inset-block-start et height sur son panneau.</li>
+        <li>Toujours là : toute la hauteur de l'écran, même avec peu de contenu ; dans une page courte, la page s'allonge d'autant.</li>
+        <li>Collé : un parent ou un ancêtre en overflow: hidden ou auto l'empêche de coller (une règle de position: sticky).</li>
         <li>Écriture de droite à gauche : drawer-start se met bien à droite, mais glisse depuis la gauche (le déplacement translate ne suit pas le sens d'écriture).</li>
         <li>command, commandfor et closedby ont les mêmes limites que pour le dialogue (navigateurs récents ; closedby pas encore dans Safari).</li>
     </ul>

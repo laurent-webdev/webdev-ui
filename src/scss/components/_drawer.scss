@@ -6,7 +6,7 @@
         --drawer-padding-inline: 1rem;
         --drawer-border-radius: var(--border-radius-md);
         --drawer-border-width: var(--border-width);
-        // Écart avec les bords de l'écran : 1rem, comme le dialogue et le container
+        // Écart avec les bords de l'écran
         --drawer-inset: .75rem;
         // Largeur à gauche et à droite, hauteur en haut et en bas : 20rem (320px)
         --drawer-width: 20rem;
@@ -58,6 +58,17 @@
     .drawer-end { inset-inline: auto var(--drawer-inset); }
     .drawer-top { inset-block: var(--drawer-inset) auto; }
     .drawer-bottom { inset-block: auto var(--drawer-inset); }
+
+    // Sur un <aside> ou un <nav> : toujours là, une colonne de la mise en page (pas par-dessus) ; collé en haut de l'écran en faisant défiler
+    // Avec position-fixed : contre le bord de l'écran, par-dessus la page, aux écarts du drawer (le site décale son contenu)
+    // Toute la hauteur de l'écran moins les écarts, un contenu plus long défile dans le panneau
+    .drawer-start:not(dialog), .drawer-end:not(dialog) {
+        position: sticky;
+        inset-block: var(--drawer-inset) auto;
+        height: calc(100svh - var(--drawer-inset) * 2);
+        overflow-y: auto;
+        flex-shrink: 0;
+    }
 
     // À l'ouverture : glisse depuis son bord (hors de l'écran : sa taille plus l'écart), la page s'assombrit et se floute
     @starting-style {

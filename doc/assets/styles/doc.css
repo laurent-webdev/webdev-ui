@@ -41,3 +41,10 @@ body {
   line-height: 1;
   color: oklch(1 0 0);
 }
+
+/* Démo du drawer fixé : quand il est affiché, la doc se décale de sa place (sur un site : body { padding-inline-start: … } dans le @media) */
+@media (width >= 48rem) {
+  body:has(.demo-drawer-fixed:not([hidden])) {
+    padding-inline-start: calc(var(--drawer-width) + var(--drawer-inset) * 2);
+  }
+}

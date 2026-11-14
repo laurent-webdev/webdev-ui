@@ -1746,6 +1746,13 @@
   .drawer-bottom {
     inset-block: auto var(--drawer-inset);
   }
+  .drawer-start:not(dialog), .drawer-end:not(dialog) {
+    position: sticky;
+    inset-block: var(--drawer-inset) auto;
+    height: calc(100svh - var(--drawer-inset) * 2);
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
   @starting-style {
     .drawer-start[open] {
       translate: calc(-100% - var(--drawer-inset)) 0;
