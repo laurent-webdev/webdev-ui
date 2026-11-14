@@ -1296,10 +1296,10 @@
     color: inherit;
   }
   .btn:hover {
-    background-color: var(--color-neutral-subtle);
+    background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-soft), transparent);
   }
   .btn:active {
-    background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+    background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-strong), transparent);
   }
   .btn-solid {
     background-color: var(--btn-theme-color);
@@ -2287,52 +2287,42 @@
     --list-border-radius: var(--border-radius-md);
     --list-border-width: var(--border-width);
     --list-theme-color: var(--color-neutral);
-    --list-theme-subtle: var(--color-neutral-subtle);
     --list-theme-emphasis: var(--color-neutral-emphasis);
   }
   .theme-primary {
     --list-theme-color: var(--color-primary);
-    --list-theme-subtle: var(--color-primary-subtle);
     --list-theme-emphasis: var(--color-primary-emphasis);
   }
   .theme-secondary {
     --list-theme-color: var(--color-secondary);
-    --list-theme-subtle: var(--color-secondary-subtle);
     --list-theme-emphasis: var(--color-secondary-emphasis);
   }
   .theme-accent {
     --list-theme-color: var(--color-accent);
-    --list-theme-subtle: var(--color-accent-subtle);
     --list-theme-emphasis: var(--color-accent-emphasis);
   }
   .theme-success {
     --list-theme-color: var(--color-success);
-    --list-theme-subtle: var(--color-success-subtle);
     --list-theme-emphasis: var(--color-success-emphasis);
   }
   .theme-danger {
     --list-theme-color: var(--color-danger);
-    --list-theme-subtle: var(--color-danger-subtle);
     --list-theme-emphasis: var(--color-danger-emphasis);
   }
   .theme-warning {
     --list-theme-color: var(--color-warning);
-    --list-theme-subtle: var(--color-warning-subtle);
     --list-theme-emphasis: var(--color-warning-emphasis);
   }
   .theme-info {
     --list-theme-color: var(--color-info);
-    --list-theme-subtle: var(--color-info-subtle);
     --list-theme-emphasis: var(--color-info-emphasis);
   }
   .theme-neutral {
     --list-theme-color: var(--color-neutral);
-    --list-theme-subtle: var(--color-neutral-subtle);
     --list-theme-emphasis: var(--color-neutral-emphasis);
   }
   .theme-inverse {
     --list-theme-color: var(--color-inverse);
-    --list-theme-subtle: var(--color-inverse-subtle);
     --list-theme-emphasis: var(--color-inverse-emphasis);
   }
   .list {
@@ -2375,13 +2365,13 @@
     transition-duration: var(--transition-duration);
   }
   .list-item:hover {
-    background-color: var(--list-theme-subtle);
+    background-color: color-mix(in oklch, var(--list-theme-color) var(--state-mix-soft), transparent);
   }
   .list-item:active {
-    background-color: color-mix(in srgb, var(--list-theme-subtle), var(--list-theme-color) var(--state-mix-soft));
+    background-color: color-mix(in oklch, var(--list-theme-color) var(--state-mix-strong), transparent);
   }
   .list-item[aria-current]:not([aria-current=false]) {
-    background-color: color-mix(in srgb, var(--list-theme-subtle), var(--list-theme-color) var(--state-mix-soft));
+    background-color: color-mix(in oklch, var(--list-theme-color) var(--state-mix-strong), transparent);
   }
   .list-item:focus-visible {
     outline: var(--focus-outline-width) solid var(--list-theme-emphasis);

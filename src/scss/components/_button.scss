@@ -46,17 +46,18 @@
         }
     }
 
-    // Par défaut, sans couleur : fond transparent, le texte autour, cadre gris ; au survol et au clic, un fond gris léger
+    // Par défaut, sans couleur : fond transparent, le texte autour, cadre gris
+    // Au survol et au clic, un voile gris transparent : ce qui est derrière (verre, image) reste visible
     .btn {
         border-color: var(--border-color);
         background-color: transparent;
         color: inherit;
 
         &:hover {
-            background-color: var(--color-neutral-subtle);
+            background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-soft), transparent);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+            background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-strong), transparent);
         }
     }
 
