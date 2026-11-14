@@ -337,6 +337,102 @@
         <li>Case puis texte sur la même ligne, le plus courant : la case dans son libellé, &lt;label&gt;&lt;input type="checkbox"&gt; Texte&lt;/label&gt;, comme dans les autres exemples de la page.</li>
     </ul>
 
+    <h2 class="mt-10">Groupe</h2>
+    <p class="mt-2">Un champ et un bouton ou un texte collés sur une ligne : une recherche et son bouton, « @ » devant un nom, « € » après un prix. form-input-group autour, form-input-group-text sur un texte ; le champ prend la place qui reste.</p>
+    <div class="grid row-gap-6 mt-2">
+        <div class="form-field md:col-6">
+            <label for="group-search">Rechercher</label>
+            <div class="form-input-group">
+                <input class="form-input" id="group-search" type="search" name="group-search">
+                <button class="btn-solid theme-primary" type="button">Rechercher</button>
+            </div>
+        </div>
+        <div class="form-field md:col-6">
+            <label for="group-user">Nom d'utilisateur</label>
+            <div class="form-input-group">
+                <span class="form-input-group-text">@</span>
+                <input class="form-input" id="group-user" type="text" name="group-user" autocomplete="username">
+            </div>
+        </div>
+        <div class="form-field md:col-6">
+            <label for="group-price">Prix, en euros</label>
+            <div class="form-input-group">
+                <input class="form-input" id="group-price" type="number" name="group-price" min="0" step="0.01">
+                <span class="form-input-group-text">€</span>
+            </div>
+        </div>
+        <div class="form-field md:col-6">
+            <label for="group-email">Adresse e-mail</label>
+            <div class="form-input-group">
+                <input class="form-input" id="group-email" type="text" name="group-email" aria-describedby="group-email-domain">
+                <span class="form-input-group-text" id="group-email-domain">@exemple.fr</span>
+            </div>
+        </div>
+        <div class="form-field md:col-6">
+            <label for="group-link">Lien à partager</label>
+            <div class="form-input-group">
+                <input class="form-input" id="group-link" type="url" name="group-link" value="https://exemple.fr/a1b2c3" readonly>
+                <button class="btn" type="button">Copier</button>
+            </div>
+        </div>
+        <div class="form-field md:col-6">
+            <label for="group-sort">Trier par</label>
+            <div class="form-input-group">
+                <select class="form-input" id="group-sort" name="group-sort">
+                    <option>Les plus récents</option>
+                    <option>Prix croissant</option>
+                    <option>Prix décroissant</option>
+                </select>
+                <button class="btn-outline theme-primary" type="button">Appliquer</button>
+            </div>
+        </div>
+        <div class="form-field md:col-6">
+            <label for="group-error">Code promo</label>
+            <div class="form-input-group">
+                <input class="form-input" id="group-error" type="text" name="group-error" value="NOEL2025" aria-invalid="true" aria-describedby="group-error-message">
+                <button class="btn" type="button">Valider</button>
+            </div>
+            <p class="fs-sm color-danger-emphasis" id="group-error-message">Erreur : ce code a expiré.</p>
+        </div>
+    </div>
+
+    <h3 class="mt-6">Tailles</h3>
+    <p class="mt-2">form-sm, form-md ou form-lg sur le groupe : le champ, les boutons et les textes changent ensemble (31, 38, 45px).</p>
+    <div class="grid mt-2">
+        {% for size in ['sm', 'md', 'lg'] %}
+            <div class="form-field">
+                <label for="group-size-{{ size }}">Site (form-{{ size }})</label>
+                <div class="form-input-group form-{{ size }}">
+                    <span class="form-input-group-text">https://</span>
+                    <input class="form-input" id="group-size-{{ size }}" type="text" name="group-size-{{ size }}">
+                    <button class="btn-solid theme-primary" type="button">Vérifier</button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <pre class="mt-4" tabindex="0"><code class="language-html">&lt;div class="form-field"&gt;
+    &lt;label for="search"&gt;Rechercher&lt;/label&gt;
+    &lt;div class="form-input-group"&gt;
+        &lt;input class="form-input" id="search" type="search" name="q"&gt;
+        &lt;button class="btn-solid theme-primary" type="submit"&gt;Rechercher&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="form-field"&gt;
+    &lt;label for="price"&gt;Prix, en euros&lt;/label&gt;
+    &lt;div class="form-input-group form-lg"&gt;
+        &lt;input class="form-input" id="price" type="number" name="price"&gt;
+        &lt;span class="form-input-group-text"&gt;€&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    <ul>
+        <li>form-input-group autour : les éléments collés, un seul cadre entre deux, arrondi aux deux bouts. Le champ prend la place qui reste, les boutons et les textes leur largeur.</li>
+        <li>Dedans : un champ (form-input sur un input ou un select), des boutons du framework (toutes les variantes, avec leur .theme-*), des textes en form-input-group-text (le padding et le cadre d'un champ, un fond gris léger, sur une ligne).</li>
+        <li>Sur la ligne partagée, le cadre le plus coloré passe devant : un bouton solid, outline ou subtle devant le champ, le champ devant un texte et un btn gris (la couleur de son thème se voit en entier), un champ en erreur devant tout, et le focus devant le reste.</li>
+        <li>La taille va sur le groupe (form-sm, form-md, form-lg), pas sur le champ : tout change ensemble.</li>
+    </ul>
+
     <h2 class="mt-10">Switch</h2>
     <p class="mt-2">Un réglage allumé ou éteint : un vrai &lt;input type="checkbox"&gt; avec role="switch", sans JavaScript. form-switch le dessine, sans couleur ; form-switch-solid, avec un .theme-*, lui donne sa couleur quand il est allumé.</p>
     <div class="form-field mt-2">
@@ -578,6 +674,7 @@
         <li>Cadre d'un champ en erreur, le rouge de danger : 2,43:1 sur le fond de la page en clair, sous les 3:1, et 5,34:1 en sombre (calculé) ; c'est le message qui dit l'erreur, le cadre ne fait que la souligner. Contour de focus en danger emphasis : 7,82:1 en clair, 8,19:1 en sombre.</li>
         <li>Cadre des champs (WCAG 1.4.11 : 3:1 quand il montre seul où écrire) : le gris est à 1,63:1 sur le fond de la page en clair et 2,12:1 en sombre ; la couleur du thème à 1,75 à 2,43:1 en clair (inverse à part) et au moins 5,34:1 en sombre. Contour de focus, en emphasis : au moins 6,37:1 sur le fond de la page en clair, 8,19:1 en sombre (calculé).</li>
         <li>Aide et erreur : color-neutral-emphasis et color-danger-emphasis, au moins 4,5:1 sur le fond de la page.</li>
+        <li>Groupe : le libellé du champ dit tout, le texte du groupe ne fait que le rappeler (« Prix, en euros » avec « € ») : en passant de champ en champ (Tab), le lecteur d'écran ne lit que le libellé. Un texte qui complète la valeur (@exemple.fr) est relié au champ par aria-describedby : il est lu après le libellé.</li>
         <li>Le bouton d'envoi n'est jamais désactivé en attendant que le formulaire soit rempli : l'utilisateur ne saurait pas ce qui manque. Le navigateur l'arrête au premier champ en erreur et le dit.</li>
         <li>Un champ désactivé n'est pas envoyé et Tab passe par-dessus ; pour une valeur affichée qui doit être envoyée : readonly.</li>
         <li>Switch : avec role="switch", le lecteur d'écran annonce « allumé » ou « éteint » au lieu de « coché » (APG, Switch Pattern). L'état vient de l'attribut checked, pas d'aria-checked (ARIA in HTML).</li>
@@ -629,6 +726,22 @@
     <p>Sans .theme-*, form-switch-solid n'a pas de couleur : allumé, seul le curseur se voit. Un switch sans couleur : form-switch.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;input class="form-input-sm" type="checkbox" name="news"&gt;</code></pre>
     <p>form-input-sm est fait pour les champs : il ne change pas la taille d'une case. Une case suit la taille de son parent : form-sm.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="form-input-group"&gt;
+    &lt;input class="form-input-lg" id="price" type="number" name="price"&gt;
+    &lt;span class="form-input-group-text"&gt;€&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+    <p>Une taille sur le champ seul : le texte et les boutons restent moyens, le groupe s'aligne sur le plus haut. La taille va sur le groupe : form-input-group form-lg.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;label for="first-name"&gt;Nom&lt;/label&gt;
+&lt;div class="form-input-group"&gt;
+    &lt;input class="form-input" id="first-name" type="text" name="first-name"&gt;
+    &lt;input class="form-input" type="text" name="last-name"&gt;
+&lt;/div&gt;</code></pre>
+    <p>Deux champs pour un libellé : le deuxième n'a pas de nom pour le lecteur d'écran. Deux form-field côte à côte (grid, md:col-6), chacun avec son libellé.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="form-input-group"&gt;
+    &lt;span class="form-input-group-text"&gt;Prix&lt;/span&gt;
+    &lt;input class="form-input" type="number" name="price"&gt;
+&lt;/div&gt;</code></pre>
+    <p>Le texte du groupe à la place du libellé : il n'est pas relié au champ, le lecteur d'écran annonce un champ sans nom. Un &lt;label&gt; au-dessus.</p>
 
     <h2 class="mt-10">Limites</h2>
     <ul>
@@ -641,6 +754,9 @@
         <li>month et week n'ont pas de sélecteur dans Firefox ni dans Safari sur ordinateur : un champ de texte à la place, où l'utilisateur doit écrire 2026-10 ou 2026-W43 (MDN). datetime-local dans Safari sur ordinateur : un calendrier, l'heure s'écrit à la main. Pour un mois, deux listes (mois et année) marchent partout.</li>
         <li>Dans un champ fichier étroit, le navigateur coupe le nom du fichier : lui laisser de la largeur. Le texte du bouton (« Choisir un fichier ») et sa couleur sont ceux du navigateur.</li>
         <li>À vérifier dans Safari : la flèche et la hauteur d'une liste (select), le champ fichier, le switch et le zoom des cases.</li>
+        <li>Groupe : il ne passe pas à la ligne. Sur un écran étroit, le champ rétrécit et un bouton au texte long passe sur deux lignes : des textes et des boutons courts.</li>
+        <li>Groupe : un champ d'un thème à côté d'un bouton d'un autre thème (form-input theme-primary et btn-outline theme-danger) : sur la ligne partagée, la couleur du bouton. Avec le .theme-* sur le groupe, les deux ont la même.</li>
+        <li>Groupe : un dropdown se met après le groupe, pas dedans. Son popover compterait comme un élément du groupe, et le bouton qui l'ouvre perdrait ses coins arrondis.</li>
         <li>Le switch n'a que deux états : indeterminate ne change rien à l'écran (APG : un switch n'a pas d'état intermédiaire). Pour un choix partiel, une case à cocher.</li>
         <li>Une case seule change de taille par son parent, jamais par une classe sur elle-même : son libellé, s'il la contient, peut recevoir form-sm.</li>
         <li>Le zoom (MDN : Firefox 126, mai 2024) est ignoré par les navigateurs plus anciens : les cases, boutons radio, range et color y gardent leur taille native, sans autre gêne.</li>

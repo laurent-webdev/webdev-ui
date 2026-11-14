@@ -2079,6 +2079,44 @@
     --form-input-padding-inline: 1.25rem;
     font-size: var(--font-size-lg);
   }
+  .form-input-group {
+    display: flex;
+  }
+  .form-input-group > :is(.form-input, .form-input-sm, .form-input-md, .form-input-lg) {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+  }
+  .form-input-group > :not(:first-child) {
+    margin-inline-start: calc(var(--border-width) * -1);
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+  .form-input-group > :not(:last-child) {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+  .form-input-group > :is(.btn-solid, .btn-outline, .btn-subtle) {
+    position: relative;
+    z-index: 1;
+  }
+  .form-input-group > [aria-invalid=true] {
+    z-index: 2;
+  }
+  .form-input-group > :focus-visible {
+    position: relative;
+    z-index: 3;
+  }
+  .form-input-group-text {
+    display: flex;
+    align-items: center;
+    padding-block: var(--form-input-padding-block);
+    padding-inline: var(--form-input-padding-inline);
+    border: var(--form-input-border-width) solid var(--form-input-border-color);
+    border-radius: var(--form-input-border-radius);
+    background-color: var(--color-neutral-subtle);
+    white-space: nowrap;
+  }
   .form-switch, .form-switch-solid {
     appearance: none;
     flex-shrink: 0;

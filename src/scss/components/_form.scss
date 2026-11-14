@@ -121,6 +121,59 @@
         font-size: var(--font-size-lg);
     }
 
+    // Groupe : un champ, des boutons et des textes collés sur une ligne, arrondi aux deux bouts ; la taille par form-sm / -md / -lg sur le groupe
+    .form-input-group {
+        display: flex;
+
+        // Le champ prend la place qui reste (min-width: 0, sinon il ne rétrécit pas sous sa largeur native)
+        // Devant les textes et les boutons gris : la couleur de son thème se voit sur les quatre côtés
+        > :is(.form-input, .form-input-sm, .form-input-md, .form-input-lg) {
+            position: relative;
+            flex: 1;
+            min-width: 0;
+        }
+
+        // Collés : pas d'arrondi entre deux éléments, le cadre de l'un posé sur celui de son voisin
+        > :not(:first-child) {
+            margin-inline-start: calc(var(--border-width) * -1);
+            border-start-start-radius: 0;
+            border-end-start-radius: 0;
+        }
+        > :not(:last-child) {
+            border-start-end-radius: 0;
+            border-end-end-radius: 0;
+        }
+
+        // Les boutons de couleur devant le champ : leur cadre ou leur fond se voit sur la ligne partagée
+        > :is(.btn-solid, .btn-outline, .btn-subtle) {
+            position: relative;
+            z-index: 1;
+        }
+
+        // Le champ en erreur devant les boutons : le rouge se voit en entier
+        > [aria-invalid="true"] {
+            z-index: 2;
+        }
+
+        // Le focus devant tout le groupe : les voisins ne cachent pas le contour
+        > :focus-visible {
+            position: relative;
+            z-index: 3;
+        }
+    }
+
+    // Un texte dans le groupe (@, €, https://) : le padding et le cadre d'un champ, un fond gris léger, sur une ligne
+    .form-input-group-text {
+        display: flex;
+        align-items: center;
+        padding-block: var(--form-input-padding-block);
+        padding-inline: var(--form-input-padding-inline);
+        border: var(--form-input-border-width) solid var(--form-input-border-color);
+        border-radius: var(--form-input-border-radius);
+        background-color: var(--color-neutral-subtle);
+        white-space: nowrap;
+    }
+
     // Switch : une case à cocher avec role="switch", redessinée ; chaque variante s'utilise seule
     .form-switch, .form-switch-solid {
         appearance: none;
