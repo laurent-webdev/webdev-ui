@@ -30,7 +30,7 @@ git status --short dist/
 .claude/skills/verifier/w3c.sh <dossier scratchpad de la session>/w3c
 ```
 
-Le script enregistre chaque page du menu (sans la barre de débogage de Symfony), puis la passe au validateur Nu (image Docker `ghcr.io/validator/validator`), warnings comptés comme des erreurs. Objectif : aucune ligne. Erreur connue : le favicon de `base.html.twig` (`<` non encodé dans l'URL `data:`, voir « Décisions en attente »), une fois par page.
+Le script enregistre chaque page du menu (sans la barre de débogage de Symfony), puis la passe au validateur Nu (image Docker `ghcr.io/validator/validator`), warnings comptés comme des erreurs. Objectif : aucune ligne.
 
 ## 4. Règles du CLAUDE.md
 
