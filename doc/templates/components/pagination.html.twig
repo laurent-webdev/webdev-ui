@@ -1,0 +1,206 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pagination{% endblock %}
+
+{% block body %}
+    <h1>Pagination</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">Les liens vers les pages d'une liste longue : Précédent, les numéros, Suivant. Une liste de liens dans un &lt;nav&gt;, sans JavaScript ; la page en cours se voit par son fond. Deux variantes colorées par .theme-* (subtle et solid), une option pour coller les éléments (pagination-group) et trois tailles.</p>
+
+    <nav class="mt-2" aria-label="Pagination (démo)">
+        <ul class="pagination">
+            <li><a class="pagination-item" href="#" rel="prev">Précédent</a></li>
+            {% for page in [1, 2, 3] %}
+                <li><a class="pagination-item" href="#" aria-label="Page {{ page }}"{% if page == 2 %} aria-current="page"{% endif %}>{{ page }}</a></li>
+            {% endfor %}
+            <li>…</li>
+            <li><a class="pagination-item" href="#" aria-label="Page 12">12</a></li>
+            <li><a class="pagination-item" href="#" rel="next">Suivant</a></li>
+        </ul>
+    </nav>
+    <ul class="mt-4">
+        <li>pagination, sans couleur : le texte de la page, sans cadre ; au survol, un fond gris léger ; au clic et sur la page en cours (aria-current), ce fond renforcé.</li>
+        <li>Un numéro seul est un carré de la hauteur d'un bouton (38px) ; un nombre long ou un mot (Précédent) l'élargit.</li>
+        <li>Les points de suspension sont un &lt;li&gt; sans lien, centré sur la largeur d'un élément.</li>
+        <li>Sur un écran étroit, les éléments passent à la ligne.</li>
+    </ul>
+
+    {% for variant in ['subtle', 'solid'] %}
+        <h2 class="mt-10">pagination-{{ variant }}</h2>
+        {% for color in colors %}
+            <nav class="mt-2" aria-label="pagination-{{ variant }} theme-{{ color }} (démo)">
+                <ul class="pagination-{{ variant }} theme-{{ color }}">
+                    <li><a class="pagination-item" href="#" rel="prev">Précédent</a></li>
+                    {% for page in 1..4 %}
+                        <li><a class="pagination-item" href="#" aria-label="Page {{ page }}"{% if page == 2 %} aria-current="true"{% endif %}>{{ page }}</a></li>
+                    {% endfor %}
+                    <li><a class="pagination-item" href="#" rel="next">Suivant</a></li>
+                </ul>
+            </nav>
+        {% endfor %}
+        <ul class="mt-4">
+            <li>Le texte en emphasis du thème, comme un bouton btn-text : au survol, le fond léger du thème ; au clic, ce fond renforcé et le texte plus fort.</li>
+            {% if variant == 'subtle' %}
+                <li>La page en cours a le fond du clic et le texte plus fort : un cran au-dessus du survol, pour ne pas s'y confondre.</li>
+            {% else %}
+                <li>La page en cours a le fond plein de la couleur et son texte (-contrast), comme un bouton btn-solid : la plus visible des trois.</li>
+            {% endif %}
+            <li>.theme-* sur la pagination, ou sur un parent, la colore ; sans thème, une variante n'a pas de couleur (voir les contre-exemples). Les démos utilisent aria-current="true" : leurs liens ne mènent nulle part.</li>
+        </ul>
+    {% endfor %}
+
+    <h2 class="mt-10">pagination-group</h2>
+    {% for variant in ['', '-subtle', '-solid'] %}
+        <nav class="mt-2" aria-label="pagination{{ variant }} pagination-group (démo)">
+            <ul class="pagination{{ variant }} pagination-group{% if variant %} theme-primary{% endif %}">
+                <li><a class="pagination-item" href="#" rel="prev">Précédent</a></li>
+                {% for page in [1, 2, 3] %}
+                    <li><a class="pagination-item" href="#" aria-label="Page {{ page }}"{% if page == 2 %} aria-current="true"{% endif %}>{{ page }}</a></li>
+                {% endfor %}
+                <li>…</li>
+                <li><a class="pagination-item" href="#" aria-label="Page 12">12</a></li>
+                <li><a class="pagination-item" href="#" rel="next">Suivant</a></li>
+            </ul>
+        </nav>
+    {% endfor %}
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;ul class="pagination-solid pagination-group theme-primary"&gt;…&lt;/ul&gt;</code></pre>
+    <ul>
+        <li>Une option, à ajouter à pagination, pagination-subtle ou pagination-solid : les éléments collés dans un cadre gris, comme un groupe de boutons, les coins arrondis aux deux bouts seulement.</li>
+        <li>Au survol et sur la page en cours, le cadre prend la couleur du thème (un gris plus marqué sans couleur) et passe devant ses voisins.</li>
+        <li>Les points de suspension prennent aussi le cadre.</li>
+    </ul>
+
+    <h2 class="mt-10">Tailles</h2>
+    {% for size in ['sm', 'md', 'lg'] %}
+        <nav class="mt-2" aria-label="pagination-{{ size }} (démo)">
+            <ul class="pagination-solid pagination-{{ size }} theme-primary">
+                <li><a class="pagination-item" href="#" rel="prev">Précédent</a></li>
+                {% for page in [1, 2, 3, 100] %}
+                    <li><a class="pagination-item" href="#" aria-label="Page {{ page }}"{% if page == 2 %} aria-current="true"{% endif %}>{{ page }}</a></li>
+                {% endfor %}
+                <li><a class="pagination-item" href="#" rel="next">Suivant</a></li>
+            </ul>
+        </nav>
+    {% endfor %}
+    <p class="mt-2">pagination-sm, pagination-md (le défaut) et pagination-lg : 31, 38 et 45px de haut, comme les boutons, et la taille du texte. Avec n'importe quelle variante et avec pagination-group.</p>
+
+    <h2 class="mt-10">HTML</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;nav aria-label="Pagination"&gt;
+    &lt;ul class="pagination-solid theme-primary"&gt;
+        &lt;li&gt;&lt;a class="pagination-item" href="?page=1" rel="prev"&gt;Précédent&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="pagination-item" href="?page=1" aria-label="Page 1"&gt;1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="pagination-item" href="?page=2" aria-label="Page 2" aria-current="page"&gt;2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="pagination-item" href="?page=3" aria-label="Page 3"&gt;3&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;…&lt;/li&gt;
+        &lt;li&gt;&lt;a class="pagination-item" href="?page=12" aria-label="Page 12"&gt;12&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="pagination-item" href="?page=3" rel="next"&gt;Suivant&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+    <ul>
+        <li>Un &lt;nav&gt; avec un aria-label, puis pagination, pagination-subtle ou pagination-solid sur le &lt;ul&gt; ; les &lt;li&gt; n'ont pas de classe.</li>
+        <li>pagination-item sur chaque &lt;a&gt; ; aria-current="page" sur celui de la page affichée ; rel="prev" et rel="next" sur Précédent et Suivant.</li>
+        <li>aria-label="Page 2" sur un numéro : le lecteur d'écran dit « Page 2 » au lieu de « 2 ».</li>
+        <li>Les numéros et les points de suspension sont écrits par le site (le serveur ou son template) : le framework ne calcule rien.</li>
+    </ul>
+
+    <h2 class="mt-10">Exemple : première et dernière page</h2>
+    <div class="d-flex flex-direction-column gap-4 mt-2">
+        <nav aria-label="Première page (démo)">
+            <ul class="pagination-solid theme-primary">
+                <li><a class="pagination-item">Précédent</a></li>
+                {% for page in 1..3 %}
+                    <li><a class="pagination-item" href="#" aria-label="Page {{ page }}"{% if page == 1 %} aria-current="true"{% endif %}>{{ page }}</a></li>
+                {% endfor %}
+                <li><a class="pagination-item" href="#" rel="next">Suivant</a></li>
+            </ul>
+        </nav>
+        <nav aria-label="Dernière page (démo)">
+            <ul class="pagination-solid theme-primary">
+                <li><a class="pagination-item" href="#" rel="prev">Précédent</a></li>
+                {% for page in 1..3 %}
+                    <li><a class="pagination-item" href="#" aria-label="Page {{ page }}"{% if page == 3 %} aria-current="true"{% endif %}>{{ page }}</a></li>
+                {% endfor %}
+                <li><a class="pagination-item">Suivant</a></li>
+            </ul>
+        </nav>
+    </div>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;li&gt;&lt;a class="pagination-item"&gt;Précédent&lt;/a&gt;&lt;/li&gt;</code></pre>
+    <ul>
+        <li>Sur la première page, Précédent n'a pas de href (ni de rel) : il est estompé et ne réagit pas à la souris ; le navigateur le sort de l'ordre du clavier et ne l'annonce plus comme un lien. Pareil pour Suivant sur la dernière page.</li>
+        <li>Le site peut aussi ne pas l'écrire du tout : la pagination garde sa place, Précédent ou Suivant en moins.</li>
+    </ul>
+
+    <h2 class="mt-10">Exemple : en JavaScript, des boutons</h2>
+    <nav class="mt-2" aria-label="Résultats (démo)">
+        <ul class="pagination-subtle theme-secondary">
+            <li><button class="pagination-item" type="button" disabled>Précédent</button></li>
+            {% for page in 1..3 %}
+                <li><button class="pagination-item" type="button" aria-label="Page {{ page }}"{% if page == 1 %} aria-current="true"{% endif %}>{{ page }}</button></li>
+            {% endfor %}
+            <li><button class="pagination-item" type="button">Suivant</button></li>
+        </ul>
+    </nav>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;li&gt;&lt;button class="pagination-item" type="button" aria-label="Page 1" aria-current="true"&gt;1&lt;/button&gt;&lt;/li&gt;
+&lt;li&gt;&lt;button class="pagination-item" type="button" disabled&gt;Précédent&lt;/button&gt;&lt;/li&gt;</code></pre>
+    <p>Quand le JavaScript du site change les résultats sans changer de page : des &lt;button type="button"&gt;, même style ; disabled sur Précédent ou Suivant ; aria-current="true" (pas "page") sur le numéro affiché, déplacé par le JavaScript du site.</p>
+
+    <h2 class="mt-10">Variables</h2>
+    <table class="table mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Défaut</th>
+                <th scope="col">Rôle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">--pagination-item-padding-block</th><td>0.375rem</td><td>haut et bas d'un élément (38px de haut) ; réécrite par les tailles</td></tr>
+            <tr><th scope="row">--pagination-item-padding-inline</th><td>0.75rem</td><td>côtés d'un élément, pour un nombre long ou un mot ; réécrite par les tailles</td></tr>
+            <tr><th scope="row">--pagination-item-border-radius</th><td>--border-radius-md</td><td>coins d'un élément ; ceux des deux bouts dans pagination-group</td></tr>
+        </tbody>
+    </table>
+
+    <h2 class="mt-10">Exemple : changer les valeurs</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --pagination-item-border-radius: var(--border-radius-pill); }
+.pagination-sm { --pagination-item-padding-inline: 0.375rem; }
+.pagination-articles { --pagination-item-padding-block: 0.5rem; }</code></pre>
+    <p>La première ligne arrondit tous les éléments en pilule, la deuxième resserre la petite taille ; la dernière agrandit seulement la pagination qui a la classe pagination-articles du site (pagination-md garde la valeur d'origine ailleurs).</p>
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul>
+        <li>&lt;nav&gt; et son aria-label : le lecteur d'écran annonce une zone de navigation « Pagination » ; un aria-label différent sur chaque &lt;nav&gt; de la page.</li>
+        <li>aria-current="page" sur la page affichée : le lecteur d'écran annonce « page actuelle ». À l'écran, son fond la montre : en solid, le fond plein (1,75 à 2,43:1 contre la page en clair, sauf inverse, sous les 3:1 de WCAG 1.4.11 comme le switch allumé ; 5,34 à 6,45:1 en sombre) ; en subtle et sans couleur, seulement le fond du clic (1,26 à 2,01:1 en clair, 1,76 à 2,41:1 en sombre) ; dans pagination-group, en plus, son cadre de couleur.</li>
+        <li>aria-label="Page 2" : le nom contient le texte visible (WCAG 2.5.3), une commande vocale « cliquer 2 » marche.</li>
+        <li>Textes lisibles, dans toutes les couleurs (calculé) : en subtle et solid, l'emphasis au moins 6,37:1 au repos, 5,28:1 au survol, 5,63:1 au clic et sur la page en cours de subtle en clair, 8,19:1, 6,11:1 et 6,30:1 en sombre ; le texte de la page en cours de solid au moins 8,65:1 en clair, 5,97:1 en sombre ; sans couleur, le texte de la page sur les fonds gris, au moins 10,46:1 en clair, 7,80:1 en sombre.</li>
+        <li>Le contour de focus est celui des boutons : la couleur du thème en emphasis (au moins 6,37:1 sur la page en clair, 8,19:1 en sombre), celle du texte sans couleur.</li>
+        <li>Éléments de 38px de haut (31px en pagination-sm), plus que la cible tactile minimale de 24px (WCAG 2.5.8).</li>
+        <li>Un cadre transparent autour de chaque élément : en contraste élevé (Windows), il devient visible et montre les éléments.</li>
+        <li>Précédent désactivé : un &lt;a&gt; sans href n'est plus un lien, ni pour le clavier ni pour le lecteur d'écran ; un &lt;button disabled&gt; non plus.</li>
+    </ul>
+
+    <h2 class="mt-10">Contre-exemples</h2>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;ul class="pagination-solid"&gt;…&lt;/ul&gt;</code></pre>
+    <p>Une variante sans .theme-* (ni sur elle, ni sur un parent) : pas de couleur, la page en cours ne se voit plus, et dans pagination-group les cadres prennent la couleur du texte. pagination pour une pagination sans couleur.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;ul class="pagination-group theme-primary"&gt;…&lt;/ul&gt;</code></pre>
+    <p>pagination-group seul : les éléments ne sont plus en ligne, et les puces reviennent. L'option s'ajoute à pagination, pagination-subtle ou pagination-solid.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="pagination-item" href="?page=0" aria-disabled="true"&gt;Précédent&lt;/a&gt;</code></pre>
+    <p>Désactivé par aria-disabled : le lien reste dans l'ordre du clavier, se clique et mène à la page. Retirer le href.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="pagination-item" rel="prev"&gt;Précédent&lt;/a&gt;</code></pre>
+    <p>rel sans href : refusé par le validateur W3C. Retirer rel avec le href.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="pagination-item active" href="?page=2"&gt;2&lt;/a&gt;</code></pre>
+    <p>Pas de classe d'état : aria-current="page", que le lecteur d'écran annonce et que le style lit.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="pagination"&gt;
+    &lt;a class="pagination-item" href="?page=1"&gt;1&lt;/a&gt;
+    &lt;span&gt;…&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+    <p>Sans &lt;ul&gt; ni &lt;li&gt; : le lecteur d'écran n'annonce pas le nombre d'éléments, les points de suspension ne sont plus centrés, et pagination-group ne colle plus rien. Une liste.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;ul class="pagination"&gt;…&lt;/ul&gt;</code></pre>
+    <p>Sans &lt;nav aria-label&gt; autour : pas de zone de navigation, le lecteur d'écran ne permet pas d'y aller directement.</p>
+
+    <h2 class="mt-10">Limites</h2>
+    <ul>
+        <li>En subtle et sans couleur, la page en cours ne se voit que par un fond léger (voir Accessibilité) : solid, ou pagination-group, la montre mieux.</li>
+        <li>Dans pagination-group, quand les éléments passent à la ligne sur un écran étroit, le groupe est coupé : pas de coins arrondis aux bouts de chaque ligne. Afficher moins de numéros sur petit écran.</li>
+        <li>Dans pagination-group, un élément désactivé est estompé avec son cadre : ce morceau du cadre pâlit.</li>
+        <li>Pas de calcul des pages ni des points de suspension : le site les écrit.</li>
+    </ul>
+{% endblock %}

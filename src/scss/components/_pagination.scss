@@ -1,0 +1,184 @@
+@layer components {
+
+    :root {
+        // Forme : chaque élément, 38px de haut comme un bouton
+        --pagination-item-padding-block: 0.375rem;
+        --pagination-item-padding-inline: 0.75rem;
+        --pagination-item-border-radius: var(--border-radius-md);
+    }
+
+    // Une classe par couleur : hérité, un .theme-* sur un parent colore toutes ses paginations
+    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+        .theme-#{$color} {
+            --pagination-theme-color: var(--color-#{$color});
+            --pagination-theme-contrast: var(--color-#{$color}-contrast);
+            --pagination-theme-subtle: var(--color-#{$color}-subtle);
+            --pagination-theme-emphasis: var(--color-#{$color}-emphasis);
+            --pagination-theme-emphasis-strong: var(--color-#{$color}-emphasis-strong);
+        }
+    }
+
+    // Forme commune : les éléments en ligne, séparés par un petit écart ; à la ligne sur un écran étroit
+    .pagination, .pagination-subtle, .pagination-solid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.25rem;
+        // Sans puces ni retrait ; "" et pas none : avec none, Safari n'annonce plus une liste
+        padding-inline-start: 0;
+        list-style-type: "";
+
+        // Les points de suspension : un <li> sans lien, centré sur la largeur d'un élément
+        > li:not(:has(> .pagination-item)) {
+            min-inline-size: calc(1lh + var(--pagination-item-padding-block) * 2 + var(--border-width) * 2);
+            text-align: center;
+        }
+    }
+
+    // Un lien ou un bouton, sans cadre : un carré pour un chiffre seul (la largeur minimale égale la hauteur)
+    .pagination-item {
+        display: block;
+        min-inline-size: calc(1lh + var(--pagination-item-padding-block) * 2 + var(--border-width) * 2);
+        padding-block: var(--pagination-item-padding-block);
+        padding-inline: var(--pagination-item-padding-inline);
+        // Transparente : la hauteur d'un bouton, et un cadre visible en contraste élevé (Windows)
+        border: var(--border-width) solid transparent;
+        border-radius: var(--pagination-item-border-radius);
+        background-color: transparent;
+        color: inherit;
+        text-align: center;
+        text-decoration: none;
+        transition-property: background-color, color;
+        transition-duration: var(--transition-duration);
+
+        // Comme les boutons : la couleur du thème en emphasis ; sans thème, celle du texte
+        &:focus-visible {
+            outline: var(--focus-outline-width) solid var(--pagination-theme-emphasis, currentColor);
+            outline-offset: var(--focus-outline-offset);
+        }
+
+        // Désactivé : un <a> sans href (Précédent sur la première page) ou un bouton disabled ; estompé, comme les boutons
+        &:is(a:not([href]), :disabled) {
+            opacity: var(--disabled-opacity);
+            pointer-events: none;
+        }
+    }
+
+    // Par défaut, sans couleur : le texte de la page ; au survol, un fond gris léger ; au clic et sur la page en cours, ce fond renforcé
+    .pagination .pagination-item {
+        &:hover {
+            background-color: var(--color-neutral-subtle);
+        }
+        &:active,
+        &[aria-current]:not([aria-current="false"]) {
+            background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+        }
+    }
+
+    // Subtle et solid : le texte en emphasis du thème, comme un bouton text ; au survol, son fond léger ; au clic, renforcé, avec un texte plus fort
+    .pagination-subtle .pagination-item,
+    .pagination-solid .pagination-item {
+        color: var(--pagination-theme-emphasis);
+
+        &:hover {
+            background-color: var(--pagination-theme-subtle);
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--pagination-theme-subtle), var(--pagination-theme-color) var(--state-mix-soft));
+            color: var(--pagination-theme-emphasis-strong);
+        }
+    }
+
+    // Subtle : la page en cours au fond du clic et au texte plus fort ; un cran au-dessus du survol, pour ne pas s'y confondre
+    .pagination-subtle .pagination-item[aria-current]:not([aria-current="false"]) {
+        background-color: color-mix(in srgb, var(--pagination-theme-subtle), var(--pagination-theme-color) var(--state-mix-soft));
+        color: var(--pagination-theme-emphasis-strong);
+    }
+
+    // Solid : la page en cours en fond plein et son texte, comme un bouton solid
+    .pagination-solid .pagination-item[aria-current]:not([aria-current="false"]) {
+        background-color: var(--pagination-theme-color);
+        color: var(--pagination-theme-contrast);
+    }
+
+    // Group, à ajouter : les éléments collés dans un cadre gris, comme un groupe de boutons ; avec n'importe quelle variante
+    .pagination-group {
+        gap: 0;
+
+        // Chaque élément et les points de suspension encadrés, sans arrondi ; le cadre d'un élément recouvre celui de son voisin
+        > li > .pagination-item,
+        > li:not(:has(> .pagination-item)) {
+            border: var(--border-width) solid var(--border-color);
+            border-radius: 0;
+        }
+        > li:not(:has(> .pagination-item)) {
+            padding-block: var(--pagination-item-padding-block);
+        }
+        > li + li {
+            margin-inline-start: calc(var(--border-width) * -1);
+        }
+
+        // Les coins arrondis aux deux bouts du groupe seulement
+        > li:first-child,
+        > li:first-child > .pagination-item {
+            border-start-start-radius: var(--pagination-item-border-radius);
+            border-end-start-radius: var(--pagination-item-border-radius);
+        }
+        > li:last-child,
+        > li:last-child > .pagination-item {
+            border-start-end-radius: var(--pagination-item-border-radius);
+            border-end-end-radius: var(--pagination-item-border-radius);
+        }
+
+        // Le focus passe devant les voisins : leur cadre ne cache pas le contour
+        > li > .pagination-item:focus-visible {
+            position: relative;
+            z-index: 1;
+        }
+    }
+
+    // Group : au survol et sur la page en cours, un cadre de couleur, devant les voisins pour se voir sur les quatre côtés
+    .pagination-group > li > .pagination-item {
+        &:hover,
+        &[aria-current]:not([aria-current="false"]) {
+            position: relative;
+        }
+    }
+
+    // Sans couleur : un gris plus marqué que le cadre
+    .pagination.pagination-group > li > .pagination-item {
+        &:hover,
+        &[aria-current]:not([aria-current="false"]) {
+            border-color: var(--color-neutral);
+        }
+    }
+
+    // Subtle et solid : la couleur du thème, comme le cadre d'un bouton outline
+    .pagination-subtle.pagination-group > li > .pagination-item,
+    .pagination-solid.pagination-group > li > .pagination-item {
+        &:hover,
+        &[aria-current]:not([aria-current="false"]) {
+            border-color: var(--pagination-theme-color);
+        }
+    }
+
+    // Tailles : changent le padding et le texte de tous les éléments, avec n'importe quelle variante ; 31, 38 et 45px de haut, comme les boutons
+    .pagination-sm {
+        --pagination-item-padding-block: 0.25rem;
+        --pagination-item-padding-inline: 0.5rem;
+        font-size: var(--font-size-sm);
+    }
+
+    .pagination-md {
+        --pagination-item-padding-block: 0.375rem;
+        --pagination-item-padding-inline: 0.75rem;
+        font-size: var(--font-size-md);
+    }
+
+    .pagination-lg {
+        --pagination-item-padding-block: 0.5rem;
+        --pagination-item-padding-inline: 1rem;
+        font-size: var(--font-size-lg);
+    }
+
+}
