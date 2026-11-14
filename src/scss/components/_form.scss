@@ -260,7 +260,7 @@
     .form-switch-md { --form-switch-height: 1.25rem; }
     .form-switch-lg { --form-switch-height: 1.5rem; }
 
-    // Range, case à cocher, bouton radio : ceux du navigateur, colorés par accent-color ; sans thème, la couleur du navigateur
+    // Range, case à cocher, bouton radio : ceux du navigateur, colorés par accent-color ; sans thème, celle du body (la couleur du texte)
     .form-range, .form-checkbox, .form-radio {
         accent-color: var(--form-control-theme-color);
 

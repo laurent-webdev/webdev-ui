@@ -154,7 +154,7 @@ Un fichier par famille dans `utilities/` : spacing, gap, display, flex, sizing, 
 ## Reset et base
 
 - `_reset.scss` : remise à zéro sans style visuel. `margin: 0` seul (pas de `padding: 0`) ; **`:where(:not(dialog, [popover]))` gardé, ne pas reproposer de le retirer** ; `hidden` en `!important` ; `prefers-reduced-motion: reduce` global en `!important` (choix strict assumé) ; `interpolate-size` seulement sous `no-preference` ; `scrollbar-gutter: stable` sur `html` ; pas de `ul[role="list"]` (warning W3C).
-- `base/` : styles des éléments natifs (typographie, fond du `body`). `base/_colors.scss` est en essai, à valider par Laurent ; restent à faire `hr`, `accent-color`, `:focus-visible` commun.
+- `base/` : styles des éléments natifs (typographie, fond du `body`). `base/_colors.scss` est en essai, à valider par Laurent ; `accent-color: currentColor` sur le `body` : cases, boutons radio, range et progress sans thème dans la couleur du texte, le défaut sans couleur comme `form-switch` (Bootstrap 6 met primary ; un site le change sur son `body`). Restent à faire `hr`, `:focus-visible` commun.
 
 ## Organisation des fichiers
 

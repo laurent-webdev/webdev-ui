@@ -240,7 +240,7 @@
         </div>
     </form>
     <ul>
-        <li>form-input sur les champs de texte, de nombre, de date, de fichier et les listes ; form-switch ou form-switch-solid sur les switchs ; form-range, form-checkbox et form-radio pour donner la couleur du thème à un range, une case ou un bouton radio ; sans classe, ils restent ceux du navigateur, comme color.</li>
+        <li>form-input sur les champs de texte, de nombre, de date, de fichier et les listes ; form-switch ou form-switch-solid sur les switchs ; form-range, form-checkbox et form-radio pour donner la couleur du thème à un range, une case ou un bouton radio ; sans classe, ils restent ceux du navigateur, comme color, dans la couleur du texte.</li>
         <li>Dans un form-field, le champ prend toute la largeur de sa colonne, et garde sa hauteur quand un message s'affiche dans la colonne voisine.</li>
         <li>Avec multiple ou size, la liste est affichée en entier.</li>
         <li>Un &lt;h3&gt; dans la grille prend toute la largeur, comme tout enfant sans col-*.</li>
@@ -592,7 +592,7 @@
     </div>
     <ul>
         <li>Sans thème, un cadre gris ; avec un .theme-*, le cadre a la couleur du thème, à toutes les tailles et aussi sur un champ fichier.</li>
-        <li>form-range, form-checkbox et form-radio : la partie remplie et le curseur du range, la case cochée et le bouton radio choisi prennent la couleur du thème (accent-color : le dessin reste celui du navigateur, qui choisit une coche lisible). Sans thème, la couleur du navigateur. Au focus, le contour des boutons, à la forme de l'élément (arrondi, carré ou rond), autour du range entier : la couleur du thème en emphasis, sans thème celle du texte.</li>
+        <li>form-range, form-checkbox et form-radio : la partie remplie et le curseur du range, la case cochée et le bouton radio choisi prennent la couleur du thème (accent-color : le dessin reste celui du navigateur, qui choisit une coche lisible). Sans thème, et sans classe, la couleur du texte : noir en clair, blanc en sombre, le défaut sans couleur comme form-switch (accent-color: currentColor sur le body, dans base). Au focus, le contour des boutons, à la forme de l'élément (arrondi, carré ou rond), autour du range entier : la couleur du thème en emphasis, sans thème celle du texte.</li>
         <li>Le bouton d'un champ fichier prend aussi la couleur du thème, comme btn-solid : fond plein, texte noir ou blanc (au moins 5,96:1). Sans thème, il garde les couleurs du navigateur ; désactivé, son aspect du navigateur.</li>
         <li>Au focus, un contour comme celui des boutons : la couleur du thème en emphasis (foncée en clair, claire en sombre), sans thème la couleur du texte. Pas de changement au survol.</li>
         <li>.theme-* sur le formulaire (ou un parent) colore tous ses champs, ses switchs et ses boutons ; sur un champ, seulement le sien.</li>
@@ -661,8 +661,9 @@
     <p>L'espace dans un form-field : :root { --form-field-gap: 0.25rem; } pour tous, un utilitaire pour un seul (class="form-field gap-1").</p>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --form-switch-height: 1.5rem; }
 .form-switch-lg { --form-switch-height: 2rem; }
-.form-lg { --form-control-zoom: 1.5; }</code></pre>
-    <p>La première ligne change tous les switchs sans taille, la deuxième la grande taille, la dernière les cases, les boutons radio, range et color d'un form-lg. Un switch prend les valeurs de form-lg par héritage : pour le changer dans un groupe, .form-lg { --form-switch-height: 2rem; }.</p>
+.form-lg { --form-control-zoom: 1.5; }
+body { accent-color: var(--color-primary); }</code></pre>
+    <p>La première ligne change tous les switchs sans taille, la deuxième la grande taille, la troisième les cases, les boutons radio, range et color d'un form-lg ; la dernière donne la couleur primary à toutes les cases, tous les boutons radio et tous les range sans thème du site (au lieu de la couleur du texte). Un switch prend les valeurs de form-lg par héritage : pour le changer dans un groupe, .form-lg { --form-switch-height: 2rem; }.</p>
 
     <h2 class="mt-10">Accessibilité</h2>
     <ul>

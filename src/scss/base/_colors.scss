@@ -1,8 +1,10 @@
 @layer base {
 
-    // Fond de page : suit le thème clair ou sombre
     body {
+        // Fond de page : suit le thème clair ou sombre
         background-color: var(--color-background);
+        // Cases, boutons radio, range et progress du navigateur : la couleur du texte, le défaut sans couleur (comme form-switch)
+        accent-color: currentColor;
     }
 
 }
