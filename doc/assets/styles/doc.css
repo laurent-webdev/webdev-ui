@@ -126,8 +126,10 @@ pre:has(> code[class*="language-"]) {
   font-size: var(--font-size-sm);
 }
 
-/* Bouton Copier d'un bloc de code (app.js) : au repos, le fond du bloc, le code qui passe dessous ne brouille pas l'icône ; survol et clic : ceux du bouton */
-.doc-code-copy:not(:hover, :active) {
+/* Bouton Copier d'un bloc de code (app.js) : sans cadre, le fond du bloc dans tous les états (le code qui passe dessous ne brouille pas l'icône) ;
+   la coche dit que c'est copié, le focus garde son contour (outline) */
+.doc-code-copy {
+  border-color: transparent;
   background-color: oklch(0.14 0.03 280);
 }
 
