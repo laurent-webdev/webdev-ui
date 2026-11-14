@@ -101,7 +101,8 @@
 
     // Borderless, à ajouter à list : plus de cadre ni de traits ; chaque élément arrondi, son fond se détache seul au survol et en cours
     .list-borderless {
-        --list-border-width: 0;
+        // 0px et pas 0 : la variable entre dans le calc() des coins, où un 0 sans unité est invalide
+        --list-border-width: 0px;
 
         > li {
             border-radius: var(--list-border-radius);

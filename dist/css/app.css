@@ -2392,7 +2392,7 @@
     pointer-events: none;
   }
   .list-borderless {
-    --list-border-width: 0;
+    --list-border-width: 0px;
   }
   .list-borderless > li {
     border-radius: var(--list-border-radius);
@@ -3025,7 +3025,7 @@
     border: var(--table-border-width) solid var(--table-theme-subtle-border, var(--border-color));
   }
   .table-borderless {
-    --table-border-width: 0;
+    --table-border-width: 0px;
   }
   .table-striped > tbody > tr:nth-child(odd) {
     background-color: color-mix(in srgb, var(--table-theme-subtle, var(--color-neutral-subtle)), var(--table-theme-color, var(--color-neutral)) var(--state-mix-soft));

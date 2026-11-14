@@ -52,7 +52,7 @@
 
     // Borderless : plus aucun trait
     .table-borderless {
-        --table-border-width: 0;
+        --table-border-width: 0px;
     }
 
     // Striped : une ligne sur deux, le fond léger renforcé par la couleur du thème (neutral sans thème) ; le texte de la page y reste lisible

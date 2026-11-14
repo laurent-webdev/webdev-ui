@@ -48,7 +48,7 @@
                 {# Petit écran : le menu est dans un drawer #}
                 <button class="btn btn-sm lg:d-none" type="button" commandfor="doc-menu" command="show-modal">Menu</button>
                 {# Grand écran : le nom est en haut du menu fixé #}
-                <a class="link theme-primary fs-lg fw-bold text-decoration-none lg:d-none" href="{{ path('app_main') }}">webdev-ui</a>
+                <a class="link fs-lg fw-bold text-decoration-none lg:d-none" href="{{ path('app_main') }}">webdev-ui</a>
                 <a class="btn btn-sm ms-auto" href="{{ path('app_test') }}">Page de test</a>
                 <button class="btn btn-sm" type="button" id="theme-toggle" aria-pressed="false">Thème sombre</button>
             </div>
@@ -60,16 +60,16 @@
                 <button class="btn-close" type="button" commandfor="doc-menu" command="close" aria-label="Fermer"></button>
             </div>
             <div class="drawer-body">
-                <nav class="theme-primary fs-sm d-grid gap-6" aria-label="Documentation">
+                <nav class="fs-sm d-grid gap-6" aria-label="Documentation">
                     {{ include('_menu.html.twig') }}
                 </nav>
             </div>
         </dialog>
 
         {# Grand écran : le menu toujours là, fixé contre le bord gauche, en verre ; doc.css décale la page de sa place #}
-        <nav class="drawer-start position-fixed glass theme-primary d-none lg:d-block" id="doc-menu-fixed" aria-label="Documentation">
+        <nav class="drawer-start position-fixed glass d-none lg:d-block" id="doc-menu-fixed" aria-label="Documentation">
             <div class="drawer-header">
-                <a class="link theme-primary fs-lg fw-bold text-decoration-none" href="{{ path('app_main') }}">webdev-ui</a>
+                <a class="link fs-lg fw-bold text-decoration-none" href="{{ path('app_main') }}">webdev-ui</a>
             </div>
             <div class="drawer-body fs-sm d-grid gap-6">
                 {{ include('_menu.html.twig') }}

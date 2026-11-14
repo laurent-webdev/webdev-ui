@@ -6,7 +6,7 @@
     <h1 class="fs-5xl">webdev-ui</h1>
     <p class="fs-xl color-neutral-emphasis mt-4">Un framework CSS/JS ultra léger : le HTML natif, des variables CSS pour tout personnaliser, les thèmes clair et sombre, et pas une dépendance.</p>
     <div class="d-flex flex-wrap-wrap gap-3 mt-6">
-        <a class="btn-solid theme-primary btn-lg" href="{{ path('app_accordion') }}">Voir les composants</a>
+        <a class="btn btn-lg" href="{{ path('app_accordion') }}">Voir les composants</a>
         <a class="btn btn-lg" href="{{ path('app_variables') }}">Personnaliser</a>
     </div>
 
@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-body d-flex flex-wrap-wrap align-items-start gap-2">
                     {% for link in section.links %}
-                        <a class="btn-subtle btn-xs theme-primary" href="{{ path(link[0]) }}">{{ link[1] }}</a>
+                        <a class="btn btn-xs" href="{{ path(link[0]) }}">{{ link[1] }}</a>
                     {% endfor %}
                 </div>
             </section>

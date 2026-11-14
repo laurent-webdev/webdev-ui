@@ -75,7 +75,7 @@
         </nav>
     </div>
     <ul>
-        <li>list-borderless s'ajoute à list : plus de cadre ni de traits entre les éléments (--list-border-width à 0). Pour un menu de côté, une liste dans une carte ou un drawer qui a déjà son cadre.</li>
+        <li>list-borderless s'ajoute à list : plus de cadre ni de traits entre les éléments (--list-border-width à 0px). Pour un menu de côté, une liste dans une carte ou un drawer qui a déjà son cadre.</li>
         <li>Chaque élément a les coins de la liste : au survol et en cours, son fond se détache seul, arrondi.</li>
         <li>Le menu de cette doc l'utilise, avec des lignes plus serrées (--list-item-padding-block: 0.375rem).</li>
     </ul>
@@ -129,14 +129,14 @@
             <tr><th scope="row">--list-item-padding-block</th><td>0.5rem</td><td>haut et bas d'un élément (40px de haut)</td></tr>
             <tr><th scope="row">--list-item-padding-inline</th><td>1rem</td><td>côtés d'un élément</td></tr>
             <tr><th scope="row">--list-border-radius</th><td>--border-radius-md</td><td>coins de la liste (ceux du premier et du dernier élément suivent)</td></tr>
-            <tr><th scope="row">--list-border-width</th><td>--border-width</td><td>cadre et traits entre les éléments (couleur --border-color) ; 0 dans list-borderless</td></tr>
+            <tr><th scope="row">--list-border-width</th><td>--border-width</td><td>cadre et traits entre les éléments (couleur --border-color) ; 0px dans list-borderless</td></tr>
         </tbody>
     </table>
 
     <h2 class="mt-10">Exemple : changer les valeurs</h2>
     <pre class="mt-2" tabindex="0"><code class="language-css">:root { --list-item-padding-block: 0.375rem; }
 .menu-compte { --list-item-padding-inline: 0.75rem; }
-:root { --list-border-radius: 0; }</code></pre>
+:root { --list-border-radius: 0px; }</code></pre>
     <p>La première ligne rend tous les éléments plus bas (36px), la deuxième change seulement la liste qui a la classe menu-compte du site ; la dernière donne des coins carrés à toutes les listes.</p>
 
     <h2 class="mt-10">Accessibilité</h2>
