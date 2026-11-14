@@ -58,6 +58,28 @@
         <li>aria-current="page" dans une navigation (le lien de la page où l'on est) ; "step" pour une étape, "true" pour l'élément choisi dans un groupe. La démo utilise "true" : ses liens ne mènent nulle part.</li>
     </ul>
 
+    <h2 class="mt-10">Sans bordure : list-borderless</h2>
+    <div class="grid mt-2">
+        <ul class="list list-borderless md:col-6">
+            <li>Un élément de texte</li>
+            <li>Un autre élément</li>
+            <li>Un troisième</li>
+        </ul>
+        <nav class="md:col-6" aria-label="Mon compte, sans bordure (démo)">
+            <ul class="list list-borderless theme-primary">
+                <li><a class="list-item" href="#">Profil</a></li>
+                <li><a class="list-item" href="#" aria-current="true">Réglages (en cours)</a></li>
+                <li><a class="list-item" href="#">Notifications</a></li>
+                <li><button class="list-item theme-danger" type="button">Se déconnecter</button></li>
+            </ul>
+        </nav>
+    </div>
+    <ul>
+        <li>list-borderless s'ajoute à list : plus de cadre ni de traits entre les éléments (--list-border-width à 0). Pour un menu de côté, une liste dans une carte ou un drawer qui a déjà son cadre.</li>
+        <li>Chaque élément a les coins de la liste : au survol et en cours, son fond se détache seul, arrondi.</li>
+        <li>Le menu de cette doc l'utilise, avec des lignes plus serrées (--list-item-padding-block: 0.375rem).</li>
+    </ul>
+
     <h2 class="mt-10">HTML</h2>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;ul class="list"&gt;
     &lt;li&gt;Un élément&lt;/li&gt;
@@ -75,6 +97,7 @@
         <li>list sur un &lt;ul&gt; ou un &lt;ol&gt; : sans puces ni retrait, un cadre et un trait entre les &lt;li&gt;. Les &lt;li&gt; n'ont pas de classe.</li>
         <li>list-item sur le lien ou le bouton d'un &lt;li&gt; : il prend toute la ligne, et le padding du &lt;li&gt; passe sur lui.</li>
         <li>.theme-* sur la liste ou sur un élément ; sans thème, neutral.</li>
+        <li>list-borderless à côté de list (class="list list-borderless") : sans cadre ni traits.</li>
         <li>Dans une grille ou un flex, la liste garde la hauteur de ses éléments : elle ne s'étire pas à la hauteur d'une voisine plus longue (Couleurs).</li>
     </ul>
 
@@ -106,7 +129,7 @@
             <tr><th scope="row">--list-item-padding-block</th><td>0.5rem</td><td>haut et bas d'un élément (40px de haut)</td></tr>
             <tr><th scope="row">--list-item-padding-inline</th><td>1rem</td><td>côtés d'un élément</td></tr>
             <tr><th scope="row">--list-border-radius</th><td>--border-radius-md</td><td>coins de la liste (ceux du premier et du dernier élément suivent)</td></tr>
-            <tr><th scope="row">--list-border-width</th><td>--border-width</td><td>cadre et traits entre les éléments (couleur --border-color)</td></tr>
+            <tr><th scope="row">--list-border-width</th><td>--border-width</td><td>cadre et traits entre les éléments (couleur --border-color) ; 0 dans list-borderless</td></tr>
         </tbody>
     </table>
 
@@ -152,7 +175,8 @@
         <li>list-style-type: "" garde la liste dans Safari d'après un test de 2023 (Safari 16.5 sur macOS, iOS 15) ; MDN ne documente que role="list". À vérifier avec VoiceOver. Dans un &lt;nav&gt;, Safari garde la liste de toute façon.</li>
         <li>Un &lt;ol class="list"&gt; perd ses numéros : pour une liste numérotée, les écrire dans le texte, ou garder un &lt;ol&gt; sans classe.</li>
         <li>Le padding passe du &lt;li&gt; au lien par :has() (Baseline 2023) : dans un navigateur plus ancien, un élément cliquable a un padding en double.</li>
-        <li>Pas encore de tailles, de liste horizontale, de titres de groupe ni de variante sans cadre (dans une carte) : un besoin rare se règle avec les variables.</li>
+        <li>Pas encore de tailles, de liste horizontale ni de titres de groupe : un besoin rare se règle avec les variables.</li>
+        <li>list-borderless : au repos, rien ne sépare les éléments ; une liste de textes longs sur plusieurs lignes se lit moins bien, garder les traits.</li>
         <li>L'élément en cours ne se voit que par la couleur de son fond, presque invisible en clair dans certaines couleurs (voir Accessibilité). Un site qui veut un repère de plus l'ajoute en une ligne : .list-item[aria-current] { text-decoration: underline; }.</li>
         <li>Pas de fond plein sur l'élément en cours : le texte de la page y serait illisible dans certaines couleurs.</li>
     </ul>

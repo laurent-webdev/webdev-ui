@@ -42,9 +42,73 @@ body {
   color: oklch(1 0 0);
 }
 
-/* Démo du drawer fixé : quand il est affiché, la doc se décale de sa place (sur un site : body { padding-inline-start: … } dans le @media) */
+/* Démo du drawer fixé, à droite (le menu de la doc est à gauche) : quand il est affiché, la doc se décale de sa place */
 @media (width >= 48rem) {
   body:has(.demo-drawer-fixed:not([hidden])) {
+    padding-inline-end: calc(var(--drawer-width) + var(--drawer-inset) * 2);
+  }
+}
+
+/* Menu fixé de la doc (grand écran, base.html.twig) : la page se décale de sa place, sa largeur et les deux écarts */
+@media (width >= 64rem) {
+  body {
     padding-inline-start: calc(var(--drawer-width) + var(--drawer-inset) * 2);
   }
+}
+
+/* ---------- Fond de la doc (pas dans le framework) ----------
+   Foncé, des vagues de couleur floues qui bougent lentement ; en thème clair, la même chose en clair (le texte reste noir)
+   Les teintes viennent de la palette (primary, accent, info, secondary) : elles suivent un changement de couleur */
+body {
+  background-color: light-dark(oklch(0.97 0.01 285), oklch(0.14 0.03 280));
+}
+
+/* Deux couches fixées derrière la page, plus grandes que l'écran : leurs bords ne se voient pas quand elles bougent */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: -25%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Première couche : une vague rose et une violette */
+body::before {
+  background:
+    radial-gradient(ellipse 45% 25% at 30% 35%, light-dark(oklch(from var(--color-primary) 0.90 0.07 h / 0.9), oklch(from var(--color-primary) 0.36 0.13 h / 0.9)), transparent),
+    radial-gradient(ellipse 40% 22% at 70% 60%, light-dark(oklch(from var(--color-accent) 0.90 0.07 h / 0.9), oklch(from var(--color-accent) 0.34 0.13 h / 0.9)), transparent);
+  animation: doc-waves-1 30s ease-in-out infinite alternate;
+}
+
+/* Deuxième couche : une bleue et une cyan, dans l'autre sens */
+body::after {
+  background:
+    radial-gradient(ellipse 40% 22% at 65% 30%, light-dark(oklch(from var(--color-info) 0.90 0.07 h / 0.8), oklch(from var(--color-info) 0.34 0.13 h / 0.8)), transparent),
+    radial-gradient(ellipse 45% 25% at 35% 70%, light-dark(oklch(from var(--color-secondary) 0.90 0.07 h / 0.8), oklch(from var(--color-secondary) 0.34 0.12 h / 0.8)), transparent);
+  animation: doc-waves-2 40s ease-in-out infinite alternate;
+}
+
+/* Le mouvement : translate, rotate et scale, calculés par la carte graphique ; immobile en mouvement réduit (le reset) */
+@keyframes doc-waves-1 {
+  to {
+    translate: 8% 5%;
+    rotate: 15deg;
+    scale: 1.15;
+  }
+}
+
+@keyframes doc-waves-2 {
+  to {
+    translate: -7% -6%;
+    rotate: -12deg;
+    scale: 1.1;
+  }
+}
+
+/* Menu de la doc (fixé et dans le drawer) : des lignes plus serrées que la liste par défaut, réglées par ses variables comme le ferait un site */
+#doc-menu-fixed,
+#doc-menu {
+  --list-item-padding-block: 0.375rem;
+  --list-item-padding-inline: 0.75rem;
 }

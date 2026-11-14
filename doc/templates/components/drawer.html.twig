@@ -119,9 +119,9 @@
     <h3 class="mt-6">Fixé : contre le bord de l'écran</h3>
     <p>position-fixed en plus : le panneau se met contre le bord de l'écran, comme un drawer ouvert, et ne bouge plus en faisant défiler. Un menu de côté, toujours à l'écran. Il passe par-dessus la page : le site décale son contenu de la place du panneau.</p>
     <button class="btn mt-2" type="button" aria-expanded="false" aria-controls="drawer-fixed" data-demo-toggle>Afficher / masquer le menu fixé</button>
-    <p class="mt-2">À partir de md : la page de la doc se décale pour lui laisser la place.</p>
+    <p class="mt-2">À partir de md, à droite (le menu de cette doc est déjà fixé à gauche, en drawer-start) : la page se décale pour lui laisser la place.</p>
 
-    <nav class="drawer-start position-fixed d-none md:d-block demo-drawer-fixed" id="drawer-fixed" aria-label="Menu (démo)" hidden>
+    <nav class="drawer-end position-fixed d-none md:d-block demo-drawer-fixed" id="drawer-fixed" aria-label="Menu (démo)" hidden>
         <div class="drawer-header">
             <p class="fs-lg fw-semibold">Mon site</p>
         </div>

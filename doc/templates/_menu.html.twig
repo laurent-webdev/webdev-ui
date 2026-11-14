@@ -1,13 +1,12 @@
-{# Menu : les pages de doc_sections (config/packages/twig.yaml). Inclus deux fois : colonne sur grand écran, drawer sur petit
-   La page courante a aria-current="page" ; le survol des liens est en primary (theme-primary sur le nav) #}
-<nav class="theme-primary d-grid gap-6" aria-label="Documentation">
-    {% for section in doc_sections %}
-        <div>
-            <h2 class="fs-xs text-transform-uppercase color-neutral-emphasis px-3 mb-2">{{ section.label }}</h2>
+{# Menu : les sections de doc_sections (config/packages/twig.yaml), une liste par section. Inclus deux fois, dans un <nav> : le menu fixé sur grand écran, le drawer sur petit
+   La page courante a aria-current="page" (le fond de la liste en cours) ; les états des liens sont en primary (theme-primary sur le nav) #}
+{% for section in doc_sections %}
+    <div>
+        <h2 class="fs-xs text-transform-uppercase color-neutral-emphasis px-3 mb-2">{{ section.label }}</h2>
+        <ul class="list list-borderless">
             {% for link in section.links %}
-                {% set current = app.current_route == link[0] %}
-                <a class="dropdown-item{{ current ? ' fw-semibold color-primary-emphasis' }}" href="{{ path(link[0]) }}"{% if current %} aria-current="page"{% endif %}>{{ link[1] }}</a>
+                <li><a class="list-item" href="{{ path(link[0]) }}"{% if app.current_route == link[0] %} aria-current="page"{% endif %}>{{ link[1] }}</a></li>
             {% endfor %}
-        </div>
-    {% endfor %}
-</nav>
+        </ul>
+    </div>
+{% endfor %}

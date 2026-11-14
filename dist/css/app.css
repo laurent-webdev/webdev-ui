@@ -2391,6 +2391,12 @@
     opacity: var(--disabled-opacity);
     pointer-events: none;
   }
+  .list-borderless {
+    --list-border-width: 0;
+  }
+  .list-borderless > li {
+    border-radius: var(--list-border-radius);
+  }
 }
 @layer components {
   :root {

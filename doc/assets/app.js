@@ -29,3 +29,8 @@ document.querySelectorAll('[data-demo-toast]').forEach((button) => {
         : button.closest('dialog, body').querySelector('[data-toast]');
     button.addEventListener('click', () => container.append(template.content.cloneNode(true)));
 });
+
+// Menu fixé (grand écran) : il défile seul ; au chargement, la page en cours au milieu du menu
+const docMenu = document.getElementById('doc-menu-fixed');
+const docMenuCurrent = docMenu?.querySelector('[aria-current="page"]');
+if (docMenuCurrent) docMenu.scrollTop = docMenuCurrent.offsetTop - docMenu.clientHeight / 2;

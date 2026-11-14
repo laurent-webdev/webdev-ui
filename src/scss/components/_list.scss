@@ -99,4 +99,13 @@
         }
     }
 
+    // Borderless, à ajouter à list : plus de cadre ni de traits ; chaque élément arrondi, son fond se détache seul au survol et en cours
+    .list-borderless {
+        --list-border-width: 0;
+
+        > li {
+            border-radius: var(--list-border-radius);
+        }
+    }
+
 }
