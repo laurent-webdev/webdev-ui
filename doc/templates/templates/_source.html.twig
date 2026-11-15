@@ -1,0 +1,9 @@
+{#- Le code d'un modèle : la page entière, telle qu'elle est dans son fichier
+    {{ include('templates/_source.html.twig', {file: 'templates/pages/dashboard.html.twig'}) }}
+    Seuls les chemins du framework changent : asset() de la doc devient le chemin d'un site, comme dans Installer (accueil) -#}
+<h2 class="mt-10">Le code</h2>
+<p class="mt-2">La page entière, à copier. Les deux fichiers du framework sont chargés comme dans <a class="link" href="{{ path('app_main') }}" data-hx-boost="true">Installer</a>.</p>
+{{ include('_code.html.twig', {code: source(file)|replace({
+    "{{ asset('webdev-ui/css/webdev-ui.css') }}": 'css/webdev-ui.min.css',
+    "{{ asset('webdev-ui/js/webdev-ui.js') }}": 'js/webdev-ui.min.js'
+})}) }}

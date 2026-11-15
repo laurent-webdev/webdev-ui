@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Connexion · Les Cimes</title>
+        <meta name="description" content="Connexion à l'espace adhérent du club de randonnée Les Cimes.">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="{{ asset('webdev-ui/css/webdev-ui.css') }}">
+        <script type="module" src="{{ asset('webdev-ui/js/webdev-ui.js') }}"></script>
+    </head>
+    <body>
+        <!-- Deux moitiés à partir de lg : le club sur un fond plein, le formulaire ; avant, le formulaire seul -->
+        <div class="grid gap-0 min-h-100svh">
+            <aside class="d-none lg:d-flex flex-direction-column justify-content-space-between gap-10 p-12 bg-secondary color-secondary-contrast lg:col-6" aria-label="Le club">
+                <p class="fs-xl fw-bold">Les Cimes</p>
+                <blockquote class="fs-4xl fw-medium text-wrap-balance">
+                    <p>Le dimanche matin, on marche ensemble depuis 1987.</p>
+                </blockquote>
+                <p>Prochaine sortie : Lac du Salagou, samedi <time datetime="2026-11-22T09:00">22 novembre à 9 h</time>, 14 km.</p>
+            </aside>
+
+            <main class="d-flex align-items-center py-12 lg:col-6">
+                <div class="container-xs w-100">
+                    <p class="fs-xl fw-bold lg:d-none">Les Cimes</p>
+                    <h1 class="fs-2xl mt-8 lg:mt-0">Connexion à l'espace adhérent</h1>
+                    <p class="color-neutral-emphasis mt-2">Pas encore adhérent ? <a class="link theme-secondary" href="#">Rejoindre le club</a></p>
+
+                    <form class="d-flex flex-direction-column gap-4 mt-8" method="post">
+                        <div class="form-field">
+                            <label for="connexion-email">E-mail</label>
+                            <input class="form-input" id="connexion-email" type="email" name="email" autocomplete="username" required>
+                        </div>
+                        <div class="form-field">
+                            <!-- Le lien à côté du libellé : lu après lui, avant le champ -->
+                            <div class="d-flex flex-wrap-wrap align-items-baseline justify-content-space-between column-gap-3">
+                                <label for="connexion-mot-de-passe">Mot de passe</label>
+                                <a class="link theme-secondary fs-sm" href="#">Mot de passe oublié ?</a>
+                            </div>
+                            <input class="form-input" id="connexion-mot-de-passe" type="password" name="mot-de-passe" autocomplete="current-password" required>
+                        </div>
+                        <label class="align-self-start"><input class="form-checkbox theme-secondary" type="checkbox" name="rester-connecte"> Rester connecté sur cet appareil</label>
+                        <button class="btn-solid btn-lg theme-secondary" type="submit">Se connecter</button>
+                    </form>
+
+                    <p class="fs-sm color-neutral-emphasis mt-8">Un souci pour vous connecter ? Écrivez au secrétariat : <a class="link color-inherit" href="mailto:secretariat@exemple.fr">secretariat@exemple.fr</a></p>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

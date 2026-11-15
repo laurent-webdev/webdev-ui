@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <h1>Connexion</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">Une page de connexion en deux moitiés : le club sur un fond plein, le formulaire à côté ; sur petit écran, le formulaire seul.</p>
+
+    {{ include('templates/_preview.html.twig', {route: 'app_login_page', name: 'Connexion'}) }}
+
+    <h2 class="mt-10">Ce qu'il utilise</h2>
+    <ul class="mt-2" data-hx-boost="true">
+        <li><a class="link" href="{{ path('app_grid') }}">Grille</a> : les deux moitiés (<code>lg:col-6</code>), sans écart (<code>gap-0</code>).</li>
+        <li><a class="link" href="{{ path('app_colors') }}">Couleurs</a> : le fond plein et son texte : toujours la paire <code>bg-secondary color-secondary-contrast</code>.</li>
+        <li><a class="link" href="{{ path('app_container') }}">Container</a> : <code>container-xs</code> : le formulaire à 360px de large au plus.</li>
+        <li><a class="link" href="{{ path('app_form') }}">Formulaire</a> : <code>autocomplete</code> sur chaque champ : le gestionnaire de mots de passe les remplit.</li>
+    </ul>
+
+    {{ include('templates/_source.html.twig', {file: 'templates/pages/login.html.twig'}) }}
+{% endblock %}

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Adhérents · Les Cimes</title>
+        <meta name="description" content="Les adhérents du club de randonnée : adhésion, niveau et dernière sortie de chacun.">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="{{ asset('webdev-ui/css/webdev-ui.css') }}">
+        <script type="module" src="{{ asset('webdev-ui/js/webdev-ui.js') }}"></script>
+    </head>
+    <body>
+        <!-- Les liens dans la barre à partir de lg ; avant, dans un drawer ouvert par le bouton (un btn-solid d'un autre thème sur le fond plein) -->
+        <nav class="navbar-solid theme-secondary lg:navbar-expand" aria-label="Principal">
+            <a class="navbar-brand" href="#">Les Cimes</a>
+            <ul class="navbar-list">
+                <li><a class="navbar-item" href="#">Accueil</a></li>
+                <li><a class="navbar-item" href="#" aria-current="page">Adhérents</a></li>
+                <li><a class="navbar-item" href="#">Sorties</a></li>
+                <li><a class="navbar-item" href="#">Cotisations</a></li>
+                <li><a class="navbar-item" href="#">Matériel</a></li>
+            </ul>
+            <button class="btn-solid theme-inverse navbar-toggle" type="button" commandfor="menu" command="show-modal" aria-label="Menu"></button>
+            <dialog class="drawer-end" id="menu" data-dialog closedby="any" aria-labelledby="menu-titre">
+                <div class="drawer-header">
+                    <h2 class="fs-lg" id="menu-titre">Menu</h2>
+                    <button class="btn-close" type="button" commandfor="menu" command="close" aria-label="Fermer"></button>
+                </div>
+                <div class="drawer-body">
+                    <ul class="navbar-list">
+                        <li><a class="navbar-item" href="#">Accueil</a></li>
+                        <li><a class="navbar-item" href="#" aria-current="page">Adhérents</a></li>
+                        <li><a class="navbar-item" href="#">Sorties</a></li>
+                        <li><a class="navbar-item" href="#">Cotisations</a></li>
+                        <li><a class="navbar-item" href="#">Matériel</a></li>
+                    </ul>
+                </div>
+            </dialog>
+        </nav>
+
+        <main class="container d-flex flex-direction-column gap-6 py-8">
+            <div class="d-flex flex-wrap-wrap align-items-end justify-content-space-between gap-4">
+                <div>
+                    <h1>Adhérents</h1>
+                    <p class="color-neutral-emphasis mt-1">248 adhérents pour la saison 2026-2027</p>
+                </div>
+                <button class="btn-solid theme-secondary" type="button" commandfor="nouvel-adherent" command="show-modal">Ajouter un adhérent</button>
+            </div>
+
+            <div class="d-flex flex-wrap-wrap gap-3">
+                <search class="flex-grow-1">
+                    <label class="visually-hidden" for="recherche">Rechercher un adhérent</label>
+                    <input class="form-input" id="recherche" type="search" name="recherche" placeholder="Nom, e-mail ou ville" enterkeyhint="search">
+                </search>
+                <button class="btn" type="button" commandfor="filtres" command="show-modal">Filtres</button>
+            </div>
+
+            <!-- text-wrap-nowrap : une ligne par adhérent ; trop large, le tableau défile dans sa zone -->
+            <div class="overflow-x-auto" role="region" aria-labelledby="adherents-legende" tabindex="0">
+                <table class="table table-hover text-wrap-nowrap">
+                    <caption class="fs-sm color-neutral-emphasis pb-2" id="adherents-legende">Adhérents 1 à 6 sur 248, par ordre d'inscription</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Adhérent</th>
+                            <th scope="col">Niveau</th>
+                            <th scope="col">Adhésion</th>
+                            <th scope="col">Dernière sortie</th>
+                            <th scope="col"><span class="visually-hidden">Actions</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <a class="link d-block" href="#">Camille Roux</a>
+                                <span class="fs-sm fw-normal color-neutral-emphasis">camille.roux@exemple.fr</span>
+                            </th>
+                            <td>Confirmée</td>
+                            <td><span class="badge-subtle theme-success">À jour</span></td>
+                            <td>Pic Saint-Loup, <time datetime="2026-11-09">9 nov.</time></td>
+                            <td class="text-align-end">
+                                <button class="btn btn-sm" type="button" popovertarget="actions-1">Actions<span class="visually-hidden"> pour Camille Roux</span></button>
+                                <div class="dropdown" id="actions-1" popover>
+                                    <a class="dropdown-item" href="#">Voir la fiche</a>
+                                    <a class="dropdown-item" href="#">Envoyer un e-mail</a>
+                                    <hr>
+                                    <button class="dropdown-item theme-danger" type="button" popovertarget="actions-1" popovertargetaction="hide">Archiver</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a class="link d-block" href="#">Julien Marchand</a>
+                                <span class="fs-sm fw-normal color-neutral-emphasis">j.marchand@exemple.fr</span>
+                            </th>
+                            <td>Expert</td>
+                            <td><span class="badge-subtle theme-warning">À renouveler</span></td>
+                            <td>Mont Aigoual, <time datetime="2026-10-26">26 oct.</time></td>
+                            <td class="text-align-end">
+                                <button class="btn btn-sm" type="button" popovertarget="actions-2">Actions<span class="visually-hidden"> pour Julien Marchand</span></button>
+                                <div class="dropdown" id="actions-2" popover>
+                                    <a class="dropdown-item" href="#">Voir la fiche</a>
+                                    <a class="dropdown-item" href="#">Envoyer un e-mail</a>
+                                    <button class="dropdown-item" type="button" popovertarget="actions-2" popovertargetaction="hide">Relancer la cotisation</button>
+                                    <hr>
+                                    <button class="dropdown-item theme-danger" type="button" popovertarget="actions-2" popovertargetaction="hide">Archiver</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a class="link d-block" href="#">Sofia Almeida</a>
+                                <span class="fs-sm fw-normal color-neutral-emphasis">sofia.almeida@exemple.fr</span>
+                            </th>
+                            <td>Débutante</td>
+                            <td><span class="badge-subtle theme-success">À jour</span></td>
+                            <td>Gorges du Tarn, <time datetime="2026-11-02">2 nov.</time></td>
+                            <td class="text-align-end">
+                                <button class="btn btn-sm" type="button" popovertarget="actions-3">Actions<span class="visually-hidden"> pour Sofia Almeida</span></button>
+                                <div class="dropdown" id="actions-3" popover>
+                                    <a class="dropdown-item" href="#">Voir la fiche</a>
+                                    <a class="dropdown-item" href="#">Envoyer un e-mail</a>
+                                    <hr>
+                                    <button class="dropdown-item theme-danger" type="button" popovertarget="actions-3" popovertargetaction="hide">Archiver</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a class="link d-block" href="#">Thomas Petit</a>
+                                <span class="fs-sm fw-normal color-neutral-emphasis">thomas.petit@exemple.fr</span>
+                            </th>
+                            <td>Confirmé</td>
+                            <td><span class="badge-subtle theme-danger">Expirée</span></td>
+                            <td>Cirque de Navacelles, <time datetime="2026-06-14">14 juin</time></td>
+                            <td class="text-align-end">
+                                <button class="btn btn-sm" type="button" popovertarget="actions-4">Actions<span class="visually-hidden"> pour Thomas Petit</span></button>
+                                <div class="dropdown" id="actions-4" popover>
+                                    <a class="dropdown-item" href="#">Voir la fiche</a>
+                                    <a class="dropdown-item" href="#">Envoyer un e-mail</a>
+                                    <button class="dropdown-item" type="button" popovertarget="actions-4" popovertargetaction="hide">Relancer la cotisation</button>
+                                    <hr>
+                                    <button class="dropdown-item theme-danger" type="button" popovertarget="actions-4" popovertargetaction="hide">Archiver</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a class="link d-block" href="#">Amandine Leroy</a>
+                                <span class="fs-sm fw-normal color-neutral-emphasis">amandine.leroy@exemple.fr</span>
+                            </th>
+                            <td>Experte</td>
+                            <td><span class="badge-subtle theme-success">À jour</span></td>
+                            <td>Pic Saint-Loup, <time datetime="2026-11-09">9 nov.</time></td>
+                            <td class="text-align-end">
+                                <button class="btn btn-sm" type="button" popovertarget="actions-5">Actions<span class="visually-hidden"> pour Amandine Leroy</span></button>
+                                <div class="dropdown" id="actions-5" popover>
+                                    <a class="dropdown-item" href="#">Voir la fiche</a>
+                                    <a class="dropdown-item" href="#">Envoyer un e-mail</a>
+                                    <hr>
+                                    <button class="dropdown-item theme-danger" type="button" popovertarget="actions-5" popovertargetaction="hide">Archiver</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a class="link d-block" href="#">Karim Haddad</a>
+                                <span class="fs-sm fw-normal color-neutral-emphasis">karim.haddad@exemple.fr</span>
+                            </th>
+                            <td>Débutant</td>
+                            <td><span class="badge-subtle theme-warning">À renouveler</span></td>
+                            <td>Lac du Salagou, <time datetime="2026-10-19">19 oct.</time></td>
+                            <td class="text-align-end">
+                                <button class="btn btn-sm" type="button" popovertarget="actions-6">Actions<span class="visually-hidden"> pour Karim Haddad</span></button>
+                                <div class="dropdown" id="actions-6" popover>
+                                    <a class="dropdown-item" href="#">Voir la fiche</a>
+                                    <a class="dropdown-item" href="#">Envoyer un e-mail</a>
+                                    <button class="dropdown-item" type="button" popovertarget="actions-6" popovertargetaction="hide">Relancer la cotisation</button>
+                                    <hr>
+                                    <button class="dropdown-item theme-danger" type="button" popovertarget="actions-6" popovertargetaction="hide">Archiver</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <nav class="d-flex justify-content-center" aria-label="Pages des adhérents">
+                <ul class="pagination-subtle theme-secondary">
+                    <li><a class="pagination-item">Précédent</a></li>
+                    <li><a class="pagination-item" href="#" aria-label="Page 1" aria-current="page">1</a></li>
+                    <li><a class="pagination-item" href="#" aria-label="Page 2">2</a></li>
+                    <li>…</li>
+                    <li><a class="pagination-item" href="#" aria-label="Page 42">42</a></li>
+                    <li><a class="pagination-item" href="#" rel="next">Suivant</a></li>
+                </ul>
+            </nav>
+        </main>
+
+        <!-- Les filtres : un drawer à droite, sur tous les écrans ; le formulaire renvoie la page avec les filtres dans l'adresse -->
+        <dialog class="drawer-end" id="filtres" data-dialog closedby="any" aria-labelledby="filtres-titre">
+            <div class="drawer-header">
+                <h2 class="fs-lg" id="filtres-titre">Filtres</h2>
+                <button class="btn-close" type="button" commandfor="filtres" command="close" aria-label="Fermer"></button>
+            </div>
+            <form class="drawer-body d-flex flex-direction-column gap-6" method="get">
+                <fieldset class="form-field border-0 p-0">
+                    <legend class="fw-semibold mb-2">Adhésion</legend>
+                    <label><input class="form-checkbox theme-secondary" type="checkbox" name="adhesion" value="a-jour"> À jour</label>
+                    <label><input class="form-checkbox theme-secondary" type="checkbox" name="adhesion" value="a-renouveler"> À renouveler</label>
+                    <label><input class="form-checkbox theme-secondary" type="checkbox" name="adhesion" value="expiree"> Expirée</label>
+                </fieldset>
+                <fieldset class="form-field border-0 p-0">
+                    <legend class="fw-semibold mb-2">Niveau</legend>
+                    <label><input class="form-radio theme-secondary" type="radio" name="niveau" value="" checked> Tous</label>
+                    <label><input class="form-radio theme-secondary" type="radio" name="niveau" value="debutant"> Débutant</label>
+                    <label><input class="form-radio theme-secondary" type="radio" name="niveau" value="confirme"> Confirmé</label>
+                    <label><input class="form-radio theme-secondary" type="radio" name="niveau" value="expert"> Expert</label>
+                </fieldset>
+                <div class="form-field">
+                    <label class="fw-semibold" for="filtre-sortie">Inscrit à une sortie</label>
+                    <select class="form-input" id="filtre-sortie" name="sortie">
+                        <option value="">Toutes les sorties</option>
+                        <option value="salagou">Lac du Salagou, 22 novembre</option>
+                        <option value="caroux">Mont Caroux, 29 novembre</option>
+                        <option value="vis">Gorges de la Vis, 6 décembre</option>
+                    </select>
+                </div>
+                <label class="d-flex align-items-center justify-content-space-between gap-4">Certificat médical à fournir <input class="form-switch-solid theme-secondary" type="checkbox" role="switch" name="certificat"></label>
+                <div class="d-flex flex-wrap-wrap gap-2">
+                    <button class="btn-solid theme-secondary flex-grow-1" type="submit">Filtrer</button>
+                    <button class="btn" type="reset">Effacer</button>
+                </div>
+            </form>
+        </dialog>
+
+        <!-- Ajouter un adhérent : le bouton Enregistrer, dans le pied, envoie le formulaire du corps (attribut form) -->
+        <dialog class="dialog dialog-md" id="nouvel-adherent" data-dialog aria-labelledby="nouvel-adherent-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="nouvel-adherent-titre">Ajouter un adhérent</h2>
+                <button class="btn-close" type="button" commandfor="nouvel-adherent" command="close" aria-label="Fermer"></button>
+            </div>
+            <form class="dialog-body grid" id="adherent-formulaire" method="post">
+                <div class="form-field md:col-6">
+                    <label for="adherent-prenom">Prénom (obligatoire)</label>
+                    <input class="form-input" id="adherent-prenom" type="text" name="prenom" autocomplete="given-name" required>
+                </div>
+                <div class="form-field md:col-6">
+                    <label for="adherent-nom">Nom (obligatoire)</label>
+                    <input class="form-input" id="adherent-nom" type="text" name="nom" autocomplete="family-name" required>
+                </div>
+                <div class="form-field md:col-6">
+                    <label for="adherent-email">E-mail (obligatoire)</label>
+                    <input class="form-input" id="adherent-email" type="email" name="email" autocomplete="email" required>
+                </div>
+                <div class="form-field md:col-6">
+                    <label for="adherent-telephone">Téléphone</label>
+                    <input class="form-input" id="adherent-telephone" type="tel" name="telephone" autocomplete="tel">
+                </div>
+                <div class="form-field md:col-6">
+                    <label for="adherent-niveau">Niveau</label>
+                    <select class="form-input" id="adherent-niveau" name="niveau">
+                        <option value="debutant">Débutant</option>
+                        <option value="confirme">Confirmé</option>
+                        <option value="expert">Expert</option>
+                    </select>
+                </div>
+                <div class="form-field md:col-6">
+                    <label for="adherent-cotisation">Cotisation payée le</label>
+                    <input class="form-input" id="adherent-cotisation" type="date" name="cotisation">
+                </div>
+                <div>
+                    <label><input class="form-checkbox theme-secondary" type="checkbox" name="certificat"> Certificat médical reçu</label>
+                </div>
+            </form>
+            <div class="dialog-footer">
+                <button class="btn" type="button" commandfor="nouvel-adherent" command="close">Annuler</button>
+                <button class="btn-solid theme-secondary" type="submit" form="adherent-formulaire">Enregistrer</button>
+            </div>
+        </dialog>
+    </body>
+</html>

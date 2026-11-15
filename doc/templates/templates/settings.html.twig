@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réglages du compte{% endblock %}
+
+{% block body %}
+    <h1>Réglages du compte</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">Le compte d'un client : des onglets verticaux, un formulaire par onglet, des switchs, une zone pour supprimer le compte et un toast après l'enregistrement.</p>
+
+    {{ include('templates/_preview.html.twig', {route: 'app_settings_page', name: 'Réglages du compte'}) }}
+
+    <h2 class="mt-10">Ce qu'il utilise</h2>
+    <ul class="mt-2" data-hx-boost="true">
+        <li><a class="link" href="{{ path('app_tab') }}">Onglets</a> : verticaux (<code>aria-orientation="vertical"</code>), à gauche des panneaux à partir de md.</li>
+        <li><a class="link" href="{{ path('app_form') }}">Formulaire</a> : champs, liste, boutons radio, <code>form-input-group</code> et <code>form-switch-solid</code>.</li>
+        <li><a class="link" href="{{ path('app_card') }}">Carte</a> : les adresses et le résumé de l'abonnement.</li>
+        <li><a class="link" href="{{ path('app_alert') }}">Alerte</a> : <code>alert-outline</code> pour la suppression du compte, confirmée dans un dialogue.</li>
+        <li><a class="link" href="{{ path('app_toast') }}">Toast</a> : après l'enregistrement : le conteneur dans la page, le toast ajouté par le JS du site (quelques lignes en bas de la page).</li>
+        <li><a class="link" href="{{ path('app_navbar') }}">Navbar</a> : sans couleur, dans un <code>container</code> : alignée sur le contenu.</li>
+    </ul>
+
+    {{ include('templates/_source.html.twig', {file: 'templates/pages/settings.html.twig'}) }}
+{% endblock %}

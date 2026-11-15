@@ -189,3 +189,22 @@ pre:has(> code[class*="language-"]) {
 .token.unit {
   color: var(--color-accent-emphasis);
 }
+
+/* Aperçu d'un modèle de page (templates/_preview.html.twig) : la page dans un iframe deux fois plus grand que la carte, réduit de moitié ;
+   on voit toute sa mise en page, celle d'un écran deux fois plus large */
+.demo-template {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+/* En absolu : 200 % de la hauteur donnée par aspect-ratio (en flux, le pourcentage ne se calcule pas) */
+.demo-template > iframe {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 200%;
+  height: 200%;
+  border: 0;
+  scale: 0.5;
+  transform-origin: 0 0;
+}

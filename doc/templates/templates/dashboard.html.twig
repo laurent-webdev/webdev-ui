@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+    <h1>Tableau de bord</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">Le back-office d'une boutique : un menu de côté toujours là sur grand écran, dans un drawer sur petit écran, les chiffres du mois, les dernières commandes et les objectifs.</p>
+
+    {{ include('templates/_preview.html.twig', {route: 'app_dashboard_page', name: 'Tableau de bord'}) }}
+
+    <h2 class="mt-10">Ce qu'il utilise</h2>
+    <ul class="mt-2" data-hx-boost="true">
+        <li><a class="link" href="{{ path('app_drawer') }}">Drawer</a> : le menu de côté (<code>&lt;nav class="drawer-start"&gt;</code>) et sa copie dans un <code>&lt;dialog&gt;</code> sur petit écran.</li>
+        <li><a class="link" href="{{ path('app_list') }}">Liste</a> : les liens du menu, <code>list-borderless</code>, la page en cours en <code>aria-current</code>.</li>
+        <li><a class="link" href="{{ path('app_dropdown') }}">Dropdown</a> : le menu du compte.</li>
+        <li><a class="link" href="{{ path('app_card') }}">Carte</a>, <a class="link" href="{{ path('app_table') }}">tableau</a>, <a class="link" href="{{ path('app_badge') }}">badge</a> et <a class="link" href="{{ path('app_alert') }}">alerte</a> : le contenu.</li>
+        <li><a class="link" href="{{ path('app_grid') }}">Grille</a> : les chiffres sur 2 colonnes puis 4 (xl), le tableau et les objectifs côte à côte sur grand écran.</li>
+    </ul>
+
+    {{ include('templates/_source.html.twig', {file: 'templates/pages/dashboard.html.twig'}) }}
+{% endblock %}

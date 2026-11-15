@@ -134,13 +134,14 @@ Faits (le détail est dans le SCSS et dans la page de doc de chacun) :
 
 ## Utilitaires
 
-Un fichier par famille dans `utilities/` : spacing, gap, display, flex, sizing, border, colors, font, text, cursor, object-fit, aspect-ratio, animation, visually-hidden, opacity, visibility, overflow, position, vertical-align, box-shadow, glass.
+Un fichier par famille dans `utilities/` : spacing, gap, display, flex, sizing, border, colors, font, text, cursor, object-fit, aspect-ratio, animation, visually-hidden, opacity, visibility, overflow, position, vertical-align, box-shadow, glass, list-unstyled.
 
 - **Générés par boucle ou mixin, valeurs lues dans les variables CSS** (`.m-2 { margin: var(--space-2); }`). Les mots-clés (`d-flex`, `cursor-pointer`) n'ont pas de variable.
 - **Forme des fichiers responsive** (choisie par Laurent) : un mixin `<famille>-classes($breakpoint: '')` dans le fichier, une ligne par classe, appelé sans préfixe puis dans les 6 `@media (width >= …)` recopiées. Pas de `@content` avec `using`.
 - **Ordre d'écriture : tous les côtés, puis un axe, puis un côté**, pour que le plus précis gagne (`class="m-4 mt-0"`, `class="gap-2 row-gap-8"`, `class="border border-2 border-primary"`).
 - **Couleurs** : `bg-<nom>` et `bg-<nom>-subtle` ne posent que le fond ; le texte se choisit à part : `color-<nom>-contrast` (sur le fond plein : toujours la paire `bg-* color-*-contrast`), `color-<nom>-emphasis` (texte coloré), `color-<nom>` (couleur brute, icônes et décoration seulement), `color-inherit`.
 - **Verre** : `glass`, un effet nommé comme `visually-hidden`, à ajouter à un composant sans couleur ou `-outline` (card, accordion, dialog, drawer, toast, navbar, dropdown…), jamais sur un `-solid` (texte noir ou blanc sur le verre). `--glass-background-color` (le fond de la page à 70 % : le texte de la page garde 7:1 devant du noir ou du blanc, le texte coloré tombe à 3:1) et `--glass-backdrop-filter` ; fond plein sous `prefers-reduced-transparency: reduce`. `backdrop-filter` fait de l'élément la référence des éléments fixés qu'il contient : le conteneur de toasts d'un dialogue en verre se met dans son coin.
+- **Liste sans style** : `list-unstyled`, un effet nommé comme `visually-hidden` (son fichier, sa page) : sans puces ni retrait, `list-style-type: ""` comme `.list` (la liste reste annoncée par Safari) ; l'écart se règle avec `d-grid gap-*` ou `d-flex`.
 - **Cacher** : `hidden` / `d-none` (caché à tous), `visually-hidden` (lu par les lecteurs d'écran), `visibility-hidden` (garde sa place), `opacity-0` (reste cliquable et lu).
 - **Écartés volontairement** : `order-*` et `*-reverse` (l'ordre affiché ne suit plus le DOM, WCAG 1.3.2), `text-align-justify`, `overflow-scroll`, largeurs en `vw` (les `w-*` sont en %), z-index nommés (`<dialog>` et `popover` passent au-dessus par le top layer), `!important` dans les utilitaires.
 - Animations : une variable de durée par animation (`--animation-fade-in-duration`), propriétés `translate` / `scale` / `rotate` (pas `transform`), pas de clignotement.
@@ -208,6 +209,7 @@ src/ts/
 - Scripts de `base.html.twig` : `importmap('app')` avant le `<script type="module">` du framework (Firefox ignore une importmap posée après le début du chargement d'un module : plus aucun JS de la doc ; Chromium l'accepte).
 - Pied de page : « Cette doc est faite avec » webdev-ui, htmx et Prism (liens et petits logos : le favicon, et des SVG écrits dans `base.html.twig` en `currentColor`, de Simple Icons et du dépôt de Prism), et le lien du projet sur GitHub.
 - Page de test `doc/templates/test.html.twig` (`/test`) : vide, pour essayer un exemple avant de le mettre dans sa page.
+- **Modèles** (dernière section du menu, `TemplateController`) : des pages entières prêtes à copier (tableau de bord, liste avec filtres, tableau de projet, réglages du compte, connexion, page d'accueil), faites **seulement avec le framework** : pas de `doc.css`, pas de `style`, le JS du site seulement s'il le faut (le toast des réglages). Chacune est un fichier HTML écrit en entier, `templates/templates/pages/<nom>.html.twig` (`/templates/<nom>/page`), dont le seul Twig est l'`asset()` des deux fichiers du framework, montré en `css/webdev-ui.min.css` et `js/webdev-ui.min.js` ; sa page de doc (`templates/templates/<nom>.html.twig`) : une phrase, l'aperçu (`_preview.html.twig` : la page dans un iframe `inert`, réduit de moitié par `.demo-template` de `doc.css`), le bouton qui l'ouvre, « Ce qu'il utilise » (liens vers les composants), le code entier (`_source.html.twig`, `source()`). Contenus inventés et réalistes (Brûlerie Margot, Les Cimes, Studio Ardoise), e-mails en `exemple.fr`. Le `w3c.sh` de `/verifier` les valide avec la doc.
 - Accueil : Installer (deux façons, toujours la dernière version : les deux `.min` téléchargés depuis la doc (`download`), ou le projet entier sur GitHub ; pas de tag ni de CDN, Laurent change souvent le framework) ; Personnaliser (tout se recalcule dans le navigateur quand on change une variable, sauf les breakpoints : `@use … with` et SCSS à recompiler) ; Ce qu'il y a dedans ; Navigateurs, un tableau simple (logo et nom du navigateur, version minimum), pas le détail par fonction (choix de Laurent). Versions d'après web-features (les données Baseline de MDN) ; Opera, Brave et Samsung Internet : la première version avec Chromium 135 ou plus (données MDN, journal de Brave). Logos de `@browser-logos` dans `doc/assets/images/browsers/`. À mettre à jour quand une fonction indispensable plus récente entre dans le framework.
 
 ## Façon de travailler
@@ -222,7 +224,7 @@ src/ts/
 
 - Faits : `accordion`, `alert`, `badge`, `button`, `btn-close`, `card`, `dialog`, `drawer`, `dropdown`, `link`, `list`, `navbar`, `pagination`, `spinner`, `tab`, `table`, `toast`.
 - En refonte : `form`.
-- Plus tard : `.section` (`--section-padding-block` fluide), `.list-unstyled` (`list-style-type: ""`, comme `.list`), `visually-hidden-focusable`.
+- Plus tard : `.section` (`--section-padding-block` fluide), `visually-hidden-focusable`.
 - Remplacés : `collapse` (= `accordion`), `outline` (= `border border-*`).
 
 ## Décisions en attente

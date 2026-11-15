@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mon compte · Brûlerie Margot</title>
+        <meta name="description" content="Votre compte : profil, adresses de livraison, abonnement, notifications et sécurité.">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="{{ asset('webdev-ui/css/webdev-ui.css') }}">
+        <script type="module" src="{{ asset('webdev-ui/js/webdev-ui.js') }}"></script>
+    </head>
+    <body>
+        <header class="border-bottom">
+            <div class="container">
+                <nav class="navbar md:navbar-expand theme-primary" aria-label="Principal">
+                    <a class="navbar-brand" href="#">Brûlerie Margot</a>
+                    <ul class="navbar-list">
+                        <li><a class="navbar-item" href="#">Cafés</a></li>
+                        <li><a class="navbar-item" href="#">Abonnements</a></li>
+                        <li><a class="navbar-item" href="#">Ateliers</a></li>
+                        <li><a class="navbar-item" href="#" aria-current="page">Mon compte</a></li>
+                        <li><a class="navbar-item" href="#">Panier <span class="badge-subtle theme-primary">2<span class="visually-hidden"> articles</span></span></a></li>
+                    </ul>
+                    <button class="btn navbar-toggle" type="button" commandfor="menu" command="show-modal" aria-label="Menu"></button>
+                    <dialog class="drawer-end" id="menu" data-dialog closedby="any" aria-labelledby="menu-titre">
+                        <div class="drawer-header">
+                            <h2 class="fs-lg" id="menu-titre">Menu</h2>
+                            <button class="btn-close" type="button" commandfor="menu" command="close" aria-label="Fermer"></button>
+                        </div>
+                        <div class="drawer-body">
+                            <ul class="navbar-list">
+                                <li><a class="navbar-item" href="#">Cafés</a></li>
+                                <li><a class="navbar-item" href="#">Abonnements</a></li>
+                                <li><a class="navbar-item" href="#">Ateliers</a></li>
+                                <li><a class="navbar-item" href="#" aria-current="page">Mon compte</a></li>
+                                <li><a class="navbar-item" href="#">Panier <span class="badge-subtle theme-primary">2<span class="visually-hidden"> articles</span></span></a></li>
+                            </ul>
+                        </div>
+                    </dialog>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container py-8">
+            <h1>Mon compte</h1>
+            <p class="color-neutral-emphasis mt-1">Margot Lefèvre, cliente depuis mars 2024</p>
+
+            <!-- Onglets verticaux (tab.ts) : à gauche du panneau à partir de md, au-dessus avant -->
+            <div class="grid mt-8">
+                <div class="tab theme-primary md:col-3" role="tablist" aria-label="Mon compte" aria-orientation="vertical" data-tab>
+                    <button class="tab-item" id="onglet-profil" type="button" role="tab" aria-selected="true" aria-controls="panneau-profil">Profil</button>
+                    <button class="tab-item" id="onglet-adresses" type="button" role="tab" aria-selected="false" aria-controls="panneau-adresses" tabindex="-1">Adresses</button>
+                    <button class="tab-item" id="onglet-abonnement" type="button" role="tab" aria-selected="false" aria-controls="panneau-abonnement" tabindex="-1">Abonnement</button>
+                    <button class="tab-item" id="onglet-notifications" type="button" role="tab" aria-selected="false" aria-controls="panneau-notifications" tabindex="-1">Notifications</button>
+                    <button class="tab-item" id="onglet-securite" type="button" role="tab" aria-selected="false" aria-controls="panneau-securite" tabindex="-1">Sécurité</button>
+                </div>
+
+                <!-- Profil -->
+                <div class="md:col-9 lg:col-6" id="panneau-profil" role="tabpanel" aria-labelledby="onglet-profil" tabindex="0">
+                    <h2 class="fs-xl">Profil</h2>
+                    <form class="grid mt-4" method="post" data-enregistrer>
+                        <div class="form-field sm:col-6">
+                            <label for="profil-prenom">Prénom</label>
+                            <input class="form-input" id="profil-prenom" type="text" name="prenom" value="Margot" autocomplete="given-name">
+                        </div>
+                        <div class="form-field sm:col-6">
+                            <label for="profil-nom">Nom</label>
+                            <input class="form-input" id="profil-nom" type="text" name="nom" value="Lefèvre" autocomplete="family-name">
+                        </div>
+                        <div class="form-field">
+                            <label for="profil-email">E-mail</label>
+                            <input class="form-input" id="profil-email" type="email" name="email" value="margot@exemple.fr" autocomplete="email" aria-describedby="profil-email-aide">
+                            <p class="fs-sm color-neutral-emphasis" id="profil-email-aide">Les confirmations de commande et les suivis de colis arrivent ici.</p>
+                        </div>
+                        <div class="form-field sm:col-6">
+                            <label for="profil-telephone">Téléphone</label>
+                            <input class="form-input" id="profil-telephone" type="tel" name="telephone" value="06 12 34 56 78" autocomplete="tel">
+                        </div>
+                        <div class="form-field sm:col-6">
+                            <label for="profil-naissance">Date de naissance</label>
+                            <input class="form-input" id="profil-naissance" type="date" name="naissance" autocomplete="bday" aria-describedby="profil-naissance-aide">
+                            <p class="fs-sm color-neutral-emphasis" id="profil-naissance-aide">Un paquet offert le mois de votre anniversaire.</p>
+                        </div>
+                        <div class="form-field">
+                            <label for="profil-methode">Votre méthode préférée</label>
+                            <select class="form-input" id="profil-methode" name="methode">
+                                <option value="espresso">Espresso</option>
+                                <option value="filtre" selected>Filtre</option>
+                                <option value="piston">Piston</option>
+                                <option value="moka">Moka</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button class="btn-solid theme-primary" type="submit">Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Adresses -->
+                <div class="md:col-9" id="panneau-adresses" role="tabpanel" aria-labelledby="onglet-adresses" tabindex="0" hidden>
+                    <div class="d-flex flex-wrap-wrap align-items-center justify-content-space-between gap-3">
+                        <h2 class="fs-xl">Adresses</h2>
+                        <button class="btn" type="button">Ajouter une adresse</button>
+                    </div>
+                    <div class="grid mt-4">
+                        <section class="card sm:col-6" aria-labelledby="adresse-domicile">
+                            <div class="card-body">
+                                <h3 class="d-flex flex-wrap-wrap align-items-center gap-2 fs-md" id="adresse-domicile">Domicile <span class="badge-subtle theme-primary">Par défaut</span></h3>
+                                <address class="fst-normal mt-2">Margot Lefèvre<br>12 rue de l'Aiguillerie<br>34000 Montpellier</address>
+                            </div>
+                            <div class="card-footer d-flex gap-2">
+                                <button class="btn btn-sm" type="button">Modifier<span class="visually-hidden"> l'adresse Domicile</span></button>
+                            </div>
+                        </section>
+                        <section class="card sm:col-6" aria-labelledby="adresse-bureau">
+                            <div class="card-body">
+                                <h3 class="fs-md" id="adresse-bureau">Bureau</h3>
+                                <address class="fst-normal mt-2">Margot Lefèvre, Atelier Lumen<br>4 place de la Comédie<br>34000 Montpellier</address>
+                            </div>
+                            <div class="card-footer d-flex flex-wrap-wrap gap-2">
+                                <button class="btn btn-sm" type="button">Modifier<span class="visually-hidden"> l'adresse Bureau</span></button>
+                                <button class="btn btn-sm" type="button">Choisir par défaut<span class="visually-hidden"> l'adresse Bureau</span></button>
+                                <button class="btn-outline btn-sm theme-danger" type="button">Supprimer<span class="visually-hidden"> l'adresse Bureau</span></button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Abonnement -->
+                <div class="md:col-9 lg:col-6" id="panneau-abonnement" role="tabpanel" aria-labelledby="onglet-abonnement" tabindex="0" hidden>
+                    <h2 class="fs-xl">Abonnement</h2>
+                    <div class="card-subtle theme-primary mt-4">
+                        <div class="card-body">
+                            <p class="fw-semibold">Mélange Maison, 500 g toutes les deux semaines</p>
+                            <p class="fs-sm mt-1">Prochain envoi le <time datetime="2026-11-20">20 novembre</time>, 16,90 € par envoi.</p>
+                        </div>
+                    </div>
+                    <form class="d-flex flex-direction-column gap-6 mt-6" method="post" data-enregistrer>
+                        <fieldset class="form-field border-0 p-0">
+                            <legend class="mb-2">Quantité par envoi</legend>
+                            <label><input class="form-radio theme-primary" type="radio" name="quantite" value="250"> 250 g</label>
+                            <label><input class="form-radio theme-primary" type="radio" name="quantite" value="500" checked> 500 g</label>
+                            <label><input class="form-radio theme-primary" type="radio" name="quantite" value="1000"> 1 kg</label>
+                        </fieldset>
+                        <div class="form-field">
+                            <label for="abonnement-frequence">Fréquence</label>
+                            <select class="form-input" id="abonnement-frequence" name="frequence">
+                                <option value="1">Toutes les semaines</option>
+                                <option value="2" selected>Toutes les deux semaines</option>
+                                <option value="4">Tous les mois</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="abonnement-code">Code de réduction</label>
+                            <div class="form-input-group">
+                                <input class="form-input" id="abonnement-code" type="text" name="code" autocomplete="off">
+                                <button class="btn" type="button">Appliquer</button>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-wrap-wrap gap-2">
+                            <button class="btn-solid theme-primary" type="submit">Enregistrer</button>
+                            <button class="btn" type="button">Mettre en pause</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Notifications : la description de chaque switch est lue avec lui (aria-describedby) -->
+                <div class="md:col-9 lg:col-6" id="panneau-notifications" role="tabpanel" aria-labelledby="onglet-notifications" tabindex="0" hidden>
+                    <h2 class="fs-xl">Notifications</h2>
+                    <form class="mt-2" method="post" data-enregistrer>
+                        <div class="d-flex align-items-center justify-content-space-between gap-4 py-4 border-bottom">
+                            <div>
+                                <label for="notification-expedition">Expédition d'une commande</label>
+                                <p class="fs-sm color-neutral-emphasis" id="notification-expedition-aide">Avec le lien de suivi du colis.</p>
+                            </div>
+                            <input class="form-switch-solid theme-primary flex-shrink-0" id="notification-expedition" type="checkbox" role="switch" name="expedition" aria-describedby="notification-expedition-aide" checked>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-space-between gap-4 py-4 border-bottom">
+                            <div>
+                                <label for="notification-torrefaction">Jour de torréfaction</label>
+                                <p class="fs-sm color-neutral-emphasis" id="notification-torrefaction-aide">La veille de l'envoi de votre abonnement.</p>
+                            </div>
+                            <input class="form-switch-solid theme-primary flex-shrink-0" id="notification-torrefaction" type="checkbox" role="switch" name="torrefaction" aria-describedby="notification-torrefaction-aide" checked>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-space-between gap-4 py-4 border-bottom">
+                            <div>
+                                <label for="notification-nouveautes">Nouveaux cafés</label>
+                                <p class="fs-sm color-neutral-emphasis" id="notification-nouveautes-aide">Un e-mail par mois, au plus.</p>
+                            </div>
+                            <input class="form-switch-solid theme-primary flex-shrink-0" id="notification-nouveautes" type="checkbox" role="switch" name="nouveautes" aria-describedby="notification-nouveautes-aide">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-space-between gap-4 py-4 border-bottom">
+                            <div>
+                                <label for="notification-sms">Par SMS</label>
+                                <p class="fs-sm color-neutral-emphasis" id="notification-sms-aide">Seulement le jour de la livraison.</p>
+                            </div>
+                            <input class="form-switch-solid theme-primary flex-shrink-0" id="notification-sms" type="checkbox" role="switch" name="sms" aria-describedby="notification-sms-aide">
+                        </div>
+                        <button class="btn-solid theme-primary mt-6" type="submit">Enregistrer</button>
+                    </form>
+                </div>
+
+                <!-- Sécurité -->
+                <div class="md:col-9 lg:col-6 d-flex flex-direction-column gap-10" id="panneau-securite" role="tabpanel" aria-labelledby="onglet-securite" tabindex="0" hidden>
+                    <section aria-labelledby="mot-de-passe-titre">
+                        <h2 class="fs-xl" id="mot-de-passe-titre">Mot de passe</h2>
+                        <form class="d-flex flex-direction-column gap-4 mt-4" method="post" data-enregistrer>
+                            <div class="form-field">
+                                <label for="mot-de-passe-actuel">Mot de passe actuel</label>
+                                <input class="form-input" id="mot-de-passe-actuel" type="password" name="actuel" autocomplete="current-password" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="mot-de-passe-nouveau">Nouveau mot de passe</label>
+                                <input class="form-input" id="mot-de-passe-nouveau" type="password" name="nouveau" autocomplete="new-password" minlength="12" required aria-describedby="mot-de-passe-aide">
+                                <p class="fs-sm color-neutral-emphasis" id="mot-de-passe-aide">12 caractères au moins.</p>
+                            </div>
+                            <div>
+                                <button class="btn-solid theme-primary" type="submit">Changer le mot de passe</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section aria-labelledby="appareils-titre">
+                        <h2 class="fs-xl" id="appareils-titre">Appareils connectés</h2>
+                        <ul class="list mt-4">
+                            <li class="d-flex flex-wrap-wrap align-items-center justify-content-space-between gap-3">
+                                <span>Firefox sur Linux, Montpellier</span>
+                                <span class="badge-subtle theme-success">Cet appareil</span>
+                            </li>
+                            <li class="d-flex flex-wrap-wrap align-items-center justify-content-space-between gap-3">
+                                <span>Safari sur iPhone, connecté le <time datetime="2026-11-13">13 novembre</time></span>
+                                <button class="btn btn-xs" type="button">Déconnecter<span class="visually-hidden"> Safari sur iPhone</span></button>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="alert-outline theme-danger" aria-labelledby="suppression-titre">
+                        <h2 class="fs-lg" id="suppression-titre">Supprimer le compte</h2>
+                        <p class="mt-1">Votre profil, vos adresses et votre abonnement sont supprimés. Vos factures restent disponibles dix ans, comme la loi le demande.</p>
+                        <button class="btn-outline theme-danger mt-4" type="button" commandfor="suppression" command="show-modal">Supprimer mon compte</button>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- Confirmation : Annuler ferme le dialogue, Supprimer envoie le formulaire du pied -->
+        <dialog class="dialog dialog-sm" id="suppression" data-dialog aria-labelledby="suppression-dialogue-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="suppression-dialogue-titre">Supprimer votre compte ?</h2>
+                <button class="btn-close" type="button" commandfor="suppression" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="dialog-body">
+                <p>Votre abonnement s'arrête aujourd'hui. Cette action ne peut pas être annulée.</p>
+            </div>
+            <form class="dialog-footer" method="post">
+                <button class="btn" type="button" commandfor="suppression" command="close">Annuler</button>
+                <button class="btn-solid theme-danger" type="submit" name="action" value="supprimer">Supprimer mon compte</button>
+            </form>
+        </dialog>
+
+        <!-- Toasts : le conteneur, vide au chargement (toast.ts l'ouvre) ; le modèle du toast ajouté après un enregistrement -->
+        <div class="toast-container" role="status" aria-live="polite" aria-atomic="false" popover="manual" data-toast></div>
+        <template id="toast-enregistre">
+            <div class="toast-subtle theme-success">
+                <p>Succès : modifications enregistrées.</p>
+                <button class="btn-close-subtle" type="button" aria-label="Fermer" data-toast-close></button>
+            </div>
+        </template>
+        <!-- Le JS du site, pas du framework : ici, sans serveur, l'envoi d'un formulaire data-enregistrer ajoute le toast au conteneur -->
+        <script type="module">
+            document.addEventListener('submit', (event) => {
+                if (!event.target.matches('[data-enregistrer]')) return;
+                event.preventDefault();
+                const toast = document.getElementById('toast-enregistre').content.cloneNode(true);
+                document.querySelector('[data-toast]').append(toast);
+            });
+        </script>
+    </body>
+</html>

@@ -75,6 +75,12 @@ final class UtilityController extends AbstractController
         return $this->render('utilities/glass.html.twig');
     }
 
+    #[Route('/list-unstyled', name: 'app_list_unstyled')]
+    public function listUnstyled(): Response
+    {
+        return $this->render('utilities/list-unstyled.html.twig');
+    }
+
     #[Route('/object-fit', name: 'app_object_fit')]
     public function objectFit(): Response
     {

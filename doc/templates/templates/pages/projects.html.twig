@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Site de la Brûlerie Margot · Studio Ardoise</title>
+        <meta name="description" content="Le tableau du projet : les tâches par étape, la liste des tâches et les fichiers partagés.">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="{{ asset('webdev-ui/css/webdev-ui.css') }}">
+        <script type="module" src="{{ asset('webdev-ui/js/webdev-ui.js') }}"></script>
+    </head>
+    <body>
+        <!-- Petit écran : le menu dans un drawer ; le même contenu que le menu de côté -->
+        <dialog class="drawer-start" id="menu" data-dialog closedby="any" aria-labelledby="menu-titre">
+            <div class="drawer-header">
+                <p class="fs-lg fw-bold" id="menu-titre">Studio Ardoise</p>
+                <button class="btn-close" type="button" commandfor="menu" command="close" aria-label="Fermer"></button>
+            </div>
+            <nav class="drawer-body d-grid gap-6 theme-accent" aria-label="Projets">
+                <ul class="list list-borderless">
+                    <li><a class="list-item" href="#">Accueil</a></li>
+                    <li><a class="list-item" href="#">Mes tâches</a></li>
+                    <li><a class="list-item" href="#">Calendrier</a></li>
+                </ul>
+                <div>
+                    <h2 class="fs-sm fw-semibold color-neutral-emphasis px-4 mb-2">Projets en cours</h2>
+                    <ul class="list list-borderless">
+                        <li><a class="list-item" href="#" aria-current="page">Site de la Brûlerie Margot</a></li>
+                        <li><a class="list-item" href="#">Catalogue des Éditions Sauge</a></li>
+                        <li><a class="list-item" href="#">Application Les Cimes</a></li>
+                        <li><a class="list-item" href="#">Identité du Café Pivot</a></li>
+                    </ul>
+                </div>
+                <a class="btn" href="#">Nouveau projet</a>
+            </nav>
+        </dialog>
+
+        <div class="d-flex gap-3 p-3">
+            <!-- Grand écran : le menu toujours là ; theme-accent : le survol et le projet en cours dans la couleur du studio -->
+            <nav class="drawer-start d-none lg:d-block theme-accent" aria-label="Projets">
+                <div class="drawer-header">
+                    <a class="link fs-lg fw-bold text-decoration-none" href="#">Studio Ardoise</a>
+                </div>
+                <div class="drawer-body d-grid gap-6">
+                    <ul class="list list-borderless">
+                        <li><a class="list-item" href="#">Accueil</a></li>
+                        <li><a class="list-item" href="#">Mes tâches</a></li>
+                        <li><a class="list-item" href="#">Calendrier</a></li>
+                    </ul>
+                    <div>
+                        <h2 class="fs-sm fw-semibold color-neutral-emphasis px-4 mb-2">Projets en cours</h2>
+                        <ul class="list list-borderless">
+                            <li><a class="list-item" href="#" aria-current="page">Site de la Brûlerie Margot</a></li>
+                            <li><a class="list-item" href="#">Catalogue des Éditions Sauge</a></li>
+                            <li><a class="list-item" href="#">Application Les Cimes</a></li>
+                            <li><a class="list-item" href="#">Identité du Café Pivot</a></li>
+                        </ul>
+                    </div>
+                    <a class="btn" href="#">Nouveau projet</a>
+                </div>
+            </nav>
+
+            <main class="flex-grow-1 min-w-0 d-flex flex-direction-column gap-6 lg:px-4 lg:py-2">
+                <div class="d-flex align-items-center gap-3 lg:d-none">
+                    <button class="btn navbar-toggle" type="button" commandfor="menu" command="show-modal" aria-label="Menu"></button>
+                    <p class="fw-bold">Studio Ardoise</p>
+                </div>
+
+                <div class="d-flex flex-wrap-wrap align-items-end justify-content-space-between gap-4">
+                    <div>
+                        <p class="fs-sm color-neutral-emphasis">Projet pour la Brûlerie Margot</p>
+                        <h1>Refonte du site</h1>
+                        <p class="color-neutral-emphasis mt-1">Livraison le <time datetime="2026-12-12">12 décembre</time>, 12 tâches terminées sur 31</p>
+                    </div>
+                    <div class="d-flex flex-wrap-wrap gap-2">
+                        <button class="btn" type="button">Partager</button>
+                        <button class="btn-solid theme-accent" type="button" commandfor="nouvelle-tache" command="show-modal">Nouvelle tâche</button>
+                    </div>
+                </div>
+
+                <!-- Onglets (tab.ts) : l'état de départ est dans le HTML, le JS le change au clic et aux flèches -->
+                <div>
+                    <div class="tab theme-accent" role="tablist" aria-label="Vues du projet" data-tab>
+                        <button class="tab-item" id="onglet-tableau" type="button" role="tab" aria-selected="true" aria-controls="panneau-tableau">Tableau</button>
+                        <button class="tab-item" id="onglet-liste" type="button" role="tab" aria-selected="false" aria-controls="panneau-liste" tabindex="-1">Liste</button>
+                        <button class="tab-item" id="onglet-fichiers" type="button" role="tab" aria-selected="false" aria-controls="panneau-fichiers" tabindex="-1">Fichiers</button>
+                    </div>
+
+                    <!-- Tableau : une colonne par étape, côte à côte à partir de md ; le texte de chaque titre dit l'étape, le trait de couleur l'accompagne -->
+                    <div class="grid pt-6" id="panneau-tableau" role="tabpanel" aria-labelledby="onglet-tableau" tabindex="0">
+                        <section class="d-flex flex-direction-column gap-3 md:col-6 xl:col-3" aria-labelledby="etape-a-faire">
+                            <h2 class="d-flex align-items-center justify-content-space-between gap-3 pb-2 border-bottom border-2 border-neutral fs-md" id="etape-a-faire">À faire <span class="badge">4<span class="visually-hidden"> tâches</span></span></h2>
+                            <article class="card">
+                                <div class="card-body d-flex flex-direction-column gap-2">
+                                    <h3 class="fs-md"><a class="link color-inherit" href="#">Page « Nos origines »</a></h3>
+                                    <p class="fs-sm color-neutral-emphasis">Une carte des fermes et un texte court par pays.</p>
+                                    <p class="d-flex flex-wrap-wrap align-items-center gap-2 fs-sm"><span class="badge-subtle theme-info">Contenu</span> <span class="color-neutral-emphasis">Pour le <time datetime="2026-11-28">28 nov.</time></span></p>
+                                </div>
+                            </article>
+                            <article class="card">
+                                <div class="card-body d-flex flex-direction-column gap-2">
+                                    <h3 class="fs-md"><a class="link color-inherit" href="#">Photos des cafés en sachet</a></h3>
+                                    <p class="d-flex flex-wrap-wrap align-items-center gap-2 fs-sm"><span class="badge-subtle theme-accent">Design</span> <span class="color-neutral-emphasis">Pour le <time datetime="2026-11-30">30 nov.</time></span></p>
+                                </div>
+                            </article>
+                            <article class="card">
+                                <div class="card-body d-flex flex-direction-column gap-2">
+                                    <h3 class="fs-md"><a class="link color-inherit" href="#">Abonnement : choix de la mouture</a></h3>
+                                    <p class="fs-sm color-neutral-emphasis">Grains, espresso, filtre ou piston, modifiable à chaque envoi.</p>
+                                    <p class="d-flex flex-wrap-wrap align-items-center gap-2 fs-sm"><span class="badge-subtle theme-secondary">Développement</span> <span class="color-neutral-emphasis">Pour le <time datetime="2026-12-03">3 déc.</time></span></p>
+                                </div>
+                            </article>
+                            <article class="card">
+                                <div class="card-body d-flex flex-direction-column gap-2">
+                                    <h3 class="fs-md"><a class="link color-inherit" href="#">Mentions légales et CGV</a></h3>
+                                    <p class="d-flex flex-wrap-wrap align-items-center gap-2 fs-sm"><span class="badge-subtle theme-info">Contenu</span> <span class="color-neutral-emphasis">Pour le <time datetime="2026-12-05">5 déc.</time></span></p>
+                                </div>
+                            </article>
+                        </section>
+
+                        <section class="d-flex flex-direction-column gap-3 md:col-6 xl:col-3" aria-labelledby="etape-en-cours">
+                            <h2 class="d-flex align-items-center justify-content-space-between gap-3 pb-2 border-bottom border-2 border-info fs-md" id="etape-en-cours">En cours <span class="badge">3<span class="visually-hidden"> tâches</span></span></h2>
+                            <article class="card">
+                                <div class="card-body d-flex flex-direction-column gap-2">
+                                    <h3 class="fs-md"><a class="link color-inherit" href="#">Fiche produit et choix du poids</a></h3>
+                                    <p class="fs-sm color-neutral-emphasis">250 g, 500 g ou 1 kg, le prix au kilo affiché.</p>
+                                    <p class="d-flex flex-wrap-wrap align-items-center gap-2 fs-sm"><span class="badge-subtle theme-secondary">Développement</span> <span class="badge-subtle theme-danger">Urgent</span> <span class="color-neutral-emphasis">Pour le <time datetime="2026-11-18">18 nov.</time></span></p>
+                                </div>
+                            </article>
+                            <article class="card">
+                                <div class="card-body d-flex flex-direction-column gap-2">
+                                    <h3 class="fs-md"><a class="link color-inherit" href="#">Maquette du panier</a></h3>
+                                    <p class="d-flex flex-wrap-wrap align-items-center gap-2 fs-sm"><span class="badge-subtle theme-accent">Design</span> <span class="color-neutral-emphasis">Pour le <time datetime="2026-11-20">20 nov.</time></span></p>
+                                </div>
+                            </article>
+                            <article class="card">
+                                <div class="card-body d-flex flex-direction-column gap-2">
+                                    <h3 class="fs-md"><a class="link color-inherit" href="#">Textes des fiches café</a></h3>
+                                    <p class="fs-sm color-neutral-emphasis">Notes de dégustation, altitude, variété, procédé.</p>
+                                    <p class="d-flex flex-wrap-wrap align-items-center gap-2 fs-sm"><span class="badge-subtle theme-info">Contenu</span> <span class="color-neutral-emphasis">Pour le <time datetime="2026-11-22">22 nov.</time></span></p>
+                                </div>
+                            </article>
+                        </section>
+
+                        <section class="d-flex flex-direction-column gap-3 md:col-6 xl:col-3" aria-labelledby="etape-en-revue">
+                            <h2 class="d-flex align-items-center justify-content-space-between gap-3 pb-2 border-bottom border-2 border-warning fs-md" id="etape-en-revue">En revue <span class="badge">2<span class="visually-hidden"> tâches</span></span></h2>
+                            <article class="card">
+                                <div class="card-body d-flex flex-direction-column gap-2">
+                                    <h3 class="fs-md"><a class="link color-inherit" href="#">Page d'accueil</a></h3>
+                                    <p class="fs-sm color-neutral-emphasis">Deux remarques de Margot sur le bandeau.</p>
+                                    <p class="d-flex flex-wrap-wrap align-items-center gap-2 fs-sm"><span class="badge-subtle theme-accent">Design</span> <span class="color-neutral-emphasis">Pour le <time datetime="2026-11-16">16 nov.</time></span></p>
+                                </div>
+                            </article>
+                            <article class="card">
+                                <div class="card-body d-flex flex-direction-column gap-2">
+                                    <h3 class="fs-md"><a class="link color-inherit" href="#">Paiement par carte</a></h3>
+                                    <p class="d-flex flex-wrap-wrap align-items-center gap-2 fs-sm"><span class="badge-subtle theme-secondary">Développement</span> <span class="color-neutral-emphasis">Pour le <time datetime="2026-11-17">17 nov.</time></span></p>
+                                </div>
+                            </article>
+                        </section>
+
+                        <section class="d-flex flex-direction-column gap-3 md:col-6 xl:col-3" aria-labelledby="etape-termine">
+                            <h2 class="d-flex align-items-center justify-content-space-between gap-3 pb-2 border-bottom border-2 border-success fs-md" id="etape-termine">Terminé <span class="badge">12<span class="visually-hidden"> tâches</span></span></h2>
+                            <article class="card">
+                                <div class="card-body d-flex flex-direction-column gap-2">
+                                    <h3 class="fs-md"><a class="link color-inherit" href="#">Charte graphique</a></h3>
+                                    <p class="d-flex flex-wrap-wrap align-items-center gap-2 fs-sm"><span class="badge-subtle theme-accent">Design</span> <span class="color-neutral-emphasis">Fini le <time datetime="2026-11-04">4 nov.</time></span></p>
+                                </div>
+                            </article>
+                            <article class="card">
+                                <div class="card-body d-flex flex-direction-column gap-2">
+                                    <h3 class="fs-md"><a class="link color-inherit" href="#">Hébergement et nom de domaine</a></h3>
+                                    <p class="d-flex flex-wrap-wrap align-items-center gap-2 fs-sm"><span class="badge-subtle theme-secondary">Développement</span> <span class="color-neutral-emphasis">Fini le <time datetime="2026-11-06">6 nov.</time></span></p>
+                                </div>
+                            </article>
+                            <a class="btn btn-sm" href="#">Voir les 10 autres</a>
+                        </section>
+                    </div>
+
+                    <!-- Liste : les mêmes tâches dans un tableau -->
+                    <div class="pt-6" id="panneau-liste" role="tabpanel" aria-labelledby="onglet-liste" tabindex="0" hidden>
+                        <div class="overflow-x-auto" role="region" aria-labelledby="taches-legende" tabindex="0">
+                            <table class="table table-striped text-wrap-nowrap">
+                                <caption class="visually-hidden" id="taches-legende">Tâches du projet, par échéance</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Tâche</th>
+                                        <th scope="col">Étape</th>
+                                        <th scope="col">Catégorie</th>
+                                        <th scope="col">Échéance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><th scope="row"><a class="link" href="#">Page d'accueil</a></th><td>En revue</td><td>Design</td><td><time datetime="2026-11-16">16 nov.</time></td></tr>
+                                    <tr><th scope="row"><a class="link" href="#">Paiement par carte</a></th><td>En revue</td><td>Développement</td><td><time datetime="2026-11-17">17 nov.</time></td></tr>
+                                    <tr><th scope="row"><a class="link" href="#">Fiche produit et choix du poids</a></th><td>En cours</td><td>Développement</td><td><time datetime="2026-11-18">18 nov.</time></td></tr>
+                                    <tr><th scope="row"><a class="link" href="#">Maquette du panier</a></th><td>En cours</td><td>Design</td><td><time datetime="2026-11-20">20 nov.</time></td></tr>
+                                    <tr><th scope="row"><a class="link" href="#">Textes des fiches café</a></th><td>En cours</td><td>Contenu</td><td><time datetime="2026-11-22">22 nov.</time></td></tr>
+                                    <tr><th scope="row"><a class="link" href="#">Page « Nos origines »</a></th><td>À faire</td><td>Contenu</td><td><time datetime="2026-11-28">28 nov.</time></td></tr>
+                                    <tr><th scope="row"><a class="link" href="#">Photos des cafés en sachet</a></th><td>À faire</td><td>Design</td><td><time datetime="2026-11-30">30 nov.</time></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Fichiers : une liste de liens, toute la ligne se clique -->
+                    <div class="pt-6" id="panneau-fichiers" role="tabpanel" aria-labelledby="onglet-fichiers" tabindex="0" hidden>
+                        <ul class="list">
+                            <li><a class="list-item d-flex flex-wrap-wrap justify-content-space-between column-gap-4" href="#"><span>Charte graphique.pdf</span><span class="color-neutral-emphasis fs-sm">2,4 Mo, le <time datetime="2026-11-04">4 nov.</time></span></a></li>
+                            <li><a class="list-item d-flex flex-wrap-wrap justify-content-space-between column-gap-4" href="#"><span>Maquettes, version 3.fig</span><span class="color-neutral-emphasis fs-sm">18 Mo, le <time datetime="2026-11-12">12 nov.</time></span></a></li>
+                            <li><a class="list-item d-flex flex-wrap-wrap justify-content-space-between column-gap-4" href="#"><span>Textes des fiches café.docx</span><span class="color-neutral-emphasis fs-sm">86 Ko, le <time datetime="2026-11-14">14 nov.</time></span></a></li>
+                            <li><a class="list-item d-flex flex-wrap-wrap justify-content-space-between column-gap-4" href="#"><span>Devis signé.pdf</span><span class="color-neutral-emphasis fs-sm">310 Ko, le <time datetime="2026-10-02">2 oct.</time></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Nouvelle tâche : le bouton du pied envoie le formulaire du corps (attribut form) -->
+        <dialog class="dialog dialog-sm" id="nouvelle-tache" data-dialog aria-labelledby="nouvelle-tache-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="nouvelle-tache-titre">Nouvelle tâche</h2>
+                <button class="btn-close" type="button" commandfor="nouvelle-tache" command="close" aria-label="Fermer"></button>
+            </div>
+            <form class="dialog-body d-flex flex-direction-column gap-4" id="tache-formulaire" method="post">
+                <div class="form-field">
+                    <label for="tache-titre">Titre (obligatoire)</label>
+                    <input class="form-input" id="tache-titre" type="text" name="titre" required>
+                </div>
+                <div class="form-field">
+                    <label for="tache-description">Description</label>
+                    <textarea class="form-input" id="tache-description" name="description" rows="3"></textarea>
+                </div>
+                <div class="grid">
+                    <div class="form-field xs:col-6">
+                        <label for="tache-categorie">Catégorie</label>
+                        <select class="form-input" id="tache-categorie" name="categorie">
+                            <option value="design">Design</option>
+                            <option value="contenu">Contenu</option>
+                            <option value="developpement">Développement</option>
+                        </select>
+                    </div>
+                    <div class="form-field xs:col-6">
+                        <label for="tache-echeance">Échéance</label>
+                        <input class="form-input" id="tache-echeance" type="date" name="echeance">
+                    </div>
+                </div>
+                <label class="align-self-start"><input class="form-checkbox theme-accent" type="checkbox" name="urgent"> Urgent</label>
+            </form>
+            <div class="dialog-footer">
+                <button class="btn" type="button" commandfor="nouvelle-tache" command="close">Annuler</button>
+                <button class="btn-solid theme-accent" type="submit" form="tache-formulaire">Créer la tâche</button>
+            </div>
+        </dialog>
+    </body>
+</html>

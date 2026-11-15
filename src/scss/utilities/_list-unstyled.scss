@@ -1,0 +1,10 @@
+@layer utilities {
+
+    // Une liste sans puces ni retrait (liens d'un pied de page, étiquettes) ; elle reste une liste pour le lecteur d'écran
+    // "" et pas none : avec none, Safari n'annonce plus une liste
+    .list-unstyled {
+        padding-inline-start: 0;
+        list-style-type: "";
+    }
+
+}

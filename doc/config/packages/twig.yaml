@@ -50,6 +50,7 @@ twig:
                   - [app_flex, Flex, utilities/flex.html.twig]
                   - [app_gap, Gap, utilities/gap.html.twig]
                   - [app_sizing, Largeur et hauteur, utilities/sizing.html.twig]
+                  - [app_list_unstyled, Liste sans style, utilities/list-unstyled.html.twig]
                   - [app_object_fit, Object-fit, utilities/object-fit.html.twig]
                   - [app_box_shadow, Ombres, utilities/box-shadow.html.twig]
                   - [app_opacity, Opacité, utilities/opacity.html.twig]
@@ -61,6 +62,15 @@ twig:
                   - [app_vertical_align, Vertical-align, utilities/vertical-align.html.twig]
                   - [app_visibility, Visibilité, utilities/visibility.html.twig]
                   - [app_visually_hidden, Visually-hidden, utilities/visually-hidden.html.twig]
+            - id: template
+              label: Modèles
+              links:
+                  - [app_dashboard, Tableau de bord, templates/dashboard.html.twig]
+                  - [app_members, Liste avec filtres, templates/members.html.twig]
+                  - [app_projects, Tableau de projet, templates/projects.html.twig]
+                  - [app_settings, Réglages du compte, templates/settings.html.twig]
+                  - [app_login, Connexion, templates/login.html.twig]
+                  - [app_landing, Page d'accueil, templates/landing.html.twig]
 
 when@test:
     twig:

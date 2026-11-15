@@ -5337,6 +5337,12 @@
   }
 }
 @layer utilities {
+  .list-unstyled {
+    padding-inline-start: 0;
+    list-style-type: "";
+  }
+}
+@layer utilities {
   .object-fit-contain {
     object-fit: contain;
   }

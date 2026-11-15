@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de projet{% endblock %}
+
+{% block body %}
+    <h1>Tableau de projet</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">Le suivi d'un projet : un menu de côté, trois vues en onglets (les tâches par étape, la liste, les fichiers) et un dialogue pour créer une tâche.</p>
+
+    {{ include('templates/_preview.html.twig', {route: 'app_projects_page', name: 'Tableau de projet'}) }}
+
+    <h2 class="mt-10">Ce qu'il utilise</h2>
+    <ul class="mt-2" data-hx-boost="true">
+        <li><a class="link" href="{{ path('app_drawer') }}">Drawer</a> : le menu de côté, toujours là sur grand écran, et sa copie dans un <code>&lt;dialog&gt;</code>.</li>
+        <li><a class="link" href="{{ path('app_tab') }}">Onglets</a> : les trois vues ; sans JavaScript, seule la première se voit.</li>
+        <li><a class="link" href="{{ path('app_grid') }}">Grille</a> : une colonne par étape : une, puis deux (md), puis quatre (xl).</li>
+        <li><a class="link" href="{{ path('app_card') }}">Carte</a> : une carte par tâche, son titre est le lien.</li>
+        <li><a class="link" href="{{ path('app_badge') }}">Badge</a> : la catégorie de chaque tâche et le nombre de tâches par étape.</li>
+        <li><a class="link" href="{{ path('app_border') }}">Bordures</a> : le trait coloré sous le titre de chaque étape (<code>border-bottom border-2 border-info</code>) ; le titre dit l'étape, le trait l'accompagne.</li>
+        <li><a class="link" href="{{ path('app_dialog') }}">Dialogue</a> : le formulaire de la nouvelle tâche.</li>
+    </ul>
+
+    {{ include('templates/_source.html.twig', {file: 'templates/pages/projects.html.twig'}) }}
+{% endblock %}

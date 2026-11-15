@@ -1,0 +1,9 @@
+{#- L'aperçu d'un modèle et le bouton qui l'ouvre seul, sans la doc autour
+    {{ include('templates/_preview.html.twig', {route: 'app_dashboard_page', name: 'Tableau de bord'}) }}
+    L'aperçu est la page elle-même, dans un iframe réduit de moitié (doc.css) ; inert : on la regarde ici, on s'en sert en l'ouvrant -#}
+<div class="card demo-template">
+    <iframe src="{{ path(route) }}" title="Aperçu : {{ name }}" loading="lazy" inert></iframe>
+</div>
+<div class="d-flex flex-wrap-wrap gap-3 mt-4">
+    <a class="btn" href="{{ path(route) }}">Ouvrir le modèle</a>
+</div>

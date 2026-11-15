@@ -15,6 +15,10 @@ rm -f "$dir"/*.html
 for path in $(curl -fsS "$base/" | grep -oE 'href="/[a-z0-9/_-]*"' | sed 's/^href="//; s/"$//' | sort -u); do
     name=$(echo "${path#/}" | tr '/' '-')
     curl -fsS -H 'X-Requested-With: XMLHttpRequest' "$base$path" -o "$dir/${name:-index}.html"
+    # Un modèle (section Modèles) : sa page seule aussi, hors du menu
+    if [[ "$path" == /templates/* ]]; then
+        curl -fsS -H 'X-Requested-With: XMLHttpRequest' "$base$path/page" -o "$dir/$name-page.html"
+    fi
 done
 echo "$(ls "$dir"/*.html | wc -l) pages enregistrées dans $dir"
 

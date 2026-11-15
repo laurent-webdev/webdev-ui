@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'accueil{% endblock %}
+
+{% block body %}
+    <h1>Page d'accueil</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">La page d'accueil d'un site : une barre de navigation, ce qu'on vend et deux actions, des arguments, les étapes sur une bande de couleur, les tarifs, des avis, les questions et une inscription à la lettre.</p>
+
+    {{ include('templates/_preview.html.twig', {route: 'app_landing_page', name: 'Page d\'accueil'}) }}
+
+    <h2 class="mt-10">Ce qu'il utilise</h2>
+    <ul class="mt-2" data-hx-boost="true">
+        <li><a class="link" href="{{ path('app_navbar') }}">Navbar</a> : dans un <code>container</code>, les liens dans un drawer avant md.</li>
+        <li><a class="link" href="{{ path('app_card') }}">Carte</a> : <code>card-subtle</code> pour la fiche du café, <code>card-outline</code> pour la formule mise en avant ; dans une grille, les cartes ont la même hauteur.</li>
+        <li><a class="link" href="{{ path('app_colors') }}">Couleurs</a> : la bande <code>bg-primary-subtle</code>, sur toute la largeur, le contenu dans un <code>container</code>.</li>
+        <li><a class="link" href="{{ path('app_accordion') }}">Accordéon</a> : les questions, une seule ouverte à la fois (<code>name</code>).</li>
+        <li><a class="link" href="{{ path('app_form') }}">Formulaire</a> : l'inscription à la lettre : <code>form-input-group</code>, le champ et le bouton collés.</li>
+        <li><a class="link" href="{{ path('app_container') }}">Container</a> : <code>container-md</code> : les questions et la lettre moins larges que le reste.</li>
+    </ul>
+
+    {{ include('templates/_source.html.twig', {file: 'templates/pages/landing.html.twig'}) }}
+{% endblock %}

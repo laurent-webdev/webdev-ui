@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Tableau de bord · Brûlerie Margot</title>
+        <meta name="description" content="Le tableau de bord de la boutique : ventes, commandes, objectifs et stocks du mois.">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="{{ asset('webdev-ui/css/webdev-ui.css') }}">
+        <script type="module" src="{{ asset('webdev-ui/js/webdev-ui.js') }}"></script>
+    </head>
+    <body>
+        <!-- Petit écran : le menu dans un drawer, ouvert par le bouton de l'en-tête ; le même contenu que le menu de côté -->
+        <dialog class="drawer-start" id="menu" data-dialog closedby="any" aria-labelledby="menu-titre">
+            <div class="drawer-header">
+                <p class="fs-lg fw-bold" id="menu-titre">Brûlerie Margot</p>
+                <button class="btn-close" type="button" commandfor="menu" command="close" aria-label="Fermer"></button>
+            </div>
+            <nav class="drawer-body d-grid gap-6" aria-label="Menu principal">
+                <div>
+                    <h2 class="fs-xs fw-semibold text-transform-uppercase color-neutral-emphasis px-4 mb-2">Boutique</h2>
+                    <ul class="list list-borderless">
+                        <li><a class="list-item" href="#" aria-current="page">Tableau de bord</a></li>
+                        <li><a class="list-item d-flex align-items-center justify-content-space-between gap-3" href="#">Commandes <span class="badge-subtle theme-primary">12<span class="visually-hidden"> à préparer</span></span></a></li>
+                        <li><a class="list-item" href="#">Cafés</a></li>
+                        <li><a class="list-item d-flex align-items-center justify-content-space-between gap-3" href="#">Stocks <span class="badge-subtle theme-warning">3<span class="visually-hidden"> alertes</span></span></a></li>
+                        <li><a class="list-item" href="#">Abonnements</a></li>
+                        <li><a class="list-item" href="#">Clients</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="fs-xs fw-semibold text-transform-uppercase color-neutral-emphasis px-4 mb-2">Marketing</h2>
+                    <ul class="list list-borderless">
+                        <li><a class="list-item" href="#">Promotions</a></li>
+                        <li><a class="list-item" href="#">Newsletter</a></li>
+                        <li><a class="list-item" href="#">Avis clients</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="fs-xs fw-semibold text-transform-uppercase color-neutral-emphasis px-4 mb-2">Réglages</h2>
+                    <ul class="list list-borderless">
+                        <li><a class="list-item" href="#">Boutique</a></li>
+                        <li><a class="list-item" href="#">Livraison</a></li>
+                        <li><a class="list-item" href="#">Paiements</a></li>
+                        <li><a class="list-item" href="#">Équipe</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </dialog>
+
+        <div class="d-flex gap-3 p-3">
+            <!-- Grand écran : le menu toujours là, une colonne collée en haut de l'écran ; il défile seul s'il est trop long -->
+            <nav class="drawer-start d-none lg:d-block" aria-label="Menu principal">
+                <div class="drawer-header">
+                    <a class="link fs-lg fw-bold text-decoration-none" href="#">Brûlerie Margot</a>
+                </div>
+                <div class="drawer-body d-grid gap-6">
+                    <div>
+                        <h2 class="fs-xs fw-semibold text-transform-uppercase color-neutral-emphasis px-4 mb-2">Boutique</h2>
+                        <ul class="list list-borderless">
+                            <li><a class="list-item" href="#" aria-current="page">Tableau de bord</a></li>
+                            <li><a class="list-item d-flex align-items-center justify-content-space-between gap-3" href="#">Commandes <span class="badge-subtle theme-primary">12<span class="visually-hidden"> à préparer</span></span></a></li>
+                            <li><a class="list-item" href="#">Cafés</a></li>
+                            <li><a class="list-item d-flex align-items-center justify-content-space-between gap-3" href="#">Stocks <span class="badge-subtle theme-warning">3<span class="visually-hidden"> alertes</span></span></a></li>
+                            <li><a class="list-item" href="#">Abonnements</a></li>
+                            <li><a class="list-item" href="#">Clients</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 class="fs-xs fw-semibold text-transform-uppercase color-neutral-emphasis px-4 mb-2">Marketing</h2>
+                        <ul class="list list-borderless">
+                            <li><a class="list-item" href="#">Promotions</a></li>
+                            <li><a class="list-item" href="#">Newsletter</a></li>
+                            <li><a class="list-item" href="#">Avis clients</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 class="fs-xs fw-semibold text-transform-uppercase color-neutral-emphasis px-4 mb-2">Réglages</h2>
+                        <ul class="list list-borderless">
+                            <li><a class="list-item" href="#">Boutique</a></li>
+                            <li><a class="list-item" href="#">Livraison</a></li>
+                            <li><a class="list-item" href="#">Paiements</a></li>
+                            <li><a class="list-item" href="#">Équipe</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- min-w-0 : le tableau qui défile sur le côté ne fait pas déborder la page -->
+            <div class="flex-grow-1 min-w-0 d-flex flex-direction-column gap-6 lg:px-4">
+                <header class="d-flex align-items-center gap-3">
+                    <button class="btn navbar-toggle lg:d-none" type="button" commandfor="menu" command="show-modal" aria-label="Menu"></button>
+                    <search class="flex-grow-1 md:flex-grow-0 md:w-50 xl:w-33">
+                        <label class="visually-hidden" for="recherche">Rechercher une commande, un client ou un café</label>
+                        <input class="form-input" id="recherche" type="search" name="recherche" placeholder="Rechercher" enterkeyhint="search">
+                    </search>
+                    <button class="btn d-inline-flex align-items-center gap-2 ms-auto" type="button" popovertarget="menu-compte">
+                        <span class="d-inline-flex align-items-center justify-content-center aspect-ratio-1x1 px-2 border-radius-circle bg-primary color-primary-contrast fs-xs fw-bold" aria-hidden="true">ML</span>
+                        <!-- Le nom écrit à partir de md, lu par le lecteur d'écran sur tous les écrans -->
+                        <span class="d-none md:d-inline">Margot Lefèvre</span>
+                        <span class="visually-hidden md:d-none">Margot Lefèvre</span>
+                    </button>
+                    <div class="dropdown" id="menu-compte" popover>
+                        <p class="px-3 py-2 fs-sm">
+                            <strong class="d-block">Margot Lefèvre</strong>
+                            <span class="color-neutral-emphasis">margot@exemple.fr</span>
+                        </p>
+                        <hr>
+                        <a class="dropdown-item" href="#">Mon profil</a>
+                        <a class="dropdown-item" href="#">Voir la boutique</a>
+                        <hr>
+                        <button class="dropdown-item" type="button" popovertarget="menu-compte" popovertargetaction="hide">Se déconnecter</button>
+                    </div>
+                </header>
+
+                <main class="d-grid gap-6">
+                    <div class="d-flex flex-wrap-wrap align-items-end justify-content-space-between gap-4">
+                        <div>
+                            <h1>Tableau de bord</h1>
+                            <p class="color-neutral-emphasis mt-1">Novembre 2026, mis à jour à 9 h 40</p>
+                        </div>
+                        <div class="d-flex flex-wrap-wrap gap-2">
+                            <button class="btn" type="button">Exporter</button>
+                            <a class="btn-solid theme-primary" href="#">Ajouter un café</a>
+                        </div>
+                    </div>
+
+                    <!-- Le texte dit le type du message : pas seulement la couleur -->
+                    <div class="alert-subtle theme-warning d-flex flex-wrap-wrap align-items-center justify-content-space-between gap-3">
+                        <p><strong>Stock bas :</strong> 3 cafés passent sous 5 kg (Éthiopie Guji, Brésil Cerrado, Colombie décaféiné).</p>
+                        <a class="btn-outline btn-sm theme-warning" href="#">Voir les stocks</a>
+                    </div>
+
+                    <!-- Les chiffres du mois : une liste de définitions, le libellé puis la valeur -->
+                    <section aria-labelledby="chiffres-titre">
+                        <h2 class="visually-hidden" id="chiffres-titre">Chiffres du mois</h2>
+                        <dl class="grid">
+                            <div class="card p-4 gap-1 xs:col-6 xl:col-3">
+                                <dt class="fs-sm color-neutral-emphasis">Chiffre d'affaires</dt>
+                                <dd class="fs-3xl fw-semibold">18 420 €</dd>
+                                <dd class="fs-sm"><span class="badge-subtle theme-success">+12 %</span> par rapport à octobre</dd>
+                            </div>
+                            <div class="card p-4 gap-1 xs:col-6 xl:col-3">
+                                <dt class="fs-sm color-neutral-emphasis">Commandes</dt>
+                                <dd class="fs-3xl fw-semibold">312</dd>
+                                <dd class="fs-sm"><span class="badge-subtle theme-success">+8 %</span> par rapport à octobre</dd>
+                            </div>
+                            <div class="card p-4 gap-1 xs:col-6 xl:col-3">
+                                <dt class="fs-sm color-neutral-emphasis">Panier moyen</dt>
+                                <dd class="fs-3xl fw-semibold">59,04 €</dd>
+                                <dd class="fs-sm"><span class="badge-subtle theme-danger">−2 %</span> par rapport à octobre</dd>
+                            </div>
+                            <div class="card p-4 gap-1 xs:col-6 xl:col-3">
+                                <dt class="fs-sm color-neutral-emphasis">Abonnements actifs</dt>
+                                <dd class="fs-3xl fw-semibold">486</dd>
+                                <dd class="fs-sm"><span class="badge-subtle theme-success">+21</span> ce mois-ci</dd>
+                            </div>
+                        </dl>
+                    </section>
+
+                    <div class="grid">
+                        <section class="card lg:col-8" aria-labelledby="commandes-titre">
+                            <div class="card-body d-flex flex-direction-column gap-3">
+                                <div class="d-flex flex-wrap-wrap align-items-center justify-content-space-between gap-3">
+                                    <h2 class="fs-lg" id="commandes-titre">Dernières commandes</h2>
+                                    <a class="link fs-sm" href="#">Toutes les commandes</a>
+                                </div>
+                                <!-- text-wrap-nowrap : une ligne par commande ; trop large sur téléphone, le tableau défile dans sa zone, la page ne déborde pas -->
+                                <div class="overflow-x-auto" role="region" aria-labelledby="commandes-titre" tabindex="0">
+                                    <table class="table table-hover text-wrap-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Commande</th>
+                                                <th scope="col">Client</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Statut</th>
+                                                <th scope="col" class="text-align-end">Montant</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row"><a class="link" href="#">4821</a></th>
+                                                <td>Camille Roux</td>
+                                                <td><time datetime="2026-11-15">15 nov.</time></td>
+                                                <td><span class="badge-subtle theme-info">À préparer</span></td>
+                                                <td class="text-align-end">64,50 €</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"><a class="link" href="#">4820</a></th>
+                                                <td>Hugo Bernard</td>
+                                                <td><time datetime="2026-11-15">15 nov.</time></td>
+                                                <td><span class="badge-subtle theme-info">À préparer</span></td>
+                                                <td class="text-align-end">32,00 €</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"><a class="link" href="#">4819</a></th>
+                                                <td>Léa Fontaine</td>
+                                                <td><time datetime="2026-11-14">14 nov.</time></td>
+                                                <td><span class="badge-subtle theme-secondary">Expédiée</span></td>
+                                                <td class="text-align-end">118,90 €</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"><a class="link" href="#">4818</a></th>
+                                                <td>Nadia Benali</td>
+                                                <td><time datetime="2026-11-14">14 nov.</time></td>
+                                                <td><span class="badge-subtle theme-success">Livrée</span></td>
+                                                <td class="text-align-end">45,60 €</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"><a class="link" href="#">4817</a></th>
+                                                <td>Paul Garnier</td>
+                                                <td><time datetime="2026-11-13">13 nov.</time></td>
+                                                <td><span class="badge-subtle theme-warning">Paiement en attente</span></td>
+                                                <td class="text-align-end">27,80 €</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"><a class="link" href="#">4816</a></th>
+                                                <td>Inès Moreau</td>
+                                                <td><time datetime="2026-11-13">13 nov.</time></td>
+                                                <td><span class="badge-subtle theme-neutral">Remboursée</span></td>
+                                                <td class="text-align-end">19,90 €</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Deux cartes l'une sous l'autre, à côté du tableau sur grand écran -->
+                        <div class="d-flex flex-direction-column gap-6 lg:col-4">
+                            <section class="card" aria-labelledby="objectifs-titre">
+                                <div class="card-body d-flex flex-direction-column gap-4">
+                                    <h2 class="fs-lg" id="objectifs-titre">Objectifs de novembre</h2>
+                                    <!-- progress : la barre du navigateur, de la couleur du texte (accent-color) ; la valeur est aussi écrite -->
+                                    <div class="d-grid gap-1">
+                                        <div class="d-flex flex-wrap-wrap justify-content-space-between column-gap-3 fs-sm">
+                                            <label for="objectif-ventes">Chiffre d'affaires</label>
+                                            <span>18 420 / 25 000 €</span>
+                                        </div>
+                                        <progress class="w-100 color-primary-emphasis" id="objectif-ventes" max="25000" value="18420">74 %</progress>
+                                    </div>
+                                    <div class="d-grid gap-1">
+                                        <div class="d-flex flex-wrap-wrap justify-content-space-between column-gap-3 fs-sm">
+                                            <label for="objectif-abonnements">Nouveaux abonnements</label>
+                                            <span>21 / 40</span>
+                                        </div>
+                                        <progress class="w-100 color-primary-emphasis" id="objectif-abonnements" max="40" value="21">53 %</progress>
+                                    </div>
+                                    <div class="d-grid gap-1">
+                                        <div class="d-flex flex-wrap-wrap justify-content-space-between column-gap-3 fs-sm">
+                                            <label for="objectif-avis">Avis à 5 étoiles</label>
+                                            <span>58 / 60</span>
+                                        </div>
+                                        <progress class="w-100 color-success-emphasis" id="objectif-avis" max="60" value="58">97 %</progress>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="card" aria-labelledby="ventes-titre">
+                                <div class="card-body d-flex flex-direction-column gap-3">
+                                    <h2 class="fs-lg" id="ventes-titre">Meilleures ventes</h2>
+                                    <ol class="list">
+                                        <li class="d-flex justify-content-space-between gap-3"><span>Éthiopie Yirgacheffe</span><span class="color-neutral-emphasis">84 kg</span></li>
+                                        <li class="d-flex justify-content-space-between gap-3"><span>Colombie Huila</span><span class="color-neutral-emphasis">71 kg</span></li>
+                                        <li class="d-flex justify-content-space-between gap-3"><span>Mélange Maison</span><span class="color-neutral-emphasis">66 kg</span></li>
+                                        <li class="d-flex justify-content-space-between gap-3"><span>Brésil Cerrado</span><span class="color-neutral-emphasis">39 kg</span></li>
+                                    </ol>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </main>
+
+                <footer class="d-flex flex-wrap-wrap justify-content-space-between gap-3 py-4 border-top fs-sm color-neutral-emphasis">
+                    <p>© 2026 Brûlerie Margot</p>
+                    <a class="link" href="#">Aide et contact</a>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>

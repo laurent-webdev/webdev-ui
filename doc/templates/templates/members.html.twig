@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste avec filtres{% endblock %}
+
+{% block body %}
+    <h1>Liste avec filtres</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">Une liste à gérer : une barre de navigation en haut, une recherche, des filtres dans un drawer, un tableau avec un menu d'actions par ligne, la pagination et un dialogue pour ajouter.</p>
+
+    {{ include('templates/_preview.html.twig', {route: 'app_members_page', name: 'Liste avec filtres'}) }}
+
+    <h2 class="mt-10">Ce qu'il utilise</h2>
+    <ul class="mt-2" data-hx-boost="true">
+        <li><a class="link" href="{{ path('app_navbar') }}">Navbar</a> : <code>navbar-solid</code> : les liens dans la barre à partir de lg, dans un drawer avant.</li>
+        <li><a class="link" href="{{ path('app_drawer') }}">Drawer</a> : les filtres, à droite, sur tous les écrans (<code>drawer-end</code>).</li>
+        <li><a class="link" href="{{ path('app_table') }}">Tableau</a> : <code>table-hover</code>, <code>text-wrap-nowrap</code> : une ligne par adhérent, le tableau défile sur téléphone.</li>
+        <li><a class="link" href="{{ path('app_dropdown') }}">Dropdown</a> : les actions de chaque ligne ; un popover n'est jamais coupé par le tableau qui défile.</li>
+        <li><a class="link" href="{{ path('app_pagination') }}">Pagination</a> : <code>pagination-subtle</code>, le lien Précédent sans <code>href</code> sur la première page.</li>
+        <li><a class="link" href="{{ path('app_dialog') }}">Dialogue</a> : le formulaire d'ajout ; le bouton du pied l'envoie par l'attribut <code>form</code>.</li>
+        <li><a class="link" href="{{ path('app_form') }}">Formulaire</a> : cases, boutons radio, liste et switch dans les filtres.</li>
+    </ul>
+
+    {{ include('templates/_source.html.twig', {file: 'templates/pages/members.html.twig'}) }}
+{% endblock %}

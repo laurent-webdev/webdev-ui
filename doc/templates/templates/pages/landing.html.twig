@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Brûlerie Margot · Café torréfié à Montpellier</title>
+        <meta name="description" content="Du café de spécialité torréfié la veille à Montpellier, livré chez vous en abonnement ou à l'unité.">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="{{ asset('webdev-ui/css/webdev-ui.css') }}">
+        <script type="module" src="{{ asset('webdev-ui/js/webdev-ui.js') }}"></script>
+    </head>
+    <body>
+        <header class="container">
+            <nav class="navbar md:navbar-expand theme-primary" aria-label="Principal">
+                <a class="navbar-brand" href="#">Brûlerie Margot</a>
+                <ul class="navbar-list">
+                    <li><a class="navbar-item" href="#">Cafés</a></li>
+                    <li><a class="navbar-item" href="#tarifs">Abonnements</a></li>
+                    <li><a class="navbar-item" href="#">Ateliers</a></li>
+                    <li><a class="navbar-item" href="#questions">Questions</a></li>
+                    <li><a class="navbar-item" href="#">Mon compte</a></li>
+                </ul>
+                <button class="btn navbar-toggle" type="button" commandfor="menu" command="show-modal" aria-label="Menu"></button>
+                <dialog class="drawer-end" id="menu" data-dialog closedby="any" aria-labelledby="menu-titre">
+                    <div class="drawer-header">
+                        <h2 class="fs-lg" id="menu-titre">Menu</h2>
+                        <button class="btn-close" type="button" commandfor="menu" command="close" aria-label="Fermer"></button>
+                    </div>
+                    <div class="drawer-body">
+                        <ul class="navbar-list">
+                            <li><a class="navbar-item" href="#">Cafés</a></li>
+                            <li><a class="navbar-item" href="#tarifs">Abonnements</a></li>
+                            <li><a class="navbar-item" href="#">Ateliers</a></li>
+                            <li><a class="navbar-item" href="#questions">Questions</a></li>
+                            <li><a class="navbar-item" href="#">Mon compte</a></li>
+                        </ul>
+                    </div>
+                </dialog>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Le haut de la page : ce qu'on vend, les deux actions, et la fiche du café torréfié aujourd'hui -->
+            <div class="container grid align-items-center py-12">
+                <div class="lg:col-7">
+                    <p><span class="badge-subtle theme-primary">Torréfié à Montpellier depuis 2011</span></p>
+                    <h1 class="fs-5xl mt-4">Du café torréfié la veille, livré chez vous</h1>
+                    <p class="fs-xl color-neutral-emphasis mt-4">Nous achetons nos grains aux fermes, nous les torréfions le mardi en petits lots, ils arrivent le jeudi dans votre boîte aux lettres.</p>
+                    <div class="d-flex flex-wrap-wrap gap-3 mt-8">
+                        <a class="btn-solid btn-lg theme-primary" href="#tarifs">Choisir un abonnement</a>
+                        <a class="btn btn-lg" href="#">Voir les cafés</a>
+                    </div>
+                </div>
+                <section class="card-subtle theme-primary lg:col-5" aria-labelledby="torrefaction-titre">
+                    <div class="card-header">
+                        <p class="fs-sm">Torréfaction du mardi <time datetime="2026-11-17">17 novembre</time></p>
+                        <h2 class="fs-2xl" id="torrefaction-titre">Éthiopie Guji</h2>
+                    </div>
+                    <dl class="card-body grid row-gap-3">
+                        <div class="col-6">
+                            <dt class="fs-sm">Notes</dt>
+                            <dd class="fw-semibold">Agrumes, jasmin, miel</dd>
+                        </div>
+                        <div class="col-6">
+                            <dt class="fs-sm">Altitude</dt>
+                            <dd class="fw-semibold">2 100 m</dd>
+                        </div>
+                        <div class="col-6">
+                            <dt class="fs-sm">Procédé</dt>
+                            <dd class="fw-semibold">Lavé</dd>
+                        </div>
+                        <div class="col-6">
+                            <dt class="fs-sm">Torréfaction</dt>
+                            <dd class="fw-semibold">Claire, pour le filtre</dd>
+                        </div>
+                    </dl>
+                    <div class="card-footer">
+                        <a class="link" href="#">Voir la fiche du café</a>
+                    </div>
+                </section>
+            </div>
+
+            <section class="container py-12" aria-labelledby="engagements-titre">
+                <h2 id="engagements-titre">Ce qui change dans la tasse</h2>
+                <div class="grid mt-8">
+                    <div class="card md:col-4">
+                        <div class="card-body">
+                            <h3 class="fs-lg">Des fermes que l'on connaît</h3>
+                            <p class="color-neutral-emphasis mt-2">Huit producteurs en Éthiopie, en Colombie et au Brésil, payés au-dessus du prix du marché.</p>
+                        </div>
+                    </div>
+                    <div class="card md:col-4">
+                        <div class="card-body">
+                            <h3 class="fs-lg">Torréfié en petits lots</h3>
+                            <p class="color-neutral-emphasis mt-2">Douze kilos à la fois, chaque café à son profil : clair pour le filtre, plus foncé pour l'espresso.</p>
+                        </div>
+                    </div>
+                    <div class="card md:col-4">
+                        <div class="card-body">
+                            <h3 class="fs-lg">Moulu pour votre cafetière</h3>
+                            <p class="color-neutral-emphasis mt-2">En grains, ou moulu pour l'espresso, le filtre, le piston ou la moka. Vous changez quand vous voulez.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Une bande de couleur sur toute la largeur, le contenu dans le container -->
+            <section class="bg-primary-subtle py-12" aria-labelledby="etapes-titre">
+                <div class="container">
+                    <h2 id="etapes-titre">Comment ça marche</h2>
+                    <!-- Une liste numérotée : les étapes se suivent dans cet ordre -->
+                    <ol class="grid mt-8 ps-0">
+                        <li class="d-flex gap-4 md:col-4">
+                            <span class="d-inline-flex align-items-center justify-content-center align-self-start flex-shrink-0 aspect-ratio-1x1 px-3 border-radius-circle bg-primary color-primary-contrast fw-bold" aria-hidden="true">1</span>
+                            <div>
+                                <h3 class="fs-lg">Vous choisissez</h3>
+                                <p class="mt-1">Un café, une quantité et un rythme : chaque semaine, toutes les deux semaines ou chaque mois.</p>
+                            </div>
+                        </li>
+                        <li class="d-flex gap-4 md:col-4">
+                            <span class="d-inline-flex align-items-center justify-content-center align-self-start flex-shrink-0 aspect-ratio-1x1 px-3 border-radius-circle bg-primary color-primary-contrast fw-bold" aria-hidden="true">2</span>
+                            <div>
+                                <h3 class="fs-lg">Nous torréfions le mardi</h3>
+                                <p class="mt-1">Votre café est torréfié, reposé une nuit, puis moulu si vous l'avez demandé.</p>
+                            </div>
+                        </li>
+                        <li class="d-flex gap-4 md:col-4">
+                            <span class="d-inline-flex align-items-center justify-content-center align-self-start flex-shrink-0 aspect-ratio-1x1 px-3 border-radius-circle bg-primary color-primary-contrast fw-bold" aria-hidden="true">3</span>
+                            <div>
+                                <h3 class="fs-lg">Il arrive le jeudi</h3>
+                                <p class="mt-1">Dans votre boîte aux lettres, sans signature. Une pause ou un arrêt en un clic.</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="container py-12" id="tarifs" aria-labelledby="tarifs-titre">
+                <h2 id="tarifs-titre">Abonnements</h2>
+                <p class="color-neutral-emphasis mt-2">Sans engagement, livraison offerte. Le prix est celui d'un envoi.</p>
+                <!-- Les cartes d'une ligne ont la même hauteur : le pied, avec le bouton, reste en bas -->
+                <div class="grid mt-8">
+                    <section class="card md:col-4" aria-labelledby="formule-decouverte">
+                        <div class="card-body">
+                            <h3 class="fs-lg" id="formule-decouverte">Découverte</h3>
+                            <p class="mt-2"><span class="fs-4xl fw-semibold">9,90 €</span> pour 250 g</p>
+                            <ul class="mt-4">
+                                <li>Un café différent à chaque envoi</li>
+                                <li>Une fiche de dégustation</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn w-100" href="#">Choisir Découverte</a>
+                        </div>
+                    </section>
+                    <!-- La formule mise en avant : son cadre et son bouton dans la couleur, le badge le dit aussi en texte -->
+                    <section class="card-outline theme-primary md:col-4" aria-labelledby="formule-maison">
+                        <div class="card-body">
+                            <h3 class="d-flex flex-wrap-wrap align-items-center gap-2 fs-lg" id="formule-maison">Maison <span class="badge-solid theme-primary">La plus choisie</span></h3>
+                            <p class="mt-2"><span class="fs-4xl fw-semibold">16,90 €</span> pour 500 g</p>
+                            <ul class="mt-4">
+                                <li>Votre café préféré, toujours le même</li>
+                                <li>La mouture de votre choix</li>
+                                <li>Un paquet offert pour votre anniversaire</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn-solid theme-primary w-100" href="#">Choisir Maison</a>
+                        </div>
+                    </section>
+                    <section class="card md:col-4" aria-labelledby="formule-bureau">
+                        <div class="card-body">
+                            <h3 class="fs-lg" id="formule-bureau">Bureau</h3>
+                            <p class="mt-2"><span class="fs-4xl fw-semibold">29,90 €</span> pour 1 kg</p>
+                            <ul class="mt-4">
+                                <li>Pour une équipe de 5 à 10 personnes</li>
+                                <li>Facture au nom de l'entreprise</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn w-100" href="#">Choisir Bureau</a>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <section class="container py-12" aria-labelledby="avis-titre">
+                <h2 id="avis-titre">Ils en parlent</h2>
+                <div class="grid mt-8">
+                    <figure class="md:col-6">
+                        <blockquote class="fs-lg">
+                            <p>« Le Guji du mois dernier m'a réconciliée avec le café filtre. Et le paquet arrive vraiment le jeudi. »</p>
+                        </blockquote>
+                        <figcaption class="fs-sm color-neutral-emphasis mt-2">Léa F., abonnée depuis 2023</figcaption>
+                    </figure>
+                    <figure class="md:col-6">
+                        <blockquote class="fs-lg">
+                            <p>« Au bureau, on a arrêté les capsules. Un kilo toutes les deux semaines pour huit personnes, c'est juste ce qu'il faut. »</p>
+                        </blockquote>
+                        <figcaption class="fs-sm color-neutral-emphasis mt-2">Hugo B., Atelier Lumen</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="container-md py-12" id="questions" aria-labelledby="questions-titre">
+                <h2 id="questions-titre">Questions</h2>
+                <!-- Ouvrir une question ferme les autres : le même name sur chaque details -->
+                <div class="accordion mt-8">
+                    <details name="questions" open>
+                        <summary>Combien de temps se garde le café ?</summary>
+                        <div class="accordion-body">
+                            <p>Il est meilleur entre une et quatre semaines après la torréfaction. Gardez le sachet fermé, à l'abri de la lumière, pas au réfrigérateur.</p>
+                        </div>
+                    </details>
+                    <details name="questions">
+                        <summary>Puis-je mettre mon abonnement en pause ?</summary>
+                        <div class="accordion-body">
+                            <p>Oui, depuis votre compte, jusqu'à la veille de la torréfaction : le lundi à minuit.</p>
+                        </div>
+                    </details>
+                    <details name="questions">
+                        <summary>Quelle mouture choisir ?</summary>
+                        <div class="accordion-body">
+                            <p>Fine pour l'espresso et la moka, moyenne pour le filtre, grossière pour le piston. En grains, le café garde ses arômes plus longtemps.</p>
+                        </div>
+                    </details>
+                    <details name="questions">
+                        <summary>Livrez-vous en dehors de la France ?</summary>
+                        <div class="accordion-body">
+                            <p>En Belgique, en Suisse et au Luxembourg, pour 4,90 € de plus par envoi.</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <section class="container-md py-12" aria-labelledby="lettre-titre">
+                <div class="card-subtle theme-primary">
+                    <div class="card-body p-8">
+                        <h2 class="fs-2xl" id="lettre-titre">Un nouveau café chaque mois</h2>
+                        <p class="mt-2">Une lettre par mois : le café du mois, sa ferme et une recette. Pas de publicité.</p>
+                        <form class="mt-6" method="post">
+                            <label class="visually-hidden" for="lettre-email">Votre e-mail</label>
+                            <div class="form-input-group">
+                                <input class="form-input" id="lettre-email" type="email" name="email" placeholder="nom@domaine.fr" autocomplete="email" required>
+                                <button class="btn-solid theme-primary" type="submit">S'inscrire</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="border-top">
+            <div class="container grid py-10 fs-sm">
+                <div class="md:col-6">
+                    <p class="fs-md fw-bold">Brûlerie Margot</p>
+                    <address class="fst-normal color-neutral-emphasis mt-2">7 rue du Plan d'Agde<br>34000 Montpellier<br>Ouvert du mardi au samedi, de 9 h à 19 h</address>
+                </div>
+                <nav class="xs:col-6 md:col-3" aria-labelledby="pied-boutique">
+                    <h2 class="fs-sm fw-semibold" id="pied-boutique">Boutique</h2>
+                    <ul class="list-unstyled d-grid gap-2 mt-2">
+                        <li><a class="link color-inherit" href="#">Cafés</a></li>
+                        <li><a class="link color-inherit" href="#">Abonnements</a></li>
+                        <li><a class="link color-inherit" href="#">Cartes cadeaux</a></li>
+                    </ul>
+                </nav>
+                <nav class="xs:col-6 md:col-3" aria-labelledby="pied-aide">
+                    <h2 class="fs-sm fw-semibold" id="pied-aide">Aide</h2>
+                    <ul class="list-unstyled d-grid gap-2 mt-2">
+                        <li><a class="link color-inherit" href="#">Livraison</a></li>
+                        <li><a class="link color-inherit" href="#">Contact</a></li>
+                        <li><a class="link color-inherit" href="#">Mentions légales</a></li>
+                    </ul>
+                </nav>
+                <p class="color-neutral-emphasis">© 2026 Brûlerie Margot</p>
+            </div>
+        </footer>
+    </body>
+</html>
