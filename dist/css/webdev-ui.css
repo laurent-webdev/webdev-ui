@@ -2316,9 +2316,11 @@
     --list-theme-color: var(--color-inverse);
     --list-theme-emphasis: var(--color-inverse-emphasis);
   }
-  .list {
+  .list, .list-unstyled {
     padding-inline-start: 0;
     list-style-type: "";
+  }
+  .list {
     border: var(--list-border-width) solid var(--border-color);
     border-radius: var(--list-border-radius);
     block-size: fit-content;
@@ -5334,12 +5336,6 @@
       background-color: var(--color-background);
       backdrop-filter: none;
     }
-  }
-}
-@layer utilities {
-  .list-unstyled {
-    padding-inline-start: 0;
-    list-style-type: "";
   }
 }
 @layer utilities {

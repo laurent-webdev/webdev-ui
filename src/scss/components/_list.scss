@@ -20,11 +20,15 @@
         }
     }
 
-    // Une liste encadrée, un trait entre les éléments
-    .list {
-        // Sans puces ni retrait ; "" et pas none : avec none, Safari n'annonce plus une liste
+    // Forme commune : sans puces ni retrait ; "" et pas none : avec none, Safari n'annonce plus une liste
+    // list-unstyled s'arrête là, seule : ni cadre, ni padding, ni états (liens d'un pied de page, étiquettes)
+    .list, .list-unstyled {
         padding-inline-start: 0;
         list-style-type: "";
+    }
+
+    // Une liste encadrée, un trait entre les éléments
+    .list {
         border: var(--list-border-width) solid var(--border-color);
         border-radius: var(--list-border-radius);
         // La hauteur de ses éléments : dans une grille ou un flex, ne s'étire pas à la hauteur d'un voisin, comme l'accordéon

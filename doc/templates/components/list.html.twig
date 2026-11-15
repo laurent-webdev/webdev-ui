@@ -64,6 +64,22 @@
     {% endset %}
     {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
 
+    <h2 class="mt-10">Sans style</h2>
+    <p class="mt-2"><code>list-unstyled</code>, seule : ni puces, ni retrait, ni cadre ; le lecteur d'écran l'annonce toujours comme une liste. L'écart vient de la grille ou du flex.</p>
+    {% set code %}
+        <ul class="list-unstyled d-grid gap-2">
+            <li><a class="link" href="#">Livraison</a></li>
+            <li><a class="link" href="#">Contact</a></li>
+            <li><a class="link" href="#">Mentions légales</a></li>
+        </ul>
+        <ul class="list-unstyled d-flex flex-wrap-wrap gap-2">
+            <li><span class="badge">Design</span></li>
+            <li><span class="badge">Contenu</span></li>
+            <li><span class="badge">Développement</span></li>
+        </ul>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
     <h2 class="mt-10" id="variables">Variables</h2>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
         <table class="table">
@@ -140,7 +156,7 @@
     <h2 class="mt-10">Limites</h2>
     <ul class="mt-2">
         <li>Sans puces par <code>list-style-type: ""</code> : la liste reste annoncée dans Safari d'après un test de 2023, à vérifier avec VoiceOver.</li>
-        <li>Un <code>&lt;ol class="list"&gt;</code> perd ses numéros.</li>
+        <li>Un <code>&lt;ol class="list"&gt;</code> ou <code>list-unstyled</code> perd ses numéros.</li>
         <li>Pas encore de tailles, de liste horizontale ni de titres de groupe.</li>
     </ul>
 
