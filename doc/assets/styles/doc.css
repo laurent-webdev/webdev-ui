@@ -39,7 +39,7 @@ body {
     padding-inline-start: calc(var(--drawer-width) + var(--drawer-inset) * 2);
   }
 
-  /* La page ne défile plus, le contenu défile dans le main (base.html.twig) : à l'ouverture d'un dialogue, pas de place gardée pour une barre que la fenêtre n'a pas (la page bougerait) */
+  /* La page ne défile plus, le contenu défile dans le main (base.html.twig) : pas de place gardée pour la barre de la fenêtre (le reset la garde) */
   html {
     scrollbar-gutter: auto;
   }
