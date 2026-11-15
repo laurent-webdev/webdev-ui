@@ -2,9 +2,10 @@
 // Un breakpoint au début de chaque famille d'appareils ; une classe sans préfixe vaut dès 0, petits écrans compris
 // En rem : avec un texte agrandi par l'utilisateur, la mise en page passe plus tôt en version mobile
 // En px avec la taille de texte par défaut du navigateur (1rem = 16px)
-$screen-xs: 22.5rem; // 360px : téléphones debout ; en dessous, petits écrans (320px, téléphones pliants fermés)
-$screen-sm: 36rem;   // 576px : petites tablettes, petits téléphones couchés
-$screen-md: 48rem;   // 768px : tablettes debout, la plupart des téléphones couchés
-$screen-lg: 64rem;   // 1024px : tablettes couchées, petits portables
-$screen-xl: 80rem;   // 1280px : portables
-$screen-2xl: 96rem;  // 1536px : grands portables, écrans de bureau
+// !default : un site les change dans son SCSS avec @use … with (…), sans toucher au framework
+$screen-xs: 22.5rem !default; // 360px : téléphones debout ; en dessous, petits écrans (320px, téléphones pliants fermés)
+$screen-sm: 36rem !default;   // 576px : petites tablettes, petits téléphones couchés
+$screen-md: 48rem !default;   // 768px : tablettes debout, la plupart des téléphones couchés
+$screen-lg: 64rem !default;   // 1024px : tablettes couchées, petits portables
+$screen-xl: 80rem !default;   // 1280px : portables
+$screen-2xl: 96rem !default;  // 1536px : grands portables, écrans de bureau

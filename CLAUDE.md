@@ -13,7 +13,7 @@ La v2 de webdev-ui : une refonte totale, plus native, mieux architecturée. L'an
 ## Règles absolues
 
 - **0 dépendance à l'exécution.** Outils de build : `sass`, `typescript` (et le `gulpfile.js` de Laurent, voir « Build »).
-- **Personnalisation = variables CSS uniquement.** Changer une valeur ne demande jamais de rebuild. Pas de map Sass, pas de configuration en JS ou en SCSS. Seule exception : les breakpoints (`var()` ne marche pas dans `@media`), en variables SCSS.
+- **Personnalisation = variables CSS uniquement.** Changer une valeur ne demande jamais de rebuild. Pas de map Sass, pas de configuration en JS ou en SCSS. Seule exception : les breakpoints (`var()` ne marche pas dans `@media`), en variables SCSS `!default`, que le site change dans son SCSS avec `@use '…/settings/breakpoints' with (…)` avant le framework.
 - **Couleurs en oklch**, dérivées calculées dans le navigateur (`oklch(from)`, `color(from)`, `color-mix()`, `light-dark()`), sans couleur de repli ni `@supports`.
 - **CSS d'abord, JS en dernier recours** : `<details>`, `<dialog>`, `popover`, `command` / `commandfor`, `:has()`… avant toute ligne de JS.
 - **HTML minimal et natif** : l'élément qui fait déjà le travail, le moins de classes et d'enveloppes possible.
@@ -163,7 +163,7 @@ Architecture ITCSS, modules Sass (`@use` / `@forward`, jamais `@import`).
 
 ```
 src/scss/
-├── app.scss          un @use par dossier : reset, settings, base, layout, components, utilities
+├── webdev-ui.scss    un @use par dossier : reset, settings, base, layout, components, utilities
 ├── settings/         variables CSS globales dans :root (+ _breakpoints.scss, sans sortie CSS)
 ├── tools/_mixins.scss   mixins (espacements, couleurs dérivées), sans sortie CSS
 ├── _reset.scss
@@ -172,7 +172,7 @@ src/scss/
 ├── components/       un fichier par composant
 └── utilities/        un fichier par famille
 src/ts/
-├── bundle.ts         importe chaque composant
+├── webdev-ui.ts      importe chaque composant
 └── components/       un fichier par composant qui a besoin de JS
 ```
 
@@ -184,15 +184,16 @@ src/ts/
 
 ## JavaScript (si indispensable)
 
-- TypeScript, livré en JS vanilla (modules ES), un seul fichier publié : `dist/js/bundle.js` (+ `.min.js`).
+- TypeScript, livré en JS vanilla (modules ES), un seul fichier publié : `dist/js/webdev-ui.js` (+ `.min.js`).
 - Le JS change des attributs (`hidden`, `open`, `aria-*`, `data-*`), jamais de style inline.
 - Initialisation par un attribut `data-<composant>`. **Un composant = une classe** `export default class <Composant>`, méthodes statiques (`<Composant>.méthode()`, pas `this`), démarrée en bas du fichier par `<Composant>.start()`. Écouteurs en délégation sur `document` (en capture pour `cancel`, `close`, `command`) : marche pour le HTML ajouté plus tard, sans `MutationObserver`. Pas de `destroy()` tant qu'il ne sert pas.
 - **Événements pour le site** : les natifs d'abord (`toggle`, `cancel`, `close`, `command`), jamais doublés. Sinon `new CustomEvent('<composant>-<action>', { bubbles: true, detail })` sur l'élément du composant, et `<composant>-before<action>` annulable pour l'action refusable (`tab-beforechange` / `tab-change`). Chaque page de composant avec du JS liste ses événements.
 
 ## Build
 
+- Fichiers publiés au nom du projet (`dist/css/webdev-ui.css`, `dist/js/webdev-ui.js`, + `.min`), comme leurs sources (`src/scss/webdev-ui.scss`, `src/ts/webdev-ui.ts`) : `app.css` se confondait avec le CSS du site.
 - `npm run build` / `npm run watch` lancent `gulp build` / `gulp watch` ; `symfony serve` lance le watch (worker de `doc/.symfony.local.yaml`). **Laurent a besoin de `gulpfile.js` : le garder, ne pas proposer de le supprimer.**
-- TS compilé par esbuild (déjà dans le gulpfile) de `src/ts/bundle.ts` vers `dist/js/` ; `npm run typecheck` (`tsc`, `noEmit`) vérifie les types.
+- TS compilé par esbuild (déjà dans le gulpfile) de `src/ts/webdev-ui.ts` vers `dist/js/` ; `npm run typecheck` (`tsc`, `noEmit`) vérifie les types.
 - Node n'existe que dans le conteneur Docker du dépôt : `docker exec -w /app webdev-ui npm run …`. `dist/` est versionné : il va dans le commit avec `src/`.
 - Skills du projet (`.claude/skills/`) : `/nouveau-composant <nom>` pour commencer un composant, `/verifier` avant un commit (typecheck, build, W3C sur toutes les pages, règles de ce fichier ; Lighthouse et contrastes restent à la main).
 
@@ -204,7 +205,9 @@ src/ts/
 - **Peu de texte, des exemples** (modèle : `components/button.html.twig`) : un exemple = le rendu dans un `.card`, son code juste en dessous, écrit une seule fois (`{% set code %}…{% endset %}` + `{{ include('_example.html.twig', {code: code}) }}` ; `class` change la mise en page du rendu, `html` rend autre chose que le code montré (`{% set demo %}` + `html: demo`, jamais `{% set html %}` : `include` passe toute la page, il resterait pour les exemples suivants) ; code seul : `_code.html.twig`, `language: 'css'` ; filtre `dedent` de `src/Twig/DocExtension.php`). Au plus une phrase avant un exemple, noms de classes en `<code>`, HTML écrit en entier sans boucle Twig (le template = le code affiché), boîtes des démos en classes du framework (`bg-primary-subtle p-2`, `border` pour le parent) ; une aide de `doc.css` (`demo-height`, `demo-glass`) seulement dans le rendu (`html`). Plan : titre + une phrase, exemples, Variables (tableau + CSS commenté), Accessibilité (quelques points), À éviter (`<!-- Non : … -->` / `<!-- Oui -->` dans le code), Limites, Toutes les combinaisons (grille sans code, pour les contrastes).
 - Blocs de code : `<pre tabindex="0"><code class="language-html">` (une zone qui défile se prend au clavier). Coloration Prism par CDN (cdnjs, version exacte, SRI) : doc seulement. Pas de thème Prism : ses couleurs sont dans `doc.css`, celles du fond de la doc (un fond uni, l'indigo clair en thème clair, un peu plus foncé que la page pour se voir sur le verre blanc, l'indigo foncé en sombre ; les mots en `--color-*-emphasis` des vagues primary, secondary, info et accent, ponctuation et commentaires en neutral, commentaires en italique), texte en `--font-size-sm`.
 - **Navigation sans rechargement** : htmx 2 (`doc/assets/js/htmx.min.js`, doc seulement, le framework reste sans dépendance). Les liens des deux menus, de l'en-tête, du précédent / suivant et de l'accueil (`data-hx-boost`) ne remplacent que `#doc-content` (le `<main>` et le bloc `fixed`, seul gardé pour le bouton Retour) : le menu garde son défilement. Attributs en `data-hx-*` (`hx-*` est refusé par le W3C). Après chaque changement, `app.js` refait ce que faisait le chargement : fermer le drawer du menu, `aria-current` des deux menus, Prism, boutons Copier, conteneurs de toasts, focus sur le `<h1>` (le lecteur d'écran annonce la page ; sans contour dans `doc.css` : pas cliquable, le contour natif de Chromium faisait le tour du texte et du bloc) ; les écouteurs des démos sont sur `document`. Limites : un `{% block stylesheets %}` de page ne se charge pas par htmx ; sur grand écran, Retour remet le main en haut (htmx ne garde que la position de la fenêtre).
+- Pied de page : « Cette doc est faite avec » webdev-ui, htmx et Prism (liens et petits logos : le favicon, et des SVG écrits dans `base.html.twig` en `currentColor`, de Simple Icons et du dépôt de Prism), et le lien du projet sur GitHub.
 - Page de test `doc/templates/test.html.twig` (`/test`) : vide, pour essayer un exemple avant de le mettre dans sa page.
+- Accueil : Installer (deux façons, toujours la dernière version : les deux `.min` téléchargés depuis la doc (`download`), ou le projet entier sur GitHub ; pas de tag ni de CDN, Laurent change souvent le framework) ; Personnaliser (tout se recalcule dans le navigateur quand on change une variable, sauf les breakpoints : `@use … with` et SCSS à recompiler) ; Ce qu'il y a dedans ; Navigateurs, un tableau simple (logo et nom du navigateur, version minimum), pas le détail par fonction (choix de Laurent). Versions d'après web-features (les données Baseline de MDN) ; Opera, Brave et Samsung Internet : la première version avec Chromium 135 ou plus (données MDN, journal de Brave). Logos de `@browser-logos` dans `doc/assets/images/browsers/`. À mettre à jour quand une fonction indispensable plus récente entre dans le framework.
 
 ## Façon de travailler
 
@@ -236,4 +239,4 @@ src/ts/
 - `btn-close` à 24px (Laurent avait demandé 20px, sous la cible tactile minimale).
 - Retrait de `btn-text`.
 - Navigateurs supportés (`:has()`, `popover`, `command`, positionnement par ancre déjà utilisé).
-- Nom du projet.
+- Nom du projet (les fichiers `webdev-ui.*` le suivront).

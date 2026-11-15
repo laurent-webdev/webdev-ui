@@ -35,7 +35,7 @@ Les règles sont dans `CLAUDE.md` (Nommage, Variables CSS, Couleurs, Système de
 ## 3. JS, seulement si indispensable
 
 - `src/ts/components/<nom>.ts` : `export default class <Nom>`, méthodes statiques, `<Nom>.start()` en bas du fichier, écouteurs délégués sur `document`, initialisation par `data-<nom>`. Le JS change des attributs, jamais de style.
-- `import './components/<nom>';` dans `src/ts/bundle.ts`.
+- `import './components/<nom>';` dans `src/ts/webdev-ui.ts`.
 - `docker exec -w /app webdev-ui npm run typecheck`.
 
 ## 4. Page de doc

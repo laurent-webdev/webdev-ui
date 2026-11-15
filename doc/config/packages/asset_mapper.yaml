@@ -3,7 +3,7 @@ framework:
         # The paths to make available to the asset mapper.
         paths:
             assets/: ''
-            # Le build de la librairie, tel qu'il est publié sur le CDN : dist/css/app.css → asset('webdev-ui/css/app.css').
+            # Le build de la librairie, tel qu'il est publié : dist/css/webdev-ui.css → asset('webdev-ui/css/webdev-ui.css').
             # Ce sont les fichiers publiés qui sont testés : relancer le build (dossier parent) pour voir un changement
             ../dist/: webdev-ui
         missing_import_mode: strict

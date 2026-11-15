@@ -11,9 +11,47 @@
     </div>
 
     <h2 class="mt-12">Installer</h2>
-    <p class="mt-2">Un fichier CSS et un fichier JS, sans rien à compiler. Le JS n'est utile qu'aux composants qui en ont besoin (la fermeture animée des dialogues et des drawers).</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;link rel="stylesheet" href="…/css/app.css"&gt;
-&lt;script type="module" src="…/js/bundle.js"&gt;&lt;/script&gt;</code></pre>
+    <p class="mt-2">Deux façons, toujours la dernière version.</p>
+
+    <h3 class="fs-md mt-6">Les deux fichiers</h3>
+    <p class="mt-2">Le CSS et le JS, déjà compilés, à mettre dans le site. Le JS ne sert qu'aux onglets, aux toasts et à la fermeture animée des dialogues et des drawers.</p>
+    <div class="d-flex flex-wrap-wrap gap-3 mt-4">
+        <a class="btn" href="{{ asset('webdev-ui/css/webdev-ui.min.css') }}" download="webdev-ui.min.css">Télécharger webdev-ui.min.css</a>
+        <a class="btn" href="{{ asset('webdev-ui/js/webdev-ui.min.js') }}" download="webdev-ui.min.js">Télécharger webdev-ui.min.js</a>
+    </div>
+    {% set code %}
+        <link rel="stylesheet" href="css/webdev-ui.min.css">
+        <script type="module" src="js/webdev-ui.min.js"></script>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h3 class="fs-md mt-6">Le projet entier</h3>
+    <p class="mt-2">Les sources SCSS et TypeScript, sur <a class="link" href="https://github.com/laurent-webdev/webdev-ui">GitHub</a> : pour changer les breakpoints ou lire le code. Les fichiers compilés sont dans <code>dist/</code>.</p>
+    {% set code %}
+        git clone https://github.com/laurent-webdev/webdev-ui.git
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'bash'}) }}
+
+    <h2 class="mt-12">Personnaliser</h2>
+    <p class="mt-2">Tout est calculé par le navigateur, dans le CSS : on change une variable, et tout ce qui la lit suit, sans rien recompiler.</p>
+    {% set code %}
+        /* Dans le CSS du site */
+        :root {
+            /* La couleur et ses dérivées : tous les theme-primary suivent */
+            --color-primary: light-dark(oklch(0.55 0.15 150), oklch(0.7 0.15 150));
+
+            /* Les arrondis de tous les composants */
+            --border-radius-md: 0.5rem;
+        }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
+    <p class="mt-4" data-hx-boost="true">Seule exception, les <a class="link" href="{{ path('app_breakpoints') }}">breakpoints</a> : <code>var()</code> ne marche pas dans une media query, ce sont donc des variables SCSS. Pour les changer, il faut le projet entier : le SCSS du site charge celui du framework avec ses propres largeurs, puis Sass le compile.</p>
+    {% set code %}
+        // Le SCSS du site
+        @use '…/webdev-ui/src/scss/settings/breakpoints' with ($screen-md: 50rem);
+        @use '…/webdev-ui/src/scss/webdev-ui';
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'scss'}) }}
 
     <h2 class="mt-12">Ce qu'il y a dedans</h2>
     <div class="grid mt-4" data-hx-boost="true">
@@ -30,4 +68,49 @@
             </section>
         {% endfor %}
     </div>
+
+    <h2 class="mt-12" id="navigateurs">Navigateurs</h2>
+    <p class="mt-2">Les navigateurs à jour depuis fin 2025, sur ordinateur et sur téléphone (<a class="link" href="https://developer.mozilla.org/fr/docs/Glossary/Baseline/Compatibility">Baseline</a> 2025).</p>
+    <div class="overflow-x-auto mt-4" role="region" aria-labelledby="navigateurs" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Navigateur</th>
+                    <th scope="col">Version minimum</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"><span class="d-flex align-items-center gap-2"><img src="{{ asset('images/browsers/chrome.svg') }}" alt="" width="24" height="24">Chrome</span></th>
+                    <td>135</td>
+                </tr>
+                <tr>
+                    <th scope="row"><span class="d-flex align-items-center gap-2"><img src="{{ asset('images/browsers/edge.svg') }}" alt="" width="24" height="24">Edge</span></th>
+                    <td>135</td>
+                </tr>
+                <tr>
+                    <th scope="row"><span class="d-flex align-items-center gap-2"><img src="{{ asset('images/browsers/firefox.svg') }}" alt="" width="24" height="24">Firefox</span></th>
+                    <td>144</td>
+                </tr>
+                <tr>
+                    <th scope="row"><span class="d-flex align-items-center gap-2"><img src="{{ asset('images/browsers/safari.svg') }}" alt="" width="24" height="24">Safari</span></th>
+                    <td>26.2</td>
+                </tr>
+                <tr>
+                    <th scope="row"><span class="d-flex align-items-center gap-2"><img src="{{ asset('images/browsers/opera.svg') }}" alt="" width="24" height="24">Opera</span></th>
+                    <td>120 (89 sur Android)</td>
+                </tr>
+                <tr>
+                    <th scope="row"><span class="d-flex align-items-center gap-2"><img src="{{ asset('images/browsers/brave.svg') }}" alt="" width="24" height="24">Brave</span></th>
+                    <td>1.77</td>
+                </tr>
+                <tr>
+                    <th scope="row"><span class="d-flex align-items-center gap-2"><img src="{{ asset('images/browsers/samsung-internet.svg') }}" alt="" width="24" height="24">Samsung Internet</span></th>
+                    <td>29</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="mt-2">Opera, Brave et Samsung Internet utilisent le moteur de Chrome : ces versions sont les premières avec Chromium 135 ou plus.</p>
+    <p class="mt-2">Ce qui est plus récent n'est qu'un plus : sans lui, rien ne casse (l'accordéon s'ouvre sans animation, par exemple).</p>
 {% endblock %}

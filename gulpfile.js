@@ -7,8 +7,8 @@ const esbuild = require('esbuild');
 // Les partiels (_*.scss) ne contiennent que des variables Sass : ils ne produisent pas de fichier CSS
 const SCSS = ['src/scss/**/*.scss', '!src/scss/**/_*.scss'];
 
-// Tous les composants en un fichier, le seul JS publié : src/ts/bundle.ts → dist/js/bundle.js
-const BUNDLE = 'src/ts/bundle.ts';
+// Tous les composants en un fichier, le seul JS publié : src/ts/webdev-ui.ts → dist/js/webdev-ui.js
+const BUNDLE = 'src/ts/webdev-ui.ts';
 
 // ── CSS ──────────────────────────────────────────────
 function buildCSS() {
@@ -27,11 +27,11 @@ function buildCSSMin() {
 }
 
 // ── JS bundle ────────────────────────────────────────
-// bundle: true : les composants importés par bundle.ts, et les modules qu'ils importent, dans le même fichier
+// bundle: true : les composants importés par webdev-ui.ts, et les modules qu'ils importent, dans le même fichier
 function buildJSBundle() {
     return esbuild.build({
         entryPoints: [BUNDLE],
-        outfile: 'dist/js/bundle.js',
+        outfile: 'dist/js/webdev-ui.js',
         bundle: true,
         format: 'esm',
     });
@@ -40,7 +40,7 @@ function buildJSBundle() {
 function buildJSBundleMin() {
     return esbuild.build({
         entryPoints: [BUNDLE],
-        outfile: 'dist/js/bundle.min.js',
+        outfile: 'dist/js/webdev-ui.min.js',
         bundle: true,
         minify: true,
         format: 'esm',
