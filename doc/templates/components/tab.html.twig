@@ -26,7 +26,7 @@
     </div>
     <ul class="mt-4">
         <li>Au clic, l'onglet est choisi et son panneau s'affiche. Au clavier : Tab va sur l'onglet choisi, ← et → passent à l'onglet d'à côté et l'affichent aussitôt, Début et Fin au premier et au dernier ; Tab suivant va dans le panneau.</li>
-        <li>L'onglet choisi a un trait dessous ; au survol, un fond léger, au clic, ce fond renforcé. Le texte ne change jamais, et ne bouge pas.</li>
+        <li>L'onglet choisi a un trait dessous ; au survol, un voile transparent de la couleur, au clic, ce voile renforcé. Le texte ne change jamais, et ne bouge pas.</li>
         <li>Désactivé (un bouton disabled) : estompé, sauté par les flèches.</li>
     </ul>
 
@@ -44,7 +44,7 @@
         </div>
     {% endfor %}
     <ul class="mt-4">
-        <li>Sans thème, neutral : un trait gris foncé, un fond gris au survol. .theme-* sur la rangée colore tous ses onglets ; sur un onglet, seulement le sien.</li>
+        <li>Sans thème, neutral : un trait gris foncé, un voile gris au survol. .theme-* sur la rangée colore tous ses onglets ; sur un onglet, seulement le sien.</li>
         <li>Le trait sous la rangée reste gris : .theme-* ne colore que le trait de l'onglet choisi et les fonds.</li>
     </ul>
 
@@ -170,7 +170,7 @@ document.addEventListener('tab-change', (event) =&gt; {
         <li>Le lecteur d'écran annonce un onglet, s'il est sélectionné et sa place dans la rangée (1 sur 3) : role="tab" et aria-selected, dans un role="tablist" qui a un nom (aria-label).</li>
         <li>Au clavier (ARIA APG) : un seul onglet dans l'ordre du Tab, les flèches pour les autres (↑ et ↓ aussi en vertical ; en horizontal, elles restent pour faire défiler la page) ; l'onglet atteint s'affiche aussitôt (activation automatique, conseillée quand les panneaux sont déjà dans la page).</li>
         <li>L'onglet choisi se voit sans la couleur : un trait dessous, en emphasis, au moins 4,5:1 sur le fond de la page dans toutes les couleurs. En contraste élevé (Windows), le trait garde une couleur du système ; les autres onglets n'en ont pas.</li>
-        <li>Le texte de la page reste lisible sur les fonds du survol et du clic, dans toutes les couleurs (les mêmes fonds que la liste : au moins 10,46:1 en clair, 7,80:1 en sombre). Le contour de focus a la couleur du thème en emphasis, comme les boutons, à l'intérieur de l'onglet, au moins 3,71:1 sur tous ses fonds en clair, 4,18:1 en sombre (calculé).</li>
+        <li>Le texte de la page reste lisible sur les fonds du survol et du clic, dans toutes les couleurs (les mêmes fonds que la liste : au moins 11,54:1 en clair, 8,88:1 en sombre). Le contour de focus a la couleur du thème en emphasis, comme les boutons, à l'intérieur de l'onglet, au moins 4,10:1 sur tous ses fonds en clair, 4,77:1 en sombre (calculé).</li>
         <li>Onglets de 42px de haut, plus que la cible tactile minimale de 24px (WCAG 2.5.8).</li>
         <li>Des &lt;button type="button"&gt; : dans un formulaire, un onglet n'envoie rien.</li>
     </ul>
@@ -194,7 +194,7 @@ document.addEventListener('tab-change', (event) =&gt; {
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card-solid theme-primary"&gt;
     &lt;div class="tab" role="tablist" aria-label="Mon compte" data-tab&gt;…&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-    <p>Sur un fond plein, les onglets héritent du thème de la carte : le trait emphasis et le fond léger du survol passent sous le texte de la carte, qui peut devenir illisible. Les mettre sur le fond de la page ou un fond subtle.</p>
+    <p>Sur un fond plein, les onglets héritent du thème de la carte : le trait emphasis passe sur la couleur de la carte, et le voile du survol, de la même couleur, ne se voit plus. Les mettre sur le fond de la page ou un fond subtle.</p>
 
     <h2 class="mt-10">Limites</h2>
     <ul>

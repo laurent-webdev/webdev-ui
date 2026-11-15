@@ -97,17 +97,18 @@
         transition-property: background-color;
         transition-duration: var(--transition-duration);
 
-        // Seul le fond change : léger au survol, renforcé au clic ; le texte de la page y reste lisible
+        // Seul le fond change : un voile transparent de la couleur du thème, léger au survol, renforcé au clic, comme list ;
+        // le texte de la page y reste lisible
         &:hover {
-            background-color: var(--navbar-theme-subtle);
+            background-color: color-mix(in oklch, var(--navbar-theme-color) var(--state-mix-soft), transparent);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--navbar-theme-subtle), var(--navbar-theme-color) var(--state-mix-soft));
+            background-color: color-mix(in oklch, var(--navbar-theme-color) var(--state-mix-strong), transparent);
         }
 
         // En cours : le fond du clic, sans gras pour que le texte ne bouge pas
         &[aria-current]:not([aria-current="false"]) {
-            background-color: color-mix(in srgb, var(--navbar-theme-subtle), var(--navbar-theme-color) var(--state-mix-soft));
+            background-color: color-mix(in oklch, var(--navbar-theme-color) var(--state-mix-strong), transparent);
         }
 
         // Comme les boutons, la couleur du thème en emphasis ; à l'intérieur de l'élément : l'élément voisin ne le cache pas

@@ -774,10 +774,10 @@
     border-block-start: var(--accordion-border-width) solid var(--border-color);
   }
   .accordion > details > summary:hover {
-    background-color: var(--color-neutral-subtle);
+    background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-soft), transparent);
   }
   .accordion > details > summary:active {
-    background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+    background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-strong), transparent);
   }
   .accordion-solid, .accordion-outline {
     border-color: var(--accordion-theme-border);
@@ -1139,10 +1139,10 @@
     color: inherit;
   }
   .btn-close:hover {
-    background-color: var(--color-neutral-subtle);
+    background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-soft), transparent);
   }
   .btn-close:active {
-    background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+    background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-strong), transparent);
   }
   .btn-close-solid {
     background-color: var(--btn-close-theme-color);
@@ -1811,52 +1811,42 @@
     --dropdown-border-radius: var(--border-radius-md);
     --dropdown-border-width: var(--border-width);
     --dropdown-theme-color: var(--color-neutral);
-    --dropdown-theme-subtle: var(--color-neutral-subtle);
     --dropdown-theme-emphasis: var(--color-neutral-emphasis);
   }
   .theme-primary {
     --dropdown-theme-color: var(--color-primary);
-    --dropdown-theme-subtle: var(--color-primary-subtle);
     --dropdown-theme-emphasis: var(--color-primary-emphasis);
   }
   .theme-secondary {
     --dropdown-theme-color: var(--color-secondary);
-    --dropdown-theme-subtle: var(--color-secondary-subtle);
     --dropdown-theme-emphasis: var(--color-secondary-emphasis);
   }
   .theme-accent {
     --dropdown-theme-color: var(--color-accent);
-    --dropdown-theme-subtle: var(--color-accent-subtle);
     --dropdown-theme-emphasis: var(--color-accent-emphasis);
   }
   .theme-success {
     --dropdown-theme-color: var(--color-success);
-    --dropdown-theme-subtle: var(--color-success-subtle);
     --dropdown-theme-emphasis: var(--color-success-emphasis);
   }
   .theme-danger {
     --dropdown-theme-color: var(--color-danger);
-    --dropdown-theme-subtle: var(--color-danger-subtle);
     --dropdown-theme-emphasis: var(--color-danger-emphasis);
   }
   .theme-warning {
     --dropdown-theme-color: var(--color-warning);
-    --dropdown-theme-subtle: var(--color-warning-subtle);
     --dropdown-theme-emphasis: var(--color-warning-emphasis);
   }
   .theme-info {
     --dropdown-theme-color: var(--color-info);
-    --dropdown-theme-subtle: var(--color-info-subtle);
     --dropdown-theme-emphasis: var(--color-info-emphasis);
   }
   .theme-neutral {
     --dropdown-theme-color: var(--color-neutral);
-    --dropdown-theme-subtle: var(--color-neutral-subtle);
     --dropdown-theme-emphasis: var(--color-neutral-emphasis);
   }
   .theme-inverse {
     --dropdown-theme-color: var(--color-inverse);
-    --dropdown-theme-subtle: var(--color-inverse-subtle);
     --dropdown-theme-emphasis: var(--color-inverse-emphasis);
   }
   .dropdown {
@@ -1891,10 +1881,10 @@
     transition-duration: var(--transition-duration);
   }
   .dropdown-item:hover {
-    background-color: var(--dropdown-theme-subtle);
+    background-color: color-mix(in oklch, var(--dropdown-theme-color) var(--state-mix-soft), transparent);
   }
   .dropdown-item:active {
-    background-color: color-mix(in srgb, var(--dropdown-theme-subtle), var(--dropdown-theme-color) var(--state-mix-soft));
+    background-color: color-mix(in oklch, var(--dropdown-theme-color) var(--state-mix-strong), transparent);
   }
   .dropdown-item:focus-visible {
     outline: var(--focus-outline-width) solid var(--dropdown-theme-emphasis);
@@ -2507,13 +2497,13 @@
     transition-duration: var(--transition-duration);
   }
   .navbar-item:hover {
-    background-color: var(--navbar-theme-subtle);
+    background-color: color-mix(in oklch, var(--navbar-theme-color) var(--state-mix-soft), transparent);
   }
   .navbar-item:active {
-    background-color: color-mix(in srgb, var(--navbar-theme-subtle), var(--navbar-theme-color) var(--state-mix-soft));
+    background-color: color-mix(in oklch, var(--navbar-theme-color) var(--state-mix-strong), transparent);
   }
   .navbar-item[aria-current]:not([aria-current=false]) {
-    background-color: color-mix(in srgb, var(--navbar-theme-subtle), var(--navbar-theme-color) var(--state-mix-soft));
+    background-color: color-mix(in oklch, var(--navbar-theme-color) var(--state-mix-strong), transparent);
   }
   .navbar-item:focus-visible {
     outline: var(--focus-outline-width) solid var(--navbar-theme-emphasis);
@@ -2734,10 +2724,10 @@
     pointer-events: none;
   }
   .pagination .pagination-item:hover {
-    background-color: var(--color-neutral-subtle);
+    background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-soft), transparent);
   }
   .pagination .pagination-item:active, .pagination .pagination-item[aria-current]:not([aria-current=false]) {
-    background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+    background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-strong), transparent);
   }
   .pagination-subtle .pagination-item,
   .pagination-solid .pagination-item {
@@ -2840,52 +2830,42 @@
     --tab-border-width: var(--border-width);
     --tab-item-border-width: 0.125rem;
     --tab-theme-color: var(--color-neutral);
-    --tab-theme-subtle: var(--color-neutral-subtle);
     --tab-theme-emphasis: var(--color-neutral-emphasis);
   }
   .theme-primary {
     --tab-theme-color: var(--color-primary);
-    --tab-theme-subtle: var(--color-primary-subtle);
     --tab-theme-emphasis: var(--color-primary-emphasis);
   }
   .theme-secondary {
     --tab-theme-color: var(--color-secondary);
-    --tab-theme-subtle: var(--color-secondary-subtle);
     --tab-theme-emphasis: var(--color-secondary-emphasis);
   }
   .theme-accent {
     --tab-theme-color: var(--color-accent);
-    --tab-theme-subtle: var(--color-accent-subtle);
     --tab-theme-emphasis: var(--color-accent-emphasis);
   }
   .theme-success {
     --tab-theme-color: var(--color-success);
-    --tab-theme-subtle: var(--color-success-subtle);
     --tab-theme-emphasis: var(--color-success-emphasis);
   }
   .theme-danger {
     --tab-theme-color: var(--color-danger);
-    --tab-theme-subtle: var(--color-danger-subtle);
     --tab-theme-emphasis: var(--color-danger-emphasis);
   }
   .theme-warning {
     --tab-theme-color: var(--color-warning);
-    --tab-theme-subtle: var(--color-warning-subtle);
     --tab-theme-emphasis: var(--color-warning-emphasis);
   }
   .theme-info {
     --tab-theme-color: var(--color-info);
-    --tab-theme-subtle: var(--color-info-subtle);
     --tab-theme-emphasis: var(--color-info-emphasis);
   }
   .theme-neutral {
     --tab-theme-color: var(--color-neutral);
-    --tab-theme-subtle: var(--color-neutral-subtle);
     --tab-theme-emphasis: var(--color-neutral-emphasis);
   }
   .theme-inverse {
     --tab-theme-color: var(--color-inverse);
-    --tab-theme-subtle: var(--color-inverse-subtle);
     --tab-theme-emphasis: var(--color-inverse-emphasis);
   }
   .tab {
@@ -2908,10 +2888,10 @@
     transition-duration: var(--transition-duration);
   }
   .tab-item:hover {
-    background-color: var(--tab-theme-subtle);
+    background-color: color-mix(in oklch, var(--tab-theme-color) var(--state-mix-soft), transparent);
   }
   .tab-item:active {
-    background-color: color-mix(in srgb, var(--tab-theme-subtle), var(--tab-theme-color) var(--state-mix-soft));
+    background-color: color-mix(in oklch, var(--tab-theme-color) var(--state-mix-strong), transparent);
   }
   .tab-item[aria-selected=true] {
     padding-block-end: var(--tab-item-padding-block);

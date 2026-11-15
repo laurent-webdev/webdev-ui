@@ -122,13 +122,13 @@
         border-block-start: var(--accordion-border-width) solid var(--border-color);
     }
 
-    // Par défaut, sans couleur : pas de fond, le texte autour ; au survol et au clic du titre, un fond gris léger
+    // Par défaut, sans couleur : pas de fond, le texte autour ; au survol et au clic du titre, un voile gris transparent, comme btn
     .accordion > details > summary {
         &:hover {
-            background-color: var(--color-neutral-subtle);
+            background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-soft), transparent);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+            background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-strong), transparent);
         }
     }
 

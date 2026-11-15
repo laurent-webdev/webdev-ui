@@ -10,7 +10,6 @@
 
         // Thème des onglets par défaut, sans classe .theme-*
         --tab-theme-color: var(--color-neutral);
-        --tab-theme-subtle: var(--color-neutral-subtle);
         --tab-theme-emphasis: var(--color-neutral-emphasis);
     }
 
@@ -18,7 +17,6 @@
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
         .theme-#{$color} {
             --tab-theme-color: var(--color-#{$color});
-            --tab-theme-subtle: var(--color-#{$color}-subtle);
             --tab-theme-emphasis: var(--color-#{$color}-emphasis);
         }
     }
@@ -46,12 +44,13 @@
         transition-property: background-color;
         transition-duration: var(--transition-duration);
 
-        // Seul le fond change : léger au survol, renforcé au clic ; le texte de la page y reste lisible
+        // Seul le fond change : un voile transparent de la couleur du thème, léger au survol, renforcé au clic, comme list ;
+        // le texte de la page y reste lisible
         &:hover {
-            background-color: var(--tab-theme-subtle);
+            background-color: color-mix(in oklch, var(--tab-theme-color) var(--state-mix-soft), transparent);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--tab-theme-subtle), var(--tab-theme-color) var(--state-mix-soft));
+            background-color: color-mix(in oklch, var(--tab-theme-color) var(--state-mix-strong), transparent);
         }
 
         // Choisi : un trait dessous en emphasis, visible sur le fond de page ; il prend la place du padding

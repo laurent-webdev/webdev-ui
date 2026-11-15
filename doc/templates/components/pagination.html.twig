@@ -18,7 +18,7 @@
         </ul>
     </nav>
     <ul class="mt-4">
-        <li>pagination, sans couleur : le texte de la page, sans cadre ; au survol, un fond gris léger ; au clic et sur la page en cours (aria-current), ce fond renforcé.</li>
+        <li>pagination, sans couleur : le texte de la page, sans cadre ; au survol, un voile gris transparent ; au clic et sur la page en cours (aria-current), ce voile renforcé.</li>
         <li>Un numéro seul est un carré de la hauteur d'un bouton (38px) ; un nombre long ou un mot (Précédent) l'élargit.</li>
         <li>Les points de suspension sont un &lt;li&gt; sans lien, centré sur la largeur d'un élément.</li>
         <li>Sur un écran étroit, les éléments passent à la ligne.</li>
@@ -170,9 +170,9 @@
     <h2 class="mt-10">Accessibilité</h2>
     <ul>
         <li>&lt;nav&gt; et son aria-label : le lecteur d'écran annonce une zone de navigation « Pagination » ; un aria-label différent sur chaque &lt;nav&gt; de la page.</li>
-        <li>aria-current="page" sur la page affichée : le lecteur d'écran annonce « page actuelle ». À l'écran, son fond la montre : en solid, le fond plein (1,75 à 2,43:1 contre la page en clair, sauf inverse, sous les 3:1 de WCAG 1.4.11 comme le switch allumé ; 5,34 à 6,45:1 en sombre) ; en subtle et sans couleur, seulement le fond du clic (1,26 à 2,01:1 en clair, 1,76 à 2,41:1 en sombre) ; dans pagination-group, en plus, son cadre de couleur.</li>
+        <li>aria-current="page" sur la page affichée : le lecteur d'écran annonce « page actuelle ». À l'écran, son fond la montre : en solid, le fond plein (1,75 à 2,43:1 contre la page en clair, sauf inverse, sous les 3:1 de WCAG 1.4.11 comme le switch allumé ; 5,34 à 6,45:1 en sombre) ; en subtle, seulement le fond du clic (1,26 à 2,01:1 en clair, 1,76 à 2,41:1 en sombre) ; sans couleur, le voile du clic (1,19:1 en clair, 1,58:1 en sombre) ; dans pagination-group, en plus, son cadre de couleur.</li>
         <li>aria-label="Page 2" : le nom contient le texte visible (WCAG 2.5.3), une commande vocale « cliquer 2 » marche.</li>
-        <li>Textes lisibles, dans toutes les couleurs (calculé) : en subtle et solid, l'emphasis au moins 6,37:1 au repos, 5,28:1 au survol, 5,63:1 au clic et sur la page en cours de subtle en clair, 8,19:1, 6,11:1 et 6,30:1 en sombre ; le texte de la page en cours de solid au moins 8,65:1 en clair, 5,97:1 en sombre ; sans couleur, le texte de la page sur les fonds gris, au moins 10,46:1 en clair, 7,80:1 en sombre.</li>
+        <li>Textes lisibles, dans toutes les couleurs (calculé) : en subtle et solid, l'emphasis au moins 6,37:1 au repos, 5,28:1 au survol, 5,63:1 au clic et sur la page en cours de subtle en clair, 8,19:1, 6,11:1 et 6,30:1 en sombre ; le texte de la page en cours de solid au moins 8,65:1 en clair, 5,97:1 en sombre ; sans couleur, le texte de la page sur les voiles gris, au moins 17,62:1 en clair, 11,93:1 en sombre.</li>
         <li>Le contour de focus est celui des boutons : la couleur du thème en emphasis (au moins 6,37:1 sur la page en clair, 8,19:1 en sombre), celle du texte sans couleur.</li>
         <li>Éléments de 38px de haut (31px en pagination-sm), plus que la cible tactile minimale de 24px (WCAG 2.5.8).</li>
         <li>Un cadre transparent autour de chaque élément : en contraste élevé (Windows), il devient visible et montre les éléments.</li>

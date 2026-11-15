@@ -12,7 +12,6 @@
 
         // Thème des éléments par défaut, sans classe .theme-*
         --dropdown-theme-color: var(--color-neutral);
-        --dropdown-theme-subtle: var(--color-neutral-subtle);
         --dropdown-theme-emphasis: var(--color-neutral-emphasis);
     }
 
@@ -20,7 +19,6 @@
     @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
         .theme-#{$color} {
             --dropdown-theme-color: var(--color-#{$color});
-            --dropdown-theme-subtle: var(--color-#{$color}-subtle);
             --dropdown-theme-emphasis: var(--color-#{$color}-emphasis);
         }
     }
@@ -64,12 +62,13 @@
         transition-property: background-color;
         transition-duration: var(--transition-duration);
 
-        // Seul le fond change : léger au survol, renforcé au clic ; le texte de la page y reste lisible
+        // Seul le fond change : un voile transparent de la couleur du thème, léger au survol, renforcé au clic, comme list ;
+        // le texte de la page y reste lisible
         &:hover {
-            background-color: var(--dropdown-theme-subtle);
+            background-color: color-mix(in oklch, var(--dropdown-theme-color) var(--state-mix-soft), transparent);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--dropdown-theme-subtle), var(--dropdown-theme-color) var(--state-mix-soft));
+            background-color: color-mix(in oklch, var(--dropdown-theme-color) var(--state-mix-strong), transparent);
         }
 
         // Comme les boutons, la couleur du thème en emphasis ; à l'intérieur de l'élément : l'élément voisin ne le cache pas

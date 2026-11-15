@@ -33,7 +33,7 @@
     <ul class="mt-4">
         <li>Sous 768px (md), la barre montre le nom du site et un bouton ; le bouton ouvre le drawer, les liens y sont empilés sur toute la largeur. Échap, la croix ou un clic à côté le ferment.</li>
         <li>À partir de 768px, les liens sont dans la barre, au bout ; le bouton disparaît. Rétrécir la fenêtre pour voir le passage.</li>
-        <li>Au survol, un fond léger ; au clic, ce fond renforcé ; la page en cours (aria-current) garde le fond du clic. Le texte ne change jamais.</li>
+        <li>Au survol, un voile transparent de la couleur ; au clic, ce voile renforcé ; la page en cours (aria-current) garde le fond du clic. Le texte ne change jamais.</li>
     </ul>
 
     <h2 class="mt-10">Couleurs</h2>
@@ -215,10 +215,10 @@
     <h2 class="mt-10">Accessibilité</h2>
     <ul>
         <li>&lt;nav&gt; et son aria-label : le lecteur d'écran annonce une zone de navigation (« Principal ») et permet d'y aller directement. Un aria-label différent sur chaque &lt;nav&gt; de la page.</li>
-        <li>aria-current="page" sur le lien de la page affichée : le lecteur d'écran annonce « page actuelle ». À l'écran, seulement le fond du clic : 1,26 à 2,01:1 contre la page en clair, 1,76 à 2,41:1 en sombre (les fonds de la liste, calculé), sous les 3:1 (WCAG 1.4.11), et par la couleur seule (WCAG 1.4.1).</li>
+        <li>aria-current="page" sur le lien de la page affichée : le lecteur d'écran annonce « page actuelle ». À l'écran, seulement le fond du clic : 1,19 à 1,82:1 contre la page en clair, 1,49 à 2,11:1 en sombre (les fonds de la liste, calculé), sous les 3:1 (WCAG 1.4.11), et par la couleur seule (WCAG 1.4.1).</li>
         <li>Le bouton est un &lt;button&gt; avec un aria-label (« Menu ») : les trois traits ne disent rien au lecteur d'écran. Il ouvre un dialogue modal : le focus va dans le drawer, la page derrière n'est plus atteignable, Échap le ferme et le focus revient sur le bouton, sans JavaScript. Pas d'aria-expanded : le bouton ouvre une boîte de dialogue, qui s'annonce elle-même.</li>
         <li>Une seule liste se montre à la fois : l'autre, en display: none, n'est ni lue ni prise au clavier.</li>
-        <li>Le texte de la page reste lisible sur tous les fonds, dans toutes les couleurs (les mêmes fonds que la liste, calculé) : au moins 14,91:1 au survol et 10,46:1 au clic et sur la page en cours en clair, 12,59:1 et 7,80:1 en sombre. Le contour de focus a la couleur du thème en emphasis, à l'intérieur du lien, au moins 3,71:1 sur tous ses fonds en clair, 4,18:1 en sombre.</li>
+        <li>Le texte de la page reste lisible sur tous les fonds, dans toutes les couleurs (les mêmes fonds que la liste, calculé) : au moins 14,31:1 au survol et 11,54:1 au clic et sur la page en cours en clair, 11,95:1 et 8,88:1 en sombre. Le contour de focus a la couleur du thème en emphasis, à l'intérieur du lien, au moins 4,10:1 sur tous ses fonds en clair, 4,77:1 en sombre.</li>
         <li>navbar-subtle : le texte de la page sur les fonds des liens, au moins 10,46:1 au survol et 8,60:1 au clic et sur la page en cours en clair, 7,80:1 et 6,14:1 en sombre ; le contour de focus en emphasis, au moins 3,05:1 en clair (inverse, au clic), 3,29:1 en sombre (calculé).</li>
         <li>navbar-solid : le texte -contrast sur le fond plein, au moins 8,65:1 en clair et 5,97:1 en sombre, plus encore au survol et au clic (le fond se mélange à l'opposé du texte) ; le contour de focus a la couleur du texte (calculé).</li>
         <li>Liens de 40px de haut, bouton de 38px : plus que la cible tactile minimale de 24px (WCAG 2.5.8).</li>
@@ -252,12 +252,12 @@
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;header class="bg-primary color-primary-contrast"&gt;
     &lt;nav class="navbar md:navbar-expand" aria-label="Principal"&gt;…&lt;/nav&gt;
 &lt;/header&gt;</code></pre>
-    <p>Une barre colorée par les utilitaires : le fond léger du survol et de la page en cours passe sous le texte de la barre (la couleur -contrast), qui peut devenir illisible. navbar-solid theme-primary, qui règle aussi les fonds des liens.</p>
+    <p>Une barre colorée par les utilitaires : le voile gris du survol et de la page en cours se mélange à la couleur de la barre : il se voit mal, et ne suit pas le texte de la barre (la couleur -contrast). navbar-solid theme-primary, qui règle aussi les fonds des liens.</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;nav class="navbar-solid theme-primary md:navbar-expand" aria-label="Principal"&gt;
     …
     &lt;button class="btn navbar-toggle" type="button" commandfor="menu" command="show-modal" aria-label="Menu"&gt;&lt;/button&gt;
 &lt;/nav&gt;</code></pre>
-    <p>Sur navbar-solid, un btn : son cadre gris se voit mal, et son fond gris du survol passe sous les trois traits. Un btn-solid d'un autre thème (theme-inverse).</p>
+    <p>Sur navbar-solid, un btn : son cadre gris se voit mal, et son voile gris du survol se voit mal sur la couleur. Un btn-solid d'un autre thème (theme-inverse).</p>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;nav class="navbar navbar-solid theme-primary" aria-label="Principal"&gt;…&lt;/nav&gt;</code></pre>
     <p>Deux classes de barre : navbar-solid s'utilise seule, à la place de navbar.</p>
 

@@ -64,14 +64,14 @@
         }
     }
 
-    // Par défaut, sans couleur : le texte de la page ; au survol, un fond gris léger ; au clic et sur la page en cours, ce fond renforcé
+    // Par défaut, sans couleur : le texte de la page ; au survol, un voile gris transparent, comme btn ; au clic et sur la page en cours, ce voile renforcé
     .pagination .pagination-item {
         &:hover {
-            background-color: var(--color-neutral-subtle);
+            background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-soft), transparent);
         }
         &:active,
         &[aria-current]:not([aria-current="false"]) {
-            background-color: color-mix(in srgb, var(--color-neutral-subtle), var(--color-neutral) var(--state-mix-soft));
+            background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-strong), transparent);
         }
     }
 
