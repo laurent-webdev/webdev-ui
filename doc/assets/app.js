@@ -127,11 +127,20 @@ const closeList = () => {
     setActive(null);
 };
 
-// Frappe : la liste suit le texte, fermée si le champ est vide ou si aucune page ne correspond
+// Clic dans le champ : ouvre la liste sans attendre la frappe (toutes les pages si le champ est vide) ; un deuxième clic la ferme, comme l'exemple de l'APG
+search.addEventListener('click', () => {
+    if (searchList.matches(':popover-open')) {
+        closeList();
+    } else if (filterOptions().length) {
+        openList();
+    }
+});
+
+// Frappe : la liste suit le texte (champ vidé : toutes les pages), fermée si aucune page ne correspond
 search.addEventListener('input', () => {
     const options = filterOptions();
     setActive(null);
-    if (search.value.trim() && options.length) {
+    if (options.length) {
         openList();
     } else {
         closeList();

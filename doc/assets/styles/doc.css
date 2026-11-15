@@ -114,22 +114,28 @@ body::after {
   overflow-y: auto;
 }
 
+/* Le titre qui reçoit le focus après un changement de page (app.js) : sans contour, il n'est pas cliquable (pas dans l'ordre du Tab) ;
+   le lecteur d'écran annonce la page, le Tab suivant repart de lui ; le contour natif de Chromium faisait le tour du texte et du bloc, plus gras autour du texte */
+#doc-content h1[tabindex="-1"]:focus {
+  outline: none;
+}
+
 /* L'option choisie au clavier : le focus reste dans le champ (aria-activedescendant), elle est entourée comme un élément du dropdown qui a le focus */
 #doc-search-list [aria-selected="true"] {
   outline: var(--focus-outline-width) solid var(--dropdown-theme-emphasis);
   outline-offset: calc(var(--focus-outline-width) * -1);
 }
 
-/* Blocs de code : les couleurs du fond de la doc, foncés dans les deux thèmes ; Prism (base.html.twig) découpe le code en .token */
+/* Blocs de code : les couleurs du fond de la doc, clairs en thème clair, foncés en sombre ; Prism (base.html.twig) découpe le code en .token */
 /* :has() et pas pre[class*="language-"] : Prism n'ajoute la classe au <pre> qu'une fois chargé */
 pre:has(> code[class*="language-"]) {
-  color-scheme: dark; /* light-dark() y prend les couleurs sombres de la palette, aussi en thème clair */
   margin-block-end: 0.5rem; /* l'écart avec le paragraphe qui suit, écrit sans classe ; le haut, c'est le mt-* du bloc */
   padding: 1rem;
   overflow-x: auto;
   border-radius: var(--border-radius-md);
-  background-color: oklch(0.14 0.03 280); /* l'indigo du fond de la doc en sombre */
-  color: oklch(0.93 0.01 280);
+  /* L'indigo du fond de la doc ; en clair, un peu plus foncé que lui : le bloc se voit sur le verre blanc */
+  background-color: light-dark(oklch(0.95 0.015 280), oklch(0.14 0.03 280));
+  color: light-dark(oklch(0.2 0.02 280), oklch(0.93 0.01 280));
   font-size: var(--font-size-sm);
 }
 
@@ -137,7 +143,7 @@ pre:has(> code[class*="language-"]) {
    la coche dit que c'est copié, le focus garde son contour (outline) */
 .doc-code-copy {
   border-color: transparent;
-  background-color: oklch(0.14 0.03 280);
+  background-color: inherit;
 }
 
 /* Les mots du code : les couleurs des vagues, en emphasis (le texte coloré lisible de la palette) */
