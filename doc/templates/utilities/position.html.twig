@@ -4,54 +4,101 @@
 
 {% block body %}
     <h1>Position</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">position-*, décalages (top-*, bottom-*, start-*, end-*, inset-0), centrage (translate-middle) et z-index-*.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6"><code>position-*</code>, les décalages (<code>top-*</code>, <code>bottom-*</code>, <code>start-*</code>, <code>end-*</code>, <code>inset-0</code>), le centrage <code>translate-middle</code> et <code>z-index-*</code>.</p>
 
-    <p class="mt-4">position-relative sur le parent, position-absolute et les décalages sur les enfants</p>
-    <div class="demo-box demo-height position-relative mt-2">
-        <span class="bg-primary color-primary-contrast p-1 position-absolute top-0 start-0">top-0 start-0</span>
-        <span class="bg-primary color-primary-contrast p-1 position-absolute top-0 end-0">top-0 end-0</span>
-        <span class="bg-primary color-primary-contrast p-1 position-absolute top-50 start-50 translate-middle">top-50 start-50 translate-middle</span>
-        <span class="bg-primary color-primary-contrast p-1 position-absolute bottom-0 start-0">bottom-0 start-0</span>
-        <span class="bg-primary color-primary-contrast p-1 position-absolute bottom-0 end-0">bottom-0 end-0</span>
-    </div>
+    <h2 class="mt-10">Dans les coins</h2>
+    <p class="mt-2"><code>position-relative</code> sur le parent, <code>position-absolute</code> et les décalages sur les enfants.</p>
+    {% set code %}
+        <div class="position-relative aspect-ratio-21x9 border">
+            <span class="bg-primary color-primary-contrast p-1 position-absolute top-0 start-0">top-0 start-0</span>
+            <span class="bg-primary color-primary-contrast p-1 position-absolute top-0 end-0">top-0 end-0</span>
+            <span class="bg-primary color-primary-contrast p-1 position-absolute top-50 start-50 translate-middle">translate-middle</span>
+            <span class="bg-primary color-primary-contrast p-1 position-absolute bottom-0 start-0">bottom-0 start-0</span>
+            <span class="bg-primary color-primary-contrast p-1 position-absolute bottom-0 end-0">bottom-0 end-0</span>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
-    <h2 class="mt-10">Exemple : un badge sur le coin d'un bouton</h2>
-    <button class="btn position-relative mt-4" type="button">
-        Messages
-        <span class="badge-solid theme-danger border-radius-pill position-absolute top-0 start-100 translate-middle">3<span class="visually-hidden"> non lus</span></span>
-    </button>
+    <h2 class="mt-10">Un badge sur un bouton</h2>
+    {% set code %}
+        <button class="btn position-relative" type="button">
+            Messages
+            <span class="badge-solid theme-danger border-radius-pill position-absolute top-0 start-100 translate-middle">3<span class="visually-hidden"> non lus</span></span>
+        </button>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex p-6'}) }}
 
-    <h2 class="mt-10">Exemple : un en-tête collé en haut</h2>
-    <div class="demo-box demo-height overflow-y-auto mt-2" tabindex="0" role="region" aria-label="Exemple position-sticky">
-        <p class="bg-primary color-primary-contrast p-2 position-sticky top-0">position-sticky top-0 : reste en haut</p>
-        <p class="p-2">Faire défiler ce bloc. Le texte continue sur plusieurs lignes, pour que la boîte de 8rem défile et que l'en-tête reste collé en haut pendant que le reste passe dessous.</p>
-        <p class="p-2">Un deuxième paragraphe, pour avoir assez de texte à faire défiler.</p>
-    </div>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;aside class="md:position-sticky top-0"&gt;…&lt;/aside&gt;</code></pre>
-    <p>Une colonne collée seulement à partir de md : sur téléphone, elle défile avec la page (top-0 est sans effet sur un élément static).</p>
+    <h2 class="mt-10">Collé en haut</h2>
+    <p class="mt-2">Faire défiler le bloc : l'en-tête reste en haut.</p>
+    {% set code %}
+        <!-- Un parent qui a une hauteur, 8rem ici -->
+        <div class="overflow-y-auto border" role="region" aria-label="Exemple position-sticky" tabindex="0">
+            <p class="bg-primary color-primary-contrast p-2 position-sticky top-0">position-sticky top-0</p>
+            <p class="p-2">Un texte assez long pour que le bloc défile. L'en-tête reste collé en haut pendant que le reste passe dessous.</p>
+            <p class="p-2">Un deuxième paragraphe, pour avoir assez de texte à faire défiler.</p>
+        </div>
+    {% endset %}
+    {% set demo %}
+        <div class="demo-height overflow-y-auto border" role="region" aria-label="Exemple position-sticky" tabindex="0">
+            <p class="bg-primary color-primary-contrast p-2 position-sticky top-0">position-sticky top-0</p>
+            <p class="p-2">Un texte assez long pour que le bloc défile. L'en-tête reste collé en haut pendant que le reste passe dessous.</p>
+            <p class="p-2">Un deuxième paragraphe, pour avoir assez de texte à faire défiler.</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo, class: ''}) }}
 
-    <h2 class="mt-10">Exemple : un calque qui couvre son parent</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="position-relative"&gt;
-    &lt;img src="…" alt="…"&gt;
-    &lt;div class="position-absolute inset-0"&gt;…&lt;/div&gt;
-&lt;/div&gt;</code></pre>
+    <h2 class="mt-10">Selon l'écran</h2>
+    <p class="mt-2">Une colonne collée à partir de md ; sur téléphone, elle défile avec la page.</p>
+    {% set code %}
+        <aside class="md:position-sticky top-0">…</aside>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div&gt;
-    &lt;span class="position-absolute top-0 end-0"&gt;…&lt;/span&gt;
-&lt;/div&gt;</code></pre>
-    <p>Sans position-relative sur le parent, l'enfant se place par rapport au premier parent positionné, ou à la page : il part dans le coin de l'écran.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;header class="position-sticky"&gt;…&lt;/header&gt;</code></pre>
-    <p>Sans décalage, sticky ne colle pas. Ajouter top-0.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p class="z-index-3"&gt;…&lt;/p&gt;</code></pre>
-    <p>Sans effet sur un élément static : z-index demande une position (relative, absolute…) ou un enfant flex ou grid.</p>
+    <h2 class="mt-10">Un calque sur une image</h2>
+    {% set code %}
+        <div class="position-relative">
+            <img class="w-100 aspect-ratio-21x9 object-fit-cover" src="{{ asset('images/demo-landscape.svg') }}" alt="" width="400" height="200">
+            <p class="position-absolute inset-0 d-flex align-items-center justify-content-center">
+                <span class="bg-inverse color-inverse-contrast p-2">Le texte sur l'image</span>
+            </p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul class="mt-2">
+        <li>Un en-tête fixé ou collé peut cacher l'élément qui a le focus (WCAG 2.4.11) : <code>scroll-padding-top</code> dans le site, et un en-tête bas.</li>
+        <li>Une zone qui défile a <code>tabindex="0"</code>, un <code>role="region"</code> et un nom : elle se prend au clavier.</li>
+    </ul>
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : sans parent positionné, l'enfant part dans le coin de la page -->
+        <div><span class="position-absolute top-0 end-0">…</span></div>
+        <!-- Oui -->
+        <div class="position-relative"><span class="position-absolute top-0 end-0">…</span></div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : sans décalage, sticky ne colle pas -->
+        <header class="position-sticky">…</header>
+        <!-- Oui -->
+        <header class="position-sticky top-0">…</header>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : z-index ne fait rien sur un élément static -->
+        <p class="z-index-3">…</p>
+        <!-- Oui -->
+        <p class="position-relative z-index-3">…</p>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>Un en-tête fixed ou sticky peut cacher l'élément qui a le focus (WCAG 2.4.11) et prend beaucoup de place en zoom 200 % : prévoir scroll-padding-top dans le site, et un en-tête bas.</li>
-        <li>translate-middle utilise translate : une animation slide-in ou shake sur le même élément le remplace pendant le mouvement. Mettre l'animation sur un enfant.</li>
-        <li>Variantes responsive seulement pour position-* ; les décalages et z-index valent pour tous les écrans.</li>
-        <li>En écriture de droite à gauche (arabe, hébreu), start-50 translate-middle ne centre pas : translate recule toujours vers la gauche. Pas encore pris en charge.</li>
-        <li>z-index de 0 à 3, entre voisins : dialog et popover natifs passent au-dessus de tout sans z-index.</li>
+    <ul class="mt-2">
+        <li>Seul <code>position-*</code> a un préfixe d'écran ; les décalages et <code>z-index-*</code> valent pour tous.</li>
+        <li><code>z-index-0</code> à <code>-3</code>, entre voisins : <code>&lt;dialog&gt;</code> et <code>popover</code> passent au-dessus de tout sans z-index.</li>
+        <li><code>translate-middle</code> utilise <code>translate</code> : une animation <code>slide-in-*</code> ou <code>shake</code> sur le même élément le remplace. Mettre l'animation sur un enfant.</li>
+        <li>En écriture de droite à gauche, <code>start-50 translate-middle</code> ne centre pas : <code>translate</code> recule toujours vers la gauche.</li>
     </ul>
 {% endblock %}

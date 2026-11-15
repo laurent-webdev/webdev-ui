@@ -4,112 +4,131 @@
 
 {% block body %}
     <h1>Verre</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">L'effet verre dépoli : un fond translucide, clair ou foncé selon le thème, et ce qui est derrière flouté. glass s'ajoute à un composant sans couleur (card, accordion, dialog, drawer, toast, navbar, dropdown…) ou à un bloc du site, sans JavaScript.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6"><code>glass</code> : un fond translucide, clair ou foncé selon le thème, et ce qui est derrière flouté. Sur un composant sans couleur ou <code>-outline</code>, ou un bloc du site.</p>
 
     <div class="toast-container" role="status" aria-live="polite" aria-atomic="false" popover="manual" data-toast></div>
 
-    <h2 class="mt-10">Exemple</h2>
-    <div class="demo-glass mt-2">
-        <nav class="navbar navbar-expand glass position-sticky top-0 px-4" aria-label="Verre (démo)">
-            <a class="navbar-brand" href="#">Mon site</a>
-            <ul class="navbar-list">
-                {% for link in ['Accueil', 'Blog', 'Contact'] %}
-                    <li><a class="navbar-item" href="#"{% if loop.first %} aria-current="true"{% endif %}>{{ link }}</a></li>
-                {% endfor %}
-            </ul>
-        </nav>
-
-        <p class="demo-glass-text mt-6" aria-hidden="true">VERRE DÉPOLI</p>
-
-        <div class="grid gap-4 mt-6">
-            <div class="card glass md:col-6 lg:col-4">
+    <h2 class="mt-10">Sur une image</h2>
+    <p class="mt-2">Le fond de l'exemple est chargé exprès : une bande noire à gauche, une blanche à droite, le pire cas pour le texte.</p>
+    {% set code %}
+        <div class="grid gap-4">
+            <div class="card glass md:col-6">
                 <div class="card-header"><h3 class="fs-md">card glass</h3></div>
-                <div class="card-body"><p>Le texte de la page, sur le verre, avec <a class="link" href="#">un lien</a>.</p></div>
+                <div class="card-body"><p>Le texte de la page, avec <a class="link" href="#">un lien</a>.</p></div>
             </div>
-            <div class="card-outline theme-primary glass md:col-6 lg:col-4">
-                <div class="card-body"><p>card-outline theme-primary glass : le cadre coloré reste.</p></div>
+            <div class="card-outline theme-primary glass md:col-6">
+                <div class="card-body"><p>card-outline : le cadre coloré reste.</p></div>
             </div>
-            <div class="alert glass md:col-6 lg:col-4">
+            <div class="alert glass md:col-6">
                 <p>alert glass : un message posé sur une image.</p>
             </div>
-            <div class="accordion glass md:col-6 lg:col-4">
-                {% for title in ['accordion glass', 'Deuxième panneau', 'Troisième panneau'] %}
-                    <details name="glass-accordion"{% if loop.first %} open{% endif %}>
-                        <summary>{{ title }}</summary>
-                        <div class="accordion-body">
-                            <p>Le verre est sur le bloc : les titres et le contenu le gardent, le survol d'un titre y pose un voile gris transparent.</p>
-                        </div>
-                    </details>
-                {% endfor %}
-            </div>
-            <div class="card glass md:col-6 lg:col-4">
-                <div class="card-body d-flex flex-wrap-wrap gap-2">
-                    <button class="btn" type="button" popovertarget="glass-dropdown">dropdown glass</button>
-                    <button class="btn" type="button" commandfor="glass-dialog" command="show-modal">dialog glass</button>
-                    <button class="btn" type="button" commandfor="glass-drawer" command="show-modal">drawer-end glass</button>
-                    <button class="btn" type="button" data-demo-toast="glass-toast">toast glass</button>
-                </div>
+            <div class="accordion glass md:col-6">
+                <details name="glass-accordion" open>
+                    <summary>accordion glass</summary>
+                    <div class="accordion-body"><p>Le survol d'un titre pose un voile transparent.</p></div>
+                </details>
+                <details name="glass-accordion">
+                    <summary>Deuxième panneau</summary>
+                    <div class="accordion-body"><p>Le contenu du deuxième panneau.</p></div>
+                </details>
             </div>
         </div>
-
-        <p class="demo-glass-text mt-6" aria-hidden="true">FLOU</p>
-        <p class="demo-glass-text mt-6" aria-hidden="true">DERRIÈRE</p>
-        <p class="demo-glass-text mt-6" aria-hidden="true">LA BARRE</p>
-    </div>
-    <ul class="mt-4">
-        <li>Le fond de la page à 70 % : blanc en clair, foncé en sombre, sans rien changer. Derrière, un flou de 16px et un peu plus de saturation.</li>
-        <li>La navbar est collée en haut du bloc (position-sticky top-0) : en faisant défiler, le fond passe dessous. navbar n'a pas de marge sur les côtés : px-4 en donne une au verre.</li>
-        <li>Le dropdown, le dialogue, le drawer et le toast passent par-dessus toute la page : le verre floute ce qu'il y a derrière eux (sous le dialogue et le drawer, la page déjà assombrie).</li>
-        <li>À gauche du fond, une bande noire ; à droite, une bande blanche : le pire cas pour le texte (voir Accessibilité).</li>
-    </ul>
-
-    <div class="dropdown glass" id="glass-dropdown" popover>
-        <a class="dropdown-item" href="#">Profil</a>
-        <a class="dropdown-item" href="#">Réglages</a>
-        <hr>
-        <a class="dropdown-item" href="#">Déconnexion</a>
-    </div>
-
-    <dialog class="dialog glass dialog-sm" id="glass-dialog" data-dialog closedby="any" aria-labelledby="glass-dialog-titre">
-        <div class="dialog-header">
-            <h3 class="fs-lg" id="glass-dialog-titre">dialog glass</h3>
-            <button class="btn-close" type="button" commandfor="glass-dialog" command="close" aria-label="Fermer"></button>
+    {% endset %}
+    {% set demo %}
+        <div class="demo-glass">
+            <p class="demo-glass-text" aria-hidden="true">VERRE</p>
+            {{ code }}
+            <p class="demo-glass-text" aria-hidden="true">DÉPOLI</p>
         </div>
-        <div class="dialog-body">
-            <p>Devant la page assombrie et floutée par le fond du dialogue.</p>
-        </div>
-    </dialog>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo, class: 'p-0 overflow-hidden'}) }}
 
-    <dialog class="drawer-end glass" id="glass-drawer" data-dialog closedby="any" aria-labelledby="glass-drawer-titre">
-        <div class="drawer-header">
-            <h3 class="fs-lg" id="glass-drawer-titre">drawer-end glass</h3>
-            <button class="btn-close" type="button" commandfor="glass-drawer" command="close" aria-label="Fermer"></button>
+    <h2 class="mt-10">Une barre collée en haut</h2>
+    <p class="mt-2">En faisant défiler la page, le fond passe dessous ; <code>px-4</code> donne une marge au verre.</p>
+    {% set code %}
+        <nav class="navbar navbar-expand glass position-sticky top-0 px-4" aria-label="Exemple en verre">
+            <a class="navbar-brand" href="#">Mon site</a>
+            <ul class="navbar-list">
+                <li><a class="navbar-item" href="#" aria-current="page">Accueil</a></li>
+                <li><a class="navbar-item" href="#">Blog</a></li>
+                <li><a class="navbar-item" href="#">Contact</a></li>
+            </ul>
+        </nav>
+    {% endset %}
+    {% set demo %}
+        <div class="demo-glass">
+            {{ code }}
+            <p class="demo-glass-text mt-6" aria-hidden="true">FLOU</p>
+            <p class="demo-glass-text mt-6" aria-hidden="true">DERRIÈRE</p>
+            <p class="demo-glass-text mt-6" aria-hidden="true">LA BARRE</p>
         </div>
-        <div class="drawer-body">
-            <p>Glisse depuis la droite, devant la page assombrie et floutée.</p>
-        </div>
-    </dialog>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo, class: 'p-0 overflow-clip'}) }}
 
-    <template id="glass-toast">
+    <h2 class="mt-10">Par-dessus la page</h2>
+    <p class="mt-2">Le dropdown, le dialogue, le drawer et le toast floutent ce qu'il y a derrière eux.</p>
+    {% set code %}
+        <button class="btn" type="button" popovertarget="glass-dropdown">Dropdown</button>
+        <div class="dropdown glass" id="glass-dropdown" popover>
+            <a class="dropdown-item" href="#">Profil</a>
+            <a class="dropdown-item" href="#">Réglages</a>
+        </div>
+
+        <button class="btn" type="button" commandfor="glass-dialog" command="show-modal">Dialogue</button>
+        <dialog class="dialog glass dialog-sm" id="glass-dialog" data-dialog closedby="any" aria-labelledby="glass-dialog-titre">
+            <div class="dialog-header">
+                <h3 class="fs-lg" id="glass-dialog-titre">dialog glass</h3>
+                <button class="btn-close" type="button" commandfor="glass-dialog" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="dialog-body"><p>Devant la page assombrie et floutée.</p></div>
+        </dialog>
+
+        <button class="btn" type="button" commandfor="glass-drawer" command="show-modal">Drawer</button>
+        <dialog class="drawer-end glass" id="glass-drawer" data-dialog closedby="any" aria-labelledby="glass-drawer-titre">
+            <div class="drawer-header">
+                <h3 class="fs-lg" id="glass-drawer-titre">drawer-end glass</h3>
+                <button class="btn-close" type="button" commandfor="glass-drawer" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="drawer-body"><p>Glisse depuis la droite.</p></div>
+        </dialog>
+
+        <!-- Ajouté par le site dans le conteneur de toasts -->
         <div class="toast glass">
             <p>Profil enregistré.</p>
             <button class="btn-close" type="button" aria-label="Fermer" data-toast-close></button>
         </div>
-    </template>
-
-    <h2 class="mt-10">HTML</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card glass"&gt;…&lt;/div&gt;
-&lt;div class="accordion glass"&gt;…&lt;/div&gt;
-&lt;nav class="navbar glass position-sticky top-0 px-4" aria-label="Principal"&gt;…&lt;/nav&gt;
-&lt;div class="dropdown glass" id="menu" popover&gt;…&lt;/div&gt;
-&lt;dialog class="dialog glass" …&gt;…&lt;/dialog&gt;
-&lt;dialog class="drawer-end glass" …&gt;…&lt;/dialog&gt;
-&lt;div class="toast glass"&gt;…&lt;/div&gt;</code></pre>
-    <ul>
-        <li>glass remplace le fond du composant (c'est un utilitaire : il passe devant, sans spécificité) et ajoute le flou ; le texte, le cadre et l'ombre restent ceux du composant.</li>
-        <li>Sur un composant sans couleur, ou une variante outline (le cadre garde sa couleur). Jamais sur une variante solid ni sur un fond coloré (voir les contre-exemples).</li>
-        <li>L'effet ne se voit que s'il y a quelque chose derrière : une barre collante au-dessus du contenu qui défile, une carte sur une image, un dialogue ou un toast au-dessus de la page.</li>
-    </ul>
+    {% endset %}
+    {% set demo %}
+        <button class="btn" type="button" popovertarget="glass-dropdown">Dropdown</button>
+        <div class="dropdown glass" id="glass-dropdown" popover>
+            <a class="dropdown-item" href="#">Profil</a>
+            <a class="dropdown-item" href="#">Réglages</a>
+        </div>
+        <button class="btn" type="button" commandfor="glass-dialog" command="show-modal">Dialogue</button>
+        <dialog class="dialog glass dialog-sm" id="glass-dialog" data-dialog closedby="any" aria-labelledby="glass-dialog-titre">
+            <div class="dialog-header">
+                <h3 class="fs-lg" id="glass-dialog-titre">dialog glass</h3>
+                <button class="btn-close" type="button" commandfor="glass-dialog" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="dialog-body"><p>Devant la page assombrie et floutée.</p></div>
+        </dialog>
+        <button class="btn" type="button" commandfor="glass-drawer" command="show-modal">Drawer</button>
+        <dialog class="drawer-end glass" id="glass-drawer" data-dialog closedby="any" aria-labelledby="glass-drawer-titre">
+            <div class="drawer-header">
+                <h3 class="fs-lg" id="glass-drawer-titre">drawer-end glass</h3>
+                <button class="btn-close" type="button" commandfor="glass-drawer" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="drawer-body"><p>Glisse depuis la droite.</p></div>
+        </dialog>
+        <button class="btn" type="button" data-demo-toast="glass-toast">Toast</button>
+        <template id="glass-toast">
+            <div class="toast glass">
+                <p>Profil enregistré.</p>
+                <button class="btn-close" type="button" aria-label="Fermer" data-toast-close></button>
+            </div>
+        </template>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo}) }}
 
     <h2 class="mt-10" id="variables">Variables</h2>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
@@ -122,40 +141,53 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><th scope="row">--glass-background-color</th><td>--color-background à 70 %</td><td>le fond du verre ; clair ou foncé selon le thème</td></tr>
-                <tr><th scope="row">--glass-backdrop-filter</th><td>blur(16px) saturate(180%)</td><td>ce qui est derrière : flouté et un peu plus saturé</td></tr>
+                <tr><th scope="row">--glass-background-color</th><td>--color-background à 70 %</td><td>le fond du verre, clair ou foncé selon le thème</td></tr>
+                <tr><th scope="row">--glass-backdrop-filter</th><td>blur(16px) saturate(180%)</td><td>ce qui est derrière : flouté, un peu plus saturé</td></tr>
             </tbody>
         </table>
     </div>
+    {% set code %}
+        /* Tout le verre du site : moins flou */
+        :root { --glass-backdrop-filter: blur(8px) saturate(150%); }
 
-    <h2 class="mt-10">Exemple : changer les valeurs</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --glass-backdrop-filter: blur(8px) saturate(150%); }
-.hero-card { --glass-background-color: oklch(from var(--color-background) l c h / 0.85); }</code></pre>
-    <p>La première ligne floute moins tout le verre du site ; la deuxième rend plus opaque seulement le verre de la classe hero-card du site. Garder au moins 60 % (voir Accessibilité).</p>
+        /* Un bloc du site : plus opaque (60 % au moins) */
+        .hero-card { --glass-background-color: oklch(from var(--color-background) l c h / 0.85); }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
 
     <h2 class="mt-10">Accessibilité</h2>
-    <ul>
-        <li>Le fond du verre change avec ce qui passe derrière : le contraste dépend de la page. 70 % est choisi pour que le texte de la page reste lisible dans le pire cas, devant du noir en clair ou du blanc en sombre (calculé) : au moins 9,96:1 en clair et 7,03:1 en sombre. Le minimum pour 4,5:1 est 60 %.</li>
-        <li>Le texte coloré (emphasis, btn-outline, btn-text, un lien avec un thème) n'est pas garanti : il tombe à 3:1 dans le pire cas. Sur le verre, le texte de la page, et des boutons qui ont leur propre fond (btn, btn-solid, btn-subtle).</li>
-        <li>Le réglage « Réduire la transparence » du système (prefers-reduced-transparency: reduce) : le fond de la page, plein, sans flou. Chrome et Edge le lisent ; Firefox et Safari pas encore : le verre y reste.</li>
-        <li>Les outils (Lighthouse, axe) ne savent pas calculer un contraste sur un fond translucide : ils le marquent « à vérifier », sans erreur. À regarder à la main, sur la vraie page.</li>
+    <ul class="mt-2">
+        <li>À 70 %, le texte de la page reste lisible devant du noir (en clair) ou du blanc (en sombre) ; sous 60 %, plus.</li>
+        <li>Le texte coloré (emphasis, <code>btn-outline</code>, <code>btn-text</code>, un lien avec un thème) n'est pas garanti : sur le verre, le texte de la page et des boutons qui ont leur fond.</li>
+        <li>« Réduire la transparence » (<code>prefers-reduced-transparency</code>) : un fond plein, sans flou (Chrome et Edge).</li>
+        <li>Lighthouse ne calcule pas un contraste sur un fond translucide : à regarder à la main.</li>
     </ul>
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card-solid theme-primary glass"&gt;…&lt;/div&gt;</code></pre>
-    <p>Sur une variante solid : le fond plein devient du verre clair ou foncé, mais le texte reste noir ou blanc, fait pour la couleur pleine : illisible dans un des deux thèmes. Sur card-subtle, le verre remplace la teinte : écrire card glass.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --glass-background-color: oklch(from var(--color-background) l c h / 0.4); }</code></pre>
-    <p>Sous 60 %, le texte de la page descend sous 4,5:1 devant du noir (en clair) ou du blanc (en sombre).</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card glass"&gt;
-    &lt;button class="btn-outline theme-info" type="button"&gt;Voir&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-    <p>Un texte coloré sans fond sur le verre : 3:1 dans le pire cas. btn ou btn-solid, qui ont leur fond.</p>
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : sur solid, le texte noir ou blanc est fait pour la couleur pleine, pas pour le verre -->
+        <div class="card-solid theme-primary glass">…</div>
+        <!-- Oui -->
+        <div class="card glass">…</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : un texte coloré sans fond sur le verre -->
+        <div class="card glass"><button class="btn-outline theme-info" type="button">Voir</button></div>
+        <!-- Oui : un bouton qui a son fond -->
+        <div class="card glass"><button class="btn-solid theme-info" type="button">Voir</button></div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        /* Non : sous 60 %, le texte de la page descend sous 4,5:1 */
+        :root { --glass-background-color: oklch(from var(--color-background) l c h / 0.4); }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>backdrop-filter fait de l'élément la référence des éléments en position: fixed qu'il contient : le conteneur de toasts d'un dialogue en verre se met dans le coin du dialogue, pas de l'écran. Les popovers et les dialogues (dropdown, drawer de la navbar) ne sont pas touchés : ils passent par-dessus toute la page.</li>
-        <li>Un verre dans un verre : celui de l'intérieur ne floute que le contenu de celui de l'extérieur, pas la page.</li>
-        <li>Pas de verre coloré : le fond est toujours celui de la page.</li>
-        <li>Le flou coûte du calcul : sur un appareil lent, beaucoup de verre à l'écran peut ralentir le défilement.</li>
+    <ul class="mt-2">
+        <li><code>backdrop-filter</code> fait de l'élément la référence des éléments fixés qu'il contient : le conteneur de toasts d'un dialogue en verre se met dans le coin du dialogue.</li>
+        <li>Un verre dans un verre ne floute que le contenu du premier. Pas de verre coloré.</li>
+        <li>Le flou coûte du calcul : beaucoup de verre à l'écran peut ralentir le défilement sur un appareil lent.</li>
     </ul>
 {% endblock %}

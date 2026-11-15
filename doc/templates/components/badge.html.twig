@@ -4,45 +4,64 @@
 
 {% block body %}
     <h1>Badge</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Une étiquette dans le texte, qui suit sa taille : badge par défaut, ou badge-solid, -subtle, -outline avec une couleur .theme-*.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Une étiquette dans le texte, qui suit sa taille. Une variante pour la forme, un <code>.theme-*</code> pour la couleur.</p>
 
     <h2 class="mt-10">Par défaut</h2>
-    <p class="mt-2"><span class="badge">badge</span></p>
-    <p class="mt-2">badge n'a pas de couleur : fond transparent, cadre --border-color, le texte autour. Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres.</p>
+    {% set code %}
+        <span class="badge">Brouillon</span>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
-    {% for variant in ['solid', 'subtle', 'outline'] %}
-        <h2 class="mt-10">badge-{{ variant }}</h2>
-        <p class="d-flex flex-wrap-wrap gap-2 mt-2">
-            {% for color in colors %}
-                <span class="badge-{{ variant }} theme-{{ color }}">{{ color }}</span>
-            {% endfor %}
-        </p>
-    {% endfor %}
+    <h2 class="mt-10">Variantes</h2>
+    {% set code %}
+        <span class="badge-solid theme-success">Payée</span>
+        <span class="badge-subtle theme-success">Payée</span>
+        <span class="badge-outline theme-success">Payée</span>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
-    <h2 class="mt-10">La taille suit le texte autour</h2>
-    {% for size in ['3xl', 'xl', 'md', 'sm'] %}
-        <p class="fs-{{ size }} mt-2">Texte fs-{{ size }} <span class="badge-solid theme-primary">Nouveau</span></p>
-    {% endfor %}
-    <p class="mt-2">0.75em du texte autour, jamais moins que --font-size-xs (12px).</p>
+    <h2 class="mt-10">Couleurs</h2>
+    {% set code %}
+        <span class="badge-solid theme-primary">Primary</span>
+        <span class="badge-solid theme-secondary">Secondary</span>
+        <span class="badge-solid theme-accent">Accent</span>
+        <span class="badge-solid theme-success">Success</span>
+        <span class="badge-solid theme-danger">Danger</span>
+        <span class="badge-solid theme-warning">Warning</span>
+        <span class="badge-solid theme-info">Info</span>
+        <span class="badge-solid theme-neutral">Neutral</span>
+        <span class="badge-solid theme-inverse">Inverse</span>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
-    <h2 class="mt-10">Exemple : dans un bouton</h2>
-    <p class="d-flex flex-wrap-wrap gap-2 mt-2">
-        <button class="btn-solid theme-primary" type="button">Messages <span class="badge-solid theme-inverse">4<span class="visually-hidden"> non lus</span></span></button>
-        <button class="btn" type="button">Notifications <span class="badge-solid theme-danger">12<span class="visually-hidden"> nouvelles</span></span></button>
-    </p>
-    <p class="mt-2">Sans le texte visually-hidden, le lecteur d'écran lit « Messages 4 » : le nombre seul ne dit pas ce qu'il compte.</p>
+    <h2 class="mt-10">La taille suit le texte</h2>
+    <p class="mt-2">0.75em du texte autour, jamais moins de 12px.</p>
+    {% set code %}
+        <p class="fs-3xl">Titre <span class="badge-solid theme-primary">Nouveau</span></p>
+        <p class="fs-lg">Texte fs-lg <span class="badge-solid theme-primary">Nouveau</span></p>
+        <p class="fs-sm">Texte fs-sm <span class="badge-solid theme-primary">Nouveau</span></p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-2'}) }}
 
-    <h2 class="mt-10">Exemple : en pastille</h2>
-    <p class="d-flex flex-wrap-wrap gap-2 mt-2">
+    <h2 class="mt-10">Dans un bouton</h2>
+    <p class="mt-2">Le texte <code>visually-hidden</code> dit ce que compte le nombre.</p>
+    {% set code %}
+        <button class="btn-solid theme-primary" type="button">
+            Messages <span class="badge-solid theme-inverse">4<span class="visually-hidden"> non lus</span></span>
+        </button>
+        <button class="btn" type="button">
+            Notifications <span class="badge-solid theme-danger">12<span class="visually-hidden"> nouvelles</span></span>
+        </button>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">En pastille</h2>
+    {% set code %}
         <span class="badge-solid theme-success border-radius-pill">En ligne</span>
         <span class="badge-subtle theme-warning border-radius-pill">En attente</span>
         <span class="badge-outline theme-danger border-radius-pill">Hors ligne</span>
-    </p>
-    <p class="mt-2">L'utilitaire border-radius-pill passe devant le rayon du badge.</p>
-
-    <h2 class="mt-10">HTML</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="badge-subtle theme-success"&gt;Payée&lt;/span&gt;</code></pre>
-    <p>Comme les boutons : une variante (badge-solid, badge-subtle, badge-outline) qui s'utilise seule, et une couleur .theme-*. badge seul : le défaut, sans couleur.</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
     <h2 class="mt-10" id="variables">Variables</h2>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
@@ -62,36 +81,72 @@
             </tbody>
         </table>
     </div>
-    <p class="mt-2">Les couleurs viennent de .theme-* : le cadre a la couleur du thème (badge-subtle : celle du fond léger), la variante dit le fond et le texte. Le padding est en em : il suit la taille du badge.</p>
+    {% set code %}
+        /* Tous les badges en pastille */
+        :root { --badge-border-radius: 50rem; }
 
-    <h2 class="mt-10">Exemple : changer les valeurs</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --badge-border-radius: 50rem; }
-.badge-statut { --badge-padding-inline: 0.75em; }</code></pre>
-    <p>La première ligne met tous les badges en pastille, la deuxième change seulement ceux qui ont la classe badge-statut du site.</p>
+        /* Un badge du site */
+        .badge-statut { --badge-padding-inline: 0.75em; }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
 
     <h2 class="mt-10">Accessibilité</h2>
-    <ul>
+    <ul class="mt-2">
         <li>Le texte du badge dit ce qu'il veut dire : la couleur ne suffit pas (WCAG 1.4.1).</li>
-        <li>Un nombre seul (4, 12) a besoin de son contexte pour les lecteurs d'écran : un texte visually-hidden (« non lus »).</li>
-        <li>Le texte est lisible dans toutes les variantes et toutes les couleurs (au moins 4,5:1, comme les boutons), sur le fond de la page et sur les fonds légers.</li>
+        <li>Un nombre seul a besoin d'un texte <code>visually-hidden</code> (« non lus »).</li>
     </ul>
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="badge-subtle"&gt;Nouveau&lt;/span&gt;</code></pre>
-    <p>Une variante sans .theme-* n'a pas de couleur : pas de fond. Écrire badge, ou badge-subtle avec une couleur (theme-neutral pour le gris).</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="badge-subtle theme-primary" href="/tag/css"&gt;CSS&lt;/a&gt;</code></pre>
-    <p>Un badge ne se clique pas : il n'a pas de survol ni de clic visibles. Une étiquette cliquable est un bouton : &lt;a class="btn-subtle btn-xs theme-primary" href="/tag/css"&gt;.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="badge-solid theme-success"&gt;&lt;/span&gt; Laurent</code></pre>
-    <p>Une pastille vide : seule la couleur dit « en ligne » (WCAG 1.4.1). Écrire le texte dans le badge.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-solid theme-primary"&gt;Messages &lt;span class="badge-outline"&gt;4&lt;/span&gt;&lt;/button&gt;</code></pre>
-    <p>badge-subtle et badge-outline sont faits pour le fond de la page et les fonds légers : sur un fond plein (btn-solid, alert-solid, bg-*), seul badge-solid.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="badge"&gt;Livraison offerte dès 50 € d'achat en France métropolitaine&lt;/span&gt;</code></pre>
-    <p>Le texte d'un badge ne passe pas à la ligne : un long texte dépasse de l'écran sur téléphone (WCAG 1.4.10). Quelques mots seulement.</p>
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : une variante sans .theme-* n'a pas de couleur -->
+        <span class="badge-subtle">Nouveau</span>
+        <!-- Oui -->
+        <span class="badge-subtle theme-primary">Nouveau</span>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : un badge ne se clique pas (pas de survol ni de clic visibles) -->
+        <a class="badge-subtle theme-primary" href="/tag/css">CSS</a>
+        <!-- Oui : une étiquette cliquable est un bouton -->
+        <a class="btn-subtle btn-xs theme-primary" href="/tag/css">CSS</a>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : une pastille vide, seule la couleur dit « en ligne » -->
+        <span class="badge-solid theme-success"></span> Laurent
+        <!-- Oui -->
+        Laurent <span class="badge-solid theme-success">En ligne</span>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : sur un fond plein, badge-subtle et badge-outline ne se lisent pas -->
+        <button class="btn-solid theme-primary" type="button">Messages <span class="badge-outline">4</span></button>
+        <!-- Oui : badge-solid d'un autre thème -->
+        <button class="btn-solid theme-primary" type="button">Messages <span class="badge-solid theme-inverse">4</span></button>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : le texte d'un badge ne passe pas à la ligne, il dépasse de l'écran sur téléphone -->
+        <span class="badge">Livraison offerte dès 50 € d'achat en France métropolitaine</span>
+        <!-- Oui : quelques mots -->
+        <span class="badge">Livraison offerte</span>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>Pas de classes de taille : le badge suit le texte autour (dans un titre, il est plus grand). Pour un badge plus grand ou plus petit : les variables, ou le texte du parent.</li>
-        <li>En clair, le cadre de badge-subtle se voit à peine : le fond léger délimite le badge.</li>
-        <li>Un badge vide reste affiché (une petite boîte vide) : le JS du site le cache (hidden) quand le compteur est à 0.</li>
+    <ul class="mt-2">
+        <li>Pas de classes de taille : le badge suit le texte autour.</li>
+        <li>En clair, le cadre de <code>badge-subtle</code> se voit à peine : le fond léger délimite le badge.</li>
+        <li>Un badge vide reste affiché : le site le cache (<code>hidden</code>) quand le compteur est à 0.</li>
     </ul>
+
+    <h2 class="mt-10">Toutes les combinaisons</h2>
+    {% for variant in ['solid', 'subtle', 'outline'] %}
+        <h3 class="fs-md mt-6">badge-{{ variant }}</h3>
+        <p class="d-flex flex-wrap-wrap gap-2 mt-2">
+            {% for color in colors %}
+                <span class="badge-{{ variant }} theme-{{ color }}">{{ color }}</span>
+            {% endfor %}
+        </p>
+    {% endfor %}
 {% endblock %}

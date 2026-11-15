@@ -4,49 +4,115 @@
 
 {% block body %}
     <h1>Flex</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Les propriétés du flex en classes au nom complet (flex-direction-column, justify-content-space-between…), avec des variantes xs: à 2xl:.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Les propriétés du flex au nom complet : <code>flex-direction-*</code>, <code>justify-content-*</code>, <code>align-items-*</code>, <code>align-self-*</code>, <code>flex-wrap-*</code>, <code>flex-grow-*</code> et <code>flex-shrink-*</code>.</p>
 
-    <p class="mt-4">d-flex flex-direction-column md:flex-direction-row gap-2 : en colonne, en ligne dès md</p>
-    <div class="d-flex flex-direction-column md:flex-direction-row gap-2">
-        <div class="demo-box p-2">un</div>
-        <div class="demo-box p-2">deux</div>
-        <div class="demo-box p-2">trois</div>
-    </div>
-    <p class="mt-4">justify-content-start / center / end / space-between</p>
-    <div class="demo-frame d-flex justify-content-start gap-2 mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div></div>
-    <div class="demo-frame d-flex justify-content-center gap-2 mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div></div>
-    <div class="demo-frame d-flex justify-content-end gap-2 mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div></div>
-    <div class="demo-frame d-flex justify-content-space-between gap-2 mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div></div>
-    <p class="mt-4">justify-content-space-between / space-around / space-evenly : la différence se voit aux bords</p>
-    <div class="demo-frame d-flex justify-content-space-between mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div><div class="demo-box p-2">trois</div></div>
-    <div class="demo-frame d-flex justify-content-space-around mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div><div class="demo-box p-2">trois</div></div>
-    <div class="demo-frame d-flex justify-content-space-evenly mt-2"><div class="demo-box p-2">un</div><div class="demo-box p-2">deux</div><div class="demo-box p-2">trois</div></div>
-    <p class="mt-4">align-items-start / center / end / baseline / stretch (le premier bloc est plus haut)</p>
-    <div class="demo-frame d-flex align-items-start gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">start</div></div>
-    <div class="demo-frame d-flex align-items-center gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">center</div></div>
-    <div class="demo-frame d-flex align-items-end gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">end</div></div>
-    <div class="demo-frame d-flex align-items-baseline gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">baseline</div></div>
-    <div class="demo-frame d-flex align-items-stretch gap-2 mt-2"><div class="demo-box p-6">haut</div><div class="demo-box p-2">stretch</div></div>
-    <p class="mt-4">align-self : un enfant s'aligne autrement que les autres (parent en align-items-start)</p>
-    <div class="demo-frame d-flex align-items-start gap-2 mt-2">
-        <div class="demo-box p-6">haut</div>
-        <div class="demo-box p-2">start</div>
-        <div class="demo-box p-2 align-self-center">align-self-center</div>
-        <div class="demo-box p-2 align-self-end">align-self-end</div>
-    </div>
-    <p class="mt-4">d-flex flex-direction-column : le bouton s'étire ; align-self-start le garde à sa taille</p>
-    <div class="demo-frame d-flex flex-direction-column gap-2 p-2 mt-2">
-        <button class="btn" type="button">étiré</button>
-        <button class="btn align-self-start" type="button">align-self-start</button>
-    </div>
-    <p class="mt-4">flex-wrap-wrap : passe à la ligne quand la place manque</p>
-    <div class="demo-frame d-flex flex-wrap-wrap gap-2 mt-2">
-        <span class="demo-box p-2">étiquette</span><span class="demo-box p-2">étiquette longue</span><span class="demo-box p-2">étiquette</span><span class="demo-box p-2">encore une étiquette</span><span class="demo-box p-2">étiquette</span><span class="demo-box p-2">étiquette</span>
-    </div>
-    <p class="mt-4">flex-grow-1 : le champ prend la place libre ; flex-shrink-0 : le bouton garde sa taille</p>
-    <form class="d-flex flex-wrap-wrap align-items-center gap-2 mt-2">
-        <label for="demo-search">Recherche</label>
-        <input class="flex-grow-1" id="demo-search" type="search" name="q">
-        <button class="btn-solid theme-primary flex-shrink-0" type="submit">Rechercher</button>
-    </form>
+    <h2 class="mt-10">Direction</h2>
+    <p class="mt-2">En colonne sur téléphone, en ligne à partir de md.</p>
+    {% set code %}
+        <div class="d-flex flex-direction-column md:flex-direction-row gap-2">
+            <p class="bg-primary-subtle p-2">Un</p>
+            <p class="bg-primary-subtle p-2">Deux</p>
+            <p class="bg-primary-subtle p-2">Trois</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Sur la ligne</h2>
+    <p class="mt-2"><code>justify-content-*</code> : le cadre montre le parent.</p>
+    {% set code %}
+        <div class="d-flex justify-content-start gap-2 border"><p class="bg-primary-subtle p-2">start</p><p class="bg-primary-subtle p-2">start</p></div>
+        <div class="d-flex justify-content-center gap-2 border"><p class="bg-primary-subtle p-2">center</p><p class="bg-primary-subtle p-2">center</p></div>
+        <div class="d-flex justify-content-end gap-2 border"><p class="bg-primary-subtle p-2">end</p><p class="bg-primary-subtle p-2">end</p></div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">L'espace qui reste</h2>
+    <p class="mt-2"><code>space-between</code>, <code>-around</code> et <code>-evenly</code> : la différence se voit aux bords.</p>
+    {% set code %}
+        <div class="d-flex justify-content-space-between border"><p class="bg-primary-subtle p-2">Un</p><p class="bg-primary-subtle p-2">Deux</p><p class="bg-primary-subtle p-2">Trois</p></div>
+        <div class="d-flex justify-content-space-around border"><p class="bg-primary-subtle p-2">Un</p><p class="bg-primary-subtle p-2">Deux</p><p class="bg-primary-subtle p-2">Trois</p></div>
+        <div class="d-flex justify-content-space-evenly border"><p class="bg-primary-subtle p-2">Un</p><p class="bg-primary-subtle p-2">Deux</p><p class="bg-primary-subtle p-2">Trois</p></div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">En hauteur</h2>
+    <p class="mt-2"><code>align-items-*</code> : le premier bloc est plus haut.</p>
+    {% set code %}
+        <div class="d-flex align-items-start gap-2 border"><p class="bg-primary-subtle px-2 py-6">haut</p><p class="bg-primary-subtle p-2">start</p></div>
+        <div class="d-flex align-items-center gap-2 border"><p class="bg-primary-subtle px-2 py-6">haut</p><p class="bg-primary-subtle p-2">center</p></div>
+        <div class="d-flex align-items-end gap-2 border"><p class="bg-primary-subtle px-2 py-6">haut</p><p class="bg-primary-subtle p-2">end</p></div>
+        <div class="d-flex align-items-baseline gap-2 border"><p class="bg-primary-subtle px-2 py-6">haut</p><p class="bg-primary-subtle p-2">baseline</p></div>
+        <div class="d-flex align-items-stretch gap-2 border"><p class="bg-primary-subtle px-2 py-6">haut</p><p class="bg-primary-subtle p-2">stretch</p></div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Un enfant à part</h2>
+    <p class="mt-2"><code>align-self-*</code> passe devant le <code>align-items-*</code> du parent.</p>
+    {% set code %}
+        <div class="d-flex align-items-start gap-2 border">
+            <p class="bg-primary-subtle px-2 py-6">haut</p>
+            <p class="bg-primary-subtle p-2 align-self-center">center</p>
+            <p class="bg-primary-subtle p-2 align-self-end">end</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Un bouton dans une colonne</h2>
+    <p class="mt-2">En colonne, un enfant s'étire ; <code>align-self-start</code> le garde à sa taille.</p>
+    {% set code %}
+        <div class="d-flex flex-direction-column gap-2">
+            <button class="btn" type="button">Étiré</button>
+            <button class="btn align-self-start" type="button">align-self-start</button>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Passer à la ligne</h2>
+    {% set code %}
+        <div class="d-flex flex-wrap-wrap gap-2">
+            <p class="bg-primary-subtle p-2">Étiquette</p>
+            <p class="bg-primary-subtle p-2">Une étiquette plus longue</p>
+            <p class="bg-primary-subtle p-2">Étiquette</p>
+            <p class="bg-primary-subtle p-2">Encore une étiquette</p>
+            <p class="bg-primary-subtle p-2">Étiquette</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Prendre la place qui reste</h2>
+    <p class="mt-2"><code>flex-grow-1</code> : le texte s'étire ; <code>flex-shrink-0</code> : le bouton garde sa taille.</p>
+    {% set code %}
+        <div class="d-flex align-items-center gap-2">
+            <p class="bg-primary-subtle p-2 flex-grow-1">Un article dans le panier</p>
+            <button class="btn flex-shrink-0" type="button">Supprimer</button>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul class="mt-2">
+        <li>Pas de <code>order-*</code> ni de <code>*-reverse</code> : l'ordre affiché suit le HTML, celui du clavier et du lecteur d'écran (WCAG 1.3.2).</li>
+    </ul>
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : sans d-flex, les classes du flex ne font rien -->
+        <div class="justify-content-space-between">…</div>
+        <!-- Oui -->
+        <div class="d-flex justify-content-space-between">…</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : un mot long fait déborder l'enfant flex -->
+        <div class="d-flex"><p>Anticonstitutionnellement…</p></div>
+        <!-- Oui : min-w-0 le laisse rétrécir -->
+        <div class="d-flex"><p class="min-w-0">Anticonstitutionnellement…</p></div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Limites</h2>
+    <ul class="mt-2">
+        <li><code>start</code> et <code>end</code> suivent le sens d'écriture (pas <code>flex-start</code> ni <code>left</code>).</li>
+        <li>Pas de <code>align-content-*</code> : rarement utile ; dans le site.</li>
+    </ul>
 {% endblock %}

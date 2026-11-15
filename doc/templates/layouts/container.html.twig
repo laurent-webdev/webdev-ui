@@ -4,21 +4,98 @@
 
 {% block body %}
     <h1>Container</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Un bloc centré qui s'arrête à une largeur maximum (96rem), avec une marge sur les côtés ; container-xs à container-2xl pour une largeur plus petite.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un bloc centré, avec une marge sur les côtés, qui s'arrête à une largeur maximum : <code>container</code>, ou <code>container-xs</code> à <code>-2xl</code> pour une largeur plus petite.</p>
 
-    <div class="container demo-frame mt-4">
-        <div class="demo-box p-2">container : centré, 96rem au plus, 1rem de marge sur les côtés (le cadre montre ses bords)</div>
-    </div>
-    <div class="container-2xl demo-frame mt-4"><div class="demo-box p-2">container-2xl : 96rem au plus, comme container</div></div>
-    <div class="container-xl demo-frame mt-4"><div class="demo-box p-2">container-xl : 80rem au plus</div></div>
-    <div class="container-lg demo-frame mt-4"><div class="demo-box p-2">container-lg : 64rem au plus</div></div>
-    <div class="container-md demo-frame mt-4"><div class="demo-box p-2">container-md : 48rem au plus</div></div>
-    <div class="container-sm demo-frame mt-4"><div class="demo-box p-2">container-sm : 36rem au plus</div></div>
-    <div class="container-xs demo-frame mt-4"><div class="demo-box p-2">container-xs : 22.5rem au plus</div></div>
-    <div class="container demo-frame mt-4">
-        <div class="grid">
-            <div class="demo-box p-2 md:col-6">container + grid : md:col-6</div>
-            <div class="demo-box p-2 md:col-6">md:col-6</div>
+    <h2 class="mt-10">Par défaut</h2>
+    <p class="mt-2">96rem au plus, 1rem de marge sur les côtés (le cadre montre ses bords).</p>
+    {% set code %}
+        <div class="container border">
+            <p class="bg-primary-subtle p-2">Le contenu de la page</p>
         </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Tailles</h2>
+    <p class="mt-2">La largeur du breakpoint du même nom : 22.5, 36, 48, 64, 80 et 96rem.</p>
+    {% set code %}
+        <div class="container-xs border"><p class="bg-primary-subtle p-2">container-xs</p></div>
+        <div class="container-sm border"><p class="bg-primary-subtle p-2">container-sm</p></div>
+        <div class="container-md border"><p class="bg-primary-subtle p-2">container-md</p></div>
+        <div class="container-lg border"><p class="bg-primary-subtle p-2">container-lg</p></div>
+        <div class="container-xl border"><p class="bg-primary-subtle p-2">container-xl</p></div>
+        <div class="container-2xl border"><p class="bg-primary-subtle p-2">container-2xl</p></div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Avec une grille</h2>
+    {% set code %}
+        <div class="container">
+            <div class="grid">
+                <p class="bg-primary-subtle p-2 md:col-6">md:col-6</p>
+                <p class="bg-primary-subtle p-2 md:col-6">md:col-6</p>
+            </div>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Une bande pleine largeur</h2>
+    <p class="mt-2">Le fond sur la section, le container dedans.</p>
+    {% set code %}
+        <section class="bg-primary-subtle py-6">
+            <div class="container">
+                <h3 class="fs-lg">Le fond va jusqu'aux bords, le texte reste aligné sur la page</h3>
+            </div>
+        </section>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--container-max-width</th><td>96rem (2xl)</td><td>largeur maximum, marges comprises</td></tr>
+                <tr><th scope="row">--container-padding-inline</th><td>1rem</td><td>marge sur les côtés</td></tr>
+            </tbody>
+        </table>
     </div>
+    {% set code %}
+        /* Tous les containers sans taille (container-2xl garde 96rem) */
+        :root { --container-max-width: 80rem; }
+
+        /* Une taille */
+        .container-md { --container-padding-inline: 1.5rem; }
+
+        /* Un container du site */
+        .container-article { --container-max-width: 42rem; }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : un container dans un container, les marges s'ajoutent -->
+        <div class="container"><div class="container-md">…</div></div>
+        <!-- Oui -->
+        <div class="container-md">…</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : sur un grand écran, le fond s'arrête à 96rem -->
+        <section class="container bg-primary-subtle">…</section>
+        <!-- Oui -->
+        <section class="bg-primary-subtle"><div class="container">…</div></section>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Limites</h2>
+    <ul class="mt-2">
+        <li>Une seule largeur maximum, pas de paliers : le container est fluide jusqu'à sa largeur.</li>
+        <li>Les tailles suivent les breakpoints : une autre largeur se règle par <code>--container-max-width</code> sur une classe du site.</li>
+    </ul>
 {% endblock %}

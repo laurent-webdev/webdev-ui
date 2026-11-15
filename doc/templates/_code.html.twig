@@ -1,0 +1,3 @@
+{#- Un bloc de code : {% set code %}…{% endset %} puis {{ include('_code.html.twig', {code: code}) }} ; language : html par défaut, ou css, js…
+    Le code s'écrit tel quel dans le template, indenté comme le reste : dedent le colle à gauche, Twig l'échappe -#}
+<pre class="mt-2" tabindex="0"><code class="language-{{ language|default('html') }}">{{ code|dedent }}</code></pre>

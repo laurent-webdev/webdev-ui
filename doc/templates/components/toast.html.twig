@@ -4,165 +4,142 @@
 
 {% block body %}
     <h1>Toast</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Des messages courts qui s'empilent dans un coin de l'écran, par-dessus la page, puis se ferment seuls. Un conteneur toast-container, où le JavaScript du site ajoute un toast : toast par défaut, ou une variante (toast-solid, -subtle, -outline) avec une couleur .theme-*. Le minuteur et les animations sont en CSS ; le JavaScript du framework ouvre le conteneur et retire les toasts fermés.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Des messages courts qui s'empilent dans un coin de l'écran, puis se ferment seuls. Le site ajoute le toast dans un conteneur ; le minuteur est en CSS.</p>
 
+    {# Le conteneur de la page, et le toast des démos de position et du dialogue #}
     <div class="toast-container" role="status" aria-live="polite" aria-atomic="false" popover="manual" data-toast></div>
-
-    <h2 class="mt-10">Par défaut</h2>
-    <p class="mt-2 d-flex flex-wrap-wrap gap-2">
-        <button class="btn" type="button" data-demo-toast="toast-demo-defaut">toast</button>
-        <button class="btn" type="button" data-demo-toast="toast-demo-succes">toast-subtle theme-success</button>
-        <button class="btn" type="button" data-demo-toast="toast-demo-erreur">toast-solid theme-danger</button>
-        <button class="btn" type="button" data-demo-toast="toast-demo-info">toast-outline theme-info</button>
-    </p>
-    <ul class="mt-4">
-        <li>Le conteneur est en bas, côté fin (à droite), à 1rem des bords et large de 22rem ; sur un petit écran, toute la largeur moins les écarts. Les toasts s'empilent, le dernier arrivé contre le bord.</li>
-        <li>Un toast se ferme seul après 5 secondes, en fondu ; le minuteur est en pause tant que la souris ou le focus est dedans. La croix le ferme tout de suite.</li>
-        <li>Le conteneur est un popover="manual", dans le top layer : au-dessus de toute la page, même de ce qui est positionné (un en-tête collant, un z-index), sans z-index. Entre les toasts, les clics passent à la page.</li>
-        <li>toast, sans couleur : le fond de la page (il passe par-dessus le contenu), un cadre gris, une ombre, le texte autour.</li>
-    </ul>
-
-    <template id="toast-demo-defaut">
-        <div class="toast">
-            <p>Brouillon enregistré.</p>
-            <button class="btn-close" type="button" aria-label="Fermer" data-toast-close></button>
-        </div>
-    </template>
-    <template id="toast-demo-succes">
+    <template id="toast-modele">
         <div class="toast-subtle theme-success">
             <p>Succès : profil enregistré.</p>
             <button class="btn-close-subtle" type="button" aria-label="Fermer" data-toast-close></button>
         </div>
     </template>
-    <template id="toast-demo-erreur">
+
+    <h2 class="mt-10">Le conteneur</h2>
+    <p class="mt-2">Une fois dans la page, vide au chargement, à la fin du <code>&lt;body&gt;</code>.</p>
+    {% set code %}
+        <div class="toast-container" role="status" aria-live="polite" aria-atomic="false" popover="manual" data-toast></div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Par défaut</h2>
+    <p class="mt-2">Un texte dans un seul élément, puis la croix <code>data-toast-close</code>. Il se ferme après 5 secondes, en pause au survol et au focus.</p>
+    {% set code %}
+        <div class="toast">
+            <p>Brouillon enregistré.</p>
+            <button class="btn-close" type="button" aria-label="Fermer" data-toast-close></button>
+        </div>
+    {% endset %}
+    {% set demo %}
+        {{ code }}
+        <button class="btn" type="button" data-demo-toast="toast-defaut">Afficher dans le coin</button>
+        <template id="toast-defaut">{{ code }}</template>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo}) }}
+
+    <h2 class="mt-10">Variantes</h2>
+    <p class="mt-2">La croix : <code>btn-close-solid</code> sur <code>toast-solid</code>, <code>btn-close-subtle</code> sur les autres.</p>
+    {% set code %}
         <div class="toast-solid theme-danger">
-            <p>Erreur : le profil n'a pas été enregistré. Réessayez dans quelques minutes.</p>
+            <p>Erreur : le profil n'a pas été enregistré.</p>
             <button class="btn-close-solid" type="button" aria-label="Fermer" data-toast-close></button>
         </div>
-    </template>
-    <template id="toast-demo-info">
+        <div class="toast-subtle theme-success">
+            <p>Succès : profil enregistré.</p>
+            <button class="btn-close-subtle" type="button" aria-label="Fermer" data-toast-close></button>
+        </div>
         <div class="toast-outline theme-info">
             <p>Information : une mise à jour est disponible.</p>
             <button class="btn-close-subtle" type="button" aria-label="Fermer" data-toast-close></button>
         </div>
-    </template>
+    {% endset %}
+    {% set demo %}
+        {{ code }}
+        <button class="btn" type="button" data-demo-toast="toast-variantes">Afficher dans le coin</button>
+        <template id="toast-variantes">{{ code }}</template>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo}) }}
 
-    {% for variant in ['solid', 'subtle', 'outline'] %}
-        <h2 class="mt-10">toast-{{ variant }}</h2>
-        <div class="grid gap-3 mt-2">
-            {% for color in colors %}
-                <div class="toast-{{ variant }} theme-{{ color }} md:col-6 lg:col-4">
-                    <p>theme-{{ color }} : profil enregistré.</p>
-                    <button class="{{ variant == 'solid' ? 'btn-close-solid' : 'btn-close-subtle' }}" type="button" aria-label="Fermer"></button>
-                </div>
-            {% endfor %}
-        </div>
-        <p class="mt-2">
-            {% if variant == 'solid' %}
-                Fond plein, texte noir ou blanc. La croix : btn-close-solid, qui prend le thème du toast : le carré se fond dans le fond, la croix est noire ou blanche comme le texte, le carré apparaît au survol. Un bouton avec du texte, lui, est d'un autre thème (voir l'exemple avec une action).
-            {% elseif variant == 'subtle' %}
-                Fond léger, cadre de la même couleur, texte en emphasis. La croix : btn-close-subtle, qui prend le thème du toast.
-            {% else %}
-                Cadre de la couleur du thème, sur le fond de la page, texte en emphasis. La croix : btn-close-subtle, qui prend le thème du toast.
-            {% endif %}
-            Ici, les toasts sont dans la page, hors du conteneur : sans minuteur, pour les voir tous.
-        </p>
-    {% endfor %}
-
-    <h2 class="mt-10">HTML</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;!-- Une fois dans la page, vide au chargement : la zone que le lecteur d'écran surveille --&gt;
-&lt;div class="toast-container" role="status" aria-live="polite" aria-atomic="false" popover="manual" data-toast&gt;&lt;/div&gt;
-
-&lt;!-- Un toast, ajouté dans le conteneur par le JavaScript du site --&gt;
-&lt;div class="toast-subtle theme-success"&gt;
-    &lt;p&gt;Succès : profil enregistré.&lt;/p&gt;
-    &lt;button class="btn-close-subtle" type="button" aria-label="Fermer" data-toast-close&gt;&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-    <ul>
-        <li>Le conteneur : toast-container, role="status" aria-live="polite" aria-atomic="false", popover="manual" et data-toast (le JavaScript du framework l'ouvre au chargement). Un par page, à la fin du &lt;body&gt; de préférence, hors d'un bloc coloré : un toast sans couleur prend le texte de son parent.</li>
-        <li>Un toast : toast, ou une variante (toast-solid, toast-subtle, toast-outline) avec une couleur .theme-* ; un texte dans un seul élément (un &lt;p&gt;), puis la croix data-toast-close, poussée au bout de la ligne.</li>
-        <li>Le minuteur est sur les toasts du conteneur : le site n'a rien à écrire.</li>
-    </ul>
-
-    <h2 class="mt-10">Exemple : ajouter un toast en JavaScript</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;template id="toast-enregistre"&gt;
-    &lt;div class="toast-subtle theme-success"&gt;
-        &lt;p&gt;Succès : profil enregistré.&lt;/p&gt;
-        &lt;button class="btn-close-subtle" type="button" aria-label="Fermer" data-toast-close&gt;&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/template&gt;</code></pre>
-    <pre class="mt-2" tabindex="0"><code class="language-js">const modele = document.getElementById('toast-enregistre');
-document.querySelector('[data-toast]').append(modele.content.cloneNode(true));</code></pre>
-    <ul>
-        <li>Un &lt;template&gt; n'est ni affiché ni lu : le site en garde un par message, et en ajoute une copie à chaque fois.</li>
-        <li>Un texte qui change : le mettre dans le &lt;p&gt; de la copie avant de l'ajouter, avec textContent (jamais innerHTML pour un texte venu d'un utilisateur).</li>
-        <li>append() : le nouveau toast va contre le bord, et le lecteur d'écran le lit.</li>
-    </ul>
-
-    <h2 class="mt-10">Exemple : un toast avec une action</h2>
-    <p class="mt-2 d-flex flex-wrap-wrap gap-2">
-        <button class="btn" type="button" data-demo-toast="toast-demo-action">Avec un bouton</button>
-        <button class="btn" type="button" data-demo-toast="toast-demo-lien">Avec un lien</button>
-    </p>
-    <template id="toast-demo-action">
+    <h2 class="mt-10">Avec une action</h2>
+    <p class="mt-2">Un lien ou un autre bouton que la croix : pas de minuteur, il reste jusqu'à la croix (WCAG 2.2.1).</p>
+    {% set code %}
         <div class="toast">
             <p>Message supprimé.</p>
             <button class="btn-solid theme-primary btn-sm" type="button">Annuler</button>
             <button class="btn-close" type="button" aria-label="Fermer" data-toast-close></button>
         </div>
-    </template>
-    <template id="toast-demo-lien">
         <div class="toast-subtle theme-info">
             <p>Nouveau message de Camille. <a class="link" href="#">Voir le message</a></p>
             <button class="btn-close-subtle" type="button" aria-label="Fermer" data-toast-close></button>
         </div>
-    </template>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="toast"&gt;
-    &lt;p&gt;Message supprimé.&lt;/p&gt;
-    &lt;button class="btn-solid theme-primary btn-sm" type="button"&gt;Annuler&lt;/button&gt;
-    &lt;button class="btn-close" type="button" aria-label="Fermer" data-toast-close&gt;&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-    <p>Un toast qui contient un lien ou un autre bouton que la croix n'a pas de minuteur : il reste jusqu'à la croix. Au clavier ou avec un lecteur d'écran, aller jusqu'au bouton prend du temps (WCAG 2.2.1) ; le site n'écrit rien de plus.</p>
+    {% endset %}
+    {% set demo %}
+        {{ code }}
+        <button class="btn" type="button" data-demo-toast="toast-action">Afficher dans le coin</button>
+        <template id="toast-action">{{ code }}</template>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo}) }}
 
-    <h2 class="mt-10">Exemple : la position du conteneur</h2>
-    <p class="mt-2 d-flex flex-wrap-wrap gap-2">
-        <button class="btn" type="button" data-demo-toast="toast-demo-succes" data-demo-toast-container="toast-demo-top">toast-container-top</button>
-        <button class="btn" type="button" data-demo-toast="toast-demo-succes" data-demo-toast-container="toast-demo-start">toast-container-start</button>
-        <button class="btn" type="button" data-demo-toast="toast-demo-succes" data-demo-toast-container="toast-demo-top-start">toast-container-top toast-container-start</button>
-    </p>
-    <div class="toast-container toast-container-top" id="toast-demo-top" role="status" aria-live="polite" aria-atomic="false" popover="manual" data-toast></div>
-    <div class="toast-container toast-container-start" id="toast-demo-start" role="status" aria-live="polite" aria-atomic="false" popover="manual" data-toast></div>
-    <div class="toast-container toast-container-top toast-container-start" id="toast-demo-top-start" role="status" aria-live="polite" aria-atomic="false" popover="manual" data-toast></div>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="toast-container toast-container-top" …&gt;&lt;/div&gt;
-&lt;div class="toast-container toast-container-start" …&gt;&lt;/div&gt;
-&lt;div class="toast-container toast-container-top toast-container-start" …&gt;&lt;/div&gt;</code></pre>
-    <ul>
-        <li>Deux options à ajouter à toast-container, combinables : toast-container-top (en haut), toast-container-start (au début de la ligne : à gauche, à droite en écriture de droite à gauche). Sans elles, en bas à droite.</li>
-        <li>En haut, le toast descend en apparaissant, et le dernier arrivé se met sous les autres : l'ordre du HTML, qui est aussi l'ordre de lecture. Pour mettre le plus récent contre le bord, le site l'ajoute avec prepend() au lieu d'append().</li>
-        <li>Les démos de cette page ont un conteneur par position ; un site n'en a qu'un.</li>
-    </ul>
+    <h2 class="mt-10">Ajouter un toast en JavaScript</h2>
+    <p class="mt-2">Un <code>&lt;template&gt;</code> par message ; le site en ajoute une copie au conteneur. Un texte qui change : <code>textContent</code>, jamais <code>innerHTML</code>.</p>
+    {% set code %}
+        <template id="toast-enregistre">
+            <div class="toast-subtle theme-success">
+                <p>Succès : profil enregistré.</p>
+                <button class="btn-close-subtle" type="button" aria-label="Fermer" data-toast-close></button>
+            </div>
+        </template>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        const modele = document.getElementById('toast-enregistre');
+        document.querySelector('[data-toast]').append(modele.content.cloneNode(true));
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'js'}) }}
 
-    <h2 class="mt-10">Exemple : depuis un dialogue</h2>
-    <p class="mt-2">
-        <button class="btn" type="button" commandfor="toast-demo-dialog" command="show-modal">Ouvrir le dialogue</button>
-    </p>
-    <dialog class="dialog dialog-sm" id="toast-demo-dialog" data-dialog closedby="any" aria-labelledby="toast-demo-dialog-titre">
-        <div class="dialog-header">
-            <h3 class="fs-lg" id="toast-demo-dialog-titre">Modifier le profil</h3>
-            <button class="btn-close" type="button" commandfor="toast-demo-dialog" command="close" aria-label="Fermer"></button>
-        </div>
-        <div class="dialog-body">
-            <button class="btn-solid theme-primary" type="button" data-demo-toast="toast-demo-succes">Enregistrer</button>
-            <div class="toast-container" role="status" aria-live="polite" aria-atomic="false" data-toast></div>
-        </div>
-    </dialog>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog" …&gt;
-    &lt;div class="dialog-body"&gt;
-        …
-        &lt;div class="toast-container" role="status" aria-live="polite" aria-atomic="false" data-toast&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/dialog&gt;</code></pre>
-    <p>Un dialogue modal ouvert passe devant le conteneur de la page, et rend le reste de la page inactif : ses toasts ne se verraient pas et ne seraient pas lus. Le dialogue a son propre conteneur, sans popover : il est déjà dans le top layer avec le dialogue. Il se place toujours en bas à droite de l'écran.</p>
+    <h2 class="mt-10">Position</h2>
+    <p class="mt-2"><code>toast-container-top</code> et <code>toast-container-start</code> se combinent. Sans elles, en bas à droite.</p>
+    {% set code %}
+        <div class="toast-container toast-container-top" id="toasts-haut" role="status" aria-live="polite" aria-atomic="false" popover="manual" data-toast></div>
+        <div class="toast-container toast-container-start" id="toasts-gauche" role="status" aria-live="polite" aria-atomic="false" popover="manual" data-toast></div>
+        <div class="toast-container toast-container-top toast-container-start" id="toasts-haut-gauche" role="status" aria-live="polite" aria-atomic="false" popover="manual" data-toast></div>
+    {% endset %}
+    {% set demo %}
+        <button class="btn" type="button" data-demo-toast="toast-modele" data-demo-toast-container="toasts-haut">toast-container-top</button>
+        <button class="btn" type="button" data-demo-toast="toast-modele" data-demo-toast-container="toasts-gauche">toast-container-start</button>
+        <button class="btn" type="button" data-demo-toast="toast-modele" data-demo-toast-container="toasts-haut-gauche">Les deux</button>
+        {{ code }}
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo}) }}
+
+    <h2 class="mt-10">Depuis un dialogue</h2>
+    <p class="mt-2">Le dialogue modal passe devant le conteneur de la page : il a le sien, sans <code>popover</code>.</p>
+    {% set code %}
+        <dialog class="dialog dialog-sm" id="dialog-profil" data-dialog closedby="any" aria-labelledby="dialog-profil-titre">
+            <div class="dialog-header">
+                <h3 class="fs-lg" id="dialog-profil-titre">Modifier le profil</h3>
+                <button class="btn-close" type="button" commandfor="dialog-profil" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="dialog-body">
+                <button class="btn-solid theme-primary" type="button">Enregistrer</button>
+                <div class="toast-container" role="status" aria-live="polite" aria-atomic="false" data-toast></div>
+            </div>
+        </dialog>
+    {% endset %}
+    {% set demo %}
+        <button class="btn" type="button" commandfor="dialog-profil" command="show-modal">Ouvrir le dialogue</button>
+        <dialog class="dialog dialog-sm" id="dialog-profil" data-dialog closedby="any" aria-labelledby="dialog-profil-titre">
+            <div class="dialog-header">
+                <h3 class="fs-lg" id="dialog-profil-titre">Modifier le profil</h3>
+                <button class="btn-close" type="button" commandfor="dialog-profil" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="dialog-body">
+                <button class="btn-solid theme-primary" type="button" data-demo-toast="toast-modele">Enregistrer</button>
+                <div class="toast-container" role="status" aria-live="polite" aria-atomic="false" data-toast></div>
+            </div>
+        </dialog>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo}) }}
 
     <h2 class="mt-10" id="variables">Variables</h2>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
@@ -179,28 +156,27 @@ document.querySelector('[data-toast]').append(modele.content.cloneNode(true));</
                 <tr><th scope="row">--toast-padding-inline</th><td>1rem</td><td>côtés d'un toast</td></tr>
                 <tr><th scope="row">--toast-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
                 <tr><th scope="row">--toast-border-width</th><td>--border-width</td><td>cadre</td></tr>
-                <tr><th scope="row">--toast-width</th><td>22rem</td><td>largeur du conteneur (sur un petit écran, toute la largeur moins les écarts)</td></tr>
-                <tr><th scope="row">--toast-inset</th><td>1rem</td><td>écart entre le conteneur et les bords de l'écran</td></tr>
-                <tr><th scope="row">--toast-duration</th><td>5s</td><td>temps d'affichage avant le fondu</td></tr>
+                <tr><th scope="row">--toast-width</th><td>22rem</td><td>largeur du conteneur</td></tr>
+                <tr><th scope="row">--toast-inset</th><td>1rem</td><td>écart avec les bords de l'écran</td></tr>
+                <tr><th scope="row">--toast-duration</th><td>5s</td><td>temps d'affichage</td></tr>
                 <tr><th scope="row">--toast-transition-duration</th><td>0.2s</td><td>apparition et fondu</td></tr>
             </tbody>
         </table>
     </div>
-    <p class="mt-2">Les couleurs viennent de .theme-*, comme l'alerte : la variante dit le fond, le cadre et le texte.</p>
+    {% set code %}
+        /* Tous les toasts : 8 secondes */
+        :root { --toast-duration: 8s; }
 
-    <h2 class="mt-10">Exemple : changer les valeurs</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --toast-duration: 8s; }
-.toast-container-top { --toast-inset: 5rem; }
-.toast-erreur { --toast-duration: 12s; }</code></pre>
-    <p>La première ligne laisse tous les toasts 8 secondes ; la deuxième descend le conteneur du haut sous un en-tête de 4rem ; la dernière laisse plus longtemps les toasts qui ont la classe toast-erreur du site.</p>
+        /* Le conteneur du haut, sous un en-tête de 4rem */
+        .toast-container-top { --toast-inset: 5rem; }
+
+        /* Un toast du site */
+        .toast-erreur { --toast-duration: 12s; }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
 
     <h2 class="mt-10" id="javascript">JavaScript</h2>
-    <ul>
-        <li>toast.ts, dans dist/js/bundle.js : au chargement, il ouvre les conteneurs data-toast qui ont popover (showPopover()) ; il retire un toast de la page à la fin de son fondu ; la croix data-toast-close pose data-closing (le fondu), puis il retire le toast.</li>
-        <li>Les écouteurs sont sur document : ils marchent pour les toasts ajoutés plus tard, sans surveiller la page.</li>
-        <li>Pas d'événement : le site sait quand il ajoute un toast.</li>
-        <li>Un conteneur ajouté après le chargement : le site l'ouvre lui-même, avec showPopover().</li>
-    </ul>
+    <p class="mt-2">Rien à écrire : <code>dist/js/bundle.js</code> ouvre les conteneurs au chargement et retire les toasts fermés. Pas d'événement. Un conteneur ajouté plus tard : <code>showPopover()</code>.</p>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="javascript" tabindex="0">
         <table class="table">
             <thead>
@@ -211,58 +187,84 @@ document.querySelector('[data-toast]').append(modele.content.cloneNode(true));</
                 </tr>
             </thead>
             <tbody>
-                <tr><th scope="row">data-toast</th><td>le conteneur</td><td>le JavaScript l'ouvre et retire ses toasts</td></tr>
+                <tr><th scope="row">data-toast</th><td>le conteneur</td><td>ouvert au chargement, ses toasts retirés à la fin</td></tr>
                 <tr><th scope="row">data-toast-close</th><td>la croix</td><td>ferme le toast qui la contient</td></tr>
-                <tr><th scope="row">data-closing</th><td>le toast, posé par le JavaScript</td><td>le fondu de fermeture ; le toast est retiré à la fin</td></tr>
+                <tr><th scope="row">data-closing</th><td>le toast, posé par le JS</td><td>le fondu de fermeture</td></tr>
             </tbody>
         </table>
     </div>
 
     <h2 class="mt-10">Accessibilité</h2>
-    <ul>
-        <li>Le conteneur est une zone role="status" présente dès le chargement, vide : le lecteur d'écran lit chaque toast ajouté, après sa lecture en cours. MDN conseille d'ajouter aria-live="polite" pour les anciens lecteurs d'écran.</li>
-        <li>aria-atomic="false" : role="status" lit toute la zone à chaque changement (aria-atomic est à true par défaut, MDN) ; ainsi, seul le nouveau toast est lu, pas toute la pile.</li>
-        <li>Pas de role="alert" : un toast n'interrompt pas la lecture. Une erreur qui demande d'agir va dans la page, à côté du champ concerné (une alerte).</li>
-        <li>Le minuteur se met en pause au survol et au focus. Un toast qui contient un lien ou un autre bouton que la croix n'en a pas (WCAG 2.2.1). --toast-duration règle le temps d'affichage.</li>
-        <li>prefers-reduced-motion : ni glissement ni fondu, mais le toast reste 5 secondes (le reset réduit la durée des animations, pas leur délai).</li>
-        <li>La couleur ne suffit pas (WCAG 1.4.1) : le texte dit le type de message (« Erreur : », « Succès : »).</li>
-        <li>Textes lisibles dans toutes les couleurs (calculé) : toast-solid au moins 8,65:1 en clair et 5,97:1 en sombre ; toast-subtle 5,28:1 et 6,11:1 ; toast-outline 6,37:1 et 8,19:1 ; toast, le texte de la page sur son fond.</li>
-        <li>Le toast ne prend pas le focus : on continue ce qu'on faisait. Au clavier, il est dans l'ordre du HTML, là où se trouve le conteneur.</li>
-        <li>La croix a un nom, aria-label="Fermer" ; son contour de focus est celui des boutons.</li>
+    <ul class="mt-2">
+        <li>Le conteneur est une zone <code>role="status"</code> présente dès le chargement : chaque toast ajouté est lu, sans interrompre.</li>
+        <li><code>aria-atomic="false"</code> : seul le nouveau toast est lu, pas toute la pile.</li>
+        <li>Le texte dit le type du message (« Erreur : ») ; une erreur qui demande d'agir va dans la page (une alerte).</li>
+        <li>Le toast ne prend pas le focus ; animations réduites : ni glissement ni fondu, mais il reste 5 secondes.</li>
     </ul>
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="toast-subtle"&gt;…&lt;/div&gt;</code></pre>
-    <p>Une variante sans .theme-* n'a pas de couleur : pas de fond, et la page se voit à travers. Écrire toast, ou toast-subtle avec une couleur (theme-neutral pour le gris).</p>
-    <pre class="mt-2" tabindex="0"><code class="language-js">document.body.append(conteneur); // le conteneur et son premier toast, ajoutés ensemble</code></pre>
-    <p>Une zone role="status" ajoutée avec son message : en général, rien n'est lu (MDN). Le conteneur est dans la page dès le chargement, vide.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="toast-container" role="status" aria-live="polite" aria-atomic="false" data-toast&gt;&lt;/div&gt;</code></pre>
-    <p>Sans popover, dans la page : le conteneur passe sous tout ce qui est positionné après lui (un accordéon, un en-tête collant). Sans data-toast, il n'est jamais ouvert : rien ne se voit.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog" …&gt;
-    &lt;div class="toast-container" … popover="manual" data-toast&gt;&lt;/div&gt;
-&lt;/dialog&gt;</code></pre>
-    <p>Dans un dialogue, avec popover : le conteneur est ouvert au chargement, avant le dialogue, et reste sous lui. Sans popover.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="toast-solid theme-danger" role="alert"&gt;…&lt;/div&gt;</code></pre>
-    <p>role="alert" interrompt la lecture et doublerait l'annonce du conteneur. Le conteneur suffit.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="toast"&gt;
-    &lt;h3&gt;Profil&lt;/h3&gt;
-    &lt;p&gt;Enregistré.&lt;/p&gt;
-    &lt;button class="btn-close" …&gt;&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-    <p>Le texte et la croix sont sur une ligne : le titre et le paragraphe se mettent côte à côte. Les mettre dans un seul élément (un &lt;div&gt;).</p>
-    <pre class="mt-2" tabindex="0"><code class="language-js">conteneur.innerHTML += `&lt;div class="toast"&gt;&lt;p&gt;${message}&lt;/p&gt;…&lt;/div&gt;`;</code></pre>
-    <p>Un message venu d'un utilisateur écrit en HTML : il peut contenir du code. Copier un &lt;template&gt; et mettre le texte avec textContent. innerHTML += réécrit aussi les toasts déjà là.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="toast-subtle theme-success"&gt;&lt;p&gt;Paiement&lt;/p&gt;…&lt;/div&gt;</code></pre>
-    <p>Seule la couleur dit si le paiement est accepté (WCAG 1.4.1) : l'écrire, « Paiement accepté ».</p>
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : une variante sans .theme-* n'a pas de fond -->
+        <div class="toast-subtle">…</div>
+        <!-- Non : role="alert" interrompt la lecture et double l'annonce du conteneur -->
+        <div class="toast-solid theme-danger" role="alert">…</div>
+        <!-- Oui -->
+        <div class="toast-solid theme-danger">…</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : sans popover, il passe sous ce qui est positionné ; sans data-toast, il n'est jamais ouvert -->
+        <div class="toast-container" role="status" aria-live="polite" aria-atomic="false"></div>
+        <!-- Non : dans un dialogue, avec popover, il reste sous le dialogue -->
+        <dialog class="dialog">
+            <div class="toast-container" role="status" aria-live="polite" aria-atomic="false" popover="manual" data-toast></div>
+        </dialog>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : le texte et la croix sont sur une ligne, le titre et le paragraphe se mettent côte à côte -->
+        <div class="toast">
+            <h3>Profil</h3>
+            <p>Enregistré.</p>
+            <button class="btn-close" type="button" aria-label="Fermer" data-toast-close></button>
+        </div>
+        <!-- Oui : le texte dans un seul élément -->
+        <div class="toast">
+            <div><h3>Profil</h3><p>Enregistré.</p></div>
+            <button class="btn-close" type="button" aria-label="Fermer" data-toast-close></button>
+        </div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        // Non : un message d'utilisateur écrit en HTML peut contenir du code, et les toasts déjà là sont réécrits
+        conteneur.innerHTML += `<div class="toast"><p>${message}</p>…</div>`;
+        // Non : la zone role="status" ajoutée avec son message, rien n'est lu
+        document.body.append(conteneurAvecToast);
+        // Oui : la copie d'un template, le texte par textContent
+        const toast = modele.content.cloneNode(true);
+        toast.querySelector('p').textContent = message;
+        conteneur.append(toast);
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'js'}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>Un dialogue modal ouvert après le conteneur de la page passe devant : un toast lancé depuis le dialogue va dans le conteneur du dialogue (voir l'exemple).</li>
-        <li>Fermer un toast à la croix, au clavier : le focus disparaît avec lui et repart au début de la page.</li>
-        <li>Quand un toast part, ceux d'au-dessus descendent d'un coup, sans animation.</li>
-        <li>Pas de limite au nombre de toasts : trop nombreux, la pile dépasse de l'écran. Le site en montre peu à la fois.</li>
-        <li>Un toast déjà dans le HTML au chargement n'est pas lu (rien n'a changé dans la zone) : après le rechargement d'une page (un formulaire envoyé), une alerte dans la page.</li>
-        <li>Sur toast-solid, le contour de focus de la croix (l'emphasis du thème, sur le fond plein du même thème) est sous 3:1 en sombre (1,18 à 1,74:1), et en clair sur theme-inverse (1,83:1) : comme les boutons sur les autres fonds pleins, à revoir avec les couleurs.</li>
-        <li>Pas de tailles ni de position au centre : changer les variables, ou écrire la position dans le site.</li>
+    <ul class="mt-2">
+        <li>Fermé à la croix au clavier, le focus repart au début de la page.</li>
+        <li>Quand un toast part, ceux d'au-dessus descendent d'un coup. Pas de limite au nombre de toasts.</li>
+        <li>Un toast déjà dans le HTML au chargement n'est pas lu : après un rechargement, une alerte.</li>
+        <li>Sur <code>toast-solid</code>, le contour de focus de la croix est sous 3:1 en sombre.</li>
     </ul>
+
+    <h2 class="mt-10">Toutes les combinaisons</h2>
+    {% for variant in ['solid', 'subtle', 'outline'] %}
+        <h3 class="fs-md mt-6">toast-{{ variant }}</h3>
+        <div class="grid gap-3 mt-2">
+            {% for color in colors %}
+                <div class="toast-{{ variant }} theme-{{ color }} md:col-6 lg:col-4">
+                    <p>theme-{{ color }} : profil enregistré.</p>
+                    <button class="{{ variant == 'solid' ? 'btn-close-solid' : 'btn-close-subtle' }}" type="button" aria-label="Fermer"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock %}

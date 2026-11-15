@@ -4,66 +4,94 @@
 
 {% block body %}
     <h1>Alerte</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Un message dans la page, sans JavaScript : alert par défaut, ou une variante (alert-solid, -subtle, -outline) avec une couleur .theme-*.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un message dans la page, sans JavaScript. Une variante pour la forme, un <code>.theme-*</code> pour la couleur.</p>
 
     <h2 class="mt-10">Par défaut</h2>
-    <div class="alert mt-2">
-        <p>alert n'a pas de couleur : fond transparent, cadre --border-color, le texte autour, avec <a class="link" href="#">un lien</a>. Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres.</p>
-    </div>
-
-    {% for variant in ['solid', 'subtle', 'outline'] %}
-        <h2 class="mt-10">alert-{{ variant }}</h2>
-        <div class="grid gap-3 mt-2">
-            {% for color in colors %}
-                <div class="alert-{{ variant }} theme-{{ color }} md:col-6 lg:col-4">
-                    <p>theme-{{ color }}, avec <a class="link{% if variant == 'solid' %} color-inherit{% endif %}" href="#">un lien</a></p>
-                </div>
-            {% endfor %}
+    {% set code %}
+        <div class="alert">
+            <p>Votre session expire dans 5 minutes.</p>
         </div>
-    {% endfor %}
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
 
-    <h2 class="mt-10">HTML</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="alert-subtle theme-warning"&gt;
-    &lt;p&gt;Attention : la maintenance aura lieu dimanche.&lt;/p&gt;
-&lt;/div&gt;</code></pre>
-    <p>Comme les boutons : une variante (alert-solid, alert-subtle, alert-outline) qui s'utilise seule, et une couleur .theme-*. alert seul : le défaut, sans couleur. Le contenu s'empile : titre, paragraphes, liste, boutons.</p>
+    <h2 class="mt-10">Variantes</h2>
+    {% set code %}
+        <div class="alert-solid theme-warning">
+            <p>Attention : votre abonnement expire demain.</p>
+        </div>
+        <div class="alert-subtle theme-warning">
+            <p>Attention : votre abonnement expire demain.</p>
+        </div>
+        <div class="alert-outline theme-warning">
+            <p>Attention : votre abonnement expire demain.</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
 
-    <h2 class="mt-10">Exemple : un titre et une liste de liens</h2>
-    <div class="alert-subtle theme-danger mt-2">
-        <h3 class="fs-md">Erreur : le formulaire contient 2 erreurs</h3>
-        <ul class="mt-2">
-            <li><a class="link" href="#">Le champ e-mail est vide</a></li>
-            <li><a class="link" href="#">Le mot de passe est trop court</a></li>
-        </ul>
-    </div>
-
-    <h2 class="mt-10">Exemple : avec une icône</h2>
-    <div class="alert-outline theme-info d-flex gap-3 mt-2">
-        <svg class="flex-shrink-0" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7v.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <p>Information : la maintenance aura lieu dimanche de 2 h à 4 h.</p>
-    </div>
-    <p class="mt-2">Les utilitaires d-flex gap-3 sur l'alerte placent l'icône à côté du texte ; l'icône est décorative (aria-hidden), le texte dit « Information ».</p>
-
-    <h2 class="mt-10">Exemple : un bouton dans une alerte solid</h2>
-    <div class="alert-solid theme-primary mt-2">
-        <p>Une nouvelle version est disponible. <a class="link color-inherit" href="#">Voir les nouveautés</a></p>
-        <button class="btn-solid theme-inverse mt-3" type="button">Mettre à jour</button>
-    </div>
-    <p class="mt-2">Sur un fond plein, seul btn-solid est prévu, avec un autre thème que l'alerte ; color-inherit donne au lien la couleur du texte.</p>
-
-    <h2 class="mt-10">Exemple : un message affiché par le JS</h2>
-    <button class="btn mt-2" type="button" aria-expanded="false" aria-controls="demo-alert-status" data-demo-toggle>Afficher / masquer le message</button>
-    <div class="mt-2" role="status" aria-live="polite">
-        <div class="alert-subtle theme-success" id="demo-alert-status" hidden>
+    <h2 class="mt-10">Couleurs</h2>
+    <p class="mt-2">Le texte dit le type du message : la couleur ne suffit pas.</p>
+    {% set code %}
+        <div class="alert-subtle theme-success">
             <p>Succès : vos modifications sont enregistrées.</p>
         </div>
-    </div>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div role="status" aria-live="polite"&gt;
-    &lt;div class="alert-subtle theme-success" hidden&gt;
-        &lt;p&gt;Succès : vos modifications sont enregistrées.&lt;/p&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-    <p>La zone role="status" est dans la page dès le chargement ; le JS du site retire hidden : le lecteur d'écran lit le message après ce qu'il est en train de lire.</p>
+        <div class="alert-subtle theme-info">
+            <p>Information : la maintenance aura lieu dimanche.</p>
+        </div>
+        <div class="alert-subtle theme-warning">
+            <p>Attention : votre abonnement expire demain.</p>
+        </div>
+        <div class="alert-subtle theme-danger">
+            <p>Erreur : le paiement a été refusé.</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Un titre et une liste</h2>
+    {% set code %}
+        <div class="alert-subtle theme-danger">
+            <h3 class="fs-md">Erreur : le formulaire contient 2 erreurs</h3>
+            <ul class="mt-2">
+                <li><a class="link" href="#">Le champ e-mail est vide</a></li>
+                <li><a class="link" href="#">Le mot de passe est trop court</a></li>
+            </ul>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Avec une icône</h2>
+    <p class="mt-2">L'icône est décorative (<code>aria-hidden</code>), le texte dit « Information ».</p>
+    {% set code %}
+        <div class="alert-outline theme-info d-flex gap-3">
+            <svg class="flex-shrink-0" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7v.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <p>Information : la maintenance aura lieu dimanche de 2 h à 4 h.</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Un bouton et un lien sur un fond plein</h2>
+    <p class="mt-2">Un <code>btn-solid</code> d'un autre thème ; <code>color-inherit</code> sur le lien.</p>
+    {% set code %}
+        <div class="alert-solid theme-primary">
+            <p>Une nouvelle version est disponible. <a class="link color-inherit" href="#">Voir les nouveautés</a></p>
+            <button class="btn-solid theme-inverse mt-3" type="button">Mettre à jour</button>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Un message affiché par le JS</h2>
+    <p class="mt-2">La zone <code>role="status"</code> est dans la page dès le chargement ; le JS du site retire <code>hidden</code>.</p>
+    {% set code %}
+        <div role="status" aria-live="polite">
+            <div class="alert-subtle theme-success" id="message-enregistre" hidden>
+                <p>Succès : vos modifications sont enregistrées.</p>
+            </div>
+        </div>
+    {% endset %}
+    {% set demo %}
+        <button class="btn" type="button" aria-expanded="false" aria-controls="message-enregistre" data-demo-toggle>Afficher / masquer le message</button>
+        {{ code }}
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo, class: 'd-flex flex-direction-column align-items-start gap-2'}) }}
 
     <h2 class="mt-10" id="variables">Variables</h2>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
@@ -83,47 +111,83 @@
             </tbody>
         </table>
     </div>
-    <p class="mt-2">Les couleurs viennent de .theme-* : le cadre a la couleur du thème (alert-subtle : celle du fond léger), la variante dit le fond et le texte.</p>
+    {% set code %}
+        /* Toutes les alertes */
+        :root { --alert-padding-block: 0.75rem; }
 
-    <h2 class="mt-10">Exemple : changer les valeurs</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --alert-padding-block: 0.75rem; }
-.alert-compact { --alert-padding-block: 0.5rem; --alert-padding-inline: 0.75rem; }</code></pre>
-    <p>La première ligne change toutes les alertes, la deuxième seulement celles qui ont la classe alert-compact du site.</p>
+        /* Une alerte du site */
+        .alert-compact { --alert-padding-block: 0.5rem; --alert-padding-inline: 0.75rem; }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
 
     <h2 class="mt-10">Accessibilité</h2>
-    <ul>
-        <li>Un message déjà dans la page au chargement (information permanente, erreurs après l'envoi d'un formulaire rechargé) : pas de role. MDN : role="alert" est fait pour un contenu affiché par le JS, pas pour celui du chargement.</li>
-        <li>Un message affiché par le JS après une action : dans une zone présente dès le chargement, vide ou cachée, où le JS met le message. role="status" aria-live="polite" pour une information ou un succès (lu après la lecture en cours ; MDN conseille d'ajouter aria-live="polite" pour les anciens lecteurs d'écran) ; role="alert" pour une erreur urgente (interrompt la lecture ; sans aria-live, VoiceOver sur iOS le lirait deux fois).</li>
-        <li>role="alert" avec parcimonie (MDN) : plusieurs alertes à la fois, ou inutiles, gênent.</li>
-        <li>La couleur ne suffit pas (WCAG 1.4.1) : le texte dit le type de message (« Erreur : », « Succès : »). Une icône seule, cachée aux lecteurs d'écran, ne compte pas.</li>
-        <li>Le texte est lisible dans toutes les variantes et toutes les couleurs (au moins 4,5:1, comme les boutons).</li>
+    <ul class="mt-2">
+        <li>Un message présent au chargement : pas de <code>role</code>.</li>
+        <li>Un message affiché par le JS : dans une zone présente dès le chargement, <code>role="status" aria-live="polite"</code> (information, succès) ou <code>role="alert"</code> seul (erreur urgente ; avec <code>aria-live</code>, VoiceOver iOS le lit deux fois).</li>
+        <li>Le texte dit le type du message (« Erreur : », « Succès : ») : la couleur ou une icône cachée ne suffisent pas (WCAG 1.4.1).</li>
     </ul>
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="alert-subtle"&gt;…&lt;/div&gt;</code></pre>
-    <p>Une variante sans .theme-* n'a pas de couleur : pas de fond. Écrire alert, ou alert-subtle avec une couleur (theme-neutral pour le gris).</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="alert-subtle theme-warning" role="alert"&gt;
-    &lt;p&gt;Attention : la maintenance aura lieu dimanche.&lt;/p&gt;
-&lt;/div&gt;</code></pre>
-    <p>Présente au chargement de la page : role="alert" n'est pas fait pour ça (MDN). Sans role, c'est un bloc de texte comme un autre.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="alert-subtle theme-success"&gt;&lt;p&gt;Paiement&lt;/p&gt;&lt;/div&gt;
-&lt;div class="alert-subtle theme-danger"&gt;&lt;p&gt;Paiement&lt;/p&gt;&lt;/div&gt;</code></pre>
-    <p>Seule la couleur dit si le paiement est accepté ou refusé (WCAG 1.4.1) : l'écrire, « Paiement accepté », « Paiement refusé ».</p>
-    <pre class="mt-2" tabindex="0"><code class="language-js">zone.append(alerte); // une alerte déjà remplie, avec role="status"</code></pre>
-    <p>Ajouter d'un coup une zone role="status" et son message : en général rien n'est lu (MDN). La zone doit exister avant, vide.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="alert-solid theme-primary"&gt;
-    &lt;a class="btn-outline" href="…"&gt;Voir&lt;/a&gt;
-&lt;/div&gt;</code></pre>
-    <p>btn-outline, btn-text et btn-link sont faits pour le fond de la page et les fonds légers : sur un fond plein, seul btn-solid.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="alert-solid theme-primary"&gt;
-    &lt;a class="link" href="…"&gt;Voir&lt;/a&gt;
-&lt;/div&gt;</code></pre>
-    <p>Le lien prend le thème de l'alerte, comme partout : la couleur emphasis, peu lisible sur le fond plein. Écrire class="link color-inherit".</p>
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : une variante sans .theme-* n'a pas de couleur -->
+        <div class="alert-subtle">…</div>
+        <!-- Oui -->
+        <div class="alert-subtle theme-neutral">…</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : role="alert" n'est pas fait pour un message présent au chargement -->
+        <div class="alert-subtle theme-warning" role="alert">
+            <p>Attention : la maintenance aura lieu dimanche.</p>
+        </div>
+        <!-- Oui : sans role -->
+        <div class="alert-subtle theme-warning">
+            <p>Attention : la maintenance aura lieu dimanche.</p>
+        </div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : seule la couleur dit si le paiement est accepté ou refusé -->
+        <div class="alert-subtle theme-danger"><p>Paiement</p></div>
+        <!-- Oui -->
+        <div class="alert-subtle theme-danger"><p>Paiement refusé</p></div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        // Non : ajouter d'un coup la zone role="status" et son message, en général rien n'est lu
+        zone.append(alerteAvecRoleStatus);
+        // Oui : la zone existe déjà, vide ; le JS y met le message
+        zone.append(alerte);
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'js'}) }}
+    {% set code %}
+        <!-- Non : sur un fond plein, btn-outline et un lien sans color-inherit ne se lisent pas -->
+        <div class="alert-solid theme-primary">
+            <a class="link" href="#">Voir</a> <a class="btn-outline" href="#">Voir</a>
+        </div>
+        <!-- Oui -->
+        <div class="alert-solid theme-primary">
+            <a class="link color-inherit" href="#">Voir</a> <a class="btn-solid theme-inverse" href="#">Voir</a>
+        </div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>Pas de bouton de fermeture ni de disparition automatique : il faut du JS. Ce sera le rôle des notifications, plus tard.</li>
-        <li>En clair, le cadre d'alert-subtle se voit à peine sur le fond de la page : le fond léger suffit à la délimiter.</li>
+    <ul class="mt-2">
+        <li>Pas de bouton de fermeture ni de disparition automatique : c'est le rôle du toast.</li>
+        <li>En clair, le cadre d'<code>alert-subtle</code> se voit à peine : le fond léger délimite l'alerte.</li>
         <li>Pas de tailles : changer les variables dans le site.</li>
     </ul>
+
+    <h2 class="mt-10">Toutes les combinaisons</h2>
+    {% for variant in ['solid', 'subtle', 'outline'] %}
+        <h3 class="fs-md mt-6">alert-{{ variant }}</h3>
+        <div class="grid gap-3 mt-2">
+            {% for color in colors %}
+                <div class="alert-{{ variant }} theme-{{ color }} md:col-6 lg:col-4">
+                    <p>theme-{{ color }}, avec <a class="link{% if variant == 'solid' %} color-inherit{% endif %}" href="#">un lien</a></p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock %}

@@ -46,6 +46,8 @@
 
     // Forme commune des champs : chaque taille s'utilise seule, comme le container
     .form-input, .form-input-sm, .form-input-md, .form-input-lg {
+        // Toute la largeur du parent : le champ rétrécit avec lui, sa largeur native déborderait sur téléphone
+        width: 100%;
         padding-block: var(--form-input-padding-block);
         padding-inline: var(--form-input-padding-inline);
         // Cadre de la couleur du thème ; sans thème, le gris des champs

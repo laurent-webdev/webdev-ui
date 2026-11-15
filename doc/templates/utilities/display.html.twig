@@ -4,20 +4,59 @@
 
 {% block body %}
     <h1>Display</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">d-none, d-inline, d-inline-block, d-block, d-flex, d-inline-flex et d-grid, avec des variantes xs: à 2xl: pour afficher ou cacher selon l'écran.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6"><code>d-none</code>, <code>d-inline</code>, <code>d-inline-block</code>, <code>d-block</code>, <code>d-flex</code>, <code>d-inline-flex</code> et <code>d-grid</code>, avec un préfixe pour afficher ou cacher selon l'écran.</p>
 
-    <p class="demo-box p-2 mt-4 d-none md:d-block">d-none md:d-block : visible à partir de md (768px)</p>
-    <p class="demo-box p-2 mt-4 md:d-none">md:d-none : masqué à partir de md (768px)</p>
-    <p class="mt-4">d-inline-block : <span class="demo-box p-2 d-inline-block">prend un padding vertical</span> dans le texte</p>
-    <p class="mt-4">d-inline-flex gap-2 : <span class="demo-box p-1 d-inline-flex gap-2"><span>un</span><span>deux</span></span> dans le texte</p>
-    <p class="mt-4">d-grid gap-2 : boutons empilés, pleine largeur</p>
-    <div class="d-grid gap-2">
-        <button class="btn-solid theme-primary" type="button">Valider</button>
-        <button class="btn" type="button">Annuler</button>
-    </div>
-    <p class="mt-4">grid d-none lg:d-grid : grille visible à partir de lg (1024px)</p>
-    <div class="grid d-none lg:d-grid">
-        <div class="demo-box p-2 col-6">col-6</div>
-        <div class="demo-box p-2 col-6">col-6</div>
-    </div>
+    <h2 class="mt-10">Selon l'écran</h2>
+    <p class="mt-2">Agrandir ou réduire la fenêtre autour de 768px (md).</p>
+    {% set code %}
+        <p class="bg-primary-subtle p-2 d-none md:d-block">Visible à partir de md</p>
+        <p class="bg-primary-subtle p-2 md:d-none">Caché à partir de md</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Dans le texte</h2>
+    <p class="mt-2"><code>d-inline-block</code> prend un padding en hauteur, <code>d-inline-flex</code> range ses enfants.</p>
+    {% set code %}
+        <p>Un <span class="bg-primary-subtle p-2 d-inline-block">bloc</span> dans le texte</p>
+        <p>Un <span class="bg-primary-subtle p-1 d-inline-flex gap-2"><span>un</span><span>deux</span></span> dans le texte</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Boutons empilés</h2>
+    <p class="mt-2"><code>d-grid</code> : toute la largeur, sur téléphone par exemple.</p>
+    {% set code %}
+        <div class="d-grid gap-2">
+            <button class="btn-solid theme-primary" type="button">Valider</button>
+            <button class="btn" type="button">Annuler</button>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul class="mt-2">
+        <li><code>d-none</code> cache aussi le contenu aux lecteurs d'écran ; pour eux seuls, <code>visually-hidden</code>.</li>
+        <li>Un contenu caché sur téléphone doit se trouver autrement (le même menu dans un drawer, par exemple).</li>
+    </ul>
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : à partir de lg, la grille s'affiche en bloc, sans ses colonnes -->
+        <div class="grid d-none lg:d-block">…</div>
+        <!-- Oui : la grille reprend son display à partir de lg -->
+        <div class="grid d-none lg:d-grid">…</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : le JS ajoute ou retire une classe pour afficher -->
+        <div class="d-flex d-none" id="message">…</div>
+        <!-- Oui : l'attribut natif, que le JS change (message.hidden = false) ; il passe devant d-flex -->
+        <div class="d-flex" id="message" hidden>…</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Limites</h2>
+    <ul class="mt-2">
+        <li>Les préfixes suivent la largeur de l'écran, pas celle du parent.</li>
+        <li>Pas de <code>d-table</code> ni de <code>d-contents</code> : une table s'écrit en <code>&lt;table&gt;</code>, et <code>display: contents</code> retire le rôle de certains éléments.</li>
+    </ul>
 {% endblock %}

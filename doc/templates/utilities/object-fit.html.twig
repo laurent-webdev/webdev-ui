@@ -4,34 +4,62 @@
 
 {% block body %}
     <h1>Object-fit</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Comment une image ou une vidéo remplit sa boîte : object-fit-contain, -cover, -fill, -none et -scale-down.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Comment une image ou une vidéo remplit sa boîte : <code>object-fit-contain</code>, <code>-cover</code>, <code>-fill</code>, <code>-none</code> et <code>-scale-down</code>.</p>
 
-    <p class="mt-4">La même image (2 fois plus large que haute) dans des boîtes de 8rem de haut : img w-100 h-100 object-fit-*</p>
-    <div class="grid gap-2 mt-2">
-        {% for fit in ['contain', 'cover', 'fill', 'none', 'scale-down'] %}
+    <h2 class="mt-10">Valeurs</h2>
+    <p class="mt-2">La même image, deux fois plus large que haute, dans une boîte carrée.</p>
+    {% set code %}
+        <div class="grid">
             <figure class="col-6 md:col-4">
-                <div class="demo-box demo-height">
-                    <img class="w-100 h-100 object-fit-{{ fit }}" src="{{ asset('images/demo-landscape.svg') }}" width="400" height="200" alt="">
-                </div>
-                <figcaption>object-fit-{{ fit }}</figcaption>
+                <img class="w-100 aspect-ratio-1x1 object-fit-contain border" src="{{ asset('images/demo-landscape.svg') }}" alt="" width="400" height="200">
+                <figcaption>object-fit-contain</figcaption>
             </figure>
-        {% endfor %}
-    </div>
+            <figure class="col-6 md:col-4">
+                <img class="w-100 aspect-ratio-1x1 object-fit-cover border" src="{{ asset('images/demo-landscape.svg') }}" alt="" width="400" height="200">
+                <figcaption>object-fit-cover</figcaption>
+            </figure>
+            <figure class="col-6 md:col-4">
+                <img class="w-100 aspect-ratio-1x1 object-fit-fill border" src="{{ asset('images/demo-landscape.svg') }}" alt="" width="400" height="200">
+                <figcaption>object-fit-fill</figcaption>
+            </figure>
+            <figure class="col-6 md:col-4">
+                <img class="w-100 aspect-ratio-1x1 object-fit-none border" src="{{ asset('images/demo-landscape.svg') }}" alt="" width="400" height="200">
+                <figcaption>object-fit-none</figcaption>
+            </figure>
+            <figure class="col-6 md:col-4">
+                <img class="w-100 aspect-ratio-1x1 object-fit-scale-down border" src="{{ asset('images/demo-landscape.svg') }}" alt="" width="400" height="200">
+                <figcaption>object-fit-scale-down</figcaption>
+            </figure>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
-    <h2 class="mt-10">Exemple : un avatar rond, avec une image qui n'est pas carrée</h2>
-    <img class="aspect-ratio-1x1 object-fit-cover border-radius-circle mt-2" src="{{ asset('images/demo-landscape.svg') }}" width="96" height="96" alt="">
-    <p class="mt-2">width="96" donne la taille, aspect-ratio-1x1 le carré, object-fit-cover recadre l'image, border-radius-circle l'arrondit.</p>
+    <h2 class="mt-10">Un avatar rond</h2>
+    <p class="mt-2"><code>width</code> donne la taille, <code>aspect-ratio-1x1</code> le carré, <code>object-fit-cover</code> recadre.</p>
+    {% set code %}
+        <img class="aspect-ratio-1x1 object-fit-cover border-radius-circle" src="{{ asset('images/demo-landscape.svg') }}" alt="" width="96" height="96">
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;img class="object-fit-cover" src="…" width="400" height="200" alt="…"&gt;</code></pre>
-    <p>Sans effet : l'image garde ses proportions (hauteur auto), elle n'a pas de boîte à remplir. Lui donner une largeur et une hauteur : w-100 h-100 dans un parent qui a une hauteur, ou w-100 aspect-ratio-*.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;img class="w-100 h-100 object-fit-cover" src="logo.svg" alt="…"&gt;</code></pre>
-    <p>cover recadre les bords : sur un logo, un schéma ou une image avec du texte, une partie disparaît. Utiliser object-fit-contain.</p>
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : l'image n'a pas de boîte à remplir, sa hauteur suit ses proportions -->
+        <img class="object-fit-cover" src="…" alt="…" width="400" height="200">
+        <!-- Oui : une largeur et des proportions -->
+        <img class="w-100 aspect-ratio-1x1 object-fit-cover" src="…" alt="…" width="400" height="200">
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : cover coupe les bords d'un logo ou d'un schéma -->
+        <img class="w-100 aspect-ratio-1x1 object-fit-cover" src="logo.svg" alt="…">
+        <!-- Oui -->
+        <img class="w-100 aspect-ratio-1x1 object-fit-contain" src="logo.svg" alt="…">
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>Seulement sur une image ou une vidéo (img, video) ; pour une image de fond, c'est background-size, dans le site.</li>
-        <li>Le recadrage est centré : pas d'utilitaire object-position pour l'instant (le régler dans le site).</li>
-        <li>Pas de variante responsive (md:object-fit-*).</li>
+    <ul class="mt-2">
+        <li>Sur <code>&lt;img&gt;</code> et <code>&lt;video&gt;</code> ; une image de fond se règle par <code>background-size</code>, dans le site.</li>
+        <li>Le recadrage est centré : pas d'<code>object-position</code>. Pas de préfixe d'écran.</li>
     </ul>
 {% endblock %}

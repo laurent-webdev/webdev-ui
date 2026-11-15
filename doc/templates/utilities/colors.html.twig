@@ -4,82 +4,135 @@
 
 {% block body %}
     <h1>Couleurs</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Une classe par couleur et par usage : bg-* et bg-*-subtle pour le fond, color-*-contrast pour le texte sur un fond plein, color-*-emphasis pour un texte coloré, color-* pour les icônes.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Le fond par <code>bg-*</code> et <code>bg-*-subtle</code>, le texte à part : <code>color-*-contrast</code> sur un fond plein, <code>color-*-emphasis</code> pour un texte coloré, <code>color-*</code> pour une icône.</p>
 
-    <p class="mt-4">bg-* color-*-contrast : fond plein, texte noir ou blanc lisible</p>
+    <h2 class="mt-10">Fond plein</h2>
+    <p class="mt-2">Toujours la paire <code>bg-*</code> + <code>color-*-contrast</code> : un texte noir ou blanc, le plus lisible.</p>
+    {% set code %}
+        <p class="bg-primary color-primary-contrast p-2">bg-primary color-primary-contrast</p>
+        <p class="bg-danger color-danger-contrast p-2">bg-danger color-danger-contrast</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-2'}) }}
+
+    <h2 class="mt-10">Fond léger</h2>
+    <p class="mt-2">Le texte de la page, ou un texte coloré.</p>
+    {% set code %}
+        <p class="bg-success-subtle p-2">bg-success-subtle</p>
+        <p class="bg-success-subtle color-success-emphasis p-2">bg-success-subtle color-success-emphasis</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-2'}) }}
+
+    <h2 class="mt-10">Texte coloré</h2>
+    {% set code %}
+        <p class="color-danger-emphasis">Le mot de passe est trop court.</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Une icône</h2>
+    <p class="mt-2"><code>color-*</code>, la couleur brute : pour une icône ou un décor, pas pour du texte.</p>
+    {% set code %}
+        <p class="d-flex align-items-center gap-2">
+            <svg class="color-success" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor"/></svg>
+            En ligne
+        </p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Liens et boutons sur un fond</h2>
+    <p class="mt-2">Sur un fond plein, un lien prend la couleur du texte et seul <code>btn-solid</code> se lit.</p>
+    {% set code %}
+        <div class="bg-primary color-primary-contrast p-4">
+            <p>Un texte avec <a class="link" href="#">un lien</a>.</p>
+            <button class="btn-solid theme-inverse mt-2" type="button">Action</button>
+        </div>
+        <div class="bg-success-subtle p-4">
+            <p>Un texte avec <a class="link" href="#">un lien</a>.</p>
+            <button class="btn-outline theme-success mt-2" type="button">Action</button>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul class="mt-2">
+        <li>La couleur ne dit jamais seule l'information : un texte dit l'erreur ou l'état (WCAG 1.4.1).</li>
+        <li><code>color-*-emphasis</code> se lit sur le fond de page et sur <code>bg-*-subtle</code>, dans les deux thèmes.</li>
+    </ul>
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : un fond plein sans son texte, illisible dans un des thèmes -->
+        <section class="bg-warning">…</section>
+        <!-- Oui -->
+        <section class="bg-warning color-warning-contrast">…</section>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : la couleur brute pour du texte, trop claire -->
+        <p class="color-success">Enregistré</p>
+        <!-- Oui -->
+        <p class="color-success-emphasis">Enregistré</p>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : sous un .theme-*, le lien prend l'emphasis du thème, peu lisible sur le fond plein -->
+        <section class="bg-primary color-primary-contrast theme-primary"><a class="link" href="…">…</a></section>
+        <!-- Oui -->
+        <section class="bg-primary color-primary-contrast theme-primary"><a class="link color-inherit" href="…">…</a></section>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : btn-outline, btn-text et btn-link sont faits pour le fond de page -->
+        <section class="bg-primary color-primary-contrast"><button class="btn-outline theme-neutral" type="button">…</button></section>
+        <!-- Oui -->
+        <section class="bg-primary color-primary-contrast"><button class="btn-solid theme-inverse" type="button">…</button></section>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Limites</h2>
+    <ul class="mt-2">
+        <li>Pas de préfixe d'écran : ce n'est pas de la mise en page.</li>
+        <li>Sur un fond plein, le contour de focus des boutons garde la couleur de leur thème : il peut manquer de contraste.</li>
+        <li>Une nouvelle couleur : une <code>--color-&lt;nom&gt;</code> et son nom dans la liste <code>$colors</code> de <code>settings/_colors.scss</code> (recompiler).</li>
+    </ul>
+
+    <h2 class="mt-10">Toutes les couleurs</h2>
+    <h3 class="fs-md mt-6">bg-* color-*-contrast</h3>
     <div class="grid gap-2 mt-2">
         {% for color in colors %}
-            <div class="bg-{{ color }} color-{{ color }}-contrast p-2 col-6 md:col-4">bg-{{ color }} color-{{ color }}-contrast</div>
+            <p class="bg-{{ color }} color-{{ color }}-contrast p-2 col-6 md:col-4">{{ color }}</p>
         {% endfor %}
     </div>
-    <p class="mt-4">bg-*-subtle : fond léger, le texte reste normal</p>
+    <h3 class="fs-md mt-6">bg-*-subtle</h3>
     <div class="grid gap-2 mt-2">
         {% for color in colors %}
-            <div class="bg-{{ color }}-subtle p-2 col-6 md:col-4">bg-{{ color }}-subtle</div>
+            <p class="bg-{{ color }}-subtle p-2 col-6 md:col-4">{{ color }}</p>
         {% endfor %}
     </div>
-    <p class="mt-4">bg-*-subtle color-*-emphasis : fond léger, texte coloré</p>
+    <h3 class="fs-md mt-6">bg-*-subtle color-*-emphasis</h3>
     <div class="grid gap-2 mt-2">
         {% for color in colors %}
-            <div class="bg-{{ color }}-subtle color-{{ color }}-emphasis p-2 col-6 md:col-4">bg-{{ color }}-subtle color-{{ color }}-emphasis</div>
+            <p class="bg-{{ color }}-subtle color-{{ color }}-emphasis p-2 col-6 md:col-4">{{ color }}</p>
         {% endfor %}
     </div>
-    <p class="mt-4">color-*-emphasis : texte coloré lisible</p>
+    <h3 class="fs-md mt-6">bg-neutral-subtle color-*-emphasis</h3>
     <div class="grid gap-2 mt-2">
         {% for color in colors %}
-            <p class="color-{{ color }}-emphasis col-6 md:col-4">color-{{ color }}-emphasis</p>
+            <p class="bg-neutral-subtle color-{{ color }}-emphasis p-2 col-6 md:col-4">{{ color }}</p>
         {% endfor %}
     </div>
-    <p class="mt-4">color-* : couleur brute, pour une icône (le texte reste normal)</p>
+    <h3 class="fs-md mt-6">color-*-emphasis</h3>
+    <div class="grid gap-2 mt-2">
+        {% for color in colors %}
+            <p class="color-{{ color }}-emphasis col-6 md:col-4">{{ color }}</p>
+        {% endfor %}
+    </div>
+    <h3 class="fs-md mt-6">color-*</h3>
     <div class="grid gap-2 mt-2">
         {% for color in colors %}
             <p class="d-flex align-items-center gap-2 col-6 md:col-4">
                 <svg class="color-{{ color }}" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor"/></svg>
-                color-{{ color }}
+                {{ color }}
             </p>
         {% endfor %}
     </div>
-    <p class="mt-4">bg-neutral-subtle color-*-emphasis : fond gris léger, texte coloré</p>
-    <div class="grid gap-2 mt-2">
-        {% for color in colors %}
-            <div class="bg-neutral-subtle color-{{ color }}-emphasis p-2 col-6 md:col-4">bg-neutral-subtle color-{{ color }}-emphasis</div>
-        {% endfor %}
-    </div>
-
-    <h2 class="mt-10">Liens et boutons dans un fond</h2>
-
-    <h3 class="mt-6">Exemples</h3>
-    <div class="bg-primary color-primary-contrast p-4 mt-2">
-        <p>bg-primary color-primary-contrast : texte noir ou blanc ; les <a class="link" href="#">liens</a> prennent sa couleur, sans autre classe. Au survol, le soulignement s'épaissit.</p>
-        <button class="btn-solid theme-neutral mt-2" type="button">btn-solid : son propre fond, toujours lisible</button>
-    </div>
-    <div class="bg-success-subtle p-4 mt-2">
-        <p>bg-success-subtle : texte et <a class="link" href="#">liens</a> normaux, lisibles sans autre classe.</p>
-        <button class="btn-outline theme-success mt-2" type="button">btn-outline theme-success</button>
-    </div>
-    <div class="bg-success-subtle color-success-emphasis p-4 mt-2">
-        <p>bg-success-subtle color-success-emphasis : texte vert ; le <a class="link" href="#">lien</a> aussi.</p>
-    </div>
-
-    <h3 class="mt-6">Contre-exemples (non affichés : ils seraient illisibles)</h3>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;section class="bg-warning"&gt;…&lt;/section&gt;</code></pre>
-    <p>Un fond plein sans color-*-contrast garde le texte de la page : en sombre, blanc sur jaune, 1,44:1. Toujours écrire la paire bg-warning color-warning-contrast.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;section class="bg-primary color-primary-contrast theme-primary"&gt;
-    &lt;a class="link" href="…"&gt;…&lt;/a&gt;
-&lt;/section&gt;</code></pre>
-    <p>Sous un .theme-*, le lien prend la couleur emphasis du thème, peu lisible sur le fond plein. Ajouter color-inherit sur le lien.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;section class="bg-primary color-primary-contrast"&gt;
-    &lt;button class="btn-outline theme-neutral" type="button"&gt;…&lt;/button&gt;
-&lt;/section&gt;</code></pre>
-    <p>btn-outline, btn-text et btn-link sont faits pour le fond de page : texte gris sur fond bleu. Sur un fond plein, utiliser btn-solid.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p class="color-success"&gt;Enregistré&lt;/p&gt;</code></pre>
-    <p>color-* est la couleur brute, pour une icône : en texte, 1,87:1 sur fond blanc. Pour du texte, color-success-emphasis.</p>
-
-    <h3 class="mt-6">Limites</h3>
-    <ul>
-        <li>Les fonds (bg-*, bg-*-subtle) ne posent que le fond : sur un fond plein, le texte demande color-*-contrast, et les liens .link le suivent.</li>
-        <li>Sur un fond plein (bg-*), seul btn-solid est prévu.</li>
-        <li>Sur un fond plein, le contour de focus des boutons garde la couleur du thème : il peut manquer de contraste (WCAG 1.4.11 demande 3:1).</li>
-        <li>Dans un fond, la couleur des liens .link ne change pas au survol : c'est le soulignement qui s'épaissit.</li>
-    </ul>
 {% endblock %}

@@ -4,36 +4,58 @@
 
 {% block body %}
     <h1>Aspect-ratio</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Les proportions d'une boîte : aspect-ratio-1x1, -4x3, -16x9, -21x9 et -auto, avec des variantes xs: à 2xl:.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Les proportions d'une boîte, la hauteur suit la largeur : <code>aspect-ratio-1x1</code>, <code>-4x3</code>, <code>-16x9</code>, <code>-21x9</code> et <code>-auto</code>.</p>
 
-    <p class="mt-4">aspect-ratio-* : la hauteur suit la largeur</p>
-    <div class="grid gap-2 mt-2">
-        {% for ratio in ['1x1', '4x3', '16x9', '21x9'] %}
-            <div class="demo-box aspect-ratio-{{ ratio }} p-2 col-6 md:col-3">aspect-ratio-{{ ratio }}</div>
-        {% endfor %}
-    </div>
+    <h2 class="mt-10">Valeurs</h2>
+    {% set code %}
+        <div class="grid">
+            <p class="bg-primary-subtle p-2 aspect-ratio-1x1 col-6 md:col-3">1x1</p>
+            <p class="bg-primary-subtle p-2 aspect-ratio-4x3 col-6 md:col-3">4x3</p>
+            <p class="bg-primary-subtle p-2 aspect-ratio-16x9 col-6 md:col-3">16x9</p>
+            <p class="bg-primary-subtle p-2 aspect-ratio-21x9 col-6 md:col-3">21x9</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
-    <h2 class="mt-10">Exemple : une vignette en 16/9</h2>
-    <div class="grid mt-2">
-        <img class="w-100 aspect-ratio-16x9 object-fit-cover col-12 md:col-6" src="{{ asset('images/demo-landscape.svg') }}" width="400" height="200" alt="">
-    </div>
+    <h2 class="mt-10">Une vignette</h2>
+    <p class="mt-2">Avec <code>object-fit-cover</code> : l'image n'est pas déformée.</p>
+    {% set code %}
+        <img class="w-50 aspect-ratio-16x9 object-fit-cover" src="{{ asset('images/demo-landscape.svg') }}" alt="" width="400" height="200">
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
-    <h2 class="mt-10">Exemple : un bandeau, plus haut sur téléphone</h2>
-    <img class="w-100 aspect-ratio-4x3 md:aspect-ratio-21x9 object-fit-cover mt-2" src="{{ asset('images/demo-landscape.svg') }}" width="400" height="200" alt="">
-    <p class="mt-2">aspect-ratio-4x3 md:aspect-ratio-21x9 : 4/3 sur téléphone, 21/9 à partir de md.</p>
+    <h2 class="mt-10">Selon l'écran</h2>
+    <p class="mt-2">Un bandeau plus haut sur téléphone : 4/3, puis 21/9 à partir de md.</p>
+    {% set code %}
+        <img class="w-100 aspect-ratio-4x3 md:aspect-ratio-21x9 object-fit-cover" src="{{ asset('images/demo-landscape.svg') }}" alt="" width="400" height="200">
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
-    <h2 class="mt-10">Exemple : une vidéo intégrée</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;iframe class="w-100 aspect-ratio-16x9" src="https://www.youtube-nocookie.com/embed/…" title="Titre de la vidéo"&gt;&lt;/iframe&gt;</code></pre>
+    <h2 class="mt-10">Une vidéo intégrée</h2>
+    {% set code %}
+        <iframe class="w-100 aspect-ratio-16x9" src="https://www.youtube-nocookie.com/embed/…" title="Titre de la vidéo"></iframe>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;img class="w-100 aspect-ratio-16x9" src="…" width="400" height="200" alt="…"&gt;</code></pre>
-    <p>Une image dont les proportions ne sont pas celles de la boîte est déformée (object-fit: fill par défaut). Ajouter object-fit-cover.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="aspect-ratio-1x1 w-100 h-100"&gt;…&lt;/div&gt;</code></pre>
-    <p>Ignoré : la largeur et la hauteur sont déjà fixées toutes les deux. aspect-ratio calcule la dimension qui reste en auto.</p>
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : l'image est déformée -->
+        <img class="w-100 aspect-ratio-16x9" src="…" alt="…" width="400" height="200">
+        <!-- Oui -->
+        <img class="w-100 aspect-ratio-16x9 object-fit-cover" src="…" alt="…" width="400" height="200">
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : largeur et hauteur déjà fixées, le ratio est ignoré -->
+        <div class="aspect-ratio-1x1 w-100 h-100">…</div>
+        <!-- Oui : une seule des deux -->
+        <div class="aspect-ratio-1x1 w-100">…</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>Un bloc avec du texte grandit si le contenu dépasse : le ratio est un minimum, le texte ne déborde jamais (zoom 200 %, texte long).</li>
-        <li>Seulement les proportions courantes : une autre (3 / 2, 9 / 16) s'écrit dans le site, aspect-ratio: 3 / 2.</li>
+    <ul class="mt-2">
+        <li>Un bloc avec du texte grandit si le texte dépasse : le ratio est un minimum (zoom 200 %, texte long).</li>
+        <li>Une autre proportion (3/2, 9/16) s'écrit dans le site : <code>aspect-ratio: 3 / 2</code>.</li>
     </ul>
 {% endblock %}

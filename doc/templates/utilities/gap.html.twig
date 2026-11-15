@@ -4,48 +4,77 @@
 
 {% block body %}
     <h1>Gap</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">L'espace entre les enfants d'une grille ou d'un flex : gap-*, row-gap-* et column-gap-*, de 0 à 12 (--space-*), avec des variantes xs: à 2xl:.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">L'espace entre les enfants d'une grille ou d'un flex : <code>gap-*</code>, <code>row-gap-*</code> et <code>column-gap-*</code>, de 0 à 12 (<code>--space-*</code>).</p>
 
-    <p>grid sans classe gap : 1rem (--grid-gap)</p>
-    <div class="grid">
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-    </div>
-    <p class="mt-4">gap-0</p>
-    <div class="grid gap-0">
-        <div class="demo-box demo-frame p-2 col-4">col-4</div>
-        <div class="demo-box demo-frame p-2 col-4">col-4</div>
-        <div class="demo-box demo-frame p-2 col-4">col-4</div>
-        <div class="demo-box demo-frame p-2 col-4">col-4</div>
-        <div class="demo-box demo-frame p-2 col-4">col-4</div>
-        <div class="demo-box demo-frame p-2 col-4">col-4</div>
-    </div>
-    <p class="mt-4">gap-2 row-gap-8 : le plus précis gagne</p>
-    <div class="grid gap-2 row-gap-8">
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-    </div>
-    <p class="mt-4">d-flex gap-4 : gap marche aussi en flex</p>
-    <div class="d-flex gap-4">
-        <div class="demo-box p-2">un</div>
-        <div class="demo-box p-2">deux</div>
-        <div class="demo-box p-2">trois</div>
-    </div>
-    <p class="mt-4">gap-2 md:gap-8 : grandit avec l'écran</p>
-    <div class="grid gap-2 md:gap-8">
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-4">col-4</div>
-    </div>
+    <h2 class="mt-10">Dans une grille</h2>
+    <p class="mt-2">Sans classe, <code>grid</code> a déjà 1rem (<code>--grid-gap</code>).</p>
+    {% set code %}
+        <div class="grid gap-2">
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Lignes et colonnes</h2>
+    <p class="mt-2">Le plus précis gagne : <code>row-gap-8</code> passe devant <code>gap-2</code>.</p>
+    {% set code %}
+        <div class="grid gap-2 row-gap-8">
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Sans espace</h2>
+    {% set code %}
+        <div class="grid gap-0">
+            <p class="border p-2 col-4">col-4</p>
+            <p class="border p-2 col-4">col-4</p>
+            <p class="border p-2 col-4">col-4</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Dans un flex</h2>
+    {% set code %}
+        <div class="d-flex flex-wrap-wrap gap-4">
+            <p class="bg-primary-subtle p-2">Un</p>
+            <p class="bg-primary-subtle p-2">Deux</p>
+            <p class="bg-primary-subtle p-2">Trois</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Selon l'écran</h2>
+    {% set code %}
+        <div class="grid gap-2 md:gap-8">
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : gap ne fait rien sans flex ni grid -->
+        <div class="gap-4"><p>…</p><p>…</p></div>
+        <!-- Oui -->
+        <div class="d-grid gap-4"><p>…</p><p>…</p></div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Limites</h2>
+    <ul class="mt-2">
+        <li>L'échelle est celle des espacements : changer <code>--space</code> change aussi les gaps.</li>
+    </ul>
 {% endblock %}

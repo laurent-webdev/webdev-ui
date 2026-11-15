@@ -4,39 +4,58 @@
 
 {% block body %}
     <h1>Vertical-align</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">L'alignement vertical d'un élément dans une ligne de texte ou dans une cellule de tableau.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">L'alignement vertical d'un élément dans une ligne de texte ou dans une cellule de tableau : <code>vertical-align-*</code>.</p>
 
-    <p class="mt-4">Un carré de 24px dans une ligne de texte</p>
-    {% for align in ['baseline', 'top', 'middle', 'bottom', 'text-top', 'text-bottom'] %}
-        <p class="mt-2">Texte xg <svg class="color-primary-emphasis vertical-align-{{ align }}" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="currentColor"/></svg> vertical-align-{{ align }}</p>
-    {% endfor %}
+    <h2 class="mt-10">Dans une ligne de texte</h2>
+    <p class="mt-2">Un carré de 24px à côté du texte.</p>
+    {% set code %}
+        <p>Texte xg <svg class="color-primary vertical-align-baseline" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="currentColor"/></svg> baseline</p>
+        <p>Texte xg <svg class="color-primary vertical-align-top" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="currentColor"/></svg> top</p>
+        <p>Texte xg <svg class="color-primary vertical-align-middle" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="currentColor"/></svg> middle</p>
+        <p>Texte xg <svg class="color-primary vertical-align-bottom" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="currentColor"/></svg> bottom</p>
+        <p>Texte xg <svg class="color-primary vertical-align-text-top" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="currentColor"/></svg> text-top</p>
+        <p>Texte xg <svg class="color-primary vertical-align-text-bottom" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="currentColor"/></svg> text-bottom</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-2'}) }}
 
-    <h2 class="mt-10" id="exemple-les-cellules-d-un-tableau">Exemple : les cellules d'un tableau</h2>
-    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="exemple-les-cellules-d-un-tableau" tabindex="0">
+    <h2 class="mt-10">Dans un tableau</h2>
+    <p class="mt-2">Une cellule est centrée par défaut ; <code>table</code> met déjà ses cellules en haut.</p>
+    {% set code %}
         <table>
             <tbody>
                 <tr>
                     <th class="border p-2" scope="row">Trois<br>lignes<br>de texte</th>
                     <td class="border p-2 vertical-align-top">vertical-align-top</td>
-                    <td class="border p-2">sans classe (middle)</td>
+                    <td class="border p-2">sans classe</td>
                     <td class="border p-2 vertical-align-bottom">vertical-align-bottom</td>
                 </tr>
             </tbody>
         </table>
-    </div>
-    <p class="mt-2">Une cellule est centrée par défaut : vertical-align-top aligne le haut des cellules quand les textes n'ont pas la même longueur.</p>
+    {% endset %}
+    {% set demo %}
+        <div class="overflow-x-auto" role="region" aria-label="Exemple de cellules" tabindex="0">{{ code }}</div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo, class: ''}) }}
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="d-flex"&gt;
-    &lt;img class="vertical-align-middle" src="…" alt="…"&gt;
-&lt;/div&gt;</code></pre>
-    <p>Sans effet sur un enfant flex ou grid : align-items-center sur le parent, ou align-self-center sur l'enfant.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="vertical-align-middle"&gt;…&lt;/div&gt;</code></pre>
-    <p>Sans effet sur un bloc : vertical-align ne centre pas un bloc dans son parent. Pour ça : d-flex align-items-center sur le parent.</p>
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : sans effet sur un enfant flex ou grid -->
+        <div class="d-flex"><img class="vertical-align-middle" src="…" alt="…"></div>
+        <!-- Oui -->
+        <div class="d-flex align-items-center"><img src="…" alt="…"></div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : vertical-align ne centre pas un bloc dans son parent -->
+        <div class="vertical-align-middle">…</div>
+        <!-- Oui -->
+        <div class="d-flex align-items-center">…</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>middle aligne sur le milieu des minuscules, pas sur le milieu exact de la ligne : une icône peut paraître un peu haute ou basse selon la police.</li>
-        <li>Pas de sub ni de super : utiliser les balises &lt;sub&gt; et &lt;sup&gt;.</li>
+    <ul class="mt-2">
+        <li><code>middle</code> aligne sur le milieu des minuscules : une icône peut paraître un peu haute ou basse selon la police.</li>
+        <li>Pas de <code>sub</code> ni de <code>super</code> : les balises <code>&lt;sub&gt;</code> et <code>&lt;sup&gt;</code>.</li>
     </ul>
 {% endblock %}

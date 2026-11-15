@@ -67,7 +67,7 @@
                         <label class="visually-hidden" for="doc-search">Rechercher une page</label>
                         {# type="text" : role="combobox" n'est pas permis sur type="search" ; enterkeyhint : la touche Rechercher du clavier des téléphones ;
                            autocomplete="off" : seulement les pages, pas ce qui a déjà été tapé ; size="10" : une largeur de départ courte, le champ prend ensuite la place qui reste #}
-                        <input class="form-input-sm w-100" id="doc-search" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="doc-search-list" placeholder="Rechercher" size="10" enterkeyhint="search" autocomplete="off">
+                        <input class="form-input-sm" id="doc-search" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="doc-search-list" placeholder="Rechercher" size="10" enterkeyhint="search" autocomplete="off">
                         {# La liste : un dropdown en verre sous le champ, de sa largeur (doc.css) ; chaque option est un lien, chargé par htmx ; tabindex="-1" : Tab quitte la recherche #}
                         <div class="dropdown glass" id="doc-search-list" role="listbox" aria-label="Pages de la documentation" popover="manual" data-hx-boost="true">
                             {% for section in doc_sections %}

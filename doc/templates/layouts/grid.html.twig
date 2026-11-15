@@ -4,37 +4,117 @@
 
 {% block body %}
     <h1>Grille</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Une grille de 12 colonnes en CSS Grid : grid sur le parent, col-1 à col-12 sur les enfants, avec des variantes xs: à 2xl: ; sans classe, un enfant prend toute la largeur.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">12 colonnes en CSS Grid : <code>grid</code> sur le parent, <code>col-1</code> à <code>col-12</code> sur les enfants ; sans classe, un enfant prend toute la largeur.</p>
 
-    <div class="grid mt-4">
-        <div class="demo-box p-2">sans classe : pleine largeur</div>
-    </div>
-    <div class="grid mt-4">
-        <div class="demo-box p-2 col-6">col-6</div>
-        <div class="demo-box p-2 col-6">col-6</div>
-    </div>
-    <div class="grid mt-4">
-        <div class="demo-box p-2 col-4">col-4</div>
-        <div class="demo-box p-2 col-8">col-8</div>
-    </div>
-    <div class="grid mt-4">
-        <div class="demo-box p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</div>
-        <div class="demo-box p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</div>
-        <div class="demo-box p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</div>
-        <div class="demo-box p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</div>
-    </div>
-    <div class="grid mt-4">
-        <p class="demo-box p-2 col-3">col-3 avec un mot très long : Anticonstitutionnellementanticonstitutionnellement</p>
-        <div class="demo-box p-2 col-9">col-9</div>
-    </div>
-    <div class="grid mt-4">
-        <div class="demo-box p-2 md:col-6">
-            <p>md:col-6 avec une grille dedans</p>
-            <div class="grid mt-2">
-                <div class="demo-frame p-2 col-6">col-6</div>
-                <div class="demo-frame p-2 col-6">col-6</div>
-            </div>
+    <h2 class="mt-10">Colonnes</h2>
+    {% set code %}
+        <div class="grid">
+            <p class="bg-primary-subtle p-2">sans classe : toute la largeur</p>
+            <p class="bg-primary-subtle p-2 col-6">col-6</p>
+            <p class="bg-primary-subtle p-2 col-6">col-6</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-8">col-8</p>
         </div>
-        <div class="demo-box p-2 md:col-6">md:col-6</div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Selon l'écran</h2>
+    <p class="mt-2">Empilées sur téléphone, deux par ligne à partir de md, quatre à partir de lg.</p>
+    {% set code %}
+        <div class="grid">
+            <p class="bg-primary-subtle p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</p>
+            <p class="bg-primary-subtle p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</p>
+            <p class="bg-primary-subtle p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</p>
+            <p class="bg-primary-subtle p-2 md:col-6 lg:col-3">md:col-6 lg:col-3</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Espace entre les colonnes</h2>
+    <p class="mt-2">1rem par défaut ; les utilitaires <code>gap-*</code> le changent.</p>
+    {% set code %}
+        <div class="grid gap-2">
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+            <p class="bg-primary-subtle p-2 col-4">col-4</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Un mot long</h2>
+    <p class="mt-2">La colonne garde sa largeur, le mot passe à la ligne.</p>
+    {% set code %}
+        <div class="grid">
+            <p class="bg-primary-subtle p-2 col-3">Anticonstitutionnellementanticonstitutionnellement</p>
+            <p class="bg-primary-subtle p-2 col-9">col-9</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Une grille dans une grille</h2>
+    {% set code %}
+        <div class="grid">
+            <div class="bg-primary-subtle p-2 md:col-6">
+                <div class="grid">
+                    <p class="border p-2 col-6">col-6</p>
+                    <p class="border p-2 col-6">col-6</p>
+                </div>
+            </div>
+            <p class="bg-primary-subtle p-2 md:col-6">md:col-6</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--grid-gap</th><td>1rem</td><td>espace entre les colonnes et entre les lignes</td></tr>
+            </tbody>
+        </table>
     </div>
+    {% set code %}
+        /* Toutes les grilles */
+        :root { --grid-gap: 1.5rem; }
+
+        /* Une grille du site */
+        .grid-produits { --grid-gap: 2rem; }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul class="mt-2">
+        <li>L'ordre affiché suit celui du HTML : le lecteur d'écran et le clavier vont dans le même ordre (WCAG 1.3.2).</li>
+        <li>Sans classe, les colonnes s'empilent : à 320px et en zoom 200 %, rien ne déborde.</li>
+    </ul>
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : 12 colonnes sur téléphone, chacune trop étroite pour son texte -->
+        <div class="grid"><p class="col-1">…</p> …</div>
+        <!-- Oui : empilées, côte à côte à partir de md -->
+        <div class="grid"><p class="md:col-1">…</p> …</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : la colonne n'est pas un enfant direct de la grille -->
+        <div class="grid"><div><p class="col-6">…</p></div></div>
+        <!-- Oui -->
+        <div class="grid"><p class="col-6">…</p></div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Limites</h2>
+    <ul class="mt-2">
+        <li>Les variantes suivent la largeur de l'écran, pas celle du parent : une grille dans une colonne étroite garde les classes de l'écran.</li>
+        <li>Pas de décalage ni d'ordre de colonne : l'ordre affiché ne suivrait plus le HTML.</li>
+        <li>12 colonnes font 11 espaces : sur un petit écran, beaucoup de colonnes laissent peu de place au contenu.</li>
+    </ul>
 {% endblock %}

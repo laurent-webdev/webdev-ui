@@ -1,0 +1,11 @@
+{#- Un exemple : le rendu, puis son code juste en dessous, écrit une seule fois
+    {% set code %}<button class="btn" type="button">Annuler</button>{% endset %} puis {{ include('_example.html.twig', {code: code}) }}
+    class : la mise en page du rendu (une ligne qui passe à la ligne par défaut ; 'd-grid gap-4' pour des blocs)
+    html : ce qui est rendu, quand il diffère du code montré (un bouton de démo qui ouvre l'exemple) :
+    {% set demo %}…{% endset %} puis html: demo ; pas {% set html %} : include passe toute la page, html resterait pour les exemples suivants -#}
+<div class="card mt-2">
+    <div class="card-body {{ class ?? 'd-flex flex-wrap-wrap align-items-center gap-2' }}">
+        {{ html ?? code }}
+    </div>
+</div>
+{{ include('_code.html.twig', {code: code}) }}

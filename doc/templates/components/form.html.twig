@@ -4,632 +4,348 @@
 
 {% block body %}
     <h1>Formulaire</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Les champs du navigateur, mis en forme : form-input (md, le défaut), form-input-sm, -md et -lg, sur input, select et textarea, posent la taille, le fond, le cadre et l'arrondi ; avec un .theme-*, le cadre prend la couleur du thème et le contour de focus est celui des boutons ; avec aria-invalid="true", le thème danger. Les cases, les boutons radio et le range restent ceux du navigateur, colorés par accent-color ; le switch est dessiné. Le navigateur vérifie les champs (required, type="email", minlength…) et affiche ses messages, sans JavaScript.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Les champs du navigateur, mis en forme : <code>form-input</code> sur <code>input</code>, <code>select</code> et <code>textarea</code> ; cases, boutons radio et range colorés par le thème ; un switch dessiné. Le navigateur vérifie les champs, sans JavaScript.</p>
 
-    <form class="grid mt-2">
-        <div class="form-field md:col-6">
-            <label for="form-name">Nom (obligatoire)</label>
-            <input class="form-input" id="form-name" type="text" name="name" autocomplete="name" required>
+    <h2 class="mt-10">Par défaut</h2>
+    <p class="mt-2"><code>form-field</code> empile le libellé, le champ et son aide.</p>
+    {% set code %}
+        <div class="form-field">
+            <label for="f-email">Adresse e-mail (obligatoire)</label>
+            <input class="form-input" id="f-email" type="email" name="email" autocomplete="email" required aria-describedby="f-email-aide">
+            <p class="fs-sm color-neutral-emphasis" id="f-email-aide">Exemple : nom@domaine.fr</p>
         </div>
-        <div class="form-field md:col-6">
-            <label for="form-email">Adresse e-mail (obligatoire)</label>
-            <input class="form-input" id="form-email" type="email" name="email" autocomplete="email" required aria-describedby="form-email-help">
-            <p class="fs-sm color-neutral-emphasis" id="form-email-help">Exemple : nom@domaine.fr</p>
-        </div>
-        <div class="form-field md:col-6">
-            <label for="form-password">Mot de passe (obligatoire)</label>
-            <input class="form-input" id="form-password" type="password" name="password" autocomplete="new-password" minlength="12" required aria-describedby="form-password-help">
-            <p class="fs-sm color-neutral-emphasis" id="form-password-help">12 caractères au moins.</p>
-        </div>
-        <div class="form-field md:col-6">
-            <label for="form-country">Pays</label>
-            <select class="form-input" id="form-country" name="country" autocomplete="country">
-                <option value="BE">Belgique</option>
-                <option value="CA">Canada</option>
-                <option value="FR" selected>France</option>
-                <option value="CH">Suisse</option>
-            </select>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
+
+    <h2 class="mt-10">Un formulaire</h2>
+    <p class="mt-2">La grille place les champs côte à côte. Envoyer vide : le navigateur s'arrête sur le premier champ obligatoire.</p>
+    {% set code %}
+        <form class="grid">
+            <div class="form-field md:col-6">
+                <label for="f-nom">Nom (obligatoire)</label>
+                <input class="form-input" id="f-nom" type="text" name="nom" autocomplete="name" required>
+            </div>
+            <div class="form-field md:col-6">
+                <label for="f-pays">Pays</label>
+                <select class="form-input" id="f-pays" name="pays" autocomplete="country">
+                    <option value="BE">Belgique</option>
+                    <option value="FR" selected>France</option>
+                    <option value="CH">Suisse</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="f-message">Message</label>
+                <textarea class="form-input" id="f-message" name="message" rows="3"></textarea>
+            </div>
+            <fieldset class="form-field">
+                <legend>Être contacté</legend>
+                <label><input type="radio" name="contact" value="email" checked> Par e-mail</label>
+                <label><input type="radio" name="contact" value="telephone"> Par téléphone</label>
+            </fieldset>
+            <div>
+                <label><input type="checkbox" name="conditions" required> J'accepte les conditions (obligatoire)</label>
+            </div>
+            <div>
+                <button class="btn-solid theme-primary" type="submit">Envoyer</button>
+            </div>
+        </form>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Champs de texte</h2>
+    {% set code %}
+        <div class="form-field">
+            <label for="f-texte">Texte (text)</label>
+            <input class="form-input" id="f-texte" type="text" name="texte">
         </div>
         <div class="form-field">
-            <label for="form-message">Message</label>
-            <textarea class="form-input" id="form-message" name="message" rows="4" placeholder="Une question, une remarque…"></textarea>
+            <label for="f-mot-de-passe">Mot de passe (password)</label>
+            <input class="form-input" id="f-mot-de-passe" type="password" name="mot-de-passe" autocomplete="current-password">
         </div>
-        <fieldset class="form-field md:col-6">
-            <legend>Être contacté</legend>
-            <label><input type="radio" name="contact" value="email" checked> Par e-mail</label>
-            <label><input type="radio" name="contact" value="phone"> Par téléphone</label>
-        </fieldset>
-        <fieldset class="form-field md:col-6">
-            <legend>Recevoir</legend>
-            <label><input type="checkbox" name="news"> Les nouveautés, une fois par mois</label>
-            <label><input type="checkbox" name="offers" disabled> Les offres des partenaires (bientôt)</label>
-        </fieldset>
-        <div>
-            <label><input type="checkbox" name="terms" required> J'accepte les conditions d'utilisation (obligatoire)</label>
+        <div class="form-field">
+            <label for="f-recherche">Recherche (search)</label>
+            <input class="form-input" id="f-recherche" type="search" name="recherche">
         </div>
-        <div>
-            <button class="btn-solid theme-primary" type="submit">Créer mon compte</button>
+        <div class="form-field">
+            <label for="f-telephone">Téléphone (tel)</label>
+            <input class="form-input" id="f-telephone" type="tel" name="telephone" autocomplete="tel">
         </div>
-    </form>
-    <ul>
-        <li>Envoyer le formulaire vide : le navigateur s'arrête sur le premier champ obligatoire et affiche son message.</li>
-        <li>Mise en page : un &lt;div class="form-field"&gt; empile le libellé, le champ et l'aide ; la grille place les champs côte à côte (md:col-6).</li>
-    </ul>
+        <div class="form-field">
+            <label for="f-site">Site web (url)</label>
+            <input class="form-input" id="f-site" type="url" name="site" autocomplete="url">
+        </div>
+        <div class="form-field">
+            <label for="f-texte-long">Texte long (textarea)</label>
+            <textarea class="form-input" id="f-texte-long" name="texte-long" rows="3"></textarea>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
 
-    <h2 class="mt-10">Erreur écrite par le serveur</h2>
-    <div class="form-field mt-2">
-        <label for="form-server-email">Adresse e-mail (obligatoire)</label>
-        <input class="form-input" id="form-server-email" type="email" name="server-email" value="nom@domaine.fr" autocomplete="email" required aria-invalid="true" aria-describedby="form-server-email-error">
-        <p class="fs-sm color-danger-emphasis" id="form-server-email-error">Erreur : cette adresse a déjà un compte.</p>
-    </div>
-    <p class="mt-2">Après l'envoi, la page revient avec le message sous le champ. aria-invalid="true" fait tout : le champ prend le thème danger (cadre et contour de focus rouges, bouton rouge sur un champ fichier) et le lecteur d'écran annonce « invalide » ; le message, relié par aria-describedby, est lu avec le champ. Pas de classe en plus : l'état est l'attribut.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="form-field"&gt;
-    &lt;label for="email"&gt;Adresse e-mail (obligatoire)&lt;/label&gt;
-    &lt;input class="form-input" id="email" type="email" name="email" value="nom@domaine.fr" autocomplete="email" required aria-invalid="true" aria-describedby="email-error"&gt;
-    &lt;p class="fs-sm color-danger-emphasis" id="email-error"&gt;Erreur : cette adresse a déjà un compte.&lt;/p&gt;
-&lt;/div&gt;</code></pre>
-    <ul>
-        <li>Le message est toujours écrit, sous le champ, et commence par « Erreur : » : la couleur seule ne dit rien (WCAG 1.4.1).</li>
-        <li>Sans JavaScript, les erreurs avant l'envoi restent celles du navigateur (required, type="email", minlength…) : il arrête l'envoi au premier champ en erreur et affiche son message.</li>
-        <li>Le champ corrigé reste rouge jusqu'au prochain envoi : le JavaScript du site peut retirer aria-invalid quand la valeur change.</li>
-        <li>Pas de :user-invalid (le champ rouge dès qu'on le quitte, sans envoi) : le cadre rouge arriverait seul, sans message en texte (WCAG 1.4.1).</li>
-    </ul>
+    <h2 class="mt-10">Nombres et dates</h2>
+    {% set code %}
+        <div class="form-field">
+            <label for="f-quantite">Quantité (number)</label>
+            <input class="form-input" id="f-quantite" type="number" name="quantite" min="1" max="10" value="1">
+        </div>
+        <div class="form-field">
+            <label for="f-date">Date (date)</label>
+            <input class="form-input" id="f-date" type="date" name="date">
+        </div>
+        <div class="form-field">
+            <label for="f-heure">Heure (time)</label>
+            <input class="form-input" id="f-heure" type="time" name="heure">
+        </div>
+        <div class="form-field">
+            <label for="f-date-heure">Date et heure (datetime-local)</label>
+            <input class="form-input" id="f-date-heure" type="datetime-local" name="date-heure">
+        </div>
+        <div class="form-field">
+            <label for="f-mois">Mois (month)</label>
+            <input class="form-input" id="f-mois" type="month" name="mois">
+        </div>
+        <div class="form-field">
+            <label for="f-semaine">Semaine (week)</label>
+            <input class="form-input" id="f-semaine" type="week" name="semaine">
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
 
-    <h2 class="mt-10">Tous les champs</h2>
-    <p class="mt-2">Chaque type de champ du HTML, rangé dans la grille : une colonne sur téléphone, deux à partir de sm (sm:col-6), trois à partir de lg (lg:col-4). Effacer remet le formulaire comme au chargement.</p>
-    <form class="grid mt-2">
-        <h3 class="fs-lg mt-4">Texte</h3>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-text">Texte (text)</label>
-            <input class="form-input" id="form-all-text" type="text" name="all-text" placeholder="Un mot, une phrase">
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-email">Adresse e-mail (email)</label>
-            <input class="form-input" id="form-all-email" type="email" name="all-email" autocomplete="email" placeholder="nom@domaine.fr">
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-password">Mot de passe (password)</label>
-            <input class="form-input" id="form-all-password" type="password" name="all-password" autocomplete="current-password">
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-search">Recherche (search)</label>
-            <input class="form-input" id="form-all-search" type="search" name="all-search" placeholder="Rechercher un article">
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-tel">Téléphone (tel)</label>
-            <input class="form-input" id="form-all-tel" type="tel" name="all-tel" autocomplete="tel" placeholder="06 12 34 56 78">
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-url">Site web (url)</label>
-            <input class="form-input" id="form-all-url" type="url" name="all-url" autocomplete="url" placeholder="https://exemple.fr">
-        </div>
-
-        <h3 class="fs-lg mt-4">Nombres</h3>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-number">Quantité (number)</label>
-            <input class="form-input" id="form-all-number" type="number" name="all-number" min="1" max="10" value="1">
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-range">Volume (range)</label>
-            <input id="form-all-range" type="range" name="all-range" min="0" max="100" value="50">
-        </div>
-
-        <h3 class="fs-lg mt-4">Dates et heures</h3>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-date">Date (date)</label>
-            <input class="form-input" id="form-all-date" type="date" name="all-date">
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-time">Heure (time)</label>
-            <input class="form-input" id="form-all-time" type="time" name="all-time">
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-datetime">Date et heure (datetime-local)</label>
-            <input class="form-input" id="form-all-datetime" type="datetime-local" name="all-datetime">
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-month">Mois (month)</label>
-            <input class="form-input" id="form-all-month" type="month" name="all-month">
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-week">Semaine (week)</label>
-            <input class="form-input" id="form-all-week" type="week" name="all-week">
-        </div>
-
-        <h3 class="fs-lg mt-4">Listes</h3>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-select">Liste déroulante (select)</label>
-            <select class="form-input" id="form-all-select" name="all-select">
+    <h2 class="mt-10">Listes</h2>
+    <p class="mt-2">Avec <code>multiple</code> ou <code>size</code>, la liste est affichée en entier.</p>
+    {% set code %}
+        <div class="form-field">
+            <label for="f-liste">Liste (select)</label>
+            <select class="form-input" id="f-liste" name="liste">
                 <option value="">Choisir…</option>
                 <option value="fr">France</option>
                 <option value="be">Belgique</option>
-                <option value="ch">Suisse</option>
             </select>
         </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-optgroup">Avec des groupes (optgroup)</label>
-            <select class="form-input" id="form-all-optgroup" name="all-optgroup">
+        <div class="form-field">
+            <label for="f-groupes">Avec des groupes (optgroup)</label>
+            <select class="form-input" id="f-groupes" name="groupes">
                 <optgroup label="Fruits">
                     <option value="pomme">Pomme</option>
                     <option value="poire">Poire</option>
                 </optgroup>
                 <optgroup label="Légumes">
                     <option value="carotte">Carotte</option>
-                    <option value="poireau">Poireau</option>
                 </optgroup>
             </select>
         </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-datalist">Suggestions (datalist)</label>
-            <input class="form-input" id="form-all-datalist" type="text" name="all-datalist" list="form-all-browsers" placeholder="Votre navigateur">
-            <datalist id="form-all-browsers">
+        <div class="form-field">
+            <label for="f-suggestions">Suggestions (datalist)</label>
+            <input class="form-input" id="f-suggestions" type="text" name="suggestions" list="f-navigateurs">
+            <datalist id="f-navigateurs">
                 <option value="Chrome"></option>
-                <option value="Edge"></option>
                 <option value="Firefox"></option>
                 <option value="Safari"></option>
             </datalist>
         </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-multiple">Plusieurs choix (select multiple)</label>
-            <select class="form-input" id="form-all-multiple" name="all-multiple" multiple size="3">
+        <div class="form-field">
+            <label for="f-plusieurs">Plusieurs choix (multiple)</label>
+            <select class="form-input" id="f-plusieurs" name="plusieurs" multiple size="3">
                 <option value="fr">Français</option>
                 <option value="en">Anglais</option>
                 <option value="es">Espagnol</option>
             </select>
         </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
 
-        <h3 class="fs-lg mt-4">Cases, boutons radio et switchs</h3>
-        <fieldset class="form-field sm:col-6 lg:col-4">
-            <legend>Cases à cocher (checkbox)</legend>
-            <label><input type="checkbox" name="all-checkbox" value="a" checked> Cochée</label>
-            <label><input type="checkbox" name="all-checkbox" value="b"> Pas cochée</label>
-            <label><input type="checkbox" name="all-checkbox" value="c" disabled> Désactivée</label>
-        </fieldset>
-        <fieldset class="form-field sm:col-6 lg:col-4">
-            <legend>Boutons radio (radio)</legend>
-            <label><input type="radio" name="all-radio" value="a" checked> Choisi</label>
-            <label><input type="radio" name="all-radio" value="b"> Pas choisi</label>
-            <label><input type="radio" name="all-radio" value="c" disabled> Désactivé</label>
-        </fieldset>
-        <fieldset class="form-field sm:col-6 lg:col-4">
-            <legend>Switchs (role="switch")</legend>
-            <label><input class="form-switch" type="checkbox" role="switch" name="all-switch-a" checked> Allumé</label>
-            <label><input class="form-switch" type="checkbox" role="switch" name="all-switch-b"> Éteint</label>
-            <label><input class="form-switch" type="checkbox" role="switch" name="all-switch-c" disabled> Désactivé</label>
-        </fieldset>
-
-        <h3 class="fs-lg mt-4">Autres</h3>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-color">Couleur (color)</label>
-            <input id="form-all-color" type="color" name="all-color" value="#118ab2">
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-file">Fichier (file)</label>
-            <input class="form-input" id="form-all-file" type="file" name="all-file">
+    <h2 class="mt-10">Fichier, couleur et range</h2>
+    {% set code %}
+        <div class="form-field">
+            <label for="f-fichier">Fichier (file)</label>
+            <input class="form-input" id="f-fichier" type="file" name="fichier">
         </div>
         <div class="form-field">
-            <label for="form-all-textarea">Texte long (textarea)</label>
-            <textarea class="form-input" id="form-all-textarea" name="all-textarea" rows="3" placeholder="Plusieurs lignes"></textarea>
+            <label for="f-couleur">Couleur (color)</label>
+            <input id="f-couleur" type="color" name="couleur" value="#118ab2">
         </div>
+        <div class="form-field">
+            <label for="f-volume">Volume (range)</label>
+            <input class="form-range" id="f-volume" type="range" name="volume" min="0" max="100" value="50">
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
 
-        <h3 class="fs-lg mt-4">États</h3>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-required">Obligatoire (required)</label>
-            <input class="form-input" id="form-all-required" type="text" name="all-required" required aria-describedby="form-all-required-help">
-            <p class="fs-sm color-neutral-emphasis" id="form-all-required-help">Vide, l'envoi s'arrête ici.</p>
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-invalid">En erreur (aria-invalid)</label>
-            <input class="form-input" id="form-all-invalid" type="text" name="all-invalid" value="Valeur refusée" aria-invalid="true" aria-describedby="form-all-invalid-error">
-            <p class="fs-sm color-danger-emphasis" id="form-all-invalid-error">Erreur : cette valeur n'est pas acceptée.</p>
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-readonly">Lecture seule (readonly)</label>
-            <input class="form-input" id="form-all-readonly" type="text" name="all-readonly" value="Envoyé, pas modifiable" readonly>
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-all-disabled">Désactivé (disabled)</label>
-            <input class="form-input" id="form-all-disabled" type="text" name="all-disabled" value="Ni modifiable ni envoyé" disabled>
-        </div>
+    <h2 class="mt-10">Cases et boutons radio</h2>
+    <p class="mt-2">Un <code>&lt;fieldset class="form-field"&gt;</code> et une <code>&lt;legend&gt;</code> ; la case dans son libellé.</p>
+    {% set code %}
+        <fieldset class="form-field">
+            <legend>Recevoir</legend>
+            <label><input type="checkbox" name="nouveautes" checked> Les nouveautés</label>
+            <label><input type="checkbox" name="offres"> Les offres</label>
+            <label><input type="checkbox" name="partenaires" disabled> Les partenaires (bientôt)</label>
+        </fieldset>
+        <fieldset class="form-field">
+            <legend>Livraison</legend>
+            <label><input type="radio" name="livraison" value="domicile" checked> À domicile</label>
+            <label><input type="radio" name="livraison" value="relais"> En point relais</label>
+        </fieldset>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
 
-        <h3 class="fs-lg mt-4">Boutons</h3>
-        <div class="d-flex flex-wrap-wrap gap-2">
-            <button class="btn-solid theme-primary" type="submit">Envoyer (button submit)</button>
-            <input class="btn" type="reset" value="Effacer (input reset)">
-            <input class="btn" type="button" value="Bouton (input button)">
+    <h2 class="mt-10">États</h2>
+    {% set code %}
+        <div class="form-field">
+            <label for="f-obligatoire">Obligatoire (required)</label>
+            <input class="form-input" id="f-obligatoire" type="text" name="obligatoire" required>
         </div>
-    </form>
-    <ul>
-        <li>form-input sur les champs de texte, de nombre, de date, de fichier et les listes ; form-switch ou form-switch-solid sur les switchs ; form-range, form-checkbox et form-radio pour donner la couleur du thème à un range, une case ou un bouton radio ; sans classe, ils restent ceux du navigateur, comme color, dans la couleur du texte.</li>
-        <li>Dans un form-field, le champ prend toute la largeur de sa colonne, et garde sa hauteur quand un message s'affiche dans la colonne voisine.</li>
-        <li>Avec multiple ou size, la liste est affichée en entier.</li>
-        <li>Un &lt;h3&gt; dans la grille prend toute la largeur, comme tout enfant sans col-*.</li>
-        <li>Les boutons sont des &lt;button&gt; ou des &lt;input&gt; avec les classes btn-* : le même rendu.</li>
-        <li>Pas montrés : hidden (une valeur envoyée sans être affichée) et image (un bouton d'envoi en image).</li>
-    </ul>
+        <div class="form-field">
+            <label for="f-lecture">Lecture seule (readonly) : envoyé</label>
+            <input class="form-input" id="f-lecture" type="text" name="lecture" value="Pas modifiable" readonly>
+        </div>
+        <div class="form-field">
+            <label for="f-desactive">Désactivé (disabled) : pas envoyé</label>
+            <input class="form-input" id="f-desactive" type="text" name="desactive" value="Pas modifiable" disabled>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
 
-    <h2 class="mt-10">Libellé à côté ou au-dessus</h2>
-    <p class="mt-2">Les mêmes champs, le libellé à côté (formulaire horizontal), puis au-dessus.</p>
-    {% set layout_fields = [['text', 'Texte'], ['email', 'Adresse e-mail'], ['password', 'Mot de passe'], ['search', 'Recherche'], ['tel', 'Téléphone'], ['url', 'Site web'], ['number', 'Nombre'], ['date', 'Date'], ['time', 'Heure'], ['datetime-local', 'Date et heure'], ['month', 'Mois'], ['week', 'Semaine'], ['file', 'Fichier']] %}
+    <h2 class="mt-10">Erreur</h2>
+    <p class="mt-2"><code>aria-invalid="true"</code> pose le thème danger ; le message, relié par <code>aria-describedby</code>, commence par « Erreur : ».</p>
+    {% set code %}
+        <div class="form-field">
+            <label for="f-email-pris">Adresse e-mail (obligatoire)</label>
+            <input class="form-input" id="f-email-pris" type="email" name="email-pris" value="nom@domaine.fr" autocomplete="email" required aria-invalid="true" aria-describedby="f-email-pris-erreur">
+            <p class="fs-sm color-danger-emphasis" id="f-email-pris-erreur">Erreur : cette adresse a déjà un compte.</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
 
-    <h3 class="fs-lg mt-4">À côté</h3>
-    <div class="grid row-gap-3 align-items-center mt-2">
-        {% for field in layout_fields %}
-            <label class="md:col-3" for="side-{{ field[0] }}">{{ field[1] }}</label>
-            <input class="form-input md:col-9" id="side-{{ field[0] }}" type="{{ field[0] }}" name="side-{{ field[0] }}">
-        {% endfor %}
-        <label class="md:col-3" for="side-select">Liste</label>
-        <select class="form-input md:col-9" id="side-select" name="side-select">
-            <option>Choisir…</option>
-            <option>Pomme</option>
-        </select>
-        <label class="md:col-3" for="side-textarea">Message</label>
-        <textarea class="form-input md:col-9" id="side-textarea" name="side-textarea" rows="3"></textarea>
-        <label class="md:col-3" for="side-range">Volume</label>
-        <input class="form-range md:col-9" id="side-range" type="range" name="side-range">
-        <label class="md:col-3" for="side-color">Couleur</label>
-        <div class="md:col-9"><input id="side-color" type="color" name="side-color" value="#118ab2"></div>
-        <label class="md:col-3" for="side-checkbox">Case à cocher</label>
-        <div class="md:col-9"><input class="form-checkbox theme-primary" id="side-checkbox" type="checkbox" name="side-checkbox" checked></div>
-        <label class="md:col-3" for="side-radio">Bouton radio</label>
-        <div class="md:col-9"><input class="form-radio theme-primary" id="side-radio" type="radio" name="side-radio" checked></div>
-        <label class="md:col-3" for="side-switch">Switch</label>
-        <div class="md:col-9"><input class="form-switch-solid theme-primary" id="side-switch" type="checkbox" role="switch" name="side-switch" checked></div>
-    </div>
+    <h2 class="mt-10">Libellé à côté</h2>
+    <p class="mt-2">Une grille : le libellé en <code>md:col-3</code>, le champ en <code>md:col-9</code> ; une case dans un <code>&lt;div&gt;</code> de sa colonne.</p>
+    {% set code %}
+        <div class="grid row-gap-3 align-items-center">
+            <label class="md:col-3" for="f-cote-nom">Nom</label>
+            <input class="form-input md:col-9" id="f-cote-nom" type="text" name="cote-nom">
 
-    <h3 class="fs-lg mt-4">Au-dessus</h3>
-    <div class="grid mt-2">
-        {% for field in layout_fields %}
-            <div class="form-field sm:col-6 lg:col-4">
-                <label for="top-{{ field[0] }}">{{ field[1] }}</label>
-                <input class="form-input" id="top-{{ field[0] }}" type="{{ field[0] }}" name="top-{{ field[0] }}">
-            </div>
-        {% endfor %}
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="top-select">Liste</label>
-            <select class="form-input" id="top-select" name="top-select">
-                <option>Choisir…</option>
-                <option>Pomme</option>
+            <label class="md:col-3" for="f-cote-pays">Pays</label>
+            <select class="form-input md:col-9" id="f-cote-pays" name="cote-pays">
+                <option>France</option>
+                <option>Belgique</option>
             </select>
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="top-textarea">Message</label>
-            <textarea class="form-input" id="top-textarea" name="top-textarea" rows="3"></textarea>
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="top-range">Volume</label>
-            <input class="form-range" id="top-range" type="range" name="top-range">
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="top-color">Couleur</label>
-            <input id="top-color" type="color" name="top-color" value="#118ab2">
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="top-checkbox">Case à cocher</label>
-            <input class="form-checkbox theme-primary" id="top-checkbox" type="checkbox" name="top-checkbox" checked>
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="top-radio">Bouton radio</label>
-            <input class="form-radio theme-primary" id="top-radio" type="radio" name="top-radio" checked>
-        </div>
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="top-switch">Switch</label>
-            <input class="form-switch-solid theme-primary" id="top-switch" type="checkbox" role="switch" name="top-switch" checked>
-        </div>
-    </div>
-    <pre class="mt-4" tabindex="0"><code class="language-html">&lt;!-- À côté : le libellé dans sa colonne, le champ dans l'autre --&gt;
-&lt;div class="grid row-gap-3 align-items-center"&gt;
-    &lt;label class="md:col-3" for="name"&gt;Nom&lt;/label&gt;
-    &lt;input class="form-input md:col-9" id="name" type="text" name="name"&gt;
 
-    &lt;label class="md:col-3" for="news"&gt;Nouveautés&lt;/label&gt;
-    &lt;div class="md:col-9"&gt;&lt;input class="form-checkbox" id="news" type="checkbox" name="news"&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Au-dessus : form-field, pour une case aussi --&gt;
-&lt;div class="form-field"&gt;
-    &lt;label for="alerts"&gt;Alertes&lt;/label&gt;
-    &lt;input class="form-switch-solid theme-primary" id="alerts" type="checkbox" role="switch" name="alerts"&gt;
-&lt;/div&gt;</code></pre>
-    <ul>
-        <li>À côté : une grille, le libellé en md:col-3 et le champ en md:col-9 (sous md, le libellé passe au-dessus). Une case, un bouton radio, un switch ou une couleur va dans un &lt;div&gt; de sa colonne : la grille l'étirerait sur toute la cellule. Le libellé remplit sa colonne : un clic dans le vide de la colonne coche la case, comme dans le formulaire horizontal de Bootstrap.</li>
-        <li>Au-dessus : form-field, le libellé relié par for et id. Le libellé, la case et le bouton radio gardent leur largeur ; les champs et le range prennent toute la largeur.</li>
-        <li>Case puis texte sur la même ligne, le plus courant : la case dans son libellé, &lt;label&gt;&lt;input type="checkbox"&gt; Texte&lt;/label&gt;, comme dans les autres exemples de la page.</li>
-    </ul>
+            <label class="md:col-3" for="f-cote-nouveautes">Nouveautés</label>
+            <div class="md:col-9"><input class="form-checkbox theme-primary" id="f-cote-nouveautes" type="checkbox" name="cote-nouveautes" checked></div>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
     <h2 class="mt-10">Groupe</h2>
-    <p class="mt-2">Un champ et un bouton ou un texte collés sur une ligne : une recherche et son bouton, « @ » devant un nom, « € » après un prix. form-input-group autour, form-input-group-text sur un texte ; le champ prend la place qui reste.</p>
-    <div class="grid row-gap-6 mt-2">
-        <div class="form-field md:col-6">
-            <label for="group-search">Rechercher</label>
+    <p class="mt-2">Un champ, des boutons et des textes collés sur une ligne ; le champ prend la place qui reste.</p>
+    {% set code %}
+        <div class="form-field">
+            <label for="f-groupe-recherche">Rechercher</label>
             <div class="form-input-group">
-                <input class="form-input" id="group-search" type="search" name="group-search">
+                <input class="form-input" id="f-groupe-recherche" type="search" name="groupe-recherche">
                 <button class="btn-solid theme-primary" type="button">Rechercher</button>
             </div>
         </div>
-        <div class="form-field md:col-6">
-            <label for="group-user">Nom d'utilisateur</label>
+        <div class="form-field">
+            <label for="f-groupe-utilisateur">Nom d'utilisateur</label>
             <div class="form-input-group">
                 <span class="form-input-group-text">@</span>
-                <input class="form-input" id="group-user" type="text" name="group-user" autocomplete="username">
+                <input class="form-input" id="f-groupe-utilisateur" type="text" name="groupe-utilisateur" autocomplete="username">
             </div>
         </div>
-        <div class="form-field md:col-6">
-            <label for="group-price">Prix, en euros</label>
+        <div class="form-field">
+            <label for="f-groupe-prix">Prix, en euros</label>
             <div class="form-input-group">
-                <input class="form-input" id="group-price" type="number" name="group-price" min="0" step="0.01">
+                <input class="form-input" id="f-groupe-prix" type="number" name="groupe-prix" min="0" step="0.01">
                 <span class="form-input-group-text">€</span>
             </div>
         </div>
-        <div class="form-field md:col-6">
-            <label for="group-email">Adresse e-mail</label>
+        <div class="form-field">
+            <label for="f-groupe-code">Code promo</label>
             <div class="form-input-group">
-                <input class="form-input" id="group-email" type="text" name="group-email" aria-describedby="group-email-domain">
-                <span class="form-input-group-text" id="group-email-domain">@exemple.fr</span>
-            </div>
-        </div>
-        <div class="form-field md:col-6">
-            <label for="group-link">Lien à partager</label>
-            <div class="form-input-group">
-                <input class="form-input" id="group-link" type="url" name="group-link" value="https://exemple.fr/a1b2c3" readonly>
-                <button class="btn" type="button">Copier</button>
-            </div>
-        </div>
-        <div class="form-field md:col-6">
-            <label for="group-sort">Trier par</label>
-            <div class="form-input-group">
-                <select class="form-input" id="group-sort" name="group-sort">
-                    <option>Les plus récents</option>
-                    <option>Prix croissant</option>
-                    <option>Prix décroissant</option>
-                </select>
-                <button class="btn-outline theme-primary" type="button">Appliquer</button>
-            </div>
-        </div>
-        <div class="form-field md:col-6">
-            <label for="group-error">Code promo</label>
-            <div class="form-input-group">
-                <input class="form-input" id="group-error" type="text" name="group-error" value="NOEL2025" aria-invalid="true" aria-describedby="group-error-message">
+                <input class="form-input" id="f-groupe-code" type="text" name="groupe-code" value="NOEL2025" aria-invalid="true" aria-describedby="f-groupe-code-erreur">
                 <button class="btn" type="button">Valider</button>
             </div>
-            <p class="fs-sm color-danger-emphasis" id="group-error-message">Erreur : ce code a expiré.</p>
+            <p class="fs-sm color-danger-emphasis" id="f-groupe-code-erreur">Erreur : ce code a expiré.</p>
         </div>
-    </div>
-
-    <h3 class="mt-6">Tailles</h3>
-    <p class="mt-2">form-sm, form-md ou form-lg sur le groupe : le champ, les boutons et les textes changent ensemble (31, 38, 45px).</p>
-    <div class="grid mt-2">
-        {% for size in ['sm', 'md', 'lg'] %}
-            <div class="form-field">
-                <label for="group-size-{{ size }}">Site (form-{{ size }})</label>
-                <div class="form-input-group form-{{ size }}">
-                    <span class="form-input-group-text">https://</span>
-                    <input class="form-input" id="group-size-{{ size }}" type="text" name="group-size-{{ size }}">
-                    <button class="btn-solid theme-primary" type="button">Vérifier</button>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-
-    <pre class="mt-4" tabindex="0"><code class="language-html">&lt;div class="form-field"&gt;
-    &lt;label for="search"&gt;Rechercher&lt;/label&gt;
-    &lt;div class="form-input-group"&gt;
-        &lt;input class="form-input" id="search" type="search" name="q"&gt;
-        &lt;button class="btn-solid theme-primary" type="submit"&gt;Rechercher&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="form-field"&gt;
-    &lt;label for="price"&gt;Prix, en euros&lt;/label&gt;
-    &lt;div class="form-input-group form-lg"&gt;
-        &lt;input class="form-input" id="price" type="number" name="price"&gt;
-        &lt;span class="form-input-group-text"&gt;€&lt;/span&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-    <ul>
-        <li>form-input-group autour : les éléments collés, un seul cadre entre deux, arrondi aux deux bouts. Le champ prend la place qui reste, les boutons et les textes leur largeur.</li>
-        <li>Dedans : un champ (form-input sur un input ou un select), des boutons du framework (toutes les variantes, avec leur .theme-*), des textes en form-input-group-text (le padding et le cadre d'un champ, un fond gris léger, sur une ligne).</li>
-        <li>Sur la ligne partagée, le cadre le plus coloré passe devant : un bouton solid, outline ou subtle devant le champ, le champ devant un texte et un btn gris (la couleur de son thème se voit en entier), un champ en erreur devant tout, et le focus devant le reste.</li>
-        <li>La taille va sur le groupe (form-sm, form-md, form-lg), pas sur le champ : tout change ensemble.</li>
-    </ul>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
 
     <h2 class="mt-10">Switch</h2>
-    <p class="mt-2">Un réglage allumé ou éteint : un vrai &lt;input type="checkbox"&gt; avec role="switch", sans JavaScript. form-switch le dessine, sans couleur ; form-switch-solid, avec un .theme-*, lui donne sa couleur quand il est allumé.</p>
-    <div class="form-field mt-2">
-        <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="switch-email" checked> Notifications par e-mail</label>
-        <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="switch-sms"> Alertes par SMS</label>
-        <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="switch-sync" disabled> Synchronisation (bientôt)</label>
-        <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="switch-backup" disabled checked> Sauvegarde (toujours allumée)</label>
-    </div>
+    <p class="mt-2">Une case avec <code>role="switch"</code>, sans JavaScript. <code>form-switch</code> sans couleur, <code>form-switch-solid</code> avec un <code>.theme-*</code>.</p>
+    {% set code %}
+        <fieldset class="form-field">
+            <legend>Notifications</legend>
+            <label><input class="form-switch" type="checkbox" role="switch" name="switch-email" checked> Par e-mail</label>
+            <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="switch-sms" checked> Par SMS</label>
+            <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="switch-push"> Sur le téléphone</label>
+            <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="switch-courrier" disabled> Par courrier (bientôt)</label>
+        </fieldset>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
 
-    <h3 class="fs-lg mt-4">Variantes</h3>
-    <div class="form-field mt-2">
-        <label><input class="form-switch" type="checkbox" role="switch" name="switch-default" checked> form-switch, sans couleur</label>
-        <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="switch-solid" checked> form-switch-solid theme-primary</label>
-    </div>
-
-    <h3 class="fs-lg mt-4">Solid, dans toutes les couleurs</h3>
-    <div class="grid mt-2">
-        {% for color in colors %}
-            <div class="sm:col-6 lg:col-4"><label><input class="form-switch-solid theme-{{ color }}" type="checkbox" role="switch" name="switch-solid-{{ color }}" checked> theme-{{ color }}</label></div>
-        {% endfor %}
-    </div>
-
-    <h3 class="fs-lg mt-4">Tailles</h3>
-    <div class="form-field mt-2">
-        {% for size in ['sm', 'md', 'lg'] %}
-            <label><input class="form-switch-solid form-switch-{{ size }} theme-primary" type="checkbox" role="switch" name="switch-size-{{ size }}" checked> form-switch-{{ size }}</label>
-        {% endfor %}
-    </div>
-
-    <h3 class="fs-lg mt-4">Exemple : une liste de réglages</h3>
-    <div class="theme-primary mt-2">
-        <label class="d-flex justify-content-space-between align-items-center gap-4 py-2 border-bottom">Mode sombre <input class="form-switch-solid" type="checkbox" role="switch" name="settings-dark"></label>
-        <label class="d-flex justify-content-space-between align-items-center gap-4 py-2 border-bottom">Sauvegarde automatique, à chaque modification du document <input class="form-switch-solid" type="checkbox" role="switch" name="settings-save" checked></label>
-    </div>
-    <ul>
-        <li>Éteint, avec ou sans couleur : sans fond, le cadre des champs (--form-input-border-color) et un curseur de la couleur du texte autour. Allumé : form-switch prend la couleur du texte ; form-switch-solid, un fond plein de la couleur du thème, un cadre un peu plus marqué (--color-*-border) et un curseur noir ou blanc. Le curseur se déplace aussi, la couleur n'est pas seule à dire l'état (WCAG 1.4.1).</li>
-        <li>.theme-* sur un parent colore tous ses form-switch-solid ; sur un switch, seulement le sien. Il ne colore pas form-switch.</li>
-        <li>form-switch-sm, -md et -lg se combinent avec form-switch et form-switch-solid (class="form-switch-solid form-switch-lg") : 32 × 16, 40 × 20 et 48 × 24px. form-switch-md a les valeurs du défaut.</li>
-        <li>Le libellé peut contenir le switch, avant ou après le texte, ou être relié par for et id : un clic sur le libellé bascule le switch.</li>
-        <li>Dans un parent flex, le switch garde sa largeur à côté d'un long libellé.</li>
-    </ul>
-
-    <h2 class="mt-10">Tailles</h2>
-    <p class="mt-2">form-sm, form-md et form-lg sur un parent (form, fieldset, form-field…) : tout ce qu'il contient change d'un coup.</p>
-    {% for size in ['sm', 'md', 'lg'] %}
-        <h3 class="fs-lg mt-4">form-{{ size }}</h3>
-        <form class="form-{{ size }} grid mt-2">
-            <div class="form-field md:col-4">
-                <label for="form-group-{{ size }}-name">Nom</label>
-                <input class="form-input" id="form-group-{{ size }}-name" type="text" name="group-{{ size }}-name">
-            </div>
-            <div class="form-field md:col-4">
-                <label for="form-group-{{ size }}-country">Pays</label>
-                <select class="form-input" id="form-group-{{ size }}-country" name="group-{{ size }}-country">
-                    <option value="fr">France</option>
-                    <option value="be">Belgique</option>
-                </select>
-            </div>
-            <div class="form-field md:col-4">
-                <label for="form-group-{{ size }}-file">Fichier</label>
-                <input class="form-input" id="form-group-{{ size }}-file" type="file" name="group-{{ size }}-file">
-            </div>
-            <div class="form-field md:col-4">
-                <label for="form-group-{{ size }}-volume">Volume</label>
-                <input id="form-group-{{ size }}-volume" type="range" name="group-{{ size }}-volume">
-            </div>
-            <div class="form-field md:col-4">
-                <label for="form-group-{{ size }}-color">Couleur</label>
-                <input id="form-group-{{ size }}-color" type="color" name="group-{{ size }}-color" value="#118ab2">
-            </div>
-            <div class="form-field md:col-4">
-                <label><input type="checkbox" name="group-{{ size }}-box" checked> Case à cocher</label>
-                <label><input type="radio" name="group-{{ size }}-radio" checked> Bouton radio</label>
-                <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="group-{{ size }}-switch" checked> Switch</label>
-            </div>
-            <div class="d-flex flex-wrap-wrap gap-2">
-                <button class="btn-solid theme-primary" type="button">Envoyer</button>
-                <button class="btn" type="reset">Effacer</button>
-            </div>
-        </form>
-    {% endfor %}
-    <ul>
-        <li>Le parent règle les champs (form-input), les switchs, les boutons sans taille, les cases, les boutons radio, range et color, et le texte autour (libellés, légendes).</li>
-        <li>Champ de texte, champ fichier et bouton : 31, 38 et 45px de haut, côte à côte ils s'alignent. Switch : 16, 20 et 24px.</li>
-        <li>Cases, boutons radio, range et color restent ceux du navigateur : le zoom les agrandit dans le rapport des tailles du texte (14, 16 et 18px : 0.875, 1 et 1.125).</li>
-        <li>Le plus proche gagne : form-input-lg ou btn-sm dans un form-md, un fieldset form-sm dans un form form-lg.</li>
-        <li>form-md a les valeurs par défaut, écrites dans la classe : elle reste la taille d'origine si le site change le défaut, et remet un groupe à cette taille dans un form-sm.</li>
-    </ul>
-
-    <h3 class="fs-lg mt-4">Un seul champ</h3>
-    {% for size in ['sm', 'md', 'lg'] %}
-        <div class="d-flex flex-wrap-wrap align-items-center gap-2 mt-2">
-            <label class="w-25" for="form-size-{{ size }}">form-input-{{ size }}</label>
-            <input class="form-input-{{ size }} w-auto flex-grow-1" id="form-size-{{ size }}" type="text" name="size-{{ size }}" placeholder="Un article">
-            <button class="btn-solid theme-primary btn-{{ size }}" type="button">btn-{{ size }}</button>
+    <h2 class="mt-10">Une liste de réglages</h2>
+    {% set code %}
+        <div class="theme-primary">
+            <label class="d-flex justify-content-space-between align-items-center gap-4 py-2 border-bottom">Mode sombre <input class="form-switch-solid" type="checkbox" role="switch" name="reglage-sombre"></label>
+            <label class="d-flex justify-content-space-between align-items-center gap-4 py-2 border-bottom">Sauvegarde automatique <input class="form-switch-solid" type="checkbox" role="switch" name="reglage-sauvegarde" checked></label>
         </div>
-    {% endfor %}
-    <ul>
-        <li>Chaque taille s'utilise seule, à la place de form-input : class="form-input-sm". form-input-md a les valeurs de form-input, le défaut.</li>
-        <li>Le padding et la taille du texte sont ceux du bouton de la même taille (btn-sm, btn-md, btn-lg) ; le fond (celui de la page), le cadre et l'arrondi sont les mêmes à toutes les tailles.</li>
-    </ul>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
     <h2 class="mt-10">Couleurs</h2>
-    <div class="grid mt-2">
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-theme-none">sans thème</label>
-            <input class="form-input" id="form-theme-none" type="text" name="theme-none">
+    <p class="mt-2">Le cadre des champs, le bouton du champ fichier, la case cochée, le range et le switch allumé prennent la couleur du thème.</p>
+    {% set code %}
+        <form class="form-field theme-primary">
+            <label for="f-couleur-nom">Nom</label>
+            <input class="form-input" id="f-couleur-nom" type="text" name="couleur-nom">
+            <input class="form-input" type="file" name="couleur-fichier" aria-label="Fichier">
+            <input class="form-range" type="range" name="couleur-volume" aria-label="Volume">
+            <label><input class="form-checkbox" type="checkbox" name="couleur-case" checked> Case</label>
+            <label><input class="form-radio" type="radio" name="couleur-radio" checked> Bouton radio</label>
+            <label><input class="form-switch-solid" type="checkbox" role="switch" name="couleur-switch" checked> Switch</label>
+        </form>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
+
+    <h2 class="mt-10">Tailles</h2>
+    <p class="mt-2"><code>form-sm</code>, <code>form-md</code> ou <code>form-lg</code> sur un parent : tout ce qu'il contient (31, 38, 45px).</p>
+    {% set code %}
+        <form class="form-sm form-field">
+            <label for="f-petit-nom">Nom</label>
+            <input class="form-input" id="f-petit-nom" type="text" name="petit-nom">
+            <label><input type="checkbox" name="petit-case" checked> Case à cocher</label>
+            <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="petit-switch" checked> Switch</label>
+            <div><button class="btn-solid theme-primary" type="button">Envoyer</button></div>
+        </form>
+        <form class="form-lg form-field">
+            <label for="f-grand-nom">Nom</label>
+            <input class="form-input" id="f-grand-nom" type="text" name="grand-nom">
+            <label><input type="checkbox" name="grand-case" checked> Case à cocher</label>
+            <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="grand-switch" checked> Switch</label>
+            <div><button class="btn-solid theme-primary" type="button">Envoyer</button></div>
+        </form>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-8'}) }}
+
+    <h3 class="fs-lg mt-6">Un seul champ, un groupe, un switch</h3>
+    <p class="mt-2"><code>form-input-sm</code> s'utilise seul ; un groupe prend sa taille par <code>form-sm</code> ; le switch a ses tailles.</p>
+    {% set code %}
+        <input class="form-input-sm" type="text" name="seul-petit" aria-label="Petit champ">
+        <input class="form-input-md" type="text" name="seul-moyen" aria-label="Champ moyen">
+        <input class="form-input-lg" type="text" name="seul-grand" aria-label="Grand champ">
+
+        <div class="form-input-group form-lg">
+            <span class="form-input-group-text">@</span>
+            <input class="form-input" type="text" name="groupe-pseudo" aria-label="Pseudo">
+            <button class="btn-solid theme-primary" type="button">Vérifier</button>
         </div>
-        {% for theme in colors %}
-            <div class="form-field sm:col-6 lg:col-4 theme-{{ theme }}">
-                <label for="form-theme-{{ theme }}">theme-{{ theme }}</label>
-                <input class="form-input" id="form-theme-{{ theme }}" type="text" name="theme-{{ theme }}">
-            </div>
-        {% endfor %}
-    </div>
 
-    <h3 class="fs-lg mt-4">Champ fichier</h3>
-    <div class="grid mt-2">
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-file-theme-none">sans thème</label>
-            <input class="form-input" id="form-file-theme-none" type="file" name="file-theme-none">
+        <div class="d-flex flex-wrap-wrap align-items-center gap-4">
+            <label><input class="form-switch-solid form-switch-sm theme-primary" type="checkbox" role="switch" name="switch-petit" checked> form-switch-sm</label>
+            <label><input class="form-switch-solid form-switch-md theme-primary" type="checkbox" role="switch" name="switch-moyen" checked> form-switch-md</label>
+            <label><input class="form-switch-solid form-switch-lg theme-primary" type="checkbox" role="switch" name="switch-grand" checked> form-switch-lg</label>
         </div>
-        {% for theme in colors %}
-            <div class="form-field sm:col-6 lg:col-4 theme-{{ theme }}">
-                <label for="form-file-theme-{{ theme }}">theme-{{ theme }}</label>
-                <input class="form-input" id="form-file-theme-{{ theme }}" type="file" name="file-theme-{{ theme }}">
-            </div>
-        {% endfor %}
-    </div>
-
-    <h3 class="fs-lg mt-4">Range</h3>
-    <div class="grid mt-2">
-        <div class="form-field sm:col-6 lg:col-4">
-            <label for="form-range-theme-none">sans thème</label>
-            <input class="form-range" id="form-range-theme-none" type="range" name="range-theme-none">
-        </div>
-        {% for theme in colors %}
-            <div class="form-field sm:col-6 lg:col-4 theme-{{ theme }}">
-                <label for="form-range-theme-{{ theme }}">theme-{{ theme }}</label>
-                <input class="form-range" id="form-range-theme-{{ theme }}" type="range" name="range-theme-{{ theme }}">
-            </div>
-        {% endfor %}
-    </div>
-
-    <h3 class="fs-lg mt-4">Cases et boutons radio</h3>
-    <div class="grid mt-2">
-        <div class="d-flex flex-wrap-wrap gap-4 sm:col-6 lg:col-4">
-            <label><input class="form-checkbox" type="checkbox" name="checkbox-theme-none" checked> Case, sans thème</label>
-            <label><input class="form-radio" type="radio" name="radio-theme-none" checked> Radio</label>
-        </div>
-        {% for theme in colors %}
-            <div class="d-flex flex-wrap-wrap gap-4 sm:col-6 lg:col-4 theme-{{ theme }}">
-                <label><input class="form-checkbox" type="checkbox" name="checkbox-theme-{{ theme }}" checked> Case, theme-{{ theme }}</label>
-                <label><input class="form-radio" type="radio" name="radio-theme-{{ theme }}" checked> Radio</label>
-            </div>
-        {% endfor %}
-    </div>
-    <ul>
-        <li>Sans thème, un cadre gris ; avec un .theme-*, le cadre a la couleur du thème, à toutes les tailles et aussi sur un champ fichier.</li>
-        <li>form-range, form-checkbox et form-radio : la partie remplie et le curseur du range, la case cochée et le bouton radio choisi prennent la couleur du thème (accent-color : le dessin reste celui du navigateur, qui choisit une coche lisible). Sans thème, et sans classe, la couleur du texte : noir en clair, blanc en sombre, le défaut sans couleur comme form-switch (accent-color: currentColor sur le body, dans base). Au focus, le contour des boutons, à la forme de l'élément (arrondi, carré ou rond), autour du range entier : la couleur du thème en emphasis, sans thème celle du texte.</li>
-        <li>Le bouton d'un champ fichier prend aussi la couleur du thème, comme btn-solid : fond plein, texte noir ou blanc (au moins 5,96:1). Sans thème, il garde les couleurs du navigateur ; désactivé, son aspect du navigateur.</li>
-        <li>Au focus, un contour comme celui des boutons : la couleur du thème en emphasis (foncée en clair, claire en sombre), sans thème la couleur du texte. Pas de changement au survol.</li>
-        <li>.theme-* sur le formulaire (ou un parent) colore tous ses champs, ses switchs et ses boutons ; sur un champ, seulement le sien.</li>
-    </ul>
-
-    <h2 class="mt-10">HTML</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="form-field"&gt;
-    &lt;label for="email"&gt;Adresse e-mail (obligatoire)&lt;/label&gt;
-    &lt;input class="form-input" id="email" type="email" name="email" autocomplete="email" required aria-describedby="email-help"&gt;
-    &lt;p id="email-help"&gt;Exemple : nom@domaine.fr&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;div class="form-field"&gt;
-    &lt;label for="search"&gt;Rechercher&lt;/label&gt;
-    &lt;input class="form-input-lg" id="search" type="search" name="q"&gt;
-&lt;/div&gt;
-
-&lt;fieldset class="form-field"&gt;
-    &lt;legend&gt;Être contacté&lt;/legend&gt;
-    &lt;label&gt;&lt;input type="radio" name="contact" value="email" checked&gt; Par e-mail&lt;/label&gt;
-    &lt;label&gt;&lt;input type="radio" name="contact" value="phone"&gt; Par téléphone&lt;/label&gt;
-&lt;/fieldset&gt;
-
-&lt;label&gt;&lt;input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="notifications"&gt; Notifications&lt;/label&gt;
-
-&lt;form class="form-sm"&gt;
-    &lt;!-- Tout ce que contient le formulaire est en petite taille --&gt;
-&lt;/form&gt;</code></pre>
-    <ul>
-        <li>form-input (ou une taille) sur input, select et textarea ; form-switch ou form-switch-solid (et une taille si besoin) sur une case avec role="switch" ; les cases et les boutons radio n'ont besoin d'une classe (form-checkbox, form-radio) que pour la couleur du thème.</li>
-        <li>Sur un champ fichier (type="file"), form-input colle le bouton du navigateur au cadre : le champ a la même hauteur qu'un champ de texte de la même taille.</li>
-        <li>Sur une liste déroulante (select sans multiple ni size), form-input remplace la flèche du navigateur par une flèche dessinée, à la distance du padding du bord : celle de Chromium restait collée au cadre. La liste qui s'ouvre reste celle du navigateur.</li>
-        <li>Une case dans son libellé n'a besoin ni de for ni d'id.</li>
-        <li>form-field ne fait que la mise en page : il empile un libellé, son champ et son message, avec le même espace partout. Il ne vérifie rien et n'ajoute aucune couleur. Pas de form-field autour d'un fieldset : sur le fieldset lui-même (class="form-field"), il empile ses cases ou ses boutons radio.</li>
-        <li>Dans un form-field, un libellé prend la largeur de son texte, une case et un bouton radio la leur (align-self: start) : ils ne sont cliquables que sur eux-mêmes, pas sur toute la ligne. Les champs, eux, gardent toute la largeur.</li>
-        <li>Mettre en page : form-field autour d'un libellé et de son champ, la grille (grid, md:col-6) pour les placer côte à côte.</li>
-    </ul>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
 
     <h2 class="mt-10" id="variables">Variables</h2>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
@@ -645,124 +361,160 @@
                 <tr><th scope="row">--form-field-gap</th><td>0.5rem</td><td>espace entre le libellé, le champ et son message</td></tr>
                 <tr><th scope="row">--form-input-padding-block</th><td>0.375rem</td><td>haut et bas d'un champ</td></tr>
                 <tr><th scope="row">--form-input-padding-inline</th><td>1rem</td><td>côtés d'un champ</td></tr>
-                <tr><th scope="row">--form-input-border-radius</th><td>--border-radius-md</td><td>coins d'un champ, le même à toutes les tailles</td></tr>
+                <tr><th scope="row">--form-input-border-radius</th><td>--border-radius-md</td><td>coins d'un champ</td></tr>
                 <tr><th scope="row">--form-input-border-width</th><td>--border-width</td><td>épaisseur du cadre</td></tr>
-                <tr><th scope="row">--form-input-border-color</th><td>gris foncé, clair et sombre</td><td>couleur du cadre au repos (dans settings/_colors.scss, au moins 3:1 sur le fond de page)</td></tr>
-                <tr><th scope="row">--form-switch-height</th><td>1.25rem</td><td>hauteur d'un switch ; la largeur en vaut le double</td></tr>
-                <tr><th scope="row">--form-switch-border-width</th><td>--border-width</td><td>épaisseur du cadre d'un switch</td></tr>
-                <tr><th scope="row">--form-control-zoom</th><td>0.875, 1, 1.125</td><td>zoom des cases, boutons radio, range et color ; posée par form-sm, form-md et form-lg</td></tr>
+                <tr><th scope="row">--form-input-border-color</th><td>gris foncé</td><td>couleur du cadre au repos</td></tr>
+                <tr><th scope="row">--form-switch-height</th><td>1.25rem</td><td>hauteur d'un switch (la largeur en vaut le double)</td></tr>
+                <tr><th scope="row">--form-switch-border-width</th><td>--border-width</td><td>cadre d'un switch</td></tr>
+                <tr><th scope="row">--form-control-zoom</th><td>0.875, 1, 1.125</td><td>zoom des cases, boutons radio, range et color dans <code>form-sm</code>, <code>-md</code>, <code>-lg</code></td></tr>
             </tbody>
         </table>
     </div>
+    {% set code %}
+        /* Tous les champs et tous les switchs */
+        :root {
+            --form-input-border-radius: 0px;
+            --form-field-gap: 0.25rem;
+            --form-switch-height: 1.5rem;
+        }
 
-    <h2 class="mt-10">Exemple : changer les valeurs</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --form-input-border-radius: 0px; }
-.form-input-lg { --form-input-padding-inline: 1.5rem; }
-.recherche-hero { --form-input-padding-block: 0.75rem; }</code></pre>
-    <p>La première ligne change tous les champs, la deuxième la grande taille, la dernière seulement le champ qui a la classe recherche-hero du site.</p>
-    <p>L'espace dans un form-field : :root { --form-field-gap: 0.25rem; } pour tous, un utilitaire pour un seul (class="form-field gap-1").</p>
-    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --form-switch-height: 1.5rem; }
-.form-switch-lg { --form-switch-height: 2rem; }
-.form-lg { --form-control-zoom: 1.5; }
-body { accent-color: var(--color-primary); }</code></pre>
-    <p>La première ligne change tous les switchs sans taille, la deuxième la grande taille, la troisième les cases, les boutons radio, range et color d'un form-lg ; la dernière donne la couleur primary à toutes les cases, tous les boutons radio et tous les range sans thème du site (au lieu de la couleur du texte). Un switch prend les valeurs de form-lg par héritage : pour le changer dans un groupe, .form-lg { --form-switch-height: 2rem; }.</p>
+        /* Une taille */
+        .form-input-lg { --form-input-padding-inline: 1.5rem; }
+        .form-lg { --form-control-zoom: 1.5; }
+
+        /* Un champ du site */
+        .recherche-hero { --form-input-padding-block: 0.75rem; }
+
+        /* Les cases, boutons radio et range sans thème en primary (au lieu de la couleur du texte) */
+        body { accent-color: var(--color-primary); }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
 
     <h2 class="mt-10">Accessibilité</h2>
-    <ul>
-        <li>Chaque champ a un libellé visible relié par for et id, ou qui le contient (une case dans son libellé). Le placeholder n'est pas un libellé : il disparaît dès la saisie, et il est gris.</li>
-        <li>Un groupe de cases ou de boutons radio va dans un &lt;fieldset&gt; avec une &lt;legend&gt; : le lecteur d'écran lit la question avec chaque réponse.</li>
-        <li>autocomplete sur les champs qui parlent de l'utilisateur (name, email, tel, new-password…) : le navigateur les remplit (WCAG 1.3.5).</li>
-        <li>Un champ obligatoire le dit dans son libellé (« obligatoire ») et a l'attribut required ; un astérisque seul ne se comprend pas sans explication.</li>
-        <li>Une erreur se dit en texte, pas seulement en couleur (WCAG 1.4.1) : « Erreur : … » sous le champ, relié par aria-describedby, et aria-invalid="true" sur le champ.</li>
-        <li>Cadre d'un champ en erreur, le rouge de danger : 2,43:1 sur le fond de la page en clair, sous les 3:1, et 5,34:1 en sombre (calculé) ; c'est le message qui dit l'erreur, le cadre ne fait que la souligner. Contour de focus en danger emphasis : 7,82:1 en clair, 8,19:1 en sombre.</li>
-        <li>Cadre des champs (WCAG 1.4.11 : 3:1 quand il montre seul où écrire) : le gris est à 1,63:1 sur le fond de la page en clair et 2,12:1 en sombre ; la couleur du thème à 1,75 à 2,43:1 en clair (inverse à part) et au moins 5,34:1 en sombre. Contour de focus, en emphasis : au moins 6,37:1 sur le fond de la page en clair, 8,19:1 en sombre (calculé).</li>
-        <li>Aide et erreur : color-neutral-emphasis et color-danger-emphasis, au moins 4,5:1 sur le fond de la page.</li>
-        <li>Groupe : le libellé du champ dit tout, le texte du groupe ne fait que le rappeler (« Prix, en euros » avec « € ») : en passant de champ en champ (Tab), le lecteur d'écran ne lit que le libellé. Un texte qui complète la valeur (@exemple.fr) est relié au champ par aria-describedby : il est lu après le libellé.</li>
-        <li>Le bouton d'envoi n'est jamais désactivé en attendant que le formulaire soit rempli : l'utilisateur ne saurait pas ce qui manque. Le navigateur l'arrête au premier champ en erreur et le dit.</li>
-        <li>Un champ désactivé n'est pas envoyé et Tab passe par-dessus ; pour une valeur affichée qui doit être envoyée : readonly.</li>
-        <li>Switch : avec role="switch", le lecteur d'écran annonce « allumé » ou « éteint » au lieu de « coché » (APG, Switch Pattern). L'état vient de l'attribut checked, pas d'aria-checked (ARIA in HTML).</li>
-        <li>Switch au clavier : Tab pour l'atteindre, Espace pour le basculer, comme une case à cocher. Au focus, le contour des boutons, arrondi comme le switch : la couleur du thème en emphasis (au moins 6,37:1 sur le fond de la page en clair, 8,19:1 en sombre), sans thème celle du texte ; un .theme-* colore aussi le contour de form-switch.</li>
-        <li>Switch ou case ? Le switch agit tout de suite sur un réglage ; la case est un choix envoyé avec le formulaire, ou une réponse parmi d'autres.</li>
-        <li>Contraste du switch (WCAG 1.4.11), calculé dans les neuf thèmes. Solid allumé : le curseur noir ou blanc est à au moins 5,97:1 sur le fond du switch ; le cadre est à au moins 4,42:1 sur la page en sombre, mais à 2,17 à 2,98:1 en clair (inverse à part), sous les 3:1 : seul le curseur montre l'état. Éteint, le curseur a la couleur du texte ; le cadre, celui des champs, est décoratif (gris léger) : le curseur suffit à montrer le switch.</li>
-        <li>Cible à toucher (WCAG 2.5.8) : form-switch-lg fait 24px de haut, sm et md moins. Un libellé relié agrandit la zone à cliquer ; laisser de l'espace entre deux switchs (gap-2).</li>
+    <ul class="mt-2">
+        <li>Chaque champ a un libellé visible, relié par <code>for</code> et <code>id</code> ou qui le contient ; le placeholder n'est pas un libellé.</li>
+        <li>Un groupe de cases ou de boutons radio va dans un <code>&lt;fieldset&gt;</code> avec une <code>&lt;legend&gt;</code>.</li>
+        <li><code>autocomplete</code> sur les champs qui parlent de l'utilisateur (WCAG 1.3.5) ; « obligatoire » écrit dans le libellé, avec <code>required</code>.</li>
+        <li>Une erreur se dit en texte, relié par <code>aria-describedby</code>, et <code>aria-invalid="true"</code> sur le champ (WCAG 1.4.1).</li>
+        <li>Le bouton d'envoi n'est jamais désactivé en attendant : le navigateur dit ce qui manque.</li>
+        <li>Switch : <code>role="switch"</code>, annoncé « allumé » ou « éteint » ; l'état vient de <code>checked</code>. Il agit tout de suite ; une case est envoyée avec le formulaire.</li>
+        <li>En clair, le cadre gris des champs et les couleurs pleines sont sous 3:1 sur le fond de la page.</li>
     </ul>
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;input class="form-input" type="email" name="email" placeholder="Adresse e-mail"&gt;</code></pre>
-    <p>Sans libellé : le lecteur d'écran n'annonce rien de sûr, et l'utilisateur ne sait plus ce qu'il remplit dès qu'il a écrit.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div&gt;
-    &lt;p&gt;Être contacté&lt;/p&gt;
-    &lt;label&gt;&lt;input type="radio" name="contact"&gt; Par e-mail&lt;/label&gt;</code></pre>
-    <p>La question n'est pas reliée aux réponses : un &lt;fieldset&gt; et une &lt;legend&gt;.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;fieldset&gt;
-    &lt;legend&gt;Recevoir&lt;/legend&gt;
-    &lt;label class="d-block"&gt;&lt;input type="checkbox" name="news"&gt; Les nouveautés&lt;/label&gt;
-&lt;/fieldset&gt;</code></pre>
-    <p>Un libellé en bloc (d-block) prend toute la ligne : un clic dans le vide, loin de la case, la coche. Le fieldset en form-field empile les libellés à la largeur de leur texte.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;input class="form-input" id="email" type="email" name="email" aria-invalid="true"&gt;</code></pre>
-    <p>En erreur sans message : le cadre rouge ne dit pas ce qui ne va pas, et le lecteur d'écran dit seulement « invalide ».</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;input class="form-input theme-danger" id="email" type="email" name="email" aria-invalid="true" aria-describedby="email-error"&gt;</code></pre>
-    <p>theme-danger en plus d'aria-invalid : inutile, l'attribut pose déjà le thème danger. Avec la classe seule, le champ est rouge mais le lecteur d'écran ne sait pas qu'il est en erreur.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="grid"&gt;
-    &lt;div class="d-grid gap-2 md:col-6"&gt;
-        &lt;label for="name"&gt;Nom&lt;/label&gt;
-        &lt;input class="form-input" id="name" type="text" name="name"&gt;
-    &lt;/div&gt;
-    &lt;div class="d-grid gap-2 md:col-6"&gt;
-        &lt;label for="email"&gt;Adresse e-mail&lt;/label&gt;
-        &lt;input class="form-input" id="email" type="email" name="email" aria-describedby="email-help"&gt;
-        &lt;p id="email-help"&gt;Exemple : nom@domaine.fr&lt;/p&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-    <p>d-grid autour d'un champ dans une grille : les lignes de d-grid s'étirent pour remplir la cellule, le champ « Nom » s'agrandit et descend à côté du message. Dans une colonne étroite, le champ dépasse aussi de sa colonne. form-field n'a aucun des deux défauts.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;label&gt;&lt;input class="form-switch" type="checkbox" name="news"&gt; Nouveautés&lt;/label&gt;</code></pre>
-    <p>Sans role="switch" : il a l'air d'un switch, mais le lecteur d'écran annonce une case à cocher.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;input class="form-switch" type="checkbox" role="switch" aria-checked="true" checked aria-label="Nouveautés"&gt;</code></pre>
-    <p>aria-checked est interdit sur une case à cocher (ARIA in HTML) : checked suffit, le navigateur tient l'état à jour.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;label&gt;&lt;input class="form-switch" type="checkbox" role="switch" name="news"&gt; &lt;span id="news-state"&gt;Désactivé&lt;/span&gt;&lt;/label&gt;</code></pre>
-    <p>Un libellé qui change avec l'état : « Désactivé, allumé » ne veut plus rien dire. Le libellé dit ce que le switch règle, et ne change jamais (APG, Switch Pattern).</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card-solid theme-primary"&gt;
-    &lt;input class="form-switch-solid" type="checkbox" role="switch" name="news" checked aria-label="Nouveautés"&gt;
-&lt;/div&gt;</code></pre>
-    <p>Sur un fond plein, form-switch-solid hérite du thème de la carte : allumé, il a le fond de la carte, seul le curseur se voit. Le mettre sur le fond de la page ou un fond subtle, ou lui donner un autre thème.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;label&gt;&lt;input class="form-switch-solid" type="checkbox" role="switch" name="news" checked&gt; Nouveautés&lt;/label&gt;</code></pre>
-    <p>Sans .theme-*, form-switch-solid n'a pas de couleur : allumé, seul le curseur se voit. Un switch sans couleur : form-switch.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;input class="form-input-sm" type="checkbox" name="news"&gt;</code></pre>
-    <p>form-input-sm est fait pour les champs : il ne change pas la taille d'une case. Une case suit la taille de son parent : form-sm.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="form-input-group"&gt;
-    &lt;input class="form-input-lg" id="price" type="number" name="price"&gt;
-    &lt;span class="form-input-group-text"&gt;€&lt;/span&gt;
-&lt;/div&gt;</code></pre>
-    <p>Une taille sur le champ seul : le texte et les boutons restent moyens, le groupe s'aligne sur le plus haut. La taille va sur le groupe : form-input-group form-lg.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;label for="first-name"&gt;Nom&lt;/label&gt;
-&lt;div class="form-input-group"&gt;
-    &lt;input class="form-input" id="first-name" type="text" name="first-name"&gt;
-    &lt;input class="form-input" type="text" name="last-name"&gt;
-&lt;/div&gt;</code></pre>
-    <p>Deux champs pour un libellé : le deuxième n'a pas de nom pour le lecteur d'écran. Deux form-field côte à côte (grid, md:col-6), chacun avec son libellé.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="form-input-group"&gt;
-    &lt;span class="form-input-group-text"&gt;Prix&lt;/span&gt;
-    &lt;input class="form-input" type="number" name="price"&gt;
-&lt;/div&gt;</code></pre>
-    <p>Le texte du groupe à la place du libellé : il n'est pas relié au champ, le lecteur d'écran annonce un champ sans nom. Un &lt;label&gt; au-dessus.</p>
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : sans libellé, le placeholder disparaît dès la saisie -->
+        <input class="form-input" type="email" name="email" placeholder="Adresse e-mail">
+        <!-- Oui -->
+        <label for="email">Adresse e-mail</label>
+        <input class="form-input" id="email" type="email" name="email">
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : la question n'est pas reliée aux réponses -->
+        <div>
+            <p>Être contacté</p>
+            <label><input type="radio" name="contact"> Par e-mail</label>
+        </div>
+        <!-- Oui -->
+        <fieldset class="form-field">
+            <legend>Être contacté</legend>
+            <label><input type="radio" name="contact"> Par e-mail</label>
+        </fieldset>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : en erreur sans message ; theme-danger seul n'est pas annoncé -->
+        <input class="form-input" id="email" type="email" name="email" aria-invalid="true">
+        <input class="form-input theme-danger" id="email" type="email" name="email">
+        <!-- Oui -->
+        <input class="form-input" id="email" type="email" name="email" aria-invalid="true" aria-describedby="email-erreur">
+        <p class="fs-sm color-danger-emphasis" id="email-erreur">Erreur : l'adresse est incomplète.</p>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : d-grid dans une grille, le champ s'étire à côté d'un message voisin -->
+        <div class="d-grid gap-2 md:col-6">…</div>
+        <!-- Non : un libellé en bloc, un clic loin de la case la coche -->
+        <label class="d-block"><input type="checkbox" name="nouveautes"> Les nouveautés</label>
+        <!-- Oui : form-field -->
+        <div class="form-field md:col-6">…</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : sans role="switch", annoncé comme une case ; aria-checked est interdit -->
+        <input class="form-switch" type="checkbox" name="nouveautes">
+        <input class="form-switch" type="checkbox" role="switch" aria-checked="true" checked>
+        <!-- Non : form-switch-solid sans .theme-*, allumé il n'a pas de couleur -->
+        <input class="form-switch-solid" type="checkbox" role="switch">
+        <!-- Oui -->
+        <input class="form-switch-solid theme-primary" type="checkbox" role="switch" checked>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : form-input-sm ne change pas une case ; une taille sur le champ seul d'un groupe -->
+        <input class="form-input-sm" type="checkbox" name="nouveautes">
+        <div class="form-input-group">
+            <input class="form-input-lg" id="prix" type="number" name="prix">
+            <span class="form-input-group-text">€</span>
+        </div>
+        <!-- Oui : la taille sur le parent -->
+        <div class="form-input-group form-lg">
+            <input class="form-input" id="prix" type="number" name="prix">
+            <span class="form-input-group-text">€</span>
+        </div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : le texte du groupe à la place du libellé, le champ n'a pas de nom -->
+        <div class="form-input-group">
+            <span class="form-input-group-text">Prix</span>
+            <input class="form-input" type="number" name="prix">
+        </div>
+        <!-- Oui : un libellé au-dessus -->
+        <label for="prix">Prix, en euros</label>
+        <div class="form-input-group">
+            <input class="form-input" id="prix" type="number" name="prix">
+            <span class="form-input-group-text">€</span>
+        </div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>Le style des champs est en refonte : les bulles d'erreur du navigateur, les cases et le fieldset sont ceux du navigateur, différents d'un navigateur à l'autre (ils suivent le thème clair ou sombre).</li>
-        <li>aria-invalid ne change que les champs (form-input) : une case, un bouton radio ou un switch en erreur gardent leur aspect (accent-color ne colore que la case cochée), seul le message dit l'erreur.</li>
-        <li>Désactivé, un champ est estompé (--disabled-opacity), comme les boutons : notre fond, notre cadre et la couleur du texte remplacent l'aspect désactivé du navigateur, qui ne se verrait plus.</li>
-        <li>Un champ fait 31, 38 et 45px, comme le bouton, sauf les dates et les heures dans Chromium (33, 40 et 47px). Les listes font 31, 38 et 45px dans Chromium et Firefox. À vérifier : Safari.</li>
-        <li>La flèche des listes est un gris moyen, le même en clair et en sombre (3,95:1 sur le fond clair, 4,75:1 sur le fond sombre) : une image ne prend ni la couleur du texte ni celle du thème. Elle est toujours à droite, même dans une écriture de droite à gauche.</li>
-        <li>Les messages d'erreur du navigateur sont des bulles, dans la langue du navigateur, qui disparaissent au bout de quelques secondes. Des messages sous les champs, écrits par le site, demanderont du JavaScript (plus tard).</li>
-        <li>month et week n'ont pas de sélecteur dans Firefox ni dans Safari sur ordinateur : un champ de texte à la place, où l'utilisateur doit écrire 2026-10 ou 2026-W43 (MDN). datetime-local dans Safari sur ordinateur : un calendrier, l'heure s'écrit à la main. Pour un mois, deux listes (mois et année) marchent partout.</li>
-        <li>Dans un champ fichier étroit, le navigateur coupe le nom du fichier : lui laisser de la largeur. Le texte du bouton (« Choisir un fichier ») et sa couleur sont ceux du navigateur.</li>
-        <li>À vérifier dans Safari : la flèche et la hauteur d'une liste (select), le champ fichier, le switch et le zoom des cases.</li>
-        <li>Groupe : il ne passe pas à la ligne. Sur un écran étroit, le champ rétrécit et un bouton au texte long passe sur deux lignes : des textes et des boutons courts.</li>
-        <li>Groupe : un champ d'un thème à côté d'un bouton d'un autre thème (form-input theme-primary et btn-outline theme-danger) : sur la ligne partagée, la couleur du bouton. Avec le .theme-* sur le groupe, les deux ont la même.</li>
-        <li>Groupe : un dropdown se met après le groupe, pas dedans. Son popover compterait comme un élément du groupe, et le bouton qui l'ouvre perdrait ses coins arrondis.</li>
-        <li>Le switch n'a que deux états : indeterminate ne change rien à l'écran (APG : un switch n'a pas d'état intermédiaire). Pour un choix partiel, une case à cocher.</li>
-        <li>Une case seule change de taille par son parent, jamais par une classe sur elle-même : son libellé, s'il la contient, peut recevoir form-sm.</li>
-        <li>Le zoom (MDN : Firefox 126, mai 2024) est ignoré par les navigateurs plus anciens : les cases, boutons radio, range et color y gardent leur taille native, sans autre gêne.</li>
-        <li>La taille native n'est pas la même partout : une case fait 13px dans Chromium, 14px dans Firefox, et le champ de couleur 50 × 27px dans Chromium, 64 × 32px dans Firefox.</li>
+    <ul class="mt-2">
+        <li>En refonte : les bulles d'erreur, les cases et le fieldset sont ceux du navigateur.</li>
+        <li><code>aria-invalid</code> ne change que les champs : une case ou un switch en erreur gardent leur aspect.</li>
+        <li>Dans Chromium, les dates et les heures font 33, 40 et 47px au lieu de 31, 38 et 45. Pas encore vérifié dans Safari.</li>
+        <li><code>month</code> et <code>week</code> n'ont pas de sélecteur dans Firefox ni Safari sur ordinateur.</li>
+        <li>La flèche des listes est grise dans les deux thèmes, toujours à droite.</li>
+        <li>Un groupe ne passe pas à la ligne : des textes et des boutons courts. Un dropdown se met après le groupe, pas dedans.</li>
     </ul>
+
+    <h2 class="mt-10">Toutes les couleurs</h2>
+    <div class="grid mt-2">
+        <div class="form-field sm:col-6 lg:col-4">
+            <label for="form-theme-none">sans thème</label>
+            <input class="form-input" id="form-theme-none" type="text" name="theme-none">
+            <input class="form-input" type="file" name="file-theme-none" aria-label="Fichier, sans thème">
+            <input class="form-range" type="range" name="range-theme-none" aria-label="Range, sans thème">
+            <div class="d-flex flex-wrap-wrap gap-4">
+                <label><input class="form-checkbox" type="checkbox" name="checkbox-theme-none" checked> Case</label>
+                <label><input class="form-radio" type="radio" name="radio-theme-none" checked> Radio</label>
+                <label><input class="form-switch" type="checkbox" role="switch" name="switch-theme-none" checked> Switch</label>
+            </div>
+        </div>
+        {% for theme in colors %}
+            <div class="form-field sm:col-6 lg:col-4 theme-{{ theme }}">
+                <label for="form-theme-{{ theme }}">theme-{{ theme }}</label>
+                <input class="form-input" id="form-theme-{{ theme }}" type="text" name="theme-{{ theme }}">
+                <input class="form-input" type="file" name="file-theme-{{ theme }}" aria-label="Fichier, theme-{{ theme }}">
+                <input class="form-range" type="range" name="range-theme-{{ theme }}" aria-label="Range, theme-{{ theme }}">
+                <div class="d-flex flex-wrap-wrap gap-4">
+                    <label><input class="form-checkbox" type="checkbox" name="checkbox-theme-{{ theme }}" checked> Case</label>
+                    <label><input class="form-radio" type="radio" name="radio-theme-{{ theme }}" checked> Radio</label>
+                    <label><input class="form-switch-solid" type="checkbox" role="switch" name="switch-theme-{{ theme }}" checked> Switch</label>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

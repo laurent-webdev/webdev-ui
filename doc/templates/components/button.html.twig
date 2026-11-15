@@ -3,73 +3,75 @@
 {% block title %}Bouton{% endblock %}
 
 {% block body %}
-        <h1>Bouton</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Un &lt;button&gt; pour une action, un &lt;a&gt; pour aller vers une page. La variante (btn-solid, -outline, -subtle, -text, -link) dit comment le bouton utilise sa couleur, .theme-* dit la couleur ; btn seul est le bouton par défaut, sans couleur.</p>
+    <h1>Bouton</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">Une variante pour la forme, un <code>.theme-*</code> pour la couleur. <code>btn</code> seul : le bouton sans couleur.</p>
 
     <h2 class="mt-10">Par défaut</h2>
-    <div class="d-flex flex-wrap-wrap align-items-center gap-2 mt-2">
-        {% for size in ['xs', 'sm', 'md', 'lg'] %}
-            <button class="btn btn-{{ size }}" type="button">btn btn-{{ size }}</button>
-        {% endfor %}
-    </div>
-    <p class="mt-2">btn n'a pas de couleur : fond transparent, cadre --border-color, le texte autour, un voile gris transparent au survol et au clic : ce qui est derrière (verre, image) reste visible. Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres.</p>
+    {% set code %}
+        <button class="btn" type="button">Annuler</button>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
-    <h2 class="mt-10">Variantes et couleurs</h2>
-    {% for variant in ['solid', 'outline', 'subtle', 'text', 'link'] %}
-        <h3 class="fs-md mt-6">btn-{{ variant }}</h3>
-        <div class="d-flex flex-wrap-wrap gap-2 mt-2">
-            {% for theme in colors %}
-                <button class="btn-{{ variant }} theme-{{ theme }}" type="button">{{ theme }}</button>
-            {% endfor %}
+    <h2 class="mt-10">Variantes</h2>
+    {% set code %}
+        <button class="btn-solid theme-primary" type="button">Solid</button>
+        <button class="btn-outline theme-primary" type="button">Outline</button>
+        <button class="btn-subtle theme-primary" type="button">Subtle</button>
+        <button class="btn-text theme-primary" type="button">Text</button>
+        <button class="btn-link theme-primary" type="button">Link</button>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Couleurs</h2>
+    {% set code %}
+        <button class="btn-solid theme-primary" type="button">Primary</button>
+        <button class="btn-solid theme-secondary" type="button">Secondary</button>
+        <button class="btn-solid theme-accent" type="button">Accent</button>
+        <button class="btn-solid theme-success" type="button">Success</button>
+        <button class="btn-solid theme-danger" type="button">Danger</button>
+        <button class="btn-solid theme-warning" type="button">Warning</button>
+        <button class="btn-solid theme-info" type="button">Info</button>
+        <button class="btn-solid theme-neutral" type="button">Neutral</button>
+        <button class="btn-solid theme-inverse" type="button">Inverse</button>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Couleur sur un parent</h2>
+    <p class="mt-2">Tous les boutons prennent la couleur du parent ; celui qui a son <code>.theme-*</code> garde le sien.</p>
+    {% set code %}
+        <div class="theme-danger d-flex flex-wrap-wrap gap-2">
+            <button class="btn-solid" type="button">Supprimer</button>
+            <button class="btn-outline" type="button">Archiver</button>
+            <button class="btn-outline theme-neutral" type="button">Annuler</button>
         </div>
-    {% endfor %}
-    <ul class="mt-4">
-        <li>solid : fond plein, texte noir ou blanc (le plus lisible) ; le fond fonce ou s'éclaircit au survol et au clic.</li>
-        <li>outline : cadre et texte de la couleur, devient solid au survol.</li>
-        <li>subtle : fond léger ; le fond se renforce au survol et au clic.</li>
-        <li>text : sans fond, devient subtle au survol.</li>
-        <li>link : souligné comme un lien, le soulignement s'épaissit au survol et au clic.</li>
-    </ul>
-
-    <h2 class="mt-10">HTML</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-solid theme-primary" type="button"&gt;Enregistrer&lt;/button&gt;
-&lt;a class="btn" href="/aide"&gt;Aide&lt;/a&gt;</code></pre>
-    <ul>
-        <li>btn seul : le défaut. Une variante s'utilise seule, avec une couleur : btn-solid theme-primary, jamais btn btn-solid.</li>
-        <li>.theme-* sur un parent colore tous ses boutons : &lt;form class="theme-primary"&gt;. Un bouton qui a son propre .theme-* garde le sien.</li>
-    </ul>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Tailles</h2>
-    <div class="theme-primary d-flex flex-wrap-wrap align-items-center gap-2 mt-2">
-        {% for size in ['xs', 'sm', 'md', 'lg'] %}
-            <button class="btn-solid btn-{{ size }}" type="button">btn-{{ size }}</button>
-        {% endfor %}
-    </div>
-    <div class="theme-primary d-flex flex-wrap-wrap align-items-center gap-2 mt-2">
-        {% for size in ['xs', 'sm', 'md', 'lg'] %}
-            <button class="btn-outline btn-{{ size }}" type="button">btn-{{ size }}</button>
-        {% endfor %}
-    </div>
-    <p class="mt-2">Hauteurs : 24, 31, 38 et 45px. Une taille va avec toutes les variantes (class="btn-outline btn-lg") ; btn-md a les valeurs du bouton sans taille.</p>
-
-    <h2 class="mt-10">Désactivé</h2>
-    <div class="theme-primary d-flex flex-wrap-wrap gap-2 mt-2">
-        {% for variant in ['solid', 'outline', 'subtle', 'text', 'link'] %}
-            <button class="btn-{{ variant }}" type="button" disabled>btn-{{ variant }}</button>
-        {% endfor %}
-    </div>
-    <p class="mt-2">L'attribut natif disabled : estompé, plus de survol ni de clic. Un &lt;fieldset disabled&gt; désactive aussi ses boutons.</p>
+    <p class="mt-2">24, 31, 38 et 45px de haut.</p>
+    {% set code %}
+        <button class="btn-solid theme-primary btn-xs" type="button">btn-xs</button>
+        <button class="btn-solid theme-primary btn-sm" type="button">btn-sm</button>
+        <button class="btn-solid theme-primary btn-md" type="button">btn-md</button>
+        <button class="btn-solid theme-primary btn-lg" type="button">btn-lg</button>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Lien ou bouton</h2>
-    <div class="theme-primary d-flex flex-wrap-wrap gap-2 mt-2">
-        <button class="btn-solid" type="button">button solid</button>
-        <a class="btn-solid" href="#">a solid</a>
-        <button class="btn-outline" type="button">button outline</button>
-        <a class="btn-outline" href="#">a outline</a>
-        <button class="btn-link" type="button">button link</button>
-        <a class="btn-link" href="#">a link</a>
-    </div>
-    <p class="mt-2">Les mêmes classes sur &lt;button&gt; et sur &lt;a&gt; : le même rendu.</p>
+    <p class="mt-2"><code>&lt;a&gt;</code> pour aller vers une page, <code>&lt;button&gt;</code> pour une action : le même rendu.</p>
+    {% set code %}
+        <a class="btn-outline theme-primary" href="#">Voir le produit</a>
+        <button class="btn-solid theme-primary" type="button">Ajouter au panier</button>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Désactivé</h2>
+    <p class="mt-2">Un <code>&lt;fieldset disabled&gt;</code> désactive aussi tous ses boutons.</p>
+    {% set code %}
+        <button class="btn" type="button" disabled>Annuler</button>
+        <button class="btn-solid theme-primary" type="button" disabled>Enregistrer</button>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
     <h2 class="mt-10" id="variables">Variables</h2>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
@@ -82,40 +84,75 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><th scope="row">--btn-padding-block</th><td>0.375rem</td><td>haut et bas (38px de haut)</td></tr>
+                <tr><th scope="row">--btn-padding-block</th><td>0.375rem</td><td>haut et bas</td></tr>
                 <tr><th scope="row">--btn-padding-inline</th><td>1rem</td><td>côtés</td></tr>
                 <tr><th scope="row">--btn-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
                 <tr><th scope="row">--btn-border-width</th><td>--border-width</td><td>épaisseur du cadre</td></tr>
             </tbody>
         </table>
     </div>
+    {% set code %}
+        /* Tous les boutons sans taille (btn-md garde 1rem) */
+        :root { --btn-padding-inline: 1.25rem; }
 
-    <h2 class="mt-10">Exemple : changer les valeurs</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --btn-padding-inline: 1.25rem; }
-.btn-lg { --btn-padding-inline: 1.5rem; }
-.btn-hero { --btn-padding-inline: 2rem; }</code></pre>
-    <p>La première ligne change les boutons sans taille (btn-md garde la valeur d'origine), la deuxième la grande taille, la dernière seulement le bouton qui a la classe btn-hero du site.</p>
+        /* Une taille */
+        .btn-lg { --btn-padding-inline: 1.5rem; }
+
+        /* Un bouton du site */
+        .btn-hero { --btn-padding-inline: 2rem; }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
 
     <h2 class="mt-10">Accessibilité</h2>
-    <ul>
-        <li>&lt;button type="button"&gt; pour une action, &lt;a href&gt; pour changer de page : le lecteur d'écran annonce le bon rôle, Entrée et Espace marchent sans JavaScript.</li>
-        <li>Le texte dit l'action (« Enregistrer », pas « OK ») ; un bouton avec seulement une icône a un aria-label.</li>
-        <li>Contour de focus de la couleur du thème (emphasis), lisible sur le fond de la page ; sur btn, celle du texte.</li>
-        <li>Texte lisible dans toutes les couleurs, au repos, au survol et au clic, en clair et en sombre.</li>
-        <li>btn-xs fait 24px de haut, la cible tactile minimale (WCAG 2.5.8).</li>
+    <ul class="mt-2">
+        <li><code>&lt;button type="button"&gt;</code> pour une action, <code>&lt;a href&gt;</code> pour une page : le bon rôle, Entrée et Espace sans JavaScript.</li>
+        <li>Le texte dit l'action (« Enregistrer », pas « OK ») ; une icône seule a un <code>aria-label</code>.</li>
+        <li><code>btn-xs</code> fait 24px de haut, la cible tactile minimale (WCAG 2.5.8).</li>
     </ul>
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-solid" type="button"&gt;Valider&lt;/button&gt;</code></pre>
-    <p>Une variante sans .theme-* n'a pas de couleur : le bouton n'a pas de fond. Écrire btn, ou btn-solid avec une couleur (theme-neutral pour le gris).</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="btn" onclick="…"&gt;Valider&lt;/div&gt;</code></pre>
-    <p>Une &lt;div&gt; ne se prend pas au clavier et n'est pas annoncée comme un bouton : un &lt;button&gt;.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="btn" href="#" onclick="supprimer()"&gt;Supprimer&lt;/a&gt;</code></pre>
-    <p>Une action dans un lien : un &lt;button&gt;, le lien est fait pour changer de page.</p>
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : une variante sans .theme-* n'a pas de couleur -->
+        <button class="btn-solid" type="button">Valider</button>
+        <!-- Oui -->
+        <button class="btn-solid theme-primary" type="button">Valider</button>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : btn et une variante ensemble -->
+        <button class="btn btn-solid theme-primary" type="button">Valider</button>
+        <!-- Oui : la variante seule -->
+        <button class="btn-solid theme-primary" type="button">Valider</button>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : une <div> ne se prend pas au clavier et n'est pas annoncée comme un bouton -->
+        <div class="btn" onclick="valider()">Valider</div>
+        <!-- Oui -->
+        <button class="btn" type="button">Valider</button>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : une action dans un lien -->
+        <a class="btn" href="#" onclick="supprimer()">Supprimer</a>
+        <!-- Oui : un lien change de page, un bouton fait une action -->
+        <button class="btn" type="button">Supprimer</button>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>Sur un fond plein (bg-*), seul btn-solid est prévu ; son contour de focus peut y manquer de contraste.</li>
-        <li>Pas encore de lien désactivé, de bouton avec icône seule ni de groupe de boutons.</li>
+    <ul class="mt-2">
+        <li>Sur un fond plein (<code>bg-*</code>), seul <code>btn-solid</code> d'un autre thème ; son contour de focus peut y manquer de contraste.</li>
+        <li>Pas encore de lien désactivé, de bouton à icône seule ni de groupe de boutons.</li>
     </ul>
+
+    <h2 class="mt-10">Toutes les combinaisons</h2>
+    {% for variant in ['solid', 'outline', 'subtle', 'text', 'link'] %}
+        <h3 class="fs-md mt-6">btn-{{ variant }}</h3>
+        <div class="d-flex flex-wrap-wrap gap-2 mt-2">
+            {% for theme in colors %}
+                <button class="btn-{{ variant }} theme-{{ theme }}" type="button">{{ theme }}</button>
+            {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock %}

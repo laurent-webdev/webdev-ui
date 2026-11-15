@@ -4,7 +4,25 @@
 
 {% block body %}
     <h1>Breakpoints</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Six largeurs d'écran, une au début de chaque famille d'appareils. Une classe sans préfixe vaut pour tous les écrans ; avec un préfixe (md:), elle vaut à partir de cette largeur.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Six largeurs d'écran. Une classe sans préfixe vaut pour tous les écrans ; avec un préfixe (<code>md:</code>), à partir de cette largeur.</p>
+
+    <h2 class="mt-10">Exemple</h2>
+    <p class="mt-2">En colonne sur téléphone, en ligne à partir de md (768px).</p>
+    {% set code %}
+        <div class="d-flex flex-direction-column md:flex-direction-row gap-4">
+            <p class="bg-primary-subtle p-2">Un</p>
+            <p class="bg-primary-subtle p-2">Deux</p>
+            <p class="bg-primary-subtle p-2">Trois</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Plusieurs préfixes</h2>
+    <p class="mt-2">Le plus grand qui correspond à l'écran gagne.</p>
+    {% set code %}
+        <p class="bg-primary-subtle p-2 md:p-6 lg:p-12">p-2 md:p-6 lg:p-12</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
     <h2 class="mt-10" id="les-largeurs">Les largeurs</h2>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="les-largeurs" tabindex="0">
@@ -28,17 +46,29 @@
         </table>
     </div>
 
-    <h2 class="mt-10">Exemple</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="d-flex flex-direction-column md:flex-direction-row gap-4"&gt;…&lt;/div&gt;</code></pre>
-    <p>En colonne sur téléphone, en ligne à partir de 768px.</p>
-
     <h2 class="mt-10">Quelles classes ont un préfixe</h2>
-    <p>Seulement la mise en page : display, flex, grille (col-*), espacements, gap, largeur et hauteur, aspect-ratio, position-* et alignement du texte. Pas les couleurs, les bordures, les ombres ni l'opacité, ni les tailles des composants.</p>
+    <p class="mt-2">La mise en page seulement : display, flex, grille (<code>col-*</code>), espacements, gap, largeur et hauteur, aspect-ratio, <code>position-*</code> et alignement du texte.</p>
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : sm: ne veut pas dire « petit écran », mais « à partir de 576px » -->
+        <div class="sm:d-none">…</div>
+        <!-- Oui : caché sur petit écran, affiché à partir de md -->
+        <div class="d-none md:d-block">…</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : pas de préfixe pour les couleurs, les bordures, les ombres ni les tailles des composants -->
+        <button class="btn-sm md:btn-lg" type="button">…</button>
+        <!-- Oui -->
+        <button class="btn-md" type="button">…</button>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>En rem : quand l'utilisateur agrandit le texte de son navigateur, la mise en page passe plus tôt en version mobile (Chrome et Firefox ; Safari se comporte comme en px).</li>
-        <li>var() ne marche pas dans une media query : les largeurs sont des variables SCSS (settings/_breakpoints.scss), les changer demande de recompiler le CSS.</li>
-        <li>Les préfixes suivent la largeur de l'écran, pas celle du bloc parent.</li>
+    <ul class="mt-2">
+        <li>En rem : quand l'utilisateur agrandit le texte de son navigateur, la page passe plus tôt en version mobile (Chrome et Firefox ; Safari reste en px).</li>
+        <li><code>var()</code> ne marche pas dans une media query : les largeurs sont des variables SCSS (<code>settings/_breakpoints.scss</code>), les changer demande de recompiler.</li>
+        <li>Les préfixes suivent la largeur de l'écran, pas celle du parent.</li>
     </ul>
 {% endblock %}

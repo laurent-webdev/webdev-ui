@@ -6,41 +6,98 @@
     <h1>Animation</h1>
     <p class="fs-lg color-neutral-emphasis mb-6">Huit animations d'apparition, d'erreur et de chargement, une classe chacune, sans JavaScript ; coupées quand l'utilisateur demande moins d'animations.</p>
 
-    <p class="mt-4">Une animation se joue quand l'élément s'affiche : au chargement de la page, ou quand le JS du site retire hidden.</p>
-    <button class="btn mt-2" type="button" aria-expanded="false" aria-controls="demo-animations" data-demo-toggle>Afficher / masquer les animations</button>
-    <div class="grid gap-2 mt-2" id="demo-animations" hidden>
-        {% for animation in ['fade-in', 'slide-in-top', 'slide-in-bottom', 'slide-in-start', 'slide-in-end', 'scale-in', 'shake'] %}
-            <div class="demo-box animation-{{ animation }} p-2 col-6 md:col-4">animation-{{ animation }}</div>
-        {% endfor %}
+    <h2 class="mt-10">Apparition</h2>
+    <p class="mt-2">L'animation se joue quand l'élément s'affiche : au chargement, ou quand le JS retire <code>hidden</code>.</p>
+    {% set code %}
+        <p class="bg-primary-subtle p-2 animation-fade-in">animation-fade-in</p>
+        <p class="bg-primary-subtle p-2 animation-slide-in-top">animation-slide-in-top</p>
+        <p class="bg-primary-subtle p-2 animation-slide-in-bottom">animation-slide-in-bottom</p>
+        <p class="bg-primary-subtle p-2 animation-slide-in-start">animation-slide-in-start</p>
+        <p class="bg-primary-subtle p-2 animation-slide-in-end">animation-slide-in-end</p>
+        <p class="bg-primary-subtle p-2 animation-scale-in">animation-scale-in</p>
+        <p class="bg-primary-subtle p-2 animation-shake">animation-shake</p>
+    {% endset %}
+    {% set demo %}
+        <button class="btn" type="button" aria-expanded="false" aria-controls="demo-animations" data-demo-toggle>Afficher / masquer les animations</button>
+        <div class="d-grid gap-2" id="demo-animations" hidden>{{ code }}</div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Chargement</h2>
+    <p class="mt-2">Toujours un texte à côté de l'icône.</p>
+    {% set code %}
+        <p class="d-flex align-items-center gap-2" role="status" aria-live="polite">
+            <svg class="animation-spin" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Chargement…
+        </p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Un message qui apparaît</h2>
+    <p class="mt-2">Le JS retire <code>hidden</code> (<code>message.hidden = false</code>) ; la zone <code>role="status"</code> est là dès le chargement.</p>
+    {% set code %}
+        <div role="status" aria-live="polite">
+            <p class="animation-slide-in-top" id="message" hidden>Enregistré</p>
+        </div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--animation-fade-in-duration</th><td>0.3s</td><td><code>animation-fade-in</code></td></tr>
+                <tr><th scope="row">--animation-slide-in-duration</th><td>0.3s</td><td>les quatre <code>animation-slide-in-*</code></td></tr>
+                <tr><th scope="row">--animation-scale-in-duration</th><td>0.3s</td><td><code>animation-scale-in</code></td></tr>
+                <tr><th scope="row">--animation-shake-duration</th><td>0.8s</td><td><code>animation-shake</code></td></tr>
+                <tr><th scope="row">--animation-spin-duration</th><td>1s</td><td>un tour d'<code>animation-spin</code></td></tr>
+            </tbody>
+        </table>
     </div>
-    <p class="d-flex align-items-center gap-2 mt-4" role="status" aria-live="polite">
-        <svg class="animation-spin" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        animation-spin : Chargement…
-    </p>
+    {% set code %}
+        /* Tout le site */
+        :root { --animation-fade-in-duration: 0.6s; }
 
-    <h2 class="mt-10">Exemple : un message qui apparaît</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div role="status" aria-live="polite"&gt;
-    &lt;p class="animation-slide-in-top" id="message" hidden&gt;Enregistré&lt;/p&gt;
-&lt;/div&gt;</code></pre>
-    <p>Le JS du site retire hidden (message.hidden = false) : le message glisse en place. La zone role="status" reste affichée et le message est dedans : une zone cachée puis affichée avec son message n'est en général pas lue (MDN).</p>
+        /* Un bloc du site */
+        .hero { --animation-slide-in-duration: 0.5s; }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
 
-    <h2 class="mt-10">Exemple : changer une durée</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --animation-fade-in-duration: 0.6s; }
-.hero { --animation-slide-in-duration: 0.5s; }</code></pre>
-    <p>Une variable par animation : --animation-fade-in-duration, --animation-slide-in-duration (les quatre slide-in) et --animation-scale-in-duration valent 0.3s, --animation-shake-duration 0.8s, --animation-spin-duration 1s. Dans :root pour tout le site, ou sur un seul bloc.</p>
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul class="mt-2">
+        <li><code>prefers-reduced-motion: reduce</code> coupe tout (reset) : l'élément apparaît d'un coup, la secousse ne se voit pas, l'icône est figée.</li>
+        <li>Une zone <code>role="status"</code> cachée puis affichée avec son message n'est en général pas lue : la zone reste, le message apparaît dedans.</li>
+    </ul>
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;input class="animation-shake" type="email" name="email" aria-label="E-mail"&gt;</code></pre>
-    <p>La secousse seule ne dit pas ce qui ne va pas, et ne se voit pas si l'utilisateur réduit les animations. Toujours un message d'erreur écrit (WCAG 3.3.1).</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;svg class="animation-spin" aria-hidden="true"&gt;…&lt;/svg&gt;</code></pre>
-    <p>Une icône seule n'est pas annoncée par les lecteurs d'écran, et elle est figée si l'utilisateur réduit les animations. Toujours un texte, « Chargement… ».</p>
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : la secousse seule ne dit pas l'erreur, et ne se voit pas si les animations sont réduites -->
+        <input class="form-input animation-shake" type="email" name="email" aria-label="E-mail">
+        <!-- Oui : un message écrit (WCAG 3.3.1) -->
+        <input class="form-input animation-shake" type="email" name="email" aria-label="E-mail" aria-invalid="true" aria-describedby="email-erreur">
+        <p class="fs-sm color-danger-emphasis" id="email-erreur">L'adresse doit contenir un @.</p>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : une icône seule n'est pas annoncée -->
+        <svg class="animation-spin" aria-hidden="true">…</svg>
+        <!-- Oui -->
+        <p role="status" aria-live="polite"><svg class="animation-spin" aria-hidden="true">…</svg> Chargement…</p>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>prefers-reduced-motion: reduce coupe toutes les animations (reset) : l'élément apparaît directement, la secousse ne se voit pas, l'icône est figée.</li>
-        <li>Une animation se joue une fois, à l'affichage : pour la rejouer, masquer puis réafficher l'élément (hidden).</li>
-        <li>Pas d'animation de disparition : il faut attendre sa fin en JS avant de masquer l'élément ; elles viendront avec les composants (dialog, toast).</li>
-        <li>slide-in-start, slide-in-end et shake bougent sur le côté : un bloc pleine largeur, hors container, dépasse du bord de l'écran pendant le mouvement, et une barre de défilement horizontale apparaît un instant. Dans un .container, la marge des côtés (1rem) absorbe le mouvement ; sinon, overflow-x-clip sur la section.</li>
-        <li>slide-in-start arrive toujours de la gauche, slide-in-end de la droite : l'écriture de droite à gauche (arabe, hébreu) n'est pas encore prise en charge.</li>
+    <ul class="mt-2">
+        <li>Une animation se joue une fois, à l'affichage : pour la rejouer, cacher puis réafficher l'élément.</li>
+        <li>Pas d'animation de disparition : le JS attend la fin avant de cacher (le dialogue et le toast le font).</li>
+        <li><code>slide-in-start</code>, <code>-end</code> et <code>shake</code> bougent sur le côté : hors d'un container, une barre de défilement peut apparaître un instant ; <code>overflow-x-clip</code> sur la section.</li>
+        <li><code>slide-in-start</code> arrive toujours de la gauche : l'écriture de droite à gauche n'est pas encore prise en charge.</li>
     </ul>
 {% endblock %}

@@ -4,112 +4,98 @@
 
 {% block body %}
     <h1>Carte</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Un bloc de contenu avec un en-tête, un corps et un pied : card par défaut, ou card-solid, -subtle, -outline avec une couleur .theme-*.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un bloc de contenu avec un en-tête, un corps et un pied, tous facultatifs sauf le corps. Une variante pour la forme, un <code>.theme-*</code> pour la couleur.</p>
 
     <h2 class="mt-10">Par défaut</h2>
-    <article class="card mt-2">
-        <header class="card-header">
-            <h3 class="fs-md">card</h3>
-        </header>
-        <div class="card-body">
-            <p>Pas de couleur : fond transparent, cadre et traits --border-color, le texte autour. Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres.</p>
-        </div>
-    </article>
+    {% set code %}
+        <article class="card">
+            <header class="card-header">
+                <h3 class="fs-md">Titre de la carte</h3>
+            </header>
+            <div class="card-body">
+                <p>Le contenu de la carte.</p>
+            </div>
+            <footer class="card-footer">
+                <button class="btn btn-sm" type="button">Action</button>
+            </footer>
+        </article>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
-    {% for variant in ['solid', 'subtle', 'outline'] %}
-        <h2 class="mt-10">card-{{ variant }}</h2>
-        <div class="grid gap-4 mt-2">
-            {% for theme in ['theme-neutral', 'theme-primary', 'theme-success'] %}
-                <article class="card-{{ variant }} {{ theme }} md:col-4">
-                    <header class="card-header">
-                        <h3 class="fs-md">card-{{ variant }} {{ theme }}</h3>
-                    </header>
-                    <div class="card-body">
-                        <p>Le corps prend la place qui reste{% if loop.index == 2 %}, même quand une carte voisine a plus de texte : dans une grille, les cartes ont la même hauteur et les pieds restent alignés en bas{% endif %}.</p>
-                        <p class="mt-2"><a class="link{% if variant == 'solid' %} color-inherit{% endif %}" href="#">Un lien</a></p>
-                    </div>
-                    <footer class="card-footer">
-                        <button class="btn-solid btn-sm{% if variant == 'solid' %} theme-inverse{% endif %}" type="button">Action</button>
-                    </footer>
-                </article>
-            {% endfor %}
+    <h2 class="mt-10">Variantes</h2>
+    <p class="mt-2">Dans une grille, les cartes ont la même hauteur et les pieds restent alignés.</p>
+    {% set code %}
+        <div class="grid gap-4">
+            <article class="card-solid theme-primary md:col-4">
+                <div class="card-body">
+                    <h3 class="fs-md">Solid</h3>
+                    <p class="mt-2">Fond plein, texte noir ou blanc. <a class="link color-inherit" href="#">Un lien</a></p>
+                </div>
+                <footer class="card-footer">
+                    <button class="btn-solid btn-sm theme-inverse" type="button">Action</button>
+                </footer>
+            </article>
+            <article class="card-subtle theme-primary md:col-4">
+                <div class="card-body">
+                    <h3 class="fs-md">Subtle</h3>
+                    <p class="mt-2">Fond léger. <a class="link" href="#">Un lien</a></p>
+                </div>
+                <footer class="card-footer">
+                    <button class="btn-solid btn-sm" type="button">Action</button>
+                </footer>
+            </article>
+            <article class="card-outline theme-primary md:col-4">
+                <div class="card-body">
+                    <h3 class="fs-md">Outline</h3>
+                    <p class="mt-2">Un cadre de la couleur. <a class="link" href="#">Un lien</a></p>
+                </div>
+                <footer class="card-footer">
+                    <button class="btn-solid btn-sm" type="button">Action</button>
+                </footer>
+            </article>
         </div>
-    {% endfor %}
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
-    <h2 class="mt-10">Exemple : en-tête et pied colorés avec les utilitaires</h2>
-    <p class="mt-2">Le premier et le dernier élément de la carte suivent ses coins : le fond d'un en-tête ou d'un pied ne dépasse pas de l'arrondi.</p>
-    <div class="grid gap-4 mt-2">
-        <article class="card-outline theme-primary md:col-6 lg:col-3">
+    <h2 class="mt-10">Une image</h2>
+    <p class="mt-2">L'image prend toute la largeur, ses coins suivent le cadre.</p>
+    {% set code %}
+        <article class="card w-50">
+            <img class="aspect-ratio-16x9 object-fit-cover" src="{{ asset('images/demo-landscape.svg') }}" alt="" width="400" height="200">
+            <div class="card-body">
+                <h3 class="fs-lg">Titre de l'article</h3>
+                <p class="mt-2">Le résumé de l'article.</p>
+            </div>
+        </article>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">En-tête et pied colorés</h2>
+    <p class="mt-2">Les utilitaires <code>bg-*</code> ; les coins suivent le cadre.</p>
+    {% set code %}
+        <article class="card-outline theme-primary">
             <header class="card-header bg-primary color-primary-contrast">
                 <h3 class="fs-md">En-tête bg-primary</h3>
             </header>
             <div class="card-body">
-                <p>card-outline theme-primary</p>
+                <p>Le contenu de la carte.</p>
             </div>
             <footer class="card-footer bg-primary-subtle">
                 <p>Pied bg-primary-subtle</p>
             </footer>
         </article>
-        <article class="card md:col-6 lg:col-3">
-            <header class="card-header bg-neutral-subtle">
-                <h3 class="fs-md">En-tête bg-neutral-subtle</h3>
-            </header>
-            <div class="card-body">
-                <p>card-outline sans thème</p>
-            </div>
-            <footer class="card-footer bg-neutral-subtle">
-                <p>Pied bg-neutral-subtle</p>
-            </footer>
-        </article>
-        <article class="card-subtle theme-success md:col-6 lg:col-3">
-            <header class="card-header bg-success color-success-contrast">
-                <h3 class="fs-md">En-tête bg-success</h3>
-            </header>
-            <div class="card-body">
-                <p>card-subtle theme-success</p>
-            </div>
-            <footer class="card-footer bg-success color-success-contrast">
-                <p>Pied bg-success</p>
-            </footer>
-        </article>
-        <article class="card-solid theme-primary md:col-6 lg:col-3">
-            <header class="card-header bg-primary-subtle color-primary-emphasis">
-                <h3 class="fs-md">En-tête bg-primary-subtle</h3>
-            </header>
-            <div class="card-body">
-                <p>card-solid theme-primary</p>
-            </div>
-            <footer class="card-footer bg-primary-subtle color-primary-emphasis">
-                <p>Pied bg-primary-subtle</p>
-            </footer>
-        </article>
-    </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
-    <h2 class="mt-10">HTML</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;article class="card-outline theme-primary"&gt;
-    &lt;img src="…" alt="…"&gt;
-    &lt;header class="card-header"&gt;…&lt;/header&gt;
-    &lt;div class="card-body"&gt;…&lt;/div&gt;
-    &lt;footer class="card-footer"&gt;…&lt;/footer&gt;
-&lt;/article&gt;</code></pre>
-    <p>Comme les boutons : une variante (card-solid, card-subtle, card-outline) qui s'utilise seule, et une couleur .theme-*. card seul : le défaut, sans couleur. L'image, l'en-tête et le pied sont facultatifs ; le corps est toujours là.</p>
-
-    <h2 class="mt-10">Exemple : une image en haut</h2>
-    <div class="grid gap-4 mt-2">
-        <article class="card md:col-6 lg:col-4">
-            <img class="aspect-ratio-16x9 object-fit-cover" src="{{ asset('images/demo-landscape.svg') }}" alt="" width="400" height="200">
+    <h2 class="mt-10">Avec une ombre</h2>
+    {% set code %}
+        <div class="card box-shadow-md">
             <div class="card-body">
-                <h3 class="fs-lg">Titre de l'article</h3>
-                <p class="mt-2">L'image prend toute la largeur, ses coins du haut suivent le cadre.</p>
+                <p>L'utilitaire box-shadow-md soulève la carte.</p>
             </div>
-        </article>
-        <article class="card-subtle theme-primary box-shadow-md md:col-6 lg:col-4">
-            <div class="card-body">
-                <h3 class="fs-lg">Avec une ombre</h3>
-                <p class="mt-2">L'utilitaire box-shadow-md soulève la carte.</p>
-            </div>
-        </article>
-    </div>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
     <h2 class="mt-10" id="variables">Variables</h2>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
@@ -124,50 +110,85 @@
             <tbody>
                 <tr><th scope="row">--card-padding-block</th><td>1rem</td><td>haut et bas de l'en-tête, du corps et du pied</td></tr>
                 <tr><th scope="row">--card-padding-inline</th><td>1rem</td><td>côtés de l'en-tête, du corps et du pied</td></tr>
-                <tr><th scope="row">--card-border-radius</th><td>--border-radius-md</td><td>coins du cadre et de l'image</td></tr>
+                <tr><th scope="row">--card-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
                 <tr><th scope="row">--card-border-width</th><td>--border-width</td><td>cadre et traits</td></tr>
             </tbody>
         </table>
     </div>
-    <p class="mt-2">Les couleurs viennent de .theme-* : le cadre et les traits ont la couleur de bordure du thème (--color-*-border ; card-subtle : --color-*-subtle-border), la variante dit le fond. Le texte reste celui de la page, sauf sur card-solid (noir ou blanc).</p>
+    {% set code %}
+        /* Toutes les cartes */
+        :root { --card-padding-inline: 1.5rem; }
 
-    <h2 class="mt-10">Exemple : changer les valeurs</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --card-padding-inline: 1.5rem; }
-.card-produit { --card-border-radius: var(--border-radius-xl); }</code></pre>
-    <p>La première ligne change toutes les cartes, la deuxième seulement celles qui ont la classe card-produit du site.</p>
+        /* Une carte du site */
+        .card-produit { --card-border-radius: var(--border-radius-xl); }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
 
     <h2 class="mt-10">Accessibilité</h2>
-    <ul>
-        <li>&lt;article&gt; pour un contenu qui se comprend seul (un article, un produit), sinon &lt;div&gt; ; le titre de la carte suit la hiérarchie de la page (h2, h3…).</li>
-        <li>Une image qui ne dit rien de plus que le texte : alt="".</li>
-        <li>Plusieurs liens « Lire la suite » : chacun dit où il mène (WCAG 2.4.4), avec un texte visually-hidden : Lire la suite&lt;span class="visually-hidden"&gt; : titre de l'article&lt;/span&gt;.</li>
-        <li>Sur card-solid, le texte est noir ou blanc (au moins 4,58:1) ; sur card-subtle, le texte de la page reste très lisible.</li>
+    <ul class="mt-2">
+        <li><code>&lt;article&gt;</code> pour un contenu qui se comprend seul (un article, un produit), sinon <code>&lt;div&gt;</code> ; le titre suit la hiérarchie de la page.</li>
+        <li>Une image qui ne dit rien de plus que le texte : <code>alt=""</code>.</li>
+        <li>Plusieurs « Lire la suite » : chacun dit où il mène, avec un texte <code>visually-hidden</code> (WCAG 2.4.4).</li>
     </ul>
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;article class="card-solid"&gt;…&lt;/article&gt;</code></pre>
-    <p>Une variante sans .theme-* n'a pas de couleur : pas de fond. Écrire card, ou card-solid avec une couleur (theme-neutral pour le gris).</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a href="/article"&gt;
-    &lt;article class="card"&gt;… &lt;button&gt;Partager&lt;/button&gt;&lt;/article&gt;
-&lt;/a&gt;</code></pre>
-    <p>Une carte entière dans un lien : un bouton dans un lien est interdit (W3C), et le lecteur d'écran lit tout le contenu comme nom du lien. Mettre le lien sur le titre.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card"&gt;&lt;p&gt;Texte&lt;/p&gt;&lt;/div&gt;</code></pre>
-    <p>Sans .card-body, le texte est collé aux bords.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card-solid theme-primary"&gt;
-    &lt;div class="card-body"&gt;&lt;a class="btn-outline" href="…"&gt;Voir&lt;/a&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-    <p>Sur un fond plein, seuls btn-solid et badge-solid sont prévus.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="card-solid theme-primary"&gt;
-    &lt;div class="card-body"&gt;&lt;a class="link" href="…"&gt;Voir&lt;/a&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-    <p>Le lien prend le thème de la carte, comme partout : la couleur emphasis, peu lisible sur le fond plein. Écrire class="link color-inherit".</p>
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : une variante sans .theme-* n'a pas de couleur -->
+        <article class="card-solid">…</article>
+        <!-- Oui -->
+        <article class="card-solid theme-neutral">…</article>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : un bouton dans un lien est interdit, et tout le contenu devient le nom du lien -->
+        <a href="/article">
+            <article class="card">… <button type="button">Partager</button></article>
+        </a>
+        <!-- Oui : le lien sur le titre -->
+        <article class="card">
+            <div class="card-body">
+                <h3><a class="link" href="/article">Titre</a></h3>
+            </div>
+        </article>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : sans card-body, le texte est collé aux bords -->
+        <div class="card"><p>Texte</p></div>
+        <!-- Oui -->
+        <div class="card"><div class="card-body"><p>Texte</p></div></div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : sur un fond plein, btn-outline et un lien sans color-inherit ne se lisent pas -->
+        <div class="card-solid theme-primary">
+            <div class="card-body"><a class="link" href="#">Voir</a> <a class="btn-outline" href="#">Voir</a></div>
+        </div>
+        <!-- Oui -->
+        <div class="card-solid theme-primary">
+            <div class="card-body"><a class="link color-inherit" href="#">Voir</a> <a class="btn-solid theme-inverse" href="#">Voir</a></div>
+        </div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>Les traits sous l'en-tête et au-dessus du pied ont la couleur du cadre : discrets sur card-solid et card-subtle, plus marqués sur card-outline.</li>
-        <li>Seul le premier ou le dernier élément de la carte suit ses coins : une image dans un lien ou dans un &lt;picture&gt; garde ses coins carrés (le rayon du parent ne coupe pas l'image).</li>
-        <li>Pas de carte entièrement cliquable, ni de carte horizontale (image à côté) : plus tard, si besoin.</li>
-        <li>Un .theme-* sur la carte colore aussi ses boutons, liens et badges (les tokens sont hérités) : sur card-solid, un btn-solid du même thème disparaît dans le fond, lui donner un autre thème (theme-inverse).</li>
-        <li>Pas de tailles : changer les variables dans le site.</li>
+    <ul class="mt-2">
+        <li>Seul le premier ou le dernier élément suit les coins : une image dans un lien ou un <code>&lt;picture&gt;</code> garde ses coins carrés.</li>
+        <li>Un <code>.theme-*</code> sur la carte colore aussi ses boutons, liens et badges : sur <code>card-solid</code>, donner un autre thème au bouton.</li>
+        <li>Pas de carte entièrement cliquable ni horizontale ; pas de tailles.</li>
     </ul>
+
+    <h2 class="mt-10">Toutes les combinaisons</h2>
+    {% for variant in ['solid', 'subtle', 'outline'] %}
+        <h3 class="fs-md mt-6">card-{{ variant }}</h3>
+        <div class="grid gap-4 mt-2">
+            {% for color in colors %}
+                <div class="card-{{ variant }} theme-{{ color }} col-6 md:col-4">
+                    <div class="card-body">
+                        <p>theme-{{ color }}, <a class="link{% if variant == 'solid' %} color-inherit{% endif %}" href="#">un lien</a></p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock %}

@@ -4,58 +4,30 @@
 
 {% block body %}
     <h1>Dialogue</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Un &lt;dialog&gt; natif, du même style que les cartes : dialog par défaut, ou une variante (dialog-solid, dialog-subtle, dialog-outline) avec une couleur .theme-*, et les zones dialog-header, dialog-body, dialog-footer. Les boutons l'ouvrent et le ferment sans JavaScript, avec les attributs command et commandfor. Avec data-dialog, le JS du framework l'efface aussi à la fermeture.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un <code>&lt;dialog&gt;</code> natif, ouvert et fermé sans JavaScript par <code>command</code> et <code>commandfor</code>. Avec <code>data-dialog</code>, le JS du framework l'efface aussi à la fermeture.</p>
 
     <h2 class="mt-10">Par défaut</h2>
-    <p class="mt-2">dialog n'a pas de couleur : cadre et traits --border-color, le fond de la page (transparent, la page se verrait derrière le texte). Un .theme-* ne le colore pas : pour une couleur, une variante. theme-neutral est une couleur comme les autres. Les dialogues ci-dessous sont en dialog, sauf dans « Variantes ».</p>
+    <p class="mt-2">Échap ou un bouton le ferment ; le focus revient sur le bouton d'ouverture.</p>
+    {% set code %}
+        <button class="btn-solid theme-primary" type="button" commandfor="dialog-compte" command="show-modal">Mon compte</button>
+        <dialog class="dialog" id="dialog-compte" data-dialog aria-labelledby="dialog-compte-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="dialog-compte-titre">Mon compte</h2>
+                <button class="btn-close" type="button" commandfor="dialog-compte" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="dialog-body">
+                <p>Le contenu du dialogue.</p>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn" type="button" commandfor="dialog-compte" command="close">Annuler</button>
+                <button class="btn-solid theme-primary" type="button" commandfor="dialog-compte" command="close">Enregistrer</button>
+            </div>
+        </dialog>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
-    <h2 class="mt-10" id="comportements-l-attribut-closedby">Comportements : l'attribut closedby</h2>
-    <div class="d-flex flex-wrap-wrap gap-2 mt-2">
-        <button class="btn" type="button" commandfor="dialog-default" command="show-modal">Sans closedby</button>
-        <button class="btn" type="button" commandfor="dialog-any" command="show-modal">closedby="any"</button>
-        <button class="btn" type="button" commandfor="dialog-none" command="show-modal">closedby="none"</button>
-    </div>
-
-    <dialog class="dialog" id="dialog-default" data-dialog aria-labelledby="dialog-default-title">
-        <div class="dialog-header">
-            <h2 class="fs-lg" id="dialog-default-title">Sans closedby</h2>
-            <button class="btn-close" type="button" commandfor="dialog-default" command="close" aria-label="Fermer"></button>
-        </div>
-        <div class="dialog-body">
-            <p>Se ferme avec Échap ou un bouton. Le focus est sur le premier élément focusable (la croix) ; à la fermeture, il revient sur le bouton qui a ouvert le dialogue.</p>
-        </div>
-        <div class="dialog-footer">
-            <button class="btn-solid theme-primary" type="button" commandfor="dialog-default" command="close">OK</button>
-        </div>
-    </dialog>
-
-    <dialog class="dialog" id="dialog-any" data-dialog aria-labelledby="dialog-any-title" closedby="any">
-        <div class="dialog-header">
-            <h2 class="fs-lg" id="dialog-any-title">closedby="any"</h2>
-            <button class="btn-close" type="button" commandfor="dialog-any" command="close" aria-label="Fermer"></button>
-        </div>
-        <div class="dialog-body">
-            <p>Se ferme avec Échap, un bouton, ou un clic à côté du dialogue.</p>
-        </div>
-        <div class="dialog-footer">
-            <button class="btn-solid theme-primary" type="button" commandfor="dialog-any" command="close">OK</button>
-        </div>
-    </dialog>
-
-    <dialog class="dialog" id="dialog-none" data-dialog aria-labelledby="dialog-none-title" closedby="none">
-        <div class="dialog-header">
-            <h2 class="fs-lg" id="dialog-none-title">closedby="none"</h2>
-        </div>
-        <div class="dialog-body">
-            <p>Se ferme seulement avec un bouton du dialogue : ni Échap, ni clic à côté. Pour un choix que la personne doit faire.</p>
-        </div>
-        <div class="dialog-footer">
-            <button class="btn" type="button" commandfor="dialog-none" command="close">Refuser</button>
-            <button class="btn-solid theme-primary" type="button" commandfor="dialog-none" command="close">Accepter</button>
-        </div>
-    </dialog>
-
-    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="comportements-l-attribut-closedby" tabindex="0">
+    <h2 class="mt-10" id="closedby">Fermer en cliquant à côté</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="closedby" tabindex="0">
         <table class="table">
             <thead>
                 <tr>
@@ -67,126 +39,182 @@
             </thead>
             <tbody>
                 <tr><th scope="row">any</th><td>oui</td><td>oui</td><td>oui</td></tr>
-                <tr><th scope="row">closerequest (défaut d'un modal)</th><td>oui</td><td>non</td><td>oui</td></tr>
+                <tr><th scope="row">closerequest (défaut)</th><td>oui</td><td>non</td><td>oui</td></tr>
                 <tr><th scope="row">none</th><td>non</td><td>non</td><td>oui</td></tr>
             </tbody>
         </table>
     </div>
+    {% set code %}
+        <button class="btn" type="button" commandfor="dialog-aide" command="show-modal">Aide</button>
+        <dialog class="dialog" id="dialog-aide" data-dialog closedby="any" aria-labelledby="dialog-aide-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="dialog-aide-titre">Aide</h2>
+                <button class="btn-close" type="button" commandfor="dialog-aide" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="dialog-body">
+                <p>Un clic à côté le ferme aussi.</p>
+            </div>
+        </dialog>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Variantes</h2>
-    <div class="d-flex flex-wrap-wrap gap-2 mt-2">
-        {% for dialog in [{variant: 'solid', theme: 'theme-primary'}, {variant: 'subtle', theme: 'theme-success'}, {variant: 'outline', theme: 'theme-neutral'}] %}
-            <button class="btn" type="button" commandfor="dialog-{{ dialog.variant }}" command="show-modal">dialog-{{ dialog.variant }} {{ dialog.theme }}</button>
-        {% endfor %}
-    </div>
-
-    {% for dialog in [{variant: 'solid', theme: 'theme-primary'}, {variant: 'subtle', theme: 'theme-success'}, {variant: 'outline', theme: 'theme-neutral'}] %}
-        <dialog class="dialog-{{ dialog.variant }} {{ dialog.theme }}" id="dialog-{{ dialog.variant }}" data-dialog aria-labelledby="dialog-{{ dialog.variant }}-title">
+    <p class="mt-2">Sur <code>dialog-solid</code> : un <code>btn-solid</code> d'un autre thème, la croix <code>btn-close-solid</code> du même thème.</p>
+    {% set code %}
+        <button class="btn" type="button" commandfor="dialog-solid" command="show-modal">dialog-solid</button>
+        <dialog class="dialog-solid theme-primary" id="dialog-solid" data-dialog aria-labelledby="dialog-solid-titre">
             <div class="dialog-header">
-                <h2 class="fs-lg" id="dialog-{{ dialog.variant }}-title">dialog-{{ dialog.variant }} {{ dialog.theme }}</h2>
-                <button class="{{ dialog.variant == 'solid' ? 'btn-close-solid' : 'btn-close-subtle' }}" type="button" commandfor="dialog-{{ dialog.variant }}" command="close" aria-label="Fermer"></button>
+                <h2 class="fs-lg" id="dialog-solid-titre">dialog-solid</h2>
+                <button class="btn-close-solid" type="button" commandfor="dialog-solid" command="close" aria-label="Fermer"></button>
             </div>
             <div class="dialog-body">
-                <p>Le texte suit la variante du dialogue. <a class="link{% if dialog.variant == 'solid' %} color-inherit{% endif %}" href="#">Un lien</a></p>
+                <p>Texte noir ou blanc. <a class="link color-inherit" href="#">Un lien</a></p>
             </div>
             <div class="dialog-footer">
-                {% if dialog.variant != 'solid' %}
-                    <button class="btn" type="button" commandfor="dialog-{{ dialog.variant }}" command="close">Annuler</button>
-                {% endif %}
-                <button class="btn-solid {{ dialog.variant == 'solid' ? 'theme-inverse' : 'theme-primary' }}" type="button" commandfor="dialog-{{ dialog.variant }}" command="close">OK</button>
+                <button class="btn-solid theme-inverse" type="button" commandfor="dialog-solid" command="close">OK</button>
             </div>
         </dialog>
-    {% endfor %}
-    <p class="mt-2">Comme les cartes : le cadre et les traits ont la couleur de bordure du thème (--color-*-border ; dialog-subtle : --color-*-subtle-border) ; le texte reste celui de la page, sauf sur dialog-solid (noir ou blanc). Sur dialog-solid, seul btn-solid est prévu, d'un autre thème (theme-inverse) ; la croix, btn-close-solid, prend le thème du dialogue : le carré se fond dans le fond, on ne voit que la croix. Sur dialog-outline, le fond est celui de la page.</p>
 
-    <h2 class="mt-10">Tailles</h2>
-    <div class="d-flex flex-wrap-wrap gap-2 mt-2">
-        {% for size in ['xs', 'sm', 'md', 'lg', 'xl'] %}
-            <button class="btn" type="button" commandfor="dialog-size-{{ size }}" command="show-modal">dialog-{{ size }}</button>
-        {% endfor %}
-    </div>
-
-    {% for size in ['xs', 'sm', 'md', 'lg', 'xl'] %}
-        <dialog class="dialog dialog-{{ size }}" id="dialog-size-{{ size }}" data-dialog aria-labelledby="dialog-size-{{ size }}-title">
+        <button class="btn" type="button" commandfor="dialog-subtle" command="show-modal">dialog-subtle</button>
+        <dialog class="dialog-subtle theme-success" id="dialog-subtle" data-dialog aria-labelledby="dialog-subtle-titre">
             <div class="dialog-header">
-                <h2 class="fs-lg" id="dialog-size-{{ size }}-title">dialog-{{ size }}</h2>
-                <button class="btn-close" type="button" commandfor="dialog-size-{{ size }}" command="close" aria-label="Fermer"></button>
+                <h2 class="fs-lg" id="dialog-subtle-titre">dialog-subtle</h2>
+                <button class="btn-close-subtle" type="button" commandfor="dialog-subtle" command="close" aria-label="Fermer"></button>
             </div>
             <div class="dialog-body">
-                <p>La largeur du breakpoint {{ size }}{% if size == 'md' %}, la taille par défaut{% endif %}. Sur un petit écran, le dialogue garde 1rem d'écart avec les bords.</p>
+                <p>Le texte de la page. <a class="link" href="#">Un lien</a></p>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn-solid" type="button" commandfor="dialog-subtle" command="close">OK</button>
             </div>
         </dialog>
-    {% endfor %}
-    <p class="mt-2">Le dialogue a la largeur du breakpoint du même nom : xs 22.5rem (360px), sm 36rem (576px), md 48rem (768px, le défaut), lg 64rem (1024px), xl 80rem (1280px).</p>
 
-    <h2 class="mt-10">HTML</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn-solid theme-primary" type="button" commandfor="dialog-compte" command="show-modal"&gt;Mon compte&lt;/button&gt;
+        <button class="btn" type="button" commandfor="dialog-outline" command="show-modal">dialog-outline</button>
+        <dialog class="dialog-outline theme-neutral" id="dialog-outline" data-dialog aria-labelledby="dialog-outline-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="dialog-outline-titre">dialog-outline</h2>
+                <button class="btn-close-subtle" type="button" commandfor="dialog-outline" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="dialog-body">
+                <p>Le fond de la page, un cadre de la couleur.</p>
+            </div>
+        </dialog>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
-&lt;dialog class="dialog" id="dialog-compte" data-dialog aria-labelledby="dialog-compte-title"&gt;
-    &lt;div class="dialog-header"&gt;
-        &lt;h2 id="dialog-compte-title"&gt;Mon compte&lt;/h2&gt;
-        &lt;button class="btn-close" type="button" commandfor="dialog-compte" command="close" aria-label="Fermer"&gt;&lt;/button&gt;
-    &lt;/div&gt;
-    &lt;div class="dialog-body"&gt;…&lt;/div&gt;
-    &lt;div class="dialog-footer"&gt;
-        &lt;button class="btn" type="button" commandfor="dialog-compte" command="close"&gt;Annuler&lt;/button&gt;
-        &lt;button class="btn-solid theme-primary" type="button" commandfor="dialog-compte" command="close"&gt;Enregistrer&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/dialog&gt;</code></pre>
-    <ul>
-        <li>command="show-modal" ouvre le dialogue en modal (le reste de la page est inactif), command="close" le ferme ; commandfor donne l'id du dialogue.</li>
-        <li>command="request-close" demande la fermeture comme Échap : le JS du site peut la refuser (événement cancel), par exemple quand un formulaire n'est pas enregistré ; pas encore avec data-dialog (voir les limites).</li>
-        <li>data-dialog : le JS du framework l'efface (transparent, un peu plus petit, la page s'éclaircit) avant de le fermer. Sans data-dialog ou sans le JS, il marche aussi, mais disparaît d'un coup.</li>
-        <li>Dans un formulaire, &lt;form method="dialog"&gt; ferme le dialogue quand il est envoyé, sans quitter la page.</li>
-        <li>En-tête : le titre et la croix sur une ligne ; pied : les boutons à droite, le principal en dernier. Les classes de taille (dialog-xs à dialog-lg) se posent sur le &lt;dialog&gt;.</li>
-    </ul>
+    <h2 class="mt-10">Tailles</h2>
+    <p class="mt-2">La largeur du breakpoint du même nom : 360, 576, 768 (le défaut), 1024 et 1280px.</p>
+    {% set code %}
+        <button class="btn" type="button" commandfor="dialog-xs" command="show-modal">dialog-xs</button>
+        <button class="btn" type="button" commandfor="dialog-sm" command="show-modal">dialog-sm</button>
+        <button class="btn" type="button" commandfor="dialog-md" command="show-modal">dialog-md</button>
+        <button class="btn" type="button" commandfor="dialog-lg" command="show-modal">dialog-lg</button>
+        <button class="btn" type="button" commandfor="dialog-xl" command="show-modal">dialog-xl</button>
+
+        <dialog class="dialog dialog-xs" id="dialog-xs" data-dialog aria-labelledby="dialog-xs-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="dialog-xs-titre">dialog-xs</h2>
+                <button class="btn-close" type="button" commandfor="dialog-xs" command="close" aria-label="Fermer"></button>
+            </div>
+        </dialog>
+        <dialog class="dialog dialog-sm" id="dialog-sm" data-dialog aria-labelledby="dialog-sm-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="dialog-sm-titre">dialog-sm</h2>
+                <button class="btn-close" type="button" commandfor="dialog-sm" command="close" aria-label="Fermer"></button>
+            </div>
+        </dialog>
+        <dialog class="dialog dialog-md" id="dialog-md" data-dialog aria-labelledby="dialog-md-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="dialog-md-titre">dialog-md</h2>
+                <button class="btn-close" type="button" commandfor="dialog-md" command="close" aria-label="Fermer"></button>
+            </div>
+        </dialog>
+        <dialog class="dialog dialog-lg" id="dialog-lg" data-dialog aria-labelledby="dialog-lg-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="dialog-lg-titre">dialog-lg</h2>
+                <button class="btn-close" type="button" commandfor="dialog-lg" command="close" aria-label="Fermer"></button>
+            </div>
+        </dialog>
+        <dialog class="dialog dialog-xl" id="dialog-xl" data-dialog aria-labelledby="dialog-xl-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="dialog-xl-titre">dialog-xl</h2>
+                <button class="btn-close" type="button" commandfor="dialog-xl" command="close" aria-label="Fermer"></button>
+            </div>
+        </dialog>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
     <h2 class="mt-10">La croix à gauche</h2>
-    <button class="btn mt-2" type="button" commandfor="dialog-close-start" command="show-modal">Croix à gauche</button>
-    <dialog class="dialog" id="dialog-close-start" data-dialog aria-labelledby="dialog-close-start-title">
-        <div class="dialog-header">
-            <button class="btn-close" type="button" commandfor="dialog-close-start" command="close" aria-label="Fermer"></button>
-            <h2 class="fs-lg" id="dialog-close-start-title">Croix à gauche</h2>
-        </div>
-        <div class="dialog-body">
-            <p>La croix est le premier élément de l'en-tête : elle se met à gauche, le titre la suit.</p>
-        </div>
-    </dialog>
-    <p class="mt-2">La croix se place selon son ordre dans le HTML : en dernier, à droite (le défaut courant) ; en premier, à gauche. L'ordre de lecture et du focus suit ce qu'on voit.</p>
+    <p class="mt-2">La croix se place selon son ordre dans le HTML.</p>
+    {% set code %}
+        <button class="btn" type="button" commandfor="dialog-croix" command="show-modal">Croix à gauche</button>
+        <dialog class="dialog" id="dialog-croix" data-dialog aria-labelledby="dialog-croix-titre">
+            <div class="dialog-header">
+                <button class="btn-close" type="button" commandfor="dialog-croix" command="close" aria-label="Fermer"></button>
+                <h2 class="fs-lg" id="dialog-croix-titre">Croix à gauche</h2>
+            </div>
+            <div class="dialog-body">
+                <p>Le titre suit la croix.</p>
+            </div>
+        </dialog>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
-    <h2 class="mt-10">Exemple : une confirmation</h2>
-    <button class="btn-solid theme-danger mt-2" type="button" commandfor="dialog-confirm" command="show-modal">Supprimer le fichier</button>
-    <dialog class="dialog dialog-xs" id="dialog-confirm" data-dialog role="alertdialog" aria-labelledby="dialog-confirm-title" aria-describedby="dialog-confirm-description">
-        <div class="dialog-header">
-            <h2 class="fs-lg" id="dialog-confirm-title">Supprimer le fichier ?</h2>
-        </div>
-        <div class="dialog-body">
-            <p id="dialog-confirm-description">Le fichier rapport.pdf sera supprimé définitivement.</p>
-        </div>
-        <div class="dialog-footer">
-            <button class="btn" type="button" commandfor="dialog-confirm" command="close" autofocus>Annuler</button>
-            <button class="btn-solid theme-danger" type="button" commandfor="dialog-confirm" command="close" value="supprimer">Supprimer</button>
-        </div>
-    </dialog>
-    <p class="mt-2">role="alertdialog" : un message qui demande une réponse, lu avec sa description (aria-describedby). autofocus sur Annuler, le choix sans risque (ARIA Authoring Practices). value="supprimer" : le JS du site lit le choix dans returnValue à la fermeture.</p>
+    <h2 class="mt-10">Une confirmation</h2>
+    <p class="mt-2"><code>role="alertdialog"</code> ; <code>autofocus</code> sur le choix sans risque ; le JS du site lit le <code>value</code> du bouton dans <code>returnValue</code>.</p>
+    {% set code %}
+        <button class="btn-solid theme-danger" type="button" commandfor="dialog-supprimer" command="show-modal">Supprimer le fichier</button>
+        <dialog class="dialog dialog-xs" id="dialog-supprimer" data-dialog role="alertdialog" aria-labelledby="dialog-supprimer-titre" aria-describedby="dialog-supprimer-texte">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="dialog-supprimer-titre">Supprimer le fichier ?</h2>
+            </div>
+            <div class="dialog-body">
+                <p id="dialog-supprimer-texte">Le fichier rapport.pdf sera supprimé définitivement.</p>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn" type="button" commandfor="dialog-supprimer" command="close" autofocus>Annuler</button>
+                <button class="btn-solid theme-danger" type="button" commandfor="dialog-supprimer" command="close" value="supprimer">Supprimer</button>
+            </div>
+        </dialog>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
-    <h2 class="mt-10">Exemple : un contenu long</h2>
-    <button class="btn mt-2" type="button" commandfor="dialog-long" command="show-modal">Conditions d'utilisation</button>
-    <dialog class="dialog dialog-md" id="dialog-long" data-dialog aria-labelledby="dialog-long-title">
-        <div class="dialog-header">
-            <h2 class="fs-lg" id="dialog-long-title">Conditions d'utilisation</h2>
-            <button class="btn-close" type="button" commandfor="dialog-long" command="close" aria-label="Fermer"></button>
-        </div>
-        <div class="dialog-body">
-            {% for i in 1..12 %}
-                <h3 class="fs-md{% if not loop.first %} mt-4{% endif %}">Article {{ i }}</h3>
-                <p class="mt-2">Un long paragraphe de conditions, pour voir le défilement. Le dialogue ne dépasse jamais de l'écran (1rem d'écart en haut et en bas) : quand le contenu est plus haut, c'est le dialogue entier qui défile, en-tête compris.</p>
-            {% endfor %}
-        </div>
-        <div class="dialog-footer">
-            <button class="btn-solid theme-primary" type="button" commandfor="dialog-long" command="close">J'ai lu</button>
-        </div>
-    </dialog>
+    <h2 class="mt-10">Un contenu long</h2>
+    <p class="mt-2">Le dialogue ne dépasse pas de l'écran : tout le dialogue défile, en-tête compris.</p>
+    {% set code %}
+        <button class="btn" type="button" commandfor="dialog-conditions" command="show-modal">Conditions d'utilisation</button>
+        <dialog class="dialog" id="dialog-conditions" data-dialog aria-labelledby="dialog-conditions-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="dialog-conditions-titre">Conditions d'utilisation</h2>
+                <button class="btn-close" type="button" commandfor="dialog-conditions" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="dialog-body">
+                <!-- Un long texte -->
+            </div>
+            <div class="dialog-footer">
+                <button class="btn-solid theme-primary" type="button" commandfor="dialog-conditions" command="close">J'ai lu</button>
+            </div>
+        </dialog>
+    {% endset %}
+    {% set demo %}
+        <button class="btn" type="button" commandfor="dialog-conditions" command="show-modal">Conditions d'utilisation</button>
+        <dialog class="dialog" id="dialog-conditions" data-dialog aria-labelledby="dialog-conditions-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="dialog-conditions-titre">Conditions d'utilisation</h2>
+                <button class="btn-close" type="button" commandfor="dialog-conditions" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="dialog-body">
+                {% for i in 1..12 %}
+                    <h3 class="fs-md{% if not loop.first %} mt-4{% endif %}">Article {{ i }}</h3>
+                    <p class="mt-2">Un long paragraphe de conditions, pour voir le défilement : quand le contenu est plus haut que l'écran, c'est le dialogue entier qui défile.</p>
+                {% endfor %}
+            </div>
+            <div class="dialog-footer">
+                <button class="btn-solid theme-primary" type="button" commandfor="dialog-conditions" command="close">J'ai lu</button>
+            </div>
+        </dialog>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo}) }}
 
     <h2 class="mt-10" id="variables">Variables</h2>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
@@ -201,70 +229,95 @@
             <tbody>
                 <tr><th scope="row">--dialog-padding-block</th><td>1rem</td><td>haut et bas de l'en-tête, du corps et du pied</td></tr>
                 <tr><th scope="row">--dialog-padding-inline</th><td>1rem</td><td>côtés de l'en-tête, du corps et du pied</td></tr>
-                <tr><th scope="row">--dialog-border-radius</th><td>--border-radius-md</td><td>coins du cadre</td></tr>
+                <tr><th scope="row">--dialog-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
                 <tr><th scope="row">--dialog-border-width</th><td>--border-width</td><td>cadre et traits</td></tr>
-                <tr><th scope="row">--dialog-width</th><td>48rem (breakpoint md)</td><td>largeur du dialogue</td></tr>
-                <tr><th scope="row">--dialog-transition-duration</th><td>0.2s</td><td>apparition et disparition du dialogue et du fond assombri</td></tr>
-                <tr><th scope="row">--backdrop-background-color</th><td>noir à 50 % (65 % en sombre)</td><td>fond qui assombrit la page derrière un dialogue modal</td></tr>
-                <tr><th scope="row">--backdrop-filter</th><td>blur(5px)</td><td>flou de la page derrière un dialogue modal</td></tr>
+                <tr><th scope="row">--dialog-width</th><td>48rem</td><td>largeur</td></tr>
+                <tr><th scope="row">--dialog-transition-duration</th><td>0.2s</td><td>apparition et disparition</td></tr>
+                <tr><th scope="row">--backdrop-background-color</th><td>noir à 50 % (65 % en sombre)</td><td>fond qui assombrit la page</td></tr>
+                <tr><th scope="row">--backdrop-filter</th><td>blur(5px)</td><td>flou de la page</td></tr>
             </tbody>
         </table>
     </div>
+    {% set code %}
+        /* Tous les dialogues sans taille ; un fond plus clair, sans flou */
+        :root {
+            --dialog-width: 40rem;
+            --backdrop-background-color: oklch(0 0 0 / 0.3);
+            --backdrop-filter: none;
+        }
 
-    <h2 class="mt-10">Exemple : changer les valeurs</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --dialog-width: 40rem; }
-.dialog-panier { --dialog-width: 50rem; }
-:root { --backdrop-background-color: oklch(0 0 0 / 0.3); }
-:root { --backdrop-filter: none; }</code></pre>
-    <p>La première ligne change tous les dialogues sans taille, la deuxième seulement celui qui a la classe dialog-panier du site ; la troisième éclaircit le fond derrière, la dernière retire le flou.</p>
+        /* Un dialogue du site */
+        .dialog-panier { --dialog-width: 50rem; }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
 
-    <h2 class="mt-10">JavaScript</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;script type="module" src="…/js/bundle.js"&gt;&lt;/script&gt;</code></pre>
-    <p>bundle.js contient tous les composants. Il n'y a rien à démarrer : il s'occupe de tous les &lt;dialog data-dialog&gt; de la page (dialogues et drawers), aussi ceux ajoutés plus tard.</p>
-    <ul>
-        <li>Il retient la fermeture du navigateur, pose l'attribut data-closing (le CSS efface le dialogue et éclaircit la page), puis appelle close() à la fin de l'animation.</li>
-        <li>Fermer depuis le JS du site : dialog.requestClose() s'anime ; dialog.close() ferme d'un coup.</li>
-    </ul>
-    <p class="mt-2">Événements, tous ceux du navigateur, écoutés sur le &lt;dialog&gt; :</p>
-    <ul>
-        <li>command : un bouton commandfor l'ouvre ou le ferme (event.source = le bouton) ;</li>
-        <li>cancel : Échap, clic à côté (closedby="any"), command="request-close" ou requestClose() ;</li>
-        <li>close : le dialogue est fermé, après l'animation (returnValue = le value du bouton de fermeture).</li>
-    </ul>
-    <pre class="mt-2" tabindex="0"><code class="language-js">document.getElementById('dialog-confirm').addEventListener('close', (event) =&gt; {
-    if (event.target.returnValue === 'supprimer') { … }
-});</code></pre>
+    <h2 class="mt-10" id="javascript">JavaScript</h2>
+    <p class="mt-2">Rien à écrire : <code>dist/js/bundle.js</code> anime la fermeture de tous les <code>&lt;dialog data-dialog&gt;</code>. Les événements sont ceux du navigateur.</p>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="javascript" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Événement</th>
+                    <th scope="col">Envoyé</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">command</th><td>un bouton <code>commandfor</code> l'ouvre ou le ferme (<code>event.source</code> = le bouton)</td></tr>
+                <tr><th scope="row">cancel</th><td>Échap, clic à côté, <code>command="request-close"</code> ou <code>requestClose()</code></td></tr>
+                <tr><th scope="row">close</th><td>le dialogue est fermé, après l'animation</td></tr>
+            </tbody>
+        </table>
+    </div>
+    {% set code %}
+        // Le choix de la confirmation
+        document.getElementById('dialog-supprimer').addEventListener('close', (event) => {
+            if (event.target.returnValue === 'supprimer') { … }
+        });
+
+        // Fermer depuis le JS du site : animé ; close() ferme d'un coup
+        dialog.requestClose();
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'js'}) }}
 
     <h2 class="mt-10">Accessibilité</h2>
-    <ul>
-        <li>Toujours command="show-modal" (ou showModal() en JS) : le reste de la page est inactif, Échap ferme, le focus va dans le dialogue puis revient sur le bouton d'ouverture à la fermeture (MDN).</li>
-        <li>aria-labelledby sur le &lt;dialog&gt;, vers son titre : le lecteur d'écran annonce le nom du dialogue à l'ouverture.</li>
-        <li>Au moins un bouton visible pour fermer (MDN), même quand Échap ferme : tout le monde n'a pas de clavier.</li>
-        <li>autofocus sur l'élément à utiliser en premier ; sans autofocus, le focus va sur le premier élément focusable (souvent la croix).</li>
-        <li>&lt;div class="dialog-header"&gt; et &lt;div class="dialog-footer"&gt; plutôt que &lt;header&gt; et &lt;footer&gt; : posés hors d'un &lt;main&gt; ou d'une &lt;section&gt;, ils deviendraient l'en-tête et le pied de toute la page pour les lecteurs d'écran.</li>
-        <li>prefers-reduced-motion : le dialogue apparaît et disparaît sans animation, le flou et l'assombrissement d'un coup.</li>
+    <ul class="mt-2">
+        <li>Toujours <code>command="show-modal"</code> : la page est inactive, Échap ferme, le focus entre dans le dialogue puis revient.</li>
+        <li><code>aria-labelledby</code> vers le titre ; au moins un bouton visible pour fermer.</li>
+        <li><code>autofocus</code> sur l'élément à utiliser en premier ; sinon le focus va sur la croix.</li>
+        <li><code>&lt;div class="dialog-header"&gt;</code> et non <code>&lt;header&gt;</code> : hors d'un <code>&lt;main&gt;</code>, il deviendrait l'en-tête de toute la page.</li>
     </ul>
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog-solid"&gt;…&lt;/dialog&gt;</code></pre>
-    <p>Une variante sans .theme-* n'a pas de couleur : le dialogue n'a pas de fond, et la page se voit à travers. Écrire dialog, ou dialog-solid avec une couleur (theme-neutral pour le gris).</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog" open&gt;…&lt;/dialog&gt;</code></pre>
-    <p>L'attribut open écrit dans le HTML affiche un dialogue non modal : pas de fond assombri, Échap ne ferme pas, le focus reste dans la page.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog" tabindex="-1"&gt;…&lt;/dialog&gt;</code></pre>
-    <p>Pas de tabindex sur un &lt;dialog&gt; (MDN) : il ne reçoit pas le focus, ce sont ses éléments qui le reçoivent.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;dialog class="dialog" closedby="none"&gt;&lt;p&gt;Chargement…&lt;/p&gt;&lt;/dialog&gt;</code></pre>
-    <p>closedby="none" sans bouton : la personne est bloquée. Un chargement s'affiche dans la page (spinner dans un role="status"), pas dans un dialogue qu'on ne peut pas fermer.</p>
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : une variante sans .theme-* n'a pas de fond, la page se voit à travers -->
+        <dialog class="dialog-solid">…</dialog>
+        <!-- Oui -->
+        <dialog class="dialog-solid theme-neutral">…</dialog>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : open affiche un dialogue non modal (pas de fond, Échap ne ferme pas) -->
+        <dialog class="dialog" open>…</dialog>
+        <!-- Non : pas de tabindex sur un dialog -->
+        <dialog class="dialog" tabindex="-1">…</dialog>
+        <!-- Oui : ouvert par un bouton command="show-modal" -->
+        <dialog class="dialog" id="dialog-compte" data-dialog aria-labelledby="dialog-compte-titre">…</dialog>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : closedby="none" sans bouton, la personne est bloquée -->
+        <dialog class="dialog" closedby="none"><p>Chargement…</p></dialog>
+        <!-- Oui : un chargement s'affiche dans la page -->
+        <p role="status" aria-live="polite"><span class="spinner"></span> Chargement…</p>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>command et commandfor sont récents (Baseline 2025 : Chrome 135, Firefox 144, Safari 26.2) : dans un navigateur plus ancien, le bouton ne fait rien. Le JS du site peut ouvrir le dialogue avec showModal().</li>
-        <li>closedby n'est pas encore dans Safari : il est ignoré, le dialogue garde le comportement par défaut (Échap ferme ; pas de clic à côté avec any ; Échap ferme quand même avec none).</li>
-        <li>La fermeture ne s'anime qu'avec le JS du framework et data-dialog (la propriété CSS overlay, qui le ferait sans JS, n'est pas encore dans Firefox ni Safari). Un &lt;form method="dialog"&gt; et close() ferment toujours d'un coup.</li>
-        <li>Échap pressé deux fois pendant l'animation ferme d'un coup : le navigateur ne laisse pas la page refuser deux fermetures de suite (protection contre les pages qui piègent l'utilisateur).</li>
-        <li>Avec data-dialog, le site ne peut pas garder le dialogue ouvert avec event.preventDefault() sur cancel : le JS du framework l'a déjà annulé pour l'animer. Pour un dialogue qui ne se ferme qu'avec ses boutons : closedby="none" ; pour refuser la fermeture d'un formulaire pas enregistré : pas de data-dialog sur ce dialogue.</li>
-        <li>Quand un dialogue modal est ouvert, la page derrière ne défile plus (overflow: hidden) : la barre de défilement disparaît, mais sa place est gardée (scrollbar-gutter: stable dans le reset), la page ne bouge pas. Sous Windows, une page trop courte pour défiler garde une bande vide à droite, de la largeur de la barre ; sur Mac et téléphone, les barres sont posées sur la page : rien ne change.</li>
-        <li>Le flou demande du calcul au navigateur : sur un vieux téléphone, l'ouverture peut saccader (:root { --backdrop-filter: none; } le retire).</li>
-        <li>Un contenu long fait défiler tout le dialogue, en-tête et pied compris : pas d'option pour faire défiler le corps seul, pour l'instant.</li>
-        <li>Un dialogue non modal (show() en JS) n'a pas de command pour s'ouvrir sans JS : pour un menu ou une bulle, popover (plus tard).</li>
+    <ul class="mt-2">
+        <li><code>command</code> et <code>commandfor</code> sont récents (Baseline 2025) : ailleurs, le JS du site ouvre avec <code>showModal()</code>.</li>
+        <li><code>closedby</code> n'est pas encore dans Safari : ignoré.</li>
+        <li>La fermeture ne s'anime qu'avec <code>data-dialog</code> ; <code>close()</code> et <code>&lt;form method="dialog"&gt;</code> ferment d'un coup. Échap pressé deux fois ferme d'un coup.</li>
+        <li>Avec <code>data-dialog</code>, <code>preventDefault()</code> sur <code>cancel</code> ne garde pas le dialogue ouvert : <code>closedby="none"</code>, ou pas de <code>data-dialog</code>.</li>
+        <li>Le flou peut saccader sur un vieux téléphone : <code>--backdrop-filter: none</code>.</li>
     </ul>
 {% endblock %}

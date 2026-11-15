@@ -4,49 +4,107 @@
 
 {% block body %}
     <h1>Spinner</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Un cercle qui tourne pendant un chargement : &lt;span class="spinner"&gt;, de la couleur et de la taille du texte.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un cercle qui tourne pendant un chargement, de la couleur et de la taille du texte. Toujours avec un texte, dans un <code>role="status"</code>.</p>
 
-    <p class="mt-4" role="status" aria-live="polite"><span class="spinner"></span> spinner : couleur du texte</p>
+    <h2 class="mt-10">Par défaut</h2>
+    {% set code %}
+        <p role="status" aria-live="polite"><span class="spinner"></span> Chargement…</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
-    <p class="mt-4">color-*-emphasis : les couleurs</p>
+    <h2 class="mt-10">Couleurs</h2>
+    <p class="mt-2">Les utilitaires <code>color-*-emphasis</code>.</p>
+    {% set code %}
+        <p role="status" aria-live="polite"><span class="spinner color-primary-emphasis"></span> Chargement…</p>
+        <p role="status" aria-live="polite"><span class="spinner color-success-emphasis"></span> Envoi…</p>
+        <p role="status" aria-live="polite"><span class="spinner color-danger-emphasis"></span> Suppression…</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-2'}) }}
+
+    <h2 class="mt-10">Tailles</h2>
+    <p class="mt-2">Le spinner suit la taille du texte : les utilitaires <code>fs-*</code>.</p>
+    {% set code %}
+        <p class="fs-sm" role="status" aria-live="polite"><span class="spinner"></span> Chargement…</p>
+        <p class="fs-2xl" role="status" aria-live="polite"><span class="spinner"></span> Chargement…</p>
+        <p class="fs-4xl" role="status" aria-live="polite"><span class="spinner"></span> Chargement…</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-2'}) }}
+
+    <h2 class="mt-10">Dans un bouton</h2>
+    {% set code %}
+        <button class="btn-solid theme-primary" type="button"><span class="spinner"></span> Envoi…</button>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Sans texte visible</h2>
+    <p class="mt-2"><code>visually-hidden</code> : caché à l'écran, lu par les lecteurs d'écran.</p>
+    {% set code %}
+        <p role="status" aria-live="polite">
+            <span class="spinner color-primary-emphasis"></span>
+            <span class="visually-hidden">Chargement…</span>
+        </p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
+
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--spinner-width</th><td>1em</td><td>taille</td></tr>
+                <tr><th scope="row">--spinner-border-width</th><td>0.125em</td><td>épaisseur du cercle</td></tr>
+            </tbody>
+        </table>
+    </div>
+    {% set code %}
+        /* Tous les spinners */
+        :root { --spinner-border-width: 0.2em; }
+
+        /* Un spinner du site */
+        .loader { --spinner-width: 3rem; }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul class="mt-2">
+        <li>Un texte (visible ou <code>visually-hidden</code>) dans un <code>role="status" aria-live="polite"</code> : le lecteur d'écran l'annonce.</li>
+        <li>La zone <code>role="status"</code> est dans la page avant que le JS du site y mette le spinner : elle n'est annoncée que quand son contenu change.</li>
+        <li>Les animations réduites figent le cercle : c'est le texte qui dit que ça charge.</li>
+    </ul>
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : seul, il n'est pas annoncé, et il est figé si les animations sont réduites -->
+        <span class="spinner"></span>
+        <!-- Oui -->
+        <p role="status" aria-live="polite"><span class="spinner"></span> Chargement…</p>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : color-* est la couleur brute, à peine visible (1,87:1 sur blanc) -->
+        <span class="spinner color-success"></span>
+        <!-- Non : sans effet, le spinner ne lit pas les .theme-* -->
+        <span class="spinner theme-success"></span>
+        <!-- Oui -->
+        <span class="spinner color-success-emphasis"></span>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Limites</h2>
+    <ul class="mt-2">
+        <li>La vitesse est celle de <code>animation-spin</code> : <code>--animation-spin-duration</code> règle les deux.</li>
+    </ul>
+
+    <h2 class="mt-10">Toutes les couleurs</h2>
     <div class="grid gap-2 mt-2">
         {% for color in colors %}
             <p class="col-6 md:col-4"><span class="spinner color-{{ color }}-emphasis"></span> color-{{ color }}-emphasis</p>
         {% endfor %}
     </div>
-
-    <p class="mt-4">fs-* : la taille suit le texte</p>
-    <div class="d-flex flex-wrap-wrap align-items-center gap-4 mt-2">
-        {% for size in ['sm', 'md', '2xl', '4xl'] %}
-            <p class="fs-{{ size }}"><span class="spinner"></span> fs-{{ size }}</p>
-        {% endfor %}
-    </div>
-
-    <h2 class="mt-10">Exemple : dans un bouton</h2>
-    <button class="btn-solid theme-primary mt-2" type="button"><span class="spinner"></span> Envoi…</button>
-    <p class="mt-2">Le spinner prend la couleur du texte du bouton, sur toutes les variantes.</p>
-
-    <h2 class="mt-10">Exemple : sans texte visible</h2>
-    <p class="mt-2" role="status" aria-live="polite"><span class="spinner color-primary-emphasis"></span><span class="visually-hidden">Chargement…</span></p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;p role="status" aria-live="polite"&gt;&lt;span class="spinner"&gt;&lt;/span&gt;&lt;span class="visually-hidden"&gt;Chargement…&lt;/span&gt;&lt;/p&gt;</code></pre>
-    <p>visually-hidden : le texte est caché à l'écran, mais lu par les lecteurs d'écran (d-none et hidden le cachent à tout le monde).</p>
-
-    <h2 class="mt-10">Exemple : changer la taille ou l'épaisseur</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-css">:root { --spinner-border-width: 0.2em; }
-.loader { --spinner-width: 3rem; }</code></pre>
-
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="spinner"&gt;&lt;/span&gt;</code></pre>
-    <p>Seul, il n'est pas annoncé par les lecteurs d'écran, et il est figé si l'utilisateur réduit les animations. Toujours un texte (visible ou visually-hidden) dans un role="status" aria-live="polite".</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="spinner color-success"&gt;&lt;/span&gt;</code></pre>
-    <p>color-* est la couleur brute : 1,87:1 sur fond blanc, à peine visible. Utiliser color-success-emphasis.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="spinner theme-primary"&gt;&lt;/span&gt;</code></pre>
-    <p>Sans effet : le spinner prend la couleur du texte, pas les .theme-* des composants. Utiliser color-primary-emphasis.</p>
-
-    <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>prefers-reduced-motion: reduce fige le cercle (reset) : c'est le texte qui dit que ça charge.</li>
-        <li>role="status" est annoncé quand son contenu change : il doit être dans la page avant que le JS du site y mette le spinner et le texte.</li>
-        <li>La vitesse est celle de animation-spin : --animation-spin-duration règle les deux.</li>
-    </ul>
 {% endblock %}

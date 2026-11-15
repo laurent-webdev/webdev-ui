@@ -4,62 +4,107 @@
 
 {% block body %}
     <h1>Largeur et hauteur</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Largeurs en pourcentage du parent (w-25 à w-100, w-auto, w-fit-content), min-w-0, h-100, h-100svh, min-h-0 et min-h-100svh, avec des variantes xs: à 2xl:.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Largeurs en pourcentage du parent (<code>w-25</code> à <code>w-100</code>, <code>w-auto</code>, <code>w-fit-content</code>), <code>min-w-0</code>, <code>h-100</code>, <code>h-100svh</code>, <code>min-h-0</code> et <code>min-h-100svh</code>.</p>
 
-    <div class="demo-frame mt-4"><div class="demo-box p-2 w-25">w-25</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box p-2 w-33">w-33 : un tiers</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box p-2 w-50">w-50</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box p-2 w-66">w-66 : deux tiers</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box p-2 w-75">w-75</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box p-2 w-100">w-100</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box p-2 w-fit-content">w-fit-content : la largeur du texte</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box p-2 md:w-50">md:w-50 : pleine largeur sur téléphone, la moitié à partir de md (768px)</div></div>
-    <p class="mt-4">d-flex : le texte prend la place qui reste, min-w-0 lui permet de rétrécir et de couper le mot long</p>
-    <div class="demo-frame d-flex gap-2 mt-2">
-        <div class="demo-box p-2 flex-shrink-0">Icône</div>
-        <p class="demo-box p-2 min-w-0">Anticonstitutionnellementanticonstitutionnellement</p>
-    </div>
-    <p class="mt-4">h-100 dans un parent de 8rem de haut : toute la hauteur du parent</p>
-    <div class="demo-frame demo-height d-flex align-items-start gap-2 mt-2">
-        <div class="demo-box p-2">sans classe</div>
-        <div class="demo-box p-2 h-100">h-100</div>
-    </div>
+    <h2 class="mt-10">Largeur</h2>
+    {% set code %}
+        <p class="bg-primary-subtle p-2 w-25">w-25</p>
+        <p class="bg-primary-subtle p-2 w-33">w-33</p>
+        <p class="bg-primary-subtle p-2 w-50">w-50</p>
+        <p class="bg-primary-subtle p-2 w-66">w-66</p>
+        <p class="bg-primary-subtle p-2 w-75">w-75</p>
+        <p class="bg-primary-subtle p-2 w-100">w-100</p>
+        <p class="bg-primary-subtle p-2 w-fit-content">w-fit-content : la largeur du texte</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
 
-    <h2 class="mt-10">Exemple : pied de page en bas de l'écran, même si la page est courte</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;body class="d-flex flex-direction-column min-h-100svh"&gt;
-    &lt;main class="flex-grow-1"&gt;…&lt;/main&gt;
-    &lt;footer&gt;…&lt;/footer&gt;
-&lt;/body&gt;</code></pre>
+    <h2 class="mt-10">Selon l'écran</h2>
+    <p class="mt-2">Toute la largeur sur téléphone, la moitié à partir de md.</p>
+    {% set code %}
+        <p class="bg-primary-subtle p-2 md:w-50">md:w-50</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
-    <h2 class="mt-10">Exemple : en-tête et pied de page toujours visibles, le contenu défile entre les deux</h2>
-    <p class="mt-2">La mise en page de cette doc. Sur grand écran, la page a la hauteur de l'écran (lg:h-100svh), le main prend la place qui reste (flex-grow-1) et son corps défile ; lg:min-h-0 laisse le main plus petit que son contenu (sans lui, un enfant flex garde au moins la hauteur de son contenu et la page s'allonge). Sur petit écran et en zoom, toute la page défile.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;body class="d-flex flex-direction-column min-h-100svh lg:h-100svh"&gt;
-    &lt;header&gt;…&lt;/header&gt;
-    &lt;main class="card flex-grow-1 lg:min-h-0"&gt;
-        &lt;div class="card-body position-relative overflow-y-auto"&gt;…&lt;/div&gt;
-    &lt;/main&gt;
-    &lt;footer&gt;…&lt;/footer&gt;
-&lt;/body&gt;</code></pre>
-    <ul>
-        <li>position-relative sur la zone qui défile : un élément en position absolue (un texte visually-hidden) défile avec le contenu au lieu d'allonger la page.</li>
-        <li>La fenêtre ne défile plus : le site rend la place que le reset garde pour sa barre (scrollbar-gutter: stable), dans le même breakpoint : <code>@media (width &gt;= 64rem) { html { scrollbar-gutter: auto; } }</code>.</li>
-        <li>Au clavier, les flèches et Espace font défiler le main quand le focus est dedans (un lien, un bloc de code).</li>
+    <h2 class="mt-10">Un enfant flex qui rétrécit</h2>
+    <p class="mt-2"><code>min-w-0</code> : le texte passe sous la largeur de son mot le plus long.</p>
+    {% set code %}
+        <div class="d-flex gap-2">
+            <p class="bg-primary-subtle p-2 flex-shrink-0">Icône</p>
+            <p class="bg-primary-subtle p-2 min-w-0">Anticonstitutionnellementanticonstitutionnellement</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Toute la hauteur du parent</h2>
+    <p class="mt-2"><code>h-100</code> demande un parent qui a une hauteur, ici par <code>aspect-ratio-21x9</code>.</p>
+    {% set code %}
+        <div class="d-flex align-items-start gap-2 aspect-ratio-21x9 border">
+            <p class="bg-primary-subtle p-2">sans classe</p>
+            <p class="bg-primary-subtle p-2 h-100">h-100</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Le pied de page en bas de l'écran</h2>
+    <p class="mt-2">Même quand la page est courte.</p>
+    {% set code %}
+        <body class="d-flex flex-direction-column min-h-100svh">
+            <main class="flex-grow-1">…</main>
+            <footer>…</footer>
+        </body>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">L'en-tête et le pied toujours visibles</h2>
+    <p class="mt-2">La mise en page de cette doc : sur grand écran, seul le contenu défile ; sur petit écran et en zoom, toute la page.</p>
+    {% set code %}
+        <body class="d-flex flex-direction-column min-h-100svh lg:h-100svh">
+            <header>…</header>
+            <main class="card flex-grow-1 lg:min-h-0">
+                <div class="card-body position-relative overflow-y-auto">…</div>
+            </main>
+            <footer>…</footer>
+        </body>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        /* La fenêtre ne défile plus : rendre la place gardée pour sa barre */
+        @media (width >= 64rem) {
+            html { scrollbar-gutter: auto; }
+        }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
+    <ul class="mt-2">
+        <li><code>lg:min-h-0</code> laisse le main plus petit que son contenu : sans lui, la page s'allonge.</li>
+        <li><code>position-relative</code> : un texte <code>visually-hidden</code> défile avec le contenu au lieu d'allonger la page.</li>
     </ul>
 
-    <h2 class="mt-10">Contre-exemples (non affichés : ils déborderaient)</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="w-100 mx-4"&gt;…&lt;/div&gt;</code></pre>
-    <p>100 % du parent plus les marges : le bloc dépasse à droite. Sans classe, un bloc prend déjà toute la place qui reste entre ses marges.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="d-flex"&gt;
-    &lt;p&gt;Anticonstitutionnellementanticonstitutionnellement&lt;/p&gt;
-&lt;/div&gt;</code></pre>
-    <p>Sans min-w-0, un enfant flex ne descend pas sous la largeur de son mot le plus long : il déborde sur petit écran.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;body class="d-flex flex-direction-column h-100svh"&gt;…&lt;/body&gt;</code></pre>
-    <p>En-tête et pied de page fixes sur tous les écrans : sur un téléphone en paysage ou un écran zoomé à 400 % (320 × 256px), ils ne laissent presque plus de place au contenu (WCAG 1.4.10). lg:h-100svh les garde pour les grands écrans.</p>
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul class="mt-2">
+        <li>Une hauteur fixe sur un bloc de texte le coupe en zoom 200 % ou quand l'utilisateur agrandit l'interligne (WCAG 1.4.4 et 1.4.12).</li>
+        <li>Au clavier, une zone qui défile se prend avec <code>tabindex="0"</code>, ou par un lien qu'elle contient.</li>
+    </ul>
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : 100 % du parent plus les marges, le bloc dépasse -->
+        <div class="w-100 mx-4">…</div>
+        <!-- Oui : un bloc prend déjà toute la place entre ses marges -->
+        <div class="mx-4">…</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : en-tête et pied fixes sur tous les écrans, il ne reste presque rien au contenu sur un téléphone couché ou en zoom 400 % (WCAG 1.4.10) -->
+        <body class="d-flex flex-direction-column h-100svh">…</body>
+        <!-- Oui : seulement sur grand écran -->
+        <body class="d-flex flex-direction-column min-h-100svh lg:h-100svh">…</body>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>h-100 ne fait rien si le parent n'a pas de hauteur : la hauteur en % devient auto.</li>
-        <li>Autres hauteurs (bandeau à la moitié de l'écran…) : en CSS dans le site, en svh comme min-h-100svh.</li>
-        <li>min-h-100svh prend la hauteur de l'écran barres du navigateur affichées : quand elles se cachent sur téléphone, il reste un peu de place en bas.</li>
+    <ul class="mt-2">
+        <li><code>h-100</code> ne fait rien si le parent n'a pas de hauteur : la hauteur en % devient auto.</li>
+        <li>Pas d'autres hauteurs (un bandeau à la moitié de l'écran) : dans le site, en svh.</li>
+        <li><code>min-h-100svh</code> prend la hauteur de l'écran avec les barres du navigateur : quand elles se cachent sur téléphone, il reste un peu de place en bas.</li>
     </ul>
 {% endblock %}

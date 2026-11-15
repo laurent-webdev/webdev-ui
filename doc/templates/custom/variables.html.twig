@@ -4,22 +4,29 @@
 
 {% block body %}
     <h1>Variables</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Tout se règle avec des variables CSS, sans rien recompiler : une ligne dans le CSS du site suffit. Les variables globales sont ici ; celles d'un composant sont sur sa page.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Tout se règle par des variables CSS, sans rien recompiler. Les globales sont ici ; celles d'un composant sont sur sa page.</p>
 
     <h2 class="mt-10">Changer une valeur</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-css">:root {
-    --color-primary: oklch(0.55 0.15 150);
-    --border-radius-md: 0.5rem;
-}
-.encadre { --btn-border-radius: 0px; }</code></pre>
-    <ul>
-        <li>Dans :root, la valeur change partout ; sur une classe du site, seulement dans ce bloc et ses enfants (ici, les boutons du bloc encadre).</li>
-        <li>Le CSS du framework est dans des @layer : le CSS du site gagne toujours, sans !important.</li>
-        <li>Une couleur a une valeur claire et une sombre : light-dark(clair, sombre).</li>
+    <p class="mt-2">Dans <code>:root</code>, partout ; sur une classe du site, seulement dans ce bloc et ses enfants.</p>
+    {% set code %}
+        /* Tout le site */
+        :root {
+            --color-primary: light-dark(oklch(0.55 0.15 150), oklch(0.7 0.15 150));
+            --border-radius-md: 0.5rem;
+        }
+
+        /* Les boutons d'un bloc du site */
+        .encadre { --btn-border-radius: 0px; }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
+    <ul class="mt-2">
+        <li>Le CSS du framework est dans des <code>@layer</code> : celui du site gagne toujours, sans <code>!important</code>.</li>
+        <li>Une couleur a une valeur claire et une sombre : <code>light-dark(clair, sombre)</code>.</li>
+        <li>Une longueur à zéro s'écrit <code>0px</code> : un <code>0</code> sans unité casse les <code>calc()</code> qui la lisent.</li>
     </ul>
 
     <h2 class="mt-10" id="couleurs">Couleurs</h2>
-    <p class="mt-2">settings/_colors.scss : des couleurs oklch, chacune avec sa valeur pour le thème clair et pour le sombre.</p>
+    <p class="mt-2"><code>settings/_colors.scss</code>, en oklch.</p>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="couleurs" tabindex="0">
         <table class="table">
             <thead>
@@ -29,27 +36,46 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><th scope="row">--color-primary</th><td>couleur principale de la marque (bleu)</td></tr>
-                <tr><th scope="row">--color-secondary</th><td>deuxième couleur de la marque (rose)</td></tr>
-                <tr><th scope="row">--color-accent</th><td>couleur d'accent (violet)</td></tr>
-                <tr><th scope="row">--color-success</th><td>succès (vert)</td></tr>
-                <tr><th scope="row">--color-danger</th><td>erreur, danger (rouge)</td></tr>
-                <tr><th scope="row">--color-warning</th><td>avertissement (jaune)</td></tr>
-                <tr><th scope="row">--color-info</th><td>information (bleu)</td></tr>
-                <tr><th scope="row">--color-neutral</th><td>gris clair en clair, gris foncé en sombre</td></tr>
+                <tr><th scope="row">--color-primary</th><td>couleur principale de la marque</td></tr>
+                <tr><th scope="row">--color-secondary</th><td>deuxième couleur de la marque</td></tr>
+                <tr><th scope="row">--color-accent</th><td>couleur d'accent</td></tr>
+                <tr><th scope="row">--color-success</th><td>succès</td></tr>
+                <tr><th scope="row">--color-danger</th><td>erreur, danger</td></tr>
+                <tr><th scope="row">--color-warning</th><td>avertissement</td></tr>
+                <tr><th scope="row">--color-info</th><td>information</td></tr>
+                <tr><th scope="row">--color-neutral</th><td>gris</td></tr>
                 <tr><th scope="row">--color-inverse</th><td>presque noir en clair, presque blanc en sombre</td></tr>
                 <tr><th scope="row">--color-background</th><td>fond de la page</td></tr>
                 <tr><th scope="row">--border-color</th><td>bordures décoratives</td></tr>
-                <tr><th scope="row">--form-input-border-color</th><td>cadre des champs de formulaire (au moins 3:1 sur le fond)</td></tr>
-                <tr><th scope="row">--box-shadow-color</th><td>couleur de toutes les ombres</td></tr>
+                <tr><th scope="row">--box-shadow-color</th><td>toutes les ombres</td></tr>
                 <tr><th scope="row">--backdrop-background-color</th><td>la page assombrie derrière un dialogue</td></tr>
+                <tr><th scope="row">--glass-background-color</th><td>fond du verre (<code>glass</code>)</td></tr>
             </tbody>
         </table>
     </div>
-    <p class="mt-2">Chaque couleur a ses dérivées, calculées dans le navigateur : --color-*-contrast (noir ou blanc, lisible sur la couleur), --color-*-state (survol et clic), --color-*-subtle (fond léger), --color-*-emphasis (texte coloré lisible sur le fond de page), --color-*-emphasis-strong (texte sur le fond léger renforcé), --color-*-border et --color-*-subtle-border (bordures décoratives : la couleur et son fond léger, avec 10 % de contraste). Changer --color-primary change toutes ses dérivées.</p>
+    <h3 class="fs-md mt-6" id="derivees">Dérivées</h3>
+    <p class="mt-2">Calculées dans le navigateur : changer <code>--color-primary</code> les change toutes.</p>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="derivees" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Dérivée</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--color-*-contrast</th><td>noir ou blanc, lisible sur la couleur pleine</td></tr>
+                <tr><th scope="row">--color-*-state</th><td>mélangée au fond au survol et au clic</td></tr>
+                <tr><th scope="row">--color-*-subtle</th><td>fond léger</td></tr>
+                <tr><th scope="row">--color-*-emphasis</th><td>texte coloré, lisible sur la page et sur le fond léger</td></tr>
+                <tr><th scope="row">--color-*-emphasis-strong</th><td>texte sur le fond léger renforcé</td></tr>
+                <tr><th scope="row">--color-*-border, --color-*-subtle-border</th><td>bordures décoratives</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="mt-10" id="espacements">Espacements</h2>
-    <p class="mt-2">settings/_spacing.scss : l'échelle des utilitaires de marge, de padding et de gap.</p>
+    <p class="mt-2"><code>settings/_spacing.scss</code> : l'échelle des marges, des paddings et des gaps.</p>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="espacements" tabindex="0">
         <table class="table">
             <thead>
@@ -61,13 +87,13 @@
             </thead>
             <tbody>
                 <tr><th scope="row">--space</th><td>0.25rem</td><td>un cran : la changer agrandit ou réduit toute l'échelle</td></tr>
-                <tr><th scope="row">--space-0 à --space-12</th><td>0 à 3rem</td><td>n crans (--space-4 = 1rem)</td></tr>
+                <tr><th scope="row">--space-0 à --space-12</th><td>0px à 3rem</td><td>n crans (<code>--space-4</code> = 1rem)</td></tr>
             </tbody>
         </table>
     </div>
 
     <h2 class="mt-10" id="typographie">Typographie</h2>
-    <p class="mt-2">settings/_typography.scss.</p>
+    <p class="mt-2"><code>settings/_typography.scss</code>.</p>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="typographie" tabindex="0">
         <table class="table">
             <thead>
@@ -90,7 +116,7 @@
     </div>
 
     <h2 class="mt-10" id="formes-et-etats">Formes et états</h2>
-    <p class="mt-2">settings/_variables.scss.</p>
+    <p class="mt-2"><code>settings/_variables.scss</code>.</p>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="formes-et-etats" tabindex="0">
         <table class="table">
             <thead>
@@ -105,11 +131,12 @@
                 <tr><th scope="row">--border-radius-xs à -xl</th><td>2 à 10px</td><td>arrondis ; md pour les composants</td></tr>
                 <tr><th scope="row">--box-shadow-xs à -xl</th><td>de plus en plus hautes</td><td>ombres</td></tr>
                 <tr><th scope="row">--backdrop-filter</th><td>blur(5px)</td><td>flou de la page derrière un dialogue</td></tr>
+                <tr><th scope="row">--glass-backdrop-filter</th><td>blur(16px) saturate(180%)</td><td>ce qui est derrière le verre</td></tr>
                 <tr><th scope="row">--state-mix-soft</th><td>20%</td><td>survol</td></tr>
                 <tr><th scope="row">--state-mix-strong</th><td>30%</td><td>clic</td></tr>
                 <tr><th scope="row">--focus-outline-width</th><td>2px</td><td>épaisseur du contour de focus</td></tr>
                 <tr><th scope="row">--focus-outline-offset</th><td>1px</td><td>écart du contour de focus</td></tr>
-                <tr><th scope="row">--text-decoration-thickness</th><td>max(1px, 0.0625rem, 0.04em)</td><td>soulignement de link et de btn-link : deux fois au survol, trois fois au clic</td></tr>
+                <tr><th scope="row">--text-decoration-thickness</th><td>max(1px, 0.0625rem, 0.04em)</td><td>soulignement des liens : deux fois au survol, trois fois au clic</td></tr>
                 <tr><th scope="row">--text-underline-offset</th><td>0.15em</td><td>distance entre le texte et le soulignement</td></tr>
                 <tr><th scope="row">--disabled-opacity</th><td>0.5</td><td>élément désactivé</td></tr>
                 <tr><th scope="row">--transition-duration</th><td>0.15s</td><td>changement de couleur au survol</td></tr>
@@ -117,9 +144,27 @@
         </table>
     </div>
 
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        /* Non : --btn-border-radius est calculé dans :root, il ne relit pas la valeur du bloc */
+        .encadre { --border-radius-md: 0px; }
+
+        /* Oui : la variable du composant */
+        .encadre { --btn-border-radius: 0px; }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
+    {% set code %}
+        /* Non : sans light-dark(), la même couleur dans les deux thèmes */
+        :root { --color-primary: oklch(0.55 0.15 150); }
+
+        /* Oui */
+        :root { --color-primary: light-dark(oklch(0.55 0.15 150), oklch(0.7 0.15 150)); }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
+
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>Les breakpoints sont des variables SCSS : var() ne marche pas dans une media query.</li>
-        <li>Une variable qui en lit une autre est calculée dans :root : changer --border-radius-md sur un seul bloc ne change pas --btn-border-radius, ni --box-shadow-color les --box-shadow-*. Sur un bloc, changer la variable du composant.</li>
+    <ul class="mt-2">
+        <li>Les breakpoints sont des variables SCSS : <code>var()</code> ne marche pas dans une media query.</li>
+        <li>Une variable qui en lit une autre est calculée dans <code>:root</code> : sur un bloc, changer la variable du composant, pas la globale.</li>
     </ul>
 {% endblock %}

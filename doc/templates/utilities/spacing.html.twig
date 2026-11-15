@@ -4,16 +4,107 @@
 
 {% block body %}
     <h1>Espacements</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Marges et paddings de 0 à 12 (--space-*, 0.25rem par cran), en propriétés logiques : m-*, mx-*, my-*, mt-*, mb-*, ms-*, me-* et les mêmes en p-*, avec des variantes xs: à 2xl:.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Marges <code>m-*</code> et paddings <code>p-*</code> de 0 à 12, 0.25rem par cran (<code>--space-*</code>), en propriétés logiques.</p>
 
-    <div class="demo-frame mt-4"><div class="demo-box p-0">p-0</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box p-3">p-3</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box p-6">p-6</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box p-12">p-12</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box px-8 py-2">px-8 py-2</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box m-4 p-2">m-4 p-2</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box m-4 mt-0 p-2">m-4 mt-0 p-2 : le côté précis gagne</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box p-2 md:p-6 lg:p-12">p-2 md:p-6 lg:p-12 : grandit avec l'écran</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box p-1 sm:p-2 md:p-4 lg:p-6 xl:p-8 2xl:p-12">p-1 sm:p-2 md:p-4 lg:p-6 xl:p-8 2xl:p-12 : un cran par breakpoint</div></div>
-    <div class="demo-frame mt-4"><div class="demo-box p-1 xs:p-4">p-1 xs:p-4 : plus serré sous 360px</div></div>
+    <h2 class="mt-10">Padding</h2>
+    {% set code %}
+        <p class="bg-primary-subtle p-0">p-0</p>
+        <p class="bg-primary-subtle p-3">p-3</p>
+        <p class="bg-primary-subtle p-6">p-6</p>
+        <p class="bg-primary-subtle p-12">p-12</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Un axe, un côté</h2>
+    <p class="mt-2"><code>x</code> les côtés, <code>y</code> le haut et le bas ; <code>t</code>, <code>b</code>, <code>s</code> (début), <code>e</code> (fin) un seul côté.</p>
+    {% set code %}
+        <p class="bg-primary-subtle px-8 py-2">px-8 py-2</p>
+        <p class="bg-primary-subtle ps-8">ps-8</p>
+        <p class="bg-primary-subtle pt-6">pt-6</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Marge</h2>
+    <p class="mt-2">Le cadre montre le parent.</p>
+    {% set code %}
+        <div class="border">
+            <p class="bg-primary-subtle m-4 p-2">m-4</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Le plus précis gagne</h2>
+    <p class="mt-2">Tous les côtés, puis un axe, puis un côté.</p>
+    {% set code %}
+        <div class="border">
+            <p class="bg-primary-subtle m-4 mt-0 p-2">m-4 mt-0</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
+
+    <h2 class="mt-10">Selon l'écran</h2>
+    <p class="mt-2">Plus serré sur téléphone, plus large sur grand écran.</p>
+    {% set code %}
+        <p class="bg-primary-subtle p-2 md:p-6 lg:p-12">p-2 md:p-6 lg:p-12</p>
+        <p class="bg-primary-subtle p-1 xs:p-4">p-1 xs:p-4 : plus serré sous 360px</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Marge auto</h2>
+    <p class="mt-2"><code>mx-auto</code> centre un bloc qui a une largeur ; <code>ms-auto</code> pousse un enfant flex à la fin.</p>
+    {% set code %}
+        <p class="bg-primary-subtle w-50 mx-auto p-2">w-50 mx-auto</p>
+        <div class="d-flex gap-2">
+            <button class="btn" type="button">Précédent</button>
+            <button class="btn-solid theme-primary ms-auto" type="button">Suivant</button>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--space</th><td>0.25rem</td><td>un cran : toute l'échelle suit</td></tr>
+                <tr><th scope="row">--space-0 à --space-12</th><td>0px à 3rem</td><td>n crans (<code>--space-4</code> = 1rem)</td></tr>
+            </tbody>
+        </table>
+    </div>
+    {% set code %}
+        /* Toute l'échelle, marges, paddings et gaps */
+        :root { --space: 0.3rem; }
+
+        /* Un cran */
+        :root { --space-12: 4rem; }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : me-* sur chaque enfant, le dernier en garde une de trop -->
+        <div class="d-flex"><p class="me-2">…</p><p class="me-2">…</p></div>
+        <!-- Oui : gap sur le parent -->
+        <div class="d-flex gap-2"><p>…</p><p>…</p></div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : ml-* et pl-* n'existent pas -->
+        <p class="ml-4">…</p>
+        <!-- Oui : s pour start, le début de la ligne (à droite en arabe) -->
+        <p class="ms-4">…</p>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Limites</h2>
+    <ul class="mt-2">
+        <li>Pas de marge négative : une valeur sous zéro s'écrit dans le site.</li>
+        <li>Les paddings des composants sont en vraies valeurs : changer <code>--space</code> ne les change pas.</li>
+    </ul>
 {% endblock %}

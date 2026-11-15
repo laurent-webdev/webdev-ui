@@ -4,28 +4,53 @@
 
 {% block body %}
     <h1>Curseur</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Le curseur de la souris au survol : cursor-pointer, cursor-not-allowed, cursor-help…</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Le pointeur de la souris au survol : <code>cursor-pointer</code>, <code>cursor-help</code>, <code>cursor-grab</code>…</p>
 
-    <p class="mt-4">Survoler chaque case pour voir son curseur</p>
-    <div class="d-flex flex-wrap-wrap gap-2 mt-2">
-        {% for cursor in ['none', 'auto', 'pointer', 'not-allowed', 'help', 'progress', 'wait', 'grab', 'grabbing', 'text', 'copy', 'alias'] %}
-            <div class="demo-box cursor-{{ cursor }} p-2">cursor-{{ cursor }}</div>
-        {% endfor %}
-    </div>
+    <h2 class="mt-10">Valeurs</h2>
+    <p class="mt-2">Survoler chaque case.</p>
+    {% set code %}
+        <p class="bg-primary-subtle p-2 cursor-auto">cursor-auto</p>
+        <p class="bg-primary-subtle p-2 cursor-pointer">cursor-pointer</p>
+        <p class="bg-primary-subtle p-2 cursor-not-allowed">cursor-not-allowed</p>
+        <p class="bg-primary-subtle p-2 cursor-help">cursor-help</p>
+        <p class="bg-primary-subtle p-2 cursor-progress">cursor-progress</p>
+        <p class="bg-primary-subtle p-2 cursor-wait">cursor-wait</p>
+        <p class="bg-primary-subtle p-2 cursor-grab">cursor-grab</p>
+        <p class="bg-primary-subtle p-2 cursor-grabbing">cursor-grabbing</p>
+        <p class="bg-primary-subtle p-2 cursor-text">cursor-text</p>
+        <p class="bg-primary-subtle p-2 cursor-copy">cursor-copy</p>
+        <p class="bg-primary-subtle p-2 cursor-alias">cursor-alias</p>
+        <p class="bg-primary-subtle p-2 cursor-none">cursor-none</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
-    <h2 class="mt-10">Exemple : une case à cocher et son texte</h2>
-    <p class="mt-2"><label class="cursor-pointer"><input type="checkbox" name="demo-cursor"> Recevoir les nouveautés</label></p>
+    <h2 class="mt-10">Une case à cocher et son texte</h2>
+    <p class="mt-2">Le libellé coche la case : la main le dit.</p>
+    {% set code %}
+        <label class="cursor-pointer"><input class="form-checkbox" type="checkbox" name="demo-cursor"> Recevoir les nouveautés</label>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="cursor-pointer" onclick="…"&gt;Valider&lt;/div&gt;</code></pre>
-    <p>Un faux bouton : pas de focus au clavier, pas annoncé comme bouton par les lecteurs d'écran (WCAG 2.1.1 et 4.1.2). Utiliser &lt;button&gt;, qui a déjà la main.</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn cursor-not-allowed" type="button" disabled&gt;…&lt;/button&gt;</code></pre>
-    <p>Sans effet : un bouton désactivé ne reçoit plus la souris (pointer-events: none), il garde la flèche.</p>
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : un faux bouton, sans focus au clavier ni rôle (WCAG 2.1.1 et 4.1.2) -->
+        <div class="cursor-pointer" onclick="…">Valider</div>
+        <!-- Oui : un bouton a déjà la main -->
+        <button class="btn" type="button">Valider</button>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : un bouton désactivé ne reçoit plus la souris, il garde la flèche -->
+        <button class="btn cursor-not-allowed" type="button" disabled>…</button>
+        <!-- Oui -->
+        <button class="btn" type="button" disabled>…</button>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>Sans effet sur un écran tactile : il n'y a pas de pointeur.</li>
-        <li>cursor-none masque le pointeur : seulement quand autre chose le remplace (jeu, vidéo en plein écran).</li>
-        <li>cursor-grab, cursor-grabbing, cursor-wait et cursor-progress suivent une action : le JS du site pose et retire la classe (glisser-déposer, chargement).</li>
+    <ul class="mt-2">
+        <li>Sans effet au tactile : il n'y a pas de pointeur.</li>
+        <li><code>cursor-none</code> masque le pointeur : seulement si autre chose le remplace (jeu, vidéo).</li>
+        <li><code>cursor-grab</code>, <code>-grabbing</code>, <code>-wait</code> et <code>-progress</code> suivent une action : le JS du site pose et retire la classe.</li>
     </ul>
 {% endblock %}

@@ -3,23 +3,7 @@ body {
   /*font-family: system-ui, sans-serif;*/
 }
 
-/* Boîte de démo : le fond montre le padding, le cadre montre la marge */
-.demo-frame {
-  display: flow-root; /* garde la marge du bloc intérieur dans le cadre */
-  outline: 1px dashed var(--color-neutral-emphasis);
-}
-
-.demo-box {
-  background-color: var(--color-primary-subtle);
-}
-
-/* Élément carré, pour la démo border-radius-circle */
-.demo-square {
-  width: 6rem;
-  aspect-ratio: 1;
-}
-
-/* Parent avec une hauteur, pour les démos h-* */
+/* Parent avec une hauteur, pour les démos qui défilent (overflow, position-sticky) */
 .demo-height {
   height: 8rem;
 }

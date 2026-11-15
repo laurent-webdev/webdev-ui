@@ -4,42 +4,85 @@
 
 {% block body %}
     <h1>Overflow</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Ce qui dépasse d'une boîte : overflow-*, overflow-x-* et overflow-y-*, en auto, hidden, clip ou visible.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Ce qui dépasse d'une boîte : <code>overflow-*</code>, <code>overflow-x-*</code> et <code>overflow-y-*</code>, en <code>auto</code>, <code>hidden</code>, <code>clip</code> ou <code>visible</code>.</p>
 
-    <p class="mt-4">Des boîtes de 8rem de haut, avec un texte plus long</p>
-    <div class="grid gap-2 mt-2">
-        {% for overflow in ['auto', 'hidden', 'clip'] %}
-            <figure class="col-12 md:col-4">
-                <div class="demo-box demo-height p-2 overflow-{{ overflow }}"{% if overflow == 'auto' %} tabindex="0" role="region" aria-label="Exemple overflow-auto"{% endif %}>
-                    <p>Un texte plus long que la boîte. Il continue sur plusieurs lignes, pour dépasser la hauteur de 8rem et voir ce que fait chaque valeur d'overflow quand le contenu ne tient plus dans son cadre.</p>
-                </div>
-                <figcaption>overflow-{{ overflow }}</figcaption>
-            </figure>
-        {% endfor %}
-    </div>
-    <p class="mt-2">hidden et clip coupent pareil à l'écran. Différence : hidden crée une zone de défilement (position: sticky ne marche plus dedans, le JS peut encore la faire défiler), clip non.</p>
+    <h2 class="mt-10">Une zone qui défile</h2>
+    <p class="mt-2"><code>overflow-y-auto</code> : une barre de défilement quand le texte dépasse.</p>
+    {% set code %}
+        <!-- Un parent qui a une hauteur, 8rem ici -->
+        <div class="overflow-y-auto border p-2" role="region" aria-label="Conditions" tabindex="0">
+            <p>Un texte plus long que la boîte. Il continue sur plusieurs lignes, pour dépasser la hauteur de la boîte et voir la barre de défilement apparaître quand le contenu ne tient plus dans son cadre.</p>
+        </div>
+    {% endset %}
+    {% set demo %}
+        <div class="demo-height overflow-y-auto border p-2" role="region" aria-label="Conditions" tabindex="0">
+            <p>Un texte plus long que la boîte. Il continue sur plusieurs lignes, pour dépasser la hauteur de la boîte et voir la barre de défilement apparaître quand le contenu ne tient plus dans son cadre.</p>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo, class: ''}) }}
 
-    <h2 class="mt-10">Exemple : un tableau large</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="overflow-x-auto" tabindex="0" role="region" aria-label="Tarifs"&gt;
-    &lt;table&gt;…&lt;/table&gt;
-&lt;/div&gt;</code></pre>
-    <p>Le tableau défile seul sur un petit écran, la page ne déborde pas. tabindex="0" : la zone défile aussi au clavier ; role et aria-label la nomment.</p>
+    <h2 class="mt-10">Couper</h2>
+    <p class="mt-2"><code>hidden</code> et <code>clip</code> coupent pareil ; <code>clip</code> ne crée pas de zone de défilement (<code>position-sticky</code> marche encore dedans).</p>
+    {% set code %}
+        <div class="overflow-hidden border p-2">…</div>
+        <div class="overflow-clip border p-2">…</div>
+    {% endset %}
+    {% set demo %}
+        <div class="demo-height overflow-hidden border p-2"><p>overflow-hidden : un texte plus long que la boîte, coupé en bas. Il continue sur plusieurs lignes pour dépasser la hauteur de la boîte et ne plus tenir dans son cadre.</p></div>
+        <div class="demo-height overflow-clip border p-2"><p>overflow-clip : un texte plus long que la boîte, coupé en bas. Il continue sur plusieurs lignes pour dépasser la hauteur de la boîte et ne plus tenir dans son cadre.</p></div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, html: demo, class: 'd-grid gap-4'}) }}
 
-    <h2 class="mt-10">Exemple : une section pleine largeur avec slide-in-end</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;section class="overflow-x-clip"&gt;
-    &lt;div class="animation-slide-in-end"&gt;…&lt;/div&gt;
-&lt;/section&gt;</code></pre>
-    <p>Pas de barre de défilement horizontale pendant le mouvement, et position: sticky marche encore dans la section.</p>
+    <h2 class="mt-10">Un tableau large</h2>
+    <p class="mt-2">Le tableau défile seul sur un petit écran, la page ne déborde pas.</p>
+    {% set code %}
+        <div class="overflow-x-auto" role="region" aria-label="Tarifs" tabindex="0">
+            <table class="table">
+                <thead>
+                    <tr><th scope="col">Offre</th><th scope="col">Janvier</th><th scope="col">Février</th><th scope="col">Mars</th><th scope="col">Avril</th><th scope="col">Mai</th><th scope="col">Juin</th></tr>
+                </thead>
+                <tbody>
+                    <tr><th scope="row">Découverte</th><td>9 €</td><td>9 €</td><td>9 €</td><td>12 €</td><td>12 €</td><td>12 €</td></tr>
+                </tbody>
+            </table>
+        </div>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: ''}) }}
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;body class="overflow-x-hidden"&gt;</code></pre>
-    <p>Cache la barre de défilement, mais aussi ce qui dépasse : le contenu est perdu pour l'utilisateur (WCAG 1.4.10), et position: sticky ne marche plus. Corriger l'élément qui déborde (min-w-0, w-100 sans marge…).</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="overflow-y-auto"&gt;Texte long…&lt;/div&gt;</code></pre>
-    <p>Sans élément focusable dedans, la zone ne défile pas au clavier dans Safari. Ajouter tabindex="0", role="region" et aria-label.</p>
+    <h2 class="mt-10">Une animation qui entre par le côté</h2>
+    <p class="mt-2">Pas de barre de défilement pendant le mouvement.</p>
+    {% set code %}
+        <section class="overflow-x-clip">
+            <div class="animation-slide-in-end">…</div>
+        </section>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul class="mt-2">
+        <li>Une zone qui défile a <code>tabindex="0"</code> (elle se prend au clavier), un <code>role="region"</code> et un nom (<code>aria-label</code> ou <code>aria-labelledby</code>).</li>
+        <li>Ce qui est coupé par <code>hidden</code> ou <code>clip</code> est perdu pour l'utilisateur : seulement pour du décor.</li>
+    </ul>
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : cache la barre, mais aussi le contenu qui dépasse (WCAG 1.4.10), et sticky ne marche plus -->
+        <body class="overflow-x-hidden">
+        <!-- Oui : corriger l'élément qui déborde (min-w-0, w-100 sans marge…) -->
+        <body>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : sans tabindex, la zone ne défile pas au clavier dans Safari -->
+        <div class="overflow-y-auto">…</div>
+        <!-- Oui -->
+        <div class="overflow-y-auto" role="region" aria-label="Conditions" tabindex="0">…</div>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>overflow-x-auto (ou -hidden) rend aussi le vertical défilant : visible devient auto sur l'autre axe (spécification CSS). Un menu qui sort de la boîte est coupé. clip n'a pas ce défaut.</li>
-        <li>Pas de overflow-scroll (barres toujours affichées) ni de variante responsive : rarement utiles.</li>
+    <ul class="mt-2">
+        <li><code>overflow-x-auto</code> (ou <code>-hidden</code>) fait défiler aussi l'autre axe : un menu qui sort de la boîte est coupé. <code>clip</code> n'a pas ce défaut.</li>
+        <li>Pas de <code>overflow-scroll</code> (barres toujours affichées) ni de préfixe d'écran.</li>
     </ul>
 {% endblock %}

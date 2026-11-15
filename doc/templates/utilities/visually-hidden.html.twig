@@ -4,25 +4,45 @@
 
 {% block body %}
     <h1>Visually-hidden</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Un texte caché à l'écran mais lu par les lecteurs d'écran : visually-hidden. hidden et d-none le cachent aux deux.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un texte caché à l'écran mais lu par les lecteurs d'écran : <code>visually-hidden</code>.</p>
 
-    <h2 class="mt-10">Exemple</h2>
-    <div class="d-flex flex-wrap-wrap gap-2 mt-2">
-        <button class="btn-solid theme-primary" type="button">Messages <span class="badge-solid theme-danger">3</span><span class="visually-hidden"> non lus</span></button>
+    <h2 class="mt-10">Compléter un nombre</h2>
+    <p class="mt-2">Le lecteur d'écran lit « Messages 3 non lus » ; à l'écran, seul le nombre se voit.</p>
+    {% set code %}
+        <button class="btn" type="button">Messages <span class="badge-solid theme-danger">3</span><span class="visually-hidden"> non lus</span></button>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Nommer une icône</h2>
+    {% set code %}
         <p role="status" aria-live="polite"><span class="spinner"></span><span class="visually-hidden">Chargement…</span></p>
-    </div>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;button class="btn" type="button"&gt;Messages &lt;span class="badge"&gt;3&lt;/span&gt;&lt;span class="visually-hidden"&gt; non lus&lt;/span&gt;&lt;/button&gt;
-&lt;p role="status" aria-live="polite"&gt;&lt;span class="spinner"&gt;&lt;/span&gt;&lt;span class="visually-hidden"&gt;Chargement…&lt;/span&gt;&lt;/p&gt;</code></pre>
-    <p>Le lecteur d'écran lit « Messages 3 non lus » et « Chargement… » ; à l'écran, seuls le nombre et le cercle se voient.</p>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
 
-    <h2 class="mt-10">Contre-exemples</h2>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;span class="d-none"&gt; non lus&lt;/span&gt;</code></pre>
-    <p>d-none cache aussi le texte au lecteur d'écran : il n'entend que « 3 ».</p>
-    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;a class="visually-hidden" href="#main"&gt;Aller au contenu&lt;/a&gt;</code></pre>
-    <p>Un lien caché reste atteint au clavier mais invisible : l'utilisateur ne voit pas où est le focus.</p>
+    <h2 class="mt-10">Un lien plus précis</h2>
+    <p class="mt-2">Plusieurs « Lire la suite » : chacun dit où il mène (WCAG 2.4.4).</p>
+    {% set code %}
+        <a class="link" href="#">Lire la suite<span class="visually-hidden"> de « Bien choisir son vélo »</span></a>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : d-none cache aussi le texte au lecteur d'écran, il n'entend que « 3 » -->
+        <span class="d-none"> non lus</span>
+        <!-- Oui -->
+        <span class="visually-hidden"> non lus</span>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : un lien caché reste atteint au clavier, mais le focus ne se voit pas -->
+        <a class="visually-hidden" href="#main">Aller au contenu</a>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
-    <ul>
-        <li>Pas encore de visually-hidden-focusable (un lien d'évitement qui apparaît au focus).</li>
+    <ul class="mt-2">
+        <li>Pas encore de <code>visually-hidden-focusable</code> (un lien d'évitement qui apparaît au focus).</li>
+        <li>Dans une zone qui défile, le parent prend <code>position-relative</code> : sinon le texte caché peut allonger la page.</li>
     </ul>
 {% endblock %}
