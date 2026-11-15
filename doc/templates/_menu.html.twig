@@ -1,8 +1,9 @@
 {# Menu : les sections de doc_sections (config/packages/twig.yaml), une liste par section. Inclus deux fois, dans un <nav> : le menu fixé sur grand écran, le drawer sur petit
-   La page courante a aria-current="page" (le fond de la liste en cours) ; sans thème, comme toute la doc : les états des liens en neutral #}
+   La page courante a aria-current="page" (le fond de la liste en cours) ; sans thème, comme toute la doc : les états des liens en neutral
+   Le titre d'une section : plus grand que les liens, sur une bande grise ; un trait entre deux sections #}
 {% for section in doc_sections %}
-    <div>
-        <h2 class="fs-sm fw-semibold text-transform-uppercase px-3 mb-2">{{ section.label }}</h2>
+    <div{% if not loop.first %} class="border-top pt-6"{% endif %}>
+        <h2 class="fs-md fw-bold bg-neutral-subtle border-radius-md px-3 py-1 mb-2">{{ section.label }}</h2>
         <ul class="list list-borderless">
             {% for link in section.links %}
                 <li><a class="list-item" href="{{ path(link[0]) }}"{% if app.current_route == link[0] %} aria-current="page"{% endif %}>{{ link[1] }}</a></li>
