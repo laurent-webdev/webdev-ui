@@ -5,7 +5,7 @@
 {% block body %}
     <h1 class="fs-5xl">webdev-ui</h1>
     <p class="fs-xl color-neutral-emphasis mt-4">Un framework CSS/JS ultra léger : le HTML natif, des variables CSS pour tout personnaliser, les thèmes clair et sombre, et pas une dépendance.</p>
-    <div class="d-flex flex-wrap-wrap gap-3 mt-6">
+    <div class="d-flex flex-wrap-wrap gap-3 mt-6" data-hx-boost="true">
         <a class="btn btn-lg" href="{{ path('app_accordion') }}">Voir les composants</a>
         <a class="btn btn-lg" href="{{ path('app_variables') }}">Personnaliser</a>
     </div>
@@ -16,7 +16,7 @@
 &lt;script type="module" src="…/js/bundle.js"&gt;&lt;/script&gt;</code></pre>
 
     <h2 class="mt-12">Ce qu'il y a dedans</h2>
-    <div class="grid mt-4">
+    <div class="grid mt-4" data-hx-boost="true">
         {% for section in doc_sections %}
             <section class="card md:col-6" aria-labelledby="home-{{ section.id }}">
                 <div class="card-header">

@@ -17,6 +17,10 @@
 
     // Hauteurs : seulement les courantes ; une hauteur en % ne marche que si le parent a une hauteur
     .#{$breakpoint}h-100 { height: 100%; }
+    // Juste la hauteur de l'écran : en-tête et pied de page restent, le contenu défile entre les deux
+    .#{$breakpoint}h-100svh { height: 100svh; }
+    // Un enfant flex ou grid peut rétrécir sous la hauteur de son contenu : la zone qui défile dedans prend la place qui reste
+    .#{$breakpoint}min-h-0 { min-height: 0; }
     // Au moins la hauteur de l'écran ; svh : rien n'est caché sous les barres du navigateur sur téléphone
     .#{$breakpoint}min-h-100svh { min-height: 100svh; }
 }

@@ -54,6 +54,11 @@ body {
   body {
     padding-inline-start: calc(var(--drawer-width) + var(--drawer-inset) * 2);
   }
+
+  /* La page ne défile plus, le contenu défile dans le main (base.html.twig) : pas de place gardée pour la barre de la fenêtre (le reset la garde) */
+  html {
+    scrollbar-gutter: auto;
+  }
 }
 
 /* ---------- Fond de la doc (pas dans le framework) ----------
@@ -111,6 +116,24 @@ body::after {
 #doc-menu {
   --list-item-padding-block: 0.375rem;
   --list-item-padding-inline: 0.75rem;
+}
+
+/* Recherche de l'en-tête (base.html.twig, app.js) : la liste sous le champ (son ancre), de sa largeur ; longue, elle défile */
+#doc-search {
+  anchor-name: --doc-search;
+}
+
+#doc-search-list {
+  position-anchor: --doc-search;
+  width: anchor-size(width);
+  max-height: min(20rem, 50svh);
+  overflow-y: auto;
+}
+
+/* L'option choisie au clavier : le focus reste dans le champ (aria-activedescendant), elle est entourée comme un élément du dropdown qui a le focus */
+#doc-search-list [aria-selected="true"] {
+  outline: var(--focus-outline-width) solid var(--dropdown-theme-emphasis);
+  outline-offset: calc(var(--focus-outline-width) * -1);
 }
 
 /* Blocs de code : les couleurs du fond de la doc, foncés dans les deux thèmes ; Prism (base.html.twig) découpe le code en .token */

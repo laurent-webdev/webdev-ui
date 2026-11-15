@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Largeur et hauteur</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Largeurs en pourcentage du parent (w-25 à w-100, w-auto, w-fit-content), min-w-0, h-100 et min-h-100svh, avec des variantes xs: à 2xl:.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Largeurs en pourcentage du parent (w-25 à w-100, w-auto, w-fit-content), min-w-0, h-100, h-100svh, min-h-0 et min-h-100svh, avec des variantes xs: à 2xl:.</p>
 
     <div class="demo-frame mt-4"><div class="demo-box p-2 w-25">w-25</div></div>
     <div class="demo-frame mt-4"><div class="demo-box p-2 w-33">w-33 : un tiers</div></div>
@@ -31,6 +31,21 @@
     &lt;footer&gt;…&lt;/footer&gt;
 &lt;/body&gt;</code></pre>
 
+    <h2 class="mt-10">Exemple : en-tête et pied de page toujours visibles, le contenu défile entre les deux</h2>
+    <p class="mt-2">La mise en page de cette doc. Sur grand écran, la page a la hauteur de l'écran (lg:h-100svh), le main prend la place qui reste (flex-grow-1) et son corps défile ; lg:min-h-0 laisse le main plus petit que son contenu (sans lui, un enfant flex garde au moins la hauteur de son contenu et la page s'allonge). Sur petit écran et en zoom, toute la page défile.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;body class="d-flex flex-direction-column min-h-100svh lg:h-100svh"&gt;
+    &lt;header&gt;…&lt;/header&gt;
+    &lt;main class="card flex-grow-1 lg:min-h-0"&gt;
+        &lt;div class="card-body position-relative overflow-y-auto"&gt;…&lt;/div&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;…&lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+    <ul>
+        <li>position-relative sur la zone qui défile : un élément en position absolue (un texte visually-hidden) défile avec le contenu au lieu d'allonger la page.</li>
+        <li>La fenêtre ne défile plus : le site rend la place que le reset garde pour sa barre (scrollbar-gutter: stable), dans le même breakpoint : <code>@media (width &gt;= 64rem) { html { scrollbar-gutter: auto; } }</code>.</li>
+        <li>Au clavier, les flèches et Espace font défiler le main quand le focus est dedans (un lien, un bloc de code).</li>
+    </ul>
+
     <h2 class="mt-10">Contre-exemples (non affichés : ils déborderaient)</h2>
     <pre class="mt-2" tabindex="0"><code class="language-html">&lt;div class="w-100 mx-4"&gt;…&lt;/div&gt;</code></pre>
     <p>100 % du parent plus les marges : le bloc dépasse à droite. Sans classe, un bloc prend déjà toute la place qui reste entre ses marges.</p>
@@ -38,6 +53,8 @@
     &lt;p&gt;Anticonstitutionnellementanticonstitutionnellement&lt;/p&gt;
 &lt;/div&gt;</code></pre>
     <p>Sans min-w-0, un enfant flex ne descend pas sous la largeur de son mot le plus long : il déborde sur petit écran.</p>
+    <pre class="mt-2" tabindex="0"><code class="language-html">&lt;body class="d-flex flex-direction-column h-100svh"&gt;…&lt;/body&gt;</code></pre>
+    <p>En-tête et pied de page fixes sur tous les écrans : sur un téléphone en paysage ou un écran zoomé à 400 % (320 × 256px), ils ne laissent presque plus de place au contenu (WCAG 1.4.10). lg:h-100svh les garde pour les grands écrans.</p>
 
     <h2 class="mt-10">Limites</h2>
     <ul>
