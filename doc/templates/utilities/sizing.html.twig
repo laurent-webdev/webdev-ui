@@ -68,7 +68,7 @@
     {% endset %}
     {{ include('_code.html.twig', {code: code}) }}
     {% set code %}
-        /* La fenêtre ne défile plus : rendre la place gardée pour sa barre */
+        /* La fenêtre ne défile plus : à l'ouverture d'un dialogue, pas de place gardée pour une barre qu'elle n'a pas */
         @media (width >= 64rem) {
             html { scrollbar-gutter: auto; }
         }

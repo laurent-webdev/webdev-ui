@@ -11,7 +11,6 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    scrollbar-gutter: stable;
   }
   @media (prefers-reduced-motion: no-preference) {
     html {
@@ -1584,6 +1583,7 @@
   }
   :root:has(dialog:modal) {
     overflow: hidden;
+    scrollbar-gutter: stable;
   }
   .dialog, .dialog-solid, .dialog-subtle, .dialog-outline {
     width: var(--dialog-width);

@@ -1,11 +1,226 @@
-{% extends 'base.html.twig' %}
+{#- Page de test (/test) : une page seule, sans base.html.twig ni doc.css, le framework tel qu'un site le reçoit ; toute la fenêtre défile.
+    Pour essayer ce qui bloque la page (dialogues, drawers) avec une vraie barre de défilement : la page ne bouge pas, les bandes vont jusqu'au bord.
+    On y essaie aussi un exemple avant de le mettre dans sa page -#}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Page de test · webdev-ui</title>
+        <meta name="description" content="Page de test de webdev-ui : dialogues, drawers, dropdown et toast sur une page qui défile.">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        {# Avant le CSS : le thème mémorisé par la doc, sans flash au chargement #}
+        <script>
+            const theme = localStorage.getItem('theme');
+            if (theme) document.documentElement.dataset.theme = theme;
+        </script>
+        <link rel="stylesheet" href="{{ asset('webdev-ui/css/webdev-ui.css') }}">
+        <script type="module" src="{{ asset('webdev-ui/js/webdev-ui.js') }}"></script>
+    </head>
+    <body>
+        {# Une bande sur toute la largeur, collée en haut : elle va jusqu'au bord, au repos comme avec un dialogue ouvert #}
+        <nav class="navbar-solid theme-primary md:navbar-expand position-sticky top-0 z-index-1" aria-label="Principal">
+            <a class="navbar-brand" href="{{ path('app_main') }}">webdev-ui</a>
+            <ul class="navbar-list">
+                <li><a class="navbar-item" href="#dialogues">Dialogues</a></li>
+                <li><a class="navbar-item" href="#drawers">Drawers</a></li>
+                <li><a class="navbar-item" href="#popovers">Dropdown et toast</a></li>
+                <li><a class="navbar-item" href="{{ path('app_main') }}">Retour à la doc</a></li>
+            </ul>
+            <button class="btn-solid theme-inverse navbar-toggle" type="button" commandfor="test-menu" command="show-modal" aria-label="Menu"></button>
+            <dialog class="drawer-end" id="test-menu" data-dialog closedby="any" aria-labelledby="test-menu-titre">
+                <div class="drawer-header">
+                    <h2 class="fs-lg" id="test-menu-titre">Menu</h2>
+                    <button class="btn-close" type="button" commandfor="test-menu" command="close" aria-label="Fermer"></button>
+                </div>
+                <div class="drawer-body">
+                    <ul class="navbar-list">
+                        <li><a class="navbar-item" href="#dialogues">Dialogues</a></li>
+                        <li><a class="navbar-item" href="#drawers">Drawers</a></li>
+                        <li><a class="navbar-item" href="#popovers">Dropdown et toast</a></li>
+                        <li><a class="navbar-item" href="{{ path('app_main') }}">Retour à la doc</a></li>
+                    </ul>
+                </div>
+            </dialog>
+        </nav>
 
-{% block title %}Page de test{% endblock %}
+        <main>
+            <div class="container py-10">
+                <h1>Page de test</h1>
+                <p class="fs-lg color-neutral-emphasis mt-2">Une page seule, sans la mise en page de la doc : toute la fenêtre défile. Ouvrir un dialogue ou un drawer : la page derrière ne bouge pas, la barre du haut, la bande de couleur et le bouton fixé en bas restent à leur place.</p>
+                <div class="d-flex flex-wrap-wrap gap-3 mt-6">
+                    <button class="btn" type="button" id="test-theme" aria-pressed="false">Thème sombre</button>
+                </div>
 
-{% block stylesheets %}
-{% endblock %}
+                <h2 class="mt-12" id="dialogues">Dialogues</h2>
+                <p class="mt-2">Le dernier ouvre une confirmation par-dessus : deux dialogues modaux l'un sur l'autre.</p>
+                <div class="d-flex flex-wrap-wrap gap-3 mt-4">
+                    <button class="btn-solid theme-primary" type="button" commandfor="test-dialogue" command="show-modal">Dialogue</button>
+                    <button class="btn" type="button" commandfor="test-dialogue-long" command="show-modal">Dialogue long</button>
+                    <button class="btn" type="button" commandfor="test-dialogue-formulaire" command="show-modal">Dialogue avec formulaire</button>
+                </div>
+            </div>
 
-{% block body %}
-    <h1>Page de test</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Pour essayer un exemple avant de le mettre dans sa page.</p>
-{% endblock %}
+            {# Une deuxième bande sur toute la largeur, au milieu de la page #}
+            <div class="bg-primary-subtle py-10">
+                <div class="container">
+                    <h2 id="drawers">Drawers</h2>
+                    <p class="mt-2">Un par bord de l'écran.</p>
+                    <div class="d-flex flex-wrap-wrap gap-3 mt-4">
+                        <button class="btn-solid theme-primary" type="button" commandfor="test-drawer-start" command="show-modal">Drawer à gauche</button>
+                        <button class="btn-solid theme-primary" type="button" commandfor="test-drawer-end" command="show-modal">Drawer à droite</button>
+                        <button class="btn-solid theme-primary" type="button" commandfor="test-drawer-top" command="show-modal">Drawer en haut</button>
+                        <button class="btn-solid theme-primary" type="button" commandfor="test-drawer-bottom" command="show-modal">Drawer en bas</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container py-10">
+                <h2 id="popovers">Dropdown et toast</h2>
+                <p class="mt-2">Des popovers : ils ne bloquent pas la page, elle défile encore.</p>
+                <div class="d-flex flex-wrap-wrap gap-3 mt-4">
+                    <button class="btn" type="button" popovertarget="test-dropdown">Mon compte</button>
+                    <div class="dropdown" id="test-dropdown" popover>
+                        <a class="dropdown-item" href="#">Profil</a>
+                        <a class="dropdown-item" href="#">Réglages</a>
+                        <hr>
+                        <button class="dropdown-item" type="button" popovertarget="test-dropdown" popovertargetaction="hide">Se déconnecter</button>
+                    </div>
+                    <button class="btn" type="button" data-test-toast>Afficher un toast</button>
+                </div>
+
+                <h2 class="mt-12">Du contenu pour faire défiler</h2>
+                {% for i in 1..12 %}
+                    <h3 class="fs-lg mt-8">Paragraphe {{ i }}</h3>
+                    <p class="mt-2">Du texte pour que la page dépasse la hauteur de l'écran et que la fenêtre ait sa barre de défilement. Faire défiler jusqu'ici, puis ouvrir un dialogue avec la barre du haut : la page reste à la même position, et elle reprend là où elle était à la fermeture.</p>
+                {% endfor %}
+            </div>
+        </main>
+
+        {# Fixé en bas à droite : il ne doit pas bouger à l'ouverture d'un dialogue #}
+        <a class="btn-solid theme-inverse position-fixed bottom-0 end-0 m-4" href="#">Haut de page</a>
+
+        <dialog class="dialog" id="test-dialogue" data-dialog closedby="any" aria-labelledby="test-dialogue-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="test-dialogue-titre">Dialogue</h2>
+                <button class="btn-close" type="button" commandfor="test-dialogue" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="dialog-body">
+                <p>Un clic à côté, Échap ou la croix le ferment. Derrière, la page ne défile plus et ne bouge pas.</p>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn" type="button" commandfor="test-dialogue" command="close">Annuler</button>
+                <button class="btn-solid theme-primary" type="button" commandfor="test-dialogue" command="close">Valider</button>
+            </div>
+        </dialog>
+
+        <dialog class="dialog" id="test-dialogue-long" data-dialog closedby="any" aria-labelledby="test-dialogue-long-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="test-dialogue-long-titre">Dialogue long</h2>
+                <button class="btn-close" type="button" commandfor="test-dialogue-long" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="dialog-body">
+                {% for i in 1..15 %}
+                    <p{% if not loop.first %} class="mt-4"{% endif %}>Paragraphe {{ i }} : plus haut que l'écran, c'est le dialogue qui défile, pas la page derrière.</p>
+                {% endfor %}
+            </div>
+            <div class="dialog-footer">
+                <button class="btn" type="button" commandfor="test-dialogue-long" command="close">Fermer</button>
+            </div>
+        </dialog>
+
+        <dialog class="dialog dialog-sm" id="test-dialogue-formulaire" data-dialog aria-labelledby="test-dialogue-formulaire-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="test-dialogue-formulaire-titre">Dialogue avec formulaire</h2>
+                <button class="btn-close" type="button" commandfor="test-dialogue-formulaire" command="close" aria-label="Fermer"></button>
+            </div>
+            <form class="dialog-body d-flex flex-direction-column gap-4" id="test-formulaire" method="dialog">
+                <div class="form-field">
+                    <label for="test-nom">Nom</label>
+                    <input class="form-input" id="test-nom" type="text" name="nom" autocomplete="name">
+                </div>
+                <div class="form-field">
+                    <label for="test-message">Message</label>
+                    <textarea class="form-input" id="test-message" name="message" rows="3"></textarea>
+                </div>
+            </form>
+            <div class="dialog-footer">
+                <button class="btn" type="button" commandfor="test-confirmation" command="show-modal">Supprimer…</button>
+                <button class="btn-solid theme-primary" type="submit" form="test-formulaire">Enregistrer</button>
+            </div>
+        </dialog>
+
+        <dialog class="dialog dialog-xs" id="test-confirmation" data-dialog aria-labelledby="test-confirmation-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="test-confirmation-titre">Supprimer ?</h2>
+                <button class="btn-close" type="button" commandfor="test-confirmation" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="dialog-body">
+                <p>Un deuxième dialogue modal, par-dessus le premier.</p>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn" type="button" commandfor="test-confirmation" command="close">Annuler</button>
+                <button class="btn-solid theme-danger" type="button" commandfor="test-confirmation" command="close">Supprimer</button>
+            </div>
+        </dialog>
+
+        <dialog class="drawer-start" id="test-drawer-start" data-dialog closedby="any" aria-labelledby="test-drawer-start-titre">
+            <div class="drawer-header">
+                <h2 class="fs-lg" id="test-drawer-start-titre">À gauche</h2>
+                <button class="btn-close" type="button" commandfor="test-drawer-start" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="drawer-body"><p>La page derrière ne bouge pas.</p></div>
+        </dialog>
+
+        <dialog class="drawer-end" id="test-drawer-end" data-dialog closedby="any" aria-labelledby="test-drawer-end-titre">
+            <div class="drawer-header">
+                <h2 class="fs-lg" id="test-drawer-end-titre">À droite</h2>
+                <button class="btn-close" type="button" commandfor="test-drawer-end" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="drawer-body"><p>Côté de la barre de défilement : le bord du drawer reste à son écart de la fenêtre.</p></div>
+        </dialog>
+
+        <dialog class="drawer-top" id="test-drawer-top" data-dialog closedby="any" aria-labelledby="test-drawer-top-titre">
+            <div class="drawer-header">
+                <h2 class="fs-lg" id="test-drawer-top-titre">En haut</h2>
+                <button class="btn-close" type="button" commandfor="test-drawer-top" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="drawer-body"><p>Toute la largeur moins les écarts.</p></div>
+        </dialog>
+
+        <dialog class="drawer-bottom" id="test-drawer-bottom" data-dialog closedby="any" aria-labelledby="test-drawer-bottom-titre">
+            <div class="drawer-header">
+                <h2 class="fs-lg" id="test-drawer-bottom-titre">En bas</h2>
+                <button class="btn-close" type="button" commandfor="test-drawer-bottom" command="close" aria-label="Fermer"></button>
+            </div>
+            <div class="drawer-body"><p>Toute la largeur moins les écarts.</p></div>
+        </dialog>
+
+        {# Toasts : le conteneur vide au chargement (toast.ts l'ouvre), le modèle ajouté par le bouton #}
+        <div class="toast-container" role="status" aria-live="polite" aria-atomic="false" popover="manual" data-toast></div>
+        <template id="test-toast">
+            <div class="toast-subtle theme-success">
+                <p>Succès : le toast s'affiche par-dessus la page.</p>
+                <button class="btn-close-subtle" type="button" aria-label="Fermer" data-toast-close></button>
+            </div>
+        </template>
+
+        {# JS de la page de test seulement : la bascule du thème (comme la doc) et le bouton du toast #}
+        <script type="module">
+            const root = document.documentElement;
+            const toggle = document.getElementById('test-theme');
+            const isDark = () => (root.dataset.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')) === 'dark';
+
+            toggle.setAttribute('aria-pressed', isDark());
+            toggle.addEventListener('click', () => {
+                root.dataset.theme = isDark() ? 'light' : 'dark';
+                localStorage.setItem('theme', root.dataset.theme);
+                toggle.setAttribute('aria-pressed', isDark());
+            });
+
+            document.querySelector('[data-test-toast]').addEventListener('click', () => {
+                document.querySelector('[data-toast]').append(document.getElementById('test-toast').content.cloneNode(true));
+            });
+        </script>
+    </body>
+</html>

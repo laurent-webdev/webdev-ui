@@ -24,9 +24,11 @@
         }
     }
 
-    // Un dialogue modal ouvert : la page derrière ne défile plus
+    // Un dialogue modal ouvert : la page derrière ne défile plus ; la place de sa barre est gardée, la page ne bouge pas quand elle disparaît
+    // Seulement pendant le blocage : au repos, une bande sur toute la largeur (navbar, fond de couleur) va jusqu'au bord de la fenêtre
     :root:has(dialog:modal) {
         overflow: hidden;
+        scrollbar-gutter: stable;
     }
 
     // Forme commune : en-tête, corps et pied empilés, au-dessus de la page
