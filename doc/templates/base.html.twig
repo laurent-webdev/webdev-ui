@@ -32,14 +32,14 @@
         {% endblock %}
 
         {% block javascripts %}
-            {# Le JS du framework, comme le CSS : dist/js/webdev-ui.js #}
-            <script type="module" src="{{ asset('webdev-ui/js/webdev-ui.js') }}"></script>
             {# htmx (doc seulement) : les liens de navigation ne rechargent que le contenu (#doc-content), le menu reste ; avant app.js, qui l'écoute #}
             <script src="{{ asset('js/htmx.min.js') }}" defer></script>
             {# Coloration du code : Prism découpe chaque <pre><code class="language-html"> (language-css, -scss, -js, -twig…) en .token, colorés par doc.css ; l'autoloader charge depuis le CDN le langage de chaque bloc #}
             <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/components/prism-core.min.js" integrity="sha384-zLRFO4dwowZvh8kzutOb5AWhH7f39HeJp+N7PtHF1SQtTBnifRx0AtmvTYs3F4YV" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha384-Uq05+JLko69eOiPr39ta9bh7kld5PKZoU+fF7g0EXTAriEollhZ+DrN8Q/Oi8J2Q" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
             {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {# Le JS du framework, comme le CSS : dist/js/webdev-ui.js ; après l'importmap : Firefox l'ignore si un module a déjà commencé à charger #}
+            <script type="module" src="{{ asset('webdev-ui/js/webdev-ui.js') }}"></script>
         {% endblock %}
     </head>
     {# htmx : un lien dans un data-hx-boost charge sa page, n'en garde que #doc-content et remplace celui-ci, en haut de la fenêtre
