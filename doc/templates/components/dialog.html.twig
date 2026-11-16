@@ -58,6 +58,25 @@
     {% endset %}
     {{ include('_example.html.twig', {code: code}) }}
 
+    <h2 class="mt-10">Fermer seulement par un bouton</h2>
+    <p class="mt-2"><code>closedby="none"</code> : pour un choix obligatoire, un bouton par réponse et pas de croix.</p>
+    {% set code %}
+        <button class="btn" type="button" commandfor="dialog-modifications" command="show-modal">Quitter</button>
+        <dialog class="dialog" id="dialog-modifications" data-dialog closedby="none" aria-labelledby="dialog-modifications-titre">
+            <div class="dialog-header">
+                <h2 class="fs-lg" id="dialog-modifications-titre">Modifications non enregistrées</h2>
+            </div>
+            <div class="dialog-body">
+                <p>Ni Échap ni un clic à côté ne le ferment : il faut choisir.</p>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn" type="button" commandfor="dialog-modifications" command="close">Ne pas enregistrer</button>
+                <button class="btn-solid theme-primary" type="button" commandfor="dialog-modifications" command="close">Enregistrer</button>
+            </div>
+        </dialog>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code}) }}
+
     <h2 class="mt-10">Variantes</h2>
     <p class="mt-2">Sur <code>dialog-solid</code> : un <code>btn-solid</code> d'un autre thème, la croix <code>btn-close-solid</code> du même thème.</p>
     {% set code %}
@@ -252,7 +271,7 @@
     {{ include('_code.html.twig', {code: code, language: 'css'}) }}
 
     <h2 class="mt-10" id="javascript">JavaScript</h2>
-    <p class="mt-2">Rien à écrire : <code>dist/js/webdev-ui.js</code> anime la fermeture de tous les <code>&lt;dialog data-dialog&gt;</code>. Les événements sont ceux du navigateur.</p>
+    <p class="mt-2">Rien à écrire : <code>dist/js/webdev-ui.js</code> anime la fermeture de tous les <code>&lt;dialog data-dialog&gt;</code> et, dans Safari, ferme au clic à côté les dialogues modaux en <code>closedby="any"</code>. Les événements sont ceux du navigateur.</p>
     <div class="overflow-x-auto mt-2" role="region" aria-labelledby="javascript" tabindex="0">
         <table class="table">
             <thead>
@@ -315,7 +334,7 @@
     <h2 class="mt-10">Limites</h2>
     <ul class="mt-2">
         <li><code>command</code> et <code>commandfor</code> sont récents (Baseline 2025) : ailleurs, le JS du site ouvre avec <code>showModal()</code>.</li>
-        <li><code>closedby</code> n'est pas encore dans Safari : ignoré.</li>
+        <li><code>closedby</code> n'est pas encore dans Safari : <code>dist/js/webdev-ui.js</code> y fait le clic à côté d'un dialogue modal en <code>closedby="any"</code> ; <code>closedby="none"</code> y reste ignoré, Échap ferme.</li>
         <li>La fermeture ne s'anime qu'avec <code>data-dialog</code> ; <code>close()</code> et <code>&lt;form method="dialog"&gt;</code> ferment d'un coup. Échap pressé deux fois ferme d'un coup.</li>
         <li>Avec <code>data-dialog</code>, <code>preventDefault()</code> sur <code>cancel</code> ne garde pas le dialogue ouvert : <code>closedby="none"</code>, ou pas de <code>data-dialog</code>.</li>
         <li>Le flou peut saccader sur un vieux téléphone : <code>--backdrop-filter: none</code>.</li>
