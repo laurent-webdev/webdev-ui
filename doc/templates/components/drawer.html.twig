@@ -82,7 +82,7 @@
     {% endset %}
     {# Le même contenu dans le panneau et dans le drawer du petit écran #}
     {% set filters %}
-        <fieldset class="form-field">
+        <fieldset class="fieldset form-field">
             <legend>Catégories</legend>
             {% for category in ['Livres', 'Musique', 'Films', 'Jeux', 'Bandes dessinées'] %}
                 <label><input class="form-checkbox theme-primary" type="checkbox" name="category"> {{ category }}</label>
@@ -141,7 +141,7 @@
     {{ include('_code.html.twig', {code: code, language: 'css'}) }}
 
     <h2 class="mt-10" id="variables">Variables</h2>
-    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+    <div class="table-responsive mt-2" role="region" aria-labelledby="variables" tabindex="0">
         <table class="table">
             <thead>
                 <tr>

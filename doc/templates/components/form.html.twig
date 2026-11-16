@@ -37,7 +37,7 @@
                 <label for="f-message">Message</label>
                 <textarea class="form-input" id="f-message" name="message" rows="3"></textarea>
             </div>
-            <fieldset class="form-field">
+            <fieldset class="fieldset form-field">
                 <legend>Être contacté</legend>
                 <label><input type="radio" name="contact" value="email" checked> Par e-mail</label>
                 <label><input type="radio" name="contact" value="telephone"> Par téléphone</label>
@@ -171,15 +171,15 @@
     {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
 
     <h2 class="mt-10">Cases et boutons radio</h2>
-    <p class="mt-2">Un <code>&lt;fieldset class="form-field"&gt;</code> et une <code>&lt;legend&gt;</code> ; la case dans son libellé.</p>
+    <p class="mt-2">Un <code>&lt;fieldset class="fieldset form-field"&gt;</code> et une <code>&lt;legend&gt;</code> ; la case dans son libellé.</p>
     {% set code %}
-        <fieldset class="form-field">
+        <fieldset class="fieldset form-field">
             <legend>Recevoir</legend>
             <label><input type="checkbox" name="nouveautes" checked> Les nouveautés</label>
             <label><input type="checkbox" name="offres"> Les offres</label>
             <label><input type="checkbox" name="partenaires" disabled> Les partenaires (bientôt)</label>
         </fieldset>
-        <fieldset class="form-field">
+        <fieldset class="fieldset form-field">
             <legend>Livraison</legend>
             <label><input type="radio" name="livraison" value="domicile" checked> À domicile</label>
             <label><input type="radio" name="livraison" value="relais"> En point relais</label>
@@ -272,7 +272,7 @@
     <h2 class="mt-10">Switch</h2>
     <p class="mt-2">Une case avec <code>role="switch"</code>, sans JavaScript. <code>form-switch</code> sans couleur, <code>form-switch-solid</code> avec un <code>.theme-*</code>.</p>
     {% set code %}
-        <fieldset class="form-field">
+        <fieldset class="fieldset form-field">
             <legend>Notifications</legend>
             <label><input class="form-switch" type="checkbox" role="switch" name="switch-email" checked> Par e-mail</label>
             <label><input class="form-switch-solid theme-primary" type="checkbox" role="switch" name="switch-sms" checked> Par SMS</label>
@@ -348,7 +348,7 @@
     {{ include('_example.html.twig', {code: code, class: 'd-flex flex-direction-column gap-4'}) }}
 
     <h2 class="mt-10" id="variables">Variables</h2>
-    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+    <div class="table-responsive mt-2" role="region" aria-labelledby="variables" tabindex="0">
         <table class="table">
             <thead>
                 <tr>
@@ -417,7 +417,7 @@
             <label><input type="radio" name="contact"> Par e-mail</label>
         </div>
         <!-- Oui -->
-        <fieldset class="form-field">
+        <fieldset class="fieldset form-field">
             <legend>Être contacté</legend>
             <label><input type="radio" name="contact"> Par e-mail</label>
         </fieldset>

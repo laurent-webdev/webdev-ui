@@ -41,6 +41,12 @@
         }
     }
 
+    // Le bloc autour d'un tableau trop large : le tableau défile dedans, la page ne déborde pas
+    // Sur le bloc, pas sur la table : en display: block, la table perdrait sa structure
+    .table-responsive {
+        overflow-x: auto;
+    }
+
     // Options : s'ajoutent à .table et se combinent entre elles
 
     // Bordered : un trait autour de chaque cellule, le tableau encadré

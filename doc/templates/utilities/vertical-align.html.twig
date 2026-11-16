@@ -33,7 +33,7 @@
         </table>
     {% endset %}
     {% set demo %}
-        <div class="overflow-x-auto" role="region" aria-label="Exemple de cellules" tabindex="0">{{ code }}</div>
+        <div class="table-responsive" role="region" aria-label="Exemple de cellules" tabindex="0">{{ code }}</div>
     {% endset %}
     {{ include('_example.html.twig', {code: code, html: demo, class: ''}) }}
 

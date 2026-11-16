@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fieldset{% endblock %}
+
+{% block body %}
+    <h1>Fieldset</h1>
+    <p class="fs-lg color-neutral-emphasis mb-6">Un groupe de champs dans un cadre gris et arrondi, nommé par sa légende.</p>
+
+    <h2 class="mt-10">Par défaut</h2>
+    <p class="mt-2"><code>fieldset</code> fait le cadre, <code>form-field</code> empile les choix.</p>
+    {% set code %}
+        <fieldset class="fieldset form-field">
+            <legend>Livraison</legend>
+            <label><input type="radio" name="livraison" value="domicile" checked> À domicile</label>
+            <label><input type="radio" name="livraison" value="relais"> En point relais</label>
+        </fieldset>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Des cases à cocher</h2>
+    {% set code %}
+        <fieldset class="fieldset form-field">
+            <legend>Recevoir</legend>
+            <label><input type="checkbox" name="nouveautes" checked> Les nouveautés</label>
+            <label><input type="checkbox" name="offres"> Les offres</label>
+        </fieldset>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Des champs de texte</h2>
+    <p class="mt-2">Un champ par <code>form-field</code>, l'écart entre eux par la grille.</p>
+    {% set code %}
+        <fieldset class="fieldset d-grid gap-4">
+            <legend>Adresse de livraison</legend>
+            <div class="form-field">
+                <label for="fieldset-rue">Rue</label>
+                <input class="form-input" id="fieldset-rue" type="text" name="rue" autocomplete="address-line1">
+            </div>
+            <div class="form-field">
+                <label for="fieldset-ville">Ville</label>
+                <input class="form-input" id="fieldset-ville" type="text" name="ville" autocomplete="address-level2">
+            </div>
+        </fieldset>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10">Sans cadre</h2>
+    <p class="mt-2">Sans <code>fieldset</code>, le cadre natif reste : <code>border-0 p-0</code> l'enlève, le groupe est toujours annoncé.</p>
+    {% set code %}
+        <fieldset class="form-field border-0 p-0">
+            <legend>Niveau</legend>
+            <label><input type="radio" name="niveau" value="debutant" checked> Débutant</label>
+            <label><input type="radio" name="niveau" value="confirme"> Confirmé</label>
+        </fieldset>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
+    <h2 class="mt-10" id="variables">Variables</h2>
+    <div class="table-responsive mt-2" role="region" aria-labelledby="variables" tabindex="0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Variable</th>
+                    <th scope="col">Défaut</th>
+                    <th scope="col">Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">--fieldset-padding-block</th><td>0.75rem</td><td>haut et bas, entre le cadre et les champs</td></tr>
+                <tr><th scope="row">--fieldset-padding-inline</th><td>1rem</td><td>côtés</td></tr>
+                <tr><th scope="row">--fieldset-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
+                <tr><th scope="row">--fieldset-border-width</th><td>--border-width</td><td>cadre</td></tr>
+            </tbody>
+        </table>
+    </div>
+    {% set code %}
+        /* Tous les fieldsets : plus d'espace autour des champs */
+        :root {
+            --fieldset-padding-block: 1rem;
+            --fieldset-padding-inline: 1.25rem;
+        }
+
+        /* Un fieldset du site */
+        .fieldset-paiement { --fieldset-border-radius: 0px; }
+    {% endset %}
+    {{ include('_code.html.twig', {code: code, language: 'css'}) }}
+
+    <h2 class="mt-10">Accessibilité</h2>
+    <ul class="mt-2">
+        <li>Un <code>&lt;fieldset&gt;</code> pour chaque groupe de boutons radio ou de cases : le lecteur d'écran annonce sa <code>&lt;legend&gt;</code> en entrant dans le groupe (WCAG 1.3.1).</li>
+        <li>La <code>&lt;legend&gt;</code> en premier enfant, toujours : sans elle, le groupe n'a pas de nom.</li>
+        <li>Le cadre est décoratif : c'est la légende qui nomme le groupe.</li>
+    </ul>
+
+    <h2 class="mt-10">À éviter</h2>
+    {% set code %}
+        <!-- Non : un texte n'est pas une légende, le groupe n'est pas annoncé -->
+        <div class="fieldset form-field">
+            <p>Livraison</p>
+            <label><input type="radio" name="livraison"> À domicile</label>
+        </div>
+        <!-- Oui -->
+        <fieldset class="fieldset form-field">
+            <legend>Livraison</legend>
+            <label><input type="radio" name="livraison"> À domicile</label>
+        </fieldset>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+    {% set code %}
+        <!-- Non : sans legend, le groupe n'a pas de nom ; role="group" est inutile, c'est déjà le rôle du fieldset -->
+        <fieldset class="fieldset" role="group">
+            <label><input type="checkbox" name="offres"> Les offres</label>
+        </fieldset>
+    {% endset %}
+    {{ include('_code.html.twig', {code: code}) }}
+
+    <h2 class="mt-10">Limites</h2>
+    <ul class="mt-2">
+        <li>La légende reste native, posée sur le trait du cadre.</li>
+        <li>Pas de couleurs ni de tailles : le cadre est gris ; les champs changent de taille par <code>form-sm</code> / <code>form-lg</code> sur le groupe.</li>
+    </ul>
+{% endblock %}

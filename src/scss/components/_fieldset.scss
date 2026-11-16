@@ -1,0 +1,20 @@
+@layer components {
+
+    :root {
+        // Forme : l'espace entre le cadre et les champs du groupe
+        --fieldset-padding-block: 0.75rem;
+        --fieldset-padding-inline: 1rem;
+        --fieldset-border-radius: var(--border-radius-md);
+        --fieldset-border-width: var(--border-width);
+    }
+
+    // Un groupe de champs encadré : le cadre gris et arrondi des cartes à la place du trait natif en relief
+    // Le legend reste natif, posé sur le trait ; c'est lui qui nomme le groupe, le cadre n'est que décoratif
+    .fieldset {
+        padding-block: var(--fieldset-padding-block);
+        padding-inline: var(--fieldset-padding-inline);
+        border: var(--fieldset-border-width) solid var(--border-color);
+        border-radius: var(--fieldset-border-radius);
+    }
+
+}

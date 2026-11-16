@@ -23,6 +23,7 @@ twig:
                   - [app_dialog, Dialogue, components/dialog.html.twig]
                   - [app_drawer, Drawer, components/drawer.html.twig]
                   - [app_dropdown, Dropdown, components/dropdown.html.twig]
+                  - [app_fieldset, Fieldset, components/fieldset.html.twig]
                   - [app_form, Formulaire, components/form.html.twig]
                   - [app_link, Lien, components/link.html.twig]
                   - [app_list, Liste, components/list.html.twig]

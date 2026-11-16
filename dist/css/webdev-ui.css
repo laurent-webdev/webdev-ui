@@ -1898,6 +1898,20 @@
 }
 @layer components {
   :root {
+    --fieldset-padding-block: 0.75rem;
+    --fieldset-padding-inline: 1rem;
+    --fieldset-border-radius: var(--border-radius-md);
+    --fieldset-border-width: var(--border-width);
+  }
+  .fieldset {
+    padding-block: var(--fieldset-padding-block);
+    padding-inline: var(--fieldset-padding-inline);
+    border: var(--fieldset-border-width) solid var(--border-color);
+    border-radius: var(--fieldset-border-radius);
+  }
+}
+@layer components {
+  :root {
     --form-input-padding-block: 0.375rem;
     --form-input-padding-inline: 1rem;
     --form-input-border-radius: var(--border-radius-md);
@@ -2036,6 +2050,9 @@
     opacity: var(--disabled-opacity);
     pointer-events: none;
   }
+  .form-input[type=file], .form-input-sm[type=file], .form-input-md[type=file], .form-input-lg[type=file] {
+    overflow: hidden;
+  }
   .form-input::file-selector-button, .form-input-sm::file-selector-button, .form-input-md::file-selector-button, .form-input-lg::file-selector-button {
     padding-block: var(--form-input-padding-block);
     padding-inline: var(--form-input-padding-inline);
@@ -2056,6 +2073,17 @@
     background-repeat: no-repeat;
     background-position: right var(--form-input-padding-inline) center;
     background-size: 1em;
+  }
+  input:is([type=date], [type=time], [type=datetime-local], [type=month], [type=week]):is(.form-input, .form-input-sm, .form-input-md, .form-input-lg) {
+    appearance: none;
+  }
+  input:is([type=date], [type=time], [type=datetime-local], [type=month], [type=week]):is(.form-input, .form-input-sm, .form-input-md, .form-input-lg)::-webkit-datetime-edit {
+    display: block;
+    padding: 0;
+  }
+  input:is([type=date], [type=time], [type=datetime-local], [type=month], [type=week]):is(.form-input, .form-input-sm, .form-input-md, .form-input-lg)::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: start;
   }
   .form-input-sm {
     --form-input-padding-block: 0.25rem;
@@ -2994,6 +3022,9 @@
     border-block-end: var(--table-border-width) solid var(--table-theme-subtle-border, var(--border-color));
     text-align: inherit;
     vertical-align: top;
+  }
+  .table-responsive {
+    overflow-x: auto;
   }
   .table-bordered > :is(thead, tbody, tfoot) > tr > :is(th, td) {
     border: var(--table-border-width) solid var(--table-theme-subtle-border, var(--border-color));

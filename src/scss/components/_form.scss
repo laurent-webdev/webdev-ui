@@ -75,6 +75,11 @@
             pointer-events: none;
         }
 
+        // Champ fichier : le bouton et le nom du fichier coupés au cadre, aux coins arrondis, sans dépasser
+        &[type="file"] {
+            overflow: hidden;
+        }
+
         // Champ fichier : bouton collé au cadre, même hauteur qu'un champ de texte
         &::file-selector-button {
             padding-block: var(--form-input-padding-block);
@@ -102,6 +107,24 @@
         background-repeat: no-repeat;
         background-position: right var(--form-input-padding-inline) center;
         background-size: 1em;
+    }
+
+    // Dates et heures : sur iPhone, l'aspect natif repasse le champ en content-box avec une largeur minimum, il dépasse de son parent ;
+    // sans lui, notre padding et notre cadre s'appliquent comme sur les autres champs, le calendrier s'ouvre toujours
+    input:is([type="date"], [type="time"], [type="datetime-local"], [type="month"], [type="week"]):is(.form-input, .form-input-sm, .form-input-md, .form-input-lg) {
+        appearance: none;
+
+        // Chromium et WebKit ajoutent un padding autour de la date : la hauteur des autres champs
+        &::-webkit-datetime-edit {
+            display: block;
+            padding: 0;
+        }
+
+        // Sur iPhone, la valeur : au début comme dans les autres champs (centrée par défaut), une ligne de haut même vide
+        &::-webkit-date-and-time-value {
+            min-height: 1lh;
+            text-align: start;
+        }
     }
 
     // Tailles : les paddings et le texte du bouton de la même taille

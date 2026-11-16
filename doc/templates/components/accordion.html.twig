@@ -100,7 +100,7 @@
     {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
 
     <h2 class="mt-10" id="variables">Variables</h2>
-    <div class="overflow-x-auto mt-2" role="region" aria-labelledby="variables" tabindex="0">
+    <div class="table-responsive mt-2" role="region" aria-labelledby="variables" tabindex="0">
         <table class="table">
             <thead>
                 <tr>
@@ -181,7 +181,7 @@
     <ul class="mt-2">
         <li>L'animation ne marche que dans Chrome et Edge : ailleurs, le panneau s'ouvre d'un coup.</li>
         <li>Un navigateur ancien ignore <code>name</code> : plusieurs panneaux peuvent être ouverts.</li>
-        <li>Un contenu plus large que l'accordéon (tableau) dépasse : le mettre dans un bloc <code>overflow-x-auto</code>.</li>
+        <li>Un contenu plus large que l'accordéon (tableau) dépasse : le mettre dans un bloc <code>table-responsive</code>.</li>
         <li>À la fermeture du dernier panneau, les coins du bas s'arrondissent avant la fin du repli.</li>
     </ul>
 

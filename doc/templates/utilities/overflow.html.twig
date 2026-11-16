@@ -34,9 +34,9 @@
     {{ include('_example.html.twig', {code: code, html: demo, class: 'd-grid gap-4'}) }}
 
     <h2 class="mt-10">Un tableau large</h2>
-    <p class="mt-2">Le tableau défile seul sur un petit écran, la page ne déborde pas.</p>
+    <p class="mt-2">Pour un tableau, <code>table-responsive</code> fait la même chose : le tableau défile seul sur un petit écran, la page ne déborde pas.</p>
     {% set code %}
-        <div class="overflow-x-auto" role="region" aria-label="Tarifs" tabindex="0">
+        <div class="table-responsive" role="region" aria-label="Tarifs" tabindex="0">
             <table class="table">
                 <thead>
                     <tr><th scope="col">Offre</th><th scope="col">Janvier</th><th scope="col">Février</th><th scope="col">Mars</th><th scope="col">Avril</th><th scope="col">Mai</th><th scope="col">Juin</th></tr>

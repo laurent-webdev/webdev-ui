@@ -63,6 +63,12 @@ final class ComponentController extends AbstractController
         return $this->render('components/dropdown.html.twig');
     }
 
+    #[Route('/fieldset', name: 'app_fieldset')]
+    public function fieldset(): Response
+    {
+        return $this->render('components/fieldset.html.twig');
+    }
+
     #[Route('/form', name: 'app_form')]
     public function form(): Response
     {
