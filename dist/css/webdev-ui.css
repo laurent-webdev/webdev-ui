@@ -1850,6 +1850,7 @@
     --dropdown-theme-emphasis: var(--color-inverse-emphasis);
   }
   .dropdown {
+    position: absolute;
     position-area: block-end span-inline-end;
     position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
     margin-block-start: 0.25rem;

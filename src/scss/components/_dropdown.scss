@@ -25,8 +25,10 @@
 
     // Un popover ouvert par un bouton popovertarget : dans le top layer, jamais coupé par un parent, sans z-index
     .dropdown {
-        // Sous le bouton (son ancre implicite), aligné sur son début ; retourné s'il n'y a pas la place
-        // Avec position-area, les marges auto natives valent 0 ; sans (navigateur ancien), le menu s'ouvre en haut de l'écran, centré
+        // Placé sur la page, il défile avec elle (en fixed, recalé sur le bouton à chaque image, il traînait derrière sur iPhone)
+        position: absolute;
+        // Sous le bouton (son ancre implicite), aligné sur son début ; retourné s'il dépasse de la page
+        // Avec position-area, les marges auto natives valent 0 ; sans (navigateur ancien), le menu s'ouvre en haut de la page, centré
         position-area: block-end span-inline-end;
         position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
         margin-block-start: 0.25rem;

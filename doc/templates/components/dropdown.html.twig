@@ -43,7 +43,7 @@
     {{ include('_example.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Au bord de l'écran</h2>
-    <p class="mt-2">Sans la place à droite, le menu s'aligne sur la fin du bouton ; sans la place en dessous, il s'ouvre au-dessus.</p>
+    <p class="mt-2">Sans la place à droite, le menu s'aligne sur la fin du bouton ; en bas de la page, il s'ouvre au-dessus.</p>
     {% set code %}
         <button class="btn" type="button" popovertarget="menu-bord">Mon compte</button>
         <div class="dropdown" id="menu-bord" popover>
@@ -139,7 +139,8 @@
 
     <h2 class="mt-10">Limites</h2>
     <ul class="mt-2">
-        <li>Placé par le positionnement CSS par ancre (Baseline 2026) ; dans un navigateur plus ancien, il s'ouvre en haut de l'écran, centré, et marche quand même.</li>
+        <li>Placé par le positionnement CSS par ancre (Baseline 2026) ; dans un navigateur plus ancien, il s'ouvre en haut de la page, centré, hors de la vue si la page a défilé.</li>
+        <li>Placé sur la page, il défile avec elle : près du bas de l'écran, il s'ouvre quand même dessous et se voit en faisant défiler.</li>
         <li>S'ouvre au clic, pas au survol ; pas d'animation.</li>
         <li>Un menu plus haut que la place disponible dépasse de l'écran.</li>
         <li>Pas encore de tailles, de titres de groupe ni de sous-menus.</li>
