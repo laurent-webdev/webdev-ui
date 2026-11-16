@@ -3024,6 +3024,7 @@
     vertical-align: top;
   }
   .table-responsive {
+    position: relative;
     overflow-x: auto;
   }
   .table-bordered > :is(thead, tbody, tfoot) > tr > :is(th, td) {

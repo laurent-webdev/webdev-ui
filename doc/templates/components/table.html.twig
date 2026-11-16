@@ -138,7 +138,7 @@
     {{ include('_example.html.twig', {code: code, class: 'd-grid gap-6'}) }}
 
     <h2 class="mt-10">Trop large pour l'écran</h2>
-    <p class="mt-2"><code>table-responsive</code> sur le <code>&lt;div&gt;</code> autour : le tableau défile dedans, la page ne déborde pas. <code>tabindex="0"</code> : les flèches le font défiler.</p>
+    <p class="mt-2"><code>table-responsive</code> sur le <code>&lt;div&gt;</code> autour : le tableau défile dedans, ses <code>visually-hidden</code> aussi, la page ne déborde pas. <code>tabindex="0"</code> : les flèches le font défiler.</p>
     {% set code %}
         <div class="table-responsive" role="region" aria-labelledby="ventes-legende" tabindex="0">
             <table class="table table-striped">
