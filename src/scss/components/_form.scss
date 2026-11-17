@@ -1,3 +1,5 @@
+@use '../settings/colors';
+
 @layer components {
 
     :root {
@@ -17,17 +19,12 @@
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses champs, ses switchs, ses range, ses cases et ses boutons radio
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         .theme-#{$color} {
-            --form-input-theme-color: var(--color-#{$color});
-            --form-input-theme-contrast: var(--color-#{$color}-contrast);
-            --form-input-theme-emphasis: var(--color-#{$color}-emphasis);
-            --form-switch-theme-color: var(--color-#{$color});
-            --form-switch-theme-contrast: var(--color-#{$color}-contrast);
-            --form-switch-theme-border: var(--color-#{$color}-border);
-            --form-switch-theme-emphasis: var(--color-#{$color}-emphasis);
-            --form-control-theme-color: var(--color-#{$color});
-            --form-control-theme-emphasis: var(--color-#{$color}-emphasis);
+            --form-theme-color: var(--color-#{$color});
+            --form-theme-contrast: var(--color-#{$color}-contrast);
+            --form-theme-border: var(--color-#{$color}-border);
+            --form-theme-emphasis: var(--color-#{$color}-emphasis);
         }
     }
 
@@ -51,22 +48,22 @@
         padding-block: var(--form-input-padding-block);
         padding-inline: var(--form-input-padding-inline);
         // Cadre de la couleur du thème ; sans thème, le gris des champs
-        border: var(--form-input-border-width) solid var(--form-input-theme-color, var(--form-input-border-color));
+        border: var(--form-input-border-width) solid var(--form-theme-color, var(--form-input-border-color));
         border-radius: var(--form-input-border-radius);
         // Le fond de la page : le fond natif (Field) n'est pas notre fond sombre
         background-color: var(--color-background);
 
         // Comme les boutons : la couleur du thème en emphasis, visible sur le fond de page ; sans thème, celle du texte
         &:focus-visible {
-            outline: var(--focus-outline-width) solid var(--form-input-theme-emphasis, currentColor);
+            outline: var(--focus-outline-width) solid var(--form-theme-emphasis, currentColor);
             outline-offset: var(--focus-outline-offset);
         }
 
         // En erreur (aria-invalid écrit par le serveur ou le JS, avec son message) : le thème danger, cadre et focus
         &[aria-invalid="true"] {
-            --form-input-theme-color: var(--color-danger);
-            --form-input-theme-contrast: var(--color-danger-contrast);
-            --form-input-theme-emphasis: var(--color-danger-emphasis);
+            --form-theme-color: var(--color-danger);
+            --form-theme-contrast: var(--color-danger-contrast);
+            --form-theme-emphasis: var(--color-danger-emphasis);
         }
 
         // Désactivé : estompé, comme les boutons ; notre fond, notre cadre et le color: inherit du reset effacent l'aspect natif
@@ -87,14 +84,14 @@
             margin-block: calc(-1 * var(--form-input-padding-block));
             margin-inline: calc(-1 * var(--form-input-padding-inline)) var(--form-input-padding-inline);
             border: 0;
-            border-inline-end: var(--form-input-border-width) solid var(--form-input-theme-color, var(--form-input-border-color));
+            border-inline-end: var(--form-input-border-width) solid var(--form-theme-color, var(--form-input-border-color));
             font: inherit;
         }
 
         // Son fond : plein de la couleur du thème, comme btn-solid ; sans thème, les couleurs du navigateur ; désactivé, l'aspect du navigateur
         &:enabled::file-selector-button {
-            background-color: var(--form-input-theme-color, ButtonFace);
-            color: var(--form-input-theme-contrast, ButtonText);
+            background-color: var(--form-theme-color, ButtonFace);
+            color: var(--form-theme-contrast, ButtonText);
         }
     }
 
@@ -120,6 +117,11 @@
             padding: 0;
         }
 
+        // Chromium : 1px de plus en haut et en bas, autour des champs de la date
+        &::-webkit-datetime-edit-fields-wrapper {
+            padding: 0;
+        }
+
         // Sur iPhone, la valeur : au début comme dans les autres champs (centrée par défaut), une ligne de haut même vide
         &::-webkit-date-and-time-value {
             min-height: 1lh;
@@ -127,23 +129,26 @@
         }
     }
 
-    // Tailles : les paddings et le texte du bouton de la même taille
+    // Tailles : les paddings, le texte et l'interligne du bouton de la même taille
     .form-input-sm {
         --form-input-padding-block: 0.25rem;
         --form-input-padding-inline: 0.75rem;
         font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
     }
 
     .form-input-md {
         --form-input-padding-block: 0.375rem;
         --form-input-padding-inline: 1rem;
         font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
     }
 
     .form-input-lg {
         --form-input-padding-block: 0.5rem;
         --form-input-padding-inline: 1.25rem;
         font-size: var(--font-size-lg);
+        line-height: var(--line-height-lg);
     }
 
     // Groupe : un champ, des boutons et des textes collés sur une ligne, arrondi aux deux bouts ; la taille par form-sm / -md / -lg sur le groupe
@@ -196,7 +201,7 @@
         border: var(--form-input-border-width) solid var(--form-input-border-color);
         border-radius: var(--form-input-border-radius);
         background-color: var(--color-neutral-subtle);
-        white-space: nowrap;
+        text-wrap: nowrap;
     }
 
     // Switch : une case à cocher avec role="switch", redessinée ; chaque variante s'utilise seule
@@ -209,7 +214,8 @@
         // Le cadre des champs ; le curseur, en couleur du texte, montre le switch
         border: var(--form-switch-border-width) solid var(--form-input-border-color);
         border-radius: 50rem;
-        vertical-align: middle;
+        // Son milieu sur le milieu des capitales du texte (middle : celui des minuscules, plus bas)
+        vertical-align: calc(0.5cap - var(--form-switch-height) / 2);
         transition-property: background-color, border-color;
         transition-duration: var(--transition-duration);
 
@@ -232,7 +238,7 @@
 
         // Comme les boutons : la couleur du thème en emphasis, visible sur le fond de page ; sans thème, celle du texte
         &:focus-visible {
-            outline: var(--focus-outline-width) solid var(--form-switch-theme-emphasis, currentColor);
+            outline: var(--focus-outline-width) solid var(--form-theme-emphasis, currentColor);
             outline-offset: var(--focus-outline-offset);
         }
 
@@ -255,11 +261,11 @@
 
     // Solid : allumé, fond plein de la couleur du thème, cadre un peu plus marqué, curseur noir ou blanc ; sans thème, le curseur reste visible
     .form-switch-solid:checked {
-        border-color: var(--form-switch-theme-border);
-        background-color: var(--form-switch-theme-color);
+        border-color: var(--form-theme-border);
+        background-color: var(--form-theme-color);
 
         &::before {
-            background-color: var(--form-switch-theme-contrast, currentColor);
+            background-color: var(--form-theme-contrast, currentColor);
         }
     }
 
@@ -287,11 +293,11 @@
 
     // Range, case à cocher, bouton radio : ceux du navigateur, colorés par accent-color ; sans thème, celle du body (la couleur du texte)
     .form-range, .form-checkbox, .form-radio {
-        accent-color: var(--form-control-theme-color);
+        accent-color: var(--form-theme-color);
 
         // Comme les boutons ; autour du range entier, le rond seul demanderait de redessiner le range
         &:focus-visible {
-            outline: var(--focus-outline-width) solid var(--form-control-theme-emphasis, currentColor);
+            outline: var(--focus-outline-width) solid var(--form-theme-emphasis, currentColor);
             outline-offset: var(--focus-outline-offset);
         }
     }
@@ -310,6 +316,7 @@
         --btn-padding-block: 0.25rem;
         --btn-padding-inline: 0.75rem;
         font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
     }
 
     .form-md {
@@ -320,6 +327,7 @@
         --btn-padding-block: 0.375rem;
         --btn-padding-inline: 1rem;
         font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
     }
 
     .form-lg {
@@ -330,6 +338,7 @@
         --btn-padding-block: 0.5rem;
         --btn-padding-inline: 1.25rem;
         font-size: var(--font-size-lg);
+        line-height: var(--line-height-lg);
     }
 
     // Cases, boutons radio, range et couleur restent natifs : le zoom les agrandit comme le texte (14, 16, 18px)

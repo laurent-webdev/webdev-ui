@@ -1,47 +1,47 @@
 @use '../tools/mixins';
 
-// Les couleurs qui ont des dérivées (contrast, state, subtle, emphasis, emphasis-strong, border)
+// Les couleurs : leurs dérivées, les .theme-* des composants et les utilitaires de couleur sont faits pour chacune
+// Une couleur de plus : son nom ici et sa --color-<nom> plus bas
 $colors: primary, secondary, accent, success, danger, warning, info, neutral, inverse;
 
 :root {
-  color-scheme: light dark;
+    color-scheme: light dark;
 }
 
 :root[data-theme="light"] {
-  color-scheme: light;
+    color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  color-scheme: dark;
+    color-scheme: dark;
 }
 
 :root {
-  // Couleur d'arrière-plan
-  --color-background: light-dark(oklch(1 0 0), oklch(0.18 0.005 245));
-  // Bordures : gris léger, décoratif
-  --border-color: light-dark(oklch(0.84 0.008 245), oklch(0.41 0.014 245));
-  // Ombres : noir transparent, plus opaque en sombre (le fond est déjà presque noir)
-  --box-shadow-color: light-dark(oklch(0 0 0 / 0.1), oklch(0 0 0 / 0.5));
-  // Derrière un dialogue modal : la page assombrie, plus en sombre
-  --backdrop-background-color: light-dark(oklch(0 0 0 / 0.5), oklch(0 0 0 / 0.65));
-  // Verre (.glass) : le fond de la page à 70 % ; le texte de la page garde 7:1 même devant du noir (clair) ou du blanc (sombre)
-  --glass-background-color: oklch(from var(--color-background) l c h / 0.7);
+    // Couleur d'arrière-plan
+    --color-background: light-dark(oklch(1 0 0), oklch(0.18 0.005 245));
+    // Bordures : gris léger, décoratif
+    --border-color: light-dark(oklch(0.84 0.008 245), oklch(0.41 0.014 245));
+    // Ombres : noir transparent, plus opaque en sombre (le fond est déjà presque noir)
+    --box-shadow-color: light-dark(oklch(0 0 0 / 0.1), oklch(0 0 0 / 0.5));
+    // Derrière un dialogue modal : la page assombrie, plus en sombre
+    --backdrop-background-color: light-dark(oklch(0 0 0 / 0.5), oklch(0 0 0 / 0.65));
+    // Verre (.glass) : le fond de la page à 70 % ; le texte de la page garde 7:1 même devant du noir (clair) ou du blanc (sombre)
+    --glass-background-color: oklch(from var(--color-background) l c h / 0.7);
 
-  --color-primary: light-dark(oklch(0.80 0.15 345), oklch(0.65 0.15 345));
-  --color-secondary: light-dark(oklch(0.80 0.15 210), oklch(0.65 0.15 210));
-  --color-accent: light-dark(oklch(0.80 0.15 300), oklch(0.65 0.15 300));
-  --color-success: light-dark(oklch(0.80 0.15 165), oklch(0.65 0.15 165));
-  --color-warning: light-dark(oklch(0.80 0.15 90), oklch(0.65 0.15 90));
-  --color-danger: light-dark(oklch(0.80 0.20 25), oklch(0.65 0.18 25));
-  --color-info: light-dark(oklch(0.80 0.15 255), oklch(0.65 0.15 255));
-  --color-neutral: light-dark(oklch(0.80 0 0), oklch(0.65 0 0));
-  --color-inverse: light-dark(oklch(0.30 0 0), oklch(0.85 0 0));
+    --color-primary: light-dark(oklch(0.80 0.15 345), oklch(0.65 0.15 345));
+    --color-secondary: light-dark(oklch(0.80 0.15 210), oklch(0.65 0.15 210));
+    --color-accent: light-dark(oklch(0.80 0.15 300), oklch(0.65 0.15 300));
+    --color-success: light-dark(oklch(0.80 0.15 165), oklch(0.65 0.15 165));
+    --color-warning: light-dark(oklch(0.80 0.15 90), oklch(0.65 0.15 90));
+    --color-danger: light-dark(oklch(0.80 0.20 25), oklch(0.65 0.18 25));
+    --color-info: light-dark(oklch(0.80 0.15 255), oklch(0.65 0.15 255));
+    --color-neutral: light-dark(oklch(0.80 0 0), oklch(0.65 0 0));
+    --color-inverse: light-dark(oklch(0.30 0 0), oklch(0.85 0 0));
 
-
-  @include mixins.contrast-colors($colors);
-  @include mixins.state-colors($colors);
-  @include mixins.subtle-colors($colors);
-  @include mixins.emphasis-colors($colors);
-  @include mixins.emphasis-strong-colors($colors);
-  @include mixins.border-colors($colors);
+    @include mixins.contrast-colors($colors);
+    @include mixins.state-colors($colors);
+    @include mixins.subtle-colors($colors);
+    @include mixins.emphasis-colors($colors);
+    @include mixins.emphasis-strong-colors($colors);
+    @include mixins.border-colors($colors);
 }

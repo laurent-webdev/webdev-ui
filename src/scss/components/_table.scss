@@ -1,3 +1,5 @@
+@use '../settings/colors';
+
 @layer components {
 
     :root {
@@ -8,7 +10,7 @@
     }
 
     // Une classe par couleur : hérité, un .theme-* sur le tableau ou un parent colore son fond, ses traits, ses rayures et son survol
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         .theme-#{$color} {
             --table-theme-color: var(--color-#{$color});
             --table-theme-subtle: var(--color-#{$color}-subtle);
@@ -22,7 +24,7 @@
         width: 100%;
         background-color: var(--table-theme-subtle, transparent);
         // La hauteur de ses lignes : dans une grille ou un flex, ne s'étire pas à la hauteur d'un voisin, comme la liste
-        block-size: fit-content;
+        height: fit-content;
         // Chiffres de même largeur : les colonnes de nombres s'alignent
         font-variant-numeric: tabular-nums;
 

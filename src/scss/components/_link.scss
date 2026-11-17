@@ -1,7 +1,9 @@
+@use '../settings/colors';
+
 @layer components {
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses liens
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         .theme-#{$color} {
             --link-theme-emphasis: var(--color-#{$color}-emphasis);
         }

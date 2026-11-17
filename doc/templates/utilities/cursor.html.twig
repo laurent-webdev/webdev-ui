@@ -11,7 +11,6 @@
     {% set code %}
         <p class="bg-primary-subtle p-2 cursor-auto">cursor-auto</p>
         <p class="bg-primary-subtle p-2 cursor-pointer">cursor-pointer</p>
-        <p class="bg-primary-subtle p-2 cursor-not-allowed">cursor-not-allowed</p>
         <p class="bg-primary-subtle p-2 cursor-help">cursor-help</p>
         <p class="bg-primary-subtle p-2 cursor-progress">cursor-progress</p>
         <p class="bg-primary-subtle p-2 cursor-wait">cursor-wait</p>
@@ -39,17 +38,11 @@
         <button class="btn" type="button">Valider</button>
     {% endset %}
     {{ include('_code.html.twig', {code: code}) }}
-    {% set code %}
-        <!-- Non : un bouton désactivé ne reçoit plus la souris, il garde la flèche -->
-        <button class="btn cursor-not-allowed" type="button" disabled>…</button>
-        <!-- Oui -->
-        <button class="btn" type="button" disabled>…</button>
-    {% endset %}
-    {{ include('_code.html.twig', {code: code}) }}
 
     <h2 class="mt-10">Limites</h2>
     <ul class="mt-2">
         <li>Sans effet au tactile : il n'y a pas de pointeur.</li>
+        <li>Pas de <code>cursor-not-allowed</code> : un élément désactivé a <code>pointer-events: none</code>, la souris passe au travers et garde la flèche.</li>
         <li><code>cursor-none</code> masque le pointeur : seulement si autre chose le remplace (jeu, vidéo).</li>
         <li><code>cursor-grab</code>, <code>-grabbing</code>, <code>-wait</code> et <code>-progress</code> suivent une action : le JS du site pose et retire la classe.</li>
     </ul>

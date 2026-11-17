@@ -4,10 +4,8 @@
     // Masque le pointeur : seulement si autre chose le remplace
     .cursor-none { cursor: none; }
     .cursor-auto { cursor: auto; }
-    // Un élément cliquable reste un <button> ou un <a>, qui ont déjà la main
+    // Le libellé d'une case à cocher ; un élément cliquable reste un <button> ou un <a>, qui ont déjà la main
     .cursor-pointer { cursor: pointer; }
-    // Sans effet sur un .btn-* désactivé : pointer-events: none, la souris passe au travers
-    .cursor-not-allowed { cursor: not-allowed; }
     .cursor-help { cursor: help; }
     .cursor-progress { cursor: progress; }
     .cursor-wait { cursor: wait; }

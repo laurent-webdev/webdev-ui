@@ -10,7 +10,7 @@
         overflow: hidden;
         clip-path: inset(50%);
         // Sur une ligne : certains lecteurs d'écran collent les mots d'un texte coupé en lignes de 1px
-        white-space: nowrap;
+        text-wrap: nowrap;
         border: 0;
     }
 

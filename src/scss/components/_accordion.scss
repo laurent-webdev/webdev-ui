@@ -1,3 +1,5 @@
+@use '../settings/colors';
+
 @layer components {
 
     :root {
@@ -7,11 +9,11 @@
         --accordion-border-radius: var(--border-radius-md);
         --accordion-border-width: var(--border-width);
         // Ouverture et fermeture d'un panneau, rotation de la flèche
-        --accordion-transition-duration: .2s;
+        --accordion-transition-duration: 0.2s;
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses accordéons
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         .theme-#{$color} {
             --accordion-theme-color: var(--color-#{$color});
             --accordion-theme-contrast: var(--color-#{$color}-contrast);
@@ -29,7 +31,7 @@
     .accordion, .accordion-solid, .accordion-subtle, .accordion-outline {
         // La hauteur de son contenu : dans une grille ou un flex, ne s'étire pas à la hauteur d'un voisin ouvert
         // (stretch n'agrandit qu'une hauteur auto ; align-self: start rétrécirait la largeur dans un flex en colonne)
-        block-size: fit-content;
+        height: fit-content;
         border: var(--accordion-border-width) solid var(--border-color);
         border-radius: var(--accordion-border-radius);
 
@@ -41,14 +43,14 @@
         // Fermé : hauteur 0 ; la hauteur s'anime vers auto grâce à l'interpolate-size du reset
         // allow-discrete sur content-visibility seulement : le contenu reste visible pendant la fermeture
         > details::details-content {
-            block-size: 0;
+            height: 0;
             overflow-y: clip;
             transition:
-                block-size var(--accordion-transition-duration),
+                height var(--accordion-transition-duration),
                 content-visibility var(--accordion-transition-duration) allow-discrete;
         }
         > details[open]::details-content {
-            block-size: auto;
+            height: auto;
         }
 
         // open est retiré dès le clic : le trait du contenu disparaît au début de la fermeture, pas à la fin
@@ -122,13 +124,13 @@
         border-block-start: var(--accordion-border-width) solid var(--border-color);
     }
 
-    // Par défaut, sans couleur : pas de fond, le texte autour ; au survol et au clic du titre, un voile gris transparent, comme btn
+    // Par défaut, sans couleur : pas de fond, le texte autour ; au survol et au clic du titre, un voile transparent de la couleur du thème (gris sans thème), comme btn
     .accordion > details > summary {
         &:hover {
-            background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-soft), transparent);
+            background-color: color-mix(in oklch, var(--accordion-theme-color, var(--color-neutral)) var(--state-mix-soft), transparent);
         }
         &:active {
-            background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-strong), transparent);
+            background-color: color-mix(in oklch, var(--accordion-theme-color, var(--color-neutral)) var(--state-mix-strong), transparent);
         }
     }
 
@@ -195,29 +197,33 @@
         }
     }
 
-    // Tailles : changent le padding et la taille du texte (titre et contenu), avec n'importe quelle variante
+    // Tailles : changent le padding, la taille du texte et l'interligne (titre et contenu), avec n'importe quelle variante
     .accordion-xs {
         --accordion-padding-block: 0.5rem;
         --accordion-padding-inline: 0.5rem;
         font-size: var(--font-size-xs);
+        line-height: var(--line-height-xs);
     }
 
     .accordion-sm {
         --accordion-padding-block: 0.75rem;
         --accordion-padding-inline: 0.75rem;
         font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
     }
 
     .accordion-md {
         --accordion-padding-block: 1rem;
         --accordion-padding-inline: 1rem;
         font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
     }
 
     .accordion-lg {
         --accordion-padding-block: 1.25rem;
         --accordion-padding-inline: 1.25rem;
         font-size: var(--font-size-lg);
+        line-height: var(--line-height-lg);
     }
 
 }

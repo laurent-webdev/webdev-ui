@@ -1,4 +1,5 @@
 @use '../settings/breakpoints';
+@use '../settings/colors';
 
 // navbar-expand : les liens dans la barre, plus de bouton de menu ; $breakpoint est mis devant le nom de la classe (.md\:navbar-expand)
 @mixin navbar-expand-classes($breakpoint: '') {
@@ -20,9 +21,10 @@
         // Forme : la barre, puis ses éléments ; les côtés seulement sur une barre colorée (navbar-subtle, navbar-solid)
         --navbar-padding-block: 0.5rem;
         --navbar-padding-inline: 1rem;
-        --navbar-item-padding-block: 0.5rem;
+        --navbar-item-padding-block: 0.375rem;
         --navbar-item-padding-inline: 0.75rem;
         --navbar-item-border-radius: var(--border-radius-md);
+        --navbar-item-border-width: var(--border-width);
 
         // Thème par défaut, sans classe .theme-*
         --navbar-theme-color: var(--color-neutral);
@@ -33,7 +35,7 @@
     }
 
     // Une classe par couleur : hérité, sur la barre elle colore tous ses éléments, sur un élément seulement lui
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         .theme-#{$color} {
             --navbar-theme-color: var(--color-#{$color});
             --navbar-theme-contrast: var(--color-#{$color}-contrast);
@@ -51,10 +53,14 @@
         gap: 1rem;
         padding-block: var(--navbar-padding-block);
 
-        // Sans navbar-expand, les liens sont dans le drawer : la liste de la barre est cachée ; dans la barre, un lien ne passe pas à la ligne
+        // Sans navbar-expand, les liens sont dans le drawer : la liste de la barre est cachée
         > .navbar-list {
             display: none;
-            white-space: nowrap;
+        }
+
+        // Dans la barre, un lien ne passe pas à la ligne ; sur le lien : le text-wrap: pretty des <li> du reset annule celui de la liste
+        > .navbar-list .navbar-item {
+            text-wrap: nowrap;
         }
     }
 
@@ -82,13 +88,14 @@
         list-style-type: "";
     }
 
-    // Un lien ou un bouton de la liste
+    // Un lien ou un bouton de la liste : 38px de haut, comme un bouton à côté de lui dans la barre
     .navbar-item {
         display: block;
         width: 100%;
         padding-block: var(--navbar-item-padding-block);
         padding-inline: var(--navbar-item-padding-inline);
-        border: 0;
+        // Transparente : la hauteur d'un bouton, et un cadre visible en contraste élevé (Windows), comme pagination-item
+        border: var(--navbar-item-border-width) solid transparent;
         border-radius: var(--navbar-item-border-radius);
         background-color: transparent;
         color: inherit;
@@ -128,14 +135,14 @@
     .navbar-toggle {
         --btn-padding-inline: var(--btn-padding-block);
 
-        // Les trois traits : un masque SVG sur ::before, de la couleur du texte du bouton
+        // Les trois traits : un masque SVG sur ::before, de la couleur du texte du bouton ; un trait de 2 sur 24, 0.125em comme les flèches
         &::before {
             content: "";
             display: block;
             width: 1.5em;
             aspect-ratio: 1;
             background-color: currentColor;
-            mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M2.5 4h11M2.5 8h11M2.5 12h11' stroke='black' stroke-width='1.25' stroke-linecap='round'/></svg>");
+            mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 6h16M4 12h16M4 18h16' stroke='black' stroke-width='2' stroke-linecap='round'/></svg>");
             mask-size: contain;
             mask-repeat: no-repeat;
         }

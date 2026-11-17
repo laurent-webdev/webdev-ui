@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Typographie</h1>
-    <p class="fs-lg color-neutral-emphasis mb-6">Tailles <code>fs-*</code>, interligne <code>line-height-*</code>, graisses <code>fw-*</code>, italique <code>fst-*</code> et <code>font-monospace</code>.</p>
+    <p class="fs-lg color-neutral-emphasis mb-6">Tailles <code>fs-*</code>, interligne <code>line-height-*</code>, graisses <code>fw-*</code>, italique <code>fst-*</code> et <code>font-family-monospace</code>.</p>
 
     <h2 class="mt-10">Titres</h2>
     <p class="mt-2">Sans classe : h1 en 3xl … h6 en sm.</p>
@@ -71,7 +71,7 @@
     {% set code %}
         <p class="fst-italic">fst-italic</p>
         <p><em class="fst-normal">fst-normal sur un em</em></p>
-        <p class="font-monospace">font-monospace</p>
+        <p class="font-family-monospace">font-family-monospace</p>
         <p>Du <code>code</code> dans un paragraphe</p>
     {% endset %}
     {{ include('_example.html.twig', {code: code, class: ''}) }}
@@ -88,7 +88,7 @@
             </thead>
             <tbody>
                 <tr><th scope="row">--font-family</th><td>polices du système</td><td>texte</td></tr>
-                <tr><th scope="row">--font-family-monospace</th><td>polices du système</td><td>code, <code>font-monospace</code></td></tr>
+                <tr><th scope="row">--font-family-monospace</th><td>polices du système</td><td>code, <code>font-family-monospace</code></td></tr>
                 <tr><th scope="row">--font-size-xs à -lg</th><td>12, 14, 16, 18px</td><td>texte</td></tr>
                 <tr><th scope="row">--font-size-xl à -6xl</th><td>de 20-24px à 48-80px</td><td>titres, grandissent avec l'écran</td></tr>
                 <tr><th scope="row">--line-height-xs à -6xl</th><td>1.5 à 1.2</td><td>interligne de chaque taille</td></tr>

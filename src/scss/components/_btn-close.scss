@@ -1,14 +1,16 @@
+@use '../settings/colors';
+
 @layer components {
 
     :root {
-        // Forme : un carré de 24px (la taille xs), bordure comprise, la cible tactile minimale
-        --btn-close-size: 1.5rem;
+        // Forme : un carré de 24px de côté (la taille xs), bordure comprise, la cible tactile minimale
+        --btn-close-width: 1.5rem;
         --btn-close-border-radius: var(--border-radius-md);
         --btn-close-border-width: var(--border-width);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses boutons de fermeture
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         .theme-#{$color} {
             --btn-close-theme-color: var(--color-#{$color});
             --btn-close-theme-contrast: var(--color-#{$color}-contrast);
@@ -21,7 +23,7 @@
 
     // Forme commune : un carré, la bordure existe toujours, toutes les variantes ont la même taille
     .btn-close, .btn-close-solid, .btn-close-subtle, .btn-close-outline {
-        width: var(--btn-close-size);
+        width: var(--btn-close-width);
         aspect-ratio: 1;
         // Dans une ligne en flex (en-tête, toast), un texte long ne la rétrécit pas
         flex-shrink: 0;
@@ -31,13 +33,13 @@
         transition-property: background-color, border-color, color;
         transition-duration: var(--transition-duration);
 
-        // La croix : un masque SVG sur ::before, de la couleur du texte de la variante
+        // La croix : un masque SVG sur ::before, de la couleur du texte de la variante ; un trait de 2px à toutes les tailles (non-scaling-stroke)
         &::before {
             content: "";
             display: block;
             aspect-ratio: 1;
             background-color: currentColor;
-            mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M5 5l6 6m0-6l-6 6' stroke='black' stroke-width='1.5' stroke-linecap='round'/></svg>");
+            mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M5 5l6 6m0-6l-6 6' stroke='black' stroke-width='2' stroke-linecap='round' vector-effect='non-scaling-stroke'/></svg>");
             mask-size: contain;
             mask-repeat: no-repeat;
         }
@@ -46,6 +48,12 @@
         &:focus-visible {
             outline: var(--focus-outline-width) solid var(--btn-close-theme-emphasis, currentColor);
             outline-offset: var(--focus-outline-offset);
+        }
+
+        // Désactivé : estompé, plus de survol ni de clic, comme les boutons
+        &:disabled {
+            opacity: var(--disabled-opacity);
+            pointer-events: none;
         }
 
         // Contraste élevé (Windows) : le fond forcé effacerait la croix, elle prend la couleur du texte des boutons
@@ -58,17 +66,17 @@
     }
 
     // Par défaut, sans couleur : fond transparent, le texte autour, cadre gris
-    // Au survol et au clic, un voile gris transparent, comme btn : ce qui est derrière (verre, image) reste visible
+    // Au survol et au clic, un voile transparent de la couleur du thème (gris sans thème), comme btn : ce qui est derrière (verre, image) reste visible
     .btn-close {
         border-color: var(--border-color);
         background-color: transparent;
         color: inherit;
 
         &:hover {
-            background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-soft), transparent);
+            background-color: color-mix(in oklch, var(--btn-close-theme-color, var(--color-neutral)) var(--state-mix-soft), transparent);
         }
         &:active {
-            background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-strong), transparent);
+            background-color: color-mix(in oklch, var(--btn-close-theme-color, var(--color-neutral)) var(--state-mix-strong), transparent);
         }
     }
 
@@ -119,9 +127,9 @@
     }
 
     // Tailles : la hauteur du bouton de la même taille (24, 31, 38, 45px), pour les aligner côte à côte
-    .btn-close-xs { --btn-close-size: 1.5rem; }
-    .btn-close-sm { --btn-close-size: 1.9375rem; }
-    .btn-close-md { --btn-close-size: 2.375rem; }
-    .btn-close-lg { --btn-close-size: 2.8125rem; }
+    .btn-close-xs { --btn-close-width: 1.5rem; }
+    .btn-close-sm { --btn-close-width: 1.9375rem; }
+    .btn-close-md { --btn-close-width: 2.375rem; }
+    .btn-close-lg { --btn-close-width: 2.8125rem; }
 
 }

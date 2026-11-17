@@ -1,3 +1,5 @@
+@use '../settings/colors';
+
 @layer components {
 
     :root {
@@ -9,7 +11,7 @@
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore tous ses badges
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         .theme-#{$color} {
             --badge-theme-color: var(--color-#{$color});
             --badge-theme-contrast: var(--color-#{$color}-contrast);

@@ -14,7 +14,6 @@
         .line-height-#{$size} { line-height: var(--line-height-#{$size}); }
     }
 
-
     // Graisse : .fw-light … .fw-bold
     @each $weight in light, normal, medium, semibold, bold {
         .fw-#{$weight} { font-weight: var(--font-weight-#{$weight}); }
@@ -25,6 +24,6 @@
     .fst-normal { font-style: normal; }
 
     // Famille
-    .font-monospace { font-family: var(--font-family-monospace), monospace; }
+    .font-family-monospace { font-family: var(--font-family-monospace), monospace; }
 
 }

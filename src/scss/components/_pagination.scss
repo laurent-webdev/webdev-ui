@@ -1,3 +1,5 @@
+@use '../settings/colors';
+
 @layer components {
 
     :root {
@@ -5,10 +7,11 @@
         --pagination-item-padding-block: 0.375rem;
         --pagination-item-padding-inline: 0.75rem;
         --pagination-item-border-radius: var(--border-radius-md);
+        --pagination-item-border-width: var(--border-width);
     }
 
     // Une classe par couleur : hérité, un .theme-* sur un parent colore toutes ses paginations
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         .theme-#{$color} {
             --pagination-theme-color: var(--color-#{$color});
             --pagination-theme-contrast: var(--color-#{$color}-contrast);
@@ -30,7 +33,7 @@
 
         // Les points de suspension : un <li> sans lien, centré sur la largeur d'un élément
         > li:not(:has(> .pagination-item)) {
-            min-inline-size: calc(1lh + var(--pagination-item-padding-block) * 2 + var(--border-width) * 2);
+            min-width: calc(1lh + var(--pagination-item-padding-block) * 2 + var(--pagination-item-border-width) * 2);
             text-align: center;
         }
     }
@@ -38,17 +41,17 @@
     // Un lien ou un bouton, sans cadre : un carré pour un chiffre seul (la largeur minimale égale la hauteur)
     .pagination-item {
         display: block;
-        min-inline-size: calc(1lh + var(--pagination-item-padding-block) * 2 + var(--border-width) * 2);
+        min-width: calc(1lh + var(--pagination-item-padding-block) * 2 + var(--pagination-item-border-width) * 2);
         padding-block: var(--pagination-item-padding-block);
         padding-inline: var(--pagination-item-padding-inline);
         // Transparente : la hauteur d'un bouton, et un cadre visible en contraste élevé (Windows)
-        border: var(--border-width) solid transparent;
+        border: var(--pagination-item-border-width) solid transparent;
         border-radius: var(--pagination-item-border-radius);
         background-color: transparent;
         color: inherit;
         text-align: center;
         text-decoration: none;
-        transition-property: background-color, color;
+        transition-property: background-color, border-color, color;
         transition-duration: var(--transition-duration);
 
         // Comme les boutons : la couleur du thème en emphasis ; sans thème, celle du texte
@@ -64,14 +67,14 @@
         }
     }
 
-    // Par défaut, sans couleur : le texte de la page ; au survol, un voile gris transparent, comme btn ; au clic et sur la page en cours, ce voile renforcé
+    // Par défaut, sans couleur : le texte de la page ; au survol, un voile transparent de la couleur du thème (gris sans thème), comme btn ; au clic et sur la page en cours, ce voile renforcé
     .pagination .pagination-item {
         &:hover {
-            background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-soft), transparent);
+            background-color: color-mix(in oklch, var(--pagination-theme-color, var(--color-neutral)) var(--state-mix-soft), transparent);
         }
         &:active,
         &[aria-current]:not([aria-current="false"]) {
-            background-color: color-mix(in oklch, var(--color-neutral) var(--state-mix-strong), transparent);
+            background-color: color-mix(in oklch, var(--pagination-theme-color, var(--color-neutral)) var(--state-mix-strong), transparent);
         }
     }
 
@@ -108,14 +111,14 @@
         // Chaque élément et les points de suspension encadrés, sans arrondi ; le cadre d'un élément recouvre celui de son voisin
         > li > .pagination-item,
         > li:not(:has(> .pagination-item)) {
-            border: var(--border-width) solid var(--border-color);
+            border: var(--pagination-item-border-width) solid var(--border-color);
             border-radius: 0;
         }
         > li:not(:has(> .pagination-item)) {
             padding-block: var(--pagination-item-padding-block);
         }
         > li + li {
-            margin-inline-start: calc(var(--border-width) * -1);
+            margin-inline-start: calc(var(--pagination-item-border-width) * -1);
         }
 
         // Les coins arrondis aux deux bouts du groupe seulement
@@ -145,11 +148,11 @@
         }
     }
 
-    // Sans couleur : un gris plus marqué que le cadre
+    // Par défaut : la couleur du thème ; sans thème, un gris plus marqué que le cadre
     .pagination.pagination-group > li > .pagination-item {
         &:hover,
         &[aria-current]:not([aria-current="false"]) {
-            border-color: var(--color-neutral);
+            border-color: var(--pagination-theme-color, var(--color-neutral));
         }
     }
 
@@ -162,23 +165,26 @@
         }
     }
 
-    // Tailles : changent le padding et le texte de tous les éléments, avec n'importe quelle variante ; 31, 38 et 45px de haut, comme les boutons
+    // Tailles : changent le padding, le texte et l'interligne de tous les éléments, avec n'importe quelle variante ; 31, 38 et 45px de haut, comme les boutons
     .pagination-sm {
         --pagination-item-padding-block: 0.25rem;
         --pagination-item-padding-inline: 0.5rem;
         font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
     }
 
     .pagination-md {
         --pagination-item-padding-block: 0.375rem;
         --pagination-item-padding-inline: 0.75rem;
         font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
     }
 
     .pagination-lg {
         --pagination-item-padding-block: 0.5rem;
         --pagination-item-padding-inline: 1rem;
         font-size: var(--font-size-lg);
+        line-height: var(--line-height-lg);
     }
 
 }

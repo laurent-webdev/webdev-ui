@@ -61,7 +61,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><th scope="row">--btn-close-size</th><td>1.5rem</td><td>côté du carré (la croix suit)</td></tr>
+                <tr><th scope="row">--btn-close-width</th><td>1.5rem</td><td>côté du carré (la croix suit)</td></tr>
                 <tr><th scope="row">--btn-close-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
                 <tr><th scope="row">--btn-close-border-width</th><td>--border-width</td><td>épaisseur du cadre</td></tr>
             </tbody>
@@ -69,10 +69,10 @@
     </div>
     {% set code %}
         /* Tous les boutons de fermeture sans taille (btn-close-xs garde 24px) */
-        :root { --btn-close-size: 2rem; }
+        :root { --btn-close-width: 2rem; }
 
         /* Une taille */
-        .btn-close-lg { --btn-close-size: 3rem; }
+        .btn-close-lg { --btn-close-width: 3rem; }
 
         /* Un bouton du site */
         .btn-close-rond { --btn-close-border-radius: 50%; }

@@ -1,8 +1,10 @@
+@use '../settings/colors';
+
 @layer utilities {
 
     // Une classe par couleur : la couleur est dans le nom, sans .theme-* (réservé aux composants)
     // Les fonds ne posent que le fond : le texte se choisit avec color-* (class="bg-primary color-primary-contrast")
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         // Fond plein
         .bg-#{$color} {
             background-color: var(--color-#{$color});
@@ -14,7 +16,7 @@
         }
     }
 
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         // Couleur brute : icônes, décoration ; sur le fond de page, trop peu contrastée pour du texte (WCAG 1.4.3)
         .color-#{$color} {
             color: var(--color-#{$color});

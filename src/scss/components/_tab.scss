@@ -1,3 +1,5 @@
+@use '../settings/colors';
+
 @layer components {
 
     :root {
@@ -14,7 +16,7 @@
     }
 
     // Une classe par couleur : hérité, sur la rangée elle colore tous ses onglets, sur un onglet seulement lui
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         .theme-#{$color} {
             --tab-theme-color: var(--color-#{$color});
             --tab-theme-emphasis: var(--color-#{$color}-emphasis);
@@ -40,7 +42,7 @@
         border-start-end-radius: var(--tab-border-radius);
         background-color: transparent;
         color: inherit;
-        white-space: nowrap;
+        text-wrap: nowrap;
         transition-property: background-color;
         transition-duration: var(--transition-duration);
 
@@ -85,7 +87,7 @@
             border-start-end-radius: 0;
             border-end-start-radius: var(--tab-border-radius);
             text-align: start;
-            white-space: normal;
+            text-wrap: wrap;
 
             &[aria-selected="true"] {
                 padding-inline-end: var(--tab-item-padding-inline);

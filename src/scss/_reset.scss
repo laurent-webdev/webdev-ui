@@ -6,118 +6,118 @@
 
 @layer reset {
 
-  // ---------- Boîtes ----------
-  *,
-  ::before,
-  ::after {
-    box-sizing: border-box;
-  }
-
-  // dialog et popover exclus : ils gardent leur centrage natif (margin: auto).
-  // :where() = spécificité 0, n'importe quelle classe passe devant.
-  :where(:not(dialog, [popover])) {
-    margin: 0;
-  }
-
-  // ---------- Document ----------
-  html {
-    -webkit-text-size-adjust: 100%; // iOS : pas d'agrandissement auto en paysage
-    text-size-adjust: 100%;         // 100% et non none : n'empêche pas le zoom texte
-    scrollbar-gutter: stable;       // place de la barre gardée : la page ne bouge pas quand elle disparaît (dialogue modal)
-  }
-
-  // Animer vers height: auto seulement si l'utilisateur accepte les animations
-  @media (prefers-reduced-motion: no-preference) {
-    html {
-      interpolate-size: allow-keywords;
-    }
-  }
-
-  body {
-    min-block-size: 100svh;
-  }
-
-  // ---------- Texte ----------
-  h1, h2, h3, h4, h5, h6 {
-    text-wrap: balance;
-  }
-
-  p, li, figcaption, blockquote, dd {
-    text-wrap: pretty;
-  }
-
-  h1, h2, h3, h4, h5, h6, p, li, dt, dd, figcaption, blockquote {
-    overflow-wrap: break-word;
-  }
-
-  // ---------- Médias ----------
-  // svg exclu du display: block pour ne pas casser les icônes dans le texte
-  img, picture, video, canvas {
-    display: block;
-  }
-
-  img, picture, video, canvas, svg {
-    max-inline-size: 100%;
-  }
-
-  img, video {
-    block-size: auto;
-  }
-
-  // ---------- Formulaires ----------
-  // Héritage de la typo uniquement : l'apparence native est gardée
-  // (bordures visibles en mode contraste élevé). Le look se fait dans .btn, .input…
-  input, button, textarea, select {
-    font: inherit;
-    color: inherit;
-    letter-spacing: inherit;
-  }
-
-  // La main sur ce qui se clique nativement (les liens l'ont déjà)
-  button:not(:disabled),
-  [type="button"]:not(:disabled),
-  [type="reset"]:not(:disabled),
-  [type="submit"]:not(:disabled),
-  summary {
-    cursor: pointer;
-  }
-
-  textarea {
-    resize: block;
-  }
-
-  // Empêche un fieldset de déborder (bug min-width natif). Bordure gardée.
-  fieldset {
-    min-inline-size: 0;
-  }
-
-  // ---------- Tableaux ----------
-  table {
-    border-collapse: collapse;
-  }
-
-  // ---------- Utilitaires natifs ----------
-  // until-found exclu : le navigateur doit pouvoir l'ouvrir avec Ctrl+F.
-  [hidden]:not([hidden="until-found"]) {
-    display: none !important;
-  }
-
-  // Ancre (#section) : laisse de l'espace au-dessus de la cible
-  :target {
-    scroll-margin-block: 5ex;
-  }
-
-  // ---------- Animations réduites ----------
-  // Filet de sécurité. !important dans le premier layer : gagne sur tout.
-  // Conséquence : les spinners sont figés, prévoir un texte « Chargement… ».
-  @media (prefers-reduced-motion: reduce) {
+    // ---------- Boîtes ----------
     *,
     ::before,
     ::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
+        box-sizing: border-box;
     }
-  }
+
+    // dialog et popover exclus : ils gardent leur centrage natif (margin: auto).
+    // :where() = spécificité 0, n'importe quelle classe passe devant.
+    :where(:not(dialog, [popover])) {
+        margin: 0;
+    }
+
+    // ---------- Document ----------
+    html {
+        -webkit-text-size-adjust: 100%; // iOS : pas d'agrandissement auto en paysage
+        text-size-adjust: 100%;         // 100% et non none : n'empêche pas le zoom texte
+        scrollbar-gutter: stable;       // place de la barre gardée : la page ne bouge pas quand elle disparaît (dialogue modal)
+    }
+
+    // Animer vers height: auto seulement si l'utilisateur accepte les animations
+    @media (prefers-reduced-motion: no-preference) {
+        html {
+            interpolate-size: allow-keywords;
+        }
+    }
+
+    body {
+        min-height: 100svh;
+    }
+
+    // ---------- Texte ----------
+    h1, h2, h3, h4, h5, h6 {
+        text-wrap: balance;
+    }
+
+    p, li, figcaption, blockquote, dd {
+        text-wrap: pretty;
+    }
+
+    h1, h2, h3, h4, h5, h6, p, li, dt, dd, figcaption, blockquote {
+        overflow-wrap: break-word;
+    }
+
+    // ---------- Médias ----------
+    // svg exclu du display: block pour ne pas casser les icônes dans le texte
+    img, picture, video, canvas {
+        display: block;
+    }
+
+    img, picture, video, canvas, svg {
+        max-width: 100%;
+    }
+
+    img, video {
+        height: auto;
+    }
+
+    // ---------- Formulaires ----------
+    // Héritage de la typo uniquement : l'apparence native est gardée
+    // (bordures visibles en mode contraste élevé). Le look se fait dans .btn, .form-input…
+    input, button, textarea, select {
+        font: inherit;
+        color: inherit;
+        letter-spacing: inherit;
+    }
+
+    // La main sur ce qui se clique nativement (les liens l'ont déjà)
+    button:not(:disabled),
+    [type="button"]:not(:disabled),
+    [type="reset"]:not(:disabled),
+    [type="submit"]:not(:disabled),
+    summary {
+        cursor: pointer;
+    }
+
+    textarea {
+        resize: block;
+    }
+
+    // Empêche un fieldset de déborder (bug min-width natif). Bordure gardée.
+    fieldset {
+        min-width: 0;
+    }
+
+    // ---------- Tableaux ----------
+    table {
+        border-collapse: collapse;
+    }
+
+    // ---------- Utilitaires natifs ----------
+    // until-found exclu : le navigateur doit pouvoir l'ouvrir avec Ctrl+F.
+    [hidden]:not([hidden="until-found"]) {
+        display: none !important;
+    }
+
+    // Ancre (#section) : laisse de l'espace au-dessus de la cible
+    :target {
+        scroll-margin-block: 5ex;
+    }
+
+    // ---------- Animations réduites ----------
+    // Filet de sécurité. !important dans le premier layer : gagne sur tout.
+    // Conséquence : les spinners sont figés, prévoir un texte « Chargement… ».
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        ::before,
+        ::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
 }

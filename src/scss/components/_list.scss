@@ -1,3 +1,5 @@
+@use '../settings/colors';
+
 @layer components {
 
     :root {
@@ -13,7 +15,7 @@
     }
 
     // Une classe par couleur : hérité, sur la liste elle colore tous ses éléments, sur un élément seulement lui
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         .theme-#{$color} {
             --list-theme-color: var(--color-#{$color});
             --list-theme-emphasis: var(--color-#{$color}-emphasis);
@@ -32,7 +34,7 @@
         border: var(--list-border-width) solid var(--border-color);
         border-radius: var(--list-border-radius);
         // La hauteur de ses éléments : dans une grille ou un flex, ne s'étire pas à la hauteur d'un voisin, comme l'accordéon
-        block-size: fit-content;
+        height: fit-content;
 
         // Un élément de texte : le padding est sur le <li>
         > li {

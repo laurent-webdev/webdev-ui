@@ -1,3 +1,5 @@
+@use '../settings/colors';
+
 @layer utilities {
 
     // Bordure pleine, avec l'épaisseur et la couleur globales
@@ -21,10 +23,10 @@
 
     // Couleur, écrite après les bordures pour remplacer le gris (class="border border-danger")
     // Brute : décorative ; emphasis : lisible sur le fond de page, pour une bordure qui doit se voir
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         .border-#{$color} { border-color: var(--color-#{$color}); }
     }
-    @each $color in primary, secondary, accent, success, danger, warning, info, neutral, inverse {
+    @each $color in colors.$colors {
         .border-#{$color}-emphasis { border-color: var(--color-#{$color}-emphasis); }
     }
 
