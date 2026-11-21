@@ -119,13 +119,6 @@ body {
   }
 }
 
-/* Menu de la doc (fixé et dans le drawer) : des lignes plus serrées que la liste par défaut, réglées par ses variables comme le ferait un site */
-#doc-menu-fixed,
-#doc-menu {
-  --list-item-padding-block: 0.375rem;
-  --list-item-padding-inline: 0.75rem;
-}
-
 /* Recherche de l'en-tête (base.html.twig, app.js) : la liste sous le champ (son ancre), de sa largeur ; longue, elle défile */
 #doc-search {
   anchor-name: --doc-search;

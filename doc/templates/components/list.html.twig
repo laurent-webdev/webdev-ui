@@ -55,6 +55,28 @@
     {% endset %}
     {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
 
+    <h2 class="mt-10">Tailles</h2>
+    <p class="mt-2">Le padding, le texte et l'interligne : des lignes de 26, 33, 40 et 47px. Sans classe : md.</p>
+    {% set code %}
+        <ul class="list list-xs">
+            <li>list-xs</li>
+            <li>Un élément</li>
+        </ul>
+        <ul class="list list-sm">
+            <li>list-sm</li>
+            <li>Un élément</li>
+        </ul>
+        <ul class="list list-md">
+            <li>list-md</li>
+            <li>Un élément</li>
+        </ul>
+        <ul class="list list-lg">
+            <li>list-lg</li>
+            <li>Un élément</li>
+        </ul>
+    {% endset %}
+    {{ include('_example.html.twig', {code: code, class: 'd-grid gap-4'}) }}
+
     <h2 class="mt-10">Un texte et un badge</h2>
     {% set code %}
         <ul class="list">
@@ -99,11 +121,14 @@
         </table>
     </div>
     {% set code %}
-        /* Toutes les listes : des éléments plus bas (36px), des coins carrés */
+        /* Toutes les listes sans taille (list-md garde 0.5rem) : des éléments plus bas (36px), des coins carrés */
         :root {
             --list-item-padding-block: 0.375rem;
             --list-border-radius: 0px;
         }
+
+        /* Une taille */
+        .list-lg { --list-item-padding-inline: 1.5rem; }
 
         /* Une liste du site */
         .menu-compte { --list-item-padding-inline: 0.75rem; }
@@ -157,7 +182,7 @@
     <ul class="mt-2">
         <li>Sans puces par <code>list-style-type: ""</code> : la liste reste annoncée dans Safari d'après un test de 2023, à vérifier avec VoiceOver.</li>
         <li>Un <code>&lt;ol class="list"&gt;</code> ou <code>list-unstyled</code> perd ses numéros.</li>
-        <li>Pas encore de tailles, de liste horizontale ni de titres de groupe.</li>
+        <li>Pas encore de liste horizontale ni de titres de groupe.</li>
     </ul>
 
     <h2 class="mt-10">Toutes les couleurs</h2>

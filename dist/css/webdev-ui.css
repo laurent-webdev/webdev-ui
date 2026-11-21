@@ -2368,6 +2368,30 @@
   .list-borderless > li {
     border-radius: var(--list-border-radius);
   }
+  .list-xs {
+    --list-item-padding-block: 0.25rem;
+    --list-item-padding-inline: 0.5rem;
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-xs);
+  }
+  .list-sm {
+    --list-item-padding-block: 0.375rem;
+    --list-item-padding-inline: 0.75rem;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-sm);
+  }
+  .list-md {
+    --list-item-padding-block: 0.5rem;
+    --list-item-padding-inline: 1rem;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+  }
+  .list-lg {
+    --list-item-padding-block: 0.625rem;
+    --list-item-padding-inline: 1.25rem;
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-lg);
+  }
 }
 @layer components {
   :root {

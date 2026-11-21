@@ -1,14 +1,34 @@
-// Bascule clair / sombre de la doc : le framework ne fournit pas ce JS, c'est au site de le faire
+// Thème de la doc : le framework ne fournit pas ce JS, c'est au site de le faire
+// Système (le défaut) : pas de data-theme, le thème de l'ordinateur, suivi en direct par le CSS (light-dark()) ; Clair ou Sombre : data-theme le force
+// Le choix est gardé dans localStorage ; le script de base.html.twig le pose avant le CSS
 const root = document.documentElement;
-const toggle = document.getElementById('theme-toggle');
+const savedTheme = localStorage.getItem('theme') ?? 'system';
 
-const isDark = () => (root.dataset.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')) === 'dark';
+// Le bouton Thème montre le choix : son emoji, et son nom pour le lecteur d'écran (le texte à la fin du libellé, après l'emoji)
+const showTheme = (input) => {
+    for (const icon of document.querySelectorAll('[data-theme-icon]')) {
+        icon.hidden = icon.dataset.themeIcon !== input.value;
+    }
+    document.getElementById('doc-theme-current').textContent = input.labels[0].lastChild.textContent;
+};
 
-toggle.setAttribute('aria-pressed', isDark());
-toggle.addEventListener('click', () => {
-    root.dataset.theme = isDark() ? 'light' : 'dark';
-    localStorage.setItem('theme', root.dataset.theme);
-    toggle.setAttribute('aria-pressed', isDark());
+// Coche le bouton radio du choix gardé (Système est coché dans le HTML)
+for (const input of document.querySelectorAll('input[name="doc-theme"]')) {
+    input.checked = input.value === savedTheme;
+    if (input.checked) showTheme(input);
+}
+
+document.addEventListener('change', (event) => {
+    if (event.target.name !== 'doc-theme') return;
+    const theme = event.target.value;
+    if (theme === 'system') {
+        delete root.dataset.theme;
+        localStorage.removeItem('theme');
+    } else {
+        root.dataset.theme = theme;
+        localStorage.setItem('theme', theme);
+    }
+    showTheme(event.target);
 });
 
 // Les écouteurs des démos et des blocs de code sont sur document : ils marchent pour le contenu que htmx remplace
