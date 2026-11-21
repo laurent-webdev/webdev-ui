@@ -46,52 +46,76 @@ body {
 }
 
 /* ---------- Fond de la doc (pas dans le framework) ----------
-   Foncé, des vagues de couleur floues qui bougent lentement ; en thème clair, la même chose en clair (le texte reste noir)
-   Les teintes viennent de la palette (primary, accent, info, secondary) : elles suivent un changement de couleur */
+   Des bandes de vagues superposées qui glissent lentement, comme les fonds d'écran de macOS ; foncées, pastel en thème clair
+   Les teintes viennent de la palette (accent, info, primary, secondary) : elles suivent un changement de couleur */
 body {
   background-color: light-dark(oklch(0.97 0.01 285), oklch(0.14 0.03 280));
 }
 
-/* Deux couches fixées derrière la page, plus grandes que l'écran : leurs bords ne se voient pas quand elles bougent */
-body::before,
-body::after {
-  content: "";
+/* Le conteneur (base.html.twig) : fixé derrière la page, plus grand que l'écran et penché : ses bords ne se voient pas */
+.doc-waves {
   position: fixed;
-  inset: -25%;
+  inset: -20%;
   z-index: -1;
+  overflow: hidden;
+  rotate: -8deg;
   pointer-events: none;
 }
 
-/* Première couche : une vague rose et une violette */
-body::before {
-  background:
-    radial-gradient(ellipse 45% 25% at 30% 35%, light-dark(oklch(from var(--color-primary) 0.90 0.07 h / 0.9), oklch(from var(--color-primary) 0.36 0.13 h / 0.9)), transparent),
-    radial-gradient(ellipse 40% 22% at 70% 60%, light-dark(oklch(from var(--color-accent) 0.90 0.07 h / 0.9), oklch(from var(--color-accent) 0.34 0.13 h / 0.9)), transparent);
-  animation: doc-waves-1 30s ease-in-out infinite alternate;
+/* Une bande : collée en bas, deux fois la largeur du conteneur, la forme de sa crête répétée (mask-image)
+   Plus claire en haut, plus foncée en bas : chaque crête se détache de la bande derrière elle */
+.doc-waves > div {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  mask-size: 50% 100%;
+  mask-repeat: repeat-x;
+  background-image: linear-gradient(
+    light-dark(oklch(from var(--wave-color) 0.88 0.08 h), oklch(from var(--wave-color) 0.52 0.16 h)),
+    light-dark(oklch(from var(--wave-color) 0.80 0.11 h), oklch(from var(--wave-color) 0.22 0.10 h)) 60%
+  );
+  animation: doc-wave linear infinite;
 }
 
-/* Deuxième couche : une bleue et une cyan, dans l'autre sens */
-body::after {
-  background:
-    radial-gradient(ellipse 40% 22% at 65% 30%, light-dark(oklch(from var(--color-info) 0.90 0.07 h / 0.8), oklch(from var(--color-info) 0.34 0.13 h / 0.8)), transparent),
-    radial-gradient(ellipse 45% 25% at 35% 70%, light-dark(oklch(from var(--color-secondary) 0.90 0.07 h / 0.8), oklch(from var(--color-secondary) 0.34 0.12 h / 0.8)), transparent);
-  animation: doc-waves-2 40s ease-in-out infinite alternate;
+/* Les quatre bandes, du fond vers l'avant : chacune sa couleur, sa crête, sa hauteur, sa vitesse et son sens */
+.doc-waves > :nth-child(1) {
+  --wave-color: var(--color-accent);
+  height: 88%;
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400' preserveAspectRatio='none'><path d='M0 70C200 0 400 0 600 70S1000 140 1200 70V400H0Z'/></svg>");
+  animation-duration: 90s;
 }
 
-/* Le mouvement : translate, rotate et scale, calculés par la carte graphique ; immobile en mouvement réduit (le reset) */
-@keyframes doc-waves-1 {
+.doc-waves > :nth-child(2) {
+  --wave-color: var(--color-info);
+  height: 70%;
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400' preserveAspectRatio='none'><path d='M0 90C150 130 350 10 600 50S1050 50 1200 90V400H0Z'/></svg>");
+  animation-duration: 70s;
+  animation-direction: reverse;
+}
+
+/* Deux crêtes par largeur d'écran (mask-size à 25 %) */
+.doc-waves > :nth-child(3) {
+  --wave-color: var(--color-primary);
+  height: 52%;
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400' preserveAspectRatio='none'><path d='M0 70C200 0 400 140 600 70S1000 140 1200 70V400H0Z'/></svg>");
+  mask-size: 25% 100%;
+  animation-duration: 55s;
+}
+
+.doc-waves > :nth-child(4) {
+  --wave-color: var(--color-secondary);
+  height: 34%;
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400' preserveAspectRatio='none'><path d='M0 100C250 140 350 0 600 30S950 60 1200 100V400H0Z'/></svg>");
+  animation-duration: 45s;
+  animation-direction: reverse;
+}
+
+/* Le mouvement : la bande avance d'une largeur de crête, qui se répète, puis recommence sans saut ;
+   translate seul, calculé par la carte graphique ; immobile en mouvement réduit (le reset) */
+@keyframes doc-wave {
   to {
-    translate: 8% 5%;
-    rotate: 15deg;
-    scale: 1.15;
-  }
-}
-
-@keyframes doc-waves-2 {
-  to {
-    translate: -7% -6%;
-    rotate: -12deg;
-    scale: 1.1;
+    translate: -50% 0;
   }
 }
 

@@ -4,8 +4,8 @@
 
     :root {
         // Forme : le même padding pour le titre et le contenu
-        --accordion-padding-block: 1rem;
-        --accordion-padding-inline: 1rem;
+        --accordion-padding-block: 0.75rem;
+        --accordion-padding-inline: 0.75rem;
         --accordion-border-radius: var(--border-radius-md);
         --accordion-border-width: var(--border-width);
         // Ouverture et fermeture d'un panneau, rotation de la flèche
@@ -198,6 +198,7 @@
     }
 
     // Tailles : changent le padding, la taille du texte et l'interligne (titre et contenu), avec n'importe quelle variante
+    // Padding tout autour : celui des côtés du bouton de la même taille (titres de 34, 41, 48, 59px)
     .accordion-xs {
         --accordion-padding-block: 0.5rem;
         --accordion-padding-inline: 0.5rem;
@@ -206,22 +207,22 @@
     }
 
     .accordion-sm {
-        --accordion-padding-block: 0.75rem;
-        --accordion-padding-inline: 0.75rem;
+        --accordion-padding-block: 0.625rem;
+        --accordion-padding-inline: 0.625rem;
         font-size: var(--font-size-sm);
         line-height: var(--line-height-sm);
     }
 
     .accordion-md {
-        --accordion-padding-block: 1rem;
-        --accordion-padding-inline: 1rem;
+        --accordion-padding-block: 0.75rem;
+        --accordion-padding-inline: 0.75rem;
         font-size: var(--font-size-md);
         line-height: var(--line-height-md);
     }
 
     .accordion-lg {
-        --accordion-padding-block: 1.25rem;
-        --accordion-padding-inline: 1.25rem;
+        --accordion-padding-block: 1rem;
+        --accordion-padding-inline: 1rem;
         font-size: var(--font-size-lg);
         line-height: var(--line-height-lg);
     }

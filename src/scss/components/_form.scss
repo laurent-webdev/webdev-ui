@@ -4,8 +4,8 @@
 
     :root {
         // Forme des champs (input, select, textarea) ; le reste est natif
-        --form-input-padding-block: 0.375rem;
-        --form-input-padding-inline: 1rem;
+        --form-input-padding-block: 0.3125rem;
+        --form-input-padding-inline: 0.75rem;
         --form-input-border-radius: var(--border-radius-md);
         --form-input-border-width: var(--border-width);
         --form-input-border-color: var(--border-color);
@@ -132,21 +132,21 @@
     // Tailles : les paddings, le texte et l'interligne du bouton de la même taille
     .form-input-sm {
         --form-input-padding-block: 0.25rem;
-        --form-input-padding-inline: 0.75rem;
+        --form-input-padding-inline: 0.625rem;
         font-size: var(--font-size-sm);
         line-height: var(--line-height-sm);
     }
 
     .form-input-md {
-        --form-input-padding-block: 0.375rem;
-        --form-input-padding-inline: 1rem;
+        --form-input-padding-block: 0.3125rem;
+        --form-input-padding-inline: 0.75rem;
         font-size: var(--font-size-md);
         line-height: var(--line-height-md);
     }
 
     .form-input-lg {
-        --form-input-padding-block: 0.5rem;
-        --form-input-padding-inline: 1.25rem;
+        --form-input-padding-block: 0.375rem;
+        --form-input-padding-inline: 1rem;
         font-size: var(--font-size-lg);
         line-height: var(--line-height-lg);
     }
@@ -310,33 +310,33 @@
     // Tailles d'un groupe : sur un parent (form, fieldset, form-field), tout ce qu'il contient change d'un coup
     .form-sm {
         --form-input-padding-block: 0.25rem;
-        --form-input-padding-inline: 0.75rem;
+        --form-input-padding-inline: 0.625rem;
         --form-switch-height: 1rem;
         --form-control-zoom: 0.875;
         --btn-padding-block: 0.25rem;
-        --btn-padding-inline: 0.75rem;
+        --btn-padding-inline: 0.625rem;
         font-size: var(--font-size-sm);
         line-height: var(--line-height-sm);
     }
 
     .form-md {
-        --form-input-padding-block: 0.375rem;
-        --form-input-padding-inline: 1rem;
+        --form-input-padding-block: 0.3125rem;
+        --form-input-padding-inline: 0.75rem;
         --form-switch-height: 1.25rem;
         --form-control-zoom: 1;
-        --btn-padding-block: 0.375rem;
-        --btn-padding-inline: 1rem;
+        --btn-padding-block: 0.3125rem;
+        --btn-padding-inline: 0.75rem;
         font-size: var(--font-size-md);
         line-height: var(--line-height-md);
     }
 
     .form-lg {
-        --form-input-padding-block: 0.5rem;
-        --form-input-padding-inline: 1.25rem;
+        --form-input-padding-block: 0.375rem;
+        --form-input-padding-inline: 1rem;
         --form-switch-height: 1.5rem;
         --form-control-zoom: 1.125;
-        --btn-padding-block: 0.5rem;
-        --btn-padding-inline: 1.25rem;
+        --btn-padding-block: 0.375rem;
+        --btn-padding-inline: 1rem;
         font-size: var(--font-size-lg);
         line-height: var(--line-height-lg);
     }

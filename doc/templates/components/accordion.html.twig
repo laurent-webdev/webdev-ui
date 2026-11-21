@@ -110,8 +110,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><th scope="row">--accordion-padding-block</th><td>1rem</td><td>haut et bas du titre et du contenu</td></tr>
-                <tr><th scope="row">--accordion-padding-inline</th><td>1rem</td><td>côtés du titre et du contenu</td></tr>
+                <tr><th scope="row">--accordion-padding-block</th><td>0.75rem</td><td>haut et bas du titre et du contenu</td></tr>
+                <tr><th scope="row">--accordion-padding-inline</th><td>0.75rem</td><td>côtés du titre et du contenu</td></tr>
                 <tr><th scope="row">--accordion-border-radius</th><td>--border-radius-md</td><td>coins</td></tr>
                 <tr><th scope="row">--accordion-border-width</th><td>--border-width</td><td>cadre et traits</td></tr>
                 <tr><th scope="row">--accordion-transition-duration</th><td>0.2s</td><td>ouverture, fermeture et flèche</td></tr>
@@ -119,8 +119,8 @@
         </table>
     </div>
     {% set code %}
-        /* Tous les accordéons sans taille (accordion-md garde 1rem) */
-        :root { --accordion-padding-block: 0.75rem; }
+        /* Tous les accordéons sans taille (accordion-md garde 0.75rem) */
+        :root { --accordion-padding-block: 1rem; }
 
         /* Une taille */
         .accordion-lg { --accordion-padding-inline: 1.5rem; }

@@ -3,9 +3,9 @@
 @layer components {
 
     :root {
-        // Forme : chaque élément, 38px de haut comme un bouton
-        --pagination-item-padding-block: 0.375rem;
-        --pagination-item-padding-inline: 0.75rem;
+        // Forme : chaque élément, 36px de haut comme un bouton ; les côtés du bouton de la taille en dessous (carré pour un chiffre)
+        --pagination-item-padding-block: 0.3125rem;
+        --pagination-item-padding-inline: 0.625rem;
         --pagination-item-border-radius: var(--border-radius-md);
         --pagination-item-border-width: var(--border-width);
     }
@@ -165,7 +165,7 @@
         }
     }
 
-    // Tailles : changent le padding, le texte et l'interligne de tous les éléments, avec n'importe quelle variante ; 31, 38 et 45px de haut, comme les boutons
+    // Tailles : changent le padding, le texte et l'interligne de tous les éléments, avec n'importe quelle variante ; 31, 36 et 41px de haut, comme les boutons
     .pagination-sm {
         --pagination-item-padding-block: 0.25rem;
         --pagination-item-padding-inline: 0.5rem;
@@ -174,15 +174,15 @@
     }
 
     .pagination-md {
-        --pagination-item-padding-block: 0.375rem;
-        --pagination-item-padding-inline: 0.75rem;
+        --pagination-item-padding-block: 0.3125rem;
+        --pagination-item-padding-inline: 0.625rem;
         font-size: var(--font-size-md);
         line-height: var(--line-height-md);
     }
 
     .pagination-lg {
-        --pagination-item-padding-block: 0.5rem;
-        --pagination-item-padding-inline: 1rem;
+        --pagination-item-padding-block: 0.375rem;
+        --pagination-item-padding-inline: 0.75rem;
         font-size: var(--font-size-lg);
         line-height: var(--line-height-lg);
     }

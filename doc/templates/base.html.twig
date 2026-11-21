@@ -47,6 +47,9 @@
     {# Grand écran : la page a la hauteur de l'écran, l'en-tête et le pied restent, le contenu défile dans le main ;
        petit écran et zoom : toute la page défile (l'en-tête et le pied ne prennent pas la place du contenu) #}
     <body class="d-flex flex-direction-column min-h-100svh lg:h-100svh" data-hx-target="#doc-content" data-hx-select="#doc-content" data-hx-swap="outerHTML show:window:top">
+        {# Fond de la doc (doc.css) : quatre bandes de vagues qui glissent derrière la page ; hors de #doc-content, htmx ne les recharge pas #}
+        <div class="doc-waves"><div></div><div></div><div></div><div></div></div>
+
         {# En-tête, contenu et pied de page : trois cartes en verre, au-dessus du fond à vagues #}
         <div class="container pt-3">
             <header class="card glass">
