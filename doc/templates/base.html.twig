@@ -86,7 +86,7 @@
 {#                        <a class="btn btn-sm" href="{{ path('app_test') }}" data-hx-boost="true">Page de test</a>#}
                         {# Thème : un dropdown du framework et trois boutons radio ; Système coché dans le HTML (le défaut), app.js coche le choix gardé et l'applique
                            Le bouton montre le thème choisi : son emoji (les deux autres en hidden), et son nom pour le lecteur d'écran (« Thème, Système ») ;
-                           les emojis de l'archive, aria-hidden : le nom du thème est écrit à côté #}
+                           les emojis en aria-hidden : le nom du thème est écrit à côté #}
                         <button class="btn btn-md d-inline-flex align-items-center gap-2" type="button" popovertarget="doc-theme">
                             <span aria-hidden="true">
                                 <span data-theme-icon="light" hidden>☀️</span>
@@ -163,12 +163,12 @@
         <div class="container pb-3">
             {# Logos : htmx et GitHub de Simple Icons (CC0), Prism de son dépôt (MIT), en currentColor : la couleur du texte dans les deux thèmes #}
             <footer class="card glass box-shadow-xl">
-                {# Une ligne sur grand écran (le pied reste affiché sous le contenu) : à gauche le nom et ce qu'est le framework,
+                {# Une ligne sur grand écran (le pied reste affiché sous le contenu) : à gauche le nom, ce qu'est le framework et comment il est fait,
                    à droite les outils de la doc et le projet, en petits boutons arrondis avec leur logo ; sur petit écran, les groupes passent à la ligne #}
                 <div class="card-body d-flex flex-wrap-wrap align-items-center justify-content-space-between gap-3 py-3">
                     <p class="d-flex flex-wrap-wrap align-items-center column-gap-3 row-gap-1">
                         <a class="link d-inline-flex align-items-center gap-2 fw-bold text-decoration-none" href="{{ path('app_main') }}" data-hx-boost="true"><img src="/favicon.svg" alt="" width="24" height="24">webdev-ui</a>
-                        <span class="fs-sm color-neutral-emphasis">HTML natif, variables CSS, zéro dépendance · licence MIT</span>
+                        <span class="fs-sm color-neutral-emphasis">HTML natif, variables CSS, zéro dépendance · licence MIT · codé en duo avec Claude Code</span>
                     </p>
                     <div class="d-flex flex-wrap-wrap align-items-center gap-2">
                         <span class="fs-sm color-neutral-emphasis me-1">Cette doc est faite avec</span>

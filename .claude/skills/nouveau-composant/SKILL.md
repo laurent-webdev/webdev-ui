@@ -1,24 +1,23 @@
 ---
 name: nouveau-composant
-description: Créer un composant du framework (SCSS, JS si indispensable, page de doc, CLAUDE.md) sur le modèle de _button.scss. À utiliser quand Laurent demande de commencer un composant de la liste « À faire » (list, navbar, tab, table…) ou d'en ajouter un nouveau.
+description: Créer un composant du framework (SCSS, JS si indispensable, page de doc, CLAUDE.md) sur le modèle de _button.scss. À utiliser quand on demande de commencer un composant de la liste « À faire » (list, navbar, tab, table…) ou d'en ajouter un nouveau.
 argument-hint: <nom-du-composant>
 ---
 
 # Nouveau composant : $ARGUMENTS
 
-Les règles sont dans `CLAUDE.md` (Nommage, Variables CSS, Couleurs, Système de thème, Composants, Documentation). Ce skill dit seulement **dans quel ordre** les appliquer. Laurent avance pas à pas : une étape, puis son accord, puis la suivante.
+Les règles sont dans `CLAUDE.md` (Nommage, Variables CSS, Couleurs, Système de thème, Composants), `.claude/rules/components.md` (les composants déjà faits) et `.claude/rules/doc.md` (les pages de doc). Ce skill dit seulement **dans quel ordre** les appliquer. Avancer pas à pas : une étape, puis l'accord de l'utilisateur, puis la suivante.
 
 ## 1. Préparer, puis proposer (rien n'est écrit)
 
 1. Lire `src/scss/components/_button.scss` (le modèle) et le composant fait le plus proche (une liste d'éléments → `_dropdown.scss`, un bloc → `_card.scss`, ouvert ou fermé → `_accordion.scss` ou `_dialog.scss`).
-2. Chercher l'ancienne version dans `/home/laurent/dev/webdev-ui_archive/src/scss/` (lecture seule) : trier chaque classe (garder, simplifier, supprimer). Ne rien copier.
-3. Vérifier les normes : l'élément natif qui fait déjà le travail, le motif de l'ARIA APG s'il y en a un, le statut Baseline (MDN) de chaque balise, attribut ou propriété nouvelle. Le dire si c'est hors Baseline.
-4. Regarder Bootstrap 6 pour les noms de classes et le HTML : `https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.css`.
-5. **Proposer à Laurent**, court, avec le HTML minimal en code :
+2. Vérifier les normes : l'élément natif qui fait déjà le travail, le motif de l'ARIA APG s'il y en a un, le statut Baseline (MDN) de chaque balise, attribut ou propriété nouvelle. Le dire si c'est hors Baseline.
+3. Regarder Bootstrap 6 pour les noms de classes et le HTML : `https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.css`.
+4. **Proposer à l'utilisateur**, court, avec le HTML minimal en code :
     - les classes : défaut `.<nom>`, éléments `.<nom>-<élément>`, variantes, tailles (avec `-md`), ou « pas de taille, suit le texte (em) » ;
     - les tokens `--<nom>-theme-*` et les variables du `:root` (peu : padding, rayon, bordure ; seulement ce qu'un site changera) ;
     - JS ou pas, et pourquoi le natif ne suffit pas ;
-    - ce qu'on écarte de l'archive et de Bootstrap, et pourquoi.
+    - ce qu'on écarte de Bootstrap, et pourquoi.
 
    Attendre son accord avant d'écrire.
 
@@ -60,10 +59,10 @@ Les règles sont dans `CLAUDE.md` (Nommage, Variables CSS, Couleurs, Système de
 ## 5. Vérifier
 
 - `/verifier`, puis contrastes mesurés dans les deux thèmes, au repos, au survol et au clic (texte ≥ 4,5:1, contour de focus et bordure seule ≥ 3:1), clavier, 320px, zoom 200 %, `prefers-reduced-motion`.
-- Donner les mesures à Laurent ; elles iront dans le message de commit.
+- Donner les mesures à l'utilisateur ; elles iront dans le message de commit.
 
 ## 6. CLAUDE.md
 
 - « Ordre de travail » : passer le composant de « À faire » à « Faits ».
-- « Composants » : une puce de une ou deux lignes (le HTML, ce qui le distingue, le pourquoi d'un choix inhabituel). Pas de mesures ni d'essais : ils vont dans le commit.
+- `.claude/rules/components.md` : une puce de une ou deux lignes (le HTML, ce qui le distingue, le pourquoi d'un choix inhabituel). Pas de mesures ni d'essais : ils vont dans le commit.
 - Un point non tranché va dans « Décisions en attente ».

@@ -1,13 +1,13 @@
 ---
 name: verifier
-description: Vérifier le framework avant un commit (typecheck, build, validateur W3C sur toutes les pages de la doc, règles du CLAUDE.md, dist/ recompilé) et dire ce qui reste à vérifier à la main. À lancer quand Laurent demande de vérifier, avant de proposer un commit, ou à la fin d'un composant.
+description: Vérifier le framework avant un commit (typecheck, build, validateur W3C sur toutes les pages de la doc, règles du CLAUDE.md, dist/ recompilé) et dire ce qui reste à vérifier à la main. À lancer quand on demande de vérifier, avant de proposer un commit, ou à la fin d'un composant.
 ---
 
 # Vérifier
 
-Node, sass et tsc n'existent que dans le conteneur Docker `webdev-ui` ; la doc est servie sur http://localhost:8888 par `symfony serve` (qui lance aussi `gulp watch`). Si `docker ps` ne montre pas `webdev-ui`, ou si la doc ne répond pas, s'arrêter et le dire à Laurent.
+Node, sass et tsc n'existent que dans le conteneur Docker `webdev-ui` ; la doc est servie sur http://localhost:8888 par `symfony serve` (qui lance aussi `gulp watch`). Si `docker ps` ne montre pas `webdev-ui`, ou si la doc ne répond pas, s'arrêter et le dire à l'utilisateur.
 
-Lancer les étapes dans l'ordre, sans rien corriger : le compte rendu d'abord, les corrections sur l'accord de Laurent.
+Lancer les étapes dans l'ordre, sans rien corriger : le compte rendu d'abord, les corrections sur l'accord de l'utilisateur.
 
 ## 1. Types
 
