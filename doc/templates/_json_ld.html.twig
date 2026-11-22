@@ -1,0 +1,38 @@
+{#- Données structurées (schema.org en JSON-LD) : ce qu'est le site et le framework, pour les moteurs de recherche et les IA.
+    Sur chaque page : le site (WebSite) et le framework (SoftwareSourceCode) ; une page du menu ajoute son article (TechArticle).
+    title, description : ceux de la page ; page : sa place dans doc_sections (base.html.twig), null pour l'accueil.
+    JSON_HEX_TAG : un < du texte s'écrit <, rien ne peut fermer le <script> -#}
+{%- set home = url('app_main') -%}
+{%- set graph = [
+    {
+        '@type': 'WebSite',
+        '@id': home ~ '#website',
+        url: home,
+        name: 'webdev-ui',
+        description: doc_tagline,
+        inLanguage: 'fr',
+    },
+    {
+        '@type': 'SoftwareSourceCode',
+        '@id': home ~ '#software',
+        name: 'webdev-ui',
+        description: doc_tagline,
+        url: home,
+        codeRepository: 'https://github.com/laurent-webdev/webdev-ui',
+        programmingLanguage: ['CSS', 'Sass', 'TypeScript'],
+        license: 'https://opensource.org/license/mit',
+        isAccessibleForFree: true,
+    },
+] -%}
+{%- if page -%}
+    {%- set graph = graph|merge([{
+        '@type': 'TechArticle',
+        headline: title,
+        description: description,
+        url: url(page.route),
+        inLanguage: 'fr',
+        isPartOf: {'@id': home ~ '#website'},
+        about: {'@id': home ~ '#software'},
+    }]) -%}
+{%- endif -%}
+<script type="application/ld+json">{{ {'@context': 'https://schema.org', '@graph': graph}|json_encode(constant('JSON_UNESCAPED_SLASHES') b-or constant('JSON_UNESCAPED_UNICODE') b-or constant('JSON_HEX_TAG'))|raw }}</script>

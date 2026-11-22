@@ -1,0 +1,18 @@
+{#- llms-full.txt : toute la doc en un fichier Markdown, pour une IA qui la lit d'un coup ; l'accueil (sa première phrase dit ce qu'est le framework), puis chaque page du menu avec son adresse (DocPages) -#}
+# webdev-ui : toute la documentation
+
+Sommaire : {{ url('app_llms') }}
+
+{{ home.markdown }}
+{% for section in sections %}
+{% for page in section.pages %}
+
+---
+
+# {{ page.title }}
+
+Section : {{ section.label }} · Adresse : {{ page.url }}
+
+{{ page.markdown }}
+{% endfor %}
+{% endfor %}

@@ -21,6 +21,7 @@
         <title>{% block title %}Documentation{% endblock %} · webdev-ui</title>
         <meta name="description" content="{% block description %}{{ block('title') }} : documentation de webdev-ui, framework CSS/JS léger et sans dépendance.{% endblock %}">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        {{ include('_json_ld.html.twig', {title: block('title'), description: block('description'), page: doc_index is not null ? doc_pages[doc_index] : null}) }}
         {# Avant le CSS : pose le thème choisi (Clair ou Sombre) sans flash au chargement ; Système, ou rien de gardé : pas de data-theme, le thème de l'ordinateur #}
         <script>
             const theme = localStorage.getItem('theme');

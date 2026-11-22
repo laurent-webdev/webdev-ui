@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1 class="fs-5xl">webdev-ui</h1>
-    <p class="fs-xl color-neutral-emphasis mt-4">Un framework CSS/JS ultra léger : le HTML natif, des variables CSS pour tout personnaliser, les thèmes clair et sombre, et pas une dépendance.</p>
+    <p class="fs-xl color-neutral-emphasis mt-4">{{ doc_tagline }}</p>
     <div class="d-flex flex-wrap-wrap gap-3 mt-6" data-hx-boost="true">
         <a class="btn btn-lg" href="{{ path('app_accordion') }}">Voir les composants</a>
         <a class="btn btn-lg" href="{{ path('app_variables') }}">Personnaliser</a>

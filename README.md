@@ -41,6 +41,8 @@ Changer les breakpoints demande les sources SCSS (ce dépôt) et un SCSS à comp
 @use '…/webdev-ui/src/scss/webdev-ui';
 ```
 
+Pour une IA : la doc publie `/llms.txt` (le sommaire et l'essentiel pour écrire du HTML avec le framework) et `/llms-full.txt` (toute la doc en Markdown).
+
 Navigateurs : les versions à jour depuis fin 2025 (Baseline 2025), sur ordinateur et sur téléphone. Le détail est sur la page d'accueil de la doc.
 
 ## Le dépôt

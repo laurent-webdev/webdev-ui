@@ -3,6 +3,8 @@ twig:
     globals:
         # Les couleurs des .theme-* et des utilitaires, pour les boucles des démos
         colors: [primary, secondary, accent, success, danger, warning, info, neutral, inverse]
+        # Ce qu'est le framework, en une phrase : l'accueil, llms.txt et les données structurées (JSON-LD) du <head>
+        doc_tagline: "Un framework CSS/JS ultra léger : le HTML natif, des variables CSS pour tout personnaliser, les thèmes clair et sombre, et pas une dépendance."
         # Pages de la doc, dans l'ordre du menu (base.html.twig). Une page = [route, libellé, template].
         # Ajouter une page : sa ligne ici, sa méthode dans le contrôleur de sa section, son template.
         doc_sections:

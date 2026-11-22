@@ -1,0 +1,30 @@
+{#- llms.txt (https://llmstxt.org) : le titre, la phrase du framework en citation, l'essentiel pour écrire du HTML avec lui,
+    puis chaque section du menu, une page par ligne avec sa phrase d'introduction (DocPages) -#}
+# webdev-ui
+
+> {{ doc_tagline }}
+
+L'essentiel pour écrire du HTML avec webdev-ui :
+
+- Installer : `<link rel="stylesheet" href="css/webdev-ui.min.css">` et `<script type="module" src="js/webdev-ui.min.js"></script>`, deux fichiers à télécharger depuis l'accueil ({{ url('app_main') }}).
+- Le HTML natif d'abord : `<dialog>`, `<details>`, `popover`, `command` / `commandfor`. Le JS ne sert qu'aux onglets, aux toasts et à la fermeture animée des dialogues et des drawers.
+- La couleur est séparée de la variante : `<button class="btn-solid theme-primary">`. Variantes `-solid`, `-subtle`, `-outline`, `-text`, `-link` ; la classe seule (`btn`, `card`) est le composant sans couleur. Couleurs : `primary`, `secondary`, `accent`, `success`, `danger`, `warning`, `info`, `neutral`, `inverse`.
+- Les utilitaires portent le nom complet de la propriété CSS (`justify-content-space-between`, `border-radius-md`, `text-align-center`) ; seules abréviations : `d`, `m` / `p` et leurs côtés, `w` / `h`, `fs` / `fw` / `fst`, `bg`, `border`.
+- Tailles en suffixe : `xs`, `sm`, `md`, `lg`, `xl` (`btn-sm`). Breakpoints en préfixe, pour la mise en page seulement (`md:d-flex`) : `xs` 360px, `sm` 576px, `md` 768px, `lg` 1024px, `xl` 1280px, `2xl` 1536px.
+- Les états sont des attributs natifs ou ARIA (`disabled`, `open`, `aria-current`), jamais des classes.
+- Tout se personnalise par des variables CSS, sans recompiler (`:root { --border-radius-md: 0.5rem; }`) ; seuls les breakpoints sont des variables SCSS.
+- Thème clair ou sombre selon le système ; `data-theme="light"` ou `"dark"` sur `<html>` le force.
+
+Toute la documentation en un seul fichier : {{ url('app_llms_full') }}
+{% for section in sections %}
+
+## {{ section.label }}
+
+{% for page in section.pages %}
+- [{{ page.title }}]({{ page.url }}){{ page.intro ? ': ' ~ page.intro }}
+{% endfor %}
+{% endfor %}
+
+## Optional
+
+- [Code source sur GitHub](https://github.com/laurent-webdev/webdev-ui): les sources SCSS et TypeScript, licence MIT.

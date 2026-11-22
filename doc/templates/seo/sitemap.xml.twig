@@ -1,0 +1,10 @@
+{#- sitemap.xml (sitemaps.org) : l'accueil et chaque page du menu, dans l'ordre de doc_sections ; sans lastmod (une date fausse est pire que pas de date) -#}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url><loc>{{ url('app_main') }}</loc></url>
+{% for section in doc_sections %}
+{% for link in section.links %}
+    <url><loc>{{ url(link[0]) }}</loc></url>
+{% endfor %}
+{% endfor %}
+</urlset>
