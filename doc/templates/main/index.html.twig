@@ -112,5 +112,6 @@
         </table>
     </div>
     <p class="mt-2">Opera, Brave et Samsung Internet utilisent le moteur de Chrome : ces versions sont les premières avec Chromium 135 ou plus.</p>
-    <p class="mt-2">Ce qui est plus récent n'est qu'un plus : sans lui, rien ne casse (l'accordéon s'ouvre sans animation, par exemple).</p>
+    <p class="mt-2">Ce qui est plus récent n'est qu'un plus : sans lui, rien ne casse. Par exemple, l'accordéon ne s'anime en s'ouvrant et en se fermant que dans Chrome, Edge et les navigateurs faits sur Chromium (Opera, Brave, Samsung Internet) : Firefox et Safari n'ont pas encore <code>interpolate-size</code>, le panneau s'y ouvre d'un coup. Les dialogues et les drawers s'animent partout.</p>
+    <p class="mt-2">Avec « Réduire les animations » dans les réglages de l'appareil, plus rien ne s'anime : le framework respecte ce choix.</p>
 {% endblock %}
